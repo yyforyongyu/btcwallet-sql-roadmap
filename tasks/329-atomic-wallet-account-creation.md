@@ -1,131 +1,89 @@
-# Task 329 — make wallet and account creation atomic
+# Task 329 — commit SQL wallet genesis atomically
 
-Component: **Manager and AccountManager**.
+Component: **Manager SQL genesis and SQL Store**.
 
 Dependencies: **[Task 332][t332], [Task 337][t337], and
-[Task 345][t345]**. [Task 341][t341] and [Task 340][t340] are transitive
-prerequisites of those two tasks.
+[Task 345][t345]**. [Task 341][t341] and [Task 340][t340] remain transitive
+prerequisites through those tasks.
 
 ## Rationale
 
-Wallet rows and secrets are already created transactionally, but default and
-initial accounts are added afterwards. A failure can therefore leave a wallet
-without the accounts its create request promised.
+SQL wallet rows, encrypted secrets, and sync state are created in one
+transaction, but default or requested initial accounts are added afterward.
+A definite account-creation failure can therefore leave a wallet that does not
+contain the accounts its supported create request promised.
 
 ## Details
 
-- Cover SQLite, PostgreSQL, and the canonical kvdb create transaction.
-- Define one normalized genesis plan before mutation. Every private-root mode,
-  including generated seed, imported seed, and imported XPrv, creates `default`
-  in every canonical `waddrmgr.DefaultKeyScopes` scope. A shell creates exactly
-  its requested initial accounts and no default account.
-- Accept an imported XPrv as a wallet root only when its depth, parent
-  fingerprint, and child index are all zero and its version belongs to the
-  selected network. Reject every non-root or wrong-network key before Vault or
-  Store access.
-- Validate every initial account as one identity before mutation: its XPub
-  version and resulting address encoding must match the selected network, and
-  its depth, address type, and declared scope must match the scope's single
-  address schema. Treat purpose and coin type as persisted or requested scope
-  identity; do not rewrite or validate the scope coin type against
-  `ChainParams.HDCoinType`. In particular, retain the canonical coin-type-zero
-  `waddrmgr.DefaultKeyScopes` on lnd test networks. Do not discard a conflicting
-  declared scope and persist an inferred replacement.
-- Use [Task 341][t341]'s optional fingerprint representation for initial accounts so
-  SQL preserves absent and present-zero distinctly. Legacy kvdb persists only
-  one four-byte fingerprint, so reject an absent initial fingerprint before
-  mutation there; a stored zero is consequently known to mean present-zero.
-  Reconcile each backend only against the fingerprint states it can represent.
-- Normalize each initial account XPub payload once and compare it wallet-wide
-  before Vault preparation. Reject equal payloads whenever the accounts'
-  effective external or internal branch schemas overlap, even across scopes;
-  names, version bytes, optional metadata, and zero address counters do not make
-  colliding child-key identities safe.
-- Persist `watch-chain` for canonical private-root default accounts. Require
-  every shell initial account to declare its immutable [Task 345][t345] discovery mode
-  explicitly and include it in genesis reconciliation.
-- Persist each scope's checked `next_account_number` in the same plan. A
-  private-root scope containing canonical account zero starts at one. Shell
-  initial XPub accounts are numberless and never advance that cursor; this task
-  has no public initial-account number to honor and must not invent one. A
-  numbered initial-account shape waits for [Task 343][t343].
-- Reject an initial account whose address-schema override differs from another
-  account in the same scope. The SQL model has one scope schema and cannot
-  represent conflicting per-account overrides truthfully.
-- Treat kvdb's reserved imported buckets as backend infrastructure, not extra
-  public accounts. Reject an XPub-root shape that cannot name truthful initial
-  accounts rather than succeeding with an empty backend-specific wallet.
-- Require [Task 337][t337]'s wallet-owned selector before admitting numberless shell
-  accounts on SQL. The maintained kvdb backend may accept shell accounts only
-  if [Task 361](361-kvdb-imported-xpub-derivation.md) lands first; otherwise
-  return a stable unsupported error before mutation rather than fabricating a
-  BIP44 account number.
-- Keep SQL key derivation and encryption outside database write transactions.
-  The retiring kvdb path may keep canonical `waddrmgr.Create` inside its one
-  transaction; do not split waddrmgr solely for this task.
-- Keep only ciphertext and public derivation facts in the genesis plan. Bound
-  plaintext account-key lifetime inside the Vault preparation call and zero it
-  on success, validation failure, write failure, and panic.
-- Keep generated seed bytes in wipeable storage and zero them on every exit.
-  Do not retain a plaintext root serialization in the plan. If the upstream HD
-  key API forces an immutable string temporarily, confine it to the Vault call,
-  retain no reference, and document and test that bounded exposure.
-- Treat an internally derived master `ExtendedKey` as task-owned and arrange
-  its zeroing immediately after derivation so every later exit clears it. For an
-  imported XPrv, validate the caller's key first, make a separate owned working
-  clone, zero only that clone, and never mutate or zero the caller-owned key.
-- Treat SQL and kvdb commit errors as potentially ambiguous. Reopen and
-  reconcile the complete wallet, secret, sync, scope, and account genesis
-  facts. Return success only for an exact committed plan, ordinary failure only
-  for no artifact, and a wallet-owned indeterminate error for any other state.
-- Publish the Wallet in `Manager.wallets` only after the complete genesis
-  transaction commits or reconciles as committed and runtime assembly
-  succeeds. A failed initial-account plan must leave no cached Wallet.
-- Do not add create manifests, replay markers, or Store callbacks.
-- Keep this independent of duplicate-create policy in [Task 330][t330].
+- Cover the shared SQLite and PostgreSQL create path only.
+- Prepare the supported request's ciphertext and public genesis facts before
+  opening the SQL write transaction. Consume the accepted watch-only policy,
+  wallet-owned selector, and persisted discovery mode from the dependencies;
+  do not redesign them here.
+- Extend one backend-local SQL wallet-create transaction to insert the wallet,
+  encrypted wallet secrets, sync state, key scopes, default or numberless
+  shell accounts, encrypted account secrets, immutable discovery modes, and
+  checked `next_account_number` cursors.
+- Create the canonical default accounts promised by a supported private-root
+  request. A scope containing canonical account zero starts its next-account
+  cursor at one.
+- Create exactly the numberless initial accounts promised by a supported shell
+  request. Those accounts do not advance a numbered account cursor.
+- Keep derivation and encryption outside the SQL transaction. The transaction
+  receives only prepared ciphertext and public persistence facts.
+- Treat every definite insertion or commit failure as failure of the complete
+  genesis operation. It must leave no wallet, secret, sync, scope, account, or
+  cursor artifact.
+- Assemble and publish the Wallet in `Manager.wallets` only after the complete
+  transaction commits and runtime assembly succeeds. A definite genesis
+  failure must leave no cached Wallet.
+- Keep modern-kvdb creation parity outside this task. No maintained non-test
+  shell-creation caller currently justifies temporary parity before
+  [Task 353](353-retire-modern-kvdb-backend.md) retires that backend.
+- Keep enhanced key-identity validation in
+  [Task 365](365-validate-wallet-genesis-keys.md), ambiguous SQL commit
+  reconciliation in [Task 366](366-reconcile-sql-genesis-commit.md), and
+  secret-lifetime hardening in
+  [Task 367](367-bound-sql-genesis-secrets.md).
+- Keep duplicate-create policy in [Task 330][t330], public cancellation in
+  [Task 358][t358], and numbered or custom account creation in
+  [Task 343][t343].
+- Do not add a create manifest, replay state, generic write lock, Store
+  callback, or cross-process coordination.
 
 ## Suggested fix
 
-Have the Vault prepare a mode-specific ciphertext-only genesis plan and destroy
-its plaintext working state before the SQL write. Extend each backend's existing
-wallet-create transaction to insert the wallet, secrets, sync state, scopes, and
-accounts and checked cursors together. Commit through a small backend-local
-operation rather than widening `db.Store` with a derivation callback. Reconcile
-an ambiguous SQL or bbolt commit from those exact genesis facts rather than
-adding a create manifest.
+Give the SQL wallet-create operation a method-specific genesis payload and
+extend its existing dialect-neutral transaction stages to persist the complete
+wallet and promised-account state. Keep only dialect-specific query wiring in
+the SQLite and PostgreSQL wrappers. Return the committed facts to Manager for
+runtime assembly and cache publication after the transaction succeeds.
 
 ## Verification
 
-A definite fault during any account insert leaves no wallet artifact on either
-SQL dialect or kvdb, and successful creates expose the same normalized public
-genesis account set for requests supported by both backends. SQL distinguishes
-absent from present-zero fingerprints; kvdb rejects absent before mutation and
-round-trips present-zero. Ambiguous SQL and bbolt commit tests prove exact-
-commit, no-artifact, and indeterminate outcomes. Focused fault injection proves
-no seed, serialized root, or account working key is retained after any exit.
-Reopen proves every private-root scope cursor is one, shell accounts leave the
-cursor unchanged, and conflicting account schemas fail before mutation.
-Non-root and wrong-network XPrvs fail before dependency access. This task does
-not add cancellation to the context-free public `Manager.Create` API; [Task 358][t358]
-owns that replacement. Declared-scope, key-depth, address-type, schema,
-discovery-mode, wrong-network initial-XPub, optional-fingerprint, and duplicate-
-XPub fixtures fail or round-trip as appropriate before mutation. No Wallet is
-published after a failed or indeterminate genesis. Generated and imported-seed
-master keys and the owned clone of an imported XPrv are zeroed on every exit;
-the caller's imported XPrv remains unchanged and usable. A zero-counter
-BIP49Plus/BIP84 initial-account fixture is rejected before creation when its
-normalized payload would make an overlapping branch derive the same scripts.
-Standard coin-type-zero scopes on testnet, simnet, and signet round-trip while
-an XPub or address encoding for another network fails before mutation.
+- Shared transaction-stage tests inject a definite failure at each wallet,
+  secret, sync, scope, account, account-secret, discovery-mode, and cursor
+  boundary and prove complete rollback.
+- The same Store conformance runs on SQLite and PostgreSQL and reopens the
+  wallet to prove the promised account set, discovery modes, and cursors.
+- Private-root fixtures prove each canonical scope contains account zero and
+  advances its cursor to one; shell fixtures prove numberless initial accounts
+  leave each numbered cursor unchanged.
+- Manager fault injection proves no Wallet is cached after a definite backend
+  failure and publication occurs only after committed genesis and successful
+  runtime assembly.
+- The PR adds no kvdb parity, reconciliation policy, key-validation policy,
+  secret-lifetime cleanup, duplicate-create behavior, or contextual API.
 
 ## Definition of done
 
-- Wallet, secret, sync, scope, account, and cursor genesis facts commit or
-  reconcile as one atomic result on every supported backend.
-- Failed or indeterminate creation publishes no Wallet and retains no
-  task-owned plaintext key material.
-- The PR adds no create manifest, generic replay mechanism, duplicate-create
-  policy, or contextual Manager API.
+- One SQLite or PostgreSQL transaction commits every wallet and promised-
+  account genesis fact for a supported request.
+- A definite failure leaves no SQL artifact and publishes no Wallet.
+- Reopened wallets expose the exact promised account set and checked scope
+  cursors on both SQL dialects.
+- The PR contains no modern-kvdb, manifest, replay, generic-lock, or unrelated
+  public API work.
 
 [t330]: 330-duplicate-wallet-create.md
 [t332]: 332-watch-only-script-policy.md

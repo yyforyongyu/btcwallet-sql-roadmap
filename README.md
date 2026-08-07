@@ -6,12 +6,13 @@ maintained SQL-backed `wallet/` library.
 ## How to use this repository
 
 1. Read [AGENTS.md](AGENTS.md) for the workflow and task rules.
-2. Read [QUEUE.md](QUEUE.md) for the recommended next work.
+2. Read [QUEUE.md](QUEUE.md) for the complete active execution state.
 3. Check [ACTIVE.md](ACTIVE.md) for assignments, active PRs, and conflicts.
 4. Select one dependency-complete task from the [task catalog](tasks/).
 5. Claim it in [ACTIVE.md](ACTIVE.md) before implementation.
 6. Implement exactly one task in one btcwallet branch and PR.
-7. After merge, archive the task and refresh the queue through a roadmap PR.
+7. After merge, archive the task and refresh the state map through a roadmap
+   PR.
 
 Claiming a task does not claim its dependencies. A task may be assigned in
 advance, but it cannot become active until every hard dependency is complete.
@@ -21,16 +22,16 @@ advance, but it cannot become active until every hard dependency is complete.
 | Information | Source |
 | --- | --- |
 | Task scope and dependencies | Individual file under [tasks/](tasks/) |
-| Recommended next work | [QUEUE.md](QUEUE.md) |
+| Active execution state | [QUEUE.md](QUEUE.md) |
 | Ownership and active PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
 | Agent workflow | [AGENTS.md](AGENTS.md) |
 | Historical work | [archive/](archive/) |
 
-Do not duplicate task dependencies or the complete backlog in this file. The
-task owns its dependency contract, and the queue shows only the current
-execution frontier.
+Do not duplicate task dependencies or the complete backlog in this file. Each
+task owns its dependency contract, and the queue derives a complete active
+state map from task files and `ACTIVE.md`.
 
 ## Scope
 

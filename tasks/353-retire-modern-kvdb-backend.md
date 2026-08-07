@@ -18,9 +18,8 @@ passphrase configuration.
 - At scheduling time, enumerate and remove every implemented or pending
   modern-kvdb clause in the canonical backlog. Do not implement temporary
   behavior only to delete it. This includes, but is not limited to,
-  [Task 329][t329], [Task 330][t330], [Task 331][t331],
-  [Task 343][t343], [Task 344][t344], [Task 352][t352], and
-  [Task 354][t354].
+  [Task 330][t330], [Task 331][t331], [Task 343][t343], [Task 344][t344],
+  [Task 352][t352], and [Task 354][t354].
   It also includes [Task 361][t361], [Task 362][t362], and the modern-kvdb
   clause of [Task 364][t364]. [Task 352][t352], [Task 361][t361], and
   [Task 362][t362] are archived entirely if retirement lands first; other
@@ -59,7 +58,6 @@ in the retirement PR description, not a runtime manifest.
 - Deprecated Loader, RPC wallet, waddrmgr, wtxmgr, and on-disk compatibility
   remain unchanged.
 
-[t329]: 329-atomic-wallet-account-creation.md
 [t330]: 330-duplicate-wallet-create.md
 [t331]: 331-manager-wallet-lifecycle.md
 [t335]: 335-kvdb-to-sql-migration.md
