@@ -19,8 +19,8 @@ backend handles inconsistently.
 - Reject unsupported watch-only/root-key combinations during validation.
 - Accept `ModeGenSeed` and `ModeImportSeed` only as spendable wallets. Accept
   private `ModeImportExtKey` only with `WatchOnly=false`. Permanently reject
-  XPub-root wallet creation; create a watch-only shell and then use [Task 343][t343]'s
-  path-bound account operation instead.
+  XPub-root wallet creation; create a watch-only shell and then use
+  [Task 391][t391]'s path-bound account operation instead.
 - Accept `ModeShell` only with `WatchOnly=true`; its optional initial accounts
   must be XPub-only. Reject private roots in watch-only modes, public roots in
   spendable modes, and every mode/field combination not named above.
@@ -40,7 +40,7 @@ bundle the large Vault API cleanup into the policy fix by default.
 SQL follows ADR 0012, kvdb retains only its documented legacy exception,
 the full creation matrix has positive and negative tests before mutation, and
 script-only tracking never claims signing authority. XPub-root mode remains
-unsupported before and after [Task 343][t343].
+unsupported before and after [Task 391][t391].
 
 ## Definition of done
 
@@ -50,4 +50,4 @@ unsupported before and after [Task 343][t343].
   failures without changing backend state.
 - The PR does not broaden Vault APIs or add XPub-root wallet creation.
 
-[t343]: 343-exact-account-creation.md
+[t391]: 391-path-bound-watch-only-xpub-accounts.md

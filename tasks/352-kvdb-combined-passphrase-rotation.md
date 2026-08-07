@@ -1,90 +1,69 @@
-# Task 352 — make kvdb combined rotation atomic
+# Task 352 — rotate kvdb passphrases atomically
 
-Component: **LegacyWalletVault, waddrmgr, and modern-kvdb AccountManager**.
+Component: **LegacyWalletVault and waddrmgr passphrase rotation**.
 
 Dependencies: **None**.
 
 ## Rationale
 
-The modern kvdb Vault rotates the legacy public and private passphrases through
-two manager calls inside one database transaction. If the second call fails,
-the database rolls back but the manager's first in-memory key change can remain.
+The modern kvdb Vault rotates public and private passphrases with two
+stateful manager calls inside one database transaction. A second-half or
+commit failure can leave the Manager's live keys changed while the durable
+bucket retains the old credential facts.
 
 ## Details
 
-- Keep kvdb's existing dual-encryption format and one-wallet limit.
-- Limit the fix to `LegacyWalletVault`, the required waddrmgr operation, and the
-  one modern-kvdb account-creation path that currently derives and encrypts
-  while its walletdb write transaction is open.
-- Prepare and validate both old credentials before changing persistent or live
-  key state.
-- Hold one manager-internal operation guard across preparation, database commit,
-  and live-key installation so lock, unlock, encryption, or another rotation
-  cannot observe or overwrite an intermediate phase.
-- Establish one lock order: acquire the operation guard before every relevant
-  `walletdb.View` or `walletdb.Update`, including lock, unlock, encryption, and
-  rotation paths. Never acquire the guard from inside an open walletdb
-  transaction.
-- For modern-kvdb account creation, read the expected account cursor under the
-  guard, close the read transaction, derive and encrypt into a prepared plan,
-  then use one short write transaction to compare-and-set the cursor and insert
-  ciphertext. No encryption or guard acquisition runs inside that write.
-- Apply the sequential invalid-child semantics to that prepared path:
-  atomically consume invalid account and branch derivations and persist terminal
-  exhaustion. Exact account creation remains permanently unsupported on the
-  maintained kvdb Manager under [Task 343][t343] and has no branch in this task.
-- Publish new in-memory keys only after the database transaction commits.
-- Preserve the pre-rotation lock state. A locked manager remains locked with no
-  decrypted private or script keys, while retaining the public crypto material
-  that waddrmgr requires while locked. An unlocked manager remains usable only
-  with the new credentials after a successful rotation.
-- Treat a bbolt commit error as potentially ambiguous. Reopen or reread the
-  exact public and private verifier facts, install the matching old or new live
-  keys, and return a wallet-owned indeterminate error if neither state can be
-  proven.
-- Zero every prepared master key and derived crypto key on abort and after
-  successful installation.
-- Deep-copy every prepared key into manager-owned live storage before zeroing
-  plan-owned buffers. Installation transfers values, never ownership of the
-  buffers that the plan destroys.
-- Do not change deprecated RPC behavior or add a new kvdb format.
+- Keep the legacy dual-encryption format and one-wallet limit.
+- Prepare and validate every requested credential half before changing
+  persistent or live key state.
+- Give waddrmgr one operation-specific rotation guard and plan spanning
+  preparation, the single `walletdb.Update`, commit reconciliation, and final
+  live-key installation.
+- Establish and document one guard-before-walletdb order for Vault Lock,
+  Unlock, Encrypt, Decrypt, and rotation. Mechanically adapt only paths needed
+  to obey that order; do not add a Store-wide write lock.
+- Apply public and private row changes in one transaction and publish deep
+  copies to Manager-owned live storage only after a successful or
+  reconciled-new commit.
+- Preserve the initial locked/unlocked state. A locked Manager retains only
+  the public material its format requires; an unlocked Manager remains usable
+  only under the new credentials after success.
+- Reconcile a bbolt commit error against the exact old and prepared-new
+  verifier facts. Return a typed indeterminate result if neither state can be
+  proved.
+- Zero every plan-owned master key, crypto key, and temporary buffer after
+  transfer or abort.
+- Exclude modern-kvdb account derivation, cursor CAS, invalid-child handling,
+  and moving encryption outside Store transactions.
+  [Task 382](382-vault-account-derivation.md) owns that account-creation
+  preparation and CAS boundary.
+- If Task 353 retires modern kvdb first, archive this task instead of
+  implementing it.
 
 ## Suggested fix
 
-Add an operation-specific waddrmgr rotation plan that acquires an internal guard
-and derives and validates both halves without mutating the manager. Apply its
-database writes in one `walletdb.Update`, install prepared in-memory keys only
-after a successful or reconciled-new commit, then zero and release the plan. A
-destroy path zeroes and releases it after reconciled-old failure. Audit and
-update every related path to use guard-before-transaction ordering. Record the
-initial lock state in the plan and install deep copies only when that state
-requires live decrypted keys. Give account creation a narrow prepared account
-plan with expected-cursor CAS so it follows the same guard-before-walletdb
-order.
+Add a narrow waddrmgr rotation plan that derives both selected halves under
+one operation guard without mutating live state, writes both halves in one
+walletdb transaction, reconciles only an ambiguous commit, installs deep
+copies for proven-new, and destroys the plan on every exit.
 
 ## Verification
 
-Injected failure before either write, between writes, and at commit leaves disk
-and live manager state on the same proven credentials; success switches both to
-the new credentials together. An ambiguous commit is reconciled as old, new, or
-typed indeterminate before prepared keys are installed or destroyed. Concurrent
-lock, unlock, encryption, and rotation cannot enter between phases, lock-order
-tests do not deadlock, and plan buffers are zeroed on every exit. Locked and
-unlocked rotations preserve their state, and zeroing the plan cannot corrupt
-manager-owned keys. Locked rotation retains usable public crypto keys but no
-private or script keys. A barrier-controlled account creation against rotation
-cannot deadlock, observe mixed credentials, or retain a partial account.
-Invalid-child and terminal-exhaustion fixtures preserve the cursor policy while
-rotation holds the same operation guard. No exact-account request or test is
-added to the modern kvdb path.
+- Injected failures before either write, between writes, and at commit prove
+  durable and live state remain on the same old or new credential tuple.
+- Ambiguous commit fixtures prove old, new, neither, and unavailable outcomes.
+- Concurrent Lock, Unlock, Encrypt, Decrypt, and rotation obey one lock order
+  without observing an intermediate credential half.
+- Locked and unlocked rotations preserve their state, and plan zeroing cannot
+  corrupt installed Manager-owned keys.
+- No account cursor, derivation, invalid-child, or exact-account behavior
+  changes.
 
 ## Definition of done
 
-- Legacy public and private credentials rotate as one proven disk-and-memory
-  result while preserving the manager's initial lock state.
-- Account creation, lock, unlock, encryption, and rotation share one explicit
-  guard-before-walletdb order without plaintext retention or deadlock.
-- The PR keeps the legacy dual-encryption format and adds no exact-account or
-  deprecated RPC behavior.
-
-[t343]: 343-exact-account-creation.md
+- Requested legacy credential halves rotate as one proven disk-and-memory
+  result while preserving initial lock state.
+- Every prepared secret is destroyed and every conflicting Vault operation
+  follows the documented order.
+- The PR adds no account-creation redesign, new kvdb format, or deprecated RPC
+  behavior.

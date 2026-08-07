@@ -2,9 +2,7 @@
 
 Component: **Manager**.
 
-Dependencies: **[Task 331][t331] and [Task 333][t333]**. [Task 333][t333]
-supplies the PostgreSQL harness; this task owns duplicate-create behavior on
-that harness.
+Dependencies: **[Task 331][t331] and [Task 333][t333]**.
 
 ## Rationale
 
@@ -15,6 +13,8 @@ depend on backend-specific constraint errors.
 
 - Define one public `ErrWalletExists` contract for kvdb and SQLite Managers and
   one matching duplicate sentinel from both SQL Stores.
+- Use [Task 333][t333] only for the PostgreSQL harness; this task owns
+  duplicate-create behavior on that harness.
 - Classify a SQLite wallet-name duplicate from the wallet-create operation
   itself. The shared SQLite mapper reduces all uniqueness variants to the same
   primary constraint class, so neither that class nor its code string can

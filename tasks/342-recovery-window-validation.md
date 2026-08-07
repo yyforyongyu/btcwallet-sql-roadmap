@@ -1,45 +1,51 @@
 # Task 342 — accept bounded recovery windows
 
-Component: **wallet configuration and Controller**.
+Component: **wallet configuration**.
 
-Dependencies: **[Task 341][t341]**.
+Dependencies: **None**.
 
 ## Rationale
 
-The current minimum rejects zero and small recovery windows even though the
-recovery code and consumers use them. Configuration needs a public upper bound
-without changing valid caller values.
+Configuration rejects every recovery window below 20 even though recovery
+already operates with smaller windows. It also has no public upper bound, so
+callers cannot validate expensive requests before Store or chain work.
 
 ## Details
 
-- Define the public `wallet.MaxRecoveryWindow` as 100,000. Accept every value
-  from zero through that maximum unchanged and reject maximum-plus-one before
-  Store or chain access.
-- Keep this validation change limited to the public maximum, unified
-  configuration, stable wallet-owned error, and boundary behavior.
-- Do not change derivation, target selection, scan budgeting, or RPC signed
-  value handling. [Task 363][t363] owns recovery scan work and targets.
+- Export `wallet.MaxRecoveryWindow = 100_000`.
+- Accept every `RecoveryWindow` from zero through that maximum unchanged.
+- Reject maximum-plus-one with the existing wallet-owned invalid-parameter
+  contract during configuration validation, before Store or chain access.
+- Remove the artificial minimum from the maintained Manager configuration.
+- Do not change scan derivation, target selection, aggregate budgeting,
+  invalid-child behavior, or signed RPC validation. [Task 363][t363] owns
+  aggregate derivation work; [Task 397][t397], [Task 398][t398], and
+  [Task 399][t399] own the semantic target contract, admission, and
+  persisted-target loading.
 
 ## Suggested fix
 
-Remove the artificial minimum and accept `0..wallet.MaxRecoveryWindow`
-exactly in unified configuration. Translate the first excess value to the
-stable wallet-owned error before dependency access. Keep negative RPC
-validation in the RPC consumer rather than adding signed wallet fields.
+Replace the minimum check in `Config.validate` with one checked public maximum
+and update callers and fixtures that use `MinRecoveryWindow` merely to satisfy
+validation. Keep RPC negative-value handling outside the unsigned Wallet
+configuration.
 
 ## Verification
 
-Focused configuration tests prove 0, 1, 2, 19, 20, and
-`wallet.MaxRecoveryWindow` are accepted unchanged. Maximum-plus-one returns
-the stable public error before Store or chain access, and the RPC consumer
-retains its separate negative-value validation.
+- Focused configuration tests accept 0, 1, 2, 19, 20, and
+  `MaxRecoveryWindow` unchanged.
+- Maximum-plus-one returns the wallet-owned invalid-parameter error without
+  Store or chain access.
+- Existing small-window recovery fixtures remain valid, and RPC retains its
+  separate negative-value check.
 
 ## Definition of done
 
-- Unified configuration accepts `0..wallet.MaxRecoveryWindow` unchanged and
-  rejects the first excess value before Store or chain access.
-- Aggregate scan budgeting and semantic-account target behavior are owned by
-  [Task 363](363-recovery-scan-work-bound.md), not this validation task.
+- Unified Wallet configuration accepts `0..MaxRecoveryWindow` and rejects
+  the first excess value before dependency access.
+- No scan-work, target, derivation, or RPC policy changes in this PR.
 
-[t341]: 341-public-role-contract.md
 [t363]: 363-recovery-scan-work-bound.md
+[t397]: 397-semantic-recovery-targets-adr.md
+[t398]: 398-semantic-account-recovery-targets.md
+[t399]: 399-zero-lookahead-persisted-targets.md

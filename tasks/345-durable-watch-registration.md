@@ -1,68 +1,51 @@
 # Task 345 — persist SQL account discovery mode
 
-Component: **AddressManager and SQL Store**.
+Component: **SQL account schema and AccountStore persistence**.
 
 Dependencies: **[Task 340][t340]**.
 
 ## Rationale
 
-The planned allocation contract needs a durable key-only mode. Keeping that
-mode only in an allocation request would lose it on restart and conflict with
-account-wide recovery and ingestion policy.
+SQL has no durable distinction between receiving accounts and
+key-only locator accounts. The storage fact must exist, backfill safely, and
+remain immutable before any caller can select key-only behavior.
 
 ## Details
 
-- Choose immutable `watch-chain` or `key-only` discovery mode when the account
-  is created. Allocations inherit it and reject any attempted override.
-- Add the SQL storage migration first: backfill every preexisting account as
-  `watch-chain`, then make discovery mode present and immutable for all account
-  rows. Prove the backfill and immutability after reopen before new creation
-  paths depend on the field.
-- Key-only locators remain derivable/signable but never become wallet credits,
-  recovery targets, balances, or watched outputs.
-- During transaction ingestion, classify an output matching a key-only locator
-  as non-owned. Retain the transaction's other credits, debits, status, and sync
-  update; one key-only output must not reject the whole batch. Key-only accounts
-  never create watch obligations.
-- Reject ordinary receiving-address allocation for key-only accounts. Their
-  next durable locator is allocated through [Task 344][t344]'s count-one key operation,
-  and an existing locator remains derivable through [Task 337][t337]. Neither path uses
-  an API that promises a receivable wallet address.
-- Treat every accountless raw address or script import as `watch-chain` in the
-  backend-neutral mode contract.
-- Land the SQL discovery-mode column, preexisting-account backfill,
-  immutability proof, regenerated SQL, and both-dialect reopen tests as the
-  artifact consumed by [Task 335][t335].
-- Keep registration obligations, retry, pending results, chain calls, and
-  historical-scan isolation in [Task 364][t364].
+- Define the wallet/store `watch-chain` and `key-only` enum with checked
+  conversion at the Store boundary.
+- Add the field in the SQLite and PostgreSQL schema, backfill every existing
+  account as `watch-chain`, then make it required and immutable.
+- Include discovery mode in account reads and method-specific create inputs.
+  Reject unknown or changed modes at the Store boundary. Until Task 392 adapts
+  every existing derived/imported caller, preserve its omitted-mode input as a
+  narrow compatibility form that writes `watch-chain`; do not expose that
+  default to new or configurable creation entry points.
+- Treat accountless raw imports as implicitly `watch-chain`; do not invent an
+  account row or a key-only raw-import form.
+- Keep public selection policy and wallet consumers in the three follow-ups
+  below.
 
 ## Suggested fix
 
-Add the SQL discovery-mode column, backfill every existing account as
-`watch-chain`, and make the field required and immutable. Route account
-creation, allocation, ingestion, and accountless raw imports through one
-backend-neutral mode type without adding delivery machinery in this task.
+Land one SQL migration and regenerated query set for both
+dialects, plus the smallest Store enum/conversion and reopen conformance. Keep
+the old derived/imported create-input adapter working by translating its
+omitted mode to `watch-chain` until Task 392 removes that adapter. Make the
+migration itself the only mutation owner.
 
 ## Verification
 
-Migration and reopen tests on SQLite and PostgreSQL prove every preexisting
-account becomes `watch-chain` before the field is made immutable. Account
-creation and allocation tests reject mode overrides after mutation. Ingestion
-tests prove a key-only match creates no credit, balance, watched output, or
-watch obligation while retaining the transaction's other effects. Receiving
-APIs reject key-only accounts before allocating a locator, and raw imports are
-classified as `watch-chain`.
+Migration fixtures prove old accounts become `watch-chain`, explicit new rows
+require a valid mode, the retained caller shape still creates `watch-chain`,
+updates cannot change mode, and reopen returns the exact mode on SQLite and
+PostgreSQL. Generated output matches source SQL.
 
 ## Definition of done
 
-- SQL stores an immutable discovery mode, backfills every existing account as
-  `watch-chain`, and preserves the backend-neutral mode contract after reopen.
-- Live watch delivery, retry, raw-import obligations, and Neutrino scan
-  isolation are owned separately by
-  [Task 364](364-durable-watch-registration.md).
+Every SQL account has one immutable, validated discovery mode after migration;
+existing derived/imported creation remains compatible until Task 392 makes its
+mode explicit. No public selection behavior, delivery row, chain call, or
+transaction-ownership change is included.
 
-[t335]: 335-kvdb-to-sql-migration.md
-[t337]: 337-imported-xpub-derivation.md
 [t340]: 340-durable-database-identity.md
-[t344]: 344-bulk-address-allocation.md
-[t364]: 364-durable-watch-registration.md

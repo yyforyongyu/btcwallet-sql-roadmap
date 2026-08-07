@@ -6,39 +6,54 @@ Dependencies: **None**.
 
 ## Rationale
 
-The PostgreSQL adapter still crosses `database/sql`, while its natural driver
-is `pgx/v5`. Shared DB helpers should not expose either backend's nullable or
-transaction types.
+Normal PostgreSQL Store queries and transactions still cross
+`database/sql`, while their native driver and error model are pgx. The shared
+runtime must not force SQLite's transaction types onto PostgreSQL.
 
 ## Details
 
-- Introduce backend-neutral nullable/domain values in `wallet/internal/db`.
-- Keep SQLite on `database/sql` internally.
-- Generate PostgreSQL sqlc code for `pgx/v5` and use `pgxpool.Pool`/`pgx.Tx`.
-- Replace the shared runtime contract that exposes `*sql.DB` and `*sql.Tx` with
-  a backend-neutral transaction runner or a pgx-native counterpart. Preserve
-  health state, error classification, retry accounting, and ambiguous-commit
-  reporting.
-- Migrate PostgreSQL migrations and integration helpers to native pgx.
-- Remove `lib/pq` only after no runtime or generated use remains.
+- Generate PostgreSQL sqlc queries for `pgx/v5` and use
+  `pgxpool.Pool`/`pgx.Tx` for normal Store reads and writes.
+- Keep SQLite on `database/sql`.
+- Refactor shared nullable/domain conversions and runtime transaction hooks
+  only as far as needed to prevent either backend's driver types from escaping
+  the shared `wallet/internal/db` contract.
+- Preserve health state, retry classification and accounting, fatal-error
+  poisoning, and ambiguous-commit reporting.
+- Keep the existing migration library and test-administration connection on
+  `database/sql` when that external tool boundary requires it. They are not
+  normal Store query/transaction paths.
+- Do not replace the migration framework, rewrite migration SQL, or require
+  removal of `lib/pq` while the selected migration driver still owns it.
 
 ## Suggested fix
 
-Land shared nullable types and the backend-neutral runtime seam first, adapt
-SQLite and kvdb without changing behavior, then switch PostgreSQL sqlc
-generation, Store transactions, migrations, and tests in separate buildable
-commits.
+Make the shared runtime transaction primitive backend-parametric or add the
+smallest pgx-native counterpart with the same hook contract, switch the
+PostgreSQL sqlc package and Store to it, and centralize pgx nullable conversion
+at the PostgreSQL adapter boundary. Leave SQLite and the migration tool
+unchanged.
 
 ## Verification
 
-No PostgreSQL runtime path uses `database/sql` or `lib/pq`, shared packages
-expose no driver types, runtime health and ambiguous-commit semantics remain
-equivalent, and PostgreSQL Store conformance remains green.
+- PostgreSQL Store conformance and runtime tests execute normal reads and
+  writes through `pgxpool` and `pgx.Tx` with no `database/sql` Store handle.
+- Retry, health, fatal-error, and ambiguous-commit vectors remain equivalent
+  to the existing runtime contract.
+- Shared DB interfaces and domain values expose no pgx or `database/sql`
+  types; SQLite conformance remains green.
+- A source audit permits `database/sql` only in SQLite and the documented
+  migration/test-administration tool boundaries.
 
 ## Definition of done
 
-- PostgreSQL storage, migrations, generated queries, and integration helpers
-  use native `pgx/v5` while SQLite keeps its internal `database/sql` path.
-- Shared runtime contracts expose only backend-neutral domain and transaction
-  seams, with equivalent health, retry, and ambiguous-commit behavior.
-- `lib/pq` is removed only after no runtime or generated caller remains.
+- Normal PostgreSQL Store queries and transactions use native pgx while
+  SQLite retains `database/sql`.
+- Shared runtime and domain contracts are driver-neutral and preserve all
+  current failure semantics.
+- The PR contains no migration-framework replacement or unrelated storage
+  redesign.
+
+The shared runtime seam stays in Task 350: by itself it changes no externally
+useful behavior and exists only to enable this cutover, so splitting it would
+create a preparatory task that is not independently useful.
