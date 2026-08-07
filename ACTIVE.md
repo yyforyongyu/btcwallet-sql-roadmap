@@ -1,47 +1,61 @@
-# Active work
+# Assignments and active work
 
-This file separates planned ownership from work currently in progress. An
-assignment does not authorize one developer to work on multiple tasks at once.
+This file is the live execution view. It includes every Phase 1 task from
+[QUEUE.md](QUEUE.md) plus any later-phase task that already has an assignee.
+The queue owns dependency phases; this table owns assignments, work status,
+and implementation PRs.
 
-An assignment may be recorded before dependencies finish. An active claim may
-start only after every hard dependency is complete. Claiming a task never
-claims its dependencies; other developers may complete them independently.
+An assignment may be recorded before dependencies finish. A task may move to
+`In progress` only after every hard dependency is complete. Claiming a task
+never claims its dependencies, and each developer may have only one task in
+progress unless YY explicitly approves an exception.
 
 `Complete` means the implementation PR is merged, or a required design or ADR
-task is accepted and merged. An assigned, active, approved, or passing
-dependency is not yet complete.
+task is accepted and merged. Assigned, in-progress, approved, or passing work
+is not complete.
 
-## Assigned tasks
+| Task | Phase | Assignee | Status | PR |
+| --- | --- | --- | --- | --- |
+| [Task 331][t331] | 1 | YY | Assigned | — |
+| [Task 332][t332] | 1 | YY | In progress | [#1305][pr1305] |
+| [Task 333][t333] | 1 | YY | In progress | [#1303][pr1303] |
+| [Task 339][t339] | 1 | — | Unassigned | — |
+| [Task 350][t350] | 1 | YY | Assigned | — |
+| [Task 352][t352] | 1 | — | Unassigned | — |
+| [Task 355][t355] | 1 | — | Unassigned | — |
+| [Task 357][t357] | 1 | — | Unassigned | — |
+| [Task 359][t359] | 1 | — | Unassigned | — |
+| [Task 360][t360] | 1 | — | Unassigned | — |
+| [Task 340][t340] | 2 | YY | Assigned | — |
+| [Task 334][t334] | 3 | YY | Assigned | — |
+| [Task 329][t329] | 4 | YY | Assigned | — |
 
-- YY: [Task 329](tasks/329-atomic-wallet-account-creation.md),
-  [Task 331](tasks/331-manager-wallet-lifecycle.md),
-  [Task 332](tasks/332-watch-only-script-policy.md),
-  [Task 333](tasks/333-postgres-manager-harness.md),
-  [Task 334](tasks/334-shared-chain-state.md),
-  [Task 340](tasks/340-durable-database-identity.md), and
-  [Task 350](tasks/350-native-pgx-postgres.md).
-
-## Active branches
-
-Add a row only after every hard dependency is complete and before starting
-implementation. Remove it after the PR merges. Each developer may have only
-one active row.
-
-- [Task 333](tasks/333-postgres-manager-harness.md): YY owns the PostgreSQL
-  Manager and harness work on branch `task-postgres-harness-2` in [PR #1303].
-- [Task 332](tasks/332-watch-only-script-policy.md): YY owns the watch-only
-  and script policy work on branch `task-watch-policy` in [PR #1305].
+Set a claimed task to `In progress` before implementation begins and add its
+PR when one is opened. Remove a completed task's row when its task file moves
+to the archive. Add a newly dependency-ready task when it moves into Phase 1.
 
 ## Coordination needed
 
-- Tasks 332 and 333 were already active under YY when the one-active-task rule
-  was adopted. Do not add another YY claim; clear these grandfathered rows as
-  their PRs merge and use one active row thereafter.
-- Gustavo's watch-only creation and itest work in [PR #1306] overlaps
-  [Task 332](tasks/332-watch-only-script-policy.md). Coordinate before further
-  wallet changes. It may become an itest-only follow-up after PRs #1303 and
-  #1305.
+- Tasks 332 and 333 were already in progress under YY when the one-task rule
+  was adopted. Do not start another YY task until both grandfathered PRs merge;
+  use one in-progress row thereafter.
+- Gustavo's watch-only creation and itest work in [PR #1306][pr1306] overlaps
+  [Task 332][t332]. Coordinate before further wallet changes. It may become an
+  itest-only follow-up after PRs #1303 and #1305.
 
-[PR #1303]: https://github.com/btcsuite/btcwallet/pull/1303
-[PR #1305]: https://github.com/btcsuite/btcwallet/pull/1305
-[PR #1306]: https://github.com/btcsuite/btcwallet/pull/1306
+[pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
+[pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
+[pr1306]: https://github.com/btcsuite/btcwallet/pull/1306
+[t329]: tasks/329-atomic-wallet-account-creation.md
+[t331]: tasks/331-manager-wallet-lifecycle.md
+[t332]: tasks/332-watch-only-script-policy.md
+[t333]: tasks/333-postgres-manager-harness.md
+[t334]: tasks/334-shared-chain-state.md
+[t339]: tasks/339-transaction-visibility.md
+[t340]: tasks/340-durable-database-identity.md
+[t350]: tasks/350-native-pgx-postgres.md
+[t352]: tasks/352-kvdb-combined-passphrase-rotation.md
+[t355]: tasks/355-transaction-size-accounting.md
+[t357]: tasks/357-transaction-amount-validation.md
+[t359]: tasks/359-revalidate-database-identity-design.md
+[t360]: tasks/360-document-kvdb-adapter-identity.md

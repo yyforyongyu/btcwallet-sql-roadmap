@@ -12,8 +12,8 @@ parallel.
 Phases are not global barriers. A task can start as soon as its own
 dependencies and gates are complete; it does not wait for unrelated tasks in
 earlier phases. Individual task files remain authoritative for scope and
-dependencies. [ACTIVE.md](ACTIVE.md) separately owns assignees, current work,
-branches, PRs, and coordination; this file does not duplicate that live state.
+dependencies. [ACTIVE.md](ACTIVE.md) separately owns assignees, work status,
+PRs, and coordination; this file does not duplicate that live state.
 
 ## Phase 1 — no active-task prerequisites
 

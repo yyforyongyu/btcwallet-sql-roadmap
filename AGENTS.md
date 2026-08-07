@@ -22,8 +22,8 @@ Use these terms precisely:
 
 - **Assigned** records the intended future owner. A blocked task may be
   assigned before its dependencies finish.
-- **Claimed** means active implementation. Record its branch and PR under
-  `Active branches` in [ACTIVE.md](ACTIVE.md).
+- **Claimed** means active implementation. Set its [ACTIVE.md](ACTIVE.md)
+  status to `In progress` before implementation and add its PR when opened.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
@@ -107,7 +107,7 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 
 After the implementation PR merges, use a roadmap PR to:
 
-1. remove its active claim from [ACTIVE.md](ACTIVE.md);
+1. remove its row from [ACTIVE.md](ACTIVE.md);
 2. move its task file under `archive/tasks/`;
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
