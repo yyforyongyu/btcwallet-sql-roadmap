@@ -1,7 +1,7 @@
 # Task NNN — imperative outcome
 
 Copy this file to `tasks/NNN-kebab-case.md` using the next free task number in
-[README.md](README.md).
+[tasks/README.md](tasks/README.md).
 
 A task is ready to enter the backlog only when it owns one small, independently
 reviewable outcome that can be delivered in one PR. Split it before assignment

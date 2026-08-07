@@ -1,400 +1,50 @@
 # btcwallet SQL wallet roadmap
 
-This private repository coordinates the remaining SQL wallet work. This file
-defines the canonical priority and dependency order, [ACTIVE.md](ACTIVE.md)
-records current ownership, and [tasks/](tasks/) contains the executable task
-specifications. [TASK_TEMPLATE.md](TASK_TEMPLATE.md) defines the required task
-shape and admission rules.
+This private repository coordinates the remaining work on btcwallet's
+maintained SQL-backed `wallet/` library.
 
-All earlier task files are preserved under [archive/](archive/) as evidence,
-not instruction. This sequence begins after archived [Task 328][t328]. The
-next free task number is 365.
+## How to use this repository
 
-## Canonical backlog
+1. Read [AGENTS.md](AGENTS.md) for the workflow and task rules.
+2. Read [QUEUE.md](QUEUE.md) for the recommended next work.
+3. Check [ACTIVE.md](ACTIVE.md) for assignments, active PRs, and conflicts.
+4. Select one dependency-complete task from the [task catalog](tasks/).
+5. Claim it in [ACTIVE.md](ACTIVE.md) before implementation.
+6. Implement exactly one task in one btcwallet branch and PR.
+7. After merge, archive the task and refresh the queue through a roadmap PR.
 
-| Task | Scope | [Assignee](ACTIVE.md) |
-| --- | --- | --- |
-| [329][t329] | atomic creation | [YY](ACTIVE.md#assigned-tasks) |
-| [330][t330] | duplicate-create semantics | — |
-| [331][t331] | lifecycle concurrency | [YY](ACTIVE.md#assigned-tasks) |
-| [332][t332] | watch-only and script-import policy | [YY](ACTIVE.md#assigned-tasks) |
-| [333][t333] | PostgreSQL Manager and harness | [YY](ACTIVE.md#assigned-tasks) |
-| [334][t334] | shared canonical chain and rollback | [YY](ACTIVE.md#assigned-tasks) |
-| [335][t335] | atomic kvdb-to-SQL conversion | — |
-| [336][t336] | redundant Wallet tests | — |
-| [337][t337] | SQL imported-XPub public derivation | — |
-| [338][t338] | definitive SQL passphrase-change result | — |
-| [339][t339] | public transaction visibility/status | — |
-| [340][t340] | SQL schema/network identity | [YY](ACTIVE.md#assigned-tasks) |
-| [341][t341] | wallet-owned public role types/errors | — |
-| [342][t342] | recovery-window bounds | — |
-| [343][t343] | exact/custom/path-bound accounts | — |
-| [344][t344] | atomic receiving/key allocation | — |
-| [345][t345] | SQL account discovery mode | — |
-| [346][t346] | metadata-preserving PSBT funding | — |
-| [347][t347] | PSBT signing authorization | — |
-| [348][t348] | watched change before funded results | — |
-| [349][t349] | invalidation/input graph | — |
-| [350][t350] | native pgx PostgreSQL cleanup | [YY](ACTIVE.md#assigned-tasks) |
-| [351][t351] | declarative SQL UTXO integrity | — |
-| [352][t352] | atomic kvdb rotation | — |
-| [353][t353] | retire modern kvdb support | — |
-| [354][t354] | Vault-owned secret resolution | — |
-| [355][t355] | transaction size accounting | — |
-| [356][t356] | viable change allocation | — |
-| [357][t357] | checked monetary aggregates | — |
-| [358][t358] | cancellable Manager operations | — |
-| [359][t359] | database-identity design revalidation | — |
-| [360][t360] | kvdb adapter-identity ADR | — |
-| [361][t361] | modern-kvdb imported-XPub derivation | — |
-| [362][t362] | definitive modern-kvdb passphrase result | — |
-| [363][t363] | aggregate recovery scan work bound | — |
-| [364][t364] | durable live-watch delivery | — |
+Claiming a task does not claim its dependencies. A task may be assigned in
+advance, but it cannot become active until every hard dependency is complete.
 
-## Execution rule and recommended order
+## Sources of truth
 
-Each task is implemented by exactly one branch and PR. Do not combine two tasks
-because they are in the same dependency group or touch nearby code. Former
-dotted milestones are now canonical numbered tasks; do not recreate partial
-PR authority under a parent task.
+| Information | Source |
+| --- | --- |
+| Task scope and dependencies | Individual file under [tasks/](tasks/) |
+| Recommended next work | [QUEUE.md](QUEUE.md) |
+| Ownership and active PRs | [ACTIVE.md](ACTIVE.md) |
+| Task catalog and next number | [tasks/README.md](tasks/README.md) |
+| Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
+| Agent workflow | [AGENTS.md](AGENTS.md) |
+| Historical work | [archive/](archive/) |
 
-Every new or materially revised task must follow
-[TASK_TEMPLATE.md](TASK_TEMPLATE.md). Split a task before assignment if it
-cannot produce one small, independently reviewable outcome in one PR. A task's
-dependencies establish readiness and do not expand its implementation scope.
+Do not duplicate task dependencies or the complete backlog in this file. The
+task owns its dependency contract, and the queue shows only the current
+execution frontier.
 
-"Parallel" below means different developers may take different ready items.
-One developer still works on one item at a time, and every item remains its own
-reviewable PR.
+## Scope
 
-### Phase 1 — enable PostgreSQL itests
+The maintained public APIs under `wallet/` are the target. Avoid voluntary
+changes to RPC, deprecated wallet APIs, or unrelated daemon behavior.
 
-1. **[Task 333][t333] — PostgreSQL Manager and harness.** Do this first. It is
-   the only task needed to make the existing and future component itests
-   selectable with `db=postgres`. [Task 350][t350]'s native-pgx cleanup is not
-   a prerequisite.
+Keep integration-test tasks test-only and benchmark tasks measurement-only.
+When either exposes a wallet defect, record a separate implementation task.
 
-Do not mix a bug exposed by the PostgreSQL run into [Task 333][t333] unless the
-bug is in its backend-selection or harness plumbing. Record other defects
-under their own task and keep the PostgreSQL-enabling PR focused.
+## Creating or changing a task
 
-### Phase 2 — make creation atomic
+Start from [TASK_TEMPLATE.md](TASK_TEMPLATE.md), use the next number in the
+[task catalog](tasks/README.md), and open a roadmap PR. Never push task or queue
+changes directly to `main`.
 
-After [Task 333][t333], finish the prerequisites below. Items on the same line
-can run in parallel as separate PRs:
-
-1. **Parallel policy and design:** [Task 332][t332] (watch-only creation
-   policy), [Task 359][t359] (database-identity revalidation), and
-   [Task 360][t360] (ADR 0013 adapter identity).
-2. **Parallel foundations:** [Task 340][t340] after [Task 359][t359], and
-   [Task 341][t341] after [Task 360][t360]. Each implementation remains
-   separate from its design review and other tasks.
-3. **Parallel focused implementations:** [Task 337][t337] after
-   [Task 341][t341], and [Task 345][t345] after [Task 340][t340].
-4. **[Task 329][t329] — atomic wallet and account creation** after
-   [Task 332][t332] and both focused implementation tasks.
-
-Only the focused SQL outcomes in [Task 337][t337] and [Task 345][t345] are
-prerequisites here. Do not pull [Task 361][t361] or [Task 364][t364] into the
-atomic-creation PR.
-
-### Phase 3 — remaining independent foundations
-
-Once [Task 329][t329] is complete, the following foundation lanes may be
-developed in parallel after satisfying any gate named on the item, each in its
-own PR:
-
-- [Task 331][t331] — Manager wallet lifecycle concurrency.
-- [Task 339][t339] — public transaction visibility and status.
-- [Task 350][t350] — native pgx PostgreSQL cleanup.
-- [Task 352][t352] — atomic legacy-kvdb passphrase rotation.
-- [Task 355][t355] — transaction size accounting.
-- [Task 357][t357] — checked transaction amount arithmetic.
-- [Task 335][t335] — kvdb-to-SQL migration, because its Phase 2 prerequisites
-  are now complete.
-- [Task 361][t361] after [Task 337][t337] while modern kvdb remains —
-  imported-XPub public derivation parity.
-- [Task 364][t364] after [Task 345][t345] and accepted ADR 0004 and ADR 0005
-  live-watch amendments — durable watch registration.
-
-### Phase 4 — first dependent group
-
-These may run in parallel once their individual predecessors are complete:
-
-- [Task 330][t330] after [Task 331][t331] and [Task 333][t333] —
-  duplicate-create semantics.
-- [Task 334][t334] after [Task 333][t333] and [Task 340][t340] plus an accepted
-  ADR 0002 replacement — shared canonical chain and rollback.
-- [Task 338][t338] after [Task 331][t331] — definitive SQL passphrase results.
-- [Task 342][t342] after [Task 341][t341] — recovery-window configuration
-  bound.
-- [Task 346][t346] after [Task 357][t357] — metadata-preserving PSBT funding.
-- [Task 354][t354] after an accepted ADR 0010 amendment and either
-  [Task 352][t352] while modern kvdb remains or [Task 353][t353] removing that
-  prerequisite — Vault-owned secret resolution.
-- [Task 356][t356] after [Task 355][t355] and [Task 357][t357] — defer change
-  allocation until viable.
-- [Task 358][t358] after [Task 329][t329] and [Task 331][t331] — cancellable
-  Manager operations.
-- [Task 353][t353] only after [Task 335][t335], verified production conversion
-  evidence, and an explicit consumer-cutover decision — retire modern kvdb
-  support.
-
-### Phase 5 — second dependent group
-
-These may run in parallel once their individual predecessors are complete:
-
-- [Task 362][t362] after [Task 338][t338] and [Task 352][t352] while modern
-  kvdb remains; [Task 353][t353] archives it if retirement lands first —
-  definitive modern-kvdb passphrase results.
-- [Task 363][t363] after [Task 337][t337], [Task 342][t342],
-  [Task 345][t345], [Task 364][t364], an accepted ADR 0004 semantic-account
-  amendment, and either [Task 361][t361] while modern kvdb remains or
-  [Task 353][t353] retiring it first — aggregate recovery scan behavior.
-- [Task 343][t343] after [Task 332][t332], [Task 337][t337],
-  [Task 340][t340], [Task 341][t341], [Task 345][t345],
-  [Task 354][t354], and [Task 364][t364] plus accepted ADR 0012 and ADR 0013
-  account amendments — exact/custom/path-bound account creation.
-- [Task 344][t344] after [Task 337][t337] and [Task 364][t364] — atomic bulk
-  receiving/key allocation.
-- [Task 348][t348] after [Task 346][t346], [Task 355][t355],
-  [Task 356][t356], and [Task 364][t364] — watched change delivery.
-- [Task 349][t349] after [Task 334][t334], [Task 339][t339], and
-  [Task 340][t340] plus an accepted ADR 0006 invalidation amendment —
-  transaction invalidation and input graph.
-
-### Phase 6 — final dependents and cleanup
-
-- [Task 347][t347] after [Task 343][t343], [Task 346][t346], and
-  [Task 354][t354] — PSBT signing authorization.
-- [Task 351][t351] after [Task 340][t340] and [Task 349][t349] plus an accepted
-  ADR 0006 UTXO-integrity amendment — declarative SQL UTXO integrity.
-- [Task 336][t336] after [Task 338][t338] and [Task 354][t354], plus either
-  [Task 362][t362] while modern kvdb remains or [Task 353][t353] retiring it
-  first — remove redundant Wallet tests only after replacement coverage is
-  stable.
-
-The numbered phases express the recommended priority, not a requirement to
-serialize unrelated work across developers. Within a phase, follow the explicit
-predecessors and keep every PR limited to one task.
-
-## Dependencies
-
-Only the following ordering constraints are currently established:
-
-- [Task 331][t331] and [Task 333][t333] → [Task 330][t330].
-- [Task 359][t359] → [Task 340][t340].
-- [Task 360][t360] → [Task 341][t341].
-- [Task 341][t341] → [Task 337][t337].
-- [Task 340][t340] → [Task 345][t345].
-- [Task 332][t332], [Task 337][t337], and [Task 345][t345] →
-  [Task 329][t329].
-- [Task 329][t329] and [Task 331][t331] → [Task 358][t358].
-- [Task 332][t332], [Task 337][t337], [Task 340][t340], and
-  [Task 345][t345] → [Task 335][t335].
-- [Task 337][t337] → [Task 361][t361] while modern kvdb remains.
-- [Task 345][t345] and accepted ADR 0004/0005 live-watch amendments →
-  [Task 364][t364].
-- [Task 335][t335], production conversion evidence, and a consumer cutover
-  decision → [Task 353][t353].
-- [Task 333][t333], [Task 340][t340], and an accepted ADR 0002 replacement →
-  [Task 334][t334].
-- [Task 334][t334], [Task 339][t339], [Task 340][t340], and an accepted ADR
-  0006 invalidation amendment → [Task 349][t349].
-- [Task 340][t340], [Task 349][t349], and an accepted ADR 0006 UTXO-integrity
-  amendment → [Task 351][t351].
-- [Task 341][t341] → [Task 342][t342].
-- [Task 337][t337], [Task 342][t342], [Task 345][t345],
-  [Task 364][t364], an accepted ADR 0004 target amendment, and either
-  [Task 361][t361] while modern kvdb remains or [Task 353][t353] retiring it →
-  [Task 363][t363].
-- [Task 337][t337] and [Task 364][t364] → [Task 344][t344].
-- [Task 332][t332], [Task 337][t337], [Task 340][t340],
-  [Task 341][t341], [Task 345][t345], [Task 354][t354],
-  [Task 364][t364], and accepted ADR 0012/0013 amendments →
-  [Task 343][t343].
-- [Task 357][t357] → [Task 346][t346].
-- [Task 343][t343], [Task 346][t346], and [Task 354][t354] →
-  [Task 347][t347].
-- [Task 331][t331] → [Task 338][t338].
-- [Task 338][t338] and [Task 352][t352] → [Task 362][t362] while modern
-  kvdb remains.
-- An accepted ADR 0010 amendment, and either [Task 352][t352] while modern kvdb
-  remains or [Task 353][t353] retiring it → [Task 354][t354].
-- [Task 338][t338], [Task 354][t354], and either [Task 362][t362] while modern
-  kvdb remains or [Task 353][t353] retiring it → [Task 336][t336].
-- [Task 355][t355] and [Task 357][t357] → [Task 356][t356].
-- [Task 346][t346], [Task 355][t355], [Task 356][t356], and
-  [Task 364][t364] → [Task 348][t348].
-
-[Tasks](tasks/) not joined by this graph remain independently schedulable.
-[Task 331][t331] owns Manager admission before [Task 330][t330] adds its
-duplicate-create fast path. [Task 330][t330] still keeps persistence atomicity
-separate from [Task 329][t329].
-
-[Task 333][t333] is intentionally independent: it enables the existing itest
-source on PostgreSQL for early bug discovery. [Task 330][t330],
-[Task 334][t334], and [Task 340][t340] own any duplicate, shared-chain, or
-durable-identity defects that run exposes; they do not block the harness
-wiring.
-
-[Task 353][t353] is not ready merely because [Task 335][t335] is complete.
-Scheduling it also requires verified production conversion evidence and an
-explicit consumer cutover decision. While modern kvdb remains,
-[Task 352][t352] precedes [Task 362][t362] and [Task 354][t354],
-[Task 361][t361] follows [Task 337][t337] and precedes [Task 363][t363], and
-[Task 362][t362] precedes [Task 336][t336]. If [Task 353][t353] retires modern
-kvdb first, [Task 352][t352], [Task 361][t361], and [Task 362][t362] are
-archived; [Task 336][t336], [Task 354][t354], and [Task 363][t363] drop their
-kvdb prerequisites; and [Task 364][t364] retains only its SQL or
-backend-neutral clauses.
-[Task 354][t354] still requires its accepted ADR 0010 amendment.
-
-Accepted ADR changes shown in the graph are scheduling artifacts, not prose
-reminders. A task may not start code that contradicts its current ADR until the
-named replacement or amendment is accepted.
-
-The former dotted nodes have these numbered owners:
-
-- [Task 359][t359] is [Task 340][t340]'s accepted pre-code design record. It
-  rechecks the minimal identity tuple, custom-signet input, preflight/adoption
-  order, and database-native first-open exclusion against the current branches.
-  It contains no Store implementation and keeps archived
-  [Task 1000][t1000]'s lock, manifest, and generic recovery machinery out of
-  scope.
-- [Task 360][t360] is [Task 341][t341]'s accepted ADR 0013 amendment. It
-  documents kvdb's internal scope-local adapter identity without exposing it
-  as a portable account ID and contains no public role implementation.
-- [Task 337][t337] lands the wallet-owned exactly-one account selector,
-  SQLite numberless-XPub public derivation, and collision/not-found tests.
-  [Task 329][t329] and [Task 335][t335] can build against it without
-  modern-kvdb acceptance.
-- [Task 345][t345] lands the SQL discovery-mode schema, complete
-  preexisting-account backfill, immutability proof, and backend-neutral mode
-  contract. Its acceptance gate is regenerated SQL plus reopen tests on both
-  SQL dialects.
-- [Task 342][t342] lands `wallet.MaxRecoveryWindow = 100_000`, accepts recovery
-  windows from zero through that bound unchanged, and rejects the first excess
-  value before Store or chain access. It contains no recovery derivation,
-  target-selection, or scan change.
-- [Task 338][t338] lands the accepted-request result latch, shutdown join, and
-  ambiguous-commit reconciliation for SQL `ChangePassphrase`. It contains no
-  kvdb or waddrmgr rotation and gates the lnd SQL password path.
-
-The extracted complementary work remains independently schedulable:
-
-- [Task 361][t361] adds modern-kvdb imported-XPub derivation without blocking
-  the SQL consumers of [Task 337][t337].
-- [Task 362][t362] adds the modern-kvdb definitive passphrase result after
-  [Task 352][t352] while that backend remains.
-- [Task 363][t363] owns aggregate recovery work, zero-lookahead persisted
-  targets, and the semantic-account rescan contract after its numbered
-  prerequisites and ADR amendment.
-- [Task 364][t364] owns durable live-watch obligations, retry, raw-import
-  delivery, and historical-scan isolation after the SQL discovery-mode task
-  and accepted live-watch ADR amendments.
-
-[Task 329][t329] and [Task 335][t335] consume [Task 337][t337] and
-[Task 345][t345]; neither requires [Task 361][t361] or [Task 364][t364].
-[Task 363][t363] consumes [Task 342][t342] before its scan changes. The lnd SQL
-password path consumes [Task 338][t338] without scheduling [Task 352][t352] or
-[Task 362][t362]. Modern-kvdb clauses may remain pending or be removed by
-[Task 353][t353] and do not block SQL consumers.
-
-## Scope rules
-
-- Keep future PRs small and behavior-owned. A task is not permission to execute
-  neighboring tasks.
-- `wallet/` is the maintained library surface. Avoid voluntary changes to the
-  deprecated wallet and RPC layers.
-- kvdb remains legacy, dual-encryption, and single-wallet. [Task 335][t335] provides the
-  converter, and [Task 353][t353] later retires kvdb from the modern Manager surface.
-  Do not add a new kvdb encryption format.
-- Do not revive create manifests, partial-state replay, generic write locks, or
-  Manager publication state machines. Use existing database transactions and
-  the smallest operation-specific compare-and-set or reconciliation needed.
-- Do not add daemon itests unless a task explicitly requires integration
-  evidence. Prefer focused unit and Store conformance tests.
-- PostgreSQL is not a prerequisite for SQLite-focused tasks unless a shared
-  Store contract changes and must continue to compile.
-
-## Deduplication decisions
-
-- Archived [Task 1000][t1000] is reference analysis, not one executable
-  mega-task. Its surviving gaps are represented by [Task 332][t332],
-  [Task 334][t334], and [Task 339][t339]–[Task 349][t349].
-- Archived [Task 10001][t10001] keeps its default decision: restart a rescan
-  from scratch; durable rescan jobs are not planned.
-- Archived [Task 10002][t10002] is absorbed by the narrow SQL
-  [Task 338][t338] and conditional modern-kvdb [Task 362][t362]. A generic
-  Controller operation registry is not planned.
-- Ambiguous SQL commits are handled by the mutation-owning task. There is no
-  standalone generic journal/quarantine task.
-- Complete SQL-role evidence is a final gate after relevant tasks land, not a
-  separate implementation task.
-- Archived single-encryption [Task 311][t311] and [Task 313][t313] are
-  abandoned. [Task 335][t335] is the only planned data transition away from
-  legacy kvdb encryption; [Task 353][t353] is the later modern-API removal
-  step.
-- The archived DBVault task is stale; the delivered design uses `WalletVault`.
-- The archived combined-rotation finding is preserved as narrow
-  [Task 352][t352]. It is consumed by [Task 362][t362] but remains separate
-  from watch-only policy, Controller result delivery, and migration.
-- [Task 354][t354] owns the ADR 0010 correction before [Task 336][t336] removes
-  redundant Wallet tests and [Task 343][t343] and [Task 347][t347] consume typed
-  secrets. [Task 355][t355] owns concrete `txsizes` defects,
-  [Task 357][t357] owns input, output, and fee-target arithmetic, and
-  [Task 356][t356] owns deferred change allocation before [Task 348][t348]
-  returns funded results. [Task 346][t346] and [Task 356][t356] consume
-  [Task 357][t357] rather than duplicating checks.
-- [Task 358][t358] alone replaces the context-free Manager `Create` and `Load` APIs.
-  It follows [Task 329][t329]'s definitive genesis reconciliation and [Task 331][t331]'s
-  admission contract; neither prerequisite grows a partial context adapter.
-- [Task 353][t353] removes every implemented or pending modern-kvdb clause after
-  migration and consumer cutover, using a task-by-task retirement ledger. Do
-  not implement temporary kvdb behavior merely to delete it in the retirement
-  stack; this includes [Task 361][t361], [Task 362][t362], and the modern-kvdb
-  clause in [Task 364][t364].
-
-[t311]: archive/tasks/311-single-encryption-for-all-backends.md
-[t313]: archive/tasks/313-single-encryption-revision-of-the-three-prs.md
-[t328]: archive/tasks/328-transaction-detail-validity-policy.md
-[t329]: tasks/329-atomic-wallet-account-creation.md
-[t330]: tasks/330-duplicate-wallet-create.md
-[t331]: tasks/331-manager-wallet-lifecycle.md
-[t332]: tasks/332-watch-only-script-policy.md
-[t333]: tasks/333-postgres-manager-harness.md
-[t334]: tasks/334-shared-chain-state.md
-[t335]: tasks/335-kvdb-to-sql-migration.md
-[t336]: tasks/336-test-cleanup.md
-[t337]: tasks/337-imported-xpub-derivation.md
-[t338]: tasks/338-passphrase-result.md
-[t339]: tasks/339-transaction-visibility.md
-[t340]: tasks/340-durable-database-identity.md
-[t341]: tasks/341-public-role-contract.md
-[t342]: tasks/342-recovery-window-validation.md
-[t343]: tasks/343-exact-account-creation.md
-[t344]: tasks/344-bulk-address-allocation.md
-[t345]: tasks/345-durable-watch-registration.md
-[t346]: tasks/346-psbt-funding-metadata.md
-[t347]: tasks/347-psbt-signing-authorization.md
-[t348]: tasks/348-watched-change-delivery.md
-[t349]: tasks/349-transaction-invalidation.md
-[t350]: tasks/350-native-pgx-postgres.md
-[t351]: tasks/351-sql-utxo-integrity.md
-[t352]: tasks/352-kvdb-combined-passphrase-rotation.md
-[t353]: tasks/353-retire-modern-kvdb-backend.md
-[t354]: tasks/354-vault-owned-secret-resolution.md
-[t355]: tasks/355-transaction-size-accounting.md
-[t356]: tasks/356-defer-change-script-allocation.md
-[t357]: tasks/357-transaction-amount-validation.md
-[t358]: tasks/358-contextual-manager-operations.md
-[t359]: tasks/359-revalidate-database-identity-design.md
-[t360]: tasks/360-document-kvdb-adapter-identity.md
-[t361]: tasks/361-kvdb-imported-xpub-derivation.md
-[t362]: tasks/362-kvdb-definitive-passphrase-result.md
-[t363]: tasks/363-recovery-scan-work-bound.md
-[t364]: tasks/364-durable-watch-registration.md
-[t1000]: archive/tasks/1000-complete-btcwallet-sql-role-readiness.md
-[t10001]: archive/tasks/10001-resumable-per-wallet-rescan.md
-[t10002]: archive/tasks/10002-controller-request-completion.md
+Earlier plans are preserved under [archive/](archive/) as evidence, not current
+instruction.
