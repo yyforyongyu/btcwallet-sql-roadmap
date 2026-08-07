@@ -3,7 +3,7 @@
 The next free task number is **368**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
-[QUEUE.md](../QUEUE.md) owns derived active execution state, and
+[QUEUE.md](../QUEUE.md) owns dependency phases, and
 [ACTIVE.md](../ACTIVE.md) owns assignments and active PRs. Grouping here does
 not create dependency or scheduling authority.
 

@@ -6,7 +6,7 @@ maintained SQL-backed `wallet/` library.
 ## How to use this repository
 
 1. Read [AGENTS.md](AGENTS.md) for the workflow and task rules.
-2. Read [QUEUE.md](QUEUE.md) for the complete active execution state.
+2. Read [QUEUE.md](QUEUE.md) for the complete dependency phase map.
 3. Check [ACTIVE.md](ACTIVE.md) for assignments, active PRs, and conflicts.
 4. Select one dependency-complete task from the [task catalog](tasks/).
 5. Claim it in [ACTIVE.md](ACTIVE.md) before implementation.
@@ -22,7 +22,7 @@ advance, but it cannot become active until every hard dependency is complete.
 | Information | Source |
 | --- | --- |
 | Task scope and dependencies | Individual file under [tasks/](tasks/) |
-| Active execution state | [QUEUE.md](QUEUE.md) |
+| Dependency phases | [QUEUE.md](QUEUE.md) |
 | Ownership and active PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
@@ -30,8 +30,8 @@ advance, but it cannot become active until every hard dependency is complete.
 | Historical work | [archive/](archive/) |
 
 Do not duplicate task dependencies or the complete backlog in this file. Each
-task owns its dependency contract, and the queue derives a complete active
-state map from task files and `ACTIVE.md`.
+task owns its dependency contract, the queue derives the phase map, and
+`ACTIVE.md` separately owns live execution state.
 
 ## Scope
 

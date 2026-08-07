@@ -5,7 +5,7 @@ This repository contains planning documents, not btcwallet source code.
 ## Sources of truth
 
 - [README.md](README.md) explains how to use the repository.
-- [QUEUE.md](QUEUE.md) owns the derived execution state of every active task.
+- [QUEUE.md](QUEUE.md) owns the dependency phase of every active task.
 - [ACTIVE.md](ACTIVE.md) owns assignments, active PRs, and coordination.
 - Individual files under [tasks/](tasks/) own scope and dependencies.
 - [tasks/README.md](tasks/README.md) owns the active catalog and next number.
@@ -13,8 +13,8 @@ This repository contains planning documents, not btcwallet source code.
 - [archive/](archive/) is historical evidence, not current instruction.
 
 Do not copy the complete dependency graph into README or ACTIVE. QUEUE may
-show the complete derived active-task state, but task files remain the only
-authority for dependency edges.
+show the complete derived phase map, but task files remain the only authority
+for dependency edges and ACTIVE remains the only authority for live state.
 
 ## Assignment, claiming, and dependencies
 
@@ -85,7 +85,7 @@ explicit exclusions, `Suggested fix` for the smallest likely implementation,
 completion.
 
 Link every dependency to its task file. Add the task to
-[tasks/README.md](tasks/README.md) and add it exactly once to the primary map in
+[tasks/README.md](tasks/README.md) and add it exactly once to the phase map in
 [QUEUE.md](QUEUE.md).
 
 Do not add status or assignee fields to a task. Before a task is claimed or
@@ -112,7 +112,7 @@ After the implementation PR merges, use a roadmap PR to:
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
    [task catalog](tasks/README.md); and
-5. refresh the affected current state and downstream layers in
+5. refresh the affected phase and downstream phases in
    [QUEUE.md](QUEUE.md).
 
 Preserve task numbers. Never reuse an archived or superseded number.
