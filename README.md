@@ -13,18 +13,18 @@ next free task number is 359.
 
 | Task | Scope | [Assignee](ACTIVE.md) |
 | --- | --- | --- |
-| [329][t329] | atomic creation | — |
+| [329][t329] | atomic creation | [YY](ACTIVE.md#assigned-tasks) |
 | [330][t330] | duplicate-create semantics | — |
-| [331][t331] | lifecycle concurrency | — |
-| [332][t332] | watch-only and script-import policy | [YY](ACTIVE.md#claimed-tasks) |
-| [333][t333] | PostgreSQL Manager and harness | [YY](ACTIVE.md#claimed-tasks) |
-| [334][t334] | shared canonical chain and rollback | — |
+| [331][t331] | lifecycle concurrency | [YY](ACTIVE.md#assigned-tasks) |
+| [332][t332] | watch-only and script-import policy | [YY](ACTIVE.md#assigned-tasks) |
+| [333][t333] | PostgreSQL Manager and harness | [YY](ACTIVE.md#assigned-tasks) |
+| [334][t334] | shared canonical chain and rollback | [YY](ACTIVE.md#assigned-tasks) |
 | [335][t335] | atomic kvdb-to-SQL conversion | — |
 | [336][t336] | redundant Wallet tests | — |
 | [337][t337] | imported-xpub public derivation | — |
 | [338][t338] | definitive passphrase-change result | — |
 | [339][t339] | public transaction visibility/status | — |
-| [340][t340] | SQL schema/network identity | — |
+| [340][t340] | SQL schema/network identity | [YY](ACTIVE.md#assigned-tasks) |
 | [341][t341] | wallet-owned public role types/errors | — |
 | [342][t342] | recovery-window bounds | — |
 | [343][t343] | exact/custom/path-bound accounts | — |
@@ -34,7 +34,7 @@ next free task number is 359.
 | [347][t347] | PSBT signing authorization | — |
 | [348][t348] | watched change before funded results | — |
 | [349][t349] | invalidation/input graph | — |
-| [350][t350] | native pgx PostgreSQL cleanup | — |
+| [350][t350] | native pgx PostgreSQL cleanup | [YY](ACTIVE.md#assigned-tasks) |
 | [351][t351] | declarative SQL UTXO integrity | — |
 | [352][t352] | atomic kvdb rotation | — |
 | [353][t353] | retire modern kvdb support | — |

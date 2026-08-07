@@ -1,9 +1,21 @@
 # Active work
 
-This is the shared claim ledger. Add a row before starting implementation, use
-one row per task, and remove the row after the PR merges.
+This file separates planned ownership from work currently in progress. An
+assignment does not authorize one developer to work on multiple tasks at once.
 
-## Claimed tasks
+## Assigned tasks
+
+- YY: [Task 329](tasks/329-atomic-wallet-account-creation.md),
+  [Task 331](tasks/331-manager-wallet-lifecycle.md),
+  [Task 332](tasks/332-watch-only-script-policy.md),
+  [Task 333](tasks/333-postgres-manager-harness.md),
+  [Task 334](tasks/334-shared-chain-state.md),
+  [Task 340](tasks/340-durable-database-identity.md), and
+  [Task 350](tasks/350-native-pgx-postgres.md).
+
+## Active branches
+
+Add a row before starting implementation and remove it after the PR merges.
 
 - [Task 333](tasks/333-postgres-manager-harness.md): YY owns the PostgreSQL
   Manager and harness work on branch `task-postgres-harness-2` in [PR #1303].
