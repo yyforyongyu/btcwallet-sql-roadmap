@@ -2,7 +2,7 @@
 
 Component: **Manager**.
 
-Dependencies: **[Task 329][t329] and [Task 331][t331]**.
+Dependencies: **[Task 331][t331], [Task 366][t366], and [Task 367][t367]**.
 
 ## Rationale
 
@@ -20,8 +20,9 @@ would instead make successful durable creation look canceled.
 - Thread the caller context through [Task 331][t331] admission, validation, safe
   preparation checkpoints, and Load. SQL performs Vault preparation before its
   transaction claim; context-free production scrypt remains joined, and
-  cancellation destroys its result at the next checkpoint before SQL mutation.
-  Do not detach cryptographic work in a goroutine.
+  cancellation invokes [Task 367][t367]'s destruction path at the next
+  checkpoint before SQL mutation. Do not detach cryptographic work in a
+  goroutine.
 - Derive Wallet lifetime independently. Cancellation after a successful return
   must not stop or poison the published Wallet.
 - Define one exact mutation cutoff: successful claim of the backend create
@@ -33,6 +34,8 @@ would instead make successful durable creation look canceled.
   then begin, write, commit, reconcile, assemble, and publish with one bounded
   Manager-owned context. Do not pass the caller context to `BeginTx`, because
   its later cancellation can roll back or poison `Commit` after the cutoff.
+  Consume [Task 366][t366]'s exact committed, absent, or indeterminate result;
+  do not redefine genesis reconciliation in this task.
 - For kvdb, check cancellation immediately before `walletdb.Update` and again
   on callback entry before atomically marking the transaction claimed. Its
   writer-lock wait is not cooperatively cancellable, so make that limitation
@@ -46,20 +49,25 @@ would instead make successful durable creation look canceled.
   the losing attempt and publishes nothing. Once publication wins, return the
   published Wallet regardless of later caller cancellation; never overwrite or
   discard a same-name winner.
-- Keep Manager close/admission ordering in [Task 331][t331]. Do not add a generic
-  operation registry or publication state machine.
+- Keep Manager close/admission ordering in [Task 331][t331], SQL genesis
+  reconciliation in [Task 366][t366], and SQL genesis secret ownership in
+  [Task 367][t367]. Do not add a generic operation registry, publication state
+  machine, reconciliation framework, or parallel zeroing contract. Task 329 is
+  a transitive prerequisite through Tasks 366 and 367, not a direct dependency
+  of this task.
 
 ## Suggested fix
 
-Change the two public signatures after [Task 329][t329] and [Task 331][t331]
-land, then carry one request context through admission and safe preparation
-checkpoints. Give SQL an operation-specific caller-cancellable writer claim
-followed by a Manager-context transaction. Give kvdb an explicit pre-`Update`
-checkpoint and document its non-cancellable writer wait and post-claim scrypt.
-Both backends use the same bounded Manager context for mutation,
-reconciliation, runtime assembly, and publication after the cutoff. For Load,
-arbitrate cancellation under [Task 331][t331]'s per-name admission immediately
-before the one cache-publication point.
+Change the two public signatures after [Task 331][t331], [Task 366][t366], and
+[Task 367][t367] land, then carry one request context through admission and
+safe preparation checkpoints. Give SQL an operation-specific
+caller-cancellable writer claim followed by a Manager-context transaction and
+reuse the accepted reconciliation and secret-destruction contracts. Give kvdb
+an explicit pre-`Update` checkpoint and document its non-cancellable writer
+wait and post-claim scrypt. Both backends use the same bounded Manager context
+for mutation, reconciliation, runtime assembly, and publication after the
+cutoff. For Load, arbitrate cancellation under [Task 331][t331]'s per-name
+admission immediately before the one cache-publication point.
 
 ## Verification
 
@@ -73,12 +81,13 @@ in SQL is observed at the next checkpoint, its output is destroyed, and no
 mutation starts. A kvdb barrier proves cancellation before the callback claim
 leaves no artifact, while cancellation during post-claim scrypt cannot replace
 the definitive create result. The kvdb writer-wait limitation is documented and
-tested without a cancellation goroutine. Exact committed genesis returns
-success despite transport cancellation; unprovable state is typed indeterminate.
-Load barriers immediately before and after cache publication prove the former
-returns cancellation with no retained assembly and the latter returns the
-published Wallet. A returned Wallet remains usable after its request context is
-canceled.
+tested without a cancellation goroutine. [Task 366][t366]'s exact committed
+genesis returns success despite transport cancellation, while its unprovable
+state remains typed indeterminate. [Task 367][t367]'s probes prove cancellation
+before the cutoff destroys every prepared SQL secret result. Load barriers
+immediately before and after cache publication prove the former returns
+cancellation with no retained assembly and the latter returns the published
+Wallet. A returned Wallet remains usable after its request context is canceled.
 
 ## Definition of done
 
@@ -89,5 +98,6 @@ canceled.
 - Maintained callers migrate together; no background-context compatibility
   wrapper, generic operation registry, or publication state machine is added.
 
-[t329]: 329-atomic-wallet-account-creation.md
 [t331]: 331-manager-wallet-lifecycle.md
+[t366]: 366-reconcile-sql-genesis-commit.md
+[t367]: 367-bound-sql-genesis-secrets.md

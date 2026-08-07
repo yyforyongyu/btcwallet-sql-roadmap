@@ -22,7 +22,8 @@ kvdb backend is the later [Task 353][t353].
   challenge digest. Treat that input as authoritative because legacy kvdb does
   not persist enough information to prove which equal-magic signet challenge
   was used. Validate persisted facts that encode a network against the trusted
-  input before writing [Task 340][t340] identity metadata; do not infer the network by
+  input before writing [Task 340][t340] identity metadata; do not infer the
+  network by
   passing parameters to `waddrmgr.Open` or claim the legacy file authenticates
   the challenge.
 - Decrypt each script with its persisted per-record cipher provenance.
@@ -30,7 +31,7 @@ kvdb backend is the later [Task 353][t353].
   zero each working buffer on success, refusal, cancellation, and write failure.
 - Decode extended keys inside a wipeable migration boundary. If an upstream API
   forces an immutable plaintext string, retain no reference after parsing and
-  document and test the same bounded exposure accepted by [Task 329][t329].
+  document and test the same bounded exposure owned by [Task 367][t367].
 - Re-encrypt secrets under the SQL wallet's single-passphrase Vault model.
 - Import full transaction history, UTXOs, and sync state. Do not make an
   incomplete rescan destination appear atomically ready.
@@ -153,7 +154,8 @@ block-membership, unspent, and unmined-input index fixtures fail before the
 destination is opened for mutation.
 Wrong-network fixtures with contradictory persisted evidence return the typed
 refusal before destination mutation. The trusted custom-signet challenge is
-written into [Task 340][t340] identity metadata, but an empty legacy source with equal
+written into [Task 340][t340] identity metadata, but an empty legacy source
+with equal
 truncated magic is not treated as proof of a different historical challenge.
 Zero-counter BIP49Plus/BIP84 fixtures with equal normalized XPub payloads fail
 before branch derivation or destination mutation. Plaintext decoder exposure
@@ -169,9 +171,9 @@ remains bounded on success, refusal, and cancellation.
 - The source remains an untouched rollback artifact and no PostgreSQL
   converter, generic import manifest, or new kvdb format is added.
 
-[t329]: 329-atomic-wallet-account-creation.md
 [t332]: 332-watch-only-script-policy.md
 [t337]: 337-imported-xpub-derivation.md
 [t340]: 340-durable-database-identity.md
 [t345]: 345-durable-watch-registration.md
 [t353]: 353-retire-modern-kvdb-backend.md
+[t367]: 367-bound-sql-genesis-secrets.md

@@ -1,6 +1,6 @@
 # Active task catalog
 
-The next free task number is **365**.
+The next free task number is **368**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns recommended order, and
@@ -9,8 +9,8 @@ not create dependency or scheduling authority.
 
 ## Creation, Manager, and storage
 
-- [Task 329](329-atomic-wallet-account-creation.md): make wallet and account
-  creation atomic.
+- [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
+  atomically.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet
   creation.
 - [Task 331](331-manager-wallet-lifecycle.md): harden Manager and Wallet
@@ -27,6 +27,10 @@ not create dependency or scheduling authority.
   loading cancellable.
 - [Task 359](359-revalidate-database-identity-design.md): revalidate database
   identity design.
+- [Task 365](365-validate-wallet-genesis-keys.md): validate wallet genesis key
+  identities.
+- [Task 366](366-reconcile-sql-genesis-commit.md): reconcile ambiguous SQL
+  genesis commits.
 
 ## Accounts, addresses, and recovery
 
@@ -86,6 +90,8 @@ not create dependency or scheduling authority.
   behind the Vault.
 - [Task 362](362-kvdb-definitive-passphrase-result.md): return a definitive
   kvdb passphrase result.
+- [Task 367](367-bound-sql-genesis-secrets.md): bound SQL genesis secret
+  lifetime.
 
 ## Migration and retirement
 

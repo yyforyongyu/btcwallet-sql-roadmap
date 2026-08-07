@@ -2,9 +2,9 @@
 
 Component: **WalletVault, AccountManager, Signer, and UnsafeSigner**.
 
-Dependencies: **An accepted ADR 0010 amendment, plus [Task 352][t352] while the modern
-kvdb backend remains; otherwise [Task 353][t353] removes that prerequisite with the
-retired kvdb clauses**.
+Dependencies: **An accepted ADR 0010 amendment, plus [Task 352][t352] while
+the modern kvdb backend remains; otherwise [Task 353][t353] removes that
+prerequisite with the retired kvdb clauses**.
 
 ## Rationale
 
@@ -35,7 +35,7 @@ does not define the planned callback ownership contract.
   buffer immediately after the callback on success, error, or panic.
 - Prefer a byte-oriented extended-key decoder. If upstream parsing requires an
   immutable plaintext string, confine it to the callback, retain no reference,
-  document the bounded exception shared with [Task 329][t329] and
+  document the bounded exception shared with [Task 367][t367] and
   [Task 335][t335], and zero every wipeable source and decoded working copy on
   exit.
 - Keep existing `UnsafeSigner` and `PrivKeyForAddress` raw-key returns plus
@@ -86,10 +86,10 @@ retains no reference beyond the callback and every wipeable copy is cleared.
 - Store writes contain only prepared ciphertext and public facts, with no
   derivation, encryption, or Vault callback under the transaction.
 
-[t329]: 329-atomic-wallet-account-creation.md
 [t335]: 335-kvdb-to-sql-migration.md
 [t336]: 336-test-cleanup.md
 [t343]: 343-exact-account-creation.md
 [t347]: 347-psbt-signing-authorization.md
 [t352]: 352-kvdb-combined-passphrase-rotation.md
 [t353]: 353-retire-modern-kvdb-backend.md
+[t367]: 367-bound-sql-genesis-secrets.md
