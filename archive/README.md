@@ -3,7 +3,7 @@
 This directory preserves planning history for traceability. Its contents are
 reference material, not active instructions. Use the root
 [README.md](../README.md) for navigation, [QUEUE.md](../QUEUE.md) for the
-current execution frontier, and [tasks/](../tasks/) for executable task
+active execution state, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
