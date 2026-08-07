@@ -14,21 +14,21 @@ progress unless YY explicitly approves an exception.
 task is accepted and merged. Assigned, in-progress, approved, or passing work
 is not complete.
 
-| Task | Phase | Assignee | Status | PR |
-| --- | --- | --- | --- | --- |
-| [Task 331][t331] | 1 | YY | Assigned | — |
-| [Task 332][t332] | 1 | YY | In progress | [#1305][pr1305] |
-| [Task 333][t333] | 1 | YY | In progress | [#1303][pr1303] |
-| [Task 339][t339] | 1 | — | Unassigned | — |
-| [Task 350][t350] | 1 | YY | Assigned | — |
-| [Task 352][t352] | 1 | — | Unassigned | — |
-| [Task 355][t355] | 1 | — | Unassigned | — |
-| [Task 357][t357] | 1 | — | Unassigned | — |
-| [Task 359][t359] | 1 | — | Unassigned | — |
-| [Task 360][t360] | 1 | — | Unassigned | — |
-| [Task 340][t340] | 2 | YY | Assigned | — |
-| [Task 334][t334] | 3 | YY | Assigned | — |
-| [Task 329][t329] | 4 | YY | Assigned | — |
+| Task | Component | Phase | Assignee | Status | PR |
+| --- | --- | --- | --- | --- | --- |
+| [Task 331][t331] | Manager and Controller | 1 | YY | Assigned | — |
+| [Task 332][t332] | Manager, AccountManager, AddressManager | 1 | YY | In progress | [#1305][pr1305] |
+| [Task 333][t333] | Manager and integration-test harness | 1 | YY | In progress | [#1303][pr1303] |
+| [Task 339][t339] | TxReader | 1 | — | Unassigned | — |
+| [Task 350][t350] | PostgreSQL Store | 1 | YY | Assigned | — |
+| [Task 352][t352] | LegacyWalletVault, waddrmgr, kvdb AccountManager | 1 | — | Unassigned | — |
+| [Task 355][t355] | TxCreator and txsizes | 1 | — | Unassigned | — |
+| [Task 357][t357] | TxCreator, PsbtManager, txauthor | 1 | — | Unassigned | — |
+| [Task 359][t359] | Manager and SQL Store design | 1 | — | Unassigned | — |
+| [Task 360][t360] | ADR 0013 and modern kvdb adapter | 1 | — | Unassigned | — |
+| [Task 340][t340] | Manager and SQL Store | 2 | YY | Assigned | — |
+| [Task 334][t334] | Manager and Controller/Syncer | 3 | YY | Assigned | — |
+| [Task 329][t329] | Manager SQL genesis and SQL Store | 4 | YY | Assigned | — |
 
 Set a claimed task to `In progress` before implementation begins and add its
 PR when one is opened. Remove a completed task's row when its task file moves
