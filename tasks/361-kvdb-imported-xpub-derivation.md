@@ -1,0 +1,56 @@
+# Task 361 — support kvdb imported-XPub derivation
+
+Component: **modern kvdb public derivation adapter**.
+
+Dependencies: **[Task 337](337-imported-xpub-derivation.md)**.
+
+## Rationale
+
+[Task 337](337-imported-xpub-derivation.md) restores the wallet-owned selector
+and SQL numberless-account path, but the maintained modern kvdb adapter still
+needs to resolve imported-XPub accounts without presenting its internal
+account identity as a public number.
+
+## Details
+
+- Reuse [Task 337](337-imported-xpub-derivation.md)'s wallet-owned
+  scope-plus-exactly-one-name-or-number selector and additive public
+  derivation request without changing the `Signer` interface.
+- Map the selector to kvdb's stable scope-local adapter identity internally;
+  never expose that identity or reinterpret it as a SQL row or BIP44 number.
+- Derive public children from the resolved imported XPub while the Wallet is
+  locked.
+- Preserve numeric BIP32-path derivation for ordinary numbered accounts and
+  reject inconsistent paths before Store access.
+- Keep imported-XPub private signing unavailable and perform no secret lookup
+  for an output-signing request that lacks authorized private derivation
+  metadata.
+- Return stable collision and not-found results without selecting another
+  account.
+- Do not add a new kvdb identity or storage format. If
+  [Task 353](353-retire-modern-kvdb-backend.md) lands first, remove this pending
+  modern-kvdb task instead of implementing temporary behavior.
+
+## Suggested fix
+
+Add a narrow adapter resolution from the wallet-owned selector to the existing
+scope-local kvdb identity, then reuse
+[Task 337](337-imported-xpub-derivation.md)'s in-memory branch and child
+derivation. Keep all backend identity conversion behind the adapter boundary.
+
+## Verification
+
+- Focused locked-Wallet tests derive a numberless imported-XPub child by name
+  and ordinary derived accounts by BIP44 number.
+- Collision, neither-set, both-set, not-found, and inconsistent numeric-path
+  cases fail before derivation or secret access.
+- External-package tests continue to name the request without importing kvdb
+  or internal database types.
+
+## Definition of done
+
+- Modern kvdb supports the same wallet-owned public selector contract as SQL
+  without exposing or inventing a portable account number.
+- Imported-XPub derivation remains public-only and cannot fall back to another
+  account or raw-import secret path.
+- The PR contains only modern-kvdb acceptance and no new legacy format.

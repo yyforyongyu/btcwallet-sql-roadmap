@@ -2,7 +2,7 @@
 
 Component: **TxReader**.
 
-Dependencies: **none**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -22,15 +22,25 @@ can look like ordinary unconfirmed transactions.
   the pending/published facts it actually retains; document that narrower
   backend result until kvdb is retired.
 
-## Potential fix
+## Suggested fix
 
 Add the smallest wallet-owned `TxStatus`, keep conversion centralized, and
 table-test every persisted status. Do not expose internal DB enums or silently
 hide SQL's retained failed, replaced, and orphaned attempts. Map only the
 pending/published history that kvdb can prove.
 
-## Done when
+## Verification
 
-No SQL terminally invalid transaction masquerades as ordinary pending state,
-SQL audit history remains visible, and the public reader contract documents
-kvdb's narrower, non-fabricated result.
+- Table-test `GetTx` and `ListTxns` conversion for pending, published, failed,
+  replaced, and orphaned SQL rows.
+- Verify terminal SQL history remains visible and no terminal row converts to
+  ordinary pending state.
+- Exercise kvdb pending and published fixtures and confirm the public contract
+  neither fabricates nor promises terminal history for that backend.
+
+## Definition of done
+
+- `GetTx` and `ListTxns` expose wallet-owned status for every SQL state and
+  only the pending or published facts that kvdb can prove.
+- No internal database enum escapes the public API, and retained SQL audit
+  history is neither hidden nor misclassified.

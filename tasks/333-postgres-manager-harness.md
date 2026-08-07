@@ -32,13 +32,14 @@ while those tests are being written.
 - Keep this task to backend selection, lifecycle, and harness plumbing. It does
   not add new itest cases or change wallet behavior merely because PostgreSQL
   exposes an existing bug.
-- Defer durable database/network identity to [Task 340][t340], shared multiwallet chain
-  coordination to [Task 334][t334], and duplicate-create semantics to [Task 330][t330]. Bugs
-  found by the PostgreSQL run should be fixed by their owning task or recorded
-  as a new task rather than absorbed here.
+- Defer durable database/network identity to [Task 340][t340], shared
+  multiwallet chain coordination to [Task 334][t334], and duplicate-create
+  semantics to [Task 330][t330]. Bugs found by the PostgreSQL run should be
+  fixed by their owning task or recorded as a new task rather than absorbed
+  here.
 - Do not expand the default CI matrix without an explicit cost decision.
 
-## Potential fix
+## Suggested fix
 
 Extract the dialect-neutral parts of `sqliteManagerBackend` into one SQL
 `managerBackend`. Keep small SQLite and PostgreSQL open functions that construct
@@ -46,7 +47,7 @@ their Store and return that shared backend. Then teach `bwtest` to provision an
 isolated PostgreSQL database and pass its DSN through the existing
 `ManagerConfig`.
 
-## Done when
+## Verification
 
 `make itest chain=btcd db=postgres icase=manager` and the existing Controller
 case run against a real, isolated PostgreSQL database through `NewManager`.
@@ -55,6 +56,14 @@ path. The same test source remains selectable for kvdb, SQLite, and PostgreSQL,
 and teardown leaves no Manager, connection pool, database, or container behind.
 No new component scenario, multiwallet chain coordinator, database identity
 scheme, or default CI matrix expansion lands in this task.
+
+## Definition of done
+
+- PostgreSQL is selectable through the existing Manager constructor and the
+  shared component-itest source with isolated lifecycle management.
+- SQLite and kvdb retain their existing selection and artifact checks.
+- The PR contains only backend-opening and harness plumbing, not defects owned
+  by [Task 330][t330], [Task 334][t334], or [Task 340][t340].
 
 [t330]: 330-duplicate-wallet-create.md
 [t334]: 334-shared-chain-state.md

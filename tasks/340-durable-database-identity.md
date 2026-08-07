@@ -2,24 +2,13 @@
 
 Component: **Manager and SQL Store**.
 
-Dependencies: **An accepted [`340.identity-revalidation`][t340] record; no task
-dependencies**.
+Dependencies: **[Task 359][t359]**.
 
 ## Rationale
 
 Migration version alone does not prove a database belongs to the btcwallet role
 schema or the intended Bitcoin network. A foreign or wrong-network database
 must fail before ordinary wallet queries mutate it.
-
-## Pre-code gate
-
-[`340.identity-revalidation`][t340] records an accepted review of the identity tuple,
-custom-signet input, read-only preflight and empty-database adoption order, and
-database-native first-open exclusion against the current SQL Store branches.
-It must confirm that the proposed behavior digest is minimal and sufficient and
-that [Task 1000][t1000]'s lock, manifest, and generic recovery machinery remain outside
-scope. This is a [Task 340][t340] design artifact, not a separate implementation task;
-implementation starts only after it is accepted.
 
 ## Details
 
@@ -48,20 +37,20 @@ implementation starts only after it is accepted.
   unless existing persisted facts prove its identity without mutation.
 - Reject dirty, newer, foreign, and mismatched databases before wallet access.
 - Preserve immutable forward migrations after the first marked release.
-- Follow the accepted [`340.identity-revalidation`][t340]; do not copy [Task 1000][t1000]'s
-  large lock, manifest, or generic recovery design.
+- Follow the design accepted in [Task 359][t359]; do not copy
+  [Task 1000][t1000]'s large lock, manifest, or generic recovery design.
 
-## Potential fix
+## Suggested fix
 
 Add a read-only preflight followed by a minimal metadata bootstrap transaction
 protected by the database's native migration exclusion. Reopen verifies exact
 family, version, genesis, and behavior digest before running forward migrations
 or constructing a Store. Build that identity from one deep-copied Manager-owned
-network snapshot and never expose the snapshot directly. Add the required-for-
-signet challenge digest directly to the existing unified configuration rather
-than introducing a backend-specific config type.
+network snapshot and never expose the snapshot directly. Add the signet
+challenge digest directly to the existing unified configuration rather than
+introducing a backend-specific config type.
 
-## Done when
+## Verification
 
 SQLite and PostgreSQL tests cover empty initialization, matching reopen,
 wrong-network and different-custom-signet reopen, foreign schema, dirty/newer
@@ -74,5 +63,14 @@ network information returned by a Wallet, cannot change Manager behavior or its
 next identity check. Missing and mismatched behavior or required signet digests
 fail before database access on both dialects.
 
-[t340]: 340-durable-database-identity.md
+## Definition of done
+
+- Every SQL database is initialized or reopened only after exact schema-family
+  and Manager-owned network identity validation.
+- Foreign, dirty, newer, unmarked-populated, and behavior-mismatched databases
+  fail without mutation on SQLite and PostgreSQL.
+- The PR follows [Task 359](359-revalidate-database-identity-design.md) and
+  adds no generic lock, create manifest, or recovery framework.
+
+[t359]: 359-revalidate-database-identity-design.md
 [t1000]: ../archive/tasks/1000-complete-btcwallet-sql-role-readiness.md

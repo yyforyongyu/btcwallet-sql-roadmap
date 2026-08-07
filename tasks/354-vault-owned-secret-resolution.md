@@ -35,8 +35,9 @@ does not define the planned callback ownership contract.
   buffer immediately after the callback on success, error, or panic.
 - Prefer a byte-oriented extended-key decoder. If upstream parsing requires an
   immutable plaintext string, confine it to the callback, retain no reference,
-  document the bounded exception shared with [Task 329][t329] and [Task 335][t335], and zero every
-  wipeable source and decoded working copy on exit.
+  document the bounded exception shared with [Task 329][t329] and
+  [Task 335][t335], and zero every wipeable source and decoded working copy on
+  exit.
 - Keep existing `UnsafeSigner` and `PrivKeyForAddress` raw-key returns plus
   `ScriptForOutput` script returns as explicit caller-owned compatibility
   exceptions; do not claim the Vault controls their post-return lifetime.
@@ -56,7 +57,7 @@ does not define the planned callback ownership contract.
   typed derivation moves.
 - Preserve locked, not-mine, imported-xpub, and watch-only behavior.
 
-## Potential fix
+## Suggested fix
 
 Introduce narrow callback-based Vault selectors for derived account keys,
 imported private keys, scripts, and exact account derivation. Move each existing
@@ -65,7 +66,7 @@ then delete the cache pass-throughs and direct account-manager lookup. Keep the
 Vault guard across typed lookup, typed tweak, use, and zeroing. Replace the
 Store derivation callback with Vault preparation plus expected-cursor CAS.
 
-## Done when
+## Verification
 
 No signer or account-manager path reads encrypted secret DTOs directly, the
 Vault owns every internal callback-scoped secret lookup and lifetime, and raw
@@ -75,6 +76,15 @@ exceptions, and unchanged public behavior. Concurrent account creation and
 passphrase rotation never derive inside a Store write, deadlock, or commit
 material encrypted under an obsolete credential. Immutable-string parsing
 retains no reference beyond the callback and every wipeable copy is cleared.
+
+## Definition of done
+
+- Maintained signing and account creation resolve typed secrets only through
+  wallet-scoped Vault operations with callback-bounded ownership and zeroing.
+- No Wallet caller receives encrypted Store DTOs or the raw decrypt primitive;
+  documented compatibility returns remain caller-owned copies.
+- Store writes contain only prepared ciphertext and public facts, with no
+  derivation, encryption, or Vault callback under the transaction.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t335]: 335-kvdb-to-sql-migration.md

@@ -2,7 +2,7 @@
 
 Component: **Manager and Controller**.
 
-Dependencies: **none**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -41,7 +41,7 @@ settled timer/authentication contract.
 - Keep all kvdb-only lifecycle state inside the deprecated backend.
 - Treat repeated Unlock semantics separately from Manager object publication.
 
-## Potential fix
+## Suggested fix
 
 Serialize build-and-publish per wallet name, serialize the whole one-wallet
 kvdb admission path, and add one small admission fence plus an admitted-
@@ -65,7 +65,7 @@ currently returns `ErrVaultUnlocked` without checking the passphrase. Avoid
 `awaitCreate`, eviction callbacks, helper chains, and publication state
 machines.
 
-## Done when
+## Verification
 
 The documented contract has focused race tests and no Wallet is leaked or
 overwritten. Under a reject contract, repeat Unlock leaves the timer unchanged
@@ -82,3 +82,12 @@ Close-versus-Start and post-Close Start tests prove revocation wins before any
 new goroutine or Vault transition is published. A barrier immediately after
 the final pre-publication check proves `Close` cannot revoke between that check
 and goroutine publication or the `Started` transition.
+
+## Definition of done
+
+- Manager admission, publication, close, startup, shutdown, and repeated
+  Unlock behavior have one documented concurrency contract.
+- No lifecycle race can publish against a closed Store, leak a Wallet, or
+  strand a restartable Wallet in a transitional state.
+- The PR keeps kvdb-only state in the legacy backend and adds no generic
+  publication state machine.

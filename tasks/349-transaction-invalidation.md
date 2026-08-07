@@ -52,7 +52,7 @@ normalized input relation and otherwise must decode raw transactions.
   operation marker and member/edge result, returning success, definite failure,
   or a wallet-owned indeterminate error.
 
-## Potential fix
+## Suggested fix
 
 Add normalized `transaction_inputs` plus indexed parent-outpoint lookup and a
 forward backfill migration. Retain an invalidation marker containing the exact
@@ -63,7 +63,7 @@ cycle detection and a bounded traversal budget before updating any status.
 Use the same marker to reconcile an ambiguous commit; do not add a generic
 transaction journal.
 
-## Done when
+## Verification
 
 Root and descendants become terminal while unrelated siblings and later valid
 spenders survive; new descendants of terminal parents are rejected, and an
@@ -73,6 +73,15 @@ deterministically, and delete removes its normalized edges atomically. Backfill
 refuses an already-invalid graph, ambiguous commit reconciles exactly, and
 replay remains correct after restart on SQLite and PostgreSQL. Corrupt raw-tx
 versus persisted-hash fixtures fail atomic preflight on both dialects.
+
+## Definition of done
+
+- SQL exposes one idempotent branch-invalidation operation backed by an
+  authoritative normalized input graph and retained audit history.
+- Every graph writer, publisher, rollback, deletion, and ambiguous outcome
+  participates in the same bounded operation-specific admission contract.
+- kvdb remains unsupported and the PR adds no generic Store write lock or
+  transaction journal.
 
 [t334]: 334-shared-chain-state.md
 [t339]: 339-transaction-visibility.md

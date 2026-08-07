@@ -2,7 +2,7 @@
 
 Component: **TxCreator, PsbtManager, and the `txauthor` module**.
 
-Dependencies: **none**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -40,7 +40,7 @@ overflow before change is computed.
 - [Task 346][t346] invokes the shared input-set validator before its PSBT lease mutation
   and continues to own attempt admission and lease semantics.
 
-## Potential fix
+## Suggested fix
 
 Add a checked output validator that returns the bounded aggregate and one
 checked amount-add helper for fee targets. Call them before the first callback
@@ -52,7 +52,7 @@ constant source builders. Replace maintained uses of `FeeForSerializeSize` with
 a checked multiply/divide helper that preserves the existing rounding and
 minimum-fee contract without forming an overflowing intermediate product.
 
-## Done when
+## Verification
 
 Nested-module and Wallet tests cover nil, negative, individual-over-maximum,
 overflowing, aggregate-over-maximum, and target-plus-fee-overflow vectors. Every
@@ -64,6 +64,15 @@ mutation. Positive fee-rate and size operands that would wrap their product,
 including a positive-wraparound result, fail before input callbacks. [Task 346][t346]
 and [Task 356][t356] consume the released validator rather than maintaining duplicate
 arithmetic.
+
+## Definition of done
+
+- Maintained transaction creation validates every output, input set, fee, sum,
+  and subtraction within Bitcoin's monetary range before side effects.
+- The checked primitives live in `txauthor`, are released for root consumers,
+  and replace maintained use of unsafe aggregate arithmetic.
+- PSBT funding and change allocation consume the shared results without
+  duplicating validation.
 
 [t346]: 346-psbt-funding-metadata.md
 [t356]: 356-defer-change-script-allocation.md

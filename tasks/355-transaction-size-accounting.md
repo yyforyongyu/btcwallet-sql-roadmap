@@ -2,7 +2,7 @@
 
 Component: **TxCreator and the `txsizes` module**.
 
-Dependencies: **none**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -27,16 +27,24 @@ mixed transaction.
   defect and is outside this task; update it only if a released API requires a
   mechanical compile fix, not to broaden this task into command maintenance.
 
-## Potential fix
+## Suggested fix
 
 Build the base and witness sizes from the same complete input/output counts used
 by wire serialization. Compare estimates against maximally signed serialized
 transactions rather than duplicating arithmetic in tests. Verify the released
 module graph without a local `replace` masking an unpublished dependency.
 
-## Done when
+## Verification
 
 Change crossing the CompactSize boundary and mixed-input vectors are never
 underestimated, and ordinary P2PKH, nested, native SegWit, and Taproot estimates
 remain conservative without phantom witness bytes. Both nested and root
 consumers resolve the tagged fix without a local replacement.
+
+## Definition of done
+
+- `txsizes` matches wire serialization at the output-count boundary and for
+  mixed legacy/witness inputs without underestimation or phantom bytes.
+- Corrected nested-module releases are tagged and consumed by `txauthor` and
+  the root module without local replacements.
+- Command-specific input-source behavior remains outside this task.

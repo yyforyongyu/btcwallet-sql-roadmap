@@ -2,9 +2,9 @@
 
 Component: **Manager and AccountManager**.
 
-Dependencies: **[Task 332][t332], [`337.sql-selector`][t337], and
-[`345.sql-discovery`][t345]**. [Task 341][t341] and [Task 340][t340] are
-transitive prerequisites of those two milestones.
+Dependencies: **[Task 332][t332], [Task 337][t337], and
+[Task 345][t345]**. [Task 341][t341] and [Task 340][t340] are transitive
+prerequisites of those two tasks.
 
 ## Rationale
 
@@ -57,9 +57,9 @@ without the accounts its create request promised.
   accounts rather than succeeding with an empty backend-specific wallet.
 - Require [Task 337][t337]'s wallet-owned selector before admitting numberless shell
   accounts on SQL. The maintained kvdb backend may accept shell accounts only
-  if [Task 337][t337]'s modern-kvdb representation lands first; otherwise return a
-  stable unsupported error before mutation rather than fabricating a BIP44
-  account number.
+  if [Task 361](361-kvdb-imported-xpub-derivation.md) lands first; otherwise
+  return a stable unsupported error before mutation rather than fabricating a
+  BIP44 account number.
 - Keep SQL key derivation and encryption outside database write transactions.
   The retiring kvdb path may keep canonical `waddrmgr.Create` inside its one
   transaction; do not split waddrmgr solely for this task.
@@ -84,7 +84,7 @@ without the accounts its create request promised.
 - Do not add create manifests, replay markers, or Store callbacks.
 - Keep this independent of duplicate-create policy in [Task 330][t330].
 
-## Potential fix
+## Suggested fix
 
 Have the Vault prepare a mode-specific ciphertext-only genesis plan and destroy
 its plaintext working state before the SQL write. Extend each backend's existing
@@ -94,7 +94,7 @@ operation rather than widening `db.Store` with a derivation callback. Reconcile
 an ambiguous SQL or bbolt commit from those exact genesis facts rather than
 adding a create manifest.
 
-## Done when
+## Verification
 
 A definite fault during any account insert leaves no wallet artifact on either
 SQL dialect or kvdb, and successful creates expose the same normalized public
@@ -117,6 +117,15 @@ BIP49Plus/BIP84 initial-account fixture is rejected before creation when its
 normalized payload would make an overlapping branch derive the same scripts.
 Standard coin-type-zero scopes on testnet, simnet, and signet round-trip while
 an XPub or address encoding for another network fails before mutation.
+
+## Definition of done
+
+- Wallet, secret, sync, scope, account, and cursor genesis facts commit or
+  reconcile as one atomic result on every supported backend.
+- Failed or indeterminate creation publishes no Wallet and retains no
+  task-owned plaintext key material.
+- The PR adds no create manifest, generic replay mechanism, duplicate-create
+  policy, or contextual Manager API.
 
 [t330]: 330-duplicate-wallet-create.md
 [t332]: 332-watch-only-script-policy.md

@@ -2,8 +2,8 @@
 
 Component: **TxCreator and the `txauthor` module**.
 
-Dependencies: **[Task 355][t355] and [Task 357][t357], including their released nested-module
-changes**.
+Dependencies: **[Task 355][t355] and [Task 357][t357], including their released
+nested-module changes**.
 
 ## Rationale
 
@@ -31,20 +31,29 @@ when no change output is returned.
   input or change callbacks. This task owns allocation timing, not a second
   monetary-arithmetic implementation.
 
-## Potential fix
+## Suggested fix
 
 Extend `ChangeSource` with an immutable representative script or a narrow
 template method. Use it during fee and dust calculation, call `NewScript` only
 after the final positive non-dust decision, verify the returned script matches
 the template, and then append the output.
 
-## Done when
+## Verification
 
 Barrier-counted tests prove zero and dust change invoke `NewScript` zero times,
 viable change attempts it exactly once, retries and pre-allocation failures do
 not allocate early, and allocator or template failures are reported without a
 false zero-allocation claim. The tagged nested and root modules consume the
 behavior without a local replace.
+
+## Definition of done
+
+- `txauthor` allocates a change script only after checked fee and dust logic
+  proves one positive viable output, and verifies the allocated template.
+- Zero, dust, retry, and other pre-allocation failures consume no locator;
+  post-allocation errors accurately report that allocation may have occurred.
+- Tagged nested and root consumers use the released estimator and monetary
+  validation without duplicate arithmetic or local replacements.
 
 [t355]: 355-transaction-size-accounting.md
 [t357]: 357-transaction-amount-validation.md

@@ -2,9 +2,10 @@
 
 Component: **Manager migration and WalletVault**.
 
-Dependencies: **[Task 332][t332] and [Task 340][t340], plus [`337.sql-selector`][t337] and
-[`345.sql-discovery`][t345]**. It does not depend on either milestone's modern-kvdb
-acceptance clauses or whole-task completion.
+Dependencies: **[Task 332][t332], [Task 337][t337], [Task 340][t340], and
+[Task 345][t345]**. It does not depend on modern-kvdb derivation in
+[Task 361](361-kvdb-imported-xpub-derivation.md) or live-watch delivery in
+[Task 364](364-durable-watch-registration.md).
 
 ## Rationale
 
@@ -119,7 +120,7 @@ kvdb backend is the later [Task 353][t353].
   is asserted with `errors.Is` plus its typed detail and leaves the destination
   unmodified.
 
-## Potential fix
+## Suggested fix
 
 With the source wallet closed, take a consistent copy and run any required
 legacy upgrades only on that copy. Decode the copy and write a fresh SQL
@@ -130,7 +131,7 @@ SQLite is the required first destination; PostgreSQL conversion remains outside
 this task until its Manager path is scheduled. Make normalized wallet metadata
 an explicit migration input and validate it before opening the destination.
 
-## Done when
+## Verification
 
 A representative real kvdb wallet round-trips to SQL with equivalent identity,
 balances, scripts, history, and sync state; injected import failure leaves no
@@ -157,6 +158,16 @@ truncated magic is not treated as proof of a different historical challenge.
 Zero-counter BIP49Plus/BIP84 fixtures with equal normalized XPub payloads fail
 before branch derivation or destination mutation. Plaintext decoder exposure
 remains bounded on success, refusal, and cancellation.
+
+## Definition of done
+
+- A supported legacy wallet converts into one fresh SQLite destination with
+  equivalent identity, custody, accounts, scripts, transaction graph, leases,
+  and sync state.
+- Every unsupported or corrupt source shape returns a typed refusal before
+  destination mutation, and ambiguous import results reconcile exactly.
+- The source remains an untouched rollback artifact and no PostgreSQL
+  converter, generic import manifest, or new kvdb format is added.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t332]: 332-watch-only-script-policy.md

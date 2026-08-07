@@ -2,7 +2,8 @@
 
 Component: **AddressManager and key allocation**.
 
-Dependencies: **[`337.sql-selector`][t337] and [Task 345][t345]**.
+Dependencies: **[Task 337][t337] and
+[Task 364](364-durable-watch-registration.md)**.
 
 ## Rationale
 
@@ -14,13 +15,15 @@ wedge a branch because the failed index never advances.
 - Positive count means the number of valid addresses returned.
 - Define one small public maximum and reject zero or excess before mutation.
 - Keep bulk address allocation receiving-only and reject key-only accounts
-  before it changes a counter. A receiving result always follows [Task 345][t345]'s
-  watch-registration contract; there is no `SkipChainWatch` request override.
+  before it changes a counter. A receiving result always follows
+  [Task 364](364-durable-watch-registration.md)'s watch-registration contract;
+  there is no `SkipChainWatch` request override.
 - Make `NewAddress` the exact-account oldest-unused operation. It returns the
   oldest persisted unused receiving address and delegates to a receiving
   count-one batch only when no candidate exists. If that candidate has an
-  outstanding [Task 345][t345] obligation, retry or await the same delivery rather than
-  allocating a replacement or exposing it early.
+  outstanding [Task 364](364-durable-watch-registration.md) obligation, retry
+  or await the same delivery rather than allocating a replacement or exposing
+  it early.
 - Make `NewBulkAddresses` the force-allocation operation. It always advances
   the selected receiving branch by the requested count and never substitutes
   an older unused candidate.
@@ -49,10 +52,11 @@ wedge a branch because the failed index never advances.
   wallet-wide script uniqueness constraint; never relabel the raw owner or
   return its script as the derived account's address.
 - Return one batch-level typed pending result after commit. Withhold the entire
-  ordered address list until [Task 345][t345] completes registration; delivery failure
-  exposes no usable partial batch.
+  ordered address list until
+  [Task 364](364-durable-watch-registration.md) completes registration;
+  delivery failure exposes no usable partial batch.
 
-## Potential fix
+## Suggested fix
 
 Add one Store batch operation that CASes the expected branch counter and inserts
 the complete ordered candidate set, final counter, and durable watch obligation.
@@ -67,7 +71,7 @@ result only after the ordered batch obligation is delivered. Use operation-
 specific insert results so a concurrent raw-script collision consumes its
 child index and refills the batch inside the same bounded allocation operation.
 
-## Done when
+## Verification
 
 Concurrent batches never overlap, invalid children cannot wedge allocation,
 results are ordered, exhaustion returns a typed zero-result error while its
@@ -88,5 +92,13 @@ allocation. Their ready and pending result variants are public and
 externally mockable. The key-only count-one operation advances its durable
 locator without creating a watch obligation or receiving result.
 
+## Definition of done
+
+- Receiving batches allocate the requested fresh scripts atomically, persist
+  skips and ordered watch obligations, and expose no usable partial result.
+- `NewAddress`, `NewBulkAddresses`, and key-only count-one allocation retain
+  their distinct reuse, force-allocation, and non-receiving contracts.
+- Concurrency, exhaustion, collision, registration, and ambiguous outcomes do
+  not overlap batches or wedge durable counters.
+
 [t337]: 337-imported-xpub-derivation.md
-[t345]: 345-durable-watch-registration.md

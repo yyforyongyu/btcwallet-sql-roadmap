@@ -2,7 +2,8 @@
 
 Component: **TxCreator, PsbtManager, and AddressManager**.
 
-Dependencies: **[Task 345][t345], [Task 346][t346], [Task 355][t355], and [Task 356][t356]**.
+Dependencies: **[Task 346][t346], [Task 355][t355], [Task 356][t356], and
+[Task 364](364-durable-watch-registration.md)**.
 
 ## Rationale
 
@@ -11,7 +12,8 @@ or PSBT before the active chain backend watches that script.
 
 ## Details
 
-- Route change through [Task 345][t345]'s watched allocation primitive.
+- Route change through
+  [Task 364](364-durable-watch-registration.md)'s watched allocation primitive.
 - Reject key-only accounts as change sources.
 - Allocate no address for zero or dust change.
 - Keep chain registration outside the Store transaction.
@@ -31,11 +33,13 @@ or PSBT before the active chain backend watches that script.
   ambiguous release before returning. Return PSBT success only while that set
   remains active, unexpired, and owned by the result's lease token.
 - Direct `CreateTransaction` has no funding lease token or lease set. Register
-  its change before returning an `AuthoredTx`; on watch failure or cancellation,
-  return no result and retain [Task 345][t345]'s durable registration obligation for
-  retry. Do not add funding ownership to `TxIntent` in this task.
+  its change before returning an `AuthoredTx`; on watch failure or
+  cancellation, return no result and retain
+  [Task 364](364-durable-watch-registration.md)'s durable registration
+  obligation for retry. Do not add funding ownership to `TxIntent` in this
+  task.
 
-## Potential fix
+## Suggested fix
 
 Commit the change address and its registration obligation atomically, reconcile
 the exact locator, deliver it idempotently, and return the funded result only
@@ -48,7 +52,7 @@ token still owns the full active set immediately before publishing the PSBT.
 For direct creation, deliver the durable watch obligation before returning and
 do not invent lease cleanup for a lease-free API.
 
-## Done when
+## Verification
 
 Every modern funded result has watched change, registration failure returns no
 publishable result, unsupported weight shapes fail before allocation, and exact
@@ -59,7 +63,15 @@ success return, the exact selected set is still leased to that result's token.
 Direct-transaction tests prove watch delivery gates success without adding
 leases or a funding lease token.
 
-[t345]: 345-durable-watch-registration.md
+## Definition of done
+
+- Every returned modern funded result has viable, supported, durably watched
+  change, and no zero or dust result consumes an address.
+- PSBT failure releases or reconciles the exact token-owned lease set; direct
+  creation returns no result until its durable watch obligation succeeds.
+- The PR adds no lease ownership to direct `TxIntent` and no duplicate size or
+  monetary arithmetic.
+
 [t346]: 346-psbt-funding-metadata.md
 [t355]: 355-transaction-size-accounting.md
 [t356]: 356-defer-change-script-allocation.md

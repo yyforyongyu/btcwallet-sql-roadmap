@@ -28,7 +28,7 @@ depend on backend-specific constraint errors.
   create returns `ErrWalletExists` regardless of the requested alias. Do not add
   restart-stable alias metadata to the legacy format.
 
-## Potential fix
+## Suggested fix
 
 Use [Task 331][t331]'s Manager admission rule only as a loaded-wallet fast path;
 backend insert-only creation remains the durable authority for concurrent
@@ -39,7 +39,7 @@ classify a generic uniqueness error. Translate that sentinel once at the
 Manager boundary. Keep partial-state recovery, create manifests, and retry
 authentication out of this task.
 
-## Done when
+## Verification
 
 Every later kvdb create and the same-name SQLite create return
 `ErrWalletExists` without mutation. PostgreSQL Store conformance proves the
@@ -48,6 +48,15 @@ translation using [Task 333][t333]'s harness. A barrier-controlled simultaneous 
 yields exactly one success and one `ErrWalletExists`; the loser changes none of
 the winner's credentials or rows. Injected non-wallet uniqueness failures
 remain their original Store errors and never become `ErrWalletExists`.
+
+## Definition of done
+
+- Every maintained backend reports the wallet-owned duplicate sentinel
+  without mutating the existing wallet or its credentials.
+- Concurrent creation admits exactly one durable winner, and unrelated Store
+  failures retain their original classification.
+- The PR does not add kvdb alias metadata or absorb atomic genesis work from
+  [Task 329](329-atomic-wallet-account-creation.md).
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t333]: 333-postgres-manager-harness.md

@@ -2,7 +2,7 @@
 
 Component: **Manager, AccountManager, and AddressManager**.
 
-Dependencies: **none**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -27,7 +27,7 @@ backend handles inconsistently.
 - Preserve ADR 0012: script presence is not private signing material.
 - Keep `AddressSecret.ScriptIsSecret`; it records legacy cipher provenance.
 
-## Potential fix
+## Suggested fix
 
 Apply backend-neutral creation validation before mutation, then enforce the SQL
 import invariant and document the kvdb compatibility exception at the Wallet
@@ -35,11 +35,19 @@ boundary. Only if it materially simplifies callers, replace wallet-domain
 `CryptoKeyType` selection with semantic script seal/open Vault methods. Do not
 bundle the large Vault API cleanup into the policy fix by default.
 
-## Done when
+## Verification
 
 SQL follows ADR 0012, kvdb retains only its documented legacy exception,
 the full creation matrix has positive and negative tests before mutation, and
 script-only tracking never claims signing authority. XPub-root mode remains
 unsupported before and after [Task 343][t343].
+
+## Definition of done
+
+- Creation and import validation enforce the documented SQL and legacy-kvdb
+  watch-only policies before mutation.
+- Unsupported root, shell, and signing-authority combinations return stable
+  failures without changing backend state.
+- The PR does not broaden Vault APIs or add XPub-root wallet creation.
 
 [t343]: 343-exact-account-creation.md

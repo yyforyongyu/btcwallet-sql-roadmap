@@ -37,14 +37,14 @@ metadata authorize the requested signature.
   path-bound external XPub only after [Task 343][t343] proves matching private account
   material through the Vault.
 
-## Potential fix
+## Suggested fix
 
 Consume [Task 346][t346]'s side-effect-free validator and clone, then centralize signing
 authorization, including the effective tweaked key, before mutation. Derive the
 exact owned key through the Vault, sign the clone, and execute finalized scripts
 before publishing the result.
 
-## Done when
+## Verification
 
 Standard, custom-scope, multisig, and Taproot vectors sign only when ownership
 and commitments match; forged metadata produces no signature or caller
@@ -54,6 +54,16 @@ signing, while an authorized path-bound account can sign after [Task 343][t343].
 Invalid purpose-independent spend shapes, branches, children, and sighash
 encodings fail before Store or Vault access. Account-number boundary tests
 accept `MaxAccountNumber` and reject the next value without secret lookup.
+
+## Definition of done
+
+- PSBT signing authorizes exactly one persisted wallet identity, validated
+  previous output, script commitment, derivation, sighash, and tweak before
+  packet mutation or secret lookup.
+- Forged or ambiguous metadata produces no signature, secret access, or caller
+  mutation, while supported standard and custom accounts remain signable.
+- Numberless imported XPub accounts remain public-only unless a path-bound
+  account proves matching private material through the Vault.
 
 [t343]: 343-exact-account-creation.md
 [t346]: 346-psbt-funding-metadata.md

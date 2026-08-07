@@ -66,7 +66,7 @@ when the unsigned transaction changes.
   primitive consumed by [Task 347][t347].
 - Keep watched change delivery in [Task 348][t348].
 
-## Potential fix
+## Suggested fix
 
 Build a wallet-owned structural validator and clone operation. Index original
 inputs by outpoint, retain transaction header and sequence facts, and tag the
@@ -80,7 +80,7 @@ rather than adding a second lease-generation column or durable attempt manifest.
 Carry packet, change index, and token in one result and use the token in the
 matching set-release API.
 
-## Done when
+## Verification
 
 Duplicate-output and metadata-rich vectors retain exact caller data, including
 version, locktime, and sequences. Change remains uniquely identified through
@@ -98,6 +98,16 @@ release or verification from the old token cannot affect or validate the new
 lease. Invalid individual or aggregate input values leave zero leases. External
 callers can retain and atomically release the exact funded set using only the
 wallet-owned result.
+
+## Definition of done
+
+- Funding publishes a validated clone that preserves authorized caller
+  metadata and identifies change through reordering without mutating the
+  caller packet on error.
+- Every selected input is atomically owned by one fresh typed lease token, and
+  release or ambiguous reconciliation affects only that exact set.
+- The PR leaves watched-change delivery to
+  [Task 348](348-watched-change-delivery.md).
 
 [t347]: 347-psbt-signing-authorization.md
 [t348]: 348-watched-change-delivery.md

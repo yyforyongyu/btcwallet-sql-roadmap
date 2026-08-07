@@ -3,8 +3,9 @@
 Component: **AccountManager**.
 
 Dependencies: **[Task 332][t332], [Task 337][t337], [Task 340][t340],
-[Task 341][t341], [Task 345][t345], and [Task 354][t354], plus accepted ADR 0012
-and ADR 0013 amendments covering scope storage and path-bound account identity**.
+[Task 341][t341], [Task 345][t345], [Task 354][t354], and
+[Task 364](364-durable-watch-registration.md), plus accepted ADR 0012 and ADR
+0013 amendments covering scope storage and path-bound account identity**.
 
 ## Rationale
 
@@ -70,7 +71,7 @@ known derivation path are currently conflated.
   contracts only after amending both ADR 0012 and ADR 0013; ADR 0012 currently
   retains `key_scope_secrets` explicitly.
 
-## Potential fix
+## Suggested fix
 
 Update ADRs 0012 and 0013, then add one generic account request with an optional
 exact number, external XPub, schema, and fingerprint. Validate path components
@@ -79,9 +80,10 @@ scope/account/counter changes by backend-local CAS. Use a callback-scoped Vault
 derivation operation that zeros private material on every exit. Keep
 initial-account transactionality in [Task 329][t329]. Reconcile exact durable facts
 after an ambiguous commit without adding a generic account manifest. Reuse
-[Task 345][t345]'s ordered branch-horizon delivery for watch-chain accounts.
+[Task 364](364-durable-watch-registration.md)'s ordered branch-horizon delivery
+for watch-chain accounts.
 
-## Done when
+## Verification
 
 Custom scopes and sparse exact accounts survive restart, invalid combinations
 and over-maximum account numbers fail before dependency access, provenance
@@ -98,6 +100,15 @@ account and return the typed collision for the other without advancing the
 cursor, creating watch obligations, or relying on address allocation to expose
 the conflict. A zero-counter BIP49Plus/BIP84 pair with equal normalized payloads
 is rejected when an overlapping branch would derive the same scripts.
+
+## Definition of done
+
+- SQL account creation supports exact, custom-scope, sequential, and truthful
+  path-bound shapes with atomic cursor, identity, discovery, and watch facts.
+- Unsupported or invalid requests fail before mutation; ambiguous outcomes
+  reconcile without duplicate accounts, cursor advances, or obligations.
+- The maintained kvdb Manager returns the stable unsupported sentinel rather
+  than extending the legacy format.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t332]: 332-watch-only-script-policy.md

@@ -2,7 +2,7 @@
 
 Component: **LegacyWalletVault, waddrmgr, and modern-kvdb AccountManager**.
 
-Dependencies: **none**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -49,7 +49,7 @@ the database rolls back but the manager's first in-memory key change can remain.
   buffers that the plan destroys.
 - Do not change deprecated RPC behavior or add a new kvdb format.
 
-## Potential fix
+## Suggested fix
 
 Add an operation-specific waddrmgr rotation plan that acquires an internal guard
 and derives and validates both halves without mutating the manager. Apply its
@@ -62,7 +62,7 @@ requires live decrypted keys. Give account creation a narrow prepared account
 plan with expected-cursor CAS so it follows the same guard-before-walletdb
 order.
 
-## Done when
+## Verification
 
 Injected failure before either write, between writes, and at commit leaves disk
 and live manager state on the same proven credentials; success switches both to
@@ -77,5 +77,14 @@ cannot deadlock, observe mixed credentials, or retain a partial account.
 Invalid-child and terminal-exhaustion fixtures preserve the cursor policy while
 rotation holds the same operation guard. No exact-account request or test is
 added to the modern kvdb path.
+
+## Definition of done
+
+- Legacy public and private credentials rotate as one proven disk-and-memory
+  result while preserving the manager's initial lock state.
+- Account creation, lock, unlock, encryption, and rotation share one explicit
+  guard-before-walletdb order without plaintext retention or deadlock.
+- The PR keeps the legacy dual-encryption format and adds no exact-account or
+  deprecated RPC behavior.
 
 [t343]: 343-exact-account-creation.md

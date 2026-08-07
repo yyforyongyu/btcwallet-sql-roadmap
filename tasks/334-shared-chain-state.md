@@ -2,9 +2,9 @@
 
 Component: **Manager and Controller/Syncer**.
 
-Dependencies: **[Task 333][t333] and [Task 340][t340], plus an accepted ADR superseding ADR
-0002**. [Task 333][t333] supplies the PostgreSQL harness; this task owns shared-chain
-behavior on that harness.
+Dependencies: **[Task 333][t333] and [Task 340][t340], plus an accepted ADR
+superseding ADR 0002**. [Task 333][t333] supplies the PostgreSQL harness; this
+task owns shared-chain behavior on that harness.
 
 ## Rationale
 
@@ -63,7 +63,7 @@ wide rollback while other wallets have independent runtime state.
   state can be proven.
 - Do not add durable rescan jobs; a restarted targeted rescan starts over.
 
-## Potential fix
+## Suggested fix
 
 Prefer a Manager-level chain coordinator with one Manager-owned chain source,
 a durable canonical frontier, and transaction-scoped compare-and-set. Quiesce
@@ -77,7 +77,7 @@ wallet-scoped instead, prove other wallets remain untouched. Run one chain event
 loop in the coordinator and fan out normalized ordered events through bounded
 per-Wallet processors after the event's one canonical mutation.
 
-## Done when
+## Verification
 
 The superseding ADR defines the Manager coordinator and remaining per-Wallet
 processor and rescan responsibilities before code lands. SQLite two-wallet
@@ -102,6 +102,14 @@ proves the underlying channel had one consumer and the canonical mutation ran
 once. Backpressure, wallet failure, removal, and Manager shutdown fixtures
 prove the fanout cannot drop accepted events, deadlock shutdown, or leak
 workers.
+
+## Definition of done
+
+- One Manager-owned coordinator is the sole canonical-chain source consumer
+  and mutation owner for every Wallet in a database.
+- Extension, bootstrap, rollback, historical insertion, fanout, and ambiguous
+  outcomes preserve one serializable frontier on both SQL dialects.
+- The PR makes no multi-Manager, multi-process, or durable-rescan guarantee.
 
 [t333]: 333-postgres-manager-harness.md
 [t340]: 340-durable-database-identity.md

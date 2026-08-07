@@ -49,18 +49,19 @@ would instead make successful durable creation look canceled.
 - Keep Manager close/admission ordering in [Task 331][t331]. Do not add a generic
   operation registry or publication state machine.
 
-## Potential fix
+## Suggested fix
 
-Change the two public signatures after [Task 329][t329] and [Task 331][t331] land, then carry one
-request context through admission and safe preparation checkpoints. Give SQL an
-operation-specific caller-cancellable writer claim followed by a Manager-
-context transaction. Give kvdb an explicit pre-`Update` checkpoint and document
-its non-cancellable writer wait and post-claim scrypt. Both backends use the same
-bounded Manager context for mutation, reconciliation, runtime assembly, and
-publication after the cutoff. For Load, arbitrate cancellation under [Task 331][t331]'s
-per-name admission immediately before the one cache-publication point.
+Change the two public signatures after [Task 329][t329] and [Task 331][t331]
+land, then carry one request context through admission and safe preparation
+checkpoints. Give SQL an operation-specific caller-cancellable writer claim
+followed by a Manager-context transaction. Give kvdb an explicit pre-`Update`
+checkpoint and document its non-cancellable writer wait and post-claim scrypt.
+Both backends use the same bounded Manager context for mutation,
+reconciliation, runtime assembly, and publication after the cutoff. For Load,
+arbitrate cancellation under [Task 331][t331]'s per-name admission immediately
+before the one cache-publication point.
 
-## Done when
+## Verification
 
 Canceled admission, caller-cancellable SQL writer acquisition, every safe
 preparation checkpoint, ambiguous commit, initial-account genesis, and same-name
@@ -78,6 +79,15 @@ Load barriers immediately before and after cache publication prove the former
 returns cancellation with no retained assembly and the latter returns the
 published Wallet. A returned Wallet remains usable after its request context is
 canceled.
+
+## Definition of done
+
+- Public Manager creation and loading take `context.Context` first and honor
+  cancellation only before their documented mutation or publication cutoff.
+- Post-cutoff mutation, reconciliation, assembly, and publication finish under
+  a bounded Manager-owned context and return the definitive result.
+- Maintained callers migrate together; no background-context compatibility
+  wrapper, generic operation registry, or publication state machine is added.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t331]: 331-manager-wallet-lifecycle.md
