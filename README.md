@@ -3,7 +3,8 @@
 This private repository coordinates the remaining SQL wallet work. This file
 defines the canonical priority and dependency order, [ACTIVE.md](ACTIVE.md)
 records current ownership, and [tasks/](tasks/) contains the executable task
-specifications.
+specifications. [TASK_TEMPLATE.md](TASK_TEMPLATE.md) defines the required task
+shape and admission rules.
 
 All earlier task files are preserved under [archive/](archive/) as evidence,
 not instruction. This sequence begins after archived [Task 328][t328]. The
@@ -46,11 +47,16 @@ next free task number is 359.
 
 ## Execution rule and recommended order
 
-Each branch and PR addresses exactly one task file. Do not combine two tasks
-because they are in the same dependency group or touch nearby code. A dotted
-milestone such as [`337.sql-selector`][t337] is one narrowly scoped PR belonging only
-to its named task; completing that milestone does not authorize the rest of the
-task in the same PR.
+Each task is implemented by exactly one branch and PR. Do not combine two tasks
+because they are in the same dependency group or touch nearby code. Existing
+dotted milestones such as [`337.sql-selector`][t337] are transitional sequencing
+labels. Extract one into the next numbered task before implementation instead
+of treating it as authority for a separate PR under the parent task.
+
+Every new or materially revised task must follow
+[TASK_TEMPLATE.md](TASK_TEMPLATE.md). Split a task before assignment if it
+cannot produce one small, independently reviewable outcome in one PR. A task's
+dependencies establish readiness and do not expand its implementation scope.
 
 "Parallel" below means different developers may take different ready items.
 One developer still works on one item at a time, and every item remains its own
