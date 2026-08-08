@@ -13,7 +13,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | In progress | [#1305][pr1305], [#1306][pr1306] |
 | [Task 333][t333] | Add PostgreSQL test harness | YY | In progress | [#1303][pr1303] |
 | [Task 334][t334] | Define shared-chain ownership | YY | Claimed | — |
-| [Task 335][t335] | Validate legacy migration snapshot | Abdullahi | Claimed | — |
+| [Task 335][t335] | Validate legacy migration snapshot | — | Unclaimed | — |
 | [Task 339][t339] | Define transaction visibility | — | Unclaimed | — |
 | [Task 342][t342] | Bound recovery windows | — | Unclaimed | — |
 | [Task 350][t350] | Use native PostgreSQL driver | YY | Claimed | — |
