@@ -2,14 +2,14 @@
 
 Component: **Wallet sync-state publication and integration-test harness**.
 
-Dependencies: **[Task 415][t415]**.
+Dependencies: **None**.
 
 ## Rationale
 
-Task 415's public UTXO integration cases can hide an invalid synchronization
-contract by polling wallet-owned reads after the Wallet has already reported
-itself synced. A retry can eventually succeed even if `Info.Synced` became true
-before all transaction, UTXO, balance, and tip state was committed.
+Public API integration cases can hide an invalid synchronization contract by
+polling wallet-owned reads after the Wallet has already reported itself synced.
+A retry can eventually succeed even if `Info.Synced` became true before all
+transaction, UTXO, balance, and tip state was committed.
 
 The Wallet and harness need one synchronization boundary. Once it succeeds,
 wallet-owned reads for the reported tip must support deterministic, one-shot
@@ -27,8 +27,9 @@ peer synchronization, mempool delivery, and wall-clock lease expiration.
   inconsistent tip; preserve explicit reorganization handling.
 - Strengthen `AssertWalletSynced` to require the sync flag and exact backend
   best hash and height. Include all observed values in a timeout failure.
-- Make assertions over already-synced wallet state one-shot, including
-  `AssertUtxosExist`, confirmations, and mature-coinbase `ListUnspent` checks.
+- Make existing assertions over already-synced wallet state one-shot. Task 415
+  and later public API itests consume this boundary when they land; they are
+  not prerequisites or part of this task.
 - Retain waits only for named external events. Mempool delivery and lease
   expiration helpers must say which event they await and remain bounded.
 - Prohibit raw generic polling in `itest` scenario files with an automated
@@ -43,8 +44,8 @@ peer synchronization, mempool delivery, and wall-clock lease expiration.
 
 Order the production sync transition after all wallet-owned state commits and
 make `AssertWalletSynced` the sole chain-state retry boundary by comparing
-`Wallet.Info` with the miner's exact best block. Replace Task 415's downstream
-wallet polling with direct assertions, move legitimate external waits behind
+`Wallet.Info` with the miner's exact best block. Convert existing downstream
+wallet polling to direct assertions, move legitimate external waits behind
 event-specific helpers, and add a small AST-based or equivalent source guard.
 
 ## Verification
@@ -52,10 +53,10 @@ event-specific helpers, and add a small AST-based or equivalent source guard.
 - Mine to a real SQL-backed Wallet, wait only through `AssertWalletSynced`, and
   check `ListUnspent`, `GetUtxo`, balance, transaction, and confirmation state
   exactly once.
-- Prove `Info.Synced` stays false until wallet state and the exact synced tip are
-  committed.
+- Prove `Info.Synced` stays false until wallet state and the exact synced tip
+  are committed.
 - Cover stale historical notification and explicit reorganization paths.
-- Run the narrow Wallet sync tests and Task 415's `utxomanager` cases on every
+- Run the narrow Wallet sync and existing synchronized-state itests on every
   supported chain backend.
 - Run the no-raw-polling guard through the ordinary unit-test target and prove
   a forbidden scenario call produces actionable guidance.
@@ -69,5 +70,3 @@ event-specific helpers, and add a small AST-based or equivalent source guard.
 - The ordinary test target rejects new generic polling in `itest` scenarios.
 - Reorganization behavior remains covered and no generic polling escape hatch
   or unrelated chain redesign is introduced.
-
-[t415]: 415-utxo-public-integration-tests.md

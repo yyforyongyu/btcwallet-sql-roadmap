@@ -1,6 +1,6 @@
 # Task dependency phases
 
-The roadmap contains **105 active tasks**. No task in the current Task
+The roadmap contains **109 active tasks**. No task in the current Task
 329-and-later series has been completed and archived; older archived files are
 historical evidence and are not part of this map.
 
@@ -15,7 +15,7 @@ Individual task files own scope, dependencies, and claim gates.
 [ACTIVE.md](ACTIVE.md) separately owns assignments, active claims, PRs, and
 coordination state.
 
-## Phase 1 — 30 tasks
+## Phase 1 — 35 tasks
 
 | Task | Component | Outcome | Direct dependencies | Non-task gates |
 | --- | --- | --- | --- | --- |
@@ -43,14 +43,19 @@ coordination state.
 | [Task 421][t421] | WalletVault and SQL wallet-secret persistence | Reconcile SQL passphrase commits | — | — |
 | [Task 424][t424] | ADR 0006 transaction and UTXO integrity contract | Define transaction and UTXO integrity ownership | — | — |
 | [Task 425][t425] | Wallet transaction-authoring wrapper boundary | Isolate shared transaction authoring from wrapper watch and lease effects | — | — |
-| [Task 427][t427] | Controller lifecycle and credential integration tests | Cover Controller lifecycle and credential contracts | — | — |
-| [Task 428][t428] | Controller information and synchronization integration tests | Cover Controller sync and information contracts | — | — |
+| [Task 427][t427] | Controller credential integration tests | Cover remaining Controller credential contracts | — | — |
+| [Task 428][t428] | Controller Resync and Rescan integration tests | Cover Controller resync and rescan contracts | — | — |
 | [Task 429][t429] | AccountManager mutation integration tests | Cover public account mutation contracts | — | — |
 | [Task 430][t430] | AccountManager query integration tests | Cover public account query contracts | — | — |
 | [Task 431][t431] | AddressManager allocation and lookup integration tests | Cover address allocation and lookup contracts | — | — |
 | [Task 432][t432] | AddressManager import and script integration tests | Cover address import and script contracts | — | — |
+| [Task 433][t433] | Wallet sync-state publication and integration-test harness | Enforce the wallet sync test boundary | — | — |
+| [Task 434][t434] | TxCreator integration tests | Cover transaction creation contracts | — | — |
+| [Task 435][t435] | TxPublisher integration tests | Cover transaction publication contracts | — | — |
+| [Task 436][t436] | TxReader integration tests | Cover transaction read contracts | — | — |
+| [Task 437][t437] | TxWriter integration tests | Cover transaction label contracts | — | — |
 
-## Phase 2 — 17 tasks
+## Phase 2 — 16 tasks
 
 | Task | Component | Outcome | Direct dependencies | Non-task gates |
 | --- | --- | --- | --- | --- |
@@ -70,7 +75,6 @@ coordination state.
 | [Task 419][t419] | wallet AddressManager benchmarks | Measure SQLite address-read performance | 416 | — |
 | [Task 420][t420] | wallet TxReader benchmarks | Measure SQLite transaction-read performance | 416 | — |
 | [Task 426][t426] | SQL TxStore ingestion amount validation | Validate persisted transaction output aggregates | 424 | — |
-| [Task 433][t433] | Wallet sync-state publication and integration-test harness | Enforce the wallet sync test boundary | 415 | — |
 
 ## Phase 3 — 15 tasks
 
@@ -289,3 +293,7 @@ task and keep non-task gates inline with their owning row.
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
 [t433]: tasks/433-wallet-sync-test-boundary.md
+[t434]: tasks/434-transaction-creation-itests.md
+[t435]: tasks/435-transaction-publication-itests.md
+[t436]: tasks/436-transaction-read-itests.md
+[t437]: tasks/437-transaction-label-itests.md

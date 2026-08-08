@@ -1,6 +1,6 @@
 # Active task catalog
 
-The next free task number is **434**.
+The next free task number is **438**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns dependency phases, and
@@ -162,10 +162,10 @@ not create dependency or scheduling authority.
 
 - [Task 415](415-utxo-public-integration-tests.md): cover public UTXO contracts
   end to end.
-- [Task 427](427-controller-lifecycle-credential-itests.md): cover Controller
-  lifecycle and credential contracts.
-- [Task 428](428-controller-sync-info-itests.md): cover Controller sync and
-  information contracts.
+- [Task 427](427-controller-lifecycle-credential-itests.md): cover remaining
+  Controller credential contracts.
+- [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
+  rescan contracts.
 - [Task 429](429-account-mutation-itests.md): cover public account mutation
   contracts.
 - [Task 430](430-account-query-itests.md): cover public account query contracts.
@@ -175,6 +175,13 @@ not create dependency or scheduling authority.
   script contracts.
 - [Task 433](433-wallet-sync-test-boundary.md): enforce the wallet sync test
   boundary.
+- [Task 434](434-transaction-creation-itests.md): cover transaction creation
+  contracts.
+- [Task 435](435-transaction-publication-itests.md): cover transaction
+  publication contracts.
+- [Task 436](436-transaction-read-itests.md): cover transaction read contracts.
+- [Task 437](437-transaction-label-itests.md): cover transaction label
+  contracts.
 
 ## Secrets and credentials
 

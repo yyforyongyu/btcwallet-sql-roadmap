@@ -1,20 +1,20 @@
-# Task 428 — cover Controller sync and information contracts
+# Task 428 — cover Controller resync and rescan contracts
 
-Component: **Controller information and synchronization integration tests**.
+Component: **Controller Resync and Rescan integration tests**.
 
 Dependencies: **None**.
 
 ## Rationale
 
 [Issue #1250][issue1250] assigns Gustavo the Controller integration-test lane.
-`Info`, `Resync`, and `Rescan` share the public synchronization boundary, but
-real-wallet coverage does not establish their lifecycle gates, reported chain
-state, bounded requests, or durable result after reopen.
+Merged [PR #1300][pr1300] covers the baseline `Info` contract. `Resync` and
+`Rescan` remain without real-wallet coverage for lifecycle gates, bounded
+requests, completion, and durable results after reopen.
 
 ## Details
 
-- Add public integration cases for `Info`, `Resync`, and `Rescan` against a
-  real SQL-backed Wallet and deterministic regtest chain.
+- Add public integration cases for `Resync` and `Rescan` against a real
+  SQL-backed Wallet and deterministic regtest chain.
 - Require SQLite and register one backend-neutral source for PostgreSQL after
   [Task 333][t333] enables that harness.
 - Cover stopped and started calls, current and earlier valid boundaries,
@@ -25,6 +25,8 @@ state, bounded requests, or durable result after reopen.
   reopen.
 - Keep the PR test-only and avoid defining future recovery or live-watch
   semantics owned by Tasks 342, 363, and 397–402.
+- Use `Info` only to observe synchronization preconditions and postconditions;
+  do not duplicate its standalone coverage from PR #1300.
 - Exclude lifecycle credentials, account/address APIs, RPC, direct Store reads,
   bitcoind parity scenarios, and production fixes.
 
@@ -45,11 +47,12 @@ requests, and observes completion only through maintained public APIs.
 
 ## Definition of done
 
-- `Info`, `Resync`, and `Rescan` have representative public lifecycle, success,
+- `Resync` and `Rescan` have representative public lifecycle, success,
   invalid-boundary, and cancellation coverage.
 - Completed synchronization results remain observable after durable reopen.
 - Assertions use a real SQLite Wallet and remain backend-neutral.
 - No production behavior or future recovery policy is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
 [t333]: 333-postgres-manager-harness.md
