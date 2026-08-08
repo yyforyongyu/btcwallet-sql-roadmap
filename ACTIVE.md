@@ -40,7 +40,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 430][t430] | Test account queries | Gustavo | Claimed | — |
 | [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
 | [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
-| [Task 433][t433] | Enforce sync test boundary | — | Unclaimed | — |
+| [Task 433][t433] | Enforce sync test boundary | YY | Claimed | — |
 | [Task 434][t434] | Test transaction creation | Abdullahi | Claimed | — |
 | [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
 | [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
