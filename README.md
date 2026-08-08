@@ -25,6 +25,7 @@ gate is complete.
 | Dependency phases | [QUEUE.md](QUEUE.md) |
 | Active tasks, claims, and in-progress PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
+| Weekly plan | [WEEKLY-PLAN.md](WEEKLY-PLAN.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
 | Agent workflow | [AGENTS.md](AGENTS.md) |
 | Historical work | [archive/](archive/) |
