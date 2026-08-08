@@ -6,7 +6,8 @@ This repository contains planning documents, not btcwallet source code.
 
 - [README.md](README.md) explains how to use the repository.
 - [QUEUE.md](QUEUE.md) owns the dependency phase of every active task.
-- [ACTIVE.md](ACTIVE.md) owns assignments, active PRs, and coordination.
+- [ACTIVE.md](ACTIVE.md) owns claims, assignments, active implementation PRs,
+  and coordination.
 - Individual files under [tasks/](tasks/) own scope and dependencies.
 - [tasks/README.md](tasks/README.md) owns the active catalog and next number.
 - [TASK_TEMPLATE.md](TASK_TEMPLATE.md) owns the required task shape.
@@ -22,8 +23,9 @@ Use these terms precisely:
 
 - **Assigned** records the intended future owner. A blocked task may be
   assigned before its dependencies finish.
-- **Claimed** means active implementation. Set its [ACTIVE.md](ACTIVE.md)
-  status to `In progress` before implementation and add its PR when opened.
+- **Claimed** means active implementation. Move the task into
+  [ACTIVE.md](ACTIVE.md)'s claimed table before implementation and add its PR
+  when opened.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
@@ -40,21 +42,21 @@ Do not use stacked implementation PRs to bypass dependency completion. YY must
 approve an exception explicitly, the prerequisite contract must be frozen, and
 the dependent PR must remain unmergeable until the prerequisite merges.
 
-## Roadmap PR workflow
+## Roadmap update workflow
 
 - Use a dedicated Git worktree under `.worktrees/` and a `roadmap/<topic>`
   branch.
-- Never push directly to `main`. Open a roadmap PR and stop for review.
-- Rebase onto the latest `main` before allocating task numbers.
+- Fetch and rebase onto the latest `main` before allocating task numbers.
 - Allocate a contiguous range from the next number in
   [tasks/README.md](tasks/README.md).
-- Serialize number-allocating PR merges. If another PR used the range first,
+- Serialize number-allocating updates. If another update used the range first,
   rebase and fold the renumbering into the introducing commit.
 - Sign every commit and keep each roadmap commit small and self-contained.
-- Fold accepted review corrections into the commit that introduced the task.
 - Validate Markdown links, task numbering, line wrapping, and
   `git diff --check`. Do not run btcwallet CI for planning-only changes.
-- Remove the worktree and its local branch after merge.
+- Fast-forward local `main` to the validated roadmap commit and push `main`
+  directly. Do not open a roadmap PR unless explicitly requested.
+- Remove the worktree and its local branch after the push.
 
 ## Task format
 
@@ -105,7 +107,7 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 
 ## Completing a task
 
-After the implementation PR merges, use a roadmap PR to:
+After the implementation PR merges, use the roadmap update workflow to:
 
 1. remove its row from [ACTIVE.md](ACTIVE.md);
 2. move its task file under `archive/tasks/`;
