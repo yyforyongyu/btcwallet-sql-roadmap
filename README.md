@@ -7,14 +7,15 @@ maintained SQL-backed `wallet/` library.
 
 1. Read [AGENTS.md](AGENTS.md) for the workflow and task rules.
 2. Read [QUEUE.md](QUEUE.md) for the complete dependency phase map.
-3. Check [ACTIVE.md](ACTIVE.md) for claims, assignments, and conflicts.
-4. Select one dependency-complete task from the [task catalog](tasks/).
+3. Check [ACTIVE.md](ACTIVE.md) for active tasks, claims, and conflicts.
+4. Select one dependency-complete active task.
 5. Claim it in [ACTIVE.md](ACTIVE.md) before implementation.
 6. Implement exactly one task in one btcwallet branch and PR.
 7. After merge, archive the task and refresh the state map directly on `main`.
 
-Claiming a task does not claim its dependencies. A task may be assigned in
-advance, but it cannot become active until every hard dependency is complete.
+Claiming a task does not claim its dependencies. A task may be claimed before
+it becomes active, but implementation cannot start until every dependency and
+gate is complete.
 
 ## Sources of truth
 
@@ -22,7 +23,7 @@ advance, but it cannot become active until every hard dependency is complete.
 | --- | --- |
 | Task scope and dependencies | Individual file under [tasks/](tasks/) |
 | Dependency phases | [QUEUE.md](QUEUE.md) |
-| Claims, ownership, and active PRs | [ACTIVE.md](ACTIVE.md) |
+| Active tasks, claims, and in-progress PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
 | Agent workflow | [AGENTS.md](AGENTS.md) |

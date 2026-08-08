@@ -5,11 +5,11 @@ This repository contains planning documents, not btcwallet source code.
 ## Sources of truth
 
 - [README.md](README.md) explains how to use the repository.
-- [QUEUE.md](QUEUE.md) owns the dependency phase of every active task.
-- [ACTIVE.md](ACTIVE.md) owns claims, assignments, active implementation PRs,
+- [QUEUE.md](QUEUE.md) owns the dependency phase of every open task.
+- [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
 - Individual files under [tasks/](tasks/) own scope and dependencies.
-- [tasks/README.md](tasks/README.md) owns the active catalog and next number.
+- [tasks/README.md](tasks/README.md) owns the open catalog and next number.
 - [TASK_TEMPLATE.md](TASK_TEMPLATE.md) owns the required task shape.
 - [archive/](archive/) is historical evidence, not current instruction.
 
@@ -17,26 +17,28 @@ Do not copy the complete dependency graph into README or ACTIVE. QUEUE may
 show the complete derived phase map, but task files remain the only authority
 for dependency edges and ACTIVE remains the only authority for live state.
 
-## Assignment, claiming, and dependencies
+## Activity, claiming, and dependencies
 
 Use these terms precisely:
 
-- **Assigned** records the intended future owner. A blocked task may be
-  assigned before its dependencies finish.
-- **Claimed** means active implementation. Move the task into
-  [ACTIVE.md](ACTIVE.md)'s claimed table before implementation and add its PR
-  when opened.
+- **Active** means current development focus. Every Phase 1 task is active,
+  whether claimed or unclaimed.
+- **Claimed** records the intended owner. A task may be claimed before its
+  dependencies finish and therefore may be claimed without being active.
+- **In progress** means implementation has started. Mark an active task in
+  progress before implementation and add its PR when opened.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
 Claiming one task never claims its dependencies, directly or transitively.
 Different developers may claim independent prerequisites and complete them in
-parallel. A task may be claimed only after every hard dependency is complete;
-assignment, an active claim, review approval, or passing CI is not completion.
+parallel. Implementation may start only after every hard dependency and gate
+is complete; a claim, active status, review approval, or passing CI is not
+completion.
 
-Each developer may claim only one task at a time. Clear the active claim after
-its implementation PR merges. A future assignment does not authorize parallel
-implementation by the same developer.
+Each developer may have only one task in progress at a time. Archive the task
+after its implementation PR merges. Additional claims do not authorize
+parallel implementation by the same developer.
 
 Do not use stacked implementation PRs to bypass dependency completion. YY must
 approve an exception explicitly, the prerequisite contract must be frozen, and
@@ -65,7 +67,7 @@ Start from [TASK_TEMPLATE.md](TASK_TEMPLATE.md). Create every task as
 [tasks/README.md](tasks/README.md).
 
 Admit one small, atomic outcome per task and implementation PR. The task must
-be independently reviewable and mergeable. Split it before assignment when it
+be independently reviewable and mergeable. Split it before claiming when it
 contains unrelated fixes, multiple independently useful behaviors, or more
 than one independently changeable implementation boundary. Dependencies
 establish ordering only; they do not import another task's scope.
@@ -90,7 +92,7 @@ Link every dependency to its task file. Add the task to
 [tasks/README.md](tasks/README.md) and add it exactly once to the phase map in
 [QUEUE.md](QUEUE.md).
 
-Do not add status or assignee fields to a task. Before a task is claimed or
+Do not add status or claimant fields to a task. Before a task is claimed or
 materially revised, bring it to this format and split it if it fails the
 atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 
@@ -113,7 +115,7 @@ After the implementation PR merges, use the roadmap update workflow to:
 2. move its task file under `archive/tasks/`;
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
-   [task catalog](tasks/README.md); and
+   [open task catalog](tasks/README.md); and
 5. refresh the affected phase and downstream phases in
    [QUEUE.md](QUEUE.md).
 

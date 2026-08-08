@@ -1,19 +1,21 @@
 # Task dependency phases
 
-The roadmap contains **109 active tasks**. No task in the current Task
+The roadmap contains **109 open tasks**. No task in the current Task
 329-and-later series has been completed and archived; older archived files are
 historical evidence and are not part of this map.
 
-Every active task appears exactly once below. Phase 1 contains tasks with no
-active-task dependency. Every later phase is
-`1 + max(phase of each direct active-task dependency)`. Tasks in one phase
+Every open task appears exactly once below. Phase 1 contains active tasks with
+no open-task dependency. Every later phase is
+`1 + max(phase of each direct open-task dependency)`. Tasks in one phase
 have no direct dependency on another task in that phase.
 
-Phase numbers report dependency state only. They convey no execution
-preference and do not assign, authorize, or impose a global barrier.
-Individual task files own scope, dependencies, and claim gates.
-[ACTIVE.md](ACTIVE.md) separately owns assignments, active claims, PRs, and
-coordination state.
+Phase numbers report dependency state. Phase 1 is the current execution focus;
+later-phase tasks may be claimed but become active only after their own
+dependencies complete and the map is refreshed. Phases impose no global
+barrier. Individual task files own scope, dependencies, and implementation
+gates.
+[ACTIVE.md](ACTIVE.md) separately owns the active-task focus, claims,
+in-progress PRs, and coordination state.
 
 ## Phase 1 — 35 tasks
 
@@ -179,14 +181,13 @@ coordination state.
 This map records the current route in which modern kvdb remains maintained.
 If Task 353 retires it first, affected task files replace or remove their
 modern-kvdb clauses and dependencies, and every affected downstream phase is
-recomputed. Assignment or claim state does not make that alternate route
-complete.
+recomputed. A claim does not make that alternate route complete.
 
 ## Maintaining the phases
 
 When a task completes or a direct dependency changes, refresh that task and
-only the downstream phases affected by the edge. Preserve one row per active
-task and keep non-task gates inline with their owning row.
+only the downstream phases affected by the edge. Preserve one row per open task
+and keep non-task gates inline with their owning row.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
