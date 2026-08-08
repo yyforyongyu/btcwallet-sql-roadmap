@@ -13,9 +13,10 @@ account identity as a public number.
 
 ## Details
 
-- Reuse [Task 337](337-imported-xpub-derivation.md)'s wallet-owned
-  scope-plus-exactly-one-name-or-number selector and additive public
-  derivation request without changing the `Signer` interface.
+- Reuse [Task 341](341-public-role-contract.md)'s wallet-owned
+  scope-plus-exactly-one-name-or-number selector and
+  [Task 337](337-imported-xpub-derivation.md)'s additive public derivation
+  request without changing the `Signer` interface.
 - Map the selector to kvdb's stable scope-local adapter identity internally;
   never expose that identity or reinterpret it as a SQL row or BIP44 number.
 - Derive public children from the resolved imported XPub while the Wallet is

@@ -20,9 +20,11 @@ ID. ADR 0013 must state the distinction before public wallet roles are changed.
   semantics in the public model.
 - Define how internal recovery selectors retain kvdb identity without the
   exported `RecoveryState.AccountID` accessor.
-- Produce only the ADR amendment. Wallet-owned DTOs, public errors,
-  conversions, and role implementation belong to
-  [Task 341](341-public-role-contract.md).
+- Produce only the ADR amendment. Semantic public identity belongs to
+  [Task 341](341-public-role-contract.md), AccountManager result conversion
+  belongs to [Task 377](377-account-manager-wallet-dto.md), and the private
+  recovery adapter belongs to [Task 381](381-recovery-adapter-identity.md).
+  The independent public error boundaries remain in Tasks 378–380.
 
 ## Suggested fix
 
@@ -43,6 +45,6 @@ the adapter boundary.
 
 - ADR 0013 explicitly preserves kvdb's internal scope-local identity while
   rejecting it as a portable public identifier.
-- [Task 341](341-public-role-contract.md) can implement wallet-owned role types
-  without another identity decision.
+- Tasks 341, 377, and 381 can implement their distinct identity, result, and
+  private-adapter contracts without another identity decision.
 - The PR changes no public API, recovery implementation, or backend storage.

@@ -32,11 +32,14 @@ while those tests are being written.
 - Keep this task to backend selection, lifecycle, and harness plumbing. It does
   not add new itest cases or change wallet behavior merely because PostgreSQL
   exposes an existing bug.
-- Defer durable database/network identity to [Task 340][t340], shared
-  multiwallet chain coordination to [Task 334][t334], and duplicate-create
-  semantics to [Task 330][t330]. Bugs found by the PostgreSQL run should be
-  fixed by their owning task or recorded as a new task rather than absorbed
-  here.
+- Defer durable database/network identity to [Task 340][t340] and
+  duplicate-create semantics to [Task 330][t330].
+- Treat [Task 334][t334] as the shared-chain design owner. Runtime
+  chain-source delivery, canonical frontier mutation, and multi-Wallet
+  rollback belong to [Task 370][t370], [Task 371][t371], and
+  [Task 372][t372], while live SQL Manager activation belongs to
+  [Task 423][t423]. Bugs found by the PostgreSQL run should be fixed by their
+  owning task or recorded as a new task rather than absorbed here.
 - Do not expand the default CI matrix without an explicit cost decision.
 
 ## Suggested fix
@@ -63,8 +66,13 @@ scheme, or default CI matrix expansion lands in this task.
   shared component-itest source with isolated lifecycle management.
 - SQLite and kvdb retain their existing selection and artifact checks.
 - The PR contains only backend-opening and harness plumbing, not defects owned
-  by [Task 330][t330], [Task 334][t334], or [Task 340][t340].
+  by [Task 330][t330], [Task 340][t340], or shared-chain work owned by
+  [Task 334][t334], Tasks 370–372, and [Task 423][t423].
 
 [t330]: 330-duplicate-wallet-create.md
 [t334]: 334-shared-chain-state.md
 [t340]: 340-durable-database-identity.md
+[t370]: 370-chain-source-delivery.md
+[t371]: 371-canonical-chain-frontier.md
+[t372]: 372-multi-wallet-rollback.md
+[t423]: 423-manager-chain-source-cutover.md

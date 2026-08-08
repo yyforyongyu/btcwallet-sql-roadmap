@@ -3,8 +3,7 @@
 Component: **Manager SQL genesis and SQL Store**.
 
 Dependencies: **[Task 332][t332], [Task 337][t337], and
-[Task 345][t345]**. [Task 341][t341] and [Task 340][t340] remain transitive
-prerequisites through those tasks.
+[Task 345][t345]**.
 
 ## Rationale
 
@@ -16,6 +15,8 @@ contain the accounts its supported create request promised.
 ## Details
 
 - Cover the shared SQLite and PostgreSQL create path only.
+- Treat [Task 341][t341] and [Task 340][t340] as transitive prerequisites
+  through the direct dependencies; do not add duplicate direct edges.
 - Prepare the supported request's ciphertext and public genesis facts before
   opening the SQL write transaction. Consume the accepted watch-only policy,
   wallet-owned selector, and persisted discovery mode from the dependencies;
@@ -25,10 +26,14 @@ contain the accounts its supported create request promised.
   shell accounts, encrypted account secrets, immutable discovery modes, and
   checked `next_account_number` cursors.
 - Create the canonical default accounts promised by a supported private-root
-  request. A scope containing canonical account zero starts its next-account
-  cursor at one.
+  request. Persist every default genesis account as `watch-chain`; reject a
+  request that attempts a key-only genesis override before derivation,
+  encryption, or SQL mutation. A scope containing canonical account zero
+  starts its next-account cursor at one.
 - Create exactly the numberless initial accounts promised by a supported shell
-  request. Those accounts do not advance a numbered account cursor.
+  request. Persist every shell genesis account as `watch-chain` and reject a
+  key-only override at the same pre-mutation boundary. Those accounts do not
+  advance a numbered account cursor.
 - Keep derivation and encryption outside the SQL transaction. The transaction
   receives only prepared ciphertext and public persistence facts.
 - Treat every definite insertion or commit failure as failure of the complete
@@ -46,8 +51,12 @@ contain the accounts its supported create request promised.
   secret-lifetime hardening in
   [Task 367](367-bound-sql-genesis-secrets.md).
 - Keep duplicate-create policy in [Task 330][t330], public cancellation in
-  [Task 358][t358], and numbered or custom account creation in
-  [Task 343][t343].
+  [Task 358][t358], numbered root-derived account creation in
+  [Task 343][t343], custom-scope creation in [Task 390][t390], and path-bound
+  watch-only XPub creation in [Task 391][t391].
+- Leave configurable key-only creation to Task 343's guarded runtime account
+  path after its allocation, ownership, and recovery prerequisites complete;
+  genesis does not expose that mode.
 - Do not add a create manifest, replay state, generic write lock, Store
   callback, or cross-process coordination.
 
@@ -68,7 +77,11 @@ runtime assembly and cache publication after the transaction succeeds.
   wallet to prove the promised account set, discovery modes, and cursors.
 - Private-root fixtures prove each canonical scope contains account zero and
   advances its cursor to one; shell fixtures prove numberless initial accounts
-  leave each numbered cursor unchanged.
+  leave each numbered cursor unchanged. Reopen proves every default and shell
+  genesis account is `watch-chain` on both dialects.
+- Private-root and shell requests that attempt a key-only genesis mode fail
+  before derivation, encryption, Store mutation, or cache publication and
+  leave no wallet artifact.
 - Manager fault injection proves no Wallet is cached after a definite backend
   failure and publication occurs only after committed genesis and successful
   runtime assembly.
@@ -81,7 +94,10 @@ runtime assembly and cache publication after the transaction succeeds.
   account genesis fact for a supported request.
 - A definite failure leaves no SQL artifact and publishes no Wallet.
 - Reopened wallets expose the exact promised account set and checked scope
-  cursors on both SQL dialects.
+  cursors on both SQL dialects, with every genesis account fixed to
+  `watch-chain`.
+- Key-only mode is unavailable during genesis and remains confined to the
+  guarded runtime account-creation path.
 - The PR contains no modern-kvdb, manifest, replay, generic-lock, or unrelated
   public API work.
 
@@ -93,3 +109,5 @@ runtime assembly and cache publication after the transaction succeeds.
 [t343]: 343-exact-account-creation.md
 [t345]: 345-durable-watch-registration.md
 [t358]: 358-contextual-manager-operations.md
+[t390]: 390-custom-scope-account-creation.md
+[t391]: 391-path-bound-watch-only-xpub-accounts.md

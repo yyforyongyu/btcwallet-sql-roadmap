@@ -1,0 +1,78 @@
+# Task 417 — measure SQLite start-to-synced performance
+
+Component: **wallet Controller and Syncer benchmarks**.
+
+Dependencies: **[Task 416][t416]**.
+
+## Rationale
+
+The existing Controller benchmarks time kvdb Wallets against live RPC and
+therefore mix database work with process, socket, serialization, polling, and
+mining latency. [Issue #1251][issue1251] needs a repeatable SQLite measurement
+of the public start-to-synced workflow before lower-level bottlenecks or tuning
+tasks can be justified.
+
+## Details
+
+- Add exactly `BenchmarkSQLiteStartToSynced`.
+- Run `Cold` and `Warm` sub-benchmarks for the three stable sync profiles:
+  `Sync-Empty-B1000-T100`, `Sync-Sparse-B1000-T100-M10`, and
+  `Sync-Dense-B1000-T100-M100`.
+- Use a deterministic in-process chain implementation containing all hashes,
+  headers, filters, and blocks before the timer starts. It must perform no
+  network I/O, mining, sleep, or random generation during a sample.
+- Use `SyncMethodAuto` and the public `Wallet.Start`/`Wallet.Info` boundary.
+- In a cold sample, copy the base snapshot and construct the chain outside the
+  timer; start the timer immediately before `NewManager`, include `Load`,
+  `Start`, and progress to the first `Info().Synced == true`, then stop before
+  result validation and shutdown.
+- In a warm sample, open and load the stopped Wallet outside the timer; start
+  immediately before `Wallet.Start`, include progress to the first
+  `Info().Synced == true`, and stop before validation and shutdown.
+- Poll without an artificial sleep. The public `Info` calls used to observe
+  completion are part of the measured workflow.
+- Call `b.ReportAllocs`; assert exact final tip, wallet transaction count,
+  UTXO count, and balance outside the timer.
+- Exclude partial-restart, reorg, watched-outpoint, PostgreSQL, P1, runtime
+  store diagnostics, profiling output, and performance changes. Create a
+  diagnostic task only after results identify a concrete lower-level cost.
+
+## Suggested fix
+
+Add a focused SQL Controller benchmark beside
+`controller_benchmark_test.go`. Reuse the fixture snapshot lifecycle and add a
+small deterministic chain dataset adapter dedicated to this benchmark. Keep
+the existing legacy/kvdb Controller benchmarks unchanged.
+
+## Verification
+
+- Run:
+
+  ```text
+  go test ./wallet -run '^$' \
+    -bench '^BenchmarkSQLiteStartToSynced$' -benchmem \
+    -benchtime=1x -count=10 | tee sync.txt
+  benchstat sync.txt
+  ```
+
+- For comparisons, capture identical commands from two revisions and run
+  `benchstat sync-base.txt sync-change.txt`.
+- Confirm the output contains all six `Cold|Warm` and
+  `Empty|Sparse|Dense` combinations with `B/op` and `allocs/op`.
+- Instrument the deterministic chain in tests and assert zero network calls,
+  zero sleeps, and no dataset construction after each timer starts.
+
+## Definition of done
+
+- The three exact datasets produce deterministic start-to-synced results on a
+  real SQLite Wallet.
+- Cold and warm timer boundaries are explicit and stable.
+- Setup and network latency are excluded, while the public lifecycle and
+  completion observation are measured.
+- Allocation results and repeatable benchstat capture are available.
+- No runtime diagnostic, tuning, P1, PostgreSQL, or legacy comparison work is
+  included.
+- The PR contains only the start-to-synced benchmark outcome.
+
+[t416]: 416-sqlite-benchmark-fixtures.md
+[issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

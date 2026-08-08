@@ -1,70 +1,46 @@
-# Task 347 — complete PSBT signing authorization
+# Task 347 — authorize explicit PSBT signatures
 
 Component: **PsbtManager and Signer**.
 
-Dependencies: **[Task 343][t343], [Task 346][t346], and [Task 354][t354]**.
+Dependencies: **[Task 346][t346], [Task 384][t384], and [Task 390][t390]**.
 
 ## Rationale
 
-Signing applies network-global coin-type assumptions and does not uniformly
-prove that persisted account identity, scripts, UTXOs, derivations, and Taproot
-metadata authorize the requested signature.
+Retain the current explicit SignPsbt authorization
+contract: validate previous outputs and script commitments; infer spend type
+from validated scripts; validate scope/account/branch/index, fingerprints,
+derivation uniqueness, sighash forms, tweakers, and exact persisted key
+identity before secret lookup or clone mutation.
 
 ## Details
 
-- Resolve persisted wallet scope and account identity, including custom scopes.
-- Verify witness/non-witness UTXOs and every script commitment.
-- Infer the spend type from the validated previous output plus redeem, witness,
-  and Taproot scripts. Do not select signing behavior from BIP purpose.
-- Accept only branch 0 or 1 and a non-hardened child index before Store or Vault
-  access.
-- Reject an account component above `db.MaxAccountNumber` before Store or Vault
-  access for both BIP32 and Taproot derivations.
-- Preserve absent versus present-zero fingerprints.
-- Normalize effective sighash by spend version.
-- Define a closed set of valid base sighashes and flags for legacy, SegWit v0,
-  and Taproot. Reject unknown bits, invalid base types, and illegal flag
-  combinations before key lookup.
-- Reject base `SIGHASH_SINGLE` for every supported spend version when the input
-  has no corresponding output, before key lookup or packet mutation.
-- Require exactly one unambiguous owned derivation for the key being signed;
-  reject conflicting or multiple wallet-owned candidates.
-- Apply ownership and tweaker authorization before decoration, finalization, or
-  any other wallet mutation of the cloned packet.
-- Restrict `FinalizePsbt` auto-signing to untweaked keys. Inputs requiring a
-  tweaker must already carry an authorized signature before finalization.
-- Keep arbitrary numberless XPub-only private signing unavailable. Permit a
-  path-bound external XPub only after [Task 343][t343] proves matching private account
-  material through the Vault.
+Permit spendable custom-scope signing only after Task 390 establishes matching
+private account material. Path-bound external XPub accounts remain watch-only.
+Consume Task 384's safe Vault-signing contract rather than defining another
+Vault API; Task 354 and the PR #1279 disposition are transitive through it.
+
+Exclusions: FinalizePsbt auto-signing, funding, leasing, metadata merging,
+and Vault interface invention.
 
 ## Suggested fix
 
-Consume [Task 346][t346]'s side-effect-free validator and clone, then centralize signing
-authorization, including the effective tweaked key, before mutation. Derive the
-exact owned key through the Vault, sign the clone, and execute finalized scripts
-before publishing the result.
+Centralize a side-effect-free per-input authorization result
+containing the validated previous output, spend form, persisted account/path,
+sighash, and authorized tweak, then sign and mutate only a packet clone.
 
 ## Verification
 
-Standard, custom-scope, multisig, and Taproot vectors sign only when ownership
-and commitments match; forged metadata produces no signature or caller
-mutation. Missing-output `SIGHASH_SINGLE` and unsigned tweaked finalization fail
-before key access. A numberless imported XPub cannot fall back to private
-signing, while an authorized path-bound account can sign after [Task 343][t343].
-Invalid purpose-independent spend shapes, branches, children, and sighash
-encodings fail before Store or Vault access. Account-number boundary tests
-accept `MaxAccountNumber` and reject the next value without secret lookup.
+Standard/custom-scope, multisig, SegWit, and Taproot vectors
+sign only one authorized identity on a clone. Forged or ambiguous metadata,
+invalid branches/children/accounts/sighashes, and missing-output
+`SIGHASH_SINGLE` fail before key lookup and caller mutation.
 
 ## Definition of done
 
-- PSBT signing authorizes exactly one persisted wallet identity, validated
-  previous output, script commitment, derivation, sighash, and tweak before
-  packet mutation or secret lookup.
-- Forged or ambiguous metadata produces no signature, secret access, or caller
-  mutation, while supported standard and custom accounts remain signable.
-- Numberless imported XPub accounts remain public-only unless a path-bound
-  account proves matching private material through the Vault.
+SignPsbt emits signatures only after one complete
+wallet-owned authorization decision and never mutates the caller packet on
+error; FinalizePsbt behavior remains owned by the follow-up task.
 
-[t343]: 343-exact-account-creation.md
 [t346]: 346-psbt-funding-metadata.md
-[t354]: 354-vault-owned-secret-resolution.md
+[t384]: 384-vault-safe-signing.md
+[t390]: 390-custom-scope-account-creation.md

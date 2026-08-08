@@ -1,71 +1,63 @@
-# Task 338 — return a definitive SQL passphrase-change result
+# Task 338 — latch accepted SQL passphrase results
 
 Component: **Controller**.
 
-Dependencies: **[Task 331][t331]**.
+Dependencies: **[Task 331][t331], [Task 368][t368], and [Task 421][t421]**.
 
 ## Rationale
 
-After the Controller accepts a passphrase request, caller cancellation can win
-the response race even though the Vault commits the new credential. The caller
-cannot know which passphrase is authoritative.
+After the Controller accepts a passphrase request, caller cancellation or
+Wallet shutdown can win the response wait even though the SQL Vault has
+settled the durable credential. The caller then receives a transport result
+instead of the authoritative operation result.
 
 ## Details
 
-- Cancellation before the unbuffered request handoff remains supported.
-- An accepted request must publish exactly one buffered result.
-- Keep the accepted-request, result, shutdown-join, and ambiguous-commit
-  behavior SQL-only. It contains no kvdb rotation or legacy waddrmgr change
-  and is consumed by the lnd SQL password path.
-- A SQL ambiguous-commit error is not a definitive credential result. Re-read
-  persisted Vault parameters and prove old or new credentials; if the Store
-  remains unavailable or neither state is provable, return a wallet-owned
-  indeterminate sentinel.
-- Serialize accepted rotations through [Task 331][t331]'s single published Wallet.
-  Multiple writable Managers and cross-process credential fencing remain
-  unsupported. Retain a durable credential generation only if it is needed to
-  reconcile an ambiguous commit, not as a cross-Manager lock.
-- Once the handler accepts a request, run mutation and reconciliation under one
-  bounded handler-owned context independent of `Wallet.lifetimeCtx`. Register
-  one operation-specific completion before mutation; Wallet and Manager
-  shutdown join it before locking the Vault or closing the Store.
-- Wallet shutdown after request acceptance cannot cancel, replace, or suppress
-  the one handler result; only cancellation before handoff may win.
-- Limit this task to `ChangePassphrase`; do not redesign every Controller call.
-- Do not add a one-line wait helper or an operation registry.
+- Preserve cancellation before the unbuffered request handoff.
+- Once the handler accepts a request, publish exactly one buffered result and
+  have the caller wait for that result without selecting on caller or Wallet
+  cancellation.
+- Run the accepted SQL handler under one bounded handler-owned context that
+  does not derive from `Wallet.lifetimeCtx`.
+- Register one ChangePassphrase-specific completion before mutation. Wallet
+  shutdown joins it through Task 368 before locking the Vault, and
+  Task 331 joins Wallet shutdown before closing the Store.
+- Consume Task 421's proven-new, proven-old, or typed
+  indeterminate result and translate its internal errors once to a
+  wallet-owned public contract.
+- Serialize rotations through the one Wallet/Vault instance. Cross-Manager
+  and cross-process credential fencing remain unsupported.
+- Keep this SQL-only. Task 362 owns modern-kvdb Controller parity.
+- Do not add a generic operation registry, redesign other Controller calls,
+  or perform Store reconciliation in the Controller.
 
 ## Suggested fix
 
-Receive the handler response directly after `sendReq` succeeds, independent
-of caller or wallet-lifetime cancellation.
-Audit every accepted SQL handler exit so it always sends one response. On an
-ambiguous SQL commit, reconcile the persisted credential facts and, if
-necessary, their generation before selecting success, failure, or the public
-indeterminate result. Give this handler one bounded context and completion that
-shutdown joins; do not add a generic Controller operation registry or cross-
-Manager fencing.
+After `sendReq` succeeds, receive directly from the buffered response channel.
+Give the passphrase handler one bounded context and one operation-specific
+completion registered before the Vault call. Map the Vault's exact outcome to
+the public result, send it once, and close the completion on every exit.
 
 ## Verification
 
-SQL tests prove that acceptance-latched success and Vault errors remain
-definitive under concurrent cancellation, while pre-acceptance cancellation
-still returns the context error. A barrier-controlled wallet shutdown after
-acceptance still joins the handler before Vault lock and returns the handler
-result. SQL ambiguous-commit tests prove old, new, readable neither-state, and
-unavailable outcomes without claiming an authoritative passphrase when it
-cannot be known. Concurrent rotations on one published Wallet from the same
-old credential to different new credentials produce one successful transition;
-the loser has a definitive result and changes no durable or live key state. No
-cross-Manager or multi-process guarantee is added.
+- A cancellation barrier before handoff returns the caller context error.
+- Barriers immediately after handoff prove caller cancellation and Wallet
+  shutdown cannot replace or suppress the handler result.
+- Wallet shutdown waits for the accepted handler before Vault lock, and
+  Manager closure waits for that Wallet shutdown before Store close.
+- Proven-new, proven-old, and indeterminate Vault outcomes each map to the
+  exact public result without another Store read in the Controller.
+- Concurrent rotations on one published Wallet serialize and every caller
+  receives one operation result.
 
 ## Definition of done
 
-- An accepted SQL passphrase request produces exactly one definitive or typed
-  indeterminate result that shutdown joins before Vault lock or Store close.
-- Pre-acceptance cancellation remains supported, while post-acceptance caller
-  or Wallet cancellation cannot replace the handler result.
-- Modern-kvdb parity is owned separately by
-  [Task 362](362-kvdb-definitive-passphrase-result.md), and no generic
-  Controller operation registry is added.
+- Every accepted SQL passphrase request returns exactly one authoritative
+  success, failure, or typed indeterminate result.
+- Shutdown joins accepted passphrase work before Vault lock and Store close.
+- Pre-handoff cancellation remains supported, and the PR adds no generic
+  operation registry or cross-Manager guarantee.
 
 [t331]: 331-manager-wallet-lifecycle.md
+[t368]: 368-wallet-startup-shutdown.md
+[t421]: 421-sql-passphrase-commit-reconciliation.md

@@ -1,115 +1,88 @@
-# Task 334 — coordinate shared chain state and rollback
+# Task 334 — supersede ADR 0002 with SQL shared-chain ownership
 
-Component: **Manager and Controller/Syncer**.
+Component: **SQL wallet architecture documentation**.
 
-Dependencies: **[Task 333][t333] and [Task 340][t340], plus an accepted ADR
-superseding ADR 0002**. [Task 333][t333] supplies the PostgreSQL harness; this
-task owns shared-chain behavior on that harness.
+Dependencies: **None**.
 
 ## Rationale
 
-Multiple SQL wallets share canonical blocks, but a wallet can invoke database-
-wide rollback while other wallets have independent runtime state.
+ADR 0002 assigns chain synchronization and database mutation to each Wallet
+Syncer. SQL Managers can own multiple Wallets over one database, while the
+database has one shared block table and a database-wide rollback operation.
+SQL implementation cannot safely choose source, frontier, delivery, or
+rollback ownership until one accepted design replaces the single-Wallet
+assumptions. The maintained modern-kvdb backend still has one Wallet per
+database and must retain its per-Wallet source path until Task 353 retires it.
 
 ## Details
 
-- Reconfirm the invariant: one canonical chain per database.
-- Supersede ADR 0002 before implementation. The accepted replacement must move
-  canonical chain-source ownership from each Wallet Syncer to the Manager
-  coordinator while preserving the Controller/processor separation below.
-- Choose one owner for canonical extension, reorg detection, and rollback.
-- Give that coordinator exactly one authoritative chain source supplied through
-  `ManagerConfig`. Every Wallet under the Manager uses it. Remove the duplicate
-  per-Wallet chain override from the maintained construction path rather than
-  trying to compare interface values or letting two sources nominate competing
-  canonical tips.
-- Make the coordinator the sole consumer of the chain source's notification
-  channel. Normalize each connected block, disconnected block, and relevant
-  transaction event once, apply its canonical database mutation once, then
-  dispatch the ordered event to every affected Wallet's processor. Wallet
-  syncers must not compete to receive from the shared channel.
-- Keep Wallet processors responsible for wallet-scoped account/address scan
-  state, credits, debits, transaction status, wallet tips, and targeted-rescan
-  intent. They request verified chain data through the coordinator; they do not
-  consume the authoritative source channel or mutate the canonical frontier.
-  Historical scan policy remains per Wallet, while canonical block identity,
-  extension, reorg, and rollback remain coordinator-owned.
-- Give each per-Wallet delivery a bounded, shutdown-aware queue or synchronous
-  handoff with an explicit failure policy. Manager shutdown closes the source
-  consumer, stops new dispatch, and joins every admitted delivery before the
-  shared Store closes; do not leak one fanout goroutine per event.
-- Targeted rescans must not move the global frontier. They may request an
-  idempotent coordinator-owned historical block identity needed by a confirmed
-  transaction, provided height, hash, and canonical header timestamp agree.
-- Canonical extension carries verified previous-block linkage. Reject a new tip
-  unless its parent hash equals the current canonical tip hash; height, hash,
-  and timestamp alone are insufficient.
-- Define the empty-frontier bootstrap explicitly. A verified birthday block is
-  historical wallet state and does not silently become a competing global
-  frontier. The first coordinator-owned frontier candidate uses an atomic
-  nil-frontier compare-and-set; one verified candidate wins, and a concurrent
-  different candidate rereads and adopts that frontier before it may extend.
-  Every later extension follows the ordinary parent-match rule.
-- Preserve the current detach triggers unless a current failing reproduction
-  proves them wrong; do not replace `ON DELETE SET NULL` speculatively.
-- Avoid process-local write locks as the correctness boundary.
-- Limit the supported runtime to one live `Manager` per database. Multiple
-  writable Managers or writer processes over one database are outside this
-  task's contract; do not add a lifetime database lease, cross-Manager fencing,
-  or reload machinery here.
-- Reconcile an ambiguous extension or rollback commit by rereading the exact
-  canonical frontier and every affected wallet tip before resuming wallets.
-  Return a typed indeterminate result if neither complete old nor complete new
-  state can be proven.
-- Do not add durable rescan jobs; a restarted targeted rescan starts over.
+- Supersede ADR 0002 with an accepted decision; preserve ADR 0002 as historical
+  context and mark its status and successor explicitly.
+- Limit the supported runtime to one live Manager per database. Multi-Manager,
+  multi-process, and cross-process fencing remain outside the contract.
+- Scope the replacement contract to SQL Managers. Make each SQL Manager own
+  exactly one authoritative chain source supplied through `ManagerConfig`.
+  SQL Manager-created Wallets cannot nominate or override a second source.
+- Record the maintained modern-kvdb per-Wallet source path as an explicit
+  temporary exception. Do not move kvdb onto the SQL coordinator or remove
+  that compatibility path before [Task 353][t353] completes.
+- Define the Manager coordinator as the sole notification consumer and the
+  owner of canonical chain extension, reorg detection, and rollback admission.
+- Distinguish database-wide canonical state from wallet-scoped state. The
+  canonical frontier and canonical block identity are shared; account/address
+  scan horizons, relevant transactions, wallet tips, birthday state, and
+  targeted-rescan intent remain Wallet-owned.
+- Define that a verified historical block can be stored for one Wallet without
+  moving the canonical frontier. A verified birthday is historical wallet
+  state and never implicitly wins an empty global frontier.
+- Define ordered bounded delivery, backpressure and processor-failure policy,
+  Wallet removal, and shutdown order. Accepted source events cannot be dropped,
+  reordered per Wallet, or outlive the Manager-owned Store.
+- Define rollback ownership and quiescence: stop new source dispatch, quiesce
+  affected Wallet processors in stable wallet-ID order, apply one durable
+  mutation, reconcile its exact result, and resume only a proven state.
+- Define how source optimization hints such as Neutrino start time use the
+  earliest required Wallet history without confusing that hint with a
+  canonical frontier or global rewind.
+- Preserve per-Wallet targeted rescans and the Controller/processor separation.
+  Targeted scans request verified chain data through the coordinator but do not
+  consume the authoritative notification stream or move the global frontier.
+- Exclude implementation, durable rescan jobs, generic write locks, replay
+  state machines, create manifests, lifetime database leases, and
+  cross-process Manager fencing.
 
 ## Suggested fix
 
-Prefer a Manager-level chain coordinator with one Manager-owned chain source,
-a durable canonical frontier, and transaction-scoped compare-and-set. Quiesce
-affected wallets for a database-wide rollback, apply detach and tip changes
-atomically, then reconcile the durable result before resuming them. Route
-verified linked headers and
-historical block insertion through the same coordinator without advancing the
-frontier. Bootstrap an absent frontier with the same coordinator CAS; never let
-`UpdateWallet` independently claim it from a birthday. If operations become
-wallet-scoped instead, prove other wallets remain untouched. Run one chain event
-loop in the coordinator and fan out normalized ordered events through bounded
-per-Wallet processors after the event's one canonical mutation.
+Add a successor ADR that records the Manager coordinator, Wallet processor,
+canonical frontier, historical block, delivery, rollback, and shutdown
+contracts. Mark ADR 0002 superseded and update the ADR index. Keep the ADR at
+the contract level; do not prescribe a generic event framework or a particular
+SQL locking statement.
 
 ## Verification
 
-The superseding ADR defines the Manager coordinator and remaining per-Wallet
-processor and rescan responsibilities before code lands. SQLite two-wallet
-reorg tests prove one coherent result, a pre-birthday confirmation can persist
-its verified block identity without moving the tip, and no wallet observes a
-partially rolled-back state. Any schema detach rewrite first has a failing
-Store regression test on both SQL dialects. Barrier-controlled SQLite Manager
-fixtures force extension and historical insertion against rollback and produce
-one serializable frontier; backend-neutral Store CAS and rollback conformance
-also runs on both dialects. This task repeats the Manager fixtures on
-PostgreSQL using [Task 333][t333]'s harness. Wrong-parent successors are rejected, and
-ambiguous extension and rollback outcomes resolve as old, new, or typed
-indeterminate before wallet execution resumes. Concurrent first-wallet tests
-with equal and different verified birthdays produce exactly one frontier while
-retaining each wallet's truthful historical birthday state. All Manager
-concurrency fixtures use multiple wallets under one Manager; this task makes no
-multi-Manager or multi-process guarantee. A construction test proves a second
-Wallet cannot install a divergent source, and competing-fork fixtures prove
-every Wallet follows the Manager's single authoritative source. Two Wallets
-receiving the same notification both process it in order while instrumentation
-proves the underlying channel had one consumer and the canonical mutation ran
-once. Backpressure, wallet failure, removal, and Manager shutdown fixtures
-prove the fanout cannot drop accepted events, deadlock shutdown, or leak
-workers.
+- Review the successor against `ManagerConfig`, `Config`, `newManagedWallet`,
+  Controller Start/Stop, Syncer notification and rescan paths, the shared
+  `blocks` table, wallet sync-state rows, and `RollbackToBlock`.
+- Walk connected block, filtered block, relevant transaction, disconnect,
+  initial birthday, targeted historical match, Wallet removal, and shutdown
+  sequences and assign one owner to every source read, durable mutation, and
+  Wallet delivery.
+- Confirm that the SQL decision supports SQLite and PostgreSQL through one
+  backend-neutral contract, preserves the modern-kvdb exception, and makes no
+  multi-Manager or cross-process claim.
+- Validate ADR links and index entries; this task runs no btcwallet code tests.
 
 ## Definition of done
 
-- One Manager-owned coordinator is the sole canonical-chain source consumer
-  and mutation owner for every Wallet in a database.
-- Extension, bootstrap, rollback, historical insertion, fanout, and ambiguous
-  outcomes preserve one serializable frontier on both SQL dialects.
-- The PR makes no multi-Manager, multi-process, or durable-rescan guarantee.
+- An accepted and merged ADR supersedes ADR 0002 for SQL Managers and defines
+  one SQL Manager-owned chain source, one canonical frontier owner,
+  wallet-scoped processors, ordered delivery, and coordinated rollback.
+- The maintained modern-kvdb backend keeps its isolated per-Wallet source path
+  until Task 353 completes.
+- Every later shared-chain implementation task cites this task rather than an
+  external “accepted ADR 0002 replacement” gate.
+- The design adds no implementation, durable rescan job, generic framework, or
+  multi-Manager/cross-process guarantee.
 
-[t333]: 333-postgres-manager-harness.md
-[t340]: 340-durable-database-identity.md
+[t353]: 353-retire-modern-kvdb-backend.md

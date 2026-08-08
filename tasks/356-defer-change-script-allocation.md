@@ -1,59 +1,55 @@
 # Task 356 — defer change-script allocation until viable
 
-Component: **TxCreator and the `txauthor` module**.
+Component: **TxCreator and `txauthor`**.
 
-Dependencies: **[Task 355][t355] and [Task 357][t357], including their released
-nested-module changes**.
+Dependencies: **[Task 355][t355], [Task 357][t357], and [Task 404][t404]**, plus
+released nested-module changes from Tasks 355 and 357.
 
 ## Rationale
 
-`txauthor.NewUnsignedTransaction` calls `ChangeSource.NewScript` before it knows
-whether change is zero or dust. A wallet address can therefore be consumed even
-when no change output is returned.
+Change scripts can be allocated before transaction viability is known,
+consuming addresses on failed or retried construction.
 
 ## Details
 
-- Decide zero and dust viability before invoking the unique-script allocator.
-- Add only the exact non-secret script template or descriptor needed to compute
-  dust and serialized size; do not create a generic funding manifest.
-- Require the allocated script to match the committed template's class and
-  size before returning the authored transaction.
-- Preserve no allocation on retry, zero-change, dust, and every other
-  pre-allocation error. After viability, make at most one allocation attempt;
-  an allocator error or mismatched result may already have consumed a locator
-  and must be reported without pretending it was rolled back.
-- Keep this change in the nested `txauthor` module with focused unit tests.
-- Tag the corrected module and update the root consumer without a local
-  replacement masking the released dependency.
-- Consume [Task 355][t355]'s tagged `txsizes` release for every fee and dust viability
-  decision; do not copy or locally replace the corrected estimator.
-- Consume [Task 357][t357]'s checked output aggregate and target-plus-fee result before
-  input or change callbacks. This task owns allocation timing, not a second
-  monetary-arithmetic implementation.
+Determine positive, non-dust change before calling the
+unique allocator; use an immutable script template; verify the allocated
+script matches it; allocate zero times on retries and every pre-allocation
+failure and at most once after viability. Move the supported input/change
+descriptor allowlist from current Task 348 into this task because descriptor
+support is part of proving fee and dust viability. The closed accepted set is
+compressed P2PKH, P2WPKH, nested P2WPKH, and key-path P2TR. Reject
+uncompressed P2PKH, unknown or default-classed scripts, every other P2SH or
+P2WSH form, and Taproot script-path shapes before fee/dust evaluation or
+change allocation. Broader descriptor support requires its own task.
+
+Exclusions: watched-change registration/delivery, PSBT metadata, leasing,
+size formulas, and monetary arithmetic.
 
 ## Suggested fix
 
-Extend `ChangeSource` with an immutable representative script or a narrow
-template method. Use it during fee and dust calculation, call `NewScript` only
-after the final positive non-dust decision, verify the returned script matches
-the template, and then append the output.
+Extend `ChangeSource` with the narrow immutable script
+template needed for fee/dust calculation, decide viability against that
+template, validate it against the exact closed descriptor sets above, then
+allocate once and verify the returned class and size.
 
 ## Verification
 
-Barrier-counted tests prove zero and dust change invoke `NewScript` zero times,
-viable change attempts it exactly once, retries and pre-allocation failures do
-not allocate early, and allocator or template failures are reported without a
-false zero-allocation claim. The tagged nested and root modules consume the
-behavior without a local replace.
+Counter/barrier tests prove zero calls for zero, dust,
+retry, malformed amounts, unsupported descriptors, and other pre-allocation
+failures; viable change attempts exactly once; mismatched allocated templates
+are reported without claiming rollback. One case for each accepted descriptor
+and each rejected descriptor family proves the allowlist is closed. Released
+consumers contain no copied size or amount arithmetic.
 
 ## Definition of done
 
-- `txauthor` allocates a change script only after checked fee and dust logic
-  proves one positive viable output, and verifies the allocated template.
-- Zero, dust, retry, and other pre-allocation failures consume no locator;
-  post-allocation errors accurately report that allocation may have occurred.
-- Tagged nested and root consumers use the released estimator and monetary
-  validation without duplicate arithmetic or local replacements.
+Counter/barrier tests prove zero calls for zero, dust,
+retry, malformed amounts, unsupported descriptors, and other pre-allocation
+failures; viable change attempts exactly once; mismatched allocated templates
+are reported without claiming rollback. Released consumers contain no copied
+size or amount arithmetic.
 
 [t355]: 355-transaction-size-accounting.md
 [t357]: 357-transaction-amount-validation.md
+[t404]: 404-transaction-input-amounts.md

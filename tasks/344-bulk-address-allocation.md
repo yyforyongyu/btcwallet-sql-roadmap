@@ -1,104 +1,60 @@
-# Task 344 — add atomic address and key allocation
+# Task 344 — allocate receiving-address batches atomically
 
-Component: **AddressManager and key allocation**.
+Component: **AddressManager receiving batches and SQL AddressStore mutation**.
 
-Dependencies: **[Task 337][t337] and
-[Task 364](364-durable-watch-registration.md)**.
+Dependencies: **[Task 341][t341], [Task 364][t364], [Task 393][t393], and
+[Task 402][t402]**.
 
 ## Rationale
 
-Repeated count-one allocation can interleave, and an invalid BIP32 child can
-wedge a branch because the failed index never advances.
+Repeated count-one allocation can interleave, and a failed
+invalid child rolls back to the same branch index. lnd also needs a true
+force-allocation API selected by exact account identity.
 
 ## Details
 
-- Positive count means the number of valid addresses returned.
-- Define one small public maximum and reject zero or excess before mutation.
-- Keep bulk address allocation receiving-only and reject key-only accounts
-  before it changes a counter. A receiving result always follows
-  [Task 364](364-durable-watch-registration.md)'s watch-registration contract;
-  there is no `SkipChainWatch` request override.
-- Make `NewAddress` the exact-account oldest-unused operation. It returns the
-  oldest persisted unused receiving address and delegates to a receiving
-  count-one batch only when no candidate exists. If that candidate has an
-  outstanding [Task 364](364-durable-watch-registration.md) obligation, retry
-  or await the same delivery rather than allocating a replacement or exposing
-  it early.
-- Make `NewBulkAddresses` the force-allocation operation. It always advances
-  the selected receiving branch by the requested count and never substitutes
-  an older unused candidate.
-- Return wallet-owned ready-or-pending results with public `AddressInfo` in
-  committed order. A pending result identifies completion but exposes no usable
-  receiving address until the complete operation-specific obligation is
-  delivered.
-- Add one count-one key allocation for key-only accounts. It selects an exact
-  account and branch, atomically consumes invalid children and advances the
-  durable counter, and returns only a wallet-owned public key and locator. It
-  creates no receiving result or watch obligation. [Task 337][t337] remains the pure
-  derivation path for an already selected locator.
-- Prepare derivation and encryption outside the write transaction.
-- Persist consumed invalid children and terminal exhaustion.
-- Select the account by stable identity, not only address type.
-- Use the BIP32 non-hardened boundary as the terminal address-index limit.
-- On a successful batch, persist skipped invalid children with the final
-  counter, ordered watch obligation, and generation/delivery record in the same
-  atomic mutation. If terminal exhaustion prevents a full batch, commit only a
-  terminal exhausted marker, return no addresses, and persist no watch
-  obligations.
-- Treat a valid derived child whose script is already owned by an accountless
-  raw import as a consumed, non-returnable collision. Continue deriving until
-  the requested number of fresh scripts is filled or the branch exhausts.
-  Reconcile a raw import racing the batch through the same write CAS and
-  wallet-wide script uniqueness constraint; never relabel the raw owner or
-  return its script as the derived account's address.
-- Return one batch-level typed pending result after commit. Withhold the entire
-  ordered address list until
-  [Task 364](364-durable-watch-registration.md) completes registration;
-  delivery failure exposes no usable partial batch.
+- Add final `NewBulkAddresses` with a wallet-owned semantic account selector,
+  explicit branch, and positive count. Define one small public maximum and
+  reject zero/excess before mutation.
+- Accept only `watch-chain` accounts. There is no `SkipChainWatch` override.
+- Return the requested number of fresh public `AddressInfo` values in committed
+  order. Always force allocation; never substitute an older unused address.
+- Derive candidates outside the write, then atomically CAS the expected branch
+  counter, insert the ordered fresh scripts, persist consumed invalid children
+  and terminal exhaustion, and append one operation-specific watch obligation.
+- Treat a valid child colliding with an accountless raw import as consumed and
+  refill from later children. Serialize a racing raw import through the same
+  wallet-wide script uniqueness and CAS without relabeling the raw owner.
+- If the branch cannot fill the complete batch, persist only terminal
+  exhaustion and return no addresses or obligation.
+- Reconcile an ambiguous mutation from exact candidate/counter/obligation
+  facts. Never retry from the transport error.
+- Return ready only after Task 402 delivers the batch. A typed pending
+  result identifies completion but exposes no usable partial list.
+- Return unsupported before mutation on modern kvdb; retain its legacy
+  count-one API until retirement.
+- Keep oldest-unused selection and key-only allocation in their own tasks.
 
 ## Suggested fix
 
-Add one Store batch operation that CASes the expected branch counter and inserts
-the complete ordered candidate set, final counter, and durable watch obligation.
-`NewAddress` first queries the oldest unused candidate and reuses its existing
-delivery record, delegating to a receiving count-one batch only when none
-exists. `NewBulkAddresses` always invokes the allocating path. Reuse its counter
-and invalid-child machinery for a separate key-only count-one operation, but
-omit address delivery and watch facts from that result. Reconcile an ambiguous
-commit using the exact candidate, counter, discovery mode, and applicable
-delivery facts, not a generic create manifest. Complete one receiving pending
-result only after the ordered batch obligation is delivered. Use operation-
-specific insert results so a concurrent raw-script collision consumes its
-child index and refills the batch inside the same bounded allocation operation.
+Add one method-specific SQL batch CAS and public
+`NewBulkAddresses` wrapper that binds the complete ordered row set and one
+retained Task 364 obligation in the same transaction.
 
 ## Verification
 
-Concurrent batches never overlap, invalid children cannot wedge allocation,
-results are ordered, exhaustion returns a typed zero-result error while its
-terminal marker prevents retry loops, and an ambiguous result is reconciled
-without duplicating either an address or watch delivery. kvdb, SQLite, and
-PostgreSQL share the same bounds and exhaustion behavior, and key-only receiving
-batches fail before changing counters or creating delivery rows. Concurrent
-key-only count-one allocations return distinct committed locators, create no
-delivery rows, and resume from the durable counter after restart. Registration
-failure returns no usable receiving address while restart repairs the same
-committed batch. Raw-import-first and barrier-controlled concurrent-import
-fixtures consume the colliding child, preserve the raw owner, and return the
-requested count from later fresh children without overlapping another batch.
-`NewAddress` returns the oldest unused candidate, retries that candidate's
-pending registration without allocating another address, and allocates exactly
-one only when none exists. `NewBulkAddresses` always forces the requested new
-allocation. Their ready and pending result variants are public and
-externally mockable. The key-only count-one operation advances its durable
-locator without creating a watch obligation or receiving result.
+Both dialects cover concurrent non-overlap, order, count
+bounds, invalid children, raw-import races, exhaustion, restart, ambiguous
+outcomes, registration failure, and no partial exposure. Key-only and kvdb
+requests fail before mutation.
 
 ## Definition of done
 
-- Receiving batches allocate the requested fresh scripts atomically, persist
-  skips and ordered watch obligations, and expose no usable partial result.
-- `NewAddress`, `NewBulkAddresses`, and key-only count-one allocation retain
-  their distinct reuse, force-allocation, and non-receiving contracts.
-- Concurrency, exhaustion, collision, registration, and ambiguous outcomes do
-  not overlap batches or wedge durable counters.
+One receiving batch atomically commits its exact fresh
+scripts, final cursor, skips, and durable obligation and exposes the complete
+ordered result only after live delivery.
 
-[t337]: 337-imported-xpub-derivation.md
+[t341]: 341-public-role-contract.md
+[t364]: 364-durable-watch-registration.md
+[t393]: 393-key-only-receiving-rejection.md
+[t402]: 402-replay-live-watch-obligations.md

@@ -1,53 +1,49 @@
-# Task 336 — remove redundant Wallet tests
+# Task 336 — remove redundant Wallet passphrase tests
 
-Component: **Controller and Wallet test suite**.
+Component: **Controller and Wallet passphrase test suite**.
 
-Dependencies: **[Task 338][t338] and [Task 354][t354], plus
-[Task 362][t362] while modern kvdb remains or [Task 353][t353] retiring that
-backend first**.
+Dependencies: **[Task 338][t338], [Task 362][t362], and [Task 386][t386]**.
 
 ## Rationale
 
-The delivered stack duplicates focused passphrase coverage at the Wallet layer.
-The same behavior is already owned by focused keyvault and backend tests.
+After the definitive Controller contracts land, the Wallet-level passphrase
+matrix duplicates narrower Controller, WalletVault, and LegacyWalletVault
+coverage and makes credential changes harder to maintain.
 
 ## Details
 
-- Keep focused keyvault and backend tests as the behavior owners.
-- Retain at most one small public Wallet smoke per backend.
-- Retain [Task 338][t338]'s SQL acceptance-latched cancellation coverage and,
-  while modern kvdb remains, [Task 362][t362]'s backend parity at the
-  Controller layer. Remove only older interruption cases made redundant by
-  those contracts.
-- Remove runtime-cache secret pass-through tests only after [Task 354][t354] moves
-  signer secret resolution behind the Vault.
-- Add no daemon itest or behavior change.
+- Keep focused keyvault and backend rotation tests as behavior owners.
+- Retain at most one public Wallet passphrase smoke per surviving backend.
+- Preserve Task 338's SQL acceptance-latched cancellation/shutdown coverage
+  and, while modern kvdb remains, Task 362's Controller parity coverage.
+- Remove only older Wallet interruption and passphrase matrix cases whose
+  assertions are fully owned by those focused suites.
+- Do not remove `runtimeCache` secret pass-through methods, mocks, or tests;
+  [Task 386][t386] owns their production removal and buildable test updates.
+- Add no behavior, daemon itest, benchmark, or broad test reorganization.
 
 ## Suggested fix
 
-Delete the duplicate Wallet passphrase matrix and interruption cases that add no
-distinct assertion. After [Task 354][t354], remove tests and mocks for obsolete
-`runtimeCache.GetAccountSecret` and `GetAddressSecret` methods.
+Map every Wallet passphrase test assertion to its focused Controller or Vault
+replacement, delete only exact duplicates, and leave one small public smoke
+per surviving backend.
 
 ## Verification
 
-- Run the focused keyvault and backend passphrase tests plus
-  [Task 338][t338]'s SQL Controller cancellation tests and, while modern kvdb
-  remains, [Task 362][t362]'s parity tests after deleting the duplicate Wallet
-  cases.
-- After [Task 354][t354], run the signer and account-manager tests that replace
-  obsolete runtime-cache pass-through mocks.
-- Inspect the remaining Wallet tests and confirm each retained case asserts a
-  distinct public smoke rather than duplicating narrower coverage.
+- Run the focused SQL WalletVault tests, Task 338 Controller tests, and, while
+  modern kvdb remains, Task 352/362 Vault and Controller tests.
+- Inspect every removed assertion against a named retained test.
+- Confirm each remaining Wallet-level case proves a distinct public smoke and
+  no production file changes.
 
 ## Definition of done
 
-- Redundant Wallet-level passphrase and cache pass-through tests are removed
-  only after their focused replacement coverage is stable.
-- At most one public Wallet smoke remains per backend, and no behavior or
-  daemon integration scenario changes.
+- Redundant Wallet-level passphrase tests are removed only after focused
+  replacement coverage is stable.
+- At most one public passphrase smoke remains per surviving backend.
+- The PR is test-only and contains no runtime-cache, signer, Vault, or daemon
+  behavior change.
 
 [t338]: 338-passphrase-result.md
-[t353]: 353-retire-modern-kvdb-backend.md
-[t354]: 354-vault-owned-secret-resolution.md
 [t362]: 362-kvdb-definitive-passphrase-result.md
+[t386]: 386-remove-raw-wallet-secret-seams.md
