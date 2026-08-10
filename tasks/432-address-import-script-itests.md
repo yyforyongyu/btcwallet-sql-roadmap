@@ -52,4 +52,4 @@ reload checks.
 - No policy, Vault, watch delivery, or other production behavior is changed.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: 333-postgres-manager-harness.md
+[t333]: ../archive/tasks/333-postgres-manager-harness.md

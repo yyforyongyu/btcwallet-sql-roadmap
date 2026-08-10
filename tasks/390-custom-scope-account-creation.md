@@ -53,5 +53,5 @@ schema cleanup, or lnd-specific methods. Ambiguous results compare the exact
 custom-scope schema introduced by this task.
 
 [t343]: 343-exact-account-creation.md
-[t387]: 387-account-creation-identity-adr.md
+[t387]: ../archive/tasks/387-account-creation-identity-adr.md
 [t389]: 389-runtime-account-commit-reconciliation.md

@@ -75,7 +75,7 @@ generic reconciliation work is included.
 
 [t332]: 332-watch-only-script-policy.md
 [t377]: 377-account-manager-wallet-dto.md
-[t382]: 382-vault-account-derivation.md
+[t382]: ../archive/tasks/382-vault-account-derivation.md
 [t388]: 388-runtime-account-xpub-collisions.md
 [t392]: 392-discovery-mode-account-creation.md
 [t393]: 393-key-only-receiving-rejection.md

@@ -50,4 +50,4 @@ wrapper call it. Keep safe callers on the non-exporting operations.
 - Safe signing remains entirely non-exporting and no general raw decrypt API is
   introduced.
 
-[t384]: 384-vault-safe-signing.md
+[t384]: ../archive/tasks/384-vault-safe-signing.md

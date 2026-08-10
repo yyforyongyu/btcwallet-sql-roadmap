@@ -12,11 +12,9 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
   atomically.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
-- [Task 331](331-manager-wallet-lifecycle.md): fence Manager admission and Store
   closure.
 - [Task 332](332-watch-only-script-policy.md): define watch-only and
   script-import policy.
-- [Task 333](333-postgres-manager-harness.md): add PostgreSQL Manager and harness
   support.
 - [Task 340](340-durable-database-identity.md): bind SQL databases to schema and
   network identity.
@@ -64,7 +62,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 380](380-address-lookup-error-boundary.md): translate address lookup
   errors.
 - [Task 381](381-recovery-adapter-identity.md): hide recovery adapter identity.
-- [Task 387](387-account-creation-identity-adr.md): define custom and path-bound
   account identity.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
@@ -74,7 +71,6 @@ Grouping here does not create dependency or scheduling authority.
   in custom scopes.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   watch-only XPub accounts.
-- [Task 392](392-discovery-mode-account-creation.md): consume discovery mode in
   existing account creation.
 - [Task 393](393-key-only-receiving-rejection.md): reject receiving allocation
   for key-only accounts.
@@ -82,7 +78,6 @@ Grouping here does not create dependency or scheduling authority.
   from wallet ownership.
 - [Task 395](395-key-only-locator-allocation.md): allocate one durable key-only
   locator.
-- [Task 396](396-oldest-unused-address.md): make NewAddress return the oldest
   unused address.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
   recovery targets.
@@ -101,7 +96,6 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Chain and synchronization
 
-- [Task 334](334-shared-chain-state.md): supersede ADR 0002 with SQL shared-
   chain ownership.
 - [Task 370](370-chain-source-delivery.md): prepare ordered Manager chain
   delivery.
@@ -124,7 +118,6 @@ Grouping here does not create dependency or scheduling authority.
   funding.
 - [Task 349](349-transaction-invalidation.md): implement idempotent transaction
   invalidation.
-- [Task 351](351-sql-utxo-integrity.md): bind SQL UTXOs to wallet tenancy.
 - [Task 355](355-transaction-size-accounting.md): correct transaction size
   accounting.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
@@ -150,7 +143,6 @@ Grouping here does not create dependency or scheduling authority.
   publication ordering.
 - [Task 413](413-utxo-spend-identity.md): constrain SQL UTXOs to exact spending
   inputs.
-- [Task 414](414-utxo-amount-bounds.md): bound persisted SQL UTXO amounts.
 - [Task 424](424-transaction-utxo-integrity-adr.md): define transaction and UTXO
   integrity ownership.
 - [Task 425](425-separate-transaction-authoring-wrappers.md): isolate shared
@@ -169,11 +161,9 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 429](429-account-mutation-itests.md): cover public account mutation
   contracts.
 - [Task 430](430-account-query-itests.md): cover public account query contracts.
-- [Task 431](431-address-allocation-lookup-itests.md): cover address allocation
   and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
-- [Task 433](433-wallet-sync-test-boundary.md): enforce the wallet sync test
   boundary.
 - [Task 434](434-transaction-creation-itests.md): cover transaction creation
   contracts.
@@ -199,13 +189,10 @@ Grouping here does not create dependency or scheduling authority.
 
 - [Task 444](444-wallet-receive-reload-scenario.md): cover wallet receipt and
   durable reload.
-- [Task 445](445-sql-account-signing-scenario.md): cover SQL account derivation
   and signing.
 - [Task 446](446-transaction-spend-publish-scenario.md): cover transaction
   creation and publication.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
-- [Task 448](448-sync-rollback-scenario.md): cover synchronization and rollback.
-- [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
   isolation.
 - [Task 450](450-bitcoind-compatibility-scenario.md): compare public wallet
   state with bitcoind.
@@ -221,11 +208,9 @@ Grouping here does not create dependency or scheduling authority.
   passphrase result.
 - [Task 367](367-bound-sql-genesis-secrets.md): bound SQL genesis secret
   lifetime.
-- [Task 382](382-vault-account-derivation.md): move account derivation into the
   Vault.
 - [Task 383](383-vault-output-script-resolution.md): resolve output scripts
   through the Vault.
-- [Task 384](384-vault-safe-signing.md): route safe signing through the Vault.
 - [Task 385](385-unsafe-signer-key-extraction.md): isolate UnsafeSigner key
   extraction.
 - [Task 386](386-remove-raw-wallet-secret-seams.md): remove raw Wallet secret
@@ -256,7 +241,6 @@ Grouping here does not create dependency or scheduling authority.
   start-to-synced performance.
 - [Task 418](418-sqlite-list-unspent-benchmark.md): measure SQLite ListUnspent
   performance.
-- [Task 419](419-sqlite-address-read-benchmark.md): measure SQLite address-read
   performance.
 - [Task 420](420-sqlite-transaction-read-benchmark.md): measure SQLite
   transaction-read performance.

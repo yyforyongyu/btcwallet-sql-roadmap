@@ -36,4 +36,4 @@ constraint over silently invalid data.
 Both dialects declaratively bound each UTXO amount and
 no Go arithmetic is duplicated from the Task 357 family.
 
-[t351]: 351-sql-utxo-integrity.md
+[t351]: ../archive/tasks/351-sql-utxo-integrity.md

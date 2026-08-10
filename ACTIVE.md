@@ -11,8 +11,6 @@ ownership; only `In progress` means implementation has started.
 | Task | Description | Claimant | State | PR |
 | --- | --- | --- | --- | --- |
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | In progress | [#1305][pr1305], [#1306][pr1306] |
-| [Task 333][t333] | Add PostgreSQL test harness | YY | In progress | [#1303][pr1303] |
-| [Task 334][t334] | Define shared-chain ownership | YY | Claimed | — |
 | [Task 335][t335] | Validate legacy migration snapshot | — | Unclaimed | — |
 | [Task 339][t339] | Define transaction visibility | — | Unclaimed | — |
 | [Task 342][t342] | Bound recovery windows | — | Unclaimed | — |
@@ -22,7 +20,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 355][t355] | Correct transaction size accounting | — | Unclaimed | — |
 | [Task 357][t357] | Validate transaction amounts | — | Unclaimed | — |
 | [Task 359][t359] | Revalidate database identity | YY | Claimed | — |
-| [Task 360][t360] | Document kvdb adapter identity | YY | Claimed | — |
+| [Task 360][t360] | Document kvdb adapter identity | YY | In progress | [#1308][pr1308] |
 | [Task 368][t368] | Serialize Wallet lifecycle | — | Unclaimed | — |
 | [Task 369][t369] | Reject repeated unlocks | — | Unclaimed | — |
 | [Task 378][t378] | Translate account errors | — | Unclaimed | — |
@@ -38,9 +36,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 428][t428] | Test resync and rescan | Gustavo | Claimed | — |
 | [Task 429][t429] | Test account mutations | Gustavo | Claimed | — |
 | [Task 430][t430] | Test account queries | Gustavo | Claimed | — |
-| [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
 | [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
-| [Task 433][t433] | Enforce sync test boundary | YY | Claimed | — |
 | [Task 434][t434] | Test transaction creation | Abdullahi | Claimed | — |
 | [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
 | [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
@@ -60,7 +56,6 @@ implementation before every dependency and gate completes.
 
 | Task | Description | Phase | Claimant |
 | --- | --- | ---: | --- |
-| [Task 331][t331] | Fence Manager lifecycle | 2 | YY |
 | [Task 340][t340] | Persist database identity | 2 | YY |
 | [Task 341][t341] | Define semantic account identity | 2 | YY |
 | [Task 337][t337] | Restore imported-XPub derivation | 3 | YY |
@@ -76,16 +71,12 @@ implementation before every dependency and gate completes.
 - After the grandfathered work clears, each developer may have only one task
   in progress at a time.
 
-[pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
 [pr1306]: https://github.com/btcsuite/btcwallet/pull/1306
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
-[t331]: tasks/331-manager-wallet-lifecycle.md
 [t332]: tasks/332-watch-only-script-policy.md
-[t333]: tasks/333-postgres-manager-harness.md
-[t334]: tasks/334-shared-chain-state.md
 [t335]: tasks/335-kvdb-to-sql-migration.md
 [t337]: tasks/337-imported-xpub-derivation.md
 [t339]: tasks/339-transaction-visibility.md
@@ -115,9 +106,7 @@ implementation before every dependency and gate completes.
 [t428]: tasks/428-controller-sync-info-itests.md
 [t429]: tasks/429-account-mutation-itests.md
 [t430]: tasks/430-account-query-itests.md
-[t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t433]: tasks/433-wallet-sync-test-boundary.md
 [t434]: tasks/434-transaction-creation-itests.md
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
@@ -129,3 +118,4 @@ implementation before every dependency and gate completes.
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
 [t451]: tasks/451-chain-version-itest-matrix.md
+[pr1308]: https://github.com/btcsuite/btcwallet/pull/1308

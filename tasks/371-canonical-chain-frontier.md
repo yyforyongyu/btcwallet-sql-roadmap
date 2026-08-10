@@ -95,5 +95,5 @@ operation-specific result boundary.
 - The PR contains no rollback, Wallet quiescence, generic journal or lock,
   durable rescan machinery, or multi-Manager/cross-process fencing.
 
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t340]: 340-durable-database-identity.md

@@ -55,4 +55,4 @@ objects for the durable credential check.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
-[t333]: 333-postgres-manager-harness.md
+[t333]: ../archive/tasks/333-postgres-manager-harness.md

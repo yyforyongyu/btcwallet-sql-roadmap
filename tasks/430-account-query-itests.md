@@ -49,4 +49,4 @@ objects, and compares filtered and point results without reading SQL rows.
 - No query contract or production behavior is changed by the PR.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: 333-postgres-manager-harness.md
+[t333]: ../archive/tasks/333-postgres-manager-harness.md
