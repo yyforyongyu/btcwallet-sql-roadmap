@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **451**.
+The next free task number is **452**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns dependency phases, and
@@ -192,6 +192,8 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 442](442-signer-signing-itests.md): cover public signing contracts.
 - [Task 443](443-unsafe-signer-itests.md): cover UnsafeSigner extraction
   contracts.
+- [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
+  releases.
 
 ## Integration-test scenarios
 

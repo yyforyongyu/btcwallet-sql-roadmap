@@ -1,6 +1,6 @@
 # Task dependency phases
 
-The roadmap contains **122 open tasks**. No task in the current Task
+The roadmap contains **123 open tasks**. No task in the current Task
 329-and-later series has been completed and archived; older archived files are
 historical evidence and are not part of this map.
 
@@ -17,7 +17,7 @@ gates.
 [ACTIVE.md](ACTIVE.md) separately owns the active-task focus, claims,
 in-progress PRs, and coordination state.
 
-## Phase 1 — 41 tasks
+## Phase 1 — 42 tasks
 
 | Task | Component | Outcome | Direct dependencies | Non-task gates |
 | --- | --- | --- | --- | --- |
@@ -62,6 +62,7 @@ in-progress PRs, and coordination state.
 | [Task 441][t441] | Signer derivation integration tests | Cover public derivation and ECDH contracts | — | — |
 | [Task 442][t442] | Signer signature integration tests | Cover public signing contracts | — | — |
 | [Task 443][t443] | UnsafeSigner integration tests | Cover UnsafeSigner extraction contracts | — | — |
+| [Task 451][t451] | integration-test CI matrix and chain daemon provisioning | Test supported chain daemon releases | — | — |
 
 ## Phase 2 — 23 tasks
 
@@ -324,3 +325,4 @@ and keep non-task gates inline with their owning row.
 [t448]: tasks/448-sync-rollback-scenario.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
 [t450]: tasks/450-bitcoind-compatibility-scenario.md
+[t451]: tasks/451-chain-version-itest-matrix.md

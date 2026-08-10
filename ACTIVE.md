@@ -51,6 +51,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 441][t441] | Test derivation and ECDH | — | Unclaimed | — |
 | [Task 442][t442] | Test public signing | — | Unclaimed | — |
 | [Task 443][t443] | Test unsafe key extraction | — | Unclaimed | — |
+| [Task 451][t451] | Test supported chain releases | — | Unclaimed | — |
 
 ## Claimed Tasks
 
@@ -127,3 +128,4 @@ implementation before every dependency and gate completes.
 [t441]: tasks/441-signer-derivation-ecdh-itests.md
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
+[t451]: tasks/451-chain-version-itest-matrix.md
