@@ -49,5 +49,5 @@ compare the two public readers before and after a full durable reopen.
 - Any status-contract gap or production defect remains a separate task.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: 333-postgres-manager-harness.md
+[t333]: ../archive/tasks/333-postgres-manager-harness.md
 [t339]: 339-transaction-visibility.md

@@ -16,7 +16,6 @@ Grouping here does not create dependency or scheduling authority.
   closure.
 - [Task 332](332-watch-only-script-policy.md): define watch-only and
   script-import policy.
-- [Task 333](333-postgres-manager-harness.md): add PostgreSQL Manager and harness
   support.
 - [Task 340](340-durable-database-identity.md): bind SQL databases to schema and
   network identity.

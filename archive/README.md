@@ -7,6 +7,7 @@ dependency phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 333](tasks/333-postgres-manager-harness.md) completed on 2026-08-10.
 
 - [Tasks 278-328](tasks/) were consolidated and deduplicated on 2026-08-07.
   [Tasks 329-358](../tasks/) replace them.

@@ -51,4 +51,4 @@ public addresses and chain events, then compare list and point APIs.
 - The task changes no allocation, discovery, or watch behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: 333-postgres-manager-harness.md
+[t333]: ../archive/tasks/333-postgres-manager-harness.md

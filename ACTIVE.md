@@ -11,7 +11,6 @@ ownership; only `In progress` means implementation has started.
 | Task | Description | Claimant | State | PR |
 | --- | --- | --- | --- | --- |
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | In progress | [#1305][pr1305], [#1306][pr1306] |
-| [Task 333][t333] | Add PostgreSQL test harness | YY | In progress | [#1303][pr1303] |
 | [Task 334][t334] | Define shared-chain ownership | YY | Claimed | — |
 | [Task 335][t335] | Validate legacy migration snapshot | — | Unclaimed | — |
 | [Task 339][t339] | Define transaction visibility | — | Unclaimed | — |
@@ -76,7 +75,6 @@ implementation before every dependency and gate completes.
 - After the grandfathered work clears, each developer may have only one task
   in progress at a time.
 
-[pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
 [pr1306]: https://github.com/btcsuite/btcwallet/pull/1306
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
@@ -84,7 +82,6 @@ implementation before every dependency and gate completes.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
 [t332]: tasks/332-watch-only-script-policy.md
-[t333]: tasks/333-postgres-manager-harness.md
 [t334]: tasks/334-shared-chain-state.md
 [t335]: tasks/335-kvdb-to-sql-migration.md
 [t337]: tasks/337-imported-xpub-derivation.md
