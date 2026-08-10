@@ -52,4 +52,4 @@ and test-scoped.
 - The task introduces no new account behavior or production fix.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md
+[t333]: 333-postgres-manager-harness.md

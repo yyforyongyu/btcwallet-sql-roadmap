@@ -59,4 +59,4 @@ remain their original Store errors and never become `ErrWalletExists`.
   [Task 329](329-atomic-wallet-account-creation.md).
 
 [t331]: 331-manager-wallet-lifecycle.md
-[t333]: ../archive/tasks/333-postgres-manager-harness.md
+[t333]: 333-postgres-manager-harness.md

@@ -58,4 +58,4 @@ return the published pointer on every post-publication path.
 - The PR contains no Create/genesis behavior, compatibility wrapper, generic
   registry, or publication state machine.
 
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md

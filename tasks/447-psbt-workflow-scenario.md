@@ -46,7 +46,7 @@ production hooks.
 - The PR is a single backend-neutral, test-only scenario.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
+[t433]: 433-wallet-sync-test-boundary.md
 [t435]: 435-transaction-publication-itests.md
 [t436]: 436-transaction-read-itests.md
 [t438]: 438-psbt-decoration-combination-itests.md

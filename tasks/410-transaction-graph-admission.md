@@ -40,6 +40,6 @@ Every graph mutation has one visible admission point
 that later invalidation and publication tasks can consume; no general write
 serialization or cross-process claim is added.
 
-[t334]: ../archive/tasks/334-shared-chain-state.md
+[t334]: 334-shared-chain-state.md
 [t409]: 409-transaction-input-graph.md
 [t372]: 372-multi-wallet-rollback.md

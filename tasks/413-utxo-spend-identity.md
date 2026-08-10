@@ -48,6 +48,6 @@ the exact normalized transaction input that spends its creating outpoint, and
 the pointer can be installed only while that same spender is active under Task
 410 admission.
 
-[t351]: ../archive/tasks/351-sql-utxo-integrity.md
+[t351]: 351-sql-utxo-integrity.md
 [t409]: 409-transaction-input-graph.md
 [t410]: 410-transaction-graph-admission.md

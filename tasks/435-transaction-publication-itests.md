@@ -51,4 +51,4 @@ waits, and asserts Wallet results only through maintained public APIs.
 - Any exposed production defect is recorded separately.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md
+[t333]: 333-postgres-manager-harness.md

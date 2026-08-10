@@ -58,6 +58,6 @@ the public result, send it once, and close the completion on every exit.
 - Pre-handoff cancellation remains supported, and the PR adds no generic
   operation registry or cross-Manager guarantee.
 
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t368]: 368-wallet-startup-shutdown.md
 [t421]: 421-sql-passphrase-commit-reconciliation.md

@@ -67,7 +67,7 @@ in the retirement PR description, not a runtime manifest.
   remain unchanged.
 
 [t330]: 330-duplicate-wallet-create.md
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t343]: 343-exact-account-creation.md
 [t344]: 344-bulk-address-allocation.md
 [t352]: 352-kvdb-combined-passphrase-rotation.md

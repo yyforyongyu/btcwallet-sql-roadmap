@@ -42,5 +42,5 @@ wallet-owned authorization decision and never mutates the caller packet on
 error; FinalizePsbt behavior remains owned by the follow-up task.
 
 [t346]: 346-psbt-funding-metadata.md
-[t384]: ../archive/tasks/384-vault-safe-signing.md
+[t384]: 384-vault-safe-signing.md
 [t390]: 390-custom-scope-account-creation.md

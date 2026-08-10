@@ -51,7 +51,7 @@ operations. Leave backend-private crypto implementation below keyvault.
   exception.
 - Task 336 can remove redundant cache-era tests without owning behavior.
 
-[t382]: ../archive/tasks/382-vault-account-derivation.md
+[t382]: 382-vault-account-derivation.md
 [t383]: 383-vault-output-script-resolution.md
 [t384]: 384-vault-safe-signing.md
 [t385]: 385-unsafe-signer-key-extraction.md

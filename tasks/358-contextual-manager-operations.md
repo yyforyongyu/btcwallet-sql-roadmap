@@ -68,6 +68,6 @@ wait.
 - The PR contains no Load cancellation, generic registry, compatibility
   wrapper, or new reconciliation/secret contract.
 
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t366]: 366-reconcile-sql-genesis-commit.md
 [t367]: 367-bound-sql-genesis-secrets.md
