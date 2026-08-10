@@ -1,6 +1,6 @@
 # Task dependency phases
 
-The roadmap contains **109 open tasks**. No task in the current Task
+The roadmap contains **122 open tasks**. No task in the current Task
 329-and-later series has been completed and archived; older archived files are
 historical evidence and are not part of this map.
 
@@ -17,7 +17,7 @@ gates.
 [ACTIVE.md](ACTIVE.md) separately owns the active-task focus, claims,
 in-progress PRs, and coordination state.
 
-## Phase 1 — 35 tasks
+## Phase 1 — 41 tasks
 
 | Task | Component | Outcome | Direct dependencies | Non-task gates |
 | --- | --- | --- | --- | --- |
@@ -56,8 +56,14 @@ in-progress PRs, and coordination state.
 | [Task 435][t435] | TxPublisher integration tests | Cover transaction publication contracts | — | — |
 | [Task 436][t436] | TxReader integration tests | Cover transaction read contracts | — | — |
 | [Task 437][t437] | TxWriter integration tests | Cover transaction label contracts | — | — |
+| [Task 438][t438] | PsbtManager packet integration tests | Cover PSBT decoration and combination contracts | — | — |
+| [Task 439][t439] | PsbtManager funding integration tests | Cover PSBT funding contracts | — | — |
+| [Task 440][t440] | PsbtManager signing integration tests | Cover PSBT signing and finalization contracts | — | — |
+| [Task 441][t441] | Signer derivation integration tests | Cover public derivation and ECDH contracts | — | — |
+| [Task 442][t442] | Signer signature integration tests | Cover public signing contracts | — | — |
+| [Task 443][t443] | UnsafeSigner integration tests | Cover UnsafeSigner extraction contracts | — | — |
 
-## Phase 2 — 16 tasks
+## Phase 2 — 23 tasks
 
 | Task | Component | Outcome | Direct dependencies | Non-task gates |
 | --- | --- | --- | --- | --- |
@@ -77,6 +83,13 @@ in-progress PRs, and coordination state.
 | [Task 419][t419] | wallet AddressManager benchmarks | Measure SQLite address-read performance | 416 | — |
 | [Task 420][t420] | wallet TxReader benchmarks | Measure SQLite transaction-read performance | 416 | — |
 | [Task 426][t426] | SQL TxStore ingestion amount validation | Validate persisted transaction output aggregates | 424 | — |
+| [Task 444][t444] | public wallet receive scenario | Cover the wallet receive and reload scenario | 415, 429, 430, 431, 433, 436 | — |
+| [Task 445][t445] | SQL account signing scenario | Cover SQL account derivation and signing | 429, 431, 441, 442 | — |
+| [Task 446][t446] | public transaction spend scenario | Cover transaction creation and publication | 415, 433, 434, 435, 436 | — |
+| [Task 447][t447] | public PSBT workflow scenario | Cover the complete PSBT workflow | 433, 435, 436, 438, 439, 440 | — |
+| [Task 448][t448] | public Wallet reorganization scenario | Cover synchronization and rollback | 415, 428, 433, 436 | — |
+| [Task 449][t449] | multi-Wallet SQL integration scenario | Cover multi-Wallet SQL isolation | 415, 429, 431, 433, 434, 435, 436 | — |
+| [Task 450][t450] | bitcoind compatibility integration scenario | Compare public wallet state with bitcoind | 415, 431, 433, 434, 435, 436 | — |
 
 ## Phase 3 — 15 tasks
 
@@ -298,3 +311,16 @@ and keep non-task gates inline with their owning row.
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
+[t438]: tasks/438-psbt-decoration-combination-itests.md
+[t439]: tasks/439-psbt-funding-itests.md
+[t440]: tasks/440-psbt-signing-finalization-itests.md
+[t441]: tasks/441-signer-derivation-ecdh-itests.md
+[t442]: tasks/442-signer-signing-itests.md
+[t443]: tasks/443-unsafe-signer-itests.md
+[t444]: tasks/444-wallet-receive-reload-scenario.md
+[t445]: tasks/445-sql-account-signing-scenario.md
+[t446]: tasks/446-transaction-spend-publish-scenario.md
+[t447]: tasks/447-psbt-workflow-scenario.md
+[t448]: tasks/448-sync-rollback-scenario.md
+[t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
+[t450]: tasks/450-bitcoind-compatibility-scenario.md

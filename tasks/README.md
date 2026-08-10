@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **438**.
+The next free task number is **451**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns dependency phases, and
@@ -182,6 +182,31 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 436](436-transaction-read-itests.md): cover transaction read contracts.
 - [Task 437](437-transaction-label-itests.md): cover transaction label
   contracts.
+- [Task 438](438-psbt-decoration-combination-itests.md): cover PSBT decoration
+  and combination contracts.
+- [Task 439](439-psbt-funding-itests.md): cover PSBT funding contracts.
+- [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
+  finalization contracts.
+- [Task 441](441-signer-derivation-ecdh-itests.md): cover public derivation and
+  ECDH contracts.
+- [Task 442](442-signer-signing-itests.md): cover public signing contracts.
+- [Task 443](443-unsafe-signer-itests.md): cover UnsafeSigner extraction
+  contracts.
+
+## Integration-test scenarios
+
+- [Task 444](444-wallet-receive-reload-scenario.md): cover wallet receipt and
+  durable reload.
+- [Task 445](445-sql-account-signing-scenario.md): cover SQL account derivation
+  and signing.
+- [Task 446](446-transaction-spend-publish-scenario.md): cover transaction
+  creation and publication.
+- [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
+- [Task 448](448-sync-rollback-scenario.md): cover synchronization and rollback.
+- [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
+  isolation.
+- [Task 450](450-bitcoind-compatibility-scenario.md): compare public wallet
+  state with bitcoind.
 
 ## Secrets and credentials
 

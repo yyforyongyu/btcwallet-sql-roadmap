@@ -45,6 +45,12 @@ ownership; only `In progress` means implementation has started.
 | [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
 | [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
 | [Task 437][t437] | Test transaction labels | Abdullahi | Claimed | — |
+| [Task 438][t438] | Test PSBT packet transforms | — | Unclaimed | — |
+| [Task 439][t439] | Test PSBT funding | — | Unclaimed | — |
+| [Task 440][t440] | Test PSBT signing | — | Unclaimed | — |
+| [Task 441][t441] | Test derivation and ECDH | — | Unclaimed | — |
+| [Task 442][t442] | Test public signing | — | Unclaimed | — |
+| [Task 443][t443] | Test unsafe key extraction | — | Unclaimed | — |
 
 ## Claimed Tasks
 
@@ -115,3 +121,9 @@ implementation before every dependency and gate completes.
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
+[t438]: tasks/438-psbt-decoration-combination-itests.md
+[t439]: tasks/439-psbt-funding-itests.md
+[t440]: tasks/440-psbt-signing-finalization-itests.md
+[t441]: tasks/441-signer-derivation-ecdh-itests.md
+[t442]: tasks/442-signer-signing-itests.md
+[t443]: tasks/443-unsafe-signer-itests.md
