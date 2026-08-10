@@ -7,6 +7,7 @@ dependency phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 415](tasks/415-utxo-public-integration-tests.md) completed on 2026-08-11.
 - [Task 333](tasks/333-postgres-manager-harness.md) completed on 2026-08-10.
 
 - [Tasks 278-328](tasks/) were consolidated and deduplicated on 2026-08-07.

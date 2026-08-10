@@ -28,7 +28,6 @@ ownership; only `In progress` means implementation has started.
 | [Task 379][t379] | Translate load errors | — | Unclaimed | — |
 | [Task 380][t380] | Translate address lookup errors | — | Unclaimed | — |
 | [Task 400][t400] | Define live-watch semantics | — | Unclaimed | — |
-| [Task 415][t415] | Test public UTXO contracts | Abdullahi | In progress | [#1307][pr1307] |
 | [Task 416][t416] | Build SQLite benchmark fixtures | — | Unclaimed | — |
 | [Task 421][t421] | Reconcile passphrase commits | — | Unclaimed | — |
 | [Task 424][t424] | Define transaction integrity | — | Unclaimed | — |
@@ -77,7 +76,6 @@ implementation before every dependency and gate completes.
 
 [pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
 [pr1306]: https://github.com/btcsuite/btcwallet/pull/1306
-[pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
@@ -103,7 +101,6 @@ implementation before every dependency and gate completes.
 [t379]: tasks/379-manager-load-error-boundary.md
 [t380]: tasks/380-address-lookup-error-boundary.md
 [t400]: tasks/400-live-watch-semantics-adr.md
-[t415]: tasks/415-utxo-public-integration-tests.md
 [t416]: tasks/416-sqlite-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md

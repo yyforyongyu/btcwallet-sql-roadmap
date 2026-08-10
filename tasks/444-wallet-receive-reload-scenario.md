@@ -47,7 +47,7 @@ UTXO, and transaction fixtures. Use one-shot wallet assertions after
 - The PR is test-only and backend-neutral.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t415]: 415-utxo-public-integration-tests.md
+[t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: 429-account-mutation-itests.md
 [t430]: 430-account-query-itests.md
 [t431]: 431-address-allocation-lookup-itests.md

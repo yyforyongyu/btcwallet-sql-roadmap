@@ -49,7 +49,7 @@ system's public view. Keep expected ownership in the test fixture.
 - The PR is deterministic, test-only, and is not a fuzz or benchmark target.
 
 [compat]: https://github.com/btcsuite/btcwallet/issues/1250#issuecomment-4563982303
-[t415]: 415-utxo-public-integration-tests.md
+[t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t431]: 431-address-allocation-lookup-itests.md
 [t433]: 433-wallet-sync-test-boundary.md
 [t434]: 434-transaction-creation-itests.md

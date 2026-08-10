@@ -159,7 +159,6 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Integration tests
 
-- [Task 415](415-utxo-public-integration-tests.md): cover public UTXO contracts
   end to end.
 - [Task 427](427-controller-lifecycle-credential-itests.md): cover remaining
   Controller credential contracts.
