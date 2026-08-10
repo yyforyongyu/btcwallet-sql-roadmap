@@ -1,6 +1,6 @@
 # Weekly plan
 
-Week: Mon Aug 3 – Sun Aug 9, 2026
+Week: Mon Aug 10 – Sun Aug 16, 2026
 
 <!-- Updated by YY directly in this repo. The btcwallet progress page copies
      this file and renders it as the "Weekly Plan" section.
@@ -11,11 +11,14 @@ Week: Mon Aug 3 – Sun Aug 9, 2026
        - [x]  manually completed (for items with no PR to detect, e.g.
               planning work) — YY flips these directly here. -->
 
-- [x] Merge the base stack: #1272, #1291, #1292 (YY)
-- [x] Merge #1300 — Manager + Controller itests (Gustavo)
-- [ ] Merge UtxoManager itests (Abdulkbk)
-- [ ] Merge AccountManager itests (Gustavo)
-- [ ] Fix the Postgres itest #1303 — make Postgres usable as a db backend in
-      the itest harness (YY)
-- [x] Collect and plan the known gaps/issues — triage into the What's-left
-      phases (YY)
+- [x] Land the PostgreSQL harness #1303 (YY) — Postgres is a usable itest
+      backend now
+- [ ] Rebase and merge the watch-only policy pair #1305 / #1306 (YY +
+      Gustavo) — #1306 approved and mergeable
+- [ ] Land UtxoManager itests #1307 (Abdulkbk) — fixes pushed, awaiting
+      re-review
+- [ ] Get #1308 (adapter identity docs) and #1309 (itest case filtering)
+      reviewed (YY)
+- [ ] Start the AccountManager itests (Gustavo) — tasks 429 / 430
+- [ ] Start the transaction itest series (Abdulkbk) — tasks 434–437
+- [ ] Open the shared-chain ownership ADR (YY) — task 334
