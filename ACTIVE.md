@@ -45,6 +45,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
 | [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
 | [Task 437][t437] | Test transaction labels | Abdullahi | Claimed | — |
+| [Task 438][t438] | Test supported chain releases | — | Unclaimed | — |
 
 ## Claimed Tasks
 
@@ -115,3 +116,4 @@ implementation before every dependency and gate completes.
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
+[t438]: tasks/438-chain-version-itest-matrix.md

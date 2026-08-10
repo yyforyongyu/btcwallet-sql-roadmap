@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **438**.
+The next free task number is **439**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns dependency phases, and
@@ -182,6 +182,8 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 436](436-transaction-read-itests.md): cover transaction read contracts.
 - [Task 437](437-transaction-label-itests.md): cover transaction label
   contracts.
+- [Task 438](438-chain-version-itest-matrix.md): test supported chain daemon
+  releases.
 
 ## Secrets and credentials
 

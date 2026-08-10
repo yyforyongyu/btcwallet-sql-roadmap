@@ -1,6 +1,6 @@
 # Task dependency phases
 
-The roadmap contains **109 open tasks**. No task in the current Task
+The roadmap contains **110 open tasks**. No task in the current Task
 329-and-later series has been completed and archived; older archived files are
 historical evidence and are not part of this map.
 
@@ -17,7 +17,7 @@ gates.
 [ACTIVE.md](ACTIVE.md) separately owns the active-task focus, claims,
 in-progress PRs, and coordination state.
 
-## Phase 1 — 35 tasks
+## Phase 1 — 36 tasks
 
 | Task | Component | Outcome | Direct dependencies | Non-task gates |
 | --- | --- | --- | --- | --- |
@@ -56,6 +56,7 @@ in-progress PRs, and coordination state.
 | [Task 435][t435] | TxPublisher integration tests | Cover transaction publication contracts | — | — |
 | [Task 436][t436] | TxReader integration tests | Cover transaction read contracts | — | — |
 | [Task 437][t437] | TxWriter integration tests | Cover transaction label contracts | — | — |
+| [Task 438][t438] | integration-test CI matrix and chain daemon provisioning | Test supported chain daemon releases | — | — |
 
 ## Phase 2 — 16 tasks
 
@@ -298,3 +299,4 @@ and keep non-task gates inline with their owning row.
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
+[t438]: tasks/438-chain-version-itest-matrix.md
