@@ -21,7 +21,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 355][t355] | Correct transaction size accounting | — | Unclaimed | — |
 | [Task 357][t357] | Validate transaction amounts | — | Unclaimed | — |
 | [Task 359][t359] | Revalidate database identity | YY | Claimed | — |
-| [Task 360][t360] | Document kvdb adapter identity | YY | Claimed | — |
+| [Task 360][t360] | Document kvdb adapter identity | YY | Claimed | [#1308][pr1308] |
 | [Task 368][t368] | Serialize Wallet lifecycle | — | Unclaimed | — |
 | [Task 369][t369] | Reject repeated unlocks | — | Unclaimed | — |
 | [Task 378][t378] | Translate account errors | — | Unclaimed | — |
@@ -38,7 +38,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 430][t430] | Test account queries | Gustavo | Claimed | — |
 | [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
 | [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
-| [Task 433][t433] | Enforce sync test boundary | YY | Claimed | — |
+| [Task 433][t433] | Enforce sync test boundary | YY | Claimed | [#1314][pr1314] |
 | [Task 434][t434] | Test transaction creation | Abdullahi | Claimed | — |
 | [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
 | [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
@@ -56,14 +56,14 @@ ownership; only `In progress` means implementation has started.
 These tasks have owners but are not active yet. A claim does not authorize
 implementation before every dependency and gate completes.
 
-| Task | Description | Phase | Claimant |
-| --- | --- | ---: | --- |
-| [Task 331][t331] | Fence Manager lifecycle | 2 | YY |
-| [Task 340][t340] | Persist database identity | 2 | YY |
-| [Task 341][t341] | Define semantic account identity | 2 | YY |
-| [Task 337][t337] | Restore imported-XPub derivation | 3 | YY |
-| [Task 345][t345] | Persist account discovery mode | 3 | YY |
-| [Task 329][t329] | Commit SQL genesis atomically | 4 | YY |
+| Task | Description | Phase | Claimant | PR |
+| --- | --- | ---: | --- | --- |
+| [Task 331][t331] | Fence Manager lifecycle | 2 | YY | — |
+| [Task 340][t340] | Persist database identity | 2 | YY | — |
+| [Task 341][t341] | Define semantic account identity | 2 | YY | [#1313][pr1313] |
+| [Task 337][t337] | Restore imported-XPub derivation | 3 | YY | — |
+| [Task 345][t345] | Persist account discovery mode | 3 | YY | — |
+| [Task 329][t329] | Commit SQL genesis atomically | 4 | YY | — |
 
 ## Coordination
 
@@ -76,6 +76,9 @@ implementation before every dependency and gate completes.
 
 [pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
 [pr1306]: https://github.com/btcsuite/btcwallet/pull/1306
+[pr1308]: https://github.com/btcsuite/btcwallet/pull/1308
+[pr1313]: https://github.com/btcsuite/btcwallet/pull/1313
+[pr1314]: https://github.com/btcsuite/btcwallet/pull/1314
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
