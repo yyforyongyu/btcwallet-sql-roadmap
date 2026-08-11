@@ -34,7 +34,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 425][t425] | Isolate transaction authoring | — | Unclaimed | — |
 | [Task 427][t427] | Test Controller credentials | Gustavo | Claimed | — |
 | [Task 428][t428] | Test resync and rescan | Gustavo | Claimed | — |
-| [Task 429][t429] | Test account mutations | Gustavo | Claimed | — |
+| [Task 429][t429] | Test account mutations | Gustavo | In progress | — |
 | [Task 430][t430] | Test account queries | Gustavo | Claimed | — |
 | [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
 | [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
