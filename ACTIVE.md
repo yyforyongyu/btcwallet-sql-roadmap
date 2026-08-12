@@ -20,7 +20,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 354][t354] | Define Vault secret ownership | — | Unclaimed | — |
 | [Task 355][t355] | Correct transaction size accounting | — | Unclaimed | — |
 | [Task 357][t357] | Validate transaction amounts | — | Unclaimed | — |
-| [Task 359][t359] | Revalidate database identity | YY | Claimed | — |
+| [Task 359][t359] | Revalidate database identity | YY | In progress | [#1319][pr1319] |
 | [Task 368][t368] | Serialize Wallet lifecycle | — | Unclaimed | — |
 | [Task 369][t369] | Reject repeated unlocks | — | Unclaimed | — |
 | [Task 378][t378] | Translate account errors | — | Unclaimed | — |
@@ -38,7 +38,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
 | [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
 | [Task 433][t433] | Enforce sync test boundary | YY | Claimed | [#1314][pr1314] |
-| [Task 434][t434] | Test transaction creation | Abdullahi | Claimed | — |
+| [Task 434][t434] | Test transaction creation | Abdullahi | In progress | [#1316][pr1316] |
 | [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
 | [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
 | [Task 437][t437] | Test transaction labels | Abdullahi | Claimed | — |
@@ -123,3 +123,5 @@ implementation before every dependency and gate completes.
 [t443]: tasks/443-unsafe-signer-itests.md
 [t451]: tasks/451-chain-version-itest-matrix.md
 [pr1320]: https://github.com/btcsuite/btcwallet/pull/1320
+[pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
+[pr1316]: https://github.com/btcsuite/btcwallet/pull/1316
