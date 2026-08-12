@@ -23,12 +23,16 @@ for live state.
 
 Use these terms precisely:
 
-- **Active** means dependency-complete work in the current development focus,
-  or already-started work retained explicitly in [ACTIVE.md](ACTIVE.md).
+- **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
+  Include every claimed Phase 1 task, every open Phase 1 task that is not a
+  hard dependency of another open task, and explicitly already-started work
+  from later phases. Active does not imply dependency-complete.
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
-- **In progress** means an active row has both a claimant and a linked PR. Add
-  the PR before implementation; there is no separate state field to update.
+- **In progress** means implementation has started. Represent it with both a
+  claimant and linked PR. If a series starts before its individual PRs open,
+  record the exception under ACTIVE's Coordination section and link each PR
+  when opened.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
@@ -46,6 +50,9 @@ authorize parallel implementation by the same developer.
 Do not use stacked implementation PRs to bypass dependency completion. YY must
 approve an exception explicitly, the prerequisite contract must be frozen, and
 the dependent PR must remain unmergeable until the prerequisite merges.
+
+Refresh ACTIVE's two task lists whenever a claim, task dependency, or task
+status changes. No task appears in both `Active Tasks` and `Claimed Tasks`.
 
 ## Roadmap update workflow
 
@@ -114,7 +121,8 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 
 After the implementation PR merges, use the roadmap update workflow to:
 
-1. remove its row from [ACTIVE.md](ACTIVE.md);
+1. remove its row from [ACTIVE.md](ACTIVE.md) and refresh the remaining active
+   and parked claimed rows;
 2. move its task file under `archive/tasks/`;
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
