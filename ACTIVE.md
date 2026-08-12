@@ -59,7 +59,7 @@ implementation before every dependency and gate completes.
 | --- | --- | ---: | --- | --- |
 | [Task 331][t331] | Fence Manager lifecycle | 2 | YY | — |
 | [Task 340][t340] | Persist database identity | 2 | YY | — |
-| [Task 341][t341] | Define semantic account identity | 2 | YY | [#1313][pr1313] |
+| [Task 341][t341] | Define semantic account identity | 2 | [#1313][pr1313] | [#1313][pr1313] |
 | [Task 337][t337] | Restore imported-XPub derivation | 3 | YY | — |
 | [Task 345][t345] | Persist account discovery mode | 3 | YY | — |
 | [Task 329][t329] | Commit SQL genesis atomically | 4 | YY | — |
