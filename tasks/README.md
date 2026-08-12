@@ -159,7 +159,10 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Integration tests
 
-  end to end.
+Shared public contracts run on kvdb, SQLite, and PostgreSQL. A task may exclude
+a backend only when that backend cannot represent the scenario, and must state
+that structural exclusion explicitly.
+
 - [Task 427](427-controller-lifecycle-credential-itests.md): cover remaining
   Controller credential contracts.
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
@@ -197,8 +200,8 @@ Grouping here does not create dependency or scheduling authority.
 
 - [Task 444](444-wallet-receive-reload-scenario.md): cover wallet receipt and
   durable reload.
-- [Task 445](445-sql-account-signing-scenario.md): cover SQL account derivation
-  and signing.
+- [Task 445](445-sql-account-signing-scenario.md): cover account derivation and
+  signing.
 - [Task 446](446-transaction-spend-publish-scenario.md): cover transaction
   creation and publication.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
@@ -248,16 +251,19 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Benchmarks
 
-- [Task 416](416-sqlite-benchmark-fixtures.md): build reusable SQLite benchmark
-  fixtures.
-- [Task 417](417-sqlite-start-to-synced-benchmark.md): measure SQLite
-  start-to-synced performance.
-- [Task 418](418-sqlite-list-unspent-benchmark.md): measure SQLite ListUnspent
+Each public benchmark uses the same logical profiles on kvdb, SQLite, and
+PostgreSQL so regressions remain attributable within each backend.
+
+- [Task 416](416-sqlite-benchmark-fixtures.md): build reusable database
+  benchmark fixtures.
+- [Task 417](417-sqlite-start-to-synced-benchmark.md): measure start-to-synced
   performance.
-- [Task 419](419-sqlite-address-read-benchmark.md): measure SQLite address-read
+- [Task 418](418-sqlite-list-unspent-benchmark.md): measure ListUnspent
   performance.
-- [Task 420](420-sqlite-transaction-read-benchmark.md): measure SQLite
-  transaction-read performance.
+- [Task 419](419-sqlite-address-read-benchmark.md): measure address-read
+  performance.
+- [Task 420](420-sqlite-transaction-read-benchmark.md): measure transaction-read
+  performance.
 
 ## Cleanup
 

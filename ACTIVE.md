@@ -56,7 +56,7 @@ not authorize implementation before every dependency and gate completes.
 
 | Task | Description | Phase | Claimant | PR |
 | --- | --- | ---: | --- | --- |
-| [Task 416][t416] | Build SQLite benchmark fixtures | 2 | YY | — |
+| [Task 416][t416] | Build database benchmark fixtures | 2 | YY | — |
 | [Task 433][t433] | Enforce sync test boundary | 2 | YY | [#1314][pr1314] |
 
 ## Coordination

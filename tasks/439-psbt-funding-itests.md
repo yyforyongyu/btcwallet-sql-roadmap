@@ -7,15 +7,16 @@ Dependencies: **None**.
 ## Rationale
 
 [Issue #1250][issue1250] calls out `FundPsbt` as a public contract requiring
-real-SQL happy-path, error, boundary, and durable-state coverage. Funding joins
-coin selection, fee and change calculation, input leases, Wallet state, and
-packet ownership, but it has no focused public integration-test task.
+real-backend happy-path, error, boundary, and durable-state coverage. Funding
+joins coin selection, fee and change calculation, input leases, Wallet state,
+and packet ownership, but it has no focused public integration-test task.
 
 ## Details
 
-- Exercise `FundPsbt` through a funded real SQL-backed Wallet.
-- Require SQLite and keep one backend-neutral registration for PostgreSQL after
-  Task 333.
+- Exercise `FundPsbt` through funded real kvdb, SQLite, and PostgreSQL Wallets.
+- Register one shared public contract for all three database backends. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover automatic selection, caller-selected inputs, with-change and no-change
   results, representative fee boundaries, and deterministic change indexing.
 - Cover insufficient funds, locked or foreign inputs, invalid packets and
@@ -25,8 +26,7 @@ packet ownership, but it has no focused public integration-test task.
   full Wallet and Manager reopen.
 - Verify every rejection leaves the caller packet, leases, and address
   allocation state unchanged.
-- Keep the PR test-only. Do not anticipate Tasks 346, 348, 405, or 406, and do
-  not fix a production defect inside the test task.
+- Do not anticipate behavior owned by Tasks 346, 348, 405, or 406.
 
 ## Suggested fix
 
@@ -36,8 +36,7 @@ UtxoManager, and AddressManager public calls rather than Store inspection.
 
 ## Verification
 
-- Run the focused SQLite `FundPsbt` cases.
-- After Task 333 merges, run the identical cases on PostgreSQL.
+- Run the focused `FundPsbt` cases on kvdb, SQLite, and PostgreSQL.
 - Verify rejected calls cause no partial mutation and every case releases all
   Wallet, Manager, miner, chain, and backend resources.
 
@@ -46,6 +45,6 @@ UtxoManager, and AddressManager public calls rather than Store inspection.
 - `FundPsbt` has representative selection, manual-input, change, fee,
   lifecycle, watch-only, and stable-error coverage.
 - Publicly observable accepted state survives a durable reopen.
-- The backend-neutral PR is test-only and changes no funding behavior.
+- Shared cases contain no backend skip branch and add no new funding behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250

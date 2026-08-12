@@ -13,10 +13,11 @@ contracts lack focused coverage against a deterministic chain backend.
 
 ## Details
 
-- Exercise `CheckMempoolAcceptance` and `Broadcast` through a real SQL-backed
-  Wallet and deterministic regtest backend.
-- Require SQLite and register one backend-neutral source for PostgreSQL after
-  [Task 333][t333].
+- Exercise `CheckMempoolAcceptance` and `Broadcast` through real kvdb, SQLite,
+  and PostgreSQL Wallets and a deterministic regtest backend.
+- Register one shared public contract for all three database backends. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover an accepted spend, a representative policy rejection, malformed or
   conflicting transactions, already-known behavior, and stopped Wallet state.
 - Prove acceptance checks do not publish and successful broadcast becomes
@@ -24,7 +25,7 @@ contracts lack focused coverage against a deterministic chain backend.
 - Keep current public publication semantics. Do not anticipate invalidation,
   graph admission, or crash-settlement behavior owned by Task 412.
 - Exclude transaction creation, reads, labels, direct Store assertions, RPC,
-  deprecated helpers, and production fixes.
+  deprecated helpers, and unrelated production changes.
 
 ## Suggested fix
 
@@ -34,12 +35,10 @@ waits, and asserts Wallet results only through maintained public APIs.
 
 ## Verification
 
-- Run the focused SQLite TxPublisher case selection against each supported
-  chain backend.
-- After Task 333 merges, run the same registered cases on PostgreSQL.
+- Run the focused TxPublisher cases on kvdb, SQLite, and PostgreSQL against
+  each supported chain backend.
 - Verify acceptance-only cases leave the mempool unchanged and all failure
   paths release Wallet, Manager, miner, and backend resources.
-- Verify the PR remains test-only.
 
 ## Definition of done
 
@@ -47,8 +46,7 @@ waits, and asserts Wallet results only through maintained public APIs.
   rejection, lifecycle, and already-known integration coverage.
 - Successful broadcast is confirmed through public behavior, while an
   acceptance check alone never publishes.
-- The cases use a real SQLite Wallet and remain backend-neutral.
-- Any exposed production defect is recorded separately.
+- Shared cases use real kvdb, SQLite, and PostgreSQL Wallets without a backend
+  skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md

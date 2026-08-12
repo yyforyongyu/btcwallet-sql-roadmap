@@ -14,8 +14,9 @@ a real chain reorganization and remain coherent after reload.
 
 ## Details
 
-- Receive and confirm one transaction in a real SQLite Wallet on a short
-  deterministic chain, then assert the exact synchronized tip and public views.
+- Register the same receive-and-confirm flow for kvdb, SQLite, and PostgreSQL
+  on a short deterministic chain, then assert the exact synchronized tip and
+  public views. Do not skip kvdb inside the shared flow.
 - Create a shallow competing branch that removes the transaction's confirming
   block and let the maintained chain backend deliver the reorganization.
 - Cross only Task 433's exact synchronization boundary, then assert the public
@@ -25,7 +26,6 @@ a real chain reorganization and remain coherent after reload.
 - Keep this to one Wallet and one bounded shallow reorg. Exclude multi-Wallet
   coordination, resumable rescans, bitcoind parity, randomized chains, and
   direct Store assertions.
-- Keep the PR test-only and record exposed production defects separately.
 
 ## Suggested fix
 
@@ -35,8 +35,8 @@ generic polling over wallet-owned state.
 
 ## Verification
 
-- Run the focused SQLite sync-and-rollback scenario.
-- Run it on each supported chain backend and on PostgreSQL after Task 333.
+- Run the focused sync-and-rollback scenario on kvdb, SQLite, and PostgreSQL
+  with each supported chain backend.
 - Verify losing and winning chain state never appear mixed after
   synchronization.
 
@@ -45,7 +45,7 @@ generic polling over wallet-owned state.
 - Public tip, transaction, confirmation, and UTXO views remain mutually
   consistent before and after one reorg and after durable reload.
 - The scenario obeys Task 433's one-shot wallet assertion boundary.
-- The PR is one bounded test-only scenario with no recovery redesign.
+- The shared scenario contains no backend skip branch and no recovery redesign.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md

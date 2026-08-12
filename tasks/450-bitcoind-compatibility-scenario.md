@@ -14,8 +14,9 @@ facts. No current task owns that scenario.
 
 ## Details
 
-- Create and load one real SQLite-backed btcwallet with bitcoind as the chain
-  backend, then generate public btcwallet receiving addresses.
+- Register the same btcwallet flow for kvdb, SQLite, and PostgreSQL with
+  bitcoind as the chain backend, then generate public receiving addresses. Do
+  not skip kvdb inside the shared flow.
 - Fund those addresses from bitcoind, mine blocks, cross Task 433's exact sync
   boundary, and compare height, hash, watched UTXOs, UTXO-sum balance,
   transaction history, confirmations, and mined or unmined state.
@@ -24,9 +25,8 @@ facts. No current task owns that scenario.
 - Compare only facts both systems model equivalently. Do not compare account,
   change, label, or implementation-specific wallet metadata.
 - Keep the initial scenario deterministic. Exclude seeded randomization,
-  fuzzing, reorgs, multi-Wallet behavior, performance claims, and direct SQL
+  fuzzing, reorgs, multi-Wallet behavior, performance claims, and direct Store
   inspection.
-- Keep the PR test-only and record exposed production defects separately.
 
 ## Suggested fix
 
@@ -36,8 +36,8 @@ system's public view. Keep expected ownership in the test fixture.
 
 ## Verification
 
-- Run the focused scenario with `chain=bitcoind` and `db=sqlite`.
-- After Task 333 merges, run the same source with PostgreSQL.
+- Run the focused scenario with `chain=bitcoind` on kvdb, SQLite, and
+  PostgreSQL.
 - Verify comparison failures identify the exact normalized fact and all
   bitcoind, Wallet, Manager, miner, and backend resources stop.
 
@@ -46,7 +46,8 @@ system's public view. Keep expected ownership in the test fixture.
 - btcwallet and bitcoind agree on the deterministic receive and spend history's
   compatible chain-derived facts before and after confirmation.
 - The scenario makes no equivalence claim about wallet-specific metadata.
-- The PR is deterministic, test-only, and is not a fuzz or benchmark target.
+- The shared scenario contains no backend skip branch and remains deterministic
+  and not a fuzz or benchmark target.
 
 [compat]: https://github.com/btcsuite/btcwallet/issues/1250#issuecomment-4563982303
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md

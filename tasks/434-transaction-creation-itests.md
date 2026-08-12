@@ -9,13 +9,15 @@ Dependencies: **None**.
 [Issue #1250][issue1250] assigns Abdullahi the TxCreator integration-test
 lane. `CreateTransaction` coordinates public input selection, fee and change
 handling, wallet state, and returned transaction metadata, but those contracts
-lack focused end-to-end coverage through a real SQL-backed Wallet.
+lack focused end-to-end coverage across real kvdb, SQLite, and PostgreSQL
+Wallets.
 
 ## Details
 
 - Exercise `CreateTransaction` through a real Store-backed Wallet.
-- Require SQLite and register the same cases for PostgreSQL after
-  [Task 333][t333] enables that harness.
+- Register the same public contract for kvdb, SQLite, and PostgreSQL. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover automatic coin selection, caller-selected inputs, transactions with
   and without change, and representative fee and output boundaries.
 - Cover insufficient funds, locked or foreign inputs, invalid outputs, a bad
@@ -25,7 +27,7 @@ lack focused end-to-end coverage through a real SQL-backed Wallet.
   change, watch-delivery, or wrapper behavior owned by Tasks 355–357, 404,
   408, and 425.
 - Exclude UTXO contract tests, publication, transaction reads or labels, PSBT
-  flows, direct Store assertions, RPC, and production fixes.
+  flows, direct Store assertions, RPC, and unrelated production changes.
 
 ## Suggested fix
 
@@ -35,19 +37,16 @@ and inspect only its public result and wallet-visible state.
 
 ## Verification
 
-- Run the focused SQLite TxCreator case selection.
-- After Task 333 merges, run the same registered cases on PostgreSQL.
+- Run the focused TxCreator cases on kvdb, SQLite, and PostgreSQL.
 - Verify every rejection leaves wallet-visible inputs and change state
   unchanged and every path shuts down its Wallet, Manager, miner, and backend.
-- Verify the PR changes only integration-test or narrow harness files.
 
 ## Definition of done
 
 - `CreateTransaction` has representative success, input-selection, change,
-  lifecycle, and stable-error coverage on a real SQLite Wallet.
-- The cases remain backend-neutral for PostgreSQL enablement.
-- The PR is test-only and does not define future transaction behavior.
-- Any exposed production defect is recorded as a separate task.
+  lifecycle, and stable-error coverage on real kvdb, SQLite, and PostgreSQL
+  Wallets.
+- Shared cases contain no backend skip branch.
+- The PR does not define future transaction behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md

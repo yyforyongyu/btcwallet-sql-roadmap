@@ -9,13 +9,14 @@ Dependencies: **None**.
 [Issue #1250][issue1250] assigns Abdullahi the TxWriter integration-test lane.
 `LabelTx` mutates durable public transaction metadata, but its validation,
 missing-transaction, replacement, lifecycle, and reload contracts lack focused
-coverage through a real SQL-backed Wallet.
+coverage through real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Details
 
 - Exercise `LabelTx` through a real Store-backed Wallet.
-- Require SQLite and register the same cases for PostgreSQL after
-  [Task 333][t333] enables that harness.
+- Register the same public contract for kvdb, SQLite, and PostgreSQL. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover a valid label, replacement according to the maintained public
   contract, empty and boundary label inputs, an unknown transaction, and
   stopped Wallet state.
@@ -24,7 +25,7 @@ coverage through a real SQL-backed Wallet.
 - Verify rejected writes do not change the prior public label.
 - Exclude transaction invalidation, creation, publication, unrelated reader
   coverage, direct Store assertions, RPC, deprecated helpers, and production
-  fixes.
+  changes unrelated to the required cases.
 
 ## Suggested fix
 
@@ -34,11 +35,9 @@ public TxReader and TxWriter calls rather than database rows.
 
 ## Verification
 
-- Run the focused SQLite TxWriter case selection.
-- After Task 333 merges, run the same registered cases on PostgreSQL.
+- Run the focused TxWriter cases on kvdb, SQLite, and PostgreSQL.
 - Verify each rejection preserves the previous label and every path releases
   Wallet, Manager, miner, and backend resources.
-- Verify the PR changes only integration-test or narrow harness files.
 
 ## Definition of done
 
@@ -46,8 +45,7 @@ public TxReader and TxWriter calls rather than database rows.
   lifecycle, and durable-reload integration coverage.
 - Accepted labels are observable through public reads after a fresh reopen,
   while rejected labels cause no mutation.
-- The cases use a real SQLite Wallet and remain backend-neutral.
-- Any exposed production defect is recorded separately.
+- Shared cases use real kvdb, SQLite, and PostgreSQL Wallets without a backend
+  skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md

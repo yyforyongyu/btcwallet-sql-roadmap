@@ -9,24 +9,25 @@ Dependencies: **None**.
 [Issue #1250][issue1250] assigns Gustavo the AddressManager integration-test
 lane. `ImportPublicKey`, `ImportTaprootScript`, `ScriptForOutput`, and
 `GetDerivationInfo` share imported ownership and script-resolution state, but
-their public errors and durable reload behavior lack focused real-SQL coverage.
+their public errors and durable reload behavior lack focused real-backend
+coverage across kvdb, SQLite, and PostgreSQL.
 
 ## Details
 
 - Exercise the four public import/script methods through a real Store-backed
   Wallet, using deterministic public keys, Taproot scripts, and outputs.
-- Require SQLite and register one backend-neutral source for PostgreSQL after
-  [Task 333][t333].
+- Register one shared public contract for kvdb, SQLite, and PostgreSQL. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover valid imports, repeated identical imports, malformed or unsupported
   inputs, foreign outputs, stopped or locked states where defined, script
   lookup, and derivation information for derived and imported ownership forms.
 - Reopen after successful imports and prove public script resolution and
   derivation information remain identical without reimport.
 - Keep watch-only policy, Vault ownership, raw-import persistence, and live-watch
-  delivery in their accepted production tasks. An exposed defect becomes a
-  separate task rather than a test-only fix.
+  delivery in their accepted production tasks.
 - Exclude allocation/list APIs, private-key extraction, direct Store reads,
-  RPC, deprecated interfaces, and production behavior changes.
+  RPC, deprecated interfaces, and unrelated production changes.
 
 ## Suggested fix
 
@@ -37,19 +38,18 @@ reload checks.
 
 ## Verification
 
-- Run the focused SQLite AddressManager import/script case selection.
-- After Task 333 merges, run the identical registration on PostgreSQL.
+- Run the focused AddressManager import/script cases on kvdb, SQLite, and
+  PostgreSQL.
 - Verify duplicate and invalid imports leave no partial public ownership and
   every case shuts down wallet, chain, miner, and backend resources.
-- Verify the PR remains limited to integration-test and harness files.
 
 ## Definition of done
 
 - All four import/script APIs have representative success, duplicate, invalid,
   foreign-output, lifecycle, and durable-reload coverage.
 - Public script and derivation results survive a fresh reopen unchanged.
-- Tests use real SQLite storage and remain backend-neutral for PostgreSQL.
-- No policy, Vault, watch delivery, or other production behavior is changed.
+- Tests use real kvdb, SQLite, and PostgreSQL storage, with no backend skip
+  branch in the shared contract.
+- No new policy, Vault, or watch-delivery behavior is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md

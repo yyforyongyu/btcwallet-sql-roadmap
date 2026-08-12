@@ -13,10 +13,11 @@ reviewable real-wallet contract slice.
 
 ## Details
 
-- Exercise the four public allocation and lookup methods through a real
-  SQL-backed Wallet.
-- Require SQLite and register one source for PostgreSQL execution after
-  [Task 333][t333].
+- Exercise the four public allocation and lookup methods through real kvdb,
+  SQLite, and PostgreSQL Wallets.
+- Register one shared public contract for all three database backends. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover supported external and internal address types, unknown accounts or
   addresses, stopped and locked states where defined, oldest-unused behavior,
   stable public metadata, and agreement between point and list results.
@@ -26,7 +27,7 @@ reviewable real-wallet contract slice.
 - Keep unsettled watch-only, key-only, batch-allocation, and live-watch behavior
   in their owning production tasks; do not encode those future contracts here.
 - Exclude import/script APIs, direct Store inspection, RPC, deprecated helpers,
-  and production fixes.
+  and unrelated production changes.
 
 ## Suggested fix
 
@@ -36,19 +37,18 @@ public addresses and chain events, then compare list and point APIs.
 
 ## Verification
 
-- Run the focused SQLite AddressManager allocation/lookup case selection.
-- After Task 333 merges, run the same registration on PostgreSQL.
+- Run the focused AddressManager allocation/lookup cases on kvdb, SQLite, and
+  PostgreSQL.
 - Verify deterministic used/unused transitions, cursor durability, and complete
   cleanup on every failure and cancellation path.
-- Verify the PR changes test and narrowly reusable harness files only.
 
 ## Definition of done
 
 - The four allocation/lookup APIs have representative success, absence,
   lifecycle, address-type, and cross-method consistency coverage.
 - Used state and allocation progress remain correct after durable reopen.
-- Tests use public APIs on a real SQLite Wallet and remain backend-neutral.
-- The task changes no allocation, discovery, or watch behavior.
+- Tests use public APIs on real kvdb, SQLite, and PostgreSQL Wallets, with no
+  backend skip branch in the shared contract.
+- No new allocation, discovery, or watch behavior is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t333]: ../archive/tasks/333-postgres-manager-harness.md

@@ -8,13 +8,15 @@ Dependencies: **[Task 415][t415], [Task 429][t429], [Task 430][t430],
 ## Rationale
 
 [Issue #1250][issue1250] requires broader scenarios after the per-API contract
-layer. The first foundation scenario should prove that one SQL Wallet can
-create an account and address, receive confirmed funds, expose consistent
-account, UTXO, and transaction views, and preserve them through load and reload.
+layer. The first foundation scenario should prove that one Wallet on each
+maintained database can create an account and address, receive confirmed funds,
+expose consistent account, UTXO, and transaction views, and preserve them
+through load and reload.
 
 ## Details
 
-- Create and start one SQLite Wallet through public Manager and Controller APIs.
+- Register the same scenario for kvdb, SQLite, and PostgreSQL through public
+  Manager and Controller APIs, without skipping kvdb inside the shared flow.
 - Create an account and receiving address, fund it from the deterministic miner,
   mine a block, and cross the exact synchronization boundary from Task 433.
 - Assert account and address identity, the received UTXO, transaction history,
@@ -24,7 +26,6 @@ account, UTXO, and transaction views, and preserve them through load and reload.
 - Keep this to one receive-and-reload path. Exclude spending, PSBT, reorg,
   bitcoind parity, multi-Wallet behavior, and duplicate negative matrices owned
   by the component contract tests.
-- Keep the PR test-only and record exposed production defects separately.
 
 ## Suggested fix
 
@@ -34,17 +35,17 @@ UTXO, and transaction fixtures. Use one-shot wallet assertions after
 
 ## Verification
 
-- Run the focused SQLite receive-and-reload scenario.
-- After Task 333 merges, run the same source on PostgreSQL.
+- Run the focused receive-and-reload scenario on kvdb, SQLite, and PostgreSQL.
 - Verify the fresh Manager uses the same durable wallet identity and all
   resources stop on success and failure.
 
 ## Definition of done
 
 - One public flow proves account and address creation, receipt, confirmation,
-  consistent reads, and durable reload on a real SQL Wallet.
+  consistent reads, and durable reload on real kvdb, SQLite, and PostgreSQL
+  Wallets.
 - The scenario reuses contract-layer behavior without duplicating its matrices.
-- The PR is test-only and backend-neutral.
+- The shared scenario contains no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
