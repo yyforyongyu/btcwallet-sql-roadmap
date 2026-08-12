@@ -73,7 +73,7 @@ children cannot wedge. Maintained modern kvdb retains its existing sequential
 subset until Task 353 retires it; no custom, XPub, genesis, watch-delivery, or
 generic reconciliation work is included.
 
-[t332]: 332-watch-only-script-policy.md
+[t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t377]: 377-account-manager-wallet-dto.md
 [t382]: 382-vault-account-derivation.md
 [t388]: 388-runtime-account-xpub-collisions.md

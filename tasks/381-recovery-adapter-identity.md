@@ -46,4 +46,4 @@ portable.
 - Syncer behavior is unchanged for SQL and modern kvdb.
 - No scan algorithm, window, DTO, or public selector behavior is included.
 
-[t360]: 360-document-kvdb-adapter-identity.md
+[t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md

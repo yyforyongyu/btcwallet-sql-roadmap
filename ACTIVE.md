@@ -10,7 +10,6 @@ ownership; only `In progress` means implementation has started.
 
 | Task | Description | Claimant | State | PR |
 | --- | --- | --- | --- | --- |
-| [Task 332][t332] | Define watch-only policy | YY + Gustavo | In progress | [#1305][pr1305], [#1306][pr1306] |
 | [Task 334][t334] | Define shared-chain ownership | YY | Claimed | — |
 | [Task 335][t335] | Validate legacy migration snapshot | — | Unclaimed | — |
 | [Task 339][t339] | Define transaction visibility | — | Unclaimed | — |
@@ -21,7 +20,6 @@ ownership; only `In progress` means implementation has started.
 | [Task 355][t355] | Correct transaction size accounting | — | Unclaimed | — |
 | [Task 357][t357] | Validate transaction amounts | — | Unclaimed | — |
 | [Task 359][t359] | Revalidate database identity | YY | Claimed | — |
-| [Task 360][t360] | Document kvdb adapter identity | YY | Claimed | [#1308][pr1308] |
 | [Task 368][t368] | Serialize Wallet lifecycle | — | Unclaimed | — |
 | [Task 369][t369] | Reject repeated unlocks | — | Unclaimed | — |
 | [Task 378][t378] | Translate account errors | — | Unclaimed | — |
@@ -34,7 +32,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 425][t425] | Isolate transaction authoring | — | Unclaimed | — |
 | [Task 427][t427] | Test Controller credentials | Gustavo | Claimed | — |
 | [Task 428][t428] | Test resync and rescan | Gustavo | Claimed | — |
-| [Task 429][t429] | Test account mutations | Gustavo | In progress | — |
+| [Task 429][t429] | Test account mutations | Gustavo | Claimed | — |
 | [Task 430][t430] | Test account queries | Gustavo | Claimed | — |
 | [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
 | [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
@@ -75,14 +73,11 @@ implementation before every dependency and gate completes.
   in progress at a time.
 
 [pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
-[pr1306]: https://github.com/btcsuite/btcwallet/pull/1306
-[pr1308]: https://github.com/btcsuite/btcwallet/pull/1308
 [pr1313]: https://github.com/btcsuite/btcwallet/pull/1313
 [pr1314]: https://github.com/btcsuite/btcwallet/pull/1314
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
-[t332]: tasks/332-watch-only-script-policy.md
 [t334]: tasks/334-shared-chain-state.md
 [t335]: tasks/335-kvdb-to-sql-migration.md
 [t337]: tasks/337-imported-xpub-derivation.md
@@ -97,7 +92,6 @@ implementation before every dependency and gate completes.
 [t355]: tasks/355-transaction-size-accounting.md
 [t357]: tasks/357-transaction-amount-validation.md
 [t359]: tasks/359-revalidate-database-identity-design.md
-[t360]: tasks/360-document-kvdb-adapter-identity.md
 [t368]: tasks/368-wallet-startup-shutdown.md
 [t369]: tasks/369-repeated-wallet-unlock.md
 [t378]: tasks/378-account-manager-error-boundary.md

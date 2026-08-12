@@ -14,7 +14,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
 - [Task 331](331-manager-wallet-lifecycle.md): fence Manager admission and Store
   closure.
-- [Task 332](332-watch-only-script-policy.md): define watch-only and
   script-import policy.
   support.
 - [Task 340](340-durable-database-identity.md): bind SQL databases to schema and
@@ -48,7 +47,6 @@ Grouping here does not create dependency or scheduling authority.
   atomically.
 - [Task 345](345-durable-watch-registration.md): persist SQL account discovery
   mode.
-- [Task 360](360-document-kvdb-adapter-identity.md): document kvdb adapter
   identity.
 - [Task 361](361-kvdb-imported-xpub-derivation.md): support kvdb imported-XPub
   derivation.

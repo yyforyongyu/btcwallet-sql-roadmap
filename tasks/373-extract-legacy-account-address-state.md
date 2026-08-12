@@ -107,5 +107,5 @@ unrepresentable identity or custody before constructing a destination Store.
 - The PR contains no transaction extraction, SQL mutation, public converter,
   kvdb rotation, wallet splitting, or general Vault redesign.
 
-[t332]: 332-watch-only-script-policy.md
+[t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md

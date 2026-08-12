@@ -55,4 +55,4 @@ identity and request contract so later tasks need no product decision, while
 changing no Go or SQL source.
 
 [t332]: 332-watch-only-script-policy.md
-[t360]: 360-document-kvdb-adapter-identity.md
+[t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md

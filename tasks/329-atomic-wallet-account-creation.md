@@ -102,7 +102,7 @@ runtime assembly and cache publication after the transaction succeeds.
   public API work.
 
 [t330]: 330-duplicate-wallet-create.md
-[t332]: 332-watch-only-script-policy.md
+[t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t337]: 337-imported-xpub-derivation.md
 [t340]: 340-durable-database-identity.md
 [t341]: 341-public-role-contract.md
