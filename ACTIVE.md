@@ -8,47 +8,47 @@ here and archive its task file.
 These Phase 1 tasks are the current development focus. A claim records
 ownership; only `In progress` means implementation has started.
 
-| Task | Description | Claimant | State | PR |
-| --- | --- | --- | --- | --- |
-| [Task 332][t332] | Define watch-only policy | YY + Gustavo | In progress | [#1320][pr1320] |
-| [Task 334][t334] | Define shared-chain ownership | YY | Claimed | — |
-| [Task 335][t335] | Validate legacy migration snapshot | — | Unclaimed | — |
-| [Task 339][t339] | Define transaction visibility | — | Unclaimed | — |
-| [Task 342][t342] | Bound recovery windows | — | Unclaimed | — |
-| [Task 350][t350] | Use native PostgreSQL driver | YY | Claimed | — |
-| [Task 352][t352] | Rotate kvdb passphrases atomically | — | Unclaimed | — |
-| [Task 354][t354] | Define Vault secret ownership | — | Unclaimed | — |
-| [Task 355][t355] | Correct transaction size accounting | — | Unclaimed | — |
-| [Task 357][t357] | Validate transaction amounts | — | Unclaimed | — |
-| [Task 359][t359] | Revalidate database identity | YY | In progress | [#1319][pr1319] |
-| [Task 368][t368] | Serialize Wallet lifecycle | — | Unclaimed | — |
-| [Task 369][t369] | Reject repeated unlocks | — | Unclaimed | — |
-| [Task 378][t378] | Translate account errors | — | Unclaimed | — |
-| [Task 379][t379] | Translate load errors | — | Unclaimed | — |
-| [Task 380][t380] | Translate address lookup errors | — | Unclaimed | — |
-| [Task 400][t400] | Define live-watch semantics | YY | Claimed | — |
-| [Task 416][t416] | Build SQLite benchmark fixtures | YY | Claimed | — |
-| [Task 421][t421] | Reconcile passphrase commits | — | Unclaimed | — |
-| [Task 424][t424] | Define transaction integrity | — | Unclaimed | — |
-| [Task 425][t425] | Isolate transaction authoring | — | Unclaimed | — |
-| [Task 427][t427] | Test Controller credentials | Gustavo | Claimed | — |
-| [Task 428][t428] | Test resync and rescan | Gustavo | Claimed | — |
-| [Task 429][t429] | Test account mutations | Gustavo | Claimed | — |
-| [Task 430][t430] | Test account queries | Gustavo | Claimed | — |
-| [Task 431][t431] | Test address allocation | Gustavo | Claimed | — |
-| [Task 432][t432] | Test address imports | Gustavo | Claimed | — |
-| [Task 433][t433] | Enforce sync test boundary | YY | Claimed | [#1314][pr1314] |
-| [Task 434][t434] | Test transaction creation | Abdullahi | In progress | [#1316][pr1316] |
-| [Task 435][t435] | Test transaction publication | Abdullahi | Claimed | — |
-| [Task 436][t436] | Test transaction reads | Abdullahi | Claimed | — |
-| [Task 437][t437] | Test transaction labels | Abdullahi | Claimed | — |
-| [Task 438][t438] | Test PSBT packet transforms | — | Unclaimed | — |
-| [Task 439][t439] | Test PSBT funding | — | Unclaimed | — |
-| [Task 440][t440] | Test PSBT signing | — | Unclaimed | — |
-| [Task 441][t441] | Test derivation and ECDH | — | Unclaimed | — |
-| [Task 442][t442] | Test public signing | — | Unclaimed | — |
-| [Task 443][t443] | Test unsafe key extraction | — | Unclaimed | — |
-| [Task 451][t451] | Test supported chain releases | — | Unclaimed | — |
+| Task | Description | Claimant | PR |
+| --- | --- | --- | --- |
+| [Task 332][t332] | Define watch-only policy | YY + Gustavo | [#1320][pr1320] |
+| [Task 334][t334] | Define shared-chain ownership | YY | — |
+| [Task 335][t335] | Validate legacy migration snapshot | — | — |
+| [Task 339][t339] | Define transaction visibility | — | — |
+| [Task 342][t342] | Bound recovery windows | — | — |
+| [Task 350][t350] | Use native PostgreSQL driver | YY | — |
+| [Task 352][t352] | Rotate kvdb passphrases atomically | — | — |
+| [Task 354][t354] | Define Vault secret ownership | — | — |
+| [Task 355][t355] | Correct transaction size accounting | — | — |
+| [Task 357][t357] | Validate transaction amounts | — | — |
+| [Task 359][t359] | Revalidate database identity | YY | [#1319][pr1319] |
+| [Task 368][t368] | Serialize Wallet lifecycle | — | — |
+| [Task 369][t369] | Reject repeated unlocks | — | — |
+| [Task 378][t378] | Translate account errors | — | — |
+| [Task 379][t379] | Translate load errors | — | — |
+| [Task 380][t380] | Translate address lookup errors | — | — |
+| [Task 400][t400] | Define live-watch semantics | YY | — |
+| [Task 416][t416] | Build SQLite benchmark fixtures | YY | — |
+| [Task 421][t421] | Reconcile passphrase commits | — | — |
+| [Task 424][t424] | Define transaction integrity | — | — |
+| [Task 425][t425] | Isolate transaction authoring | — | — |
+| [Task 427][t427] | Test Controller credentials | Gustavo | — |
+| [Task 428][t428] | Test resync and rescan | Gustavo | — |
+| [Task 429][t429] | Test account mutations | Gustavo | — |
+| [Task 430][t430] | Test account queries | Gustavo | — |
+| [Task 431][t431] | Test address allocation | Gustavo | — |
+| [Task 432][t432] | Test address imports | Gustavo | — |
+| [Task 433][t433] | Enforce sync test boundary | YY | [#1314][pr1314] |
+| [Task 434][t434] | Test transaction creation | Abdullahi | [#1316][pr1316] |
+| [Task 435][t435] | Test transaction publication | Abdullahi | — |
+| [Task 436][t436] | Test transaction reads | Abdullahi | — |
+| [Task 437][t437] | Test transaction labels | Abdullahi | — |
+| [Task 438][t438] | Test PSBT packet transforms | — | — |
+| [Task 439][t439] | Test PSBT funding | — | — |
+| [Task 440][t440] | Test PSBT signing | — | — |
+| [Task 441][t441] | Test derivation and ECDH | — | — |
+| [Task 442][t442] | Test public signing | — | — |
+| [Task 443][t443] | Test unsafe key extraction | — | — |
+| [Task 451][t451] | Test supported chain releases | — | — |
 
 ## Claimed Tasks
 
