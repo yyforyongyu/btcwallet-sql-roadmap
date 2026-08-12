@@ -18,7 +18,7 @@ as already started or explicitly approved.
 | [Task 339][t339] | Define transaction visibility | — | — |
 | [Task 341][t341] | Define semantic account identity | YY | [#1313][pr1313] |
 | [Task 342][t342] | Bound recovery windows | — | — |
-| [Task 350][t350] | Use native PostgreSQL driver | YY | — |
+| [Task 350][t350] | Use native PostgreSQL driver | YY | [#1321][pr1321] |
 | [Task 352][t352] | Rotate kvdb passphrases atomically | — | — |
 | [Task 355][t355] | Correct transaction size accounting | — | — |
 | [Task 357][t357] | Validate transaction amounts | — | — |
@@ -125,5 +125,6 @@ implementation before every dependency and gate completes.
 [t443]: tasks/443-unsafe-signer-itests.md
 [t451]: tasks/451-chain-version-itest-matrix.md
 [pr1320]: https://github.com/btcsuite/btcwallet/pull/1320
+[pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
 [pr1316]: https://github.com/btcsuite/btcwallet/pull/1316
