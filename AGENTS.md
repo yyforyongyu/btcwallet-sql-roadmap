@@ -5,7 +5,8 @@ This repository contains planning documents, not btcwallet source code.
 ## Sources of truth
 
 - [README.md](README.md) explains how to use the repository.
-- [QUEUE.md](QUEUE.md) owns the dependency phase of every open task.
+- [QUEUE.md](QUEUE.md) owns the dependency phase of every task and
+  its `Status` (`open` or `done`). Completed tasks stay listed.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
 - Individual files under [tasks/](tasks/) own scope and dependencies.
@@ -116,7 +117,17 @@ After the implementation PR merges, use the roadmap update workflow to:
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
    [open task catalog](tasks/README.md); and
-5. refresh the affected phase and downstream phases in
-   [QUEUE.md](QUEUE.md).
+5. in [QUEUE.md](QUEUE.md), set that task's `Status` to `done` — nothing else.
+
+QUEUE.md keeps the row. Do not delete it, do not move it, and do not
+recompute phases on completion: the board is the record of what the work was,
+not just what is left, and a completed task's phase is history. Only the
+`Status` cell and the counts derived from it (the open-task total and each
+phase header) may change.
+
+A task is complete only when **every** PR linked to it has merged. If a
+linked PR is closed unmerged, or cannot be found, the task is not complete —
+task 332 was archived while its work was still open because one of its two
+linked PRs was invisible to the tooling and the other had merged.
 
 Preserve task numbers. Never reuse an archived or superseded number.
