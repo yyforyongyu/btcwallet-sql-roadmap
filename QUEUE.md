@@ -203,6 +203,7 @@ and keep non-task gates inline with their owning row.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
+[t332]: tasks/332-watch-only-script-policy.md
 [t334]: tasks/334-shared-chain-state.md
 [t335]: tasks/335-kvdb-to-sql-migration.md
 [t336]: tasks/336-test-cleanup.md

@@ -10,6 +10,7 @@ ownership; only `In progress` means implementation has started.
 
 | Task | Description | Claimant | State | PR |
 | --- | --- | --- | --- | --- |
+| [Task 332][t332] | Define watch-only policy | YY + Gustavo | In progress | [#1320][pr1320] |
 | [Task 334][t334] | Define shared-chain ownership | YY | Claimed | — |
 | [Task 335][t335] | Validate legacy migration snapshot | — | Unclaimed | — |
 | [Task 339][t339] | Define transaction visibility | — | Unclaimed | — |
@@ -66,7 +67,7 @@ implementation before every dependency and gate completes.
 ## Coordination
 
 - Tasks 332 and 333 are YY's grandfathered parallel in-progress work. Task 332
-  is shared with Gustavo because PR #1305 is stacked on PR #1306.
+  was shared with Gustavo; #1306 has merged and the remaining work is #1320.
 - Task 329 waits for Task 332 and YY's two prerequisite chains:
   `360 → 341 → 337` and `359 → 340 → 345`.
 - After the grandfathered work clears, each developer may have only one task
@@ -78,6 +79,7 @@ implementation before every dependency and gate completes.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
+[t332]: tasks/332-watch-only-script-policy.md
 [t334]: tasks/334-shared-chain-state.md
 [t335]: tasks/335-kvdb-to-sql-migration.md
 [t337]: tasks/337-imported-xpub-derivation.md
@@ -120,3 +122,4 @@ implementation before every dependency and gate completes.
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
 [t451]: tasks/451-chain-version-itest-matrix.md
+[pr1320]: https://github.com/btcsuite/btcwallet/pull/1320

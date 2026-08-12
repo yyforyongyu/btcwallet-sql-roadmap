@@ -66,5 +66,5 @@ its normalized result to the later genesis preparation path.
 - The PR contains no genesis transaction, reconciliation, secret-zeroing, or
   modern-kvdb work.
 
-[t332]: ../archive/tasks/332-watch-only-script-policy.md
+[t332]: 332-watch-only-script-policy.md
 [t341]: 341-public-role-contract.md

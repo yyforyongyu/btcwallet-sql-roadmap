@@ -43,6 +43,6 @@ Every accepted maintained SQL raw import has one
 durable ordered live-watch obligation and no direct or automatic historical
 chain operation.
 
-[t332]: ../archive/tasks/332-watch-only-script-policy.md
+[t332]: 332-watch-only-script-policy.md
 [t364]: 364-durable-watch-registration.md
 [t402]: 402-replay-live-watch-obligations.md

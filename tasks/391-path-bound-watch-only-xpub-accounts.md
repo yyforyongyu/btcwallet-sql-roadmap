@@ -60,7 +60,7 @@ imports remain numberless and no spendable or kvdb path is invented. Ambiguous
 results compare the supplied XPub, declared origin, fingerprint, and provenance
 introduced by this task.
 
-[t332]: ../archive/tasks/332-watch-only-script-policy.md
+[t332]: 332-watch-only-script-policy.md
 [t337]: 337-imported-xpub-derivation.md
 [t387]: 387-account-creation-identity-adr.md
 [t388]: 388-runtime-account-xpub-collisions.md
