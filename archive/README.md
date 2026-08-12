@@ -3,7 +3,7 @@
 This directory preserves planning history for traceability. Its contents are
 reference material, not active instructions. Use the root
 [README.md](../README.md) for navigation, [QUEUE.md](../QUEUE.md) for the
-dependency phase map, and [tasks/](../tasks/) for executable task
+delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History

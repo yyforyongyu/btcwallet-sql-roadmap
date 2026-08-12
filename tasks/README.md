@@ -3,7 +3,7 @@
 The next free task number is **452**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
-[QUEUE.md](../QUEUE.md) owns dependency phases, and
+[QUEUE.md](../QUEUE.md) owns delivery phases, and
 [ACTIVE.md](../ACTIVE.md) owns active tasks, claims, and in-progress PRs.
 Grouping here does not create dependency or scheduling authority.
 
