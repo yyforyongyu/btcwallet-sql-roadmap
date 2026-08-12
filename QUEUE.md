@@ -1,8 +1,7 @@
 # Task dependency phases
 
-The roadmap contains **120 open tasks**. No task in the current Task
-329-and-later series has been completed and archived; older archived files are
-historical evidence and are not part of this map.
+The roadmap contains **120 open tasks**. Completed tasks stay listed with Status `done`; their files live under
+`archive/tasks/`.
 
 Every open task appears exactly once below. Phase 1 contains active tasks with
 no open-task dependency. Every later phase is
@@ -18,11 +17,12 @@ gates.
 in-progress PRs, and coordination state.
 
 
-## Phase 1 — 41 tasks
+## Phase 1 — 41 tasks · 3 done
 
 | Task | Status | Component | Outcome | Direct dependencies |
 | --- | --- | --- | --- | --- |
 | [Task 332][t332] | open | Manager, AccountManager, and AddressManager | Define watch-only and script-import policy | — |
+| [Task 333][t333] | done | Manager and integration-test harness | Add PostgreSQL Manager and harness support | — |
 | [Task 334][t334] | open | SQL wallet architecture documentation | Supersede ADR 0002 with SQL shared-chain ownership | — |
 | [Task 335][t335] | open | Legacy migration source snapshot | Validate an immutable legacy wallet source | — |
 | [Task 339][t339] | open | TxReader | Define public transaction visibility and status | — |
@@ -34,6 +34,7 @@ in-progress PRs, and coordination state.
 | [Task 355][t355] | open | TxCreator and the txsizes module | Correct transaction size accounting | — |
 | [Task 357][t357] | open | txauthor and TxCreator | Validate transaction output and fee arithmetic | — |
 | [Task 359][t359] | open | Manager and SQL Store design | Revalidate database identity design | — |
+| [Task 360][t360] | done | ADR 0013 and the modern kvdb adapter contract | Document kvdb adapter identity | — |
 | [Task 368][t368] | open | Controller | Serialize Wallet startup and shutdown | — |
 | [Task 369][t369] | open | Controller | Reject repeated Wallet unlocks without resetting timeout | — |
 | [Task 378][t378] | open | AccountManager public error boundary | Translate AccountManager backend errors | — |
@@ -41,6 +42,7 @@ in-progress PRs, and coordination state.
 | [Task 380][t380] | open | AddressManager GetAddressInfo error boundary | Translate address lookup errors | — |
 | [Task 381][t381] | open | RecoveryState public contract and internal Syncer adapter | Hide recovery adapter identity | — |
 | [Task 400][t400] | open | ADR 0004 and ADR 0005 synchronization contract | Separate live watches from historical recovery | — |
+| [Task 415][t415] | done | UtxoManager integration tests | Cover public UTXO contracts end to end | — |
 | [Task 416][t416] | open | wallet benchmark infrastructure | Build reusable SQLite benchmark fixtures | — |
 | [Task 421][t421] | open | WalletVault and SQL wallet-secret persistence | Reconcile SQL passphrase commits | — |
 | [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Define transaction and UTXO integrity ownership | — |
@@ -320,3 +322,6 @@ and keep non-task gates inline with their owning row.
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
 [t450]: tasks/450-bitcoind-compatibility-scenario.md
 [t451]: tasks/451-chain-version-itest-matrix.md
+[t333]: archive/tasks/333-postgres-manager-harness.md
+[t360]: archive/tasks/360-document-kvdb-adapter-identity.md
+[t415]: archive/tasks/415-utxo-public-integration-tests.md
