@@ -26,8 +26,8 @@ ownership; only `In progress` means implementation has started.
 | [Task 378][t378] | Translate account errors | — | Unclaimed | — |
 | [Task 379][t379] | Translate load errors | — | Unclaimed | — |
 | [Task 380][t380] | Translate address lookup errors | — | Unclaimed | — |
-| [Task 400][t400] | Define live-watch semantics | — | Unclaimed | — |
-| [Task 416][t416] | Build SQLite benchmark fixtures | — | Unclaimed | — |
+| [Task 400][t400] | Define live-watch semantics | YY | Claimed | — |
+| [Task 416][t416] | Build SQLite benchmark fixtures | YY | Claimed | — |
 | [Task 421][t421] | Reconcile passphrase commits | — | Unclaimed | — |
 | [Task 424][t424] | Define transaction integrity | — | Unclaimed | — |
 | [Task 425][t425] | Isolate transaction authoring | — | Unclaimed | — |
