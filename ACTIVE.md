@@ -100,7 +100,7 @@ not authorize implementation before every dependency and gate completes.
 [t380]: tasks/380-address-lookup-error-boundary.md
 [t381]: tasks/381-recovery-adapter-identity.md
 [t400]: tasks/400-live-watch-semantics-adr.md
-[t416]: tasks/416-sqlite-benchmark-fixtures.md
+[t416]: tasks/416-database-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t425]: tasks/425-separate-transaction-authoring-wrappers.md

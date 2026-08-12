@@ -296,11 +296,11 @@ phase. Every open task must remain listed exactly once.
 [t412]: tasks/412-transaction-publication-admission.md
 [t413]: tasks/413-utxo-spend-identity.md
 [t414]: tasks/414-utxo-amount-bounds.md
-[t416]: tasks/416-sqlite-benchmark-fixtures.md
-[t417]: tasks/417-sqlite-start-to-synced-benchmark.md
-[t418]: tasks/418-sqlite-list-unspent-benchmark.md
-[t419]: tasks/419-sqlite-address-read-benchmark.md
-[t420]: tasks/420-sqlite-transaction-read-benchmark.md
+[t416]: tasks/416-database-benchmark-fixtures.md
+[t417]: tasks/417-start-to-synced-benchmark.md
+[t418]: tasks/418-list-unspent-benchmark.md
+[t419]: tasks/419-address-read-benchmark.md
+[t420]: tasks/420-transaction-read-benchmark.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t422]: tasks/422-manager-load-cancellation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
@@ -325,7 +325,7 @@ phase. Every open task must remain listed exactly once.
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
 [t444]: tasks/444-wallet-receive-reload-scenario.md
-[t445]: tasks/445-sql-account-signing-scenario.md
+[t445]: tasks/445-account-signing-scenario.md
 [t446]: tasks/446-transaction-spend-publish-scenario.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t448]: tasks/448-sync-rollback-scenario.md

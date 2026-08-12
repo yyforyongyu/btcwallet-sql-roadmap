@@ -65,5 +65,5 @@ two public API trees. Do not replace or rename existing comparison benchmarks.
 - No tuning, mutation path, or P1 work is included.
 - The PR contains only the coherent AddressManager read benchmark outcome.
 
-[t416]: 416-sqlite-benchmark-fixtures.md
+[t416]: 416-database-benchmark-fixtures.md
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

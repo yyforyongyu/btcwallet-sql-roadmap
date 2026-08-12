@@ -136,4 +136,4 @@ consumer uses the same lifecycle and validation rules.
 - The PR contains only reusable three-backend benchmark infrastructure.
 
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251
-[t417]: 417-sqlite-start-to-synced-benchmark.md
+[t417]: 417-start-to-synced-benchmark.md

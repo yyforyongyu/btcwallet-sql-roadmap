@@ -200,7 +200,7 @@ that structural exclusion explicitly.
 
 - [Task 444](444-wallet-receive-reload-scenario.md): cover wallet receipt and
   durable reload.
-- [Task 445](445-sql-account-signing-scenario.md): cover account derivation and
+- [Task 445](445-account-signing-scenario.md): cover account derivation and
   signing.
 - [Task 446](446-transaction-spend-publish-scenario.md): cover transaction
   creation and publication.
@@ -254,15 +254,15 @@ that structural exclusion explicitly.
 Each public benchmark uses the same logical profiles on kvdb, SQLite, and
 PostgreSQL so regressions remain attributable within each backend.
 
-- [Task 416](416-sqlite-benchmark-fixtures.md): build reusable database
+- [Task 416](416-database-benchmark-fixtures.md): build reusable database
   benchmark fixtures.
-- [Task 417](417-sqlite-start-to-synced-benchmark.md): measure start-to-synced
+- [Task 417](417-start-to-synced-benchmark.md): measure start-to-synced
   performance.
-- [Task 418](418-sqlite-list-unspent-benchmark.md): measure ListUnspent
+- [Task 418](418-list-unspent-benchmark.md): measure ListUnspent
   performance.
-- [Task 419](419-sqlite-address-read-benchmark.md): measure address-read
+- [Task 419](419-address-read-benchmark.md): measure address-read
   performance.
-- [Task 420](420-sqlite-transaction-read-benchmark.md): measure transaction-read
+- [Task 420](420-transaction-read-benchmark.md): measure transaction-read
   performance.
 
 ## Cleanup

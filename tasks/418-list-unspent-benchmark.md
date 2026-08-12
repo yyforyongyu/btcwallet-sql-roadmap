@@ -72,5 +72,5 @@ cold and warm boundaries.
 - No tuning, mutation benchmark, or P1 work is included.
 - The PR contains only the ListUnspent measurement outcome.
 
-[t416]: 416-sqlite-benchmark-fixtures.md
+[t416]: 416-database-benchmark-fixtures.md
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

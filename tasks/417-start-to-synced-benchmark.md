@@ -77,5 +77,5 @@ benchmarks unchanged.
   included.
 - The PR contains only the start-to-synced benchmark outcome.
 
-[t416]: 416-sqlite-benchmark-fixtures.md
+[t416]: 416-database-benchmark-fixtures.md
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251
