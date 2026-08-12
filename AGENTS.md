@@ -24,9 +24,10 @@ for live state.
 Use these terms precisely:
 
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
-  Include every claimed Phase 1 task, every open Phase 1 task that is not a
-  hard dependency of another open task, and explicitly already-started work
-  from later phases. Active does not imply dependency-complete.
+  Include every claimed Phase 1 task, every open Phase 1 task with no open hard
+  dependencies, and assigned later-phase work owned by developers other than
+  YY. Park YY's later-phase assignments under `Claimed Tasks`. Active does not
+  imply dependency-complete.
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
 - **In progress** means implementation has started. Represent it with both a
