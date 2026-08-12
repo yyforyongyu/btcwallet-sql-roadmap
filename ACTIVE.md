@@ -5,19 +5,21 @@ here and archive its task file.
 
 ## Active Tasks
 
-These Phase 1 tasks are the current development focus. A claim records
-ownership; only `In progress` means implementation has started.
+Dependency-complete Phase 1 wallet gaps and Phase 2 tests and benchmarks are
+the current development focus and may proceed in parallel. No claimant means
+unclaimed, a claimant without a PR means claimed, and a claimant with a PR
+means in progress. Later delivery phases remain deferred unless recorded here
+as already started or explicitly approved.
 
 | Task | Description | Claimant | PR |
 | --- | --- | --- | --- |
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | [#1320][pr1320] |
 | [Task 334][t334] | Define shared-chain ownership | YY | — |
-| [Task 335][t335] | Validate legacy migration snapshot | — | — |
 | [Task 339][t339] | Define transaction visibility | — | — |
+| [Task 341][t341] | Define semantic account identity | YY | [#1313][pr1313] |
 | [Task 342][t342] | Bound recovery windows | — | — |
 | [Task 350][t350] | Use native PostgreSQL driver | YY | — |
 | [Task 352][t352] | Rotate kvdb passphrases atomically | — | — |
-| [Task 354][t354] | Define Vault secret ownership | — | — |
 | [Task 355][t355] | Correct transaction size accounting | — | — |
 | [Task 357][t357] | Validate transaction amounts | — | — |
 | [Task 359][t359] | Revalidate database identity | YY | [#1319][pr1319] |
@@ -26,6 +28,7 @@ ownership; only `In progress` means implementation has started.
 | [Task 378][t378] | Translate account errors | — | — |
 | [Task 379][t379] | Translate load errors | — | — |
 | [Task 380][t380] | Translate address lookup errors | — | — |
+| [Task 381][t381] | Hide recovery adapter identity | — | — |
 | [Task 400][t400] | Define live-watch semantics | YY | — |
 | [Task 416][t416] | Build SQLite benchmark fixtures | YY | — |
 | [Task 421][t421] | Reconcile passphrase commits | — | — |
@@ -57,21 +60,21 @@ implementation before every dependency and gate completes.
 
 | Task | Description | Phase | Claimant | PR |
 | --- | --- | ---: | --- | --- |
-| [Task 331][t331] | Fence Manager lifecycle | 2 | YY | — |
-| [Task 340][t340] | Persist database identity | 2 | YY | — |
-| [Task 341][t341] | Define semantic account identity | 2 | YY | [#1313][pr1313] |
-| [Task 337][t337] | Restore imported-XPub derivation | 3 | YY | — |
-| [Task 345][t345] | Persist account discovery mode | 3 | YY | — |
-| [Task 329][t329] | Commit SQL genesis atomically | 4 | YY | — |
+| [Task 331][t331] | Fence Manager lifecycle | 1 | YY | — |
+| [Task 340][t340] | Persist database identity | 1 | YY | — |
+| [Task 337][t337] | Restore imported-XPub derivation | 1 | YY | — |
+| [Task 345][t345] | Persist account discovery mode | 1 | YY | — |
+| [Task 329][t329] | Commit SQL genesis atomically | 1 | YY | — |
 
 ## Coordination
 
-- Tasks 332 and 333 are YY's grandfathered parallel in-progress work. Task 332
-  was shared with Gustavo; #1306 has merged and the remaining work is #1320.
+- Tasks 332, 341, 359, and 433 are YY's grandfathered parallel in-progress
+  work. Task 332 was shared with Gustavo; #1306 has merged and the remaining
+  work is #1320. YY starts no additional task until only one remains in
+  progress.
 - Task 329 waits for Task 332 and YY's two prerequisite chains:
   `360 → 341 → 337` and `359 → 340 → 345`.
-- After the grandfathered work clears, each developer may have only one task
-  in progress at a time.
+- Every other developer may have only one task in progress at a time.
 
 [pr1305]: https://github.com/btcsuite/btcwallet/pull/1305
 [pr1313]: https://github.com/btcsuite/btcwallet/pull/1313
@@ -81,7 +84,6 @@ implementation before every dependency and gate completes.
 [t331]: tasks/331-manager-wallet-lifecycle.md
 [t332]: tasks/332-watch-only-script-policy.md
 [t334]: tasks/334-shared-chain-state.md
-[t335]: tasks/335-kvdb-to-sql-migration.md
 [t337]: tasks/337-imported-xpub-derivation.md
 [t339]: tasks/339-transaction-visibility.md
 [t340]: tasks/340-durable-database-identity.md
@@ -90,7 +92,6 @@ implementation before every dependency and gate completes.
 [t345]: tasks/345-durable-watch-registration.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t352]: tasks/352-kvdb-combined-passphrase-rotation.md
-[t354]: tasks/354-vault-owned-secret-resolution.md
 [t355]: tasks/355-transaction-size-accounting.md
 [t357]: tasks/357-transaction-amount-validation.md
 [t359]: tasks/359-revalidate-database-identity-design.md
@@ -99,6 +100,7 @@ implementation before every dependency and gate completes.
 [t378]: tasks/378-account-manager-error-boundary.md
 [t379]: tasks/379-manager-load-error-boundary.md
 [t380]: tasks/380-address-lookup-error-boundary.md
+[t381]: tasks/381-recovery-adapter-identity.md
 [t400]: tasks/400-live-watch-semantics-adr.md
 [t416]: tasks/416-sqlite-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md

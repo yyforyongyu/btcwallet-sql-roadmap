@@ -5,7 +5,7 @@ This repository contains planning documents, not btcwallet source code.
 ## Sources of truth
 
 - [README.md](README.md) explains how to use the repository.
-- [QUEUE.md](QUEUE.md) owns the dependency phase of every task and
+- [QUEUE.md](QUEUE.md) owns the delivery phase of every task and
   its `Status` (`open` or `done`). Completed tasks stay listed.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
@@ -14,20 +14,21 @@ This repository contains planning documents, not btcwallet source code.
 - [TASK_TEMPLATE.md](TASK_TEMPLATE.md) owns the required task shape.
 - [archive/](archive/) is historical evidence, not current instruction.
 
-Do not copy the complete dependency graph into README or ACTIVE. QUEUE may
-show the complete derived phase map, but task files remain the only authority
-for dependency edges and ACTIVE remains the only authority for live state.
+Do not copy the complete dependency graph into README or ACTIVE. QUEUE shows
+every task's delivery phase and open dependencies, but task files remain the
+only authority for all dependency edges and ACTIVE remains the only authority
+for live state.
 
 ## Activity, claiming, and dependencies
 
 Use these terms precisely:
 
-- **Active** means current development focus. Every Phase 1 task is active,
-  whether claimed or unclaimed.
+- **Active** means dependency-complete work in the current development focus,
+  or already-started work retained explicitly in [ACTIVE.md](ACTIVE.md).
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
-- **In progress** means implementation has started. Mark an active task in
-  progress before implementation and add its PR when opened.
+- **In progress** means an active row has both a claimant and a linked PR. Add
+  the PR before implementation; there is no separate state field to update.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
@@ -37,9 +38,10 @@ parallel. Implementation may start only after every hard dependency and gate
 is complete; a claim, active status, review approval, or passing CI is not
 completion.
 
-Each developer may have only one task in progress at a time. Archive the task
-after its implementation PR merges. Additional claims do not authorize
-parallel implementation by the same developer.
+Each developer may have only one task in progress at a time unless an explicit
+temporary exception is recorded under ACTIVE's Coordination section. Archive
+the task after its implementation PR merges. Additional claims do not
+authorize parallel implementation by the same developer.
 
 Do not use stacked implementation PRs to bypass dependency completion. YY must
 approve an exception explicitly, the prerequisite contract must be frozen, and
@@ -90,8 +92,8 @@ explicit exclusions, `Suggested fix` for the smallest likely implementation,
 completion.
 
 Link every dependency to its task file. Add the task to
-[tasks/README.md](tasks/README.md) and add it exactly once to the phase map in
-[QUEUE.md](QUEUE.md).
+[tasks/README.md](tasks/README.md) and add it exactly once to the delivery phase
+map in [QUEUE.md](QUEUE.md).
 
 Do not add status or claimant fields to a task. Before a task is claimed or
 materially revised, bring it to this format and split it if it fails the
@@ -117,13 +119,17 @@ After the implementation PR merges, use the roadmap update workflow to:
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
    [open task catalog](tasks/README.md); and
-5. in [QUEUE.md](QUEUE.md), set that task's `Status` to `done` — nothing else.
+5. in [QUEUE.md](QUEUE.md), set that task's `Status` to `done`, refresh the
+   open/done counts, and remove its number from remaining `Open dependencies`
+   cells.
 
-QUEUE.md keeps the row. Do not delete it, do not move it, and do not
-recompute phases on completion: the board is the record of what the work was,
-not just what is left, and a completed task's phase is history. Only the
-`Status` cell and the counts derived from it (the open-task total and each
-phase header) may change.
+QUEUE.md keeps the row. Do not delete it or move it on completion: the board is
+the record of what the work was, not just what is left, and a completed task's
+delivery phase is history. Change its `Status`, refresh the counts, and remove
+its number from remaining `Open dependencies` cells; preserve the completed
+edge in each owning task file. Moving an open task between delivery phases
+requires an explicit roadmap-priority decision; it is never inferred from
+dependency completion.
 
 A task is complete only when **every** PR linked to it has merged. If a
 linked PR is closed unmerged, or cannot be accounted for, the task is not
