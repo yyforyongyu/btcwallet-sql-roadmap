@@ -126,8 +126,7 @@ not just what is left, and a completed task's phase is history. Only the
 phase header) may change.
 
 A task is complete only when **every** PR linked to it has merged. If a
-linked PR is closed unmerged, or cannot be found, the task is not complete —
-task 332 was archived while its work was still open because one of its two
-linked PRs was invisible to the tooling and the other had merged.
+linked PR is closed unmerged, or cannot be accounted for, the task is not
+complete.
 
 Preserve task numbers. Never reuse an archived or superseded number.
