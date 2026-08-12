@@ -9,10 +9,9 @@ remain the authority for every hard dependency edge and implementation gate.
 A task never becomes implementable merely because it is listed in an earlier
 phase.
 
-Phases 1 and 2 form the current delivery horizon and may proceed in parallel.
-Do not deliberately start Phase 3 or later work while dependency-complete work
-remains in that horizon, except for already-started work recorded in
-[ACTIVE.md](ACTIVE.md) or an explicit owner-approved exception.
+Phase 1 is the current delivery focus. Do not deliberately start Phase 2 or
+later work while Phase 1 remains current, except for already-started work
+recorded in [ACTIVE.md](ACTIVE.md) or an explicit owner-approved exception.
 
 `Open dependencies` lists only hard dependencies whose status is `open`.
 Completed dependency edges remain recorded in the owning task file and are
