@@ -5,23 +5,18 @@ here and archive its task file.
 
 ## Active Tasks
 
-Phase 1 is the current development focus. This list contains every claimed
-Phase 1 task, every open Phase 1 task with no open hard dependencies, and
-explicitly assigned work from other developers in later phases. YY's
-later-phase work is parked under `Claimed Tasks`. A row may still be blocked;
-its task file remains authoritative for implementation gates.
+Phase 1 is the current development focus. This list contains every open Phase 1
+task with no open hard dependencies and explicitly assigned work from other
+developers in later phases. Claimed Phase 1 tasks with open hard dependencies
+and YY's later-phase work are parked under `Claimed Tasks`.
 
 | Task | Description | Claimant | PR |
 | --- | --- | --- | --- |
-| [Task 329][t329] | Commit SQL genesis atomically | YY | — |
-| [Task 331][t331] | Fence Manager lifecycle | YY | — |
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | [#1320][pr1320] |
 | [Task 334][t334] | Define shared-chain ownership | YY | — |
 | [Task 337][t337] | Restore imported-XPub derivation | YY | — |
 | [Task 339][t339] | Define transaction visibility | — | — |
-| [Task 340][t340] | Persist database identity | YY | — |
 | [Task 342][t342] | Bound recovery windows | — | — |
-| [Task 345][t345] | Persist account discovery mode | YY | — |
 | [Task 350][t350] | Use native PostgreSQL driver | YY | [#1321][pr1321] |
 | [Task 352][t352] | Rotate kvdb passphrases atomically | — | — |
 | [Task 355][t355] | Correct transaction size accounting | — | — |
@@ -29,6 +24,7 @@ its task file remains authoritative for implementation gates.
 | [Task 359][t359] | Revalidate database identity | YY | [#1319][pr1319] |
 | [Task 368][t368] | Serialize Wallet lifecycle | — | — |
 | [Task 369][t369] | Reject repeated unlocks | — | — |
+| [Task 377][t377] | Return wallet-owned accounts | — | — |
 | [Task 378][t378] | Translate account errors | — | — |
 | [Task 379][t379] | Translate load errors | — | — |
 | [Task 380][t380] | Translate address lookup errors | — | — |
@@ -55,21 +51,23 @@ not authorize implementation before every dependency and gate completes.
 
 | Task | Description | Phase | Claimant | PR |
 | --- | --- | ---: | --- | --- |
+| [Task 329][t329] | Commit SQL genesis atomically | 1 | YY | — |
+| [Task 331][t331] | Fence Manager lifecycle | 1 | YY | — |
+| [Task 340][t340] | Persist database identity | 1 | YY | — |
+| [Task 345][t345] | Persist account discovery mode | 1 | YY | — |
 | [Task 416][t416] | Build database benchmark fixtures | 2 | YY | — |
 
 ## Coordination
 
-- Tasks 332, 341, 350, 359, and 433 are YY's grandfathered parallel
+- Tasks 332, 350, 359, and 400 are YY's grandfathered parallel
   in-progress work. Task 332 was shared with Gustavo; #1306 has merged and the
-  remaining work is #1320. Task 433 remains parked because it is Phase 2. YY
-  starts no additional task until only one remains in progress.
+  remaining work is #1320. YY starts no additional task until only one remains
+  in progress.
 - Gustavo's Phase 2 series, Tasks 427–432, and Abdullahi's Phase 2 series,
   Tasks 434–437, already started and remain active as explicit series
   exceptions. Do not add work to either series before it clears.
-- YY's Phase 2 Tasks 416 and 433 remain parked; #1314 stays linked to preserve
-  Task 433's existing implementation state.
-- Task 329 waits for Task 332 and YY's two prerequisite chains:
-  `360 → 341 → 337` and `359 → 340 → 345`.
+- YY's blocked Phase 1 Tasks 329, 331, 340, and 345 and Phase 2 Task 416 remain
+  parked.
 - Outside the exceptions above, each developer may have only one task in
   progress at a time.
 
@@ -90,6 +88,7 @@ not authorize implementation before every dependency and gate completes.
 [t359]: tasks/359-revalidate-database-identity-design.md
 [t368]: tasks/368-wallet-startup-shutdown.md
 [t369]: tasks/369-repeated-wallet-unlock.md
+[t377]: tasks/377-account-manager-wallet-dto.md
 [t378]: tasks/378-account-manager-error-boundary.md
 [t379]: tasks/379-manager-load-error-boundary.md
 [t380]: tasks/380-address-lookup-error-boundary.md
