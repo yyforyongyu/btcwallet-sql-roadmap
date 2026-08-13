@@ -5,10 +5,10 @@ here and archive its task file.
 
 ## Active Tasks
 
-Phase 1 is the current development focus. This list contains every open Phase 1
-task with no open hard dependencies and explicitly assigned work from other
-developers in later phases. Claimed Phase 1 tasks with open hard dependencies
-and YY's later-phase work are parked under `Claimed Tasks`.
+Phase 1 is the current development focus. Every task in this list has no open
+hard dependencies. It contains all dependency-ready Phase 1 tasks and
+dependency-ready later-phase work assigned to developers other than YY. Park
+blocked claims and YY's later-phase work under `Claimed Tasks`.
 
 | Task | Description | Claimant | PR |
 | --- | --- | --- | --- |

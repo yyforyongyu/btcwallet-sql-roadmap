@@ -24,10 +24,10 @@ authority for live state.
 Use these terms precisely:
 
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
-  Include every open Phase 1 task with no open hard dependencies and assigned
-  later-phase work owned by developers other than YY. Park claimed Phase 1
-  tasks with open hard dependencies and YY's later-phase assignments under
-  `Claimed Tasks`.
+  Every active task must have no open hard dependencies. Include every such
+  Phase 1 task and dependency-ready later-phase work assigned to developers
+  other than YY. Park every claimed task with open hard dependencies and YY's
+  later-phase assignments under `Claimed Tasks`.
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
 - **In progress** means implementation has started. Represent it with both a
