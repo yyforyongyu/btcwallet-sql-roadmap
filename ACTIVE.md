@@ -22,7 +22,7 @@ and YY's later-phase work are parked under `Claimed Tasks`.
 | [Task 355][t355] | Correct transaction size accounting | — | — |
 | [Task 357][t357] | Validate transaction amounts | — | — |
 | [Task 359][t359] | Revalidate database identity | YY | [#1319][pr1319] |
-| [Task 368][t368] | Serialize Wallet lifecycle | — | — |
+| [Task 368][t368] | Serialize Wallet lifecycle | YY | — |
 | [Task 369][t369] | Reject repeated unlocks | — | — |
 | [Task 377][t377] | Return wallet-owned accounts | — | — |
 | [Task 378][t378] | Translate account errors | — | — |

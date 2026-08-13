@@ -37,11 +37,13 @@ Use these terms precisely:
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
-Claiming one task never claims its dependencies, directly or transitively.
-Different developers may claim independent prerequisites and complete them in
-parallel. Implementation may start only after every hard dependency and gate
-is complete; a claim, active status, review approval, or passing CI is not
-completion.
+When claiming a task with open hard dependencies, assign every unclaimed task
+in its full transitive open dependency chain at the same time. Use the
+dependent task's claimant by default; an existing or explicitly coordinated
+different claimant may remain. Chain assignment does not make a prerequisite
+active or in progress. Implementation may start only after every hard
+dependency and gate is complete; a claim, active status, review approval, or
+passing CI is not completion.
 
 Each developer may have only one task in progress at a time unless an explicit
 temporary exception is recorded under ACTIVE's Coordination section. Archive
