@@ -14,7 +14,7 @@ blocked claims and YY's later-phase work under `Claimed Tasks`.
 | --- | --- | --- | --- |
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | [#1320][pr1320] |
 | [Task 334][t334] | Define shared-chain ownership | YY | [#1323][pr1323] |
-| [Task 337][t337] | Restore imported-XPub derivation | YY | — |
+| [Task 337][t337] | Restore imported-XPub derivation | YY | [#1324][pr1324] |
 | [Task 339][t339] | Define transaction visibility | — | — |
 | [Task 342][t342] | Bound recovery windows | — | — |
 | [Task 350][t350] | Use native PostgreSQL driver | YY | [#1321][pr1321] |
@@ -114,3 +114,4 @@ not authorize implementation before every dependency and gate completes.
 [pr1316]: https://github.com/btcsuite/btcwallet/pull/1316
 [pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
+[pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
