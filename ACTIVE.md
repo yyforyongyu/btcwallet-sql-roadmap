@@ -33,7 +33,7 @@ its task file remains authoritative for implementation gates.
 | [Task 379][t379] | Translate load errors | — | — |
 | [Task 380][t380] | Translate address lookup errors | — | — |
 | [Task 381][t381] | Hide recovery adapter identity | — | — |
-| [Task 400][t400] | Define live-watch semantics | YY | — |
+| [Task 400][t400] | Define live-watch semantics | YY | [#1322][pr1322] |
 | [Task 421][t421] | Reconcile passphrase commits | — | — |
 | [Task 424][t424] | Define transaction integrity | — | — |
 | [Task 425][t425] | Isolate transaction authoring | — | — |
@@ -113,3 +113,4 @@ not authorize implementation before every dependency and gate completes.
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
 [pr1316]: https://github.com/btcsuite/btcwallet/pull/1316
+[pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
