@@ -5,8 +5,8 @@ This repository contains planning documents, not btcwallet source code.
 ## Sources of truth
 
 - [README.md](README.md) explains how to use the repository.
-- [QUEUE.md](QUEUE.md) owns the delivery phase of every task and
-  its `Status` (`open` or `done`). Completed tasks stay listed.
+- [QUEUE.md](QUEUE.md) owns each roadmap task's delivery phase and status by
+  placing open work in a phase table and completed work in `Done`.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
 - Individual files under [tasks/](tasks/) own scope and dependencies.
@@ -15,19 +15,19 @@ This repository contains planning documents, not btcwallet source code.
 - [archive/](archive/) is historical evidence, not current instruction.
 
 Do not copy the complete dependency graph into README or ACTIVE. QUEUE shows
-every task's delivery phase and open dependencies, but task files remain the
-only authority for all dependency edges and ACTIVE remains the only authority
-for live state.
+every roadmap task's delivery phase and open dependencies, but task files
+remain the only authority for all dependency edges and ACTIVE remains the only
+authority for live state.
 
 ## Activity, claiming, and dependencies
 
 Use these terms precisely:
 
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
-  Include every claimed Phase 1 task, every open Phase 1 task with no open hard
-  dependencies, and assigned later-phase work owned by developers other than
-  YY. Park YY's later-phase assignments under `Claimed Tasks`. Active does not
-  imply dependency-complete.
+  Include every open Phase 1 task with no open hard dependencies and assigned
+  later-phase work owned by developers other than YY. Park claimed Phase 1
+  tasks with open hard dependencies and YY's later-phase assignments under
+  `Claimed Tasks`.
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
 - **In progress** means implementation has started. Represent it with both a
@@ -138,17 +138,14 @@ After the implementation PR merges, use the roadmap update workflow to:
 3. update links from remaining dependents to the archived task;
 4. update [archive/README.md](archive/README.md) and the active
    [open task catalog](tasks/README.md); and
-5. in [QUEUE.md](QUEUE.md), set that task's `Status` to `done`, refresh the
-   open/done counts, and remove its number from remaining `Open dependencies`
-   cells.
+5. in [QUEUE.md](QUEUE.md), move that task's row from its phase table to
+   `Done`, preserve its phase there, refresh the counts, and remove its number
+   from remaining `Open dependencies` cells.
 
-QUEUE.md keeps the row. Do not delete it or move it on completion: the board is
-the record of what the work was, not just what is left, and a completed task's
-delivery phase is history. Change its `Status`, refresh the counts, and remove
-its number from remaining `Open dependencies` cells; preserve the completed
-edge in each owning task file. Moving an open task between delivery phases
-requires an explicit roadmap-priority decision; it is never inferred from
-dependency completion.
+QUEUE.md keeps completed roadmap tasks in `Done` so their original delivery
+phase remains visible. Preserve the completed edge in each owning task file.
+Moving an open task between delivery phases requires an explicit
+roadmap-priority decision; it is never inferred from dependency completion.
 
 A task is complete only when **every** PR linked to it has merged. If a
 linked PR is closed unmerged, or cannot be accounted for, the task is not
