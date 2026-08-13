@@ -13,7 +13,7 @@ and YY's later-phase work are parked under `Claimed Tasks`.
 | Task | Description | Claimant | PR |
 | --- | --- | --- | --- |
 | [Task 332][t332] | Define watch-only policy | YY + Gustavo | [#1320][pr1320] |
-| [Task 334][t334] | Define shared-chain ownership | YY | — |
+| [Task 334][t334] | Define shared-chain ownership | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | YY | — |
 | [Task 339][t339] | Define transaction visibility | — | — |
 | [Task 342][t342] | Bound recovery windows | — | — |
@@ -113,3 +113,4 @@ not authorize implementation before every dependency and gate completes.
 [pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
 [pr1316]: https://github.com/btcsuite/btcwallet/pull/1316
 [pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
+[pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
