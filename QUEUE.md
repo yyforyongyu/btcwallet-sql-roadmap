@@ -21,9 +21,9 @@ The delivery stages are:
 
 1. known wallet gaps and bug fixes;
 2. integration tests and benchmarks;
-3. Signer and Vault hardening;
-4. integration with lnd; and
-5. legacy migration and kvdb retirement.
+3. integration with lnd;
+4. legacy migration and kvdb retirement; and
+5. Signer and Vault hardening.
 
 [ACTIVE.md](ACTIVE.md) separately owns the current focus, claims, in-progress
 PRs, and coordination.
@@ -140,23 +140,7 @@ three-backend performance measurements.
 | [Task 450][t450] | open | bitcoind compatibility integration scenario | Compare public wallet state with bitcoind | 431, 434, 435, 436 |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test supported chain daemon releases | — |
 
-## Phase 3 — Signer and Vault · 7 open
-
-Define and implement the wallet's typed secret-operation, derivation, signing,
-and raw-key ownership boundaries, then remove the superseded secret seams and
-dependent tests.
-
-| Task | Status | Component | Outcome | Open dependencies |
-| --- | --- | --- | --- | --- |
-| [Task 336][t336] | open | Controller and Wallet passphrase test suite | Remove redundant Wallet passphrase tests | 338, 362, 386 |
-| [Task 354][t354] | open | ADR 0010 secret-use contract | Define Vault secret-operation ownership | — |
-| [Task 382][t382] | open | AccountManager and account-derivation Vault operation | Move account derivation into the Vault | 352, 354 |
-| [Task 383][t383] | open | AddressManager ScriptForOutput and script Vault operation | Resolve output scripts through the Vault | 352, 354 |
-| [Task 384][t384] | open | Signer and primitive key-use Vault operations | Route safe signing through the Vault | 337, 352, 354, 383 |
-| [Task 385][t385] | open | UnsafeSigner raw private-key boundary | Isolate UnsafeSigner key extraction | 384 |
-| [Task 386][t386] | open | Wallet-facing Vault and runtimeCache secret interfaces | Remove raw Wallet secret seams | 382, 383, 384, 385 |
-
-## Phase 4 — lnd integration · 11 open
+## Phase 3 — lnd integration · 11 open
 
 Land the btcwallet-side public APIs explicitly required by lnd: exact and
 custom accounts, atomic address batches, durable key locators, and their final
@@ -177,10 +161,10 @@ import-wallet routing, requires a separately accepted task in this phase.
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Authorize PSBT auto-finalization | 347 |
 | [Task 408][t408] | open | TxCreator and AddressManager | Watch direct transaction change before return | 344, 356, 425 |
 
-## Phase 5 — migration and retirement · 6 open
+## Phase 4 — migration and retirement · 6 open
 
-Validate and convert legacy wallets only after the preceding wallet and
-consumer contracts are stable, then retire modern kvdb only with the required
+Validate and convert legacy wallets only after their wallet and consumer
+dependencies are stable, then retire modern kvdb only with the required
 cutover evidence.
 
 | Task | Status | Component | Outcome | Open dependencies |
@@ -191,6 +175,22 @@ cutover evidence.
 | [Task 374][t374] | open | Legacy migration transaction and sync extraction | Extract legacy transaction and sync state | 373 |
 | [Task 375][t375] | open | SQLite migration importer | Import one legacy snapshot into SQLite | 329, 374, 411 |
 | [Task 376][t376] | open | Manager migration orchestration | Orchestrate and verify legacy conversion | 375 |
+
+## Phase 5 — Signer and Vault · 7 open
+
+Define and implement the wallet's typed secret-operation, derivation, signing,
+and raw-key ownership boundaries, then remove the superseded secret seams and
+dependent tests.
+
+| Task | Status | Component | Outcome | Open dependencies |
+| --- | --- | --- | --- | --- |
+| [Task 336][t336] | open | Controller and Wallet passphrase test suite | Remove redundant Wallet passphrase tests | 338, 362, 386 |
+| [Task 354][t354] | open | ADR 0010 secret-use contract | Define Vault secret-operation ownership | — |
+| [Task 382][t382] | open | AccountManager and account-derivation Vault operation | Move account derivation into the Vault | 352, 354 |
+| [Task 383][t383] | open | AddressManager ScriptForOutput and script Vault operation | Resolve output scripts through the Vault | 352, 354 |
+| [Task 384][t384] | open | Signer and primitive key-use Vault operations | Route safe signing through the Vault | 337, 352, 354, 383 |
+| [Task 385][t385] | open | UnsafeSigner raw private-key boundary | Isolate UnsafeSigner key extraction | 384 |
+| [Task 386][t386] | open | Wallet-facing Vault and runtimeCache secret interfaces | Remove raw Wallet secret seams | 382, 383, 384, 385 |
 
 ## Conditional route state
 
