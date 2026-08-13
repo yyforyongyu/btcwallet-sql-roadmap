@@ -108,17 +108,17 @@ transaction, PSBT, and recovery behavior with focused fixes.
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
-SQLite performance measurements.
+three-backend performance measurements.
 
 | Task | Status | Component | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- |
 | [Task 333][t333] | done | Manager and integration-test harness | Add PostgreSQL Manager and harness support | — |
 | [Task 415][t415] | done | UtxoManager integration tests | Cover public UTXO contracts end to end | — |
-| [Task 416][t416] | open | wallet benchmark infrastructure | Build reusable SQLite benchmark fixtures | — |
-| [Task 417][t417] | open | wallet Controller and Syncer benchmarks | Measure SQLite start-to-synced performance | 416 |
-| [Task 418][t418] | open | wallet UtxoManager benchmarks | Measure SQLite ListUnspent performance | 416 |
-| [Task 419][t419] | open | wallet AddressManager benchmarks | Measure SQLite address-read performance | 416 |
-| [Task 420][t420] | open | wallet TxReader benchmarks | Measure SQLite transaction-read performance | 416 |
+| [Task 416][t416] | open | wallet benchmark infrastructure | Build reusable database benchmark fixtures | — |
+| [Task 417][t417] | open | wallet Controller and Syncer benchmarks | Measure start-to-synced performance | 416 |
+| [Task 418][t418] | open | wallet UtxoManager benchmarks | Measure ListUnspent performance | 416 |
+| [Task 419][t419] | open | wallet AddressManager benchmarks | Measure address-read performance | 416 |
+| [Task 420][t420] | open | wallet TxReader benchmarks | Measure transaction-read performance | 416 |
 | [Task 427][t427] | open | Controller credential integration tests | Cover remaining Controller credential contracts | — |
 | [Task 428][t428] | open | Controller Resync and Rescan integration tests | Cover Controller resync and rescan contracts | — |
 | [Task 429][t429] | open | AccountManager mutation integration tests | Cover public account mutation contracts | — |
@@ -137,7 +137,7 @@ SQLite performance measurements.
 | [Task 442][t442] | open | Signer signature integration tests | Cover public signing contracts | — |
 | [Task 443][t443] | open | UnsafeSigner integration tests | Cover UnsafeSigner extraction contracts | — |
 | [Task 444][t444] | open | public wallet receive scenario | Cover the wallet receive and reload scenario | 429, 430, 431, 433, 436 |
-| [Task 445][t445] | open | SQL account signing scenario | Cover SQL account derivation and signing | 429, 431, 441, 442 |
+| [Task 445][t445] | open | public account signing scenario | Cover account derivation and signing | 429, 431, 441, 442 |
 | [Task 446][t446] | open | public transaction spend scenario | Cover transaction creation and publication | 433, 434, 435, 436 |
 | [Task 447][t447] | open | public PSBT workflow scenario | Cover the complete PSBT workflow | 433, 435, 436, 438, 439, 440 |
 | [Task 448][t448] | open | public Wallet reorganization scenario | Cover synchronization and rollback | 428, 433, 436 |
@@ -296,11 +296,11 @@ phase. Every open task must remain listed exactly once.
 [t412]: tasks/412-transaction-publication-admission.md
 [t413]: tasks/413-utxo-spend-identity.md
 [t414]: tasks/414-utxo-amount-bounds.md
-[t416]: tasks/416-sqlite-benchmark-fixtures.md
-[t417]: tasks/417-sqlite-start-to-synced-benchmark.md
-[t418]: tasks/418-sqlite-list-unspent-benchmark.md
-[t419]: tasks/419-sqlite-address-read-benchmark.md
-[t420]: tasks/420-sqlite-transaction-read-benchmark.md
+[t416]: tasks/416-database-benchmark-fixtures.md
+[t417]: tasks/417-start-to-synced-benchmark.md
+[t418]: tasks/418-list-unspent-benchmark.md
+[t419]: tasks/419-address-read-benchmark.md
+[t420]: tasks/420-transaction-read-benchmark.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t422]: tasks/422-manager-load-cancellation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
@@ -325,7 +325,7 @@ phase. Every open task must remain listed exactly once.
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
 [t444]: tasks/444-wallet-receive-reload-scenario.md
-[t445]: tasks/445-sql-account-signing-scenario.md
+[t445]: tasks/445-account-signing-scenario.md
 [t446]: tasks/446-transaction-spend-publish-scenario.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t448]: tasks/448-sync-rollback-scenario.md

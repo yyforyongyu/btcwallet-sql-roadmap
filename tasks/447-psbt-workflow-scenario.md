@@ -10,11 +10,12 @@ Dependencies: **[Task 433][t433], [Task 435][t435], [Task 436][t436],
 [Issue #1250][issue1250] calls for a follow-up PSBT
 fund/decorate/sign/finalize scenario. The component contracts remain useful in
 isolation, but no task proves their packet handoffs compose into a valid,
-publishable transaction backed by one real SQL Wallet.
+publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Details
 
-- Fund a deterministic bare PSBT through the public PsbtManager on SQLite.
+- Register the same deterministic PSBT flow for kvdb, SQLite, and PostgreSQL.
+  Do not skip kvdb inside the shared flow.
 - Decorate the funded inputs, sign the owned inputs, and finalize the packet
   through the maintained public methods, checking each returned handoff.
 - Extract and independently execute the final transaction, check mempool
@@ -22,8 +23,6 @@ publishable transaction backed by one real SQL Wallet.
 - Reload the Wallet and prove the final transaction and change remain visible.
 - Keep this to one fully owned successful workflow. Exclude collaborative
   combination, partial ownership, error matrices, reorg, and Store inspection.
-- Keep the PR test-only and record any required production correction as its
-  own task.
 
 ## Suggested fix
 
@@ -33,8 +32,7 @@ production hooks.
 
 ## Verification
 
-- Run the focused SQLite complete-PSBT scenario.
-- After Task 333 merges, run the same source on PostgreSQL.
+- Run the focused complete-PSBT scenario on kvdb, SQLite, and PostgreSQL.
 - Verify each packet transition preserves the prior authorized metadata and
   complete teardown occurs on every failure.
 
@@ -43,7 +41,7 @@ production hooks.
 - One public PSBT flow funds, decorates, signs, finalizes, publishes, confirms,
   and reloads a valid transaction.
 - Assertions use public APIs and independent script verification only.
-- The PR is a single backend-neutral, test-only scenario.
+- The shared scenario contains no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t433]: 433-wallet-sync-test-boundary.md

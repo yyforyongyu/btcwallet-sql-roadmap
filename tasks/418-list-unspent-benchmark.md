@@ -1,4 +1,4 @@
-# Task 418 — measure SQLite ListUnspent performance
+# Task 418 — measure ListUnspent performance
 
 Component: **wallet UtxoManager benchmarks**.
 
@@ -8,13 +8,16 @@ Dependencies: **[Task 416][t416]**.
 
 `Wallet.ListUnspent` loads Store UTXO rows, enriches them into public values,
 applies the account-name filter, and sorts the result. The existing benchmark
-uses the legacy walletdb fixture, so it cannot show how the SQLite query and
-wallet-side conversion scale with both the live set and relevant transaction
-history required by [Issue #1251][issue1251].
+uses the legacy walletdb fixture, so it cannot compare how the maintained
+kvdb, SQLite, and PostgreSQL paths scale with both the live set and relevant
+transaction history required by [Issue #1251][issue1251].
 
 ## Details
 
-- Add exactly `BenchmarkSQLiteListUnspent`.
+- Add exactly `BenchmarkListUnspent`, with explicit `kvdb`, `sqlite`, and
+  `postgres` backend sub-benchmarks.
+- Run every profile and cache mode on all three database backends without a
+  kvdb skip branch.
 - Run `Cold` and `Warm` sub-benchmarks for
   `Utxo-U100-H100`, `Utxo-U100-H10000`,
   `Utxo-U10000-H10000`, and `Utxo-U10000-H100000`.
@@ -34,10 +37,10 @@ history required by [Issue #1251][issue1251].
 
 ## Suggested fix
 
-Add the SQL cases beside the existing UtxoManager benchmarks while preserving
-their names and legacy comparison purpose. Instantiate each stable snapshot
-through the reusable fixture and use one helper to enforce identical cold and
-warm boundaries.
+Add the three-backend cases beside the existing UtxoManager benchmarks while
+preserving their names and comparison purpose. Instantiate each stable
+snapshot through the reusable fixture and use one helper to enforce identical
+cold and warm boundaries.
 
 ## Verification
 
@@ -45,28 +48,29 @@ warm boundaries.
 
   ```text
   go test ./wallet -run '^$' \
-    -bench '^BenchmarkSQLiteListUnspent$' -benchmem \
+    -bench '^BenchmarkListUnspent$' -benchmem \
     -benchtime=3s -count=10 | tee listunspent.txt
   benchstat listunspent.txt
   ```
 
 - Compare revisions with
   `benchstat listunspent-base.txt listunspent-change.txt`.
-- Confirm all eight profile/cache combinations report `ns/op`, `B/op`, and
-  `allocs/op` and return exactly the named `U` live outputs.
+- Confirm all eight profile/cache combinations for each backend report
+  `ns/op`, `B/op`, and `allocs/op` and return exactly the named `U` live
+  outputs.
 - Confirm no database creation, population, or reload falls inside the timed
   public call.
 
 ## Definition of done
 
-- SQLite `ListUnspent` results scale across both named live-set and history
-  dimensions.
+- kvdb, SQLite, and PostgreSQL `ListUnspent` results scale across both named
+  live-set and history dimensions.
 - Cold and warm measurements time exactly one public read.
 - Allocations and repeatable benchstat comparison are documented.
 - Correctness checks prove count, identity, value, and sort order outside the
   timer.
-- No tuning, mutation benchmark, P1 work, or PostgreSQL lane is included.
+- No tuning, mutation benchmark, or P1 work is included.
 - The PR contains only the ListUnspent measurement outcome.
 
-[t416]: 416-sqlite-benchmark-fixtures.md
+[t416]: 416-database-benchmark-fixtures.md
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

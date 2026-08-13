@@ -1,4 +1,4 @@
-# Task 416 — build reusable SQLite benchmark fixtures
+# Task 416 — build reusable database benchmark fixtures
 
 Component: **wallet benchmark infrastructure**.
 
@@ -7,25 +7,30 @@ Dependencies: **None**.
 ## Rationale
 
 The current public API benchmarks build a legacy walletdb Wallet and seed
-`waddrmgr` and `wtxmgr` directly. That fixture cannot attribute results to the
-SQLite Store and cannot provide controlled first-query versus reused-connection
-measurements. [Issue #1251][issue1251] needs one deterministic real-SQL
-fixture before individual P0 API measurements can be comparable.
+`waddrmgr` and `wtxmgr` directly. That fixture cannot provide one controlled
+public-Manager workload across kvdb, SQLite, and PostgreSQL, or comparable
+first-query versus warm-connection measurements. [Issue #1251][issue1251]
+needs deterministic real-backend fixtures before individual P0 API
+measurements can be compared within each backend.
 
 ## Details
 
-- Add a benchmark-only fixture that creates and loads Wallets through a real
-  SQLite Manager and Store.
+- Add benchmark-only fixtures that create and load Wallets through real kvdb,
+  SQLite, and PostgreSQL Managers and Stores.
+- Register every shared fixture profile for all three database backends. Do
+  not skip kvdb inside the shared fixture or benchmark paths; isolate only
+  backend-specific setup and teardown.
 - Own this common contract for every profile: one wallet named
   `benchmark-wallet` on regression net; deterministic 32-byte seed
   `00, 01, ... 1f`; fixed timestamps, block hashes, transaction hashes,
-  scripts, and values; one SQLite connection; and one BIP84 scope with its
-  default derived account unless a profile says otherwise.
+  scripts, and values; and one BIP84 scope with its default derived account
+  unless a profile says otherwise.
 - Use no imported addresses, leases, labels, concurrent writers, or random
-  data. Every loaded Wallet uses the public Manager/Wallet boundary and a real
-  SQLite Store.
-- Keep setup, snapshot copying, deterministic chain construction, result
-  checking, and teardown outside consumer timers.
+  data. Every loaded Wallet uses the public Manager/Wallet boundary and its
+  real persistent Store.
+- Keep setup, embedded-database snapshot copying or equivalent PostgreSQL
+  reset, deterministic chain construction, result checking, and teardown
+  outside consumer timers.
 - For the address, UTXO, and transaction read profiles, `Cold` means the first
   API call after opening a copied snapshot. `Warm` means the same loaded Wallet
   receives one untimed priming call before repeated timed calls.
@@ -69,32 +74,34 @@ fixture before individual P0 API measurements can be comparable.
 - Prebuild every sync header, compact filter, and block. Serve them through a
   deterministic in-process `chain.Interface` without sockets, sleeping, RPC
   serialization, or mining during a timed sample, and use `SyncMethodAuto`.
-- Checkpoint and close each populated database before snapshotting it. Copy a
-  closed snapshot for each cold iteration so no consumer mutates its baseline.
+- Checkpoint and close each populated embedded database before snapshotting
+  it. Give each PostgreSQL iteration an equivalently isolated populated
+  database so no consumer mutates its baseline.
 - Provide explicit helpers for build, snapshot, cold reload, warm reuse,
   semantic validation, and cleanup.
-- Add `TestSQLiteBenchmarkFixtureReload` to prove that two reloads of each
-  profile preserve wallet ID, address count, transaction count, live UTXO
-  count, sync tip, and deterministic target identities.
-- Add `BenchmarkSQLiteFixtureBuild` with the `Smoke` profile as a calibration
-  benchmark. It must call `b.ReportAllocs`.
-- For `BenchmarkSQLiteFixtureBuild`, start the timer immediately before
-  creating the SQLite Manager and seeding `Smoke`; stop it after checkpoint,
-  close, and manifest calculation. Document that this calibration time is not
-  part of any P0 API result.
+- Add `TestBackendBenchmarkFixtureReload`, registered for kvdb, SQLite, and
+  PostgreSQL, to prove that two reloads of each profile preserve wallet ID,
+  address count, transaction count, live UTXO count, sync tip, and
+  deterministic target identities.
+- Add `BenchmarkBackendFixtureBuild` with backend and `Smoke` sub-benchmarks as
+  calibration measurements. Every leaf must call `b.ReportAllocs`.
+- For `BenchmarkBackendFixtureBuild`, start the timer immediately before
+  creating the Manager and seeding `Smoke`; stop it after durable flush, close,
+  and manifest calculation. Document that this calibration time is not part
+  of any P0 API result.
 - Document profile names, exact dimensions, cold/warm meanings, commands,
   timer rules, and benchstat capture in `wallet/README.md` or an adjacent
   benchmark document.
 - Do not expose fixture types outside tests. Do not alter production behavior,
-  SQL queries, indexes, caching, connection defaults, or legacy fixtures.
+  queries, indexes, caching, connection defaults, or legacy fixtures.
 
 ## Suggested fix
 
-Add a small `sqlite_benchmark_fixture_test.go` in package `wallet`. Build a
-real SQLite Manager at a caller-provided path, use maintained Store-backed
-wallet operations or deterministic Store fixture insertion to populate the
-profile, close and checkpoint it, and return an immutable manifest plus
-snapshot path. Keep reload mechanics below the API benchmarks so every
+Add a small backend benchmark fixture in package `wallet`. Give it explicit
+kvdb, SQLite, and PostgreSQL factories that populate the same logical profile
+through maintained Store-backed wallet operations or deterministic Store
+fixture insertion. Return one immutable manifest plus a backend-specific
+reload handle. Keep reload mechanics below the API benchmarks so every
 consumer uses the same lifecycle and validation rules.
 
 ## Verification
@@ -102,29 +109,31 @@ consumer uses the same lifecycle and validation rules.
 - Run:
 
   ```text
-  go test ./wallet -run '^TestSQLiteBenchmarkFixtureReload$'
+  go test ./wallet -run '^TestBackendBenchmarkFixtureReload$'
   go test ./wallet -run '^$' \
-    -bench '^BenchmarkSQLiteFixtureBuild$' -benchmem \
+    -bench '^BenchmarkBackendFixtureBuild$' -benchmem \
     -benchtime=1x -count=10 | tee fixture.txt
   benchstat fixture.txt
   ```
 
 - For a before/after comparison, capture the same command from both revisions
   and run `benchstat fixture-base.txt fixture-change.txt`.
-- Confirm `BenchmarkSQLiteFixtureBuild/Smoke` reports `ns/op`, `B/op`, and
-  `allocs/op` and that no consumer includes fixture build time.
-- Confirm the fixture tests leave no SQLite handles or WAL/SHM sidecars open.
+- Confirm every `BenchmarkBackendFixtureBuild/<backend>/Smoke` leaf reports
+  `ns/op`, `B/op`, and `allocs/op` and no consumer includes fixture build time.
+- Confirm fixture tests leave no kvdb or SQLite handles, SQLite sidecars, or
+  PostgreSQL test databases and connections open.
 
 ## Definition of done
 
 - Every named profile has one deterministic manifest and exact semantic
   validation.
 - Cold reload and warm reuse are controlled by one shared helper.
-- The calibration benchmark and reload test pass with a real SQLite Store.
+- The calibration benchmark and reload test pass with real kvdb, SQLite, and
+  PostgreSQL Stores and identical logical manifests.
 - Allocation reporting and repeatable benchstat commands are documented.
-- No wallet behavior, tuning, P1 benchmark, PostgreSQL lane, or runtime sync
-  diagnostic is added.
-- The PR contains only reusable SQLite benchmark infrastructure.
+- No wallet behavior, tuning, P1 benchmark, or runtime sync diagnostic is
+  added.
+- The PR contains only reusable three-backend benchmark infrastructure.
 
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251
-[t417]: 417-sqlite-start-to-synced-benchmark.md
+[t417]: 417-start-to-synced-benchmark.md

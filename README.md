@@ -39,8 +39,13 @@ and `ACTIVE.md` separately owns live execution state.
 The maintained public APIs under `wallet/` are the target. Avoid voluntary
 changes to RPC, deprecated wallet APIs, or unrelated daemon behavior.
 
-Keep integration-test tasks test-only and benchmark tasks measurement-only.
-When either exposes a wallet defect, record a separate implementation task.
+An integration-test task owns the tested public contract. Fix bugs revealed by
+its required cases in the same task and implementation PR, keep the regression
+coverage, and leave unrelated production changes out.
+Keep benchmark tasks measurement-only and record defects they expose as
+separate implementation tasks.
+Run shared public contracts on kvdb, SQLite, and PostgreSQL. If a backend
+cannot represent a scenario, document that structural exclusion in its task.
 
 ## Creating or changing a task
 

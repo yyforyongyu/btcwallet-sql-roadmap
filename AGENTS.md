@@ -114,8 +114,18 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 - Keep kvdb legacy and single-wallet behavior isolated from the SQL design.
 - Do not add create manifests, generic write locks, replay state machines, or
   cross-process Manager fencing without a separately accepted task.
-- Keep integration-test tasks test-only and benchmark tasks measurement-only.
-- Record an exposed defect as its own implementation task.
+- An integration-test task owns the tested public contract. Fix production bugs
+  revealed by its required cases in the same task and implementation PR, and
+  keep those cases as regression coverage. Do not include unrelated production
+  changes.
+- Keep benchmark tasks measurement-only. Record a defect exposed only by a
+  benchmark as its own implementation task.
+- Register shared public integration-test and benchmark contracts for kvdb,
+  SQLite, and PostgreSQL. Do not skip kvdb inside a shared contract. Restrict
+  backend-specific code to setup and teardown; require identical public
+  assertions and stable error identities. If a backend cannot represent the
+  scenario, keep the task backend-specific and document the structural
+  exclusion explicitly.
 - Keep findings in the owning task instead of storing raw review reports.
 
 ## Completing a task

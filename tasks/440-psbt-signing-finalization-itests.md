@@ -8,13 +8,17 @@ Dependencies: **None**.
 
 [Issue #1250][issue1250] specifically requires representative `SignPsbt` and
 `FinalizePsbt` coverage. The two methods share one ownership, script, and
-signature fixture, but no real-SQL public test proves partial signing,
-auto-signing, final script construction, or their failure boundaries.
+signature fixture, but no real-backend public test proves partial signing,
+auto-signing, final script construction, or their failure boundaries across
+kvdb, SQLite, and PostgreSQL.
 
 ## Details
 
-- Exercise `SignPsbt` and `FinalizePsbt` through a real SQL-backed Wallet.
-- Require SQLite and register the cases once for PostgreSQL after Task 333.
+- Exercise `SignPsbt` and `FinalizePsbt` through real kvdb, SQLite, and
+  PostgreSQL Wallets.
+- Register one shared public contract for all three database backends. Do not
+  skip kvdb inside shared cases. Restrict backend-specific code to setup and
+  teardown; require identical public assertions and stable error identities.
 - Cover fully owned, partially owned, unknown, already-signed, SegWit, and
   Taproot inputs plus supported multi-party partial-signature behavior.
 - Cover malformed previous-output metadata, unsupported scripts or sighashes,
@@ -23,8 +27,7 @@ auto-signing, final script construction, or their failure boundaries.
   maintained script engine; do not establish success by reading Store rows.
 - Verify errors leave the caller packet unchanged and successful signing does
   not finalize unless `FinalizePsbt` is invoked.
-- Keep the PR test-only. Tasks 347 and 407 own future authorization changes;
-  any exposed current defect becomes its own production task.
+- Tasks 347 and 407 continue to own future authorization changes.
 
 ## Suggested fix
 
@@ -34,8 +37,7 @@ final scripts against their previous outputs.
 
 ## Verification
 
-- Run the focused SQLite PsbtManager signing cases.
-- After Task 333 merges, run the same cases on PostgreSQL.
+- Run the focused PsbtManager signing cases on kvdb, SQLite, and PostgreSQL.
 - Verify packet immutability on every error and complete resource teardown.
 
 ## Definition of done
@@ -43,6 +45,6 @@ final scripts against their previous outputs.
 - Both methods have representative ownership, partial-signature, script,
   lifecycle, watch-only, and invalid-packet coverage.
 - Successful final packets execute, while rejected packets remain unchanged.
-- The PR is backend-neutral and contains no production signing change.
+- Shared cases contain no backend skip branch and add no new signing behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250

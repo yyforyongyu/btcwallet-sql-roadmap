@@ -50,14 +50,15 @@ event-specific helpers, and add a small AST-based or equivalent source guard.
 
 ## Verification
 
-- Mine to a real SQL-backed Wallet, wait only through `AssertWalletSynced`, and
-  check `ListUnspent`, `GetUtxo`, balance, transaction, and confirmation state
-  exactly once.
+- Mine to real kvdb, SQLite, and PostgreSQL Wallets, wait only through
+  `AssertWalletSynced`, and check `ListUnspent`, `GetUtxo`, balance,
+  transaction, and confirmation state exactly once.
 - Prove `Info.Synced` stays false until wallet state and the exact synced tip
   are committed.
 - Cover stale historical notification and explicit reorganization paths.
 - Run the narrow Wallet sync and existing synchronized-state itests on every
-  supported chain backend.
+  supported chain backend and all three database backends, without skipping
+  kvdb inside the shared contract.
 - Run the no-raw-polling guard through the ordinary unit-test target and prove
   a forbidden scenario call produces actionable guidance.
 
@@ -65,6 +66,8 @@ event-specific helpers, and add a small AST-based or equivalent source guard.
 
 - `AssertWalletSynced` proves the Wallet is synchronized to the backend's exact
   best hash and height after all wallet-visible state commits.
+- The synchronization boundary has the same public contract on kvdb, SQLite,
+  and PostgreSQL.
 - Wallet-state assertions after that boundary execute once.
 - Only bounded, purpose-named waits remain for genuinely external events.
 - The ordinary test target rejects new generic polling in `itest` scenarios.
