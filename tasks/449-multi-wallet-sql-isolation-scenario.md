@@ -56,7 +56,7 @@ and synchronization harness without adding a scenario-specific coordinator.
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: 429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
-[t433]: 433-wallet-sync-test-boundary.md
+[t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: 434-transaction-creation-itests.md
 [t435]: 435-transaction-publication-itests.md
 [t436]: 436-transaction-read-itests.md

@@ -57,7 +57,7 @@ semantic account contract and can name SQL numberless imported-XPub accounts
 without depending on Task 361 or exposing Store identity. Ordinary full
 positive-lookahead recovery never derives or watches a key-only account.
 
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t345]: 345-durable-watch-registration.md
 [t397]: 397-semantic-recovery-targets-adr.md
 [t399]: 399-zero-lookahead-persisted-targets.md

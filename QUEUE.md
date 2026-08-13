@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **120 open tasks**. Completed tasks stay listed with
+The roadmap contains **118 open tasks**. Completed tasks stay listed with
 Status `done`; their files live under `archive/tasks/`.
 
 Every task appears exactly once below. These are thematic delivery stages, not
@@ -29,7 +29,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — wallet gaps and bugs · 66 open · 1 done
+## Phase 1 — wallet gaps and bugs · 65 open · 2 done
 
 Stabilize the maintained wallet APIs, storage, lifecycle, synchronization,
 transaction, PSBT, and recovery behavior with focused fixes.
@@ -45,7 +45,7 @@ transaction, PSBT, and recovery behavior with focused fixes.
 | [Task 338][t338] | open | Controller | Latch accepted SQL passphrase results | 331, 368, 421 |
 | [Task 339][t339] | open | TxReader | Define public transaction visibility and status | — |
 | [Task 340][t340] | open | Manager and SQL Store | Bind SQL databases to schema and network identity | 359 |
-| [Task 341][t341] | open | wallet-owned account identity types | Define semantic account identity | — |
+| [Task 341][t341] | done | wallet-owned account identity types | Define semantic account identity | — |
 | [Task 342][t342] | open | wallet configuration | Accept bounded recovery windows | — |
 | [Task 345][t345] | open | SQL account schema and AccountStore persistence | Persist SQL account discovery mode | 340 |
 | [Task 346][t346] | open | PsbtManager packet validation and transformation | Preserve PSBT metadata during funding | 357, 404 |
@@ -104,7 +104,7 @@ transaction, PSBT, and recovery behavior with focused fixes.
 | [Task 425][t425] | open | Wallet transaction-authoring wrapper boundary | Isolate shared transaction authoring from wrapper watch and lease effects | — |
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Validate persisted transaction output aggregates | 424 |
 
-## Phase 2 — tests and benchmarks · 30 open · 2 done
+## Phase 2 — tests and benchmarks · 29 open · 3 done
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
@@ -125,7 +125,7 @@ three-backend performance measurements.
 | [Task 430][t430] | open | AccountManager query integration tests | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Cover address allocation and lookup contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Cover address import and script contracts | — |
-| [Task 433][t433] | open | Wallet sync-state publication and integration-test harness | Enforce the wallet sync test boundary | — |
+| [Task 433][t433] | done | Wallet sync-state publication and integration-test harness | Enforce the wallet sync test boundary | — |
 | [Task 434][t434] | open | TxCreator integration tests | Cover transaction creation contracts | — |
 | [Task 435][t435] | open | TxPublisher integration tests | Cover transaction publication contracts | — |
 | [Task 436][t436] | open | TxReader integration tests | Cover transaction read contracts | — |

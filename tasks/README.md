@@ -39,7 +39,6 @@ Grouping here does not create dependency or scheduling authority.
 
 - [Task 337](337-imported-xpub-derivation.md): restore SQL imported-XPub public
   derivation.
-- [Task 341](341-public-role-contract.md): define semantic account identity.
 - [Task 342](342-recovery-window-validation.md): accept bounded recovery windows.
 - [Task 343](343-exact-account-creation.md): create next-or-exact root-derived
   accounts.
@@ -174,7 +173,6 @@ that structural exclusion explicitly.
   and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
-- [Task 433](433-wallet-sync-test-boundary.md): enforce the wallet sync test
   boundary.
 - [Task 434](434-transaction-creation-itests.md): cover transaction creation
   contracts.

@@ -39,5 +39,5 @@ Every receiving allocator fails closed on key-only
 accounts before mutation using one wallet-owned error, without implementing a
 key allocator or watch delivery.
 
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t345]: 345-durable-watch-registration.md

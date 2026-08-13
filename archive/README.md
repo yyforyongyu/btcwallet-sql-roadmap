@@ -7,6 +7,8 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 433](tasks/433-wallet-sync-test-boundary.md) completed on 2026-08-13.
+- [Task 341](tasks/341-public-role-contract.md) completed on 2026-08-13.
 - [Task 360](tasks/360-document-kvdb-adapter-identity.md) completed on 2026-08-12.
 - [Task 415](tasks/415-utxo-public-integration-tests.md) completed on 2026-08-11.
 - [Task 333](tasks/333-postgres-manager-harness.md) completed on 2026-08-10.

@@ -20,7 +20,6 @@ its task file remains authoritative for implementation gates.
 | [Task 337][t337] | Restore imported-XPub derivation | YY | — |
 | [Task 339][t339] | Define transaction visibility | — | — |
 | [Task 340][t340] | Persist database identity | YY | — |
-| [Task 341][t341] | Define semantic account identity | YY | [#1313][pr1313] |
 | [Task 342][t342] | Bound recovery windows | — | — |
 | [Task 345][t345] | Persist account discovery mode | YY | — |
 | [Task 350][t350] | Use native PostgreSQL driver | YY | [#1321][pr1321] |
@@ -57,7 +56,6 @@ not authorize implementation before every dependency and gate completes.
 | Task | Description | Phase | Claimant | PR |
 | --- | --- | ---: | --- | --- |
 | [Task 416][t416] | Build database benchmark fixtures | 2 | YY | — |
-| [Task 433][t433] | Enforce sync test boundary | 2 | YY | [#1314][pr1314] |
 
 ## Coordination
 
@@ -75,8 +73,6 @@ not authorize implementation before every dependency and gate completes.
 - Outside the exceptions above, each developer may have only one task in
   progress at a time.
 
-[pr1313]: https://github.com/btcsuite/btcwallet/pull/1313
-[pr1314]: https://github.com/btcsuite/btcwallet/pull/1314
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
@@ -85,7 +81,6 @@ not authorize implementation before every dependency and gate completes.
 [t337]: tasks/337-imported-xpub-derivation.md
 [t339]: tasks/339-transaction-visibility.md
 [t340]: tasks/340-durable-database-identity.md
-[t341]: tasks/341-public-role-contract.md
 [t342]: tasks/342-recovery-window-validation.md
 [t345]: tasks/345-durable-watch-registration.md
 [t350]: tasks/350-native-pgx-postgres.md
@@ -110,7 +105,6 @@ not authorize implementation before every dependency and gate completes.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t433]: tasks/433-wallet-sync-test-boundary.md
 [t434]: tasks/434-transaction-creation-itests.md
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md

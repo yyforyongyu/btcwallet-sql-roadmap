@@ -54,7 +54,7 @@ One receiving batch atomically commits its exact fresh
 scripts, final cursor, skips, and durable obligation and exposes the complete
 ordered result only after live delivery.
 
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t364]: 364-durable-watch-registration.md
 [t393]: 393-key-only-receiving-rejection.md
 [t402]: 402-replay-live-watch-obligations.md

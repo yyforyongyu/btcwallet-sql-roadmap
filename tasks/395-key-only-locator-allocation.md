@@ -47,7 +47,7 @@ One key-only call returns one durable unique public
 locator with bounded counter progression and no receiving or watch semantics.
 Task 399 already excludes its persisted representation from recovery loading.
 
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t393]: 393-key-only-receiving-rejection.md
 [t394]: 394-key-only-transaction-ownership.md
 [t399]: 399-zero-lookahead-persisted-targets.md

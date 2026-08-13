@@ -38,5 +38,5 @@ backend IDs and every excluded shape has an explicit route.
 Accepted ADR 0004 text fixes one backend-neutral
 semantic-account recovery target and no implementation or live-watch behavior.
 
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t400]: 400-live-watch-semantics-adr.md

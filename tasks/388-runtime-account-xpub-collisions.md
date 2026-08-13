@@ -42,5 +42,5 @@ Runtime SQL account creation admits no overlapping
 normalized XPub identity and returns one public collision classification
 without changing Manager genesis validation.
 
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t387]: 387-account-creation-identity-adr.md

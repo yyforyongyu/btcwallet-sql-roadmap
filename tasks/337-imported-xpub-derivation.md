@@ -68,5 +68,5 @@ path.
   [Task 361](361-kvdb-imported-xpub-derivation.md).
 
 [t329]: 329-atomic-wallet-account-creation.md
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md
 [t376]: 376-orchestrate-legacy-conversion.md

@@ -67,4 +67,4 @@ its normalized result to the later genesis preparation path.
   modern-kvdb work.
 
 [t332]: 332-watch-only-script-policy.md
-[t341]: 341-public-role-contract.md
+[t341]: ../archive/tasks/341-public-role-contract.md

@@ -48,7 +48,7 @@ only for named external mempool and mining events.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
-[t433]: 433-wallet-sync-test-boundary.md
+[t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: 434-transaction-creation-itests.md
 [t435]: 435-transaction-publication-itests.md
 [t436]: 436-transaction-read-itests.md
