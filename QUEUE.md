@@ -177,7 +177,7 @@ import-wallet routing, requires a separately accepted task in this phase.
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Authorize PSBT auto-finalization | 347 |
 | [Task 408][t408] | open | TxCreator and AddressManager | Watch direct transaction change before return | 344, 356, 425 |
 
-## Phase 5 — migration and retirement · 6 open
+## Phase 5 — migration and retirement · 6 open · 5 done
 
 Validate and convert legacy wallets only after the preceding wallet and
 consumer contracts are stable, then retire modern kvdb only with the required
@@ -211,11 +211,11 @@ roadmap task must remain listed exactly once.
 
 | Task | Phase | Component | Outcome |
 | --- | ---: | --- | --- |
-| [Task 333][t333] | 2 | Manager and integration-test harness | Add PostgreSQL Manager and harness support |
-| [Task 341][t341] | 1 | wallet-owned account identity types | Define semantic account identity |
-| [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Document kvdb adapter identity |
-| [Task 415][t415] | 2 | UtxoManager integration tests | Cover public UTXO contracts end to end |
-| [Task 433][t433] | 2 | Wallet sync-state publication and integration-test harness | Enforce the wallet sync test boundary |
+| [Task 333][t333] | done | Manager and integration-test harness | Add PostgreSQL Manager and harness support |
+| [Task 341][t341] | done | wallet-owned account identity types | Define semantic account identity |
+| [Task 360][t360] | done | ADR 0013 and the modern kvdb adapter contract | Document kvdb adapter identity |
+| [Task 415][t415] | done | UtxoManager integration tests | Cover public UTXO contracts end to end |
+| [Task 433][t433] | done | Wallet sync-state publication and integration-test harness | Enforce the wallet sync test boundary |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
