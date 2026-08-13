@@ -2,6 +2,8 @@
 
 Component: **SQL UTXO and lease schema**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 340][t340] and [Task 424][t424]**.
 
 ## Rationale

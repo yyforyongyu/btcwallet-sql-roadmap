@@ -2,6 +2,8 @@
 
 Component: **SQL watch-generation and obligation schema**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 345][t345] and [Task 400][t400]**.
 
 ## Rationale

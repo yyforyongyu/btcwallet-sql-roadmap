@@ -2,6 +2,8 @@
 
 Component: **SQL TxStore ingestion amount validation**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 424][t424]**.
 
 ## Rationale

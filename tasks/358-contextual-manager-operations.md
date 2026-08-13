@@ -2,6 +2,8 @@
 
 Component: **Manager.Create**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 331][t331], [Task 366][t366], and [Task 367][t367]**.
 
 ## Rationale

@@ -22,17 +22,18 @@ gate is complete.
 
 | Information | Source |
 | --- | --- |
-| Task scope and complete dependency graph | Individual file under [tasks/](tasks/) |
-| Delivery phases and open dependencies | [QUEUE.md](QUEUE.md) |
+| Task type, scope, and complete dependency graph | Individual file under [tasks/](tasks/) |
+| Delivery phases, open dependencies, and completed PRs | [QUEUE.md](QUEUE.md) |
 | Active tasks, claims, and in-progress PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
 | Agent workflow | [AGENTS.md](AGENTS.md) |
 | Historical work | [archive/](archive/) |
 
-Do not duplicate task dependencies or the complete backlog in this file. Each
-task owns its dependency contract, QUEUE groups the work into delivery phases,
-and `ACTIVE.md` separately owns live execution state.
+Do not duplicate task types, dependencies, or the complete backlog in this
+file. Each task owns its type, scope, and dependency contract, QUEUE groups the
+work into delivery phases, and `ACTIVE.md` separately owns live execution
+state.
 
 ## Scope
 

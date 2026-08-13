@@ -2,6 +2,8 @@
 
 Component: **PsbtManager funding integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

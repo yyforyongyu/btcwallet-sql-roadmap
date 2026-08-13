@@ -2,6 +2,8 @@
 
 Component: **ADR 0006 transaction and UTXO integrity contract**.
 
+Type: **Design**.
+
 Dependencies: **None**.
 
 ## Rationale

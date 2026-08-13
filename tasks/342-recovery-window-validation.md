@@ -2,6 +2,8 @@
 
 Component: **wallet configuration**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

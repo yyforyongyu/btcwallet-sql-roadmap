@@ -2,6 +2,8 @@
 
 Component: **Manager.Load**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 331][t331]**.
 
 ## Rationale

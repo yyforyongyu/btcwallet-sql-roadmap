@@ -2,6 +2,8 @@
 
 Component: **Manager**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 331][t331] and [Task 333][t333]**.
 
 ## Rationale

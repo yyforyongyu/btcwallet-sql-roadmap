@@ -2,6 +2,8 @@
 
 Component: **AccountManager query integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

@@ -2,6 +2,8 @@
 
 Component: **AddressManager key allocation and SQL branch-counter mutation**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 341][t341], [Task 393][t393], [Task 394][t394], and
 [Task 399][t399]**.
 

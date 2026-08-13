@@ -2,6 +2,8 @@
 
 Component: **`txauthor` and TxCreator**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

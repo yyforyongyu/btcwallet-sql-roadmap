@@ -3,6 +3,8 @@
 Component: **AddressManager receiving entry points and AddressStore account
 lookup**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 341][t341] and [Task 345][t345]**.
 
 ## Rationale

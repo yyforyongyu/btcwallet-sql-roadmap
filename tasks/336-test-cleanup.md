@@ -2,6 +2,8 @@
 
 Component: **Controller and Wallet passphrase test suite**.
 
+Type: **Test**.
+
 Dependencies: **[Task 338][t338], [Task 362][t362], and [Task 386][t386]**.
 
 ## Rationale

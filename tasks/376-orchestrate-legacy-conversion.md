@@ -2,6 +2,8 @@
 
 Component: **Manager migration orchestration**.
 
+Type: **Migration**.
+
 Dependencies: **[Task 375][t375]**.
 
 ## Rationale

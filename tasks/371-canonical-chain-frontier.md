@@ -2,6 +2,8 @@
 
 Component: **SQL Store canonical chain state**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 334][t334] and [Task 340][t340]**.
 
 ## Rationale

@@ -2,6 +2,8 @@
 
 Component: **Controller/Syncer watch initialization and delivery completion**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 364][t364] and [Task 401][t401]**.
 
 ## Rationale

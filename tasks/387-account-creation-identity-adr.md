@@ -2,6 +2,8 @@
 
 Component: **ADR 0012 and ADR 0013 account-creation contract**.
 
+Type: **Design**.
+
 Dependencies: **[Task 332][t332] and [Task 360][t360]**.
 
 ## Rationale

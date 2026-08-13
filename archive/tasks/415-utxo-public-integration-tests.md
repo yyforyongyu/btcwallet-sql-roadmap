@@ -2,6 +2,8 @@
 
 Component: **UtxoManager integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale
@@ -103,4 +105,4 @@ backend resource running.
 - Any exposed production defect is recorded separately rather than repaired in
   this task.
 
-[t333]: ../archive/tasks/333-postgres-manager-harness.md
+[t333]: 333-postgres-manager-harness.md

@@ -2,6 +2,8 @@
 
 Component: **UnsafeSigner integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

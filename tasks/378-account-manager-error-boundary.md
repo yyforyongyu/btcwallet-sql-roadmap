@@ -2,6 +2,8 @@
 
 Component: **AccountManager public error boundary**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

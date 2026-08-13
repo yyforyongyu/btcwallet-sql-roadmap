@@ -2,6 +2,8 @@
 
 Component: **Wallet public derivation and Signer numeric adapter**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 341][t341]**.
 
 ## Rationale

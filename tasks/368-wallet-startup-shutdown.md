@@ -2,6 +2,8 @@
 
 Component: **Controller**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

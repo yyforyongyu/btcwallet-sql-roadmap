@@ -2,6 +2,8 @@
 
 Component: **Manager backend selection**.
 
+Type: **Migration**.
+
 Dependencies: **[Task 376][t376]**, plus production conversion evidence, an
 identified completed consumer-cutover artifact or release proving maintained
 consumers and deployed wallets no longer select kvdb, and an explicit

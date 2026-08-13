@@ -2,6 +2,8 @@
 
 Component: **Signer derivation integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

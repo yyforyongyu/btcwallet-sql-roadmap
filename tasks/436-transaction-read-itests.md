@@ -2,6 +2,8 @@
 
 Component: **TxReader integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

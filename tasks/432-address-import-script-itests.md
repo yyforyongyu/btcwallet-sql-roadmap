@@ -2,6 +2,8 @@
 
 Component: **AddressManager import and script integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

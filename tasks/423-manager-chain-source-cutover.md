@@ -2,6 +2,8 @@
 
 Component: **SQL Manager chain source adapter and coordinator activation**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 368][t368], [Task 370][t370], [Task 372][t372],
 [Task 412][t412], and [Task 422][t422]**.
 

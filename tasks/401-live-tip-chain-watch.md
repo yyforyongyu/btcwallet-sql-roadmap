@@ -2,6 +2,8 @@
 
 Component: **chain interface and Neutrino/btcd/bitcoind adapters**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 400][t400]**.
 
 ## Rationale

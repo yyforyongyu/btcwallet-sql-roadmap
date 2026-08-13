@@ -2,6 +2,8 @@
 
 Component: **Manager and WalletVault genesis preparation**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 329][t329]**.
 
 ## Rationale

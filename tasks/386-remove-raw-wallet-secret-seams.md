@@ -2,6 +2,8 @@
 
 Component: **Wallet-facing Vault and runtimeCache secret interfaces**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 382][t382], [Task 383][t383], [Task 384][t384], and
 [Task 385][t385]**.
 

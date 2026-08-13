@@ -2,6 +2,8 @@
 
 Component: **wallet benchmark infrastructure**.
 
+Type: **Benchmark**.
+
 Dependencies: **None**.
 
 ## Rationale

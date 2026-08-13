@@ -2,6 +2,8 @@
 
 Component: **AddressManager GetAddressInfo error boundary**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

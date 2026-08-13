@@ -2,6 +2,8 @@
 
 Component: **UTXO Store and PsbtManager cleanup**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 405][t405]**.
 
 ## Rationale

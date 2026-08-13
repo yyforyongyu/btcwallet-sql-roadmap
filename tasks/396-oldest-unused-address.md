@@ -2,6 +2,8 @@
 
 Component: **AddressManager count-one compatibility semantics**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 344][t344], [Task 348][t348], and [Task 408][t408]**.
 
 ## Rationale

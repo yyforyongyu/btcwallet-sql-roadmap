@@ -2,6 +2,8 @@
 
 Component: **AddressStore ownership resolution and transaction ingestion**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 345][t345]**.
 
 ## Rationale

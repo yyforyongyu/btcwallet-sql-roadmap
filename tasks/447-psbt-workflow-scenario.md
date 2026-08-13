@@ -2,6 +2,8 @@
 
 Component: **public PSBT workflow scenario**.
 
+Type: **Test**.
+
 Dependencies: **[Task 433][t433], [Task 435][t435], [Task 436][t436],
 [Task 438][t438], [Task 439][t439], and [Task 440][t440]**.
 

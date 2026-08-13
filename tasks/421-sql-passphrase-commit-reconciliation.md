@@ -2,6 +2,8 @@
 
 Component: **WalletVault and SQL wallet-secret persistence**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

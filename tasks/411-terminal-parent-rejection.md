@@ -2,6 +2,8 @@
 
 Component: **TxStore activation preflight and direct/batch ingestion**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 339][t339], [Task 409][t409], and [Task 410][t410]**.
 
 ## Rationale

@@ -2,6 +2,8 @@
 
 Component: **Signer signature integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

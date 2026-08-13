@@ -2,6 +2,8 @@
 
 Component: **PsbtManager and UTXO Store funding admission**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 346][t346], [Task 356][t356], and [Task 404][t404]**.
 
 ## Rationale

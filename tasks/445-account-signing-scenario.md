@@ -2,6 +2,8 @@
 
 Component: **public account signing scenario**.
 
+Type: **Test**.
+
 Dependencies: **[Task 429][t429], [Task 431][t431], [Task 441][t441], and
 [Task 442][t442]**.
 

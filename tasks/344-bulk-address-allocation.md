@@ -2,6 +2,8 @@
 
 Component: **AddressManager receiving batches and SQL AddressStore mutation**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 341][t341], [Task 364][t364], [Task 393][t393], and
 [Task 402][t402]**.
 

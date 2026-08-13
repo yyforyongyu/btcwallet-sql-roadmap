@@ -2,6 +2,8 @@
 
 Component: **Controller**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 331][t331], [Task 368][t368], and [Task 421][t421]**.
 
 ## Rationale

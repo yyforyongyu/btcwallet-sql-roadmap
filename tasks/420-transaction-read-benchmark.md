@@ -2,6 +2,8 @@
 
 Component: **wallet TxReader benchmarks**.
 
+Type: **Benchmark**.
+
 Dependencies: **[Task 416][t416]**.
 
 ## Rationale

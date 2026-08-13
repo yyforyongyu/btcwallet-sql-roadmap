@@ -2,6 +2,8 @@
 
 Component: **public transaction spend scenario**.
 
+Type: **Test**.
+
 Dependencies: **[Task 415][t415], [Task 433][t433], [Task 434][t434],
 [Task 435][t435], and [Task 436][t436]**.
 

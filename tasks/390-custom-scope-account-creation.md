@@ -2,6 +2,8 @@
 
 Component: **AccountManager custom scope and SQL key-scope/account mutation**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 343][t343], [Task 387][t387], and [Task 389][t389]**.
 
 ## Rationale

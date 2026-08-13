@@ -2,6 +2,8 @@
 
 Component: **AddressManager SQL raw-import mutation**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 332][t332], [Task 364][t364], and [Task 402][t402]**.
 
 ## Rationale

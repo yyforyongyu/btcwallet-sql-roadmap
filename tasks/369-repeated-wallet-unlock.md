@@ -2,6 +2,8 @@
 
 Component: **Controller**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

@@ -2,6 +2,8 @@
 
 Component: **public wallet receive scenario**.
 
+Type: **Test**.
+
 Dependencies: **[Task 415][t415], [Task 429][t429], [Task 430][t430],
 [Task 431][t431], [Task 433][t433], and [Task 436][t436]**.
 

@@ -2,7 +2,9 @@
 
 Component: **AccountManager and account-derivation Vault operation**.
 
-Dependencies: **[Task 352][t352] and [Task 354][t354]**.
+Type: **Refactor**.
+
+Dependencies: **[Task 352][t352], [Task 354][t354], and [Task 390][t390]**.
 
 ## Rationale
 
@@ -13,40 +15,43 @@ write. This gives Wallet and Store transaction code secret ownership that ADR
 
 ## Details
 
-- Add only the typed Vault preparation operation needed by root-derived
-  AccountManager account creation. It receives an already validated scope and
-  account number without deciding whether allocation was sequential or exact.
+- Add only the typed Vault preparation operation needed by the existing
+  root-derived AccountManager paths from Tasks 343 and 390. It receives an
+  already validated scope and account number without deciding whether
+  allocation was sequential, exact, or in a custom scope.
 - Let WalletVault and, while maintained, LegacyWalletVault resolve their own
   encrypted root/account material and cipher provenance. Keep their backend
   implementations isolated behind the same semantic request.
-- Read the expected account cursor before mutation, derive and encrypt account
-  material in Vault, then pass only ciphertext and public facts to one short
-  operation-specific Store CAS.
+- Replace the raw maintained decrypt, derivation, and encryption preparation
+  used by the sequential, exact, and custom-scope callers. Preserve their
+  existing cursor reads and pass only the typed Vault result's ciphertext and
+  public facts to their existing short operation-specific Store CAS.
 - Run no Vault operation, derivation, encryption, or caller callback under a
   Store write transaction.
 - Zero master, account, branch, serialization, and other task-owned temporary
   material on success, error, and panic. Apply the ADR's immutable-string rule.
 - Preserve lock, watch-only, invalid-child, fingerprint, and legacy behavior.
-  Migrate the existing sequential caller; [Task 343][t343] later consumes the
-  same operation for exact root-derived accounts and [Task 390][t390] for
-  validated custom scopes.
-- Exclude account-number allocation and exact-account policy from Task 343,
-  custom-scope schema admission from Task 390, supplied XPub/path-bound
-  creation from [Task 391][t391], initial SQL genesis from Tasks 329 and 367,
-  creation validation from Task 365, and ambiguous genesis reconciliation from
-  Task 366.
+  Migrate the sequential and exact callers from [Task 343][t343] and the
+  validated custom-scope caller from [Task 390][t390] without adding a second
+  preparation workflow.
+- Exclude account-number allocation, exact-account policy, invalid-child and
+  CAS sequencing from Task 343, custom-scope schema admission from Task 390,
+  supplied XPub/path-bound creation from [Task 391][t391], initial SQL genesis
+  from Tasks 329 and 367, creation validation from Task 365, and ambiguous
+  genesis reconciliation from Task 366.
 
 ## Suggested fix
 
-Replace `buildAccountDeriveFn` with a Vault-owned account preparation request
-and a prepared ciphertext/public result. Split cursor read, Vault preparation,
-and checked Store CAS into explicit phases. Implement the legacy path inside
-LegacyWalletVault without importing SQL row identity.
+Replace the callers' raw preparation helper with a Vault-owned account
+preparation request and a prepared ciphertext/public result. Keep their
+existing cursor read and checked Store CAS phases unchanged. Implement the
+legacy path inside LegacyWalletVault without importing SQL row identity.
 
 ## Verification
 
-- External-package AccountManager tests create an ordinary account on SQLite
-  and modern kvdb with unchanged public results.
+- External-package AccountManager tests create sequential, exact, and custom-
+  scope accounts on SQLite and modern kvdb where supported, with unchanged
+  public results.
 - Spies prove AccountManager never calls Store secret reads or raw `Decrypt`
   and no Vault call executes while a Store write is open.
 - Concurrency tests cover Lock and combined passphrase rotation against account
@@ -57,8 +62,8 @@ LegacyWalletVault without importing SQL row identity.
 ## Definition of done
 
 - Root-derived account creation obtains prepared secret material only through
-  one wallet-scoped Vault operation; the current sequential caller uses it and
-  later exact/custom callers can consume it without a new secret path.
+  one wallet-scoped Vault operation; the existing sequential, exact, and
+  custom-scope callers all use it without changing their public behavior.
 - Store writes receive ciphertext and public facts only and contain no secret
   work.
 - No exact/custom, genesis, validation, reconciliation, or PSBT behavior is

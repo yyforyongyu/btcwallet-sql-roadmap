@@ -2,6 +2,8 @@
 
 Component: **Manager, AccountManager, and AddressManager**.
 
+Type: **Gap fix**.
+
 Dependencies: **None**.
 
 ## Rationale

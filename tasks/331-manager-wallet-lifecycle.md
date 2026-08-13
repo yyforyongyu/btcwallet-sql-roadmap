@@ -2,6 +2,8 @@
 
 Component: **Manager**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 368][t368]**.
 
 ## Rationale

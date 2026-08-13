@@ -2,6 +2,8 @@
 
 Component: **AccountManager public result contract**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 341][t341]**.
 
 ## Rationale

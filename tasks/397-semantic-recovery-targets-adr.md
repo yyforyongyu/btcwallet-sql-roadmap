@@ -2,6 +2,8 @@
 
 Component: **ADR 0004 targeted-recovery contract**.
 
+Type: **Design**.
+
 Dependencies: **[Task 341][t341] and [Task 400][t400]**.
 
 ## Rationale

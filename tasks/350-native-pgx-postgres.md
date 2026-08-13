@@ -2,6 +2,8 @@
 
 Component: **PostgreSQL Store**.
 
+Type: **Refactor**.
+
 Dependencies: **None**.
 
 ## Rationale

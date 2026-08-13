@@ -2,6 +2,8 @@
 
 Component: **integration-test CI matrix and chain daemon provisioning**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

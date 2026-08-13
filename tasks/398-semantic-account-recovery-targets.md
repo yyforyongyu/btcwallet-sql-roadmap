@@ -2,6 +2,8 @@
 
 Component: **Controller and Syncer recovery account selection**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 341][t341], [Task 345][t345], [Task 397][t397], and
 [Task 399][t399]**.
 

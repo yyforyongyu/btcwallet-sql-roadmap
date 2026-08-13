@@ -2,6 +2,8 @@
 
 Component: **AccountManager path-bound identity and SQL AccountStore schema**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 332][t332], [Task 337][t337], [Task 387][t387],
 [Task 388][t388], [Task 389][t389], and [Task 390][t390]**.
 

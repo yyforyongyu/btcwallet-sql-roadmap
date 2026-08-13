@@ -2,6 +2,8 @@
 
 Component: **multi-Wallet SQL integration scenario**.
 
+Type: **Test**.
+
 Dependencies: **[Task 415][t415], [Task 429][t429], [Task 431][t431],
 [Task 433][t433], [Task 434][t434], [Task 435][t435], and [Task 436][t436]**.
 

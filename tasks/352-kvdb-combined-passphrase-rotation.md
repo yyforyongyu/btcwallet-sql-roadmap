@@ -2,6 +2,8 @@
 
 Component: **LegacyWalletVault and waddrmgr passphrase rotation**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale
@@ -35,8 +37,10 @@ bucket retains the old credential facts.
   transfer or abort.
 - Exclude modern-kvdb account derivation, cursor CAS, invalid-child handling,
   and moving encryption outside Store transactions.
-  [Task 382](382-vault-account-derivation.md) owns that account-creation
-  preparation and CAS boundary.
+  [Task 343][t343] owns account-creation preparation and the cursor CAS.
+  [Task 382][t382] later replaces only that raw preparation with a typed Vault
+  operation; it does not take ownership of allocation, invalid-child, or CAS
+  semantics.
 - If Task 353 retires modern kvdb first, archive this task instead of
   implementing it.
 
@@ -67,3 +71,6 @@ copies for proven-new, and destroys the plan on every exit.
   follows the documented order.
 - The PR adds no account-creation redesign, new kvdb format, or deprecated RPC
   behavior.
+
+[t343]: 343-exact-account-creation.md
+[t382]: 382-vault-account-derivation.md
