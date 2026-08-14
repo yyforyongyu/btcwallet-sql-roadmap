@@ -35,7 +35,7 @@ blocked claims and YY's later-phase work under `Claimed Tasks`.
 | [Task 425][t425] | Isolate transaction authoring | — | — |
 | [Task 427][t427] | Test Controller credentials | Gustavo | — |
 | [Task 428][t428] | Test resync and rescan | Gustavo | — |
-| [Task 429][t429] | Test account mutations | Gustavo | — |
+| [Task 429][t429] | Test account mutations | Gustavo | [#1326][pr1326] |
 | [Task 430][t430] | Test account queries | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Gustavo | — |
 | [Task 432][t432] | Test address imports | Gustavo | — |
@@ -115,3 +115,4 @@ not authorize implementation before every dependency and gate completes.
 [pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
+[pr1326]: https://github.com/btcsuite/btcwallet/pull/1326
