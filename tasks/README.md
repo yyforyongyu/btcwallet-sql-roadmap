@@ -173,7 +173,6 @@ that structural exclusion explicitly.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
   boundary.
-- [Task 434](434-transaction-creation-itests.md): cover transaction creation
   contracts.
 - [Task 435](435-transaction-publication-itests.md): cover transaction
   publication contracts.

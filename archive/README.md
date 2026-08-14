@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 434](tasks/434-transaction-creation-itests.md) completed on 2026-08-15.
 - [Task 332](tasks/332-watch-only-script-policy.md) completed on 2026-08-15.
 - [Task 433](tasks/433-wallet-sync-test-boundary.md) completed on 2026-08-13.
 - [Task 341](tasks/341-public-role-contract.md) completed on 2026-08-13.

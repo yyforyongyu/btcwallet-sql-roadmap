@@ -28,7 +28,6 @@ placement.
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 434][t434] | Test transaction creation | Test | Abdullahi | [#1316][pr1316] |
 | [Task 435][t435] | Test transaction publication | Test | Abdullahi | — |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | — |
@@ -87,13 +86,11 @@ not authorize implementation before every dependency and gate completes.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t434]: tasks/434-transaction-creation-itests.md
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
-[pr1316]: https://github.com/btcsuite/btcwallet/pull/1316
 [pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
