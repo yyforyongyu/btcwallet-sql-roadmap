@@ -29,6 +29,11 @@ gate is complete.
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
 | Agent workflow | [AGENTS.md](AGENTS.md) |
 | Historical work | [archive/](archive/) |
+| Derived machine-readable graph | [DEPENDENCY_GRAPH.json](DEPENDENCY_GRAPH.json) |
+
+`DEPENDENCY_GRAPH.json` is an inspection snapshot, not a source of truth. It
+records its source commit and includes direct edges, transitive closures,
+dependency components, and scheduling-impact counts.
 
 Do not duplicate task types, dependencies, or the complete backlog in this
 file. Each task owns its type, scope, and dependency contract, QUEUE groups the
