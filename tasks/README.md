@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **452**.
+The next free task number is **453**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -14,8 +14,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
 - [Task 331](331-manager-wallet-lifecycle.md): fence Manager admission and Store
   closure.
-  script-import policy.
-  support.
 - [Task 340](340-durable-database-identity.md): bind SQL databases to schema and
   network identity.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
@@ -46,7 +44,6 @@ Grouping here does not create dependency or scheduling authority.
   atomically.
 - [Task 345](345-durable-watch-registration.md): persist SQL account discovery
   mode.
-  identity.
 - [Task 361](361-kvdb-imported-xpub-derivation.md): support kvdb imported-XPub
   derivation.
 - [Task 363](363-recovery-scan-work-bound.md): bound aggregate recovery
@@ -94,10 +91,11 @@ Grouping here does not create dependency or scheduling authority.
   through the Syncer.
 - [Task 403](403-raw-import-watch-obligations.md): persist raw imports with
   live-watch obligations.
+- [Task 452](452-key-only-recovery-derivation.md): exclude key-only accounts
+  from recovery derivation.
 
 ## Chain and synchronization
 
-  script-import policy.
 - [Task 334](334-shared-chain-state.md): supersede ADR 0002 with SQL shared-
   chain ownership.
 - [Task 370](370-chain-source-delivery.md): prepare ordered Manager chain
@@ -172,8 +170,6 @@ that structural exclusion explicitly.
   and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
-  boundary.
-  contracts.
 - [Task 435](435-transaction-publication-itests.md): cover transaction
   publication contracts.
 - [Task 436](436-transaction-read-itests.md): cover transaction read contracts.

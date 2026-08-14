@@ -2,7 +2,7 @@
 
 Component: **AccountManager public result contract**.
 
-Type: **Refactor**.
+Type: **Gap fix**.
 
 Dependencies: **[Task 341][t341]**.
 
