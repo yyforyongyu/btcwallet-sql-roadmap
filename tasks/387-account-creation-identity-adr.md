@@ -56,5 +56,5 @@ Accepted ADR text fixes the final custom/path-bound
 identity and request contract so later tasks need no product decision, while
 changing no Go or SQL source.
 
-[t332]: 332-watch-only-script-policy.md
+[t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md

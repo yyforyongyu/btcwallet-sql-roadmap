@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **123 tasks**, with **118 remaining open**. Open tasks are
+The roadmap contains **123 tasks**, with **117 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -30,7 +30,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 38 open
+## Phase 1 — lnd integration · 37 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -39,7 +39,6 @@ separately accepted task.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 332][t332] | open | Manager, AccountManager, and AddressManager | Gap fix | Define watch-only and script-import policy | — |
 | [Task 337][t337] | open | Wallet public derivation and Signer numeric adapter | Bug fix | Restore SQL imported-XPub public derivation | — |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | 359 |
 | [Task 342][t342] | open | wallet configuration | Bug fix | Accept bounded recovery windows | — |
@@ -212,10 +211,11 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 5
+## Done · 6
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
+| [Task 332][t332] | 1 | Manager, AccountManager, and AddressManager | Gap fix | Define watch-only and script-import policy | [#1320][pr1320] |
 | [Task 333][t333] | 3 | Manager and integration-test harness | Gap fix | Add PostgreSQL Manager and harness support | [#1303][pr1303] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |

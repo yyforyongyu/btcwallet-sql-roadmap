@@ -14,7 +14,6 @@ placement.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 332][t332] | Define watch-only policy | Gap fix | YY + Gustavo | [#1320][pr1320] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 342][t342] | Bound recovery windows | Bug fix | — | — |
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | — | — |
@@ -68,7 +67,6 @@ not authorize implementation before every dependency and gate completes.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
-[t332]: tasks/332-watch-only-script-policy.md
 [t334]: tasks/334-shared-chain-state.md
 [t337]: tasks/337-imported-xpub-derivation.md
 [t340]: tasks/340-durable-database-identity.md
@@ -93,7 +91,6 @@ not authorize implementation before every dependency and gate completes.
 [t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
-[pr1320]: https://github.com/btcsuite/btcwallet/pull/1320
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
 [pr1316]: https://github.com/btcsuite/btcwallet/pull/1316

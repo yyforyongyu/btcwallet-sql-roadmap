@@ -97,7 +97,6 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Chain and synchronization
 
-- [Task 332](332-watch-only-script-policy.md): define watch-only and
   script-import policy.
 - [Task 334](334-shared-chain-state.md): supersede ADR 0002 with SQL shared-
   chain ownership.
