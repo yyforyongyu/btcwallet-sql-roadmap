@@ -27,9 +27,10 @@ Use these terms precisely:
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
   Every active task must have no open hard dependencies. Include every such
   Phase 1 task and dependency-ready later-phase work assigned to developers
-  other than YY. Put unclaimed Phase 1 work with open hard dependencies under
-  `Blocked Phase 1 Tasks`. Park every claimed task with open hard dependencies
-  and YY's later-phase assignments under `Claimed Tasks`.
+  other than YY. Put every Phase 1 task with open hard dependencies under
+  `Blocked Phase 1 Tasks`, preserving its claimant and PR when present. Park
+  claimed later-phase work under `Claimed Tasks` unless the active rule above
+  places it under `Active Tasks`.
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
 - **In progress** means implementation has started. Represent it with both a
@@ -57,9 +58,9 @@ approve an exception explicitly, the prerequisite contract must be frozen, and
 the dependent PR must remain unmergeable until the prerequisite merges.
 
 Refresh ACTIVE's three task lists whenever a claim, task dependency, task
-phase, or task status changes. The Phase 1 subset of `Active Tasks`, `Blocked
-Phase 1 Tasks`, and `Claimed Tasks` must partition every open Phase 1 task
-exactly once. No task appears in more than one list.
+phase, or task status changes. `Active Tasks` and `Blocked Phase 1 Tasks` must
+partition every open Phase 1 task exactly once. `Claimed Tasks` contains parked
+claims outside the current phase. No task appears in more than one list.
 
 ## Task types and priority
 

@@ -8,10 +8,11 @@ here and archive its task file.
 Phase 1 is the current development focus. Every task in this list has no open
 hard dependencies. It contains all dependency-ready Phase 1 tasks and
 dependency-ready later-phase work assigned to developers other than YY. Put
-unclaimed Phase 1 work with open hard dependencies under `Blocked Phase 1
-Tasks`. Park blocked claims and YY's later-phase work under `Claimed Tasks`.
-Type guides which ready work to select first; it does not change readiness or
-list placement.
+all Phase 1 work with open hard dependencies under `Blocked Phase 1 Tasks`,
+whether claimed or unclaimed. Park claimed later-phase work under `Claimed
+Tasks` unless the active rule above places it under `Active Tasks`. Type guides
+which ready work to select first; it does not change readiness or list
+placement.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
@@ -44,60 +45,62 @@ list placement.
 
 ## Blocked Phase 1 Tasks
 
-These unclaimed Phase 1 tasks have open hard dependencies. They remain outside
-the current focus until every hard dependency completes. Task files own all
-dependency edges, and `QUEUE.md` owns their delivery phase.
+These Phase 1 tasks have open hard dependencies. They remain outside the
+current focus until every hard dependency completes, while claimant and PR
+columns preserve any existing ownership. Task files own all dependency edges,
+and `QUEUE.md` owns their delivery phase.
 
-| Task | Description | Type |
-| --- | --- | --- |
-| [Task 330][t330] | Reject duplicate wallet creation | Bug fix |
-| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix |
-| [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix |
-| [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix |
-| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix |
-| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix |
-| [Task 348][t348] | Watch PSBT change before return | Bug fix |
-| [Task 349][t349] | Implement transaction invalidation | Gap fix |
-| [Task 356][t356] | Defer change-script allocation | Bug fix |
-| [Task 358][t358] | Make Manager creation cancellable | Gap fix |
-| [Task 364][t364] | Persist live-watch obligations | Gap fix |
-| [Task 366][t366] | Reconcile SQL genesis commits | Bug fix |
-| [Task 367][t367] | Bound SQL genesis secrets | Bug fix |
-| [Task 388][t388] | Reject colliding account XPub identities | Bug fix |
-| [Task 389][t389] | Reconcile runtime account commits | Bug fix |
-| [Task 390][t390] | Create accounts in custom scopes | Gap fix |
-| [Task 391][t391] | Create path-bound watch-only accounts | Gap fix |
-| [Task 392][t392] | Consume account discovery mode | Gap fix |
-| [Task 393][t393] | Reject key-only receiving allocation | Gap fix |
-| [Task 394][t394] | Exclude key-only ownership locators | Gap fix |
-| [Task 395][t395] | Allocate durable key-only locators | Gap fix |
-| [Task 396][t396] | Return the oldest unused address | Bug fix |
-| [Task 399][t399] | Isolate persisted recovery targets | Bug fix |
-| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix |
-| [Task 402][t402] | Replay live-watch obligations | Gap fix |
-| [Task 404][t404] | Validate transaction input amounts | Bug fix |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix |
-| [Task 406][t406] | Release PSBT funding leases | Gap fix |
-| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix |
-| [Task 408][t408] | Watch direct transaction change | Bug fix |
-| [Task 409][t409] | Normalize transaction input edges | Gap fix |
-| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix |
-| [Task 411][t411] | Reject children of terminal transactions | Bug fix |
-| [Task 412][t412] | Expose invalidation with publication ordering | Gap fix |
-| [Task 422][t422] | Make Manager loading cancellable | Gap fix |
-| [Task 452][t452] | Exclude key-only recovery derivation | Gap fix |
+| Task | Description | Type | Claimant | PR |
+| --- | --- | --- | --- | --- |
+| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | YY | — |
+| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | — | — |
+| [Task 331][t331] | Fence Manager lifecycle | Bug fix | YY | — |
+| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | — | — |
+| [Task 340][t340] | Persist database identity | Bug fix | YY | — |
+| [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
+| [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
+| [Task 345][t345] | Persist account discovery mode | Gap fix | YY | — |
+| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | — | — |
+| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | — | — |
+| [Task 348][t348] | Watch PSBT change before return | Bug fix | — | — |
+| [Task 349][t349] | Implement transaction invalidation | Gap fix | — | — |
+| [Task 356][t356] | Defer change-script allocation | Bug fix | — | — |
+| [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
+| [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
+| [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | — | — |
+| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | — | — |
+| [Task 388][t388] | Reject colliding account XPub identities | Bug fix | — | — |
+| [Task 389][t389] | Reconcile runtime account commits | Bug fix | — | — |
+| [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
+| [Task 391][t391] | Create path-bound watch-only accounts | Gap fix | — | — |
+| [Task 392][t392] | Consume account discovery mode | Gap fix | — | — |
+| [Task 393][t393] | Reject key-only receiving allocation | Gap fix | — | — |
+| [Task 394][t394] | Exclude key-only ownership locators | Gap fix | — | — |
+| [Task 395][t395] | Allocate durable key-only locators | Gap fix | — | — |
+| [Task 396][t396] | Return the oldest unused address | Bug fix | — | — |
+| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
+| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | — | — |
+| [Task 402][t402] | Replay live-watch obligations | Gap fix | — | — |
+| [Task 404][t404] | Validate transaction input amounts | Bug fix | — | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | — | — |
+| [Task 406][t406] | Release PSBT funding leases | Gap fix | — | — |
+| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | — | — |
+| [Task 408][t408] | Watch direct transaction change | Bug fix | — | — |
+| [Task 409][t409] | Normalize transaction input edges | Gap fix | — | — |
+| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | — | — |
+| [Task 411][t411] | Reject children of terminal transactions | Bug fix | — | — |
+| [Task 412][t412] | Expose invalidation with publication ordering | Gap fix | — | — |
+| [Task 422][t422] | Make Manager loading cancellable | Gap fix | — | — |
+| [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
 
 ## Claimed Tasks
 
-These tasks have owners but are parked outside the current focus. A claim does
-not authorize implementation before every dependency and gate completes.
+These claimed tasks sit outside the current Phase 1 delivery phase and are not
+listed under `Active Tasks` by the placement rule above. A claim does not
+authorize implementation before every dependency and gate completes.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
-| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 1 | YY | — |
-| [Task 331][t331] | Fence Manager lifecycle | Bug fix | 1 | YY | — |
-| [Task 340][t340] | Persist database identity | Bug fix | 1 | YY | — |
-| [Task 345][t345] | Persist account discovery mode | Gap fix | 1 | YY | — |
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 2 | YY | [#1321][pr1321] |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
 
@@ -109,10 +112,11 @@ not authorize implementation before every dependency and gate completes.
 - Gustavo's Phase 3 series, Tasks 427–432, and Abdullahi's remaining Phase 3
   series, Tasks 435–437, already started and remain active as explicit series
   exceptions. Do not add work to either series before it clears.
-- YY's blocked Phase 1 Tasks 329, 331, 340, and 345 remain claimed. YY's Phase
-  2 Task 350 and Phase 3 Task 416 remain parked. Dependency readiness for Phase
-  1 Tasks 334, 368, 377, and 425 does not override the no-new-start rule above;
-  Task 334 remains within the grandfathered series.
+- YY's blocked Phase 1 Tasks 329, 331, 340, and 345 remain claimed under
+  `Blocked Phase 1 Tasks`. YY's Phase 2 Task 350 and Phase 3 Task 416 remain
+  parked. Dependency readiness for Phase 1 Tasks 334, 368, 377, and 425 does
+  not override the no-new-start rule above; Task 334 remains within the
+  grandfathered series.
 - Outside the exceptions above, each developer may have only one task in
   progress at a time.
 
