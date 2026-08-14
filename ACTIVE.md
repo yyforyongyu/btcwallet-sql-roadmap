@@ -19,9 +19,9 @@ placement.
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | — | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
-| [Task 377][t377] | Return wallet-owned accounts | Refactor | — | — |
+| [Task 377][t377] | Return wallet-owned accounts | Refactor | YY | — |
 | [Task 400][t400] | Define live-watch semantics | Design | YY | [#1322][pr1322] |
-| [Task 425][t425] | Isolate transaction authoring | Refactor | — | — |
+| [Task 425][t425] | Isolate transaction authoring | Refactor | YY | — |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | — |
 | [Task 428][t428] | Test resync and rescan | Test | Gustavo | — |
 | [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
