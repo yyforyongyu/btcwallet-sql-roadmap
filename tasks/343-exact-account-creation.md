@@ -5,7 +5,7 @@ Component: **AccountManager root-derived creation and SQL AccountStore CAS**.
 Type: **Gap fix**.
 
 Dependencies: **[Task 332][t332], [Task 377][t377], [Task 388][t388],
-[Task 392][t392], [Task 393][t393], [Task 394][t394], and [Task 398][t398]**.
+[Task 392][t392], [Task 393][t393], [Task 394][t394], and [Task 452][t452]**.
 
 ## Rationale
 
@@ -86,4 +86,4 @@ generic reconciliation work is included.
 [t392]: 392-discovery-mode-account-creation.md
 [t393]: 393-key-only-receiving-rejection.md
 [t394]: 394-key-only-transaction-ownership.md
-[t398]: 398-semantic-account-recovery-targets.md
+[t452]: 452-key-only-recovery-derivation.md
