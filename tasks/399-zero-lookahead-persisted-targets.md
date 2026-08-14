@@ -2,6 +2,8 @@
 
 Component: **Syncer recovery initialization and account-scoped Store reads**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 342][t342] and [Task 345][t345]**.
 
 ## Rationale

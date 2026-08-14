@@ -2,6 +2,8 @@
 
 Component: **AddressManager ScriptForOutput and script Vault operation**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 352][t352] and [Task 354][t354]**.
 
 ## Rationale

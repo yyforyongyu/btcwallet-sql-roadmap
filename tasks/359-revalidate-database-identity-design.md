@@ -2,6 +2,8 @@
 
 Component: **Manager and SQL Store design**.
 
+Type: **Design**.
+
 Dependencies: **None**.
 
 ## Rationale

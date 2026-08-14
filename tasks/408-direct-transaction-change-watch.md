@@ -2,6 +2,8 @@
 
 Component: **TxCreator and AddressManager**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 344][t344], [Task 356][t356], and [Task 425][t425]**.
 
 ## Rationale

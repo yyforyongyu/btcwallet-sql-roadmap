@@ -2,6 +2,8 @@
 
 Component: **SQL UTXO schema**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 351][t351]**.
 
 ## Rationale

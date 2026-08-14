@@ -2,6 +2,8 @@
 
 Component: **UnsafeSigner raw private-key boundary**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 384][t384]**.
 
 ## Rationale

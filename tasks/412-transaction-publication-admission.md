@@ -3,6 +3,8 @@
 Component: **TxWriter public contract, TxPublisher, and transaction graph
 admission**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 349][t349]**.
 
 ## Rationale

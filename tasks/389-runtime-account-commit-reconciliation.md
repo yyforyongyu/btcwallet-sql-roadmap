@@ -2,6 +2,8 @@
 
 Component: **AccountManager and SQL AccountStore account result reader**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 343][t343]**.
 
 ## Rationale

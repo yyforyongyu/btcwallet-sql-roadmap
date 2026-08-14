@@ -2,6 +2,8 @@
 
 Component: **SQL UTXO and normalized-input schema**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 351][t351], [Task 409][t409], and [Task 410][t410]**.
 
 ## Rationale

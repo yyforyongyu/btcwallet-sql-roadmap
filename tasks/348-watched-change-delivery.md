@@ -2,6 +2,8 @@
 
 Component: **PsbtManager and AddressManager**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 344][t344], [Task 406][t406], and [Task 425][t425]**.
 
 ## Rationale

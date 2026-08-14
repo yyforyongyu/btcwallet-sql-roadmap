@@ -2,6 +2,8 @@
 
 Component: **wallet UtxoManager benchmarks**.
 
+Type: **Benchmark**.
+
 Dependencies: **[Task 416][t416]**.
 
 ## Rationale

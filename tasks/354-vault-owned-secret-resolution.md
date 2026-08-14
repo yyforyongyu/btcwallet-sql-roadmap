@@ -2,6 +2,8 @@
 
 Component: **ADR 0010 secret-use contract**.
 
+Type: **Design**.
+
 Dependencies: **None**, plus durable disposition of draft btcwallet PR #1279
 before ADR acceptance.
 

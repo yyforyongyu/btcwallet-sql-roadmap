@@ -2,6 +2,8 @@
 
 Component: **recovery horizon derivation**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 342][t342]**.
 
 ## Rationale

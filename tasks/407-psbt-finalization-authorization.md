@@ -2,6 +2,8 @@
 
 Component: **PsbtManager FinalizePsbt**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 347][t347]**.
 
 ## Rationale

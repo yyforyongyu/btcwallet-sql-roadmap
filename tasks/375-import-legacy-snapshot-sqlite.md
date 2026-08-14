@@ -2,6 +2,8 @@
 
 Component: **SQLite migration importer**.
 
+Type: **Migration**.
+
 Dependencies: **[Task 329][t329], [Task 374][t374], and [Task 411][t411]**.
 
 ## Rationale

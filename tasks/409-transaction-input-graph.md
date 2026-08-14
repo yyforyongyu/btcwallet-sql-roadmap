@@ -2,6 +2,8 @@
 
 Component: **SQL schema and TxStore ingestion**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 340][t340] and [Task 424][t424]**.
 
 ## Rationale

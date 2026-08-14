@@ -2,8 +2,10 @@
 
 Component: **Signer and primitive key-use Vault operations**.
 
-Dependencies: **[Task 337][t337], [Task 352][t352], [Task 354][t354], and
-[Task 383][t383]**.
+Type: **Refactor**.
+
+Dependencies: **[Task 337][t337], [Task 347][t347], [Task 352][t352],
+[Task 354][t354], and [Task 383][t383]**.
 
 ## Rationale
 
@@ -28,6 +30,11 @@ to own transaction and digest policy.
   Return only public keys, fixed-size shared secrets, or signature values.
 - Wallet computes and validates transaction digests, sighash semantics,
   scripts, witnesses, and spend policy before invoking primitive Vault signing.
+- Consume Task 347's authorization-bound tweak validation while preserving it
+  as the sole PSBT ownership, persisted-identity, sighash, and
+  tweak-authorization owner. This later refactor replaces primitive key and
+  tweak ownership without changing the check ordering, authorization result,
+  or which inputs may be signed.
 - Replace maintained private-key callback tweakers with the smallest immutable
   typed tweak descriptor. Validate it before secret lookup and apply it inside
   Vault. Leave deprecated callback APIs unchanged.
@@ -35,7 +42,8 @@ to own transaction and digest policy.
   script-decryption route.
 - Preserve lock, watch-only, not-mine, imported-XPub public-only, and signature
   serialization behavior.
-- Do not add PSBT authorization from Task 347 or UnsafeSigner raw extraction.
+- Do not add or redefine PSBT authorization from Task 347 or UnsafeSigner raw
+  extraction.
 - Do not add the proposed public `wallet/signing` package or digest request
   types from PR #1279 unless Task 354 records an exact accepted merge commit.
   If no artifact is accepted, keep primitive request types internal to
@@ -70,6 +78,7 @@ operation guard. Keep Wallet assembly unchanged.
   mutation is included.
 
 [t337]: 337-imported-xpub-derivation.md
+[t347]: 347-psbt-signing-authorization.md
 [t352]: 352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
 [t383]: 383-vault-output-script-resolution.md

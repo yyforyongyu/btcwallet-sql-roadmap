@@ -2,6 +2,8 @@
 
 Component: **TxCreator and the `txsizes` module**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

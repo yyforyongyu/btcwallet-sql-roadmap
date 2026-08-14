@@ -2,6 +2,8 @@
 
 Component: **ADR 0004 and ADR 0005 synchronization contract**.
 
+Type: **Design**.
+
 Dependencies: **None**.
 
 ## Rationale

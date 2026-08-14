@@ -2,6 +2,8 @@
 
 Component: **SQL account schema and AccountStore persistence**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 340][t340]**.
 
 ## Rationale

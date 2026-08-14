@@ -2,6 +2,8 @@
 
 Component: **AccountManager and SQL AccountStore create inputs**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 345][t345]**.
 
 ## Rationale

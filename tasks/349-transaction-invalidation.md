@@ -2,6 +2,8 @@
 
 Component: **TxStore internal invalidation workflow**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 339][t339], [Task 409][t409], [Task 410][t410], and
 [Task 411][t411]**.
 

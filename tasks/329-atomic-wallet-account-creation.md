@@ -2,6 +2,8 @@
 
 Component: **Manager SQL genesis and SQL Store**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 332][t332], [Task 337][t337], and
 [Task 345][t345]**.
 

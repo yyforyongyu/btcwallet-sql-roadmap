@@ -2,6 +2,8 @@
 
 Component: **AccountManager mutation integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

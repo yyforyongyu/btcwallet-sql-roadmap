@@ -2,6 +2,8 @@
 
 Component: **Legacy migration account and secret extraction**.
 
+Type: **Migration**.
+
 Dependencies: **[Task 332][t332] and [Task 335][t335]**.
 
 ## Rationale

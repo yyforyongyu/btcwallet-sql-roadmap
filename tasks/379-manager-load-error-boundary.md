@@ -2,6 +2,8 @@
 
 Component: **Manager Load public error boundary**.
 
+Type: **Bug fix**.
+
 Dependencies: **None**.
 
 ## Rationale

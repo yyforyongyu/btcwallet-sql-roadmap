@@ -2,6 +2,8 @@
 
 Component: **Manager and SQL Store**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 359][t359]**.
 
 ## Rationale

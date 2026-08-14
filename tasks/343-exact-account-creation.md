@@ -2,9 +2,10 @@
 
 Component: **AccountManager root-derived creation and SQL AccountStore CAS**.
 
-Dependencies: **[Task 332][t332], [Task 377][t377], [Task 382][t382],
-[Task 388][t388], [Task 392][t392], [Task 393][t393], [Task 394][t394], and
-[Task 398][t398]**.
+Type: **Gap fix**.
+
+Dependencies: **[Task 332][t332], [Task 377][t377], [Task 388][t388],
+[Task 392][t392], [Task 393][t393], [Task 394][t394], and [Task 398][t398]**.
 
 ## Rationale
 
@@ -26,8 +27,10 @@ external-XPub identity are independent extensions.
 - For exact creation, require a vacant number and atomically update the cursor
   to checked `max(current, exact+1)`. Lower sparse holes remain available for
   later exact creation.
-- Derive both branches outside the Store write through Task 382's typed Vault
-  operation. An invalid exact child leaves account and cursor unchanged.
+- Read and validate the expected account cursor, then use the maintained raw
+  Vault decrypt/encrypt boundary and wallet derivation helpers to prepare the
+  account key, both branches, ciphertext, and public facts outside the Store
+  write. An invalid exact child leaves account and cursor unchanged.
 - For sequential creation, skip and durably consume invalid account or branch
   children in one bounded CAS. Persist terminal exhaustion so retry cannot
   loop forever.
@@ -47,14 +50,17 @@ external-XPub identity are independent extensions.
 - Exclude custom scopes, supplied XPub accounts, arbitrary numberless import
   changes, Manager genesis (Task 329), and genesis secret ownership
   (Task 367).
+- [Task 382](382-vault-account-derivation.md) later moves this preparation
+  behind a typed Vault operation without changing allocation, invalid-child
+  handling, CAS sequencing, or public behavior.
 
 ## Suggested fix
 
-Prepare root-derived material through Task 382, then commit
-one expected-cursor account CAS that handles nil/exact allocation, skipped
-children, account facts, secrets, and discovery mode. Keep the maintained kvdb
-adapter on its existing sequential operation instead of sending it through the
-SQL CAS.
+Prepare root-derived material with the maintained Vault before opening the
+Store write, then commit one expected-cursor account CAS that handles
+nil/exact allocation, skipped children, account facts, secrets, and discovery
+mode. Keep the maintained kvdb adapter on its existing sequential operation
+instead of sending it through the SQL CAS.
 
 ## Verification
 
@@ -63,7 +69,8 @@ creation, lower-hole exact fill, bounds, concurrent exact/sequential requests,
 invalid account and branch children, exhaustion, mode selection, restart, and
 ambiguous return without retry. Modern-kvdb fixtures preserve the existing
 sequential subset and prove exact or SQL-only requests fail before Vault or
-Store mutation.
+Store mutation. Spies prove derivation and Vault decrypt/encrypt work finish
+before the Store write opens.
 
 ## Definition of done
 
@@ -75,7 +82,6 @@ generic reconciliation work is included.
 
 [t332]: 332-watch-only-script-policy.md
 [t377]: 377-account-manager-wallet-dto.md
-[t382]: 382-vault-account-derivation.md
 [t388]: 388-runtime-account-xpub-collisions.md
 [t392]: 392-discovery-mode-account-creation.md
 [t393]: 393-key-only-receiving-rejection.md

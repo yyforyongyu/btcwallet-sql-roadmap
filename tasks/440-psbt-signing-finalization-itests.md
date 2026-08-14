@@ -2,6 +2,8 @@
 
 Component: **PsbtManager signing integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

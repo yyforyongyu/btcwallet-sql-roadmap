@@ -2,6 +2,8 @@
 
 Component: **PsbtManager packet integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

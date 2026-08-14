@@ -2,6 +2,8 @@
 
 Component: **Legacy migration transaction and sync extraction**.
 
+Type: **Migration**.
+
 Dependencies: **[Task 373][t373]**.
 
 ## Rationale

@@ -2,6 +2,8 @@
 
 Component: **`txauthor` input sources and TxCreator source adapters**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 357][t357]**.
 
 ## Rationale

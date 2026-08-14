@@ -2,6 +2,8 @@
 
 Component: **Manager creation preflight**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 332][t332] and [Task 341][t341]**.
 
 ## Rationale

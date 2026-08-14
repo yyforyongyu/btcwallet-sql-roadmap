@@ -2,6 +2,8 @@
 
 Component: **Manager chain coordinator and Wallet processors**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 331][t331], [Task 333][t333], [Task 334][t334], and
 [Task 371][t371]**.
 

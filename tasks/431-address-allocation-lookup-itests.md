@@ -2,6 +2,8 @@
 
 Component: **AddressManager allocation and lookup integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

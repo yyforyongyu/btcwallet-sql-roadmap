@@ -2,6 +2,8 @@
 
 Component: **TxWriter integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

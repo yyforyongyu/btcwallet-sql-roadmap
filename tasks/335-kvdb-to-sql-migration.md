@@ -2,6 +2,8 @@
 
 Component: **Legacy migration source snapshot**.
 
+Type: **Migration**.
+
 Dependencies: **None**.
 
 ## Rationale

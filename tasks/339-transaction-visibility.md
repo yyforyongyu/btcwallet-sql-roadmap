@@ -2,6 +2,8 @@
 
 Component: **TxReader**.
 
+Type: **Gap fix**.
+
 Dependencies: **None**.
 
 ## Rationale

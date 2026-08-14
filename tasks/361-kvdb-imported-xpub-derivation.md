@@ -2,6 +2,8 @@
 
 Component: **modern kvdb public derivation adapter**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 337](337-imported-xpub-derivation.md)**.
 
 ## Rationale
@@ -13,7 +15,7 @@ account identity as a public number.
 
 ## Details
 
-- Reuse [Task 341](341-public-role-contract.md)'s wallet-owned
+- Reuse [Task 341](../archive/tasks/341-public-role-contract.md)'s wallet-owned
   scope-plus-exactly-one-name-or-number selector and
   [Task 337](337-imported-xpub-derivation.md)'s additive public derivation
   request without changing the `Signer` interface.

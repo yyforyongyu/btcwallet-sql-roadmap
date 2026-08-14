@@ -2,6 +2,8 @@
 
 Component: **RecoveryState public contract and internal Syncer adapter**.
 
+Type: **Refactor**.
+
 Dependencies: **[Task 360][t360]**.
 
 ## Rationale

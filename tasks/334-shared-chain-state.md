@@ -2,6 +2,8 @@
 
 Component: **SQL wallet architecture documentation**.
 
+Type: **Design**.
+
 Dependencies: **None**.
 
 ## Rationale

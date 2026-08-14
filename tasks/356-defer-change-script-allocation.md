@@ -2,6 +2,8 @@
 
 Component: **TxCreator and `txauthor`**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 355][t355], [Task 357][t357], and [Task 404][t404]**, plus
 released nested-module changes from Tasks 355 and 357.
 

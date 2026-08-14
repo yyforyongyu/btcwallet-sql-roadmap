@@ -2,6 +2,8 @@
 
 Component: **wallet Controller and Syncer benchmarks**.
 
+Type: **Benchmark**.
+
 Dependencies: **[Task 416][t416]**.
 
 ## Rationale

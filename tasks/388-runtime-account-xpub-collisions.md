@@ -2,6 +2,8 @@
 
 Component: **SQL AccountStore account-creation admission**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 341][t341] and [Task 387][t387]**.
 
 ## Rationale

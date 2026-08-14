@@ -2,6 +2,8 @@
 
 Component: **wallet-owned account identity types**.
 
+Type: **Gap fix**.
+
 Dependencies: **[Task 360][t360]**.
 
 ## Rationale
@@ -52,4 +54,4 @@ consumed by the AccountInfo DTO and Task 365.
 - No DTO conversion, backend error translation, recovery implementation, or
   backend ID is included.
 
-[t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md
+[t360]: 360-document-kvdb-adapter-identity.md

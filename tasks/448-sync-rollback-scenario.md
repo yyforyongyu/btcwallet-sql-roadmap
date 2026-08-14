@@ -2,6 +2,8 @@
 
 Component: **public Wallet reorganization scenario**.
 
+Type: **Test**.
+
 Dependencies: **[Task 415][t415], [Task 428][t428], [Task 433][t433], and
 [Task 436][t436]**.
 

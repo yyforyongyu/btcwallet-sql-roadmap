@@ -2,6 +2,8 @@
 
 Component: **ADR 0013 and the modern kvdb adapter contract**.
 
+Type: **Design**.
+
 Dependencies: **None**.
 
 ## Rationale
@@ -22,8 +24,9 @@ ID. ADR 0013 must state the distinction before public wallet roles are changed.
   exported `RecoveryState.AccountID` accessor.
 - Produce only the ADR amendment. Semantic public identity belongs to
   [Task 341](341-public-role-contract.md), AccountManager result conversion
-  belongs to [Task 377](377-account-manager-wallet-dto.md), and the private
-  recovery adapter belongs to [Task 381](381-recovery-adapter-identity.md).
+  belongs to [Task 377](../../tasks/377-account-manager-wallet-dto.md), and the
+  private recovery adapter belongs to
+  [Task 381](../../tasks/381-recovery-adapter-identity.md).
   The independent public error boundaries remain in Tasks 378–380.
 
 ## Suggested fix

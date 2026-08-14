@@ -2,6 +2,8 @@
 
 Component: **Manager chain coordinator and SQL Store rollback**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 349][t349], [Task 370][t370], and [Task 371][t371]**.
 
 ## Rationale

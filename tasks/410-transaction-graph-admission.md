@@ -2,6 +2,8 @@
 
 Component: **Wallet/Store transaction graph admission**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 334][t334] and [Task 409][t409]**.
 
 ## Rationale

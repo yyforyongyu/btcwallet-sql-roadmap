@@ -2,6 +2,8 @@
 
 Component: **Wallet sync-state publication and integration-test harness**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

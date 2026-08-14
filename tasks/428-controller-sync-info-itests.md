@@ -2,6 +2,8 @@
 
 Component: **Controller Resync and Rescan integration tests**.
 
+Type: **Test**.
+
 Dependencies: **None**.
 
 ## Rationale

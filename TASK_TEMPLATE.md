@@ -11,6 +11,8 @@ not add their scope to this task.
 
 Component: **one primary component or tightly coupled boundary**.
 
+Type: **one allowed primary type**.
+
 Dependencies: **linked tasks or None**.
 
 ## Rationale

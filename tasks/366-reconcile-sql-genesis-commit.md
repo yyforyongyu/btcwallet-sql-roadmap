@@ -2,6 +2,8 @@
 
 Component: **Manager and SQL Store genesis result**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 329][t329]**.
 
 ## Rationale

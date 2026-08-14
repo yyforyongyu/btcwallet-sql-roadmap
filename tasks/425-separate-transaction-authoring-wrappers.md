@@ -2,6 +2,8 @@
 
 Component: **Wallet transaction-authoring wrapper boundary**.
 
+Type: **Refactor**.
+
 Dependencies: **None**.
 
 ## Rationale

@@ -2,6 +2,8 @@
 
 Component: **Controller and LegacyWalletVault**.
 
+Type: **Bug fix**.
+
 Dependencies: **[Task 338](338-passphrase-result.md) and
 [Task 352](352-kvdb-combined-passphrase-rotation.md)**.
 

@@ -6,18 +6,19 @@ This repository contains planning documents, not btcwallet source code.
 
 - [README.md](README.md) explains how to use the repository.
 - [QUEUE.md](QUEUE.md) owns each roadmap task's delivery phase and status by
-  placing open work in a phase table and completed work in `Done`.
+  placing open work in a phase table and completed work with its closing PR in
+  `Done`.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
-- Individual files under [tasks/](tasks/) own scope and dependencies.
+- Individual files under [tasks/](tasks/) own type, scope, and dependencies.
 - [tasks/README.md](tasks/README.md) owns the open catalog and next number.
 - [TASK_TEMPLATE.md](TASK_TEMPLATE.md) owns the required task shape.
 - [archive/](archive/) is historical evidence, not current instruction.
 
 Do not copy the complete dependency graph into README or ACTIVE. QUEUE shows
 every roadmap task's delivery phase and open dependencies, but task files
-remain the only authority for all dependency edges and ACTIVE remains the only
-authority for live state.
+remain the only authority for type and all dependency edges, while ACTIVE
+remains the only authority for live state.
 
 ## Activity, claiming, and dependencies
 
@@ -57,6 +58,34 @@ the dependent PR must remain unmergeable until the prerequisite merges.
 Refresh ACTIVE's two task lists whenever a claim, task dependency, or task
 status changes. No task appears in both `Active Tasks` and `Claimed Tasks`.
 
+## Task types and priority
+
+Give every task exactly one primary type based on its main motivation, not
+incidental implementation details:
+
+- **Bug fix:** existing supported behavior is incorrect or unsafe.
+- **Gap fix:** behavior required by an accepted public contract, backend
+  parity, or consumer integration is missing.
+- **Feature:** optional additive behavior not required by an accepted
+  contract.
+- **Refactor:** ownership or structure changes while intended public behavior
+  remains unchanged.
+- **Test:** standalone integration, scenario, conformance, or test-cleanup
+  work.
+- **Benchmark:** measurement-only work.
+- **Design:** an ADR or contract decision required before implementation.
+- **Migration:** legacy conversion, backend retirement, or migration work.
+
+Among dependency-ready work, prioritize Bug fix and Gap fix tasks. Pull
+forward Design or Test work when it directly enables or proves one of those
+fixes. Refactors, features, benchmarks, and migrations normally follow.
+
+A Refactor must not become a hard dependency merely to force a Bug fix or Gap
+fix to use the desired final architecture. Keep that dependency only when the
+current boundary cannot implement the fix safely. Type guides which ready work
+to select first; it does not replace dependency readiness or the Active and
+Claimed rules above.
+
 ## Roadmap update workflow
 
 - Use a dedicated Git worktree under `.worktrees/` and a `roadmap/<topic>`
@@ -89,12 +118,13 @@ Keep this section order:
 
 1. `# Task NNN — imperative title`
 2. `Component: **specific owner**.`
-3. `Dependencies: **linked tasks or None**.`
-4. `## Rationale`
-5. `## Details`
-6. `## Suggested fix`
-7. `## Verification`
-8. `## Definition of done`
+3. `Type: **one allowed primary type**.`
+4. `Dependencies: **linked tasks or None**.`
+5. `## Rationale`
+6. `## Details`
+7. `## Suggested fix`
+8. `## Verification`
+9. `## Definition of done`
 
 Use `Rationale` for the concrete problem, `Details` for minimal scope and
 explicit exclusions, `Suggested fix` for the smallest likely implementation,
@@ -141,13 +171,14 @@ After the implementation PR merges, use the roadmap update workflow to:
 4. update [archive/README.md](archive/README.md) and the active
    [open task catalog](tasks/README.md); and
 5. in [QUEUE.md](QUEUE.md), move that task's row from its phase table to
-   `Done`, preserve its phase there, refresh the counts, and remove its number
-   from remaining `Open dependencies` cells.
+   `Done`, preserve its phase and record its closing PR there, refresh the
+   counts, and remove its number from remaining `Open dependencies` cells.
 
-QUEUE.md keeps completed roadmap tasks in `Done` so their original delivery
-phase remains visible. Preserve the completed edge in each owning task file.
-Moving an open task between delivery phases requires an explicit
-roadmap-priority decision; it is never inferred from dependency completion.
+QUEUE.md keeps completed roadmap tasks in `Done`. Preserve a task's assigned
+phase during ordinary completion; an explicit roadmap-priority decision may
+rephase both open and completed rows so the table continues to reflect the
+current thematic map. Preserve the completed edge in each owning task file.
+Rephasing is never inferred from dependency completion.
 
 A task is complete only when **every** PR linked to it has merged. If a
 linked PR is closed unmerged, or cannot be accounted for, the task is not
