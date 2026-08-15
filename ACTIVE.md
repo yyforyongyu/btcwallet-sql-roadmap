@@ -20,7 +20,7 @@ placement.
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 339][t339] | Define transaction visibility | Gap fix | YY | — |
 | [Task 342][t342] | Bound recovery windows | Bug fix | — | — |
-| [Task 355][t355] | Correct transaction size accounting | Bug fix | YY | — |
+| [Task 355][t355] | Correct transaction size accounting | Bug fix | — | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | YY | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
 | [Task 368][t368] | Serialize Wallet lifecycle | Bug fix | YY | — |
