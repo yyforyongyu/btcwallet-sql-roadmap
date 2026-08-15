@@ -18,16 +18,16 @@ placement.
 | --- | --- | --- | --- | --- |
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
-| [Task 339][t339] | Define transaction visibility | Gap fix | — | — |
+| [Task 339][t339] | Define transaction visibility | Gap fix | YY | — |
 | [Task 342][t342] | Bound recovery windows | Bug fix | — | — |
-| [Task 355][t355] | Correct transaction size accounting | Bug fix | — | — |
-| [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
+| [Task 355][t355] | Correct transaction size accounting | Bug fix | YY | — |
+| [Task 357][t357] | Validate transaction amounts | Bug fix | YY | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
 | [Task 368][t368] | Serialize Wallet lifecycle | Bug fix | YY | — |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | — |
-| [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
-| [Task 379][t379] | Translate Manager load errors | Bug fix | — | — |
-| [Task 380][t380] | Translate address lookup errors | Bug fix | — | — |
+| [Task 378][t378] | Translate AccountManager errors | Bug fix | YY | — |
+| [Task 379][t379] | Translate Manager load errors | Bug fix | YY | — |
+| [Task 380][t380] | Translate address lookup errors | Bug fix | YY | — |
 | [Task 387][t387] | Define account-creation identity | Design | YY | — |
 | [Task 400][t400] | Define live-watch semantics | Design | YY | [#1322][pr1322] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
