@@ -23,8 +23,8 @@ placement.
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | — | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | YY | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
-| [Task 368][t368] | Serialize Wallet lifecycle | Bug fix | YY | — |
-| [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | — |
+| [Task 368][t368] | Serialize Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
+| [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | YY | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | — |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | — |
@@ -32,7 +32,7 @@ placement.
 | [Task 400][t400] | Define live-watch semantics | Design | YY | [#1322][pr1322] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
-| [Task 425][t425] | Isolate transaction authoring | Refactor | YY | — |
+| [Task 425][t425] | Isolate transaction authoring | Refactor | YY | [#1327][pr1327] |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | — |
 | [Task 428][t428] | Test resync and rescan | Test | Gustavo | — |
 | [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
@@ -195,3 +195,6 @@ authorize implementation before every dependency and gate completes.
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
 [pr1326]: https://github.com/btcsuite/btcwallet/pull/1326
+[pr1329]: https://github.com/btcsuite/btcwallet/pull/1329
+[pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
+[pr1327]: https://github.com/btcsuite/btcwallet/pull/1327
