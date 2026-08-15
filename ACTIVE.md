@@ -28,10 +28,10 @@ placement.
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | — | — |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | — | — |
-| [Task 387][t387] | Define account-creation identity | Design | — | — |
+| [Task 387][t387] | Define account-creation identity | Design | YY | — |
 | [Task 400][t400] | Define live-watch semantics | Design | YY | [#1322][pr1322] |
-| [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | — | — |
-| [Task 424][t424] | Define transaction integrity ownership | Design | — | — |
+| [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
+| [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
 | [Task 425][t425] | Isolate transaction authoring | Refactor | YY | — |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | — |
 | [Task 428][t428] | Test resync and rescan | Test | Gustavo | — |
