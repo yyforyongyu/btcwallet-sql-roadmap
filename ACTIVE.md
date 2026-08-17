@@ -39,7 +39,7 @@ placement.
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 435][t435] | Test transaction publication | Test | Abdullahi | — |
+| [Task 435][t435] | Test transaction publication | Test | Abdullahi | [#1334][pr1334] |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | — |
 
@@ -201,3 +201,4 @@ authorize implementation before every dependency and gate completes.
 [pr1332]: https://github.com/btcsuite/btcwallet/pull/1332
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
 [pr1330]: https://github.com/btcsuite/btcwallet/pull/1330
+[pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
