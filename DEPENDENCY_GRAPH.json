@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": {
-    "generated_from_commit": "5c8af5389c8d5f4c39305833dd20b2712922c1d1",
-    "generated_on": "2026-08-15",
+    "generated_from_commit": "8020a295d1c1b2ec543681e1ed3bf7f74039d9ff",
+    "generated_on": "2026-08-17",
     "task_id_range": [
       329,
       452
@@ -23,7 +23,7 @@
     "total_tasks": 124,
     "open_tasks": 117,
     "complete_tasks": 7,
-    "dependency_edges": 201,
+    "dependency_edges": 202,
     "root_tasks": 42,
     "terminal_tasks": 39,
     "dependency_ready_open_tasks": 41,
@@ -213,8 +213,8 @@
       "status": "complete",
       "phase": 1,
       "direct_dependent_count": 3,
-      "descendant_count": 34,
-      "open_descendant_count": 33
+      "descendant_count": 35,
+      "open_descendant_count": 34
     },
     {
       "task_id": 345,
@@ -240,8 +240,8 @@
       "status": "complete",
       "phase": 1,
       "direct_dependent_count": 7,
-      "descendant_count": 24,
-      "open_descendant_count": 24
+      "descendant_count": 25,
+      "open_descendant_count": 25
     },
     {
       "task_id": 393,
@@ -280,6 +280,15 @@
       "open_descendant_count": 13
     },
     {
+      "task_id": 387,
+      "title": "define custom and path-bound account identity",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 4,
+      "descendant_count": 13,
+      "open_descendant_count": 13
+    },
+    {
       "task_id": 404,
       "title": "validate transaction input-source amounts",
       "status": "open",
@@ -291,15 +300,6 @@
     {
       "task_id": 334,
       "title": "supersede ADR 0002 with SQL shared-chain ownership",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 12,
-      "open_descendant_count": 12
-    },
-    {
-      "task_id": 387,
-      "title": "define custom and path-bound account identity",
       "status": "open",
       "phase": 1,
       "direct_dependent_count": 3,
@@ -401,7 +401,7 @@
     {
       "id": 1,
       "task_count": 88,
-      "edge_count": 159,
+      "edge_count": 160,
       "open_task_count": 84,
       "task_ids": [
         329,
@@ -633,48 +633,6 @@
       340,
       345,
       392,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
-    ],
-    [
-      359,
-      340,
-      345,
-      393,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
-    ],
-    [
-      359,
-      340,
-      345,
-      394,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
-    ],
-    [
-      359,
-      340,
-      345,
-      452,
       343,
       389,
       390,
@@ -1261,6 +1219,10 @@
       "to": 391
     },
     {
+      "from": 387,
+      "to": 392
+    },
+    {
       "from": 388,
       "to": 343
     },
@@ -1782,13 +1744,14 @@
         389,
         390,
         391,
+        392,
         403,
         407
       ],
       "dependency_count": 0,
       "dependent_count": 7,
       "ancestor_count": 0,
-      "descendant_count": 24
+      "descendant_count": 25
     },
     {
       "id": 333,
@@ -1965,7 +1928,7 @@
       "status": "open",
       "phase": 1,
       "type": "Bug fix",
-      "component": "Wallet public derivation and Signer numeric adapter",
+      "component": "Wallet and Signer public derivation",
       "path": "tasks/337-imported-xpub-derivation.md",
       "dependencies": [
         341
@@ -3071,6 +3034,7 @@
         389,
         390,
         391,
+        392,
         393,
         395,
         396,
@@ -3082,7 +3046,7 @@
       "dependency_count": 0,
       "dependent_count": 3,
       "ancestor_count": 0,
-      "descendant_count": 34
+      "descendant_count": 35
     },
     {
       "id": 361,
@@ -4093,7 +4057,8 @@
       "dependents": [
         388,
         390,
-        391
+        391,
+        392
       ],
       "transitive_dependencies": [
         332,
@@ -4111,12 +4076,13 @@
         389,
         390,
         391,
+        392,
         407
       ],
       "dependency_count": 2,
-      "dependent_count": 3,
+      "dependent_count": 4,
       "ancestor_count": 2,
-      "descendant_count": 12
+      "descendant_count": 13
     },
     {
       "id": 388,
@@ -4328,18 +4294,23 @@
       "component": "AccountManager and SQL AccountStore create inputs",
       "path": "tasks/392-discovery-mode-account-creation.md",
       "dependencies": [
-        345
+        345,
+        387
       ],
       "open_dependencies": [
-        345
+        345,
+        387
       ],
       "dependents": [
         343
       ],
       "transitive_dependencies": [
+        332,
         340,
         345,
-        359
+        359,
+        360,
+        387
       ],
       "transitive_dependents": [
         336,
@@ -4354,9 +4325,9 @@
         391,
         407
       ],
-      "dependency_count": 1,
+      "dependency_count": 2,
       "dependent_count": 1,
-      "ancestor_count": 3,
+      "ancestor_count": 6,
       "descendant_count": 11
     },
     {
@@ -4498,7 +4469,7 @@
       "status": "open",
       "phase": 1,
       "type": "Bug fix",
-      "component": "AddressManager count-one compatibility semantics",
+      "component": "AddressManager count-one semantics",
       "path": "tasks/396-oldest-unused-address.md",
       "dependencies": [
         344,
