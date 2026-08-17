@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "source": {
-    "generated_from_commit": "8020a295d1c1b2ec543681e1ed3bf7f74039d9ff",
-    "generated_on": "2026-08-17",
+    "generated_from_commit": "63403f46d0058d3d37348d0eb252dcff25988de6",
+    "generated_on": "2026-08-18",
     "task_id_range": [
       329,
-      452
+      453
     ],
     "task_metadata": "tasks/*.md and archive/tasks/*.md",
     "phase_map": "QUEUE.md",
@@ -20,31 +20,31 @@
     "large_dependency_branch": "A task with at least 10 transitive dependents. This measures scheduling impact, not implementation scope or atomicity."
   },
   "summary": {
-    "total_tasks": 124,
-    "open_tasks": 117,
+    "total_tasks": 125,
+    "open_tasks": 118,
     "complete_tasks": 7,
-    "dependency_edges": 202,
+    "dependency_edges": 206,
     "root_tasks": 42,
     "terminal_tasks": 39,
     "dependency_ready_open_tasks": 41,
-    "dependency_components": 13,
-    "multi_task_dependency_components": 3,
+    "dependency_components": 12,
+    "multi_task_dependency_components": 2,
     "isolated_tasks": 10,
     "large_dependency_branch_threshold": 10,
-    "large_dependency_branches": 23,
-    "open_large_dependency_branches": 20,
+    "large_dependency_branches": 24,
+    "open_large_dependency_branches": 21,
     "complete_large_dependency_branches": 3,
     "maximum_dependency_depth_edges": 11,
     "is_dag": true,
     "tasks_by_phase": {
-      "1": 61,
+      "1": 62,
       "2": 18,
       "3": 32,
       "4": 6,
       "5": 7
     },
     "open_tasks_by_phase": {
-      "1": 57,
+      "1": 58,
       "2": 18,
       "3": 29,
       "4": 6,
@@ -52,7 +52,7 @@
     },
     "tasks_by_type": {
       "Benchmark": 5,
-      "Bug fix": 40,
+      "Bug fix": 41,
       "Design": 8,
       "Gap fix": 27,
       "Migration": 6,
@@ -74,7 +74,6 @@
     357,
     359,
     360,
-    368,
     369,
     378,
     379,
@@ -102,7 +101,8 @@
     441,
     442,
     443,
-    451
+    451,
+    453
   ],
   "terminal_task_ids": [
     330,
@@ -158,7 +158,6 @@
     357,
     359,
     365,
-    368,
     369,
     377,
     378,
@@ -186,7 +185,8 @@
     441,
     442,
     443,
-    451
+    451,
+    453
   ],
   "large_dependency_branches": [
     {
@@ -325,6 +325,24 @@
       "open_descendant_count": 12
     },
     {
+      "task_id": 453,
+      "title": "serialize Manager Wallet publication",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 2,
+      "descendant_count": 12,
+      "open_descendant_count": 12
+    },
+    {
+      "task_id": 368,
+      "title": "make Manager own Wallet lifecycle",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 5,
+      "descendant_count": 11,
+      "open_descendant_count": 11
+    },
+    {
       "task_id": 377,
       "title": "make AccountManager results wallet-owned",
       "status": "open",
@@ -370,15 +388,6 @@
       "open_descendant_count": 10
     },
     {
-      "task_id": 368,
-      "title": "serialize Wallet startup and shutdown",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 10,
-      "open_descendant_count": 10
-    },
-    {
       "task_id": 400,
       "title": "separate live watches from historical recovery",
       "status": "open",
@@ -400,9 +409,9 @@
   "dependency_components": [
     {
       "id": 1,
-      "task_count": 88,
-      "edge_count": 160,
-      "open_task_count": 84,
+      "task_count": 94,
+      "edge_count": 168,
+      "open_task_count": 90,
       "task_ids": [
         329,
         330,
@@ -485,13 +494,19 @@
         412,
         413,
         414,
+        416,
+        417,
+        418,
+        419,
+        420,
         421,
         422,
         423,
         424,
         425,
         426,
-        452
+        452,
+        453
       ]
     },
     {
@@ -525,19 +540,6 @@
     },
     {
       "id": 3,
-      "task_count": 5,
-      "edge_count": 4,
-      "open_task_count": 5,
-      "task_ids": [
-        416,
-        417,
-        418,
-        419,
-        420
-      ]
-    },
-    {
-      "id": 4,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -546,7 +548,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 4,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -555,7 +557,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 5,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -564,7 +566,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": 6,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -573,7 +575,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 7,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -582,7 +584,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": 8,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -591,7 +593,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": 9,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -600,7 +602,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": 10,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -609,7 +611,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 11,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -618,7 +620,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": 12,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -633,6 +635,48 @@
       340,
       345,
       392,
+      343,
+      389,
+      390,
+      347,
+      384,
+      385,
+      386,
+      336
+    ],
+    [
+      359,
+      340,
+      345,
+      393,
+      343,
+      389,
+      390,
+      347,
+      384,
+      385,
+      386,
+      336
+    ],
+    [
+      359,
+      340,
+      345,
+      394,
+      343,
+      389,
+      390,
+      347,
+      384,
+      385,
+      386,
+      336
+    ],
+    [
+      359,
+      340,
+      345,
+      452,
       343,
       389,
       390,
@@ -667,13 +711,8 @@
     365,
     366,
     367,
-    368,
-    331,
-    330,
-    358,
     369,
     371,
-    370,
     373,
     374,
     377,
@@ -703,28 +742,22 @@
     406,
     415,
     416,
-    417,
     418,
     419,
     420,
     421,
-    338,
-    362,
-    422,
     424,
     351,
     409,
     410,
     411,
     349,
-    372,
     375,
     376,
     353,
     412,
     413,
     414,
-    423,
     425,
     348,
     408,
@@ -764,10 +797,22 @@
     384,
     385,
     386,
-    336,
     391,
     398,
-    407
+    407,
+    453,
+    368,
+    331,
+    330,
+    338,
+    358,
+    362,
+    336,
+    370,
+    372,
+    417,
+    422,
+    423
   ],
   "edges": [
     {
@@ -1133,6 +1178,14 @@
     {
       "from": 368,
       "to": 338
+    },
+    {
+      "from": 368,
+      "to": 417
+    },
+    {
+      "from": 368,
+      "to": 422
     },
     {
       "from": 368,
@@ -1577,6 +1630,14 @@
     {
       "from": 452,
       "to": 398
+    },
+    {
+      "from": 453,
+      "to": 368
+    },
+    {
+      "from": 453,
+      "to": 422
     }
   ],
   "tasks": [
@@ -1645,14 +1706,15 @@
       "transitive_dependencies": [
         331,
         333,
-        368
+        368,
+        453
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 2,
       "dependent_count": 0,
-      "ancestor_count": 3,
+      "ancestor_count": 4,
       "descendant_count": 0
     },
     {
@@ -1677,7 +1739,8 @@
         422
       ],
       "transitive_dependencies": [
-        368
+        368,
+        453
       ],
       "transitive_dependents": [
         330,
@@ -1692,7 +1755,7 @@
       ],
       "dependency_count": 1,
       "dependent_count": 5,
-      "ancestor_count": 1,
+      "ancestor_count": 2,
       "descendant_count": 9
     },
     {
@@ -1912,14 +1975,15 @@
         394,
         404,
         421,
-        452
+        452,
+        453
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 3,
       "dependent_count": 0,
-      "ancestor_count": 33,
+      "ancestor_count": 34,
       "descendant_count": 0
     },
     {
@@ -1991,7 +2055,8 @@
       "transitive_dependencies": [
         331,
         368,
-        421
+        421,
+        453
       ],
       "transitive_dependents": [
         336,
@@ -1999,7 +2064,7 @@
       ],
       "dependency_count": 3,
       "dependent_count": 2,
-      "ancestor_count": 3,
+      "ancestor_count": 4,
       "descendant_count": 2
     },
     {
@@ -2901,14 +2966,15 @@
         360,
         366,
         367,
-        368
+        368,
+        453
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 3,
       "dependent_count": 0,
-      "ancestor_count": 12,
+      "ancestor_count": 13,
       "descendant_count": 0
     },
     {
@@ -3102,14 +3168,15 @@
         338,
         352,
         368,
-        421
+        421,
+        453
       ],
       "transitive_dependents": [
         336
       ],
       "dependency_count": 2,
       "dependent_count": 1,
-      "ancestor_count": 5,
+      "ancestor_count": 6,
       "descendant_count": 1
     },
     {
@@ -3283,25 +3350,27 @@
     },
     {
       "id": 368,
-      "title": "serialize Wallet startup and shutdown",
+      "title": "make Manager own Wallet lifecycle",
       "status": "open",
       "phase": 1,
       "type": "Bug fix",
-      "component": "Controller",
+      "component": "Manager and Wallet runtime lifecycle",
       "path": "tasks/368-wallet-startup-shutdown.md",
       "dependencies": [
-
+        453
       ],
       "open_dependencies": [
-
+        453
       ],
       "dependents": [
         331,
         338,
+        417,
+        422,
         423
       ],
       "transitive_dependencies": [
-
+        453
       ],
       "transitive_dependents": [
         330,
@@ -3312,13 +3381,14 @@
         362,
         370,
         372,
+        417,
         422,
         423
       ],
-      "dependency_count": 0,
-      "dependent_count": 3,
-      "ancestor_count": 0,
-      "descendant_count": 10
+      "dependency_count": 1,
+      "dependent_count": 5,
+      "ancestor_count": 1,
+      "descendant_count": 11
     },
     {
       "id": 369,
@@ -3378,7 +3448,8 @@
         340,
         359,
         368,
-        371
+        371,
+        453
       ],
       "transitive_dependents": [
         372,
@@ -3386,7 +3457,7 @@
       ],
       "dependency_count": 4,
       "dependent_count": 2,
-      "ancestor_count": 7,
+      "ancestor_count": 8,
       "descendant_count": 2
     },
     {
@@ -3459,14 +3530,15 @@
         409,
         410,
         411,
-        424
+        424,
+        453
       ],
       "transitive_dependents": [
         423
       ],
       "dependency_count": 3,
       "dependent_count": 1,
-      "ancestor_count": 14,
+      "ancestor_count": 15,
       "descendant_count": 1
     },
     {
@@ -5297,26 +5369,30 @@
       "status": "open",
       "phase": 3,
       "type": "Benchmark",
-      "component": "wallet Controller and Syncer benchmarks",
+      "component": "Manager lifecycle and Syncer benchmarks",
       "path": "tasks/417-start-to-synced-benchmark.md",
       "dependencies": [
+        368,
         416
       ],
       "open_dependencies": [
+        368,
         416
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
-        416
+        368,
+        416,
+        453
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 1,
+      "dependency_count": 2,
       "dependent_count": 0,
-      "ancestor_count": 1,
+      "ancestor_count": 3,
       "descendant_count": 0
     },
     {
@@ -5442,24 +5518,29 @@
       "component": "Manager.Load",
       "path": "tasks/422-manager-load-cancellation.md",
       "dependencies": [
-        331
+        331,
+        368,
+        453
       ],
       "open_dependencies": [
-        331
+        331,
+        368,
+        453
       ],
       "dependents": [
         423
       ],
       "transitive_dependencies": [
         331,
-        368
+        368,
+        453
       ],
       "transitive_dependents": [
         423
       ],
-      "dependency_count": 1,
+      "dependency_count": 3,
       "dependent_count": 1,
-      "ancestor_count": 2,
+      "ancestor_count": 3,
       "descendant_count": 1
     },
     {
@@ -5504,14 +5585,15 @@
         411,
         412,
         422,
-        424
+        424,
+        453
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 5,
       "dependent_count": 0,
-      "ancestor_count": 17,
+      "ancestor_count": 18,
       "descendant_count": 0
     },
     {
@@ -6475,6 +6557,46 @@
       "dependency_count": 1,
       "dependent_count": 2,
       "ancestor_count": 3,
+      "descendant_count": 12
+    },
+    {
+      "id": 453,
+      "title": "serialize Manager Wallet publication",
+      "status": "open",
+      "phase": 1,
+      "type": "Bug fix",
+      "component": "Manager Wallet cache publication",
+      "path": "tasks/453-serialize-manager-wallet-publication.md",
+      "dependencies": [
+
+      ],
+      "open_dependencies": [
+
+      ],
+      "dependents": [
+        368,
+        422
+      ],
+      "transitive_dependencies": [
+
+      ],
+      "transitive_dependents": [
+        330,
+        331,
+        336,
+        338,
+        358,
+        362,
+        368,
+        370,
+        372,
+        417,
+        422,
+        423
+      ],
+      "dependency_count": 0,
+      "dependent_count": 2,
+      "ancestor_count": 0,
       "descendant_count": 12
     }
   ]
