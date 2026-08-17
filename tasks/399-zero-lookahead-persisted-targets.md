@@ -26,8 +26,9 @@ watched outputs even after horizons are narrowed.
 - Preserve the same exact persisted target sets for positive lookahead; this
   task does not alter derivation counts or public target validation.
 - Expose the narrow internal persisted-target loader consumed by Task 398 only
-  after its full/targeted and zero/positive behavior is complete. Do not change
-  the public recovery target type in this task.
+  after its full/targeted and zero/positive behavior is complete. Task 398
+  solely owns the final public recovery request; this task adds no public
+  selector or legacy adapter.
 
 ## Suggested fix
 

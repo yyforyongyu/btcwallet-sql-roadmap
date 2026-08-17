@@ -1,6 +1,6 @@
 # Task 396 — make NewAddress return the oldest unused address
 
-Component: **AddressManager count-one compatibility semantics**.
+Component: **AddressManager count-one semantics**.
 
 Type: **Bug fix**.
 
@@ -26,11 +26,11 @@ until Task 353 retires that backend.
   counter.
 - Move every force-new SQL caller to `NewBulkAddresses(count=1)` before
   changing the name's SQL semantics. Tasks 348 and 408 move their SQL PSBT and
-  direct-transaction branches first. Retain `GetUnusedAddress` only as a
-  documented compatibility adapter if source compatibility requires it.
+  direct-transaction branches first. Remove `GetUnusedAddress` after migrating
+  maintained callers; do not retain an alias solely for old callers.
 - On maintained modern kvdb, retain the legacy count-one force-allocation path
   and current `NewAddress` semantics. Do not delegate it to
-  `NewBulkAddresses`; Task 353 may remove this compatibility branch.
+  `NewBulkAddresses`; Task 353 may remove this backend branch.
 - Do not add a first-unused pointer or performance optimization.
 
 ## Suggested fix
@@ -53,7 +53,7 @@ address and never calls `NewBulkAddresses`.
 For SQL, `NewAddress` is the safe oldest-unused count-one API, force-new
 behavior exists only through `NewBulkAddresses`, and no pending script is
 exposed or replaced. Maintained modern kvdb retains its legacy count-one path
-until Task 353.
+until Task 353. No `GetUnusedAddress` legacy alias remains.
 
 [t344]: 344-bulk-address-allocation.md
 [t348]: 348-watched-change-delivery.md

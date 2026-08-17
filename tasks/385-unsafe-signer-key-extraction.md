@@ -22,17 +22,17 @@ return.
   general-purpose decrypt method.
 - Return an isolated private-key value and document that the caller owns and
   must destroy it. Do not claim post-return lifetime or zeroing by Vault.
-- Keep the legacy context-free `PrivKeyForAddress` compatibility wrapper
-  compiling by delegating to the same explicit unsafe path; do not otherwise
-  expand deprecated wallet APIs.
+- Remove the legacy context-free `PrivKeyForAddress` wrapper and update any
+  maintained caller directly. Do not retain a raw-key wrapper solely for
+  old callers or otherwise expand deprecated wallet APIs.
 - Preserve watch-only, locked, not-mine, and imported-XPub failure behavior.
 - Do not use this extraction operation from safe Signer or PSBT code.
 
 ## Suggested fix
 
 Expose one narrowly named internal extraction capability, implement it in the
-maintained Vault backends, and make only UnsafeSigner and the compatibility
-wrapper call it. Keep safe callers on the non-exporting operations.
+maintained Vault backends, and make only UnsafeSigner call it. Keep safe callers
+on the non-exporting operations and delete the obsolete wrapper.
 
 ## Verification
 
@@ -42,13 +42,14 @@ wrapper call it. Keep safe callers on the non-exporting operations.
   Vault state.
 - Static call-site inspection proves no safe Signer, PSBT, AccountManager, or
   AddressManager path calls the extraction operation.
+- Static API inspection proves the context-free legacy wrapper is gone.
 - Locked, watch-only, not-mine, and imported-XPub vectors preserve existing
   public errors.
 
 ## Definition of done
 
-- Raw private-key return is confined to UnsafeSigner and the existing
-  compatibility wrapper as a documented caller-owned exception.
+- Raw private-key return is confined to UnsafeSigner as a documented caller-
+  owned exception.
 - Safe signing remains entirely non-exporting and no general raw decrypt API is
   introduced.
 

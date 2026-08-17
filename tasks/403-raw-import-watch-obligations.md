@@ -24,8 +24,8 @@ the address and call `NotifyReceived` afterward, leaving no durable retry fact.
   generation, obligation, and delivery facts.
 - Let Task 402 deliver asynchronously. An accountless import requires a
   separate explicit full-wallet recovery request for historical discovery.
-- Preserve legacy modern-kvdb import behavior without adding a durable kvdb
-  format; Task 353 may remove that compatibility path later.
+- Keep modern-kvdb import behavior outside this SQL mutation without adding a
+  durable kvdb format; Task 353 may remove that backend path later.
 
 ## Suggested fix
 

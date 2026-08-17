@@ -29,7 +29,7 @@ ADR 0012 forbids public-only material in a spendable SQL wallet.
 - Amend ADR 0012 only as needed to confirm that a supplied XPub account is
   accepted in a uniformly watch-only SQL wallet and is not a route for
   public-only material into a spendable wallet.
-- Fix the additive final `NewAccountParams` shape. Do not create a separate
+- Fix the final `NewAccountParams` shape. Do not create a separate
   lnd-specific `EnsureExactAccount` method.
 - Decide scope-schema conflict behavior and supported account-key-derivable
   branch forms.
@@ -40,7 +40,7 @@ ADR 0012 forbids public-only material in a spendable SQL wallet.
 
 Record one focused account-creation amendment across the
 two owning ADRs, with a truth table for custody/provenance/number/fingerprint
-and the final additive request fields.
+and the final request fields.
 
 ## Verification
 

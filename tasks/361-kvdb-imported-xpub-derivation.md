@@ -17,8 +17,9 @@ account identity as a public number.
 
 - Reuse [Task 341](../archive/tasks/341-public-role-contract.md)'s wallet-owned
   scope-plus-exactly-one-name-or-number selector and
-  [Task 337](337-imported-xpub-derivation.md)'s additive public derivation
-  request without changing the `Signer` interface.
+  [Task 337](337-imported-xpub-derivation.md)'s final `Signer` derivation
+  request directly. Do not restore the removed numeric-path signature or add a
+  backend-specific public interface.
 - Map the selector to kvdb's stable scope-local adapter identity internally;
   never expose that identity or reinterpret it as a SQL row or BIP44 number.
 - Derive public children from the resolved imported XPub while the Wallet is
@@ -49,6 +50,8 @@ derivation. Keep all backend identity conversion behind the adapter boundary.
   cases fail before derivation or secret access.
 - External-package tests continue to name the request without importing kvdb
   or internal database types.
+- Maintained kvdb callers and mocks use only the final selector-bearing Signer
+  signature.
 
 ## Definition of done
 

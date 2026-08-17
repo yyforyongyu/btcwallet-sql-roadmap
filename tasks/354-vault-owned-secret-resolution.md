@@ -48,7 +48,7 @@ backend AccountID.
 
 Add one focused ADR section describing typed operation ownership, lock/use
 serialization, raw-return exceptions, semantic selectors, and consumer
-responsibilities. Include a short PR #1279 compatibility table and an explicit
+responsibilities. Include a short PR #1279 overlap table and an explicit
 accepted/superseded/non-overlap outcome.
 
 ## Verification

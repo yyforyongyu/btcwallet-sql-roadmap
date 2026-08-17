@@ -16,8 +16,9 @@ address but currently returns `db.ErrAddressNotFound` directly.
 - Define a wallet-owned `ErrAddressNotFound` and translate SQL and legacy
   address misses at `GetAddressInfo`.
 - Preserve address context while wrapping only the public sentinel.
-- Keep existing wallet-owned address DTOs unchanged; they do not leak internal
-  DB types.
+- Keep unrelated address DTO redesign outside this error-boundary task. Update
+  maintained callers and mocks directly if the final error contract requires a
+  compile-time change; do not add a legacy adapter.
 - Do not change address creation/import policy, notification behavior,
   derivation, script resolution, or signing.
 - Do not absorb `ScriptForOutput` secret lifetime; that belongs to
@@ -34,7 +35,8 @@ to use the wallet sentinel instead of Store or waddrmgr errors.
   `errors.Is(err, wallet.ErrAddressNotFound)`.
 - Invalid address encoding and unexpected Store errors are not reclassified as
   not-found.
-- Existing AddressManager result types remain source-compatible.
+- External callers match only the wallet-owned sentinel and import no Store
+  error or legacy wrapper.
 
 ## Definition of done
 

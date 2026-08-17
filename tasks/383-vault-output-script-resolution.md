@@ -18,8 +18,9 @@ and decodes plaintext scripts outside Vault.
   and Taproot revealed scripts. Do not select by a Store row ID.
 - Let each Vault implementation load the encrypted address record, apply its
   own cipher provenance, decrypt, and decode any Taproot wrapper internally.
-- Return the final script as an isolated caller-owned copy because
-  `ScriptForOutput` is an explicit compatibility exception.
+- Return the final script as an isolated caller-owned copy so no caller can
+  alias Vault or Store memory. This ownership rule is independent of the final
+  `ScriptForOutput` method shape.
 - Zero encrypted working copies and plaintext/decode buffers on success,
   error, and panic before the operation returns.
 - Preserve locked, not-mine, watch-only, no-associated-script, and supported

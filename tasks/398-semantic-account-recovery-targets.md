@@ -32,9 +32,11 @@ independent of derivation budgeting and zero-lookahead Store queries.
   input, then use its exact persisted address/outpoint set for both zero and
   positive lookahead. The public boundary must not land with the old
   wallet-wide persisted-target loader still reachable.
-- Preserve the current modern-kvdb numeric/account-name adapter internally.
-  This task does not require Task 361's public derivation API and adds no new
-  kvdb storage format. If kvdb retires first, remove only that adapter clause.
+- Resolve maintained modern-kvdb numeric and account-name targets behind the
+  final semantic public request. Remove the old public target shape and retain
+  no old-shape adapter. This task does not require Task 361's public
+  derivation API and adds no new kvdb storage format. If kvdb retires first,
+  remove only this backend-resolution clause.
 - Do not add a second persisted-target loader or widen Task 399's exact sets.
 
 ## Suggested fix

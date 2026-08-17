@@ -27,19 +27,20 @@ incorrectly impose it on the other path.
 - Leave direct watched-change delivery to Task 408. Leave PSBT lease admission,
   exact-token release, watched change, and finalization to Tasks 405–407 and
   348 in their public wrapper paths.
-- Preserve existing public request and result types. Do not add a generic
-  authoring interface, ownership token to direct `TxIntent`, or new exported
-  callback.
+- Use the smallest final request and result shapes needed by the two wrappers
+  and migrate maintained callers and mocks atomically. Do not add a generic
+  authoring interface, ownership token to direct `TxIntent`, exported callback,
+  or legacy adapter solely to preserve an old shape.
 - Exclude fee, dust, size, amount, input-selection, metadata, signing, watch,
   lease, and finalization policy changes.
 
 ## Suggested fix
 
 Move only the duplicated transaction-construction sequence into one unexported
-Wallet routine that accepts the existing input and change sources and returns
-the existing internal authored result. Keep all wrapper-specific admission,
-cleanup, watch delivery, transformation, and publication immediately around
-that call in `CreateTransaction` and `FundPsbt`.
+Wallet routine with the narrow final input, change, and authored-result shapes.
+Keep all wrapper-specific admission, cleanup, watch delivery, transformation,
+and publication immediately around that call in `CreateTransaction` and
+`FundPsbt`.
 
 ## Verification
 
@@ -60,5 +61,7 @@ that call in `CreateTransaction` and `FundPsbt`.
   effect and owns no change-allocation timing.
 - Tasks 348 and 408 can add distinct wrapper-owned post-authoring behavior
   without duplicating transaction construction or bypassing PSBT cleanup.
-- The PR contains no public API, arithmetic, metadata, signing, watch, lease,
-  or finalization policy change.
+- Any API-shape change is limited to the final authoring boundary and updates
+  maintained callers directly; no legacy adapter remains. The PR
+  contains no arithmetic, metadata, signing, watch, lease, or finalization
+  policy change.

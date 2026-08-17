@@ -31,7 +31,9 @@ contract.
 - Apply both guards before derivation, horizon mutation, or watch construction
   so a `key-only` account is never an implicit or explicit recovery target.
 - Preserve recovery-window limits and existing watch-chain derivation counts.
-  Do not change the public recovery selector shape or derivation budgets.
+  Task 398 solely owns the final public recovery selector; this task adds no
+  alternate selector or legacy adapter and does not change derivation
+  budgets.
 - Keep zero-lookahead persisted-target isolation in Task 399 and semantic
   target selection in Task 398. Task 398 must preserve this admission guard
   when replacing the selector. Do not add another persisted-target loader.
@@ -42,8 +44,8 @@ contract.
 
 Use Task 345's persisted mode at SQL recovery admission: filter untargeted
 full-recovery enumeration to `watch-chain` accounts and reject an explicitly
-targeted `key-only` account. Leave the selector shape and account-scoped
-persisted-target paths untouched.
+targeted `key-only` account. Keep account-scoped persisted-target work in its
+own task and add no public request surface here.
 
 ## Verification
 

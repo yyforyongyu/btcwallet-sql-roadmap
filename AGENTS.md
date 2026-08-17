@@ -153,6 +153,15 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 ## Scope rules
 
 - Focus on the maintained public APIs under `wallet/`.
+- Treat the maintained wallet library as development-stage software. Public
+  and private Go API source and binary compatibility are not requirements.
+  Build directly toward the final request, result, interface, and method
+  shapes, and update maintained callers, implementations, mocks, and tests in
+  the same task. Do not add an adapter, wrapper, parallel interface, optional
+  field, or retained method solely to preserve compatibility. This freedom
+  does not relax accepted behavioral contracts, safety properties, persisted-
+  data compatibility, maintained backend parity, daemon-version support, or
+  task scope.
 - Avoid voluntary RPC, deprecated-wallet, and unrelated daemon changes.
 - Keep kvdb legacy and single-wallet behavior isolated from the SQL design.
 - Do not add create manifests, generic write locks, replay state machines, or

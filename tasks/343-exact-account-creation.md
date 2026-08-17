@@ -16,9 +16,10 @@ external-XPub identity are independent extensions.
 
 ## Details
 
-- Replace the positional root-derived call with the final wallet-owned
-  `NewAccountParams` subset containing scope, optional exact account number,
-  name, and discovery mode. Nil number preserves sequential creation.
+- Consume Task 392's final wallet-owned `NewAccountParams` containing scope,
+  optional exact account number, name, and discovery mode. Implement the
+  exact-number behavior while nil preserves sequential creation; do not add a
+  second entry point or restore the removed positional signature.
 - Limit this task to existing canonical scopes and wallet-root-derived account
   material. Reject a schema override or external account key until their
   follow-ups land.

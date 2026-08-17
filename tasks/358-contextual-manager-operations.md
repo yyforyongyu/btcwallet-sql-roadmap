@@ -16,7 +16,7 @@ successful durable genesis appear canceled or leave prepared secrets alive.
 
 - Replace the public method with `Create(ctx, cfg, params)`, putting
   `context.Context` first, and migrate maintained callers without a background
-  compatibility wrapper.
+  legacy wrapper.
 - Carry the caller context through Task 331 admission, validation, SQL writer
   acquisition, and safe preparation checkpoints.
 - Define successful claim of the backend create transaction as the mutation
@@ -67,7 +67,7 @@ wait.
   before the documented backend mutation claim.
 - Post-claim mutation, reconciliation, assembly, and publication return one
   definitive Manager-owned result.
-- The PR contains no Load cancellation, generic registry, compatibility
+- The PR contains no Load cancellation, generic registry, legacy
   wrapper, or new reconciliation/secret contract.
 
 [t331]: 331-manager-wallet-lifecycle.md

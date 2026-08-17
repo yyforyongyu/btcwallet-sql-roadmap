@@ -27,7 +27,7 @@ database and must retain its per-Wallet source path until Task 353 retires it.
   SQL Manager-created Wallets cannot nominate or override a second source.
 - Record the maintained modern-kvdb per-Wallet source path as an explicit
   temporary exception. Do not move kvdb onto the SQL coordinator or remove
-  that compatibility path before [Task 353][t353] completes.
+  that backend path before [Task 353][t353] completes.
 - Define the Manager coordinator as the sole notification consumer and the
   owner of canonical chain extension, reorg detection, and rollback admission.
 - Distinguish database-wide canonical state from wallet-scoped state. The

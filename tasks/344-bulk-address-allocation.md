@@ -33,8 +33,9 @@ force-allocation API selected by exact account identity.
   facts. Never retry from the transport error.
 - Return ready only after Task 402 delivers the batch. A typed pending
   result identifies completion but exposes no usable partial list.
-- Return unsupported before mutation on modern kvdb; retain its legacy
-  count-one API until retirement.
+- Return unsupported before mutation on modern kvdb. Its existing count-one
+  backend behavior remains outside this SQL batch task until retirement, but
+  no old Go API shape is retained solely for callers.
 - Keep oldest-unused selection and key-only allocation in their own tasks.
 
 ## Suggested fix

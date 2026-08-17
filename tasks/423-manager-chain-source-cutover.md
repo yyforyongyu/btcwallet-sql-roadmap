@@ -20,8 +20,9 @@ events, register a stale Wallet, or disable reorg handling between PRs.
 
 - Add exactly one authoritative chain source to `ManagerConfig` and retain it
   on the Manager. The maintained Manager Create/Load path overwrites or rejects
-  per-Wallet source selection; keep `Config.Chain` only for deprecated or
-  non-Manager constructors that still require compatibility.
+  per-Wallet source selection. Deprecated and non-Manager constructors remain
+  outside this task; update in-repository callers as required for the final
+  maintained configuration, without adding a legacy field or adapter.
 - Make the Manager source adapter the sole maintained caller consuming
   `Notifications()` and the sole owner of block-notification registration.
 - Preserve the source's non-notification duties at the ownership cutover.
@@ -104,9 +105,8 @@ events, register a stale Wallet, or disable reorg handling between PRs.
   the source consumer, and join the coordinator before Store closure.
 - Preserve the accepted ADR's Wallet load, start, stop, removal, backpressure,
   and processor-failure policies while the live source is active.
-- Preserve deprecated and non-Manager constructor behavior outside the
-  maintained Manager path. Do not voluntarily extend the cutover to unrelated
-  daemon or RPC surfaces.
+- Do not voluntarily extend the behavioral cutover to deprecated, non-Manager,
+  daemon, or RPC surfaces. This exclusion does not freeze their Go API shapes.
 - Exclude new frontier or rollback mutation semantics, Wallet processing
   policy, durable watch replay, durable rescan jobs, generic event buses,
   multi-Manager leases, and cross-process fencing.
@@ -190,8 +190,8 @@ change, then remove the competing maintained per-Wallet consumers.
   coordinator operation joined first.
 - Run focused mock-chain Manager tests and repeat the two-Wallet Manager case
   on SQLite and PostgreSQL through Task 333's completed harness.
-- Verify deprecated and non-Manager constructors retain their documented
-  compatibility source behavior.
+- Verify all maintained and mechanically affected in-repository constructors
+  compile against the final configuration without a legacy adapter.
 
 ## Definition of done
 
@@ -207,8 +207,9 @@ change, then remove the competing maintained per-Wallet consumers.
 - Manager Load remains inactive. A stopped Wallet cannot join live delivery
   until Start aligns and catches its pending generation up against one verified
   source snapshot and the final unchanged canonical frontier.
-- Per-Wallet maintained source selection and competing consumers are removed
-  without changing deprecated or non-Manager compatibility paths.
+- Per-Wallet maintained source selection and competing consumers are removed.
+  Deprecated and non-Manager behavioral cutover remains outside this task, and
+  no legacy field remains in the maintained configuration.
 - Targeted scans retain a coordinator-mediated verified historical-query path,
   and source optimization uses the earliest durable history requirement across
   all managed Wallets without changing the canonical frontier.

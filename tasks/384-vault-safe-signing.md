@@ -18,10 +18,10 @@ to own transaction and digest policy.
 
 - Migrate maintained safe `Signer` methods: `DerivePubKey`, `ECDH`,
   `SignDigest`, `ComputeUnlockingScript`, and `ComputeRawSig`.
-- Consume Task 337's final selector-bearing public derivation request and
-  checked numeric `Signer.DerivePubKey` adapter. Task 337 owns those public
-  shapes and adapter semantics; this task owns only moving their key resolution
-  and derivation body into the Vault and must not redefine either contract.
+- Consume Task 337's final selector-bearing `Signer.DerivePubKey` request.
+  Task 337 owns that public shape; this task owns only moving its key resolution
+  and derivation body into the Vault and must not add a second derivation
+  interface or adapter.
 - Add only the semantic key locators and typed Vault operations exercised by
   those concrete methods. Select account keys by semantic scope and optional
   BIP44 number/name plus branch/index, and raw imports by script pubkey. Never
@@ -35,9 +35,10 @@ to own transaction and digest policy.
   tweak-authorization owner. This later refactor replaces primitive key and
   tweak ownership without changing the check ordering, authorization result,
   or which inputs may be signed.
-- Replace maintained private-key callback tweakers with the smallest immutable
-  typed tweak descriptor. Validate it before secret lookup and apply it inside
-  Vault. Leave deprecated callback APIs unchanged.
+- Consume Task 347's immutable authorization-bound tweak descriptor, validate
+  it before secret lookup, and apply it inside Vault. Update or remove affected
+  maintained callbacks directly; do not preserve a callback API through a
+  legacy wrapper.
 - Reuse Task 383 for script material rather than adding a second
   script-decryption route.
 - Preserve lock, watch-only, not-mine, imported-XPub public-only, and signature

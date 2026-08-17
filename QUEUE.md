@@ -43,7 +43,7 @@ separately accepted task.
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | 331 |
 | [Task 331][t331] | open | Manager | Bug fix | Fence Manager admission and Store closure | 368 |
 | [Task 334][t334] | open | SQL wallet architecture documentation | Design | Supersede ADR 0002 with SQL shared-chain ownership | — |
-| [Task 337][t337] | open | Wallet public derivation and Signer numeric adapter | Bug fix | Restore SQL imported-XPub public derivation | — |
+| [Task 337][t337] | open | Wallet and Signer public derivation | Bug fix | Restore SQL imported-XPub public derivation | — |
 | [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | 331, 368, 421 |
 | [Task 339][t339] | open | TxReader | Gap fix | Define public transaction visibility and status | — |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | 359 |
@@ -73,11 +73,11 @@ separately accepted task.
 | [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343 |
 | [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 387, 389 |
 | [Task 391][t391] | open | AccountManager path-bound identity and SQL AccountStore schema | Gap fix | Create exact path-bound watch-only XPub accounts | 337, 387, 388, 389, 390 |
-| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Consume discovery mode in existing account creation | 345 |
+| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Consume discovery mode in existing account creation | 345, 387 |
 | [Task 393][t393] | open | AddressManager receiving entry points and AddressStore account lookup | Gap fix | Reject receiving allocation for key-only accounts | 345 |
 | [Task 394][t394] | open | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | 345 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Allocate one durable key-only locator | 393, 394, 399 |
-| [Task 396][t396] | open | AddressManager count-one compatibility semantics | Bug fix | Make NewAddress return the oldest unused address | 344, 348, 408 |
+| [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344, 348, 408 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 342, 345 |
 | [Task 400][t400] | open | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | — |
 | [Task 401][t401] | open | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | 400 |

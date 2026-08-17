@@ -18,9 +18,9 @@ identity for internal recovery and lookup, not as portable public state.
 - Keep the accepted Task 360 scope-local adapter identity inside recovery
   state and expose it only through a wallet-private selector or helper used by
   Syncer horizon construction.
-- Preserve numberless imported-XPub recovery and existing account-name
-  compatibility fallback without equating BIP44 numbers, SQL row IDs, and kvdb
-  adapter IDs.
+- Resolve numberless imported-XPub recovery through the semantic account name
+  without equating BIP44 numbers, SQL row IDs, and kvdb adapter IDs. Remove any
+  obsolete public fallback shape.
 - Do not change scan targets, scan budgeting, horizon persistence, recovery
   window validation, or ADR identity policy.
 - Keep public semantic selector types in Task 341 and recovery scan work in

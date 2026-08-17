@@ -16,7 +16,7 @@ only irreversible library event is publication of the assembled Wallet.
 
 - Replace the public method with `Load(ctx, cfg)`, putting
   `context.Context` first, and migrate maintained callers without a background
-  compatibility wrapper.
+  legacy wrapper.
 - Carry the caller context through Task 331 admission, backend loading, and
   Wallet assembly checkpoints.
 - Use Task 331's per-name admission and cache publication as the one
@@ -57,7 +57,7 @@ return the published pointer on every post-publication path.
   cancellable until its one admission-protected publication point.
 - No canceled losing assembly leaks a Store or Wallet, and no winning
   publication is discarded because its request context later ends.
-- The PR contains no Create/genesis behavior, compatibility wrapper, generic
+- The PR contains no Create/genesis behavior, legacy wrapper, generic
   registry, or publication state machine.
 
 [t331]: 331-manager-wallet-lifecycle.md
