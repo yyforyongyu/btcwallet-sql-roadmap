@@ -12,8 +12,8 @@ Dependencies: **[Task 368][t368], [Task 370][t370], [Task 372][t372],
 SQL-managed Wallets still select, register, and consume chain sources
 separately after Tasks 370 and 372 prepare complete forward and rollback
 processing. The SQL Manager cannot become the sole live notification owner
-before both paths, publication ordering, cancellable loading, and generation-
-safe Wallet lifecycle exist, because any partial cutover could lose ordered
+before both paths, publication ordering, cancellable loading, and exact-runtime
+Wallet lifecycle exist, because any partial cutover could lose ordered
 events, register a stale Wallet, or disable reorg handling between PRs.
 
 ## Details
@@ -33,9 +33,9 @@ events, register a stale Wallet, or disable reorg handling between PRs.
   canonical frontier.
 - Own source optimization hints at the Manager. Before source startup,
   aggregate the earliest durable history requirement across every managed
-  Wallet, including stopped Wallets, and supply that minimum to the source.
-  Never substitute the canonical frontier or the set of currently running
-  processors for the aggregate.
+  Wallet, including those with terminal or no active runtimes, and supply that
+  minimum to the source. Never substitute the canonical frontier or the set of
+  currently active processors for the aggregate.
 - Start that sole consumer in a buffering state. Before admitting a buffered
   or newly received event, read Task 371's exact canonical frontier, every
   durable Wallet tip, and the source's exact current best chain. Do not let an
@@ -67,25 +67,25 @@ events, register a stale Wallet, or disable reorg handling between PRs.
   failure when the frontier, Wallet tips, source ancestry, rollback, or
   catch-up cannot be reconciled exactly. Never expose a partially aligned set
   of Wallet processors.
-- Keep Manager Load inactive. It may construct and publish a stopped Wallet in
-  the Manager cache, but it must not align the Wallet, start a processor, or
-  register any generation with live chain delivery.
-- Make each Wallet Start generation close coordinator admission before
+- Keep Manager Load inactive. It may construct and publish a `Created` Wallet
+  runtime in the Manager cache, but it must not align the Wallet, start a
+  processor, or register that runtime with live chain delivery.
+- Make each `Manager.StartWallet` runtime close coordinator admission before
   alignment. Classify the stored Manager frontier and that Wallet's durable
   tip against one verified source-ancestry snapshot. Reconcile an offline
   source reorg to a verified common ancestor first, and roll the starting
   Wallet back when its own tip is off the reconciled ancestry.
 - Align the pending Wallet to the reconciled frontier without advancing that
   frontier. Keep admission closed while advancing the shared frontier to the
-  exact source best, and make the unregistered pending generation an explicit
+  exact source best, and make the unregistered pending runtime an explicit
   recipient of the complete prepared forward suffix; do not rely on Task 370's
   registered-set fanout. Verify its durable tip equals the final unchanged
-  frontier before atomically registering the exact generation and reopening
+  frontier before atomically registering the exact runtime and reopening
   admission. On failure, cancel and join it without registration.
-- Make Wallet Stop close admission, unregister the exact Start generation,
-  cancel and join its processor, and complete only after that generation can
-  receive no later event. A concurrent or repeated Stop joins Task 368's
-  authoritative generation completion.
+- Make `Manager.StopWallet` close admission, unregister the exact runtime,
+  cancel and join its processor, and complete only after that runtime can
+  receive no later event. A concurrent or repeated StopWallet joins Task 368's
+  authoritative terminal completion.
 - Normalize connected, disconnected, filtered-block, and
   relevant-transaction notifications once and submit them in source order to
   the completed coordinator.
@@ -119,22 +119,22 @@ and Wallet tips. Bootstrap an absent frontier from one verified persisted
 ancestry before any rollback, use the completed rollback path for an offline
 fork, advance a valid frontier through every missing source block, and replay
 already-canonical ranges to registered Wallets that lag. Keep Load inactive;
-make Start reconcile and catch its pending generation up under closed
-admission before atomic registration, and make Stop unregister and join that
-exact generation. Route targeted historical requests through a verified,
-frontier-neutral coordinator method and initialize source hints from the
-earliest durable requirement across all managed Wallets. Release the
-deduplicated buffer only after exact active-processor alignment, switch
-maintained SQL Wallet construction and shutdown to that adapter in the same
-change, then remove the competing maintained per-Wallet consumers.
+make `Manager.StartWallet` reconcile and catch its pending runtime up under
+closed admission before atomic registration, and make `Manager.StopWallet`
+unregister and join that exact runtime. Route targeted historical requests
+through a verified, frontier-neutral coordinator method and initialize source
+hints from the earliest durable requirement across all managed Wallets.
+Release the deduplicated buffer only after exact active-processor alignment,
+then switch maintained SQL Wallet construction and shutdown to that adapter.
+Remove the competing maintained per-Wallet consumers in the same change.
 
 ## Verification
 
 - Construct two Wallets with attempted divergent per-Wallet sources and prove
   the Manager source is the only accepted maintained source.
-- Give running and stopped Wallets different history requirements and prove
-  source startup receives their aggregate earliest requirement, not the
-  canonical frontier or earliest running-Wallet value.
+- Give durable Wallets with active and terminal runtimes different history
+  requirements and prove source startup receives their aggregate earliest
+  requirement, not the canonical frontier or earliest active-Wallet value.
 - Request a targeted historical range while live delivery continues. The
   coordinator verifies it against one source snapshot and returns it only to
   the requesting Wallet; the notification consumer count, other Wallets, and
@@ -163,19 +163,21 @@ change, then remove the competing maintained per-Wallet consumers.
   offline fork. Startup bootstraps the verified old tip, rolls back once to the
   common ancestor, catches up to the exact source best, and releases no event
   before the sequence completes.
-- Leave one Wallet stopped while the frontier advances, then Load it and prove
-  Load only publishes a stopped cached Wallet with no processor registration.
-  Start it while the source frontier changes: admission remains closed, the
-  pending generation receives the exact alignment and forward suffix before
-  atomic registration, and it cannot observe a live event from a stale tip.
-- Combine both conditions: start a stopped Wallet whose tip lags a stored
-  frontier that is no longer on the source chain. Reconcile the offline reorg
-  and rollback first, align the pending generation to the reconciled frontier,
-  deliver the complete closed-admission suffix while advancing to source best,
-  prove its durable tip equals the final frontier, and only then register it.
+- Stop one Wallet runtime while the frontier advances, then Load the same
+  durable Wallet and prove Load publishes one fresh `Created` runtime with no
+  processor registration. Start that exact pointer while the source frontier
+  changes: admission remains closed, the pending runtime receives the exact
+  alignment and forward suffix before atomic registration, and it cannot
+  observe a live event from a stale tip.
+- Combine both conditions: start a fresh `Created` runtime whose durable Wallet
+  tip lags a stored frontier that is no longer on the source chain. Reconcile
+  the offline reorg and rollback first, align the pending runtime to the
+  reconciled frontier, deliver the complete closed-admission suffix while
+  advancing to source best, prove its durable tip equals the final frontier,
+  and only then register it.
 - Race Stop with source receipt and Start registration. Stop unregisters,
-  cancels, and joins the exact generation before completion; a repeated Stop
-  joins that result and no stopped generation receives another event.
+  cancels, and joins the exact runtime before completion; a repeated Stop joins
+  that result and no terminal runtime receives another event.
 - Deliver a filtered block with no paired connected event, then equal paired
   representations. The first advances the canonical frontier before fanout
   and the pair produces one frontier mutation while its filtered payload is
@@ -204,9 +206,10 @@ change, then remove the competing maintained per-Wallet consumers.
   Wallet processor before live delivery, including an absent frontier, a
   valid frontier behind source best, a Wallet left behind by
   frontier-before-fanout failure, and a reorg completed while offline.
-- Manager Load remains inactive. A stopped Wallet cannot join live delivery
-  until Start aligns and catches its pending generation up against one verified
-  source snapshot and the final unchanged canonical frontier.
+- Manager Load remains inactive. A fresh `Created` runtime returned after a
+  prior runtime stops cannot join live delivery until `Manager.StartWallet`
+  aligns it against one verified source snapshot and the final unchanged
+  canonical frontier.
 - Per-Wallet maintained source selection and competing consumers are removed.
   Deprecated and non-Manager behavioral cutover remains outside this task, and
   no legacy field remains in the maintained configuration.

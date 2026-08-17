@@ -37,9 +37,11 @@ measurements can be compared within each backend.
   API call after opening a copied snapshot. `Warm` means the same loaded Wallet
   receives one untimed priming call before repeated timed calls.
 - For sync profiles, define this lifecycle exception for
-  [Task 417][t417]: `Cold` includes Manager construction, Load, Start, and
-  synchronization, while `Warm` loads a stopped Wallet outside the timer and
-  times its first Start and synchronization without a priming Start.
+  [Task 417][t417]: `Cold` includes Manager construction, Load, its required
+  public lifecycle start, and synchronization. `Warm` constructs a fresh
+  Manager and loads its current runtime outside the timer, then times Task 417's
+  required public lifecycle start and synchronization without priming or
+  restarting a terminal pointer.
 - Implement these exact address and calibration profiles:
   - `Smoke`: one account, 100 addresses, 100 confirmed transaction records,
     10 live UTXOs, and 10 blocks.
@@ -129,7 +131,8 @@ consumer uses the same lifecycle and validation rules.
 
 - Every named profile has one deterministic manifest and exact semantic
   validation.
-- Cold reload and warm reuse are controlled by one shared helper.
+- Cold reload and each profile's warm setup are controlled by one shared
+  helper.
 - The calibration benchmark and reload test pass with real kvdb, SQLite, and
   PostgreSQL Stores and identical logical manifests.
 - Allocation reporting and repeatable benchstat commands are documented.

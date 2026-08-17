@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **124 tasks**, with **117 remaining open**. Open tasks are
+The roadmap contains **125 tasks**, with **118 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -30,7 +30,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 57 open
+## Phase 1 — lnd integration · 58 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -63,7 +63,7 @@ separately accepted task.
 | [Task 364][t364] | open | SQL watch-generation and obligation schema | Gap fix | Persist ordered SQL live-watch obligations | 345, 400 |
 | [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329 |
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | 329 |
-| [Task 368][t368] | open | Controller | Bug fix | Serialize Wallet startup and shutdown | — |
+| [Task 368][t368] | open | Manager and Wallet runtime lifecycle | Bug fix | Make Manager own Wallet lifecycle | 453 |
 | [Task 377][t377] | open | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | — |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
 | [Task 379][t379] | open | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | — |
@@ -92,10 +92,11 @@ separately accepted task.
 | [Task 411][t411] | open | TxStore activation preflight and direct/batch ingestion | Bug fix | Reject children of terminal transactions | 339, 409, 410 |
 | [Task 412][t412] | open | TxWriter public contract, TxPublisher, and transaction graph admission | Gap fix | Expose invalidation with publication ordering | 349 |
 | [Task 421][t421] | open | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | — |
-| [Task 422][t422] | open | Manager.Load | Gap fix | Make Manager loading cancellable | 331 |
+| [Task 422][t422] | open | Manager.Load | Gap fix | Make Manager loading cancellable | 331, 368, 453 |
 | [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 425][t425] | open | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | — |
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
+| [Task 453][t453] | open | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | — |
 
 ## Phase 2 — remaining wallet gaps and bugs · 18 open
 
@@ -135,7 +136,7 @@ three-backend performance measurements.
 | --- | --- | --- | --- | --- | --- |
 | [Task 369][t369] | open | Controller | Test | Reject repeated Wallet unlocks without resetting timeout | — |
 | [Task 416][t416] | open | wallet benchmark infrastructure | Benchmark | Build reusable database benchmark fixtures | — |
-| [Task 417][t417] | open | wallet Controller and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 416 |
+| [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 368, 416 |
 | [Task 418][t418] | open | wallet UtxoManager benchmarks | Benchmark | Measure ListUnspent performance | 416 |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 416 |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 416 |
@@ -347,6 +348,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t450]: tasks/450-bitcoind-compatibility-scenario.md
 [t451]: tasks/451-chain-version-itest-matrix.md
 [t452]: tasks/452-key-only-recovery-derivation.md
+[t453]: tasks/453-serialize-manager-wallet-publication.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308

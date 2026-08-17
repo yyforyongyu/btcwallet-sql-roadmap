@@ -23,7 +23,6 @@ placement.
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | — | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | YY | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
-| [Task 368][t368] | Serialize Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | YY | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
@@ -42,6 +41,7 @@ placement.
 | [Task 435][t435] | Test transaction publication | Test | Abdullahi | [#1334][pr1334] |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | — |
+| [Task 453][t453] | Serialize Manager Wallet publication | Bug fix | YY | — |
 
 ## Blocked Phase 1 Tasks
 
@@ -69,6 +69,7 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | — | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | — | — |
+| [Task 368][t368] | Manager-own Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 388][t388] | Reject colliding account XPub identities | Bug fix | — | — |
 | [Task 389][t389] | Reconcile runtime account commits | Bug fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
@@ -106,15 +107,17 @@ authorize implementation before every dependency and gate completes.
 
 ## Coordination
 
-- Tasks 334, 337, 350, 359, and 400 are YY's grandfathered parallel
-  in-progress work. YY starts no additional task until only one remains in
-  progress.
+- Tasks 334, 337, 350, 359, 368, and 400 are YY's grandfathered parallel
+  in-progress work. YY explicitly approves Task 368 and [PR #1328][pr1328] as
+  a stacked exception. Task 453's prerequisite contract is frozen, and PR
+  #1328 remains paused and unmergeable until Task 453's implementation PR
+  merges. YY starts no additional task until only one remains in progress.
 - Gustavo's Phase 3 series, Tasks 427–432, and Abdullahi's remaining Phase 3
   series, Tasks 435–437, already started and remain active as explicit series
   exceptions. Do not add work to either series before it clears.
-- YY's blocked Phase 1 Tasks 329, 331, 340, and 345 remain claimed under
+- YY's blocked Phase 1 Tasks 329, 331, 340, 345, and 368 remain claimed under
   `Blocked Phase 1 Tasks`. YY's Phase 2 Task 350 and Phase 3 Task 416 remain
-  parked. Dependency readiness for Phase 1 Tasks 334, 368, 377, and 425 does
+  parked. Dependency readiness for Phase 1 Tasks 334, 377, 425, and 453 does
   not override the no-new-start rule above; Task 334 remains within the
   grandfathered series.
 - Outside the exceptions above, each developer may have only one task in
@@ -189,6 +192,7 @@ authorize implementation before every dependency and gate completes.
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
+[t453]: tasks/453-serialize-manager-wallet-publication.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
 [pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
