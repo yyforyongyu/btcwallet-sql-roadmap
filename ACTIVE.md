@@ -41,7 +41,7 @@ placement.
 | [Task 435][t435] | Test transaction publication | Test | Abdullahi | [#1334][pr1334] |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | — |
-| [Task 453][t453] | Serialize Manager Wallet publication | Bug fix | YY | — |
+| [Task 453][t453] | Serialize Manager Wallet publication | Bug fix | YY | [#1336][pr1336] |
 
 ## Blocked Phase 1 Tasks
 
@@ -207,3 +207,4 @@ authorize implementation before every dependency and gate completes.
 [pr1330]: https://github.com/btcsuite/btcwallet/pull/1330
 [pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
 [pr1335]: https://github.com/btcsuite/btcwallet/pull/1335
+[pr1336]: https://github.com/btcsuite/btcwallet/pull/1336
