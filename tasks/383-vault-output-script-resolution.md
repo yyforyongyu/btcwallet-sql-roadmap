@@ -36,8 +36,8 @@ pubkey. Make `ScriptForOutput` consume only the copied domain result.
 
 ## Verification
 
-- External-package AddressManager vectors return the same P2SH, P2WSH, and
-  Taproot scripts on supported backends.
+- Public AddressManager itest vectors return the same exported P2SH, P2WSH, and
+  Taproot scripts on supported maintained backends.
 - Caller mutation of the returned script cannot alter Vault or Store data.
 - Dependency spies prove Wallet does not receive an encrypted address secret
   DTO or call raw `Decrypt`.

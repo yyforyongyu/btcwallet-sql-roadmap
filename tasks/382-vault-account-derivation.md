@@ -49,9 +49,9 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 
 ## Verification
 
-- External-package AccountManager tests create sequential, exact, and custom-
-  scope accounts on SQLite and modern kvdb where supported, with unchanged
-  public results.
+- Public AccountManager itests create sequential, exact, and custom-scope
+  accounts on every supported maintained backend with unchanged exported
+  results.
 - Spies prove AccountManager never calls Store secret reads or raw `Decrypt`
   and no Vault call executes while a Store write is open.
 - Concurrency tests cover Lock and combined passphrase rotation against account

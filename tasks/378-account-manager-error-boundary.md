@@ -37,9 +37,9 @@ and remove the current `errors.As(..., waddrmgr.ManagerError)` passthrough.
 
 ## Verification
 
-- External-package SQL and modern-kvdb tests prove account misses satisfy
-  `errors.Is(err, wallet.ErrAccountNotFound)` and do not satisfy internal DB or
-  legacy-manager error checks.
+- Public AccountManager itests on kvdb, SQLite, and PostgreSQL prove account
+  misses satisfy `errors.Is(err, wallet.ErrAccountNotFound)` and do not satisfy
+  internal DB or legacy-manager error checks.
 - One test covers each additional documented mapped condition, if any.
 - An injected unexpected backend error is not accidentally promoted to a
   stable public sentinel.

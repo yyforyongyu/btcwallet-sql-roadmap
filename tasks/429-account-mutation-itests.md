@@ -23,8 +23,12 @@ and reload behavior should be proven across every maintained database.
 - Cover valid mutation, duplicate name or identity, invalid name or input,
   unknown account, locked or watch-only restrictions where the maintained API
   defines them, and stopped-wallet admission.
-- Reopen after each successful mutation and verify the public account identity,
-  name, scope, and imported identity remain durable.
+- Assert every exported AccountInfo field returned by mutation and its public
+  `GetAccount` postcondition, including optional presence, counts, balances,
+  schema, public key, fingerprint, and creation time. Never assert `AccountID`
+  or another backend routing field.
+- Reopen after each successful mutation and verify the complete exported
+  account result remains durable.
 - Keep current public entry-point semantics. Do not anticipate exact-number,
   custom-scope, path-bound, discovery-mode, or reconciliation behavior owned by
   Tasks 343 and 387–392.
@@ -35,8 +39,9 @@ and reload behavior should be proven across every maintained database.
 
 Add one mutation-focused AccountManager itest source with reusable account
 fixtures and a durable reopen helper. Establish postconditions through
-`GetAccount` rather than database rows and keep imported key material
-deterministic and test-scoped.
+`GetAccount` rather than database rows, keep imported key material deterministic
+and test-scoped, and keep the public result assertion helper inside the itest
+package rather than adding a `package wallet_test` file.
 
 ## Verification
 
@@ -44,6 +49,9 @@ deterministic and test-scoped.
   PostgreSQL.
 - Verify every successful mutation survives a fresh Manager and Wallet, every
   rejection leaves the public account set unchanged, and all resources stop.
+- Compare all exported AccountInfo fields through the imported `wallet` package
+  on every backend; exported-value coverage does not use a separate
+  `package wallet_test` source.
 
 ## Definition of done
 

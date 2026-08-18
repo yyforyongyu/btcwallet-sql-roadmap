@@ -48,8 +48,8 @@ derivation. Keep all backend identity conversion behind the adapter boundary.
   and ordinary derived accounts by BIP44 number.
 - Collision, neither-set, both-set, not-found, and inconsistent numeric-path
   cases fail before derivation or secret access.
-- External-package tests continue to name the request without importing kvdb
-  or internal database types.
+- The public Signer derivation itest continues to name the request through the
+  imported `wallet` package without importing kvdb or internal database types.
 - Maintained kvdb callers and mocks use only the final selector-bearing Signer
   signature.
 

@@ -36,8 +36,8 @@ on the non-exporting operations and delete the obsolete wrapper.
 
 ## Verification
 
-- External-package UnsafeSigner tests prove both methods return usable isolated
-  keys and document caller destruction.
+- Public UnsafeSigner itests prove both methods return usable isolated keys and
+  document caller destruction.
 - Mutation or destruction of one returned key does not alter a later result or
   Vault state.
 - Static call-site inspection proves no safe Signer, PSBT, AccountManager, or

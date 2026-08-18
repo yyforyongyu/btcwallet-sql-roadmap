@@ -30,8 +30,9 @@ existing real-SQLite test to assert the public contract.
 
 ## Verification
 
-- An external-package real-SQLite test loads a missing wallet and observes
-  `errors.Is(err, wallet.ErrWalletNotFound)` with no Wallet result.
+- The public Manager itest loads a missing wallet through the imported `wallet`
+  package and observes `errors.Is(err, wallet.ErrWalletNotFound)` with no
+  Wallet result.
 - Equivalent supported backend misses map identically.
 - A non-not-found backend failure is not reclassified.
 

@@ -47,13 +47,15 @@ expose a backend row identifier as the cross-backend selector.
 
 Locked public derivation works for imported-XPub accounts on SQLite, derived
 accounts still resolve by BIP44 number, and collision tests cannot select the
-wrong XPub. An external package can name and invoke the selector-bearing
-request without importing internal DB types. Maintained implementations,
-callers, and mocks compile against only the final signature, and no numeric-
-path adapter remains. A private signing request for an imported
-identity never falls back to a numbered derived account and performs no secret
-lookup. An output-signing request for an imported-XPub child with no derivation
-metadata fails before `GetAddressSecret` or any raw-import secret path.
+wrong XPub. The public Signer derivation itest names and invokes the selector-
+bearing request through the imported `wallet` package without importing
+internal DB types; do not add a `package wallet_test` file for that check.
+Maintained implementations, callers, and mocks compile against only the final
+signature, and no numeric-path adapter remains. A private signing request for
+an imported identity never falls back to a numbered derived account and
+performs no secret lookup. An output-signing request for an imported-XPub child
+with no derivation metadata fails before `GetAddressSecret` or any raw-import
+secret path.
 
 ## Definition of done
 

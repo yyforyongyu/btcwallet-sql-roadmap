@@ -39,6 +39,9 @@ pending/published history that kvdb can prove.
   ordinary pending state.
 - Exercise kvdb pending and published fixtures and confirm the public contract
   neither fabricates nor promises terminal history for that backend.
+- Assert exported `wallet.TxStatus` values through the public TxReader itest on
+  kvdb, SQLite, and PostgreSQL. Do not add a `package wallet_test` file solely
+  for exported status coverage.
 
 ## Definition of done
 

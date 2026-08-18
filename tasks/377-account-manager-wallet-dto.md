@@ -28,6 +28,9 @@ result exposes backend adapter identity.
   slice data so callers do not alias Store-owned values.
 - Update all AccountManager result signatures, the Wallet compile-time
   assertion, and focused callers. Do not redesign the methods' input shapes.
+- Do not add a `package wallet_test` file solely to prove `AccountInfo` is
+  exported or that AccountManager can be mocked. The AccountManager mutation
+  and query itests own public result-field assertions.
 - Preserve whatever public error semantics are current when this task lands;
   Task 378 owns the independent error translation.
 - Keep exact root-derived creation in [Task 343][t343], custom-scope creation
@@ -42,10 +45,12 @@ types with the wallet-owned result. Keep internal Store queries unchanged.
 
 ## Verification
 
-- An external-package compile test implements and mocks AccountManager without
-  importing `wallet/internal/db`.
-- SQL and modern-kvdb fixtures compare every semantic field before and after
-  conversion, including nil and present-zero optionals.
+- The AccountManager mutation and query itests use the imported
+  `wallet.AccountInfo` result and compare every exported semantic field on
+  kvdb, SQLite, and PostgreSQL, including absent and present-zero optionals.
+- Focused `package wallet` converter fixtures compare every Store field before
+  and after conversion; they do not duplicate public-field coverage in a new
+  separate test file.
 - Mutation of a returned public key or optional does not mutate Store fixtures
   or a second result.
 

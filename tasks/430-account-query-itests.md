@@ -25,16 +25,20 @@ contracts together across kvdb, SQLite, and PostgreSQL.
 - Cover empty filters, exact and absent filters, multiple scopes and names,
   stopped-wallet access, unknown identities, stable ordering where the public
   contract promises it, and agreement between list and point results.
+- Compare every exported AccountInfo field, including optional presence,
+  counts, balances, schema, public key, fingerprint, and creation time. Never
+  assert `AccountID` or another backend routing field.
 - Reopen the same wallet and prove the complete public query view is unchanged.
-- Exclude account mutation implementation, future wallet-owned DTO redesign,
-  configurable identity semantics, addresses, direct Store access, RPC, and
-  unrelated production changes.
+- Exclude account mutation implementation, configurable identity semantics,
+  addresses, direct Store access, RPC, and unrelated production changes.
 
 ## Suggested fix
 
 Add one table-driven AccountManager query itest source that creates its fixture
 through public mutation APIs, derives expected identities from returned public
 objects, and compares filtered and point results without reading database rows.
+Keep the public result assertion helper inside the itest package rather than
+adding a `package wallet_test` file.
 
 ## Verification
 
@@ -42,6 +46,8 @@ objects, and compares filtered and point results without reading database rows.
   SQLite, and PostgreSQL.
 - Verify results and ordering before and after a full reopen and ensure every
   case releases Wallet, Manager, miner, chain, and backend resources.
+- Compare all exported AccountInfo fields through the imported `wallet` package
+  on every backend.
 
 ## Definition of done
 

@@ -39,8 +39,8 @@ operations. Leave backend-private crypto implementation below keyvault.
 
 - Static search finds no Wallet-facing raw `Decrypt`, `GetAccountSecret`, or
   `GetAddressSecret` production call.
-- Focused external-package AccountManager, AddressManager, Signer, and
-  UnsafeSigner suites from the predecessor tasks remain green.
+- Focused public AccountManager, AddressManager, Signer, and UnsafeSigner itest
+  suites from the predecessor tasks remain green.
 - Focused keyvault tests prove typed operations still preserve lock and zeroing
   behavior.
 - The diff contains no redundant-test purge or genesis secret work.

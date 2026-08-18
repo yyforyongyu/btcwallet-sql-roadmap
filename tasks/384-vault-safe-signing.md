@@ -59,9 +59,9 @@ operation guard. Keep Wallet assembly unchanged.
 
 ## Verification
 
-- External-package Signer vectors cover public derivation, ECDH, ECDSA,
-  Schnorr, tweaked Schnorr, unlocking scripts, and raw signatures without a
-  private key or encrypted DTO crossing the mock boundary.
+- Public Signer itest vectors cover derivation, ECDH, ECDSA, Schnorr, tweaked
+  Schnorr, unlocking scripts, and raw signatures without a private key or
+  encrypted DTO crossing the Wallet boundary.
 - Dependency spies prove invalid requests fail before Vault secret lookup.
 - Lock/concurrency and zeroing tests cover success, signer error, tweak error,
   and panic.

@@ -31,12 +31,12 @@ to use the wallet sentinel instead of Store or waddrmgr errors.
 
 ## Verification
 
-- External-package SQL and modern-kvdb tests prove an unknown address satisfies
-  `errors.Is(err, wallet.ErrAddressNotFound)`.
+- Public AddressManager itests on kvdb, SQLite, and PostgreSQL prove an unknown
+  address satisfies `errors.Is(err, wallet.ErrAddressNotFound)`.
 - Invalid address encoding and unexpected Store errors are not reclassified as
   not-found.
-- External callers match only the wallet-owned sentinel and import no Store
-  error or legacy wrapper.
+- The itest imports only the wallet-owned sentinel and no Store error or legacy
+  wrapper.
 
 ## Definition of done
 

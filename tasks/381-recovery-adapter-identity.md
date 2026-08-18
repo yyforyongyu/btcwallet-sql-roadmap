@@ -37,8 +37,9 @@ portable.
 
 - SQL and modern-kvdb recovery tests resolve every numbered and numberless
   account and persist the same horizons after the accessor removal.
-- An external-package compile test can use RecoveryState without an adapter-ID
-  API, and public API inspection finds no account row/adapter identifier.
+- The public recovery itest uses `RecoveryState` through the imported `wallet`
+  package without an adapter-ID API, and public API inspection finds no account
+  row or adapter identifier.
 - Collision fixtures with equal per-scope kvdb adapter numbers remain isolated
   by scope internally.
 
