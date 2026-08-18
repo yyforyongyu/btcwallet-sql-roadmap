@@ -57,16 +57,16 @@ is a Manager operation that returns a fresh runtime instance.
   cancellation or Stop cannot replace it; Stop may only begin the subsequent
   terminal teardown. Record teardown separately, so a later Stop never replays
   the Start result. A Stop caller's cancellation ends only that caller's wait.
-- Keep lifecycle state atomically observable for Wallet operation validation,
-  but give each Manager cache entry one lazily started lifecycle coordinator as
-  the sole owner of the multi-step transitions, startup cancellation, worker
-  publication, and shutdown completion. Start it only when the first Start or
-  Stop request is accepted, never merely because Create or Load published the
-  entry. Its startup and request-channel publication are one indivisible event.
-  It belongs to Manager, not Wallet, and exits when its runtime becomes
-  terminal. Resolve repeated and terminal calls from entry state and recorded
-  completion before channel submission, so no request can wait on an exited
-  coordinator.
+- Keep lifecycle state atomically observable for Wallet operation validation.
+  After Task 453 synchronously assembles a Wallet, replace its bare cache value
+  with a runtime entry that holds that exact pointer and one lazily started
+  lifecycle coordinator. The entry never represents an in-flight or nil
+  assembly. Start the coordinator only when the first Start or Stop request is
+  accepted. It is the sole owner of multi-step transitions, startup
+  cancellation, worker publication, and shutdown completion; it belongs to
+  Manager, not Wallet, and exits when its runtime becomes terminal. Resolve
+  repeated and terminal calls from entry state and recorded completion before
+  channel submission, so no request can wait on an exited coordinator.
 - Run blocking startup setup outside the coordinator and report its completion
   back with the exact runtime identity. The coordinator arbitrates setup
   completion against caller cancellation and Stop, performs the final decision,
@@ -83,12 +83,14 @@ is a Manager operation that returns a fresh runtime instance.
   `WaitGroup`. Never begin a worker wait until startup has either published
   every worker or declined publication, so no `WaitGroup.Add` races with
   `Wait`.
-- Consume Task 453's per-name runtime entry and exact current pointer. Extend
-  that entry only with lifecycle state, a lazy coordinator, and terminal
-  completion. A Load cache hit on a created or active runtime returns that exact
-  pointer. A Load racing terminal shutdown joins completion, then reuses the
-  entry gate to publish exactly one fresh pointer over the Manager-owned
-  backend data.
+- Consume Task 453's Manager-wide assembly lock and exact current pointer.
+  Task 368 introduces the runtime entry only to bind lifecycle state, a lazy
+  coordinator, and terminal completion to that pointer. A Load cache hit on a
+  created or active runtime returns the exact pointer. A Load racing terminal
+  shutdown records completion, releases the Manager lock, joins shutdown, then
+  reacquires the lock and revalidates the current entry. The winning caller
+  synchronously assembles and installs one fresh runtime while concurrent Loads
+  wait on the same Manager lock.
 - Preserve backend parity. SQL may assemble a fresh Wallet over the shared
   Store; the legacy one-wallet kvdb path must reuse its Manager-owned opened
   data rather than opening a second legacy wallet or closing backend resources
@@ -104,24 +106,24 @@ is a Manager operation that returns a fresh runtime instance.
 
 ## Suggested fix
 
-Extend Task 453's per-name runtime entry with lifecycle state, a coordinator
-start guard, request channel, accepted-Start response, terminal completion, and
-teardown result. Have `StartWallet` and `StopWallet` validate exact pointer
-identity and resolve repeated or terminal calls before lazily starting and
-submitting to the coordinator. After acceptance, StartWallet passes caller
-cancellation into the coordinator's exact result-publication arbitration and
-waits only for that latched result. StopWallet caller cancellation bounds only
-that caller's wait.
+Replace Task 453's bare cache pointer with a runtime entry containing the exact
+Wallet pointer, a coordinator start guard, request channel, accepted-Start
+response, terminal completion, and teardown result. Have `StartWallet` and
+`StopWallet` validate exact pointer identity and resolve repeated or terminal
+calls before lazily starting and submitting to the coordinator. After
+acceptance, StartWallet passes caller cancellation into the coordinator's exact
+result-publication arbitration and waits only for that latched result.
+StopWallet caller cancellation bounds only that caller's wait.
 
 Split Wallet startup and shutdown into unexported setup, worker-publication,
 and teardown operations invoked by the coordinator. Run blocking setup and
 worker joining in bounded helper goroutines that report completion to the
-coordinator. Reuse Task 453's per-name gate only to replace a terminal entry;
-Task 453 remains the owner of initial Create and Load publication. Retain the
-terminal entry until replacement wins, then allow the old Wallet and
-coordinator state to become unreachable. Do not add a Wallet lifecycle mutex,
-restart generation, polling loop, compatibility shim, eviction callback, or
-Store ownership to Wallet.
+coordinator. For terminal replacement, join completion outside the Manager
+lock, then reacquire it and use Task 453's synchronous assembly boundary to
+install one fresh entry. Retain the terminal entry until replacement admission,
+then allow the old Wallet and coordinator state to become unreachable. Do not
+add a Wallet lifecycle mutex, restart generation, polling loop, compatibility
+shim, eviction callback, or Store ownership to Wallet.
 
 ## Verification
 
@@ -129,9 +131,9 @@ Store ownership to Wallet.
   PostgreSQL. Cover every `Created`, `Starting`, `Started`, `Stopping`, and
   `Stopped` Start and Stop result, including the stable error identities,
   recorded teardown result, and caller-cancellation boundary.
-- Consume Task 453's proven exact current pointer. Prove Stop is terminal and a
-  later Load returns exactly one distinct pointer for the same durable wallet
-  that can be started.
+- Consume Task 453's proven exact current pointer and synchronous Manager
+  assembly lock. Prove Stop is terminal and a later Load returns exactly one
+  distinct pointer for the same durable wallet that can be started.
 - Prove a lifecycle call with a foreign or replaced Wallet returns
   `ErrWalletNotManaged` and cannot start or stop the current replacement.
 - Add barrier-controlled Stop-during-Starting cases on both sides of the final
@@ -166,8 +168,9 @@ Store ownership to Wallet.
   same pointer can never restart or submit to an exited coordinator.
 - The coordinator publishes exactly one Start result at the documented cutoff;
   caller cancellation cannot contradict the published lifecycle state.
-- Task 453 supplies one exact cold-published pointer, and post-terminal
-  replacement reuses its per-name gate to publish exactly one fresh pointer.
+- Task 453 supplies one exact cold-installed pointer, and post-terminal
+  replacement reuses its Manager-wide assembly lock to install exactly one
+  fresh pointer.
 - Manager.Load replaces a terminal instance with exactly one fresh runtime
   pointer without reopening or closing Manager-owned backend resources.
 - Stop during startup, concurrent Stop, retried Stop, and canceled Stop callers
