@@ -21,6 +21,9 @@ start a birthday-based rescan or widen the active historical rescan.
 - During an active Neutrino historical scan, isolate or defer the new watch
   until the live-tip boundary. Never mutate that scan's start height, target
   set, progress, or completion.
+- Limit production changes to btcwallet's Wallet-owned chain interface and
+  adapters. Use existing btcd, bitcoind, and Neutrino interfaces; do not modify
+  daemon source, RPC contracts, CLI, RPC frontends, or deprecated-wallet code.
 - Keep Store generations, replay, pending results, and recovery out of scope.
 
 ## Suggested fix
@@ -39,5 +42,7 @@ restarts it and becomes active at the documented tip boundary.
 
 Every maintained chain backend can add one live-only
 watch idempotently, and Neutrino preserves active historical scan identity.
+The PR changes no daemon, RPC contract or frontend, CLI, or deprecated-wallet
+code.
 
 [t400]: 400-live-watch-semantics-adr.md

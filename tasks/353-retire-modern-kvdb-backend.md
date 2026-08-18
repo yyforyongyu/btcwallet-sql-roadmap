@@ -36,27 +36,27 @@ passphrase configuration.
 - Remove kvdb from the modern `NewManager` backend selection and configuration.
 - Remove modern kvdb adapter and Vault wiring that has no remaining caller.
 - Retire kvdb-only deprecated passphrase fields from modern public configs.
-- Keep deprecated Loader, RPC wallet, waddrmgr, and wtxmgr behavior outside the
-  retirement. Update affected in-repository callers directly and do not retain
-  public or private Go fields solely for old callers. Their on-disk
-  formats remain unchanged unless separately approved.
+- Keep CLI, deprecated Loader and RPC wallet frontends, waddrmgr, and wtxmgr
+  entirely outside the retirement. Proceed only when the required consumer-
+  cutover evidence proves none of them constructs the modern Manager path. Do
+  not update them for compilation or change their Go APIs or on-disk formats.
 
 ## Suggested fix
 
 Delete the modern Manager's kvdb backend case and its internal adapter wiring,
-then simplify the unified configs around SQL ownership. Update deprecated in-
-repository construction only as required to compile against the final shapes,
-without promising unchanged shapes to external callers. Revalidate and reduce
-every remaining task after removal; do not carry obsolete kvdb prerequisites
-or acceptance criteria forward. Record the task-by-task removals in the
-retirement PR description, not a runtime manifest.
+then simplify the unified configs around SQL ownership. If the removal would
+require any excluded CLI, RPC, deprecated-wallet, waddrmgr, or wtxmgr caller
+change, the consumer-cutover gate is unmet and this task remains blocked.
+Revalidate and reduce every remaining task after removal; do not carry obsolete
+kvdb prerequisites or acceptance criteria forward. Record the task-by-task
+removals in the retirement PR description, not a runtime manifest.
 
 ## Verification
 
 - Run focused Manager backend-selection tests proving kvdb is rejected and
   converted SQL wallets still create, load, close, and reopen.
-- Build the deprecated wallet, Loader, waddrmgr, and wtxmgr paths after any
-  required caller updates, without changing their on-disk formats.
+- Build the unchanged CLI, deprecated wallet, Loader, waddrmgr, and wtxmgr
+  paths and audit the diff to prove none was modified.
 - Audit modern configuration, adapter, Vault, and canonical-task references
   against the retirement ledger so no implemented or pending kvdb clause
   remains.
@@ -68,8 +68,8 @@ retirement PR description, not a runtime manifest.
   evidence, and the explicit retirement decision.
 - Every canonical task's implemented or pending modern-kvdb clause is removed
   or archived according to the retirement ledger.
-- Deprecated Loader, RPC wallet, waddrmgr, and wtxmgr behavior and on-disk
-  formats remain outside the retirement; their Go API shapes may change.
+- CLI, deprecated Loader and RPC wallet frontends, waddrmgr, and wtxmgr code,
+  Go APIs, behavior, and on-disk formats remain unchanged.
 
 [t330]: 330-duplicate-wallet-create.md
 [t331]: 331-manager-wallet-lifecycle.md

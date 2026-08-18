@@ -21,8 +21,10 @@ events, register a stale Wallet, or disable reorg handling between PRs.
 - Add exactly one authoritative chain source to `ManagerConfig` and retain it
   on the Manager. The maintained Manager Create/Load path overwrites or rejects
   per-Wallet source selection. Deprecated and non-Manager constructors remain
-  outside this task; update in-repository callers as required for the final
-  maintained configuration, without adding a legacy field or adapter.
+  outside this task; update only maintained Wallet-library callers, mocks, and
+  tests for the final configuration, without adding a legacy field or adapter.
+  Do not modify CLI, RPC, deprecated-wallet, lnd, or daemon code for
+  compilation.
 - Make the Manager source adapter the sole maintained caller consuming
   `Notifications()` and the sole owner of block-notification registration.
 - Preserve the source's non-notification duties at the ownership cutover.
@@ -192,8 +194,9 @@ Remove the competing maintained per-Wallet consumers in the same change.
   coordinator operation joined first.
 - Run focused mock-chain Manager tests and repeat the two-Wallet Manager case
   on SQLite and PostgreSQL through Task 333's completed harness.
-- Verify all maintained and mechanically affected in-repository constructors
-  compile against the final configuration without a legacy adapter.
+- Verify maintained Wallet-library constructors compile against the final
+  configuration without a legacy adapter, and audit the diff to prove excluded
+  callers and frontends remain unchanged.
 
 ## Definition of done
 
@@ -213,6 +216,8 @@ Remove the competing maintained per-Wallet consumers in the same change.
 - Per-Wallet maintained source selection and competing consumers are removed.
   Deprecated and non-Manager behavioral cutover remains outside this task, and
   no legacy field remains in the maintained configuration.
+- CLI, RPC, deprecated-wallet, lnd, and daemon production code remains
+  unchanged.
 - Targeted scans retain a coordinator-mediated verified historical-query path,
   and source optimization uses the earliest durable history requirement across
   all managed Wallets without changing the canonical frontier.

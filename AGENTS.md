@@ -162,7 +162,12 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
   does not relax accepted behavioral contracts, safety properties, persisted-
   data compatibility, maintained backend parity, daemon-version support, or
   task scope.
-- Avoid voluntary RPC, deprecated-wallet, and unrelated daemon changes.
+- Limit production changes to maintained public Wallet APIs and their directly
+  owned storage, cryptographic, chain, and migration adapters.
+- Do not modify CLI, RPC, deprecated-wallet frontend, lnd, or external-daemon
+  production code. Tests may drive or provision daemons only through existing
+  interfaces and must not change daemon or RPC contracts. Do not use a
+  mechanical compile fix to broaden a Wallet task into one of these areas.
 - Keep kvdb legacy and single-wallet behavior isolated from the SQL design.
 - Do not add create manifests, generic write locks, replay state machines, or
   cross-process Manager fencing without a separately accepted task.

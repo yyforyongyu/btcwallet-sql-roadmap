@@ -26,8 +26,9 @@ mixed transaction.
   and bump the root module to released versions in separate commit(s).
 - Keep behavioral work limited to the maintained Wallet library and its nested
   estimator modules. `cmd/sweepaccount` has a separate existing input-source
-  defect and is outside this task; update it only if a released API requires a
-  mechanical compile fix, not to broaden this task into command maintenance.
+  defect and is outside this task. Do not modify the command even for a
+  mechanical compile fix; keep this estimator correction source-compatible
+  with its existing command usage.
 
 ## Suggested fix
 
@@ -49,4 +50,5 @@ consumers resolve the tagged fix without a local replacement.
   mixed legacy/witness inputs without underestimation or phantom bytes.
 - Corrected nested-module releases are tagged and consumed by `txauthor` and
   the root module without local replacements.
-- Command-specific input-source behavior remains outside this task.
+- `cmd/sweepaccount` remains unchanged, including mechanical caller edits and
+  its command-specific input-source behavior.

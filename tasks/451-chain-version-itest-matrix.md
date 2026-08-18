@@ -38,6 +38,10 @@ and PostgreSQL so a compatibility lane cannot hide a database-specific gap.
   jobs across the btcd compatibility matrix.
 - Retain all daemon provisioning work required to create and verify the
   selected lanes; unrelated provisioning work remains out of scope.
+- Keep daemon interaction inside existing test interfaces. Do not modify btcd,
+  bitcoind, or Neutrino production code or contracts, and do not change
+  btcwallet CLI, RPC, deprecated-wallet, or lnd code. A compatibility fix
+  revealed by a required lane remains limited to maintained Wallet components.
 - Keep new wallet scenarios, new chain behavior beyond a required compatibility
   correction, unsupported daemon releases, and the historical pre-`v0.24.2`
   btcd fallback out of scope.
@@ -77,4 +81,5 @@ replaces an expired entry instead of growing the matrix indefinitely.
 - Neutrino coverage is unchanged. Wallet behavior changes only to fix bugs
   revealed by selected lanes.
 - The implementation PR contains only the CI compatibility outcome, required
-  provisioning, and those fixes.
+  provisioning, and Wallet-component fixes proved by the required lanes. It
+  contains no CLI, RPC, deprecated-wallet, lnd, or daemon production changes.
