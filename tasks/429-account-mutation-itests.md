@@ -23,10 +23,12 @@ and reload behavior should be proven across every maintained database.
 - Cover valid mutation, duplicate name or identity, invalid name or input,
   unknown account, locked or watch-only restrictions where the maintained API
   defines them, and stopped-wallet admission.
-- Assert every exported AccountInfo field returned by mutation and its public
-  `GetAccount` postcondition, including optional presence, counts, balances,
-  schema, public key, fingerprint, and creation time. Never assert `AccountID`
-  or another backend routing field.
+- Assert every exported field of the wallet-owned `AccountInfo` from
+  [Task 377][t377] returned by mutation and its public `GetAccount`
+  postcondition. Cover the absent, present-zero, and present-nonzero optional
+  identities from [Task 341][t341], plus counts, balances, schema, public key,
+  fingerprint, and creation time. Never assert `AccountID` or another backend
+  routing field.
 - Reopen after each successful mutation and verify the complete exported
   account result remains durable.
 - Keep current public entry-point semantics. Do not anticipate exact-number,
@@ -63,3 +65,5 @@ package rather than adding a `package wallet_test` file.
 - The task introduces no new account behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t341]: ../archive/tasks/341-public-role-contract.md
+[t377]: 377-account-manager-wallet-dto.md

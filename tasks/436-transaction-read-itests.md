@@ -22,10 +22,13 @@ coverage through real kvdb, SQLite, and PostgreSQL Wallets.
 - Cover empty history, an unknown transaction, unmined and mined transactions,
   confirmations, supported list boundaries, and agreement between point and
   list results.
+- Compare every exported transaction result field. Assert the public
+  `TxStatus` from [Task 339][t339] for pending and published fixtures on all
+  three backends; Task 339's focused conversion tests retain coverage of SQL-
+  only terminal states that kvdb cannot represent.
 - Reopen the same wallet and prove the public transaction view remains stable.
-- Test the maintained contract available when the task is claimed. Do not
-  define the future status model owned by [Task 339][t339] or hide a defect by
-  encoding backend internals.
+- Task 339 owns the production status model. This task owns its public itest
+  assertions and must not encode backend status values directly.
 - Exclude creation, publication, labels, direct Store reads, RPC, deprecated
   transaction helpers, and unrelated production changes.
 
@@ -40,6 +43,8 @@ compare the two public readers before and after a full durable reopen.
 - Run the focused TxReader cases on kvdb, SQLite, and PostgreSQL.
 - Verify list boundaries are deterministic, point and list results agree, and
   every path releases Wallet, Manager, miner, and backend resources.
+- Assert every exported result field, including `TxStatus`, through the
+  imported `wallet` package rather than a separate `package wallet_test` file.
 
 ## Definition of done
 
@@ -48,7 +53,8 @@ compare the two public readers before and after a full durable reopen.
 - The public transaction view remains correct after durable reopen.
 - Shared cases use real kvdb, SQLite, and PostgreSQL Wallets without a backend
   skip branch.
-- Future status-contract work remains in Task 339.
+- The public status values from Task 339 are covered without duplicating its
+  production implementation or SQL-only conversion cases.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t339]: 339-transaction-visibility.md

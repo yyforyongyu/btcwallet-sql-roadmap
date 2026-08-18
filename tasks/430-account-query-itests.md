@@ -25,9 +25,11 @@ contracts together across kvdb, SQLite, and PostgreSQL.
 - Cover empty filters, exact and absent filters, multiple scopes and names,
   stopped-wallet access, unknown identities, stable ordering where the public
   contract promises it, and agreement between list and point results.
-- Compare every exported AccountInfo field, including optional presence,
-  counts, balances, schema, public key, fingerprint, and creation time. Never
-  assert `AccountID` or another backend routing field.
+- Compare every exported field of the wallet-owned `AccountInfo` from
+  [Task 377][t377]. Cover the absent, present-zero, and present-nonzero optional
+  identities from [Task 341][t341], plus counts, balances, schema, public key,
+  fingerprint, and creation time. Never assert `AccountID` or another backend
+  routing field.
 - Reopen the same wallet and prove the complete public query view is unchanged.
 - Exclude account mutation implementation, configurable identity semantics,
   addresses, direct Store access, RPC, and unrelated production changes.
@@ -59,3 +61,5 @@ adding a `package wallet_test` file.
 - No new query contract is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t341]: ../archive/tasks/341-public-role-contract.md
+[t377]: 377-account-manager-wallet-dto.md

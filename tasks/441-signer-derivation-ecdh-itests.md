@@ -22,12 +22,16 @@ contract end to end.
   teardown; require identical public assertions and stable error identities.
 - Cover supported account paths, external and internal branches, invalid or
   unknown paths, and stopped, locked, and watch-only states where defined.
+- Construct `DerivePubKey` inputs with the exported selector and request from
+  [Task 337][t337]. Exercise name and numbered selectors, every exported
+  request field, and numberless imported-XPub derivation on SQLite,
+  PostgreSQL, and modern kvdb after [Task 361][t361].
 - Verify ECDH against an independently generated peer key in both directions
   and reject nil or unsupported inputs without exposing secret material.
 - Reopen the same Wallet and prove public derivation and the shared secret are
   stable for the same durable identity.
-- Do not define imported-XPub selector changes from Task 337 or Vault routing
-  from Task 384.
+- Tasks 337 and 361 own imported-XPub production behavior. This task owns its
+  public itest assertions; Vault routing from Task 384 remains out of scope.
 
 ## Suggested fix
 
@@ -39,6 +43,8 @@ shared secrets, and never log or persist private material.
 
 - Run the focused Signer derivation cases on kvdb, SQLite, and PostgreSQL.
 - Verify stable results after reopen and complete secret-safe teardown.
+- Exercise every exported derivation-request field through the imported
+  `wallet` package rather than a separate `package wallet_test` file.
 
 ## Definition of done
 
@@ -48,3 +54,5 @@ shared secrets, and never log or persist private material.
 - Shared cases contain no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t337]: 337-imported-xpub-derivation.md
+[t361]: 361-kvdb-imported-xpub-derivation.md
