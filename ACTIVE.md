@@ -20,10 +20,10 @@ placement.
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 339][t339] | Define transaction visibility | Gap fix | YY | [#1330][pr1330] |
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | Gustavo | — |
-| [Task 357][t357] | Validate transaction amounts | Bug fix | YY | — |
+| [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
-| [Task 378][t378] | Translate AccountManager errors | Bug fix | YY | — |
+| [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
 | [Task 387][t387] | Define account-creation identity | Design | YY | — |
@@ -103,25 +103,6 @@ authorize implementation before every dependency and gate completes.
 | --- | --- | --- | ---: | --- | --- |
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 2 | YY | [#1321][pr1321] |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
-
-## Coordination
-
-- Tasks 334, 337, 350, 359, 368, and 400 are YY's grandfathered parallel
-  in-progress work. YY explicitly approves Task 368 and [PR #1328][pr1328] as
-  a stacked exception. Task 453's prerequisite contract is frozen, and PR
-  #1328 remains paused and unmergeable until Task 453's implementation PR
-  merges. YY starts no additional task until only one remains in progress.
-- Gustavo's Phase 3 series, Tasks 427–432, and Abdullahi's remaining Phase 3
-  series, Tasks 435–437, already started and remain active as explicit series
-  exceptions. Do not add work to either series before it clears.
-- YY's blocked Phase 1 Tasks 329, 331, 340, 345, and 368 remain claimed under
-  `Blocked Phase 1 Tasks`. YY's Phase 2 Task 350 and Phase 3 Task 416 remain
-  parked. Dependency readiness for Phase 1 Tasks 334, 377, 425, and 453 does
-  not override the no-new-start rule above; Task 334 remains within the
-  grandfathered series.
-- Outside the exceptions above, each developer may have only one task in
-  progress at a time.
-
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
