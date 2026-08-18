@@ -47,4 +47,4 @@ Every recovery scan has one deterministic aggregate
 attempt cap and checked child arithmetic, independent of target and persisted
 watch loading.
 
-[t342]: 342-recovery-window-validation.md
+[t342]: ../archive/tasks/342-recovery-window-validation.md

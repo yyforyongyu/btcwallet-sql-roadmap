@@ -51,5 +51,5 @@ documented persisted targets and targeted recovery never widens to unrelated
 wallet state. The internal loader is complete before Task 398 exposes semantic
 target admission.
 
-[t342]: 342-recovery-window-validation.md
+[t342]: ../archive/tasks/342-recovery-window-validation.md
 [t345]: 345-durable-watch-registration.md

@@ -19,7 +19,6 @@ placement.
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 339][t339] | Define transaction visibility | Gap fix | YY | [#1330][pr1330] |
-| [Task 342][t342] | Bound recovery windows | Bug fix | Abdullahi | [#1335][pr1335] |
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | Gustavo | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | YY | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
@@ -132,7 +131,6 @@ authorize implementation before every dependency and gate completes.
 [t338]: tasks/338-passphrase-result.md
 [t339]: tasks/339-transaction-visibility.md
 [t340]: tasks/340-durable-database-identity.md
-[t342]: tasks/342-recovery-window-validation.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
 [t345]: tasks/345-durable-watch-registration.md
@@ -206,5 +204,4 @@ authorize implementation before every dependency and gate completes.
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
 [pr1330]: https://github.com/btcsuite/btcwallet/pull/1330
 [pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
-[pr1335]: https://github.com/btcsuite/btcwallet/pull/1335
 [pr1336]: https://github.com/btcsuite/btcwallet/pull/1336

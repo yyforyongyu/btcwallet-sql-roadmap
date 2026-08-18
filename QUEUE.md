@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **125 tasks**, with **118 remaining open**. Open tasks are
+The roadmap contains **125 tasks**, with **117 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -30,7 +30,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 58 open
+## Phase 1 — lnd integration · 57 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -47,7 +47,6 @@ separately accepted task.
 | [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | 331, 368, 421 |
 | [Task 339][t339] | open | TxReader | Gap fix | Define public transaction visibility and status | — |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | 359 |
-| [Task 342][t342] | open | wallet configuration | Bug fix | Accept bounded recovery windows | — |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 377, 388, 392, 393, 394, 452 |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore mutation | Gap fix | Allocate receiving-address batches atomically | 364, 393, 402 |
 | [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account discovery mode | 340 |
@@ -212,13 +211,14 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 7
+## Done · 8
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
 | [Task 332][t332] | 1 | Manager, AccountManager, and AddressManager | Gap fix | Define watch-only and script-import policy | [#1320][pr1320] |
 | [Task 333][t333] | 1 | Manager and integration-test harness | Gap fix | Add PostgreSQL Manager and harness support | [#1303][pr1303] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
+| [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
 | [Task 415][t415] | 3 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 433][t433] | 3 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |

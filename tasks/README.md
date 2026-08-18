@@ -39,7 +39,6 @@ Grouping here does not create dependency or scheduling authority.
 
 - [Task 337](337-imported-xpub-derivation.md): restore SQL imported-XPub public
   derivation.
-- [Task 342](342-recovery-window-validation.md): accept bounded recovery windows.
 - [Task 343](343-exact-account-creation.md): create next-or-exact root-derived
   accounts.
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
