@@ -64,8 +64,9 @@ SQL locking statement.
 ## Verification
 
 - Review the successor against `ManagerConfig`, `Config`, `newManagedWallet`,
-  Controller Start/Stop, Syncer notification and rescan paths, the shared
-  `blocks` table, wallet sync-state rows, and `RollbackToBlock`.
+  `Manager.StartWallet`, `Manager.StopWallet`, Syncer notification and rescan
+  paths, the shared `blocks` table, wallet sync-state rows, and
+  `RollbackToBlock`.
 - Walk connected block, filtered block, relevant transaction, disconnect,
   initial birthday, targeted historical match, Wallet removal, and shutdown
   sequences and assign one owner to every source read, durable mutation, and
