@@ -106,6 +106,13 @@ authorize implementation before every dependency and gate completes.
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 2 | YY | — |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 2 | YY | — |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2 | YY | — |
+
+## Coordination
+
+Task 350 and PR #1321 are paused behind the new hard dependency on Task 454.
+No stacked implementation exception is approved: implementation must not
+resume and PR #1321 must remain unmergeable until Task 454 completes.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
@@ -178,6 +185,7 @@ authorize implementation before every dependency and gate completes.
 [t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t453]: tasks/453-serialize-manager-wallet-publication.md
+[t454]: tasks/454-postgres-transaction-isolation.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
