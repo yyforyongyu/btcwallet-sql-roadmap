@@ -54,7 +54,7 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | — | — |
 | [Task 331][t331] | Fence Manager lifecycle | Bug fix | YY | — |
-| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | — | — |
+| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | YY | — |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
@@ -64,7 +64,7 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | — | — |
 | [Task 349][t349] | Implement transaction invalidation | Gap fix | — | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | — | — |
-| [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
+| [Task 358][t358] | Make Manager creation cancellable | Gap fix | YY | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | — | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | — | — |
@@ -90,7 +90,7 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | — | — |
 | [Task 411][t411] | Reject children of terminal transactions | Bug fix | — | — |
 | [Task 412][t412] | Expose invalidation with publication ordering | Gap fix | — | — |
-| [Task 422][t422] | Make Manager loading cancellable | Gap fix | — | — |
+| [Task 422][t422] | Make Manager loading cancellable | Gap fix | YY | — |
 | [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
 
 ## Claimed Tasks
