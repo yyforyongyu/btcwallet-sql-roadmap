@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "source": {
-    "generated_from_commit": "63403f46d0058d3d37348d0eb252dcff25988de6",
-    "generated_on": "2026-08-18",
+    "generated_from_commit": "b423d7af8c059b6410c9df5e125129707108a48d",
+    "generated_on": "2026-08-21",
     "task_id_range": [
       329,
-      453
+      454
     ],
     "task_metadata": "tasks/*.md and archive/tasks/*.md",
     "phase_map": "QUEUE.md",
@@ -20,39 +20,39 @@
     "large_dependency_branch": "A task with at least 10 transitive dependents. This measures scheduling impact, not implementation scope or atomicity."
   },
   "summary": {
-    "total_tasks": 125,
-    "open_tasks": 118,
-    "complete_tasks": 7,
-    "dependency_edges": 206,
+    "total_tasks": 126,
+    "open_tasks": 114,
+    "complete_tasks": 12,
+    "dependency_edges": 207,
     "root_tasks": 42,
     "terminal_tasks": 39,
-    "dependency_ready_open_tasks": 41,
+    "dependency_ready_open_tasks": 40,
     "dependency_components": 12,
-    "multi_task_dependency_components": 2,
-    "isolated_tasks": 10,
+    "multi_task_dependency_components": 3,
+    "isolated_tasks": 9,
     "large_dependency_branch_threshold": 10,
     "large_dependency_branches": 24,
-    "open_large_dependency_branches": 21,
-    "complete_large_dependency_branches": 3,
+    "open_large_dependency_branches": 19,
+    "complete_large_dependency_branches": 5,
     "maximum_dependency_depth_edges": 11,
     "is_dag": true,
     "tasks_by_phase": {
       "1": 62,
-      "2": 18,
+      "2": 19,
       "3": 32,
       "4": 6,
       "5": 7
     },
     "open_tasks_by_phase": {
-      "1": 58,
-      "2": 18,
+      "1": 53,
+      "2": 19,
       "3": 29,
       "4": 6,
       "5": 7
     },
     "tasks_by_type": {
       "Benchmark": 5,
-      "Bug fix": 41,
+      "Bug fix": 42,
       "Design": 8,
       "Gap fix": 27,
       "Migration": 6,
@@ -67,7 +67,6 @@
     335,
     339,
     342,
-    350,
     352,
     354,
     355,
@@ -102,7 +101,8 @@
     442,
     443,
     451,
-    453
+    453,
+    454
   ],
   "terminal_task_ids": [
     330,
@@ -149,14 +149,11 @@
     334,
     335,
     337,
-    339,
-    342,
-    350,
+    340,
     352,
     354,
-    355,
     357,
-    359,
+    363,
     365,
     369,
     377,
@@ -165,7 +162,8 @@
     380,
     381,
     387,
-    400,
+    397,
+    401,
     416,
     421,
     424,
@@ -186,13 +184,14 @@
     442,
     443,
     451,
-    453
+    453,
+    454
   ],
   "large_dependency_branches": [
     {
       "task_id": 359,
       "title": "revalidate database identity design",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "direct_dependent_count": 1,
       "descendant_count": 46,
@@ -326,7 +325,7 @@
     },
     {
       "task_id": 453,
-      "title": "serialize Manager Wallet publication",
+      "title": "serialize Manager Wallet assembly",
       "status": "open",
       "phase": 1,
       "direct_dependent_count": 2,
@@ -390,7 +389,7 @@
     {
       "task_id": 400,
       "title": "separate live watches from historical recovery",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "direct_dependent_count": 3,
       "descendant_count": 10,
@@ -411,7 +410,7 @@
       "id": 1,
       "task_count": 94,
       "edge_count": 168,
-      "open_task_count": 90,
+      "open_task_count": 85,
       "task_ids": [
         329,
         330,
@@ -540,11 +539,12 @@
     },
     {
       "id": 3,
-      "task_count": 1,
-      "edge_count": 0,
-      "open_task_count": 1,
+      "task_count": 2,
+      "edge_count": 1,
+      "open_task_count": 2,
       "task_ids": [
-        350
+        350,
+        454
       ]
     },
     {
@@ -694,7 +694,6 @@
     335,
     339,
     342,
-    350,
     352,
     354,
     355,
@@ -812,7 +811,9 @@
     372,
     417,
     422,
-    423
+    423,
+    454,
+    350
   ],
   "edges": [
     {
@@ -1638,6 +1639,10 @@
     {
       "from": 453,
       "to": 422
+    },
+    {
+      "from": 454,
+      "to": 350
     }
   ],
   "tasks": [
@@ -2070,11 +2075,11 @@
     {
       "id": 339,
       "title": "define public transaction visibility and status",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Gap fix",
       "component": "TxReader",
-      "path": "tasks/339-transaction-visibility.md",
+      "path": "archive/tasks/339-transaction-visibility.md",
       "dependencies": [
 
       ],
@@ -2115,7 +2120,7 @@
         359
       ],
       "open_dependencies": [
-        359
+
       ],
       "dependents": [
         345,
@@ -2247,11 +2252,11 @@
     {
       "id": 342,
       "title": "accept bounded recovery windows",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "wallet configuration",
-      "path": "tasks/342-recovery-window-validation.md",
+      "path": "archive/tasks/342-recovery-window-validation.md",
       "dependencies": [
 
       ],
@@ -2609,7 +2614,6 @@
         411
       ],
       "open_dependencies": [
-        339,
         409,
         410,
         411
@@ -2647,23 +2651,23 @@
       "component": "PostgreSQL Store",
       "path": "tasks/350-native-pgx-postgres.md",
       "dependencies": [
-
+        454
       ],
       "open_dependencies": [
-
+        454
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
-
+        454
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 0,
+      "dependency_count": 1,
       "dependent_count": 0,
-      "ancestor_count": 0,
+      "ancestor_count": 1,
       "descendant_count": 0
     },
     {
@@ -2821,11 +2825,11 @@
     {
       "id": 355,
       "title": "correct transaction size accounting",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "TxCreator and the `txsizes` module",
-      "path": "tasks/355-transaction-size-accounting.md",
+      "path": "archive/tasks/355-transaction-size-accounting.md",
       "dependencies": [
 
       ],
@@ -2865,7 +2869,6 @@
         404
       ],
       "open_dependencies": [
-        355,
         357,
         404
       ],
@@ -2980,11 +2983,11 @@
     {
       "id": 359,
       "title": "revalidate database identity design",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Design",
       "component": "Manager and SQL Store design",
-      "path": "tasks/359-revalidate-database-identity-design.md",
+      "path": "archive/tasks/359-revalidate-database-identity-design.md",
       "dependencies": [
 
       ],
@@ -3191,7 +3194,7 @@
         342
       ],
       "open_dependencies": [
-        342
+
       ],
       "dependents": [
 
@@ -3220,8 +3223,7 @@
         400
       ],
       "open_dependencies": [
-        345,
-        400
+        345
       ],
       "dependents": [
         344,
@@ -4600,7 +4602,7 @@
         400
       ],
       "open_dependencies": [
-        400
+
       ],
       "dependents": [
         398
@@ -4675,7 +4677,6 @@
         345
       ],
       "open_dependencies": [
-        342,
         345
       ],
       "dependents": [
@@ -4700,11 +4701,11 @@
     {
       "id": 400,
       "title": "separate live watches from historical recovery",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Design",
       "component": "ADR 0004 and ADR 0005 synchronization contract",
-      "path": "tasks/400-live-watch-semantics-adr.md",
+      "path": "archive/tasks/400-live-watch-semantics-adr.md",
       "dependencies": [
 
       ],
@@ -4748,7 +4749,7 @@
         400
       ],
       "open_dependencies": [
-        400
+
       ],
       "dependents": [
         402
@@ -5157,7 +5158,6 @@
         410
       ],
       "open_dependencies": [
-        339,
         409,
         410
       ],
@@ -6561,11 +6561,11 @@
     },
     {
       "id": 453,
-      "title": "serialize Manager Wallet publication",
+      "title": "serialize Manager Wallet assembly",
       "status": "open",
       "phase": 1,
       "type": "Bug fix",
-      "component": "Manager Wallet cache publication",
+      "component": "Manager Wallet assembly and cache installation",
       "path": "tasks/453-serialize-manager-wallet-publication.md",
       "dependencies": [
 
@@ -6598,6 +6598,34 @@
       "dependent_count": 2,
       "ancestor_count": 0,
       "descendant_count": 12
+    },
+    {
+      "id": 454,
+      "title": "make PostgreSQL transaction isolation explicit",
+      "status": "open",
+      "phase": 2,
+      "type": "Bug fix",
+      "component": "PostgreSQL Store transaction runtime",
+      "path": "tasks/454-postgres-transaction-isolation.md",
+      "dependencies": [
+
+      ],
+      "open_dependencies": [
+
+      ],
+      "dependents": [
+        350
+      ],
+      "transitive_dependencies": [
+
+      ],
+      "transitive_dependents": [
+        350
+      ],
+      "dependency_count": 0,
+      "dependent_count": 1,
+      "ancestor_count": 0,
+      "descendant_count": 1
     }
   ]
 }
