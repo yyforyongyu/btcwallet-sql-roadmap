@@ -106,6 +106,7 @@ authorize implementation before every dependency and gate completes.
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2 | YY | — |
 | [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 2 | YY | — |
 | [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 2 | YY | — |
+| [Task 397][t397] | Define semantic-account recovery targets | Design | 2 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 2 | YY | — |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 2 | YY | — |
@@ -153,6 +154,7 @@ authorize implementation before every dependency and gate completes.
 [t394]: tasks/394-key-only-transaction-ownership.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
+[t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t399]: tasks/399-zero-lookahead-persisted-targets.md
 [t400]: tasks/400-live-watch-semantics-adr.md
