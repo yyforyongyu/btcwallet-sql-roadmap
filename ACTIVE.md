@@ -102,7 +102,13 @@ authorize implementation before every dependency and gate completes.
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 2 | YY | [#1321][pr1321] |
+| [Task 362][t362] | Return a definitive kvdb passphrase result | Bug fix | 2 | YY | — |
+| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2 | YY | — |
+| [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 2 | YY | — |
+| [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 2 | YY | — |
+| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 2 | YY | — |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
+| [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 2 | YY | — |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
@@ -125,10 +131,14 @@ authorize implementation before every dependency and gate completes.
 [t357]: tasks/357-transaction-amount-validation.md
 [t358]: tasks/358-contextual-manager-operations.md
 [t359]: tasks/359-revalidate-database-identity-design.md
+[t362]: tasks/362-kvdb-definitive-passphrase-result.md
 [t364]: tasks/364-durable-watch-registration.md
+[t365]: tasks/365-validate-wallet-genesis-keys.md
 [t366]: tasks/366-reconcile-sql-genesis-commit.md
 [t367]: tasks/367-bound-sql-genesis-secrets.md
 [t368]: tasks/368-wallet-startup-shutdown.md
+[t370]: tasks/370-chain-source-delivery.md
+[t372]: tasks/372-multi-wallet-rollback.md
 [t377]: tasks/377-account-manager-wallet-dto.md
 [t378]: tasks/378-account-manager-error-boundary.md
 [t379]: tasks/379-manager-load-error-boundary.md
@@ -143,6 +153,7 @@ authorize implementation before every dependency and gate completes.
 [t394]: tasks/394-key-only-transaction-ownership.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
+[t398]: tasks/398-semantic-account-recovery-targets.md
 [t399]: tasks/399-zero-lookahead-persisted-targets.md
 [t400]: tasks/400-live-watch-semantics-adr.md
 [t401]: tasks/401-live-tip-chain-watch.md
@@ -159,6 +170,7 @@ authorize implementation before every dependency and gate completes.
 [t416]: tasks/416-database-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t422]: tasks/422-manager-load-cancellation.md
+[t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t425]: tasks/425-separate-transaction-authoring-wrappers.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
