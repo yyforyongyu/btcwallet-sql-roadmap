@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **454**.
+The next free task number is **455**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -33,6 +33,8 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 422](422-manager-load-cancellation.md): make Manager loading cancellable.
 - [Task 453](453-serialize-manager-wallet-publication.md): serialize Manager
   Wallet publication.
+- [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
+  transaction isolation explicit.
 
 ## Accounts, addresses, and recovery
 

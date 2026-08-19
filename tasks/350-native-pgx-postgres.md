@@ -4,7 +4,7 @@ Component: **PostgreSQL Store**.
 
 Type: **Refactor**.
 
-Dependencies: **None**.
+Dependencies: **[Task 454][t454]**.
 
 ## Rationale
 
@@ -22,6 +22,9 @@ runtime must not force SQLite's transaction types onto PostgreSQL.
   the shared `wallet/internal/db` contract.
 - Preserve health state, retry classification and accounting, fatal-error
   poisoning, and ambiguous-commit reporting.
+- Preserve the explicit operation-level transaction isolation selected by
+  [Task 454][t454]. Do not fall back to pgx defaults or globally strengthen
+  isolation during the driver cutover.
 - Keep the existing migration library and test-administration connection on
   `database/sql` when that external tool boundary requires it. They are not
   normal Store query/transaction paths.
@@ -42,6 +45,9 @@ unchanged.
   writes through `pgxpool` and `pgx.Tx` with no `database/sql` Store handle.
 - Retry, health, fatal-error, and ambiguous-commit vectors remain equivalent
   to the existing runtime contract.
+- pgx transaction-option tests map every driver-neutral policy selected by
+  Task 454 to its exact pgx isolation level and fail if any transaction begins
+  with default isolation options.
 - Shared DB interfaces and domain values expose no pgx or `database/sql`
   types; SQLite conformance remains green.
 - A source audit permits `database/sql` only in SQLite and the documented
@@ -51,6 +57,8 @@ unchanged.
 
 - Normal PostgreSQL Store queries and transactions use native pgx while
   SQLite retains `database/sql`.
+- Every pgx transaction preserves Task 454's policy through explicit pgx
+  isolation options; no cutover path relies on driver defaults.
 - Shared runtime and domain contracts are driver-neutral and preserve all
   current failure semantics.
 - The PR contains no migration-framework replacement or unrelated storage
@@ -59,3 +67,5 @@ unchanged.
 The shared runtime seam stays in Task 350: by itself it changes no externally
 useful behavior and exists only to enable this cutover, so splitting it would
 create a preparatory task that is not independently useful.
+
+[t454]: 454-postgres-transaction-isolation.md

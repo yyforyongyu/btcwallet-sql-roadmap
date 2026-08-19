@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **125 tasks**, with **113 remaining open**. Open tasks are
+The roadmap contains **126 tasks**, with **114 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -93,7 +93,7 @@ separately accepted task.
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
 | [Task 453][t453] | open | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | — |
 
-## Phase 2 — remaining wallet gaps and bugs · 18 open
+## Phase 2 — remaining wallet gaps and bugs · 19 open
 
 Fix the remaining known gaps and bugs in maintained wallet APIs, storage,
 lifecycle, synchronization, transactions, and recovery. Keep their enabling
@@ -102,7 +102,7 @@ ready Bug fix and Gap fix work.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | — |
+| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
 | [Task 351][t351] | open | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | 340, 424 |
 | [Task 352][t352] | open | LegacyWalletVault and waddrmgr passphrase rotation | Bug fix | Rotate kvdb passphrases atomically | — |
 | [Task 361][t361] | open | modern kvdb public derivation adapter | Gap fix | Support kvdb imported-XPub derivation | 337 |
@@ -120,6 +120,7 @@ ready Bug fix and Gap fix work.
 | [Task 414][t414] | open | SQL UTXO schema | Bug fix | Bound persisted SQL UTXO amounts | 351 |
 | [Task 423][t423] | open | SQL Manager chain source adapter and coordinator activation | Refactor | Cut over SQL Manager chain notification ownership | 368, 370, 372, 412, 422 |
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
+| [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
 
 ## Phase 3 — tests and benchmarks · 29 open
 
@@ -349,6 +350,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t451]: tasks/451-chain-version-itest-matrix.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t453]: tasks/453-serialize-manager-wallet-publication.md
+[t454]: tasks/454-postgres-transaction-isolation.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308
