@@ -238,7 +238,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t339]: tasks/339-transaction-visibility.md
 [t340]: tasks/340-durable-database-identity.md
 [t341]: archive/tasks/341-public-role-contract.md
-[t342]: tasks/342-recovery-window-validation.md
+[t342]: archive/tasks/342-recovery-window-validation.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
 [t345]: tasks/345-durable-watch-registration.md
