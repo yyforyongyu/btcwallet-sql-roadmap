@@ -52,7 +52,7 @@ and `QUEUE.md` owns their delivery phase.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | YY | — |
-| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | — | — |
+| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | YY | — |
 | [Task 331][t331] | Fence Manager lifecycle | Bug fix | YY | — |
 | [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | YY | — |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | — |
@@ -66,8 +66,8 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 356][t356] | Defer change-script allocation | Bug fix | — | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | YY | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
-| [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | — | — |
-| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | — | — |
+| [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | YY | — |
+| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | YY | — |
 | [Task 368][t368] | Manager-own Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 388][t388] | Reject colliding account XPub identities | Bug fix | — | — |
 | [Task 389][t389] | Reconcile runtime account commits | Bug fix | — | — |
@@ -80,7 +80,7 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | — | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | — | — |
-| [Task 402][t402] | Replay live-watch obligations | Gap fix | — | — |
+| [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 404][t404] | Validate transaction input amounts | Bug fix | — | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | — | — |
 | [Task 406][t406] | Release PSBT funding leases | Gap fix | — | — |
