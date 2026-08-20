@@ -19,7 +19,6 @@ placement.
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 339][t339] | Define transaction visibility | Gap fix | YY | [#1330][pr1330] |
-| [Task 355][t355] | Correct transaction size accounting | Bug fix | Gustavo | [#1338][pr1338] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
@@ -125,7 +124,6 @@ authorize implementation before every dependency and gate completes.
 [t348]: tasks/348-watched-change-delivery.md
 [t349]: tasks/349-transaction-invalidation.md
 [t350]: tasks/350-native-pgx-postgres.md
-[t355]: tasks/355-transaction-size-accounting.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t357]: tasks/357-transaction-amount-validation.md
 [t358]: tasks/358-contextual-manager-operations.md
@@ -194,4 +192,3 @@ authorize implementation before every dependency and gate completes.
 [pr1330]: https://github.com/btcsuite/btcwallet/pull/1330
 [pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
 [pr1336]: https://github.com/btcsuite/btcwallet/pull/1336
-[pr1338]: https://github.com/btcsuite/btcwallet/pull/1338

@@ -119,7 +119,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 349](349-transaction-invalidation.md): implement idempotent transaction
   invalidation.
 - [Task 351](351-sql-utxo-integrity.md): bind SQL UTXOs to wallet tenancy.
-- [Task 355](355-transaction-size-accounting.md): correct transaction size
   accounting.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.

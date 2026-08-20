@@ -52,6 +52,6 @@ failures; viable change attempts exactly once; mismatched allocated templates
 are reported without claiming rollback. Released consumers contain no copied
 size or amount arithmetic.
 
-[t355]: 355-transaction-size-accounting.md
+[t355]: ../archive/tasks/355-transaction-size-accounting.md
 [t357]: 357-transaction-amount-validation.md
 [t404]: 404-transaction-input-amounts.md
