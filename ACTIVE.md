@@ -21,13 +21,11 @@ placement.
 | [Task 339][t339] | Define transaction visibility | Gap fix | YY | [#1330][pr1330] |
 | [Task 355][t355] | Correct transaction size accounting | Bug fix | Gustavo | [#1338][pr1338] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
-| [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
 | [Task 387][t387] | Define account-creation identity | Design | YY | — |
-| [Task 400][t400] | Define live-watch semantics | Design | YY | [#1322][pr1322] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
 | [Task 425][t425] | Isolate transaction authoring | Refactor | YY | [#1327][pr1327] |
@@ -131,7 +129,6 @@ authorize implementation before every dependency and gate completes.
 [t356]: tasks/356-defer-change-script-allocation.md
 [t357]: tasks/357-transaction-amount-validation.md
 [t358]: tasks/358-contextual-manager-operations.md
-[t359]: tasks/359-revalidate-database-identity-design.md
 [t362]: tasks/362-kvdb-definitive-passphrase-result.md
 [t364]: tasks/364-durable-watch-registration.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
@@ -157,7 +154,6 @@ authorize implementation before every dependency and gate completes.
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t399]: tasks/399-zero-lookahead-persisted-targets.md
-[t400]: tasks/400-live-watch-semantics-adr.md
 [t401]: tasks/401-live-tip-chain-watch.md
 [t402]: tasks/402-replay-live-watch-obligations.md
 [t404]: tasks/404-transaction-input-amounts.md
@@ -187,8 +183,6 @@ authorize implementation before every dependency and gate completes.
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t453]: tasks/453-serialize-manager-wallet-publication.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
-[pr1319]: https://github.com/btcsuite/btcwallet/pull/1319
-[pr1322]: https://github.com/btcsuite/btcwallet/pull/1322
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
 [pr1326]: https://github.com/btcsuite/btcwallet/pull/1326

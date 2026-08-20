@@ -19,7 +19,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
-- [Task 359](359-revalidate-database-identity-design.md): revalidate database
   identity design.
 - [Task 365](365-validate-wallet-genesis-keys.md): validate wallet genesis key
   identities.
@@ -84,7 +83,6 @@ Grouping here does not create dependency or scheduling authority.
   recovery targets.
 - [Task 399](399-zero-lookahead-persisted-targets.md): isolate persisted targets
   in zero-lookahead recovery.
-- [Task 400](400-live-watch-semantics-adr.md): separate live watches from
   historical recovery.
 - [Task 401](401-live-tip-chain-watch.md): add an idempotent live-tip-only chain
   watch.

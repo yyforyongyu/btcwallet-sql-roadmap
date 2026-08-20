@@ -44,4 +44,4 @@ SQL can persist and query ordered wallet-specific live
 watch obligations durably, without producing, replaying, or exposing them.
 
 [t345]: 345-durable-watch-registration.md
-[t400]: 400-live-watch-semantics-adr.md
+[t400]: ../archive/tasks/400-live-watch-semantics-adr.md

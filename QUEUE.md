@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **125 tasks**, with **117 remaining open**. Open tasks are
+The roadmap contains **125 tasks**, with **115 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -30,7 +30,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 57 open
+## Phase 1 — lnd integration · 55 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -58,7 +58,6 @@ separately accepted task.
 | [Task 356][t356] | open | TxCreator and `txauthor` | Bug fix | Defer change-script allocation until viable | 355, 357, 404 |
 | [Task 357][t357] | open | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 331, 366, 367 |
-| [Task 359][t359] | open | Manager and SQL Store design | Design | Revalidate database identity design | — |
 | [Task 364][t364] | open | SQL watch-generation and obligation schema | Gap fix | Persist ordered SQL live-watch obligations | 345, 400 |
 | [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329 |
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | 329 |
@@ -78,7 +77,6 @@ separately accepted task.
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Allocate one durable key-only locator | 393, 394, 399 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344, 348, 408 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 342, 345 |
-| [Task 400][t400] | open | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | — |
 | [Task 401][t401] | open | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | 400 |
 | [Task 402][t402] | open | Controller/Syncer watch initialization and delivery completion | Gap fix | Replay live-watch obligations through the Syncer | 364, 401 |
 | [Task 404][t404] | open | `txauthor` input sources and TxCreator source adapters | Bug fix | Validate transaction input-source amounts | 357 |
@@ -211,7 +209,7 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 8
+## Done · 10
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -219,7 +217,9 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 333][t333] | 1 | Manager and integration-test harness | Gap fix | Add PostgreSQL Manager and harness support | [#1303][pr1303] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
+| [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
+| [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 415][t415] | 3 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 433][t433] | 3 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |
 | [Task 434][t434] | 3 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |

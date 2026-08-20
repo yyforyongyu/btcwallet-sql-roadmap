@@ -7,6 +7,8 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 400](tasks/400-live-watch-semantics-adr.md) completed on 2026-08-20.
+- [Task 359](tasks/359-revalidate-database-identity-design.md) completed on 2026-08-20.
 - [Task 342](tasks/342-recovery-window-validation.md) completed on 2026-08-18.
 - [Task 434](tasks/434-transaction-creation-itests.md) completed on 2026-08-15.
 - [Task 332](tasks/332-watch-only-script-policy.md) completed on 2026-08-15.
