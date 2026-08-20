@@ -18,12 +18,14 @@ placement.
 | --- | --- | --- | --- | --- |
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
+| [Task 340][t340] | Persist database identity | Bug fix | YY | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
 | [Task 387][t387] | Define account-creation identity | Design | YY | — |
+| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | — | — |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
 | [Task 425][t425] | Isolate transaction authoring | Refactor | YY | [#1327][pr1327] |
@@ -51,7 +53,6 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | YY | — |
 | [Task 331][t331] | Fence Manager lifecycle | Bug fix | YY | — |
 | [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | YY | — |
-| [Task 340][t340] | Persist database identity | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 345][t345] | Persist account discovery mode | Gap fix | YY | — |
@@ -75,7 +76,6 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 395][t395] | Allocate durable key-only locators | Gap fix | — | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
-| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 404][t404] | Validate transaction input amounts | Bug fix | — | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | Gustavo | — |
