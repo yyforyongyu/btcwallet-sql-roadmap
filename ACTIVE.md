@@ -199,4 +199,5 @@ authorize implementation before every dependency and gate completes.
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
 [pr1330]: https://github.com/btcsuite/btcwallet/pull/1330
 [pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
-[pr1336]: https://github.com/btcsuite/btcwallet/pull/1336[pr1338]: https://github.com/btcsuite/btcwallet/pull/1338
+[pr1336]: https://github.com/btcsuite/btcwallet/pull/1336
+[pr1338]: https://github.com/btcsuite/btcwallet/pull/1338
