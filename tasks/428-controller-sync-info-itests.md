@@ -4,7 +4,7 @@ Component: **Controller Resync and Rescan integration tests**.
 
 Type: **Test**.
 
-Dependencies: **None**.
+Dependencies: **[Task 455][t455]**.
 
 ## Rationale
 
@@ -28,8 +28,11 @@ requests, completion, and durable results after reopen.
   reopen.
 - Do not define future recovery or live-watch semantics owned by Tasks 342,
   363, and 397–402.
-- Use `Info` only to observe synchronization preconditions and postconditions;
-  do not duplicate its standalone coverage from PR #1300.
+- Use `Info` to observe synchronization preconditions and postconditions.
+  After [Task 455][t455], compare every exported synchronization field through
+  the imported `wallet` package on all three backends. Task 455 owns the
+  production result; this task owns its public integration assertions. Do not
+  duplicate unrelated standalone `Info` cases from PR #1300.
 - Exclude lifecycle credentials, account/address APIs, RPC, direct Store reads,
   bitcoind parity scenarios, and unrelated production changes.
 
@@ -43,6 +46,8 @@ requests, and observes completion only through maintained public APIs.
 
 - Run the focused Controller synchronization cases on kvdb, SQLite, and
   PostgreSQL without backend branches.
+- Compare every exported synchronization field through the imported `wallet`
+  package before and after resync or rescan.
 - Verify cancellation and failure paths terminate polling and release the
   Wallet, Manager, chain backend, miner, and database resources.
 
@@ -56,3 +61,4 @@ requests, and observes completion only through maintained public APIs.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
+[t455]: 455-exact-wallet-sync-status.md

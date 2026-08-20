@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **125 tasks**, with **113 remaining open**. Open tasks are
+The roadmap contains **127 tasks**, with **115 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -93,7 +93,7 @@ separately accepted task.
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
 | [Task 453][t453] | open | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | — |
 
-## Phase 2 — remaining wallet gaps and bugs · 18 open
+## Phase 2 — remaining wallet gaps and bugs · 20 open
 
 Fix the remaining known gaps and bugs in maintained wallet APIs, storage,
 lifecycle, synchronization, transactions, and recovery. Keep their enabling
@@ -102,7 +102,7 @@ ready Bug fix and Gap fix work.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | — |
+| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
 | [Task 351][t351] | open | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | 340, 424 |
 | [Task 352][t352] | open | LegacyWalletVault and waddrmgr passphrase rotation | Bug fix | Rotate kvdb passphrases atomically | — |
 | [Task 361][t361] | open | modern kvdb public derivation adapter | Gap fix | Support kvdb imported-XPub derivation | 337 |
@@ -120,6 +120,8 @@ ready Bug fix and Gap fix work.
 | [Task 414][t414] | open | SQL UTXO schema | Bug fix | Bound persisted SQL UTXO amounts | 351 |
 | [Task 423][t423] | open | SQL Manager chain source adapter and coordinator activation | Refactor | Cut over SQL Manager chain notification ownership | 368, 370, 372, 412, 422 |
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
+| [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
+| [Task 455][t455] | open | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | — |
 
 ## Phase 3 — tests and benchmarks · 29 open
 
@@ -136,7 +138,7 @@ three-backend performance measurements.
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 416 |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 416 |
 | [Task 427][t427] | open | Controller credential integration tests | Test | Cover remaining Controller credential contracts | — |
-| [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | — |
+| [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | 455 |
 | [Task 429][t429] | open | AccountManager mutation integration tests | Test | Cover public account mutation contracts | — |
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
@@ -234,10 +236,10 @@ phase. Every roadmap task must remain listed exactly once.
 [t336]: tasks/336-test-cleanup.md
 [t337]: tasks/337-imported-xpub-derivation.md
 [t338]: tasks/338-passphrase-result.md
-[t339]: tasks/339-transaction-visibility.md
+[t339]: archive/tasks/339-transaction-visibility.md
 [t340]: tasks/340-durable-database-identity.md
 [t341]: archive/tasks/341-public-role-contract.md
-[t342]: tasks/342-recovery-window-validation.md
+[t342]: archive/tasks/342-recovery-window-validation.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
 [t345]: tasks/345-durable-watch-registration.md
@@ -349,6 +351,8 @@ phase. Every roadmap task must remain listed exactly once.
 [t451]: tasks/451-chain-version-itest-matrix.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t453]: tasks/453-serialize-manager-wallet-publication.md
+[t454]: tasks/454-postgres-transaction-isolation.md
+[t455]: tasks/455-exact-wallet-sync-status.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308

@@ -28,7 +28,6 @@ placement.
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
 | [Task 425][t425] | Isolate transaction authoring | Refactor | YY | [#1327][pr1327] |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | — |
-| [Task 428][t428] | Test resync and rescan | Test | Gustavo | — |
 | [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -37,6 +36,7 @@ placement.
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | — |
 | [Task 453][t453] | Serialize Manager Wallet publication | Bug fix | YY | [#1336][pr1336] |
+| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
 
 ## Blocked Phase 1 Tasks
 
@@ -106,6 +106,14 @@ authorize implementation before every dependency and gate completes.
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 2 | YY | — |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 2 | YY | — |
+| [Task 428][t428] | Test resync and rescan | Test | 3 | Gustavo | — |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2 | YY | — |
+
+## Coordination
+
+Task 350 and PR #1321 are paused behind the new hard dependency on Task 454.
+No stacked implementation exception is approved: implementation must not
+resume and PR #1321 must remain unmergeable until Task 454 completes.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
@@ -178,6 +186,8 @@ authorize implementation before every dependency and gate completes.
 [t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t453]: tasks/453-serialize-manager-wallet-publication.md
+[t454]: tasks/454-postgres-transaction-isolation.md
+[t455]: tasks/455-exact-wallet-sync-status.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
