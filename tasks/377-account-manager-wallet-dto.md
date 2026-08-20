@@ -28,9 +28,9 @@ result exposes backend adapter identity.
   slice data so callers do not alias Store-owned values.
 - Update all AccountManager result signatures, the Wallet compile-time
   assertion, and focused callers. Do not redesign the methods' input shapes.
-- Do not add a `package wallet_test` file solely to prove `AccountInfo` is
-  exported or that AccountManager can be mocked. The AccountManager mutation
-  and query itests own public result-field assertions.
+- [Tasks 429][t429] and [430][t430] own public itest assertions for the exported
+  AccountManager results. This task does not add or revise integration-test
+  source merely to prove that `AccountInfo` is accessible.
 - Preserve whatever public error semantics are current when this task lands;
   Task 378 owns the independent error translation.
 - Keep exact root-derived creation in [Task 343][t343], custom-scope creation
@@ -45,12 +45,8 @@ types with the wallet-owned result. Keep internal Store queries unchanged.
 
 ## Verification
 
-- The AccountManager mutation and query itests use the imported
-  `wallet.AccountInfo` result and compare every exported semantic field on
-  kvdb, SQLite, and PostgreSQL, including absent and present-zero optionals.
 - Focused `package wallet` converter fixtures compare every Store field before
-  and after conversion; they do not duplicate public-field coverage in a new
-  separate test file.
+  and after conversion, including absent and present-zero optionals.
 - Mutation of a returned public key or optional does not mutate Store fixtures
   or a second result.
 
@@ -63,5 +59,7 @@ types with the wallet-owned result. Keep internal Store queries unchanged.
 
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t343]: 343-exact-account-creation.md
+[t429]: 429-account-mutation-itests.md
+[t430]: 430-account-query-itests.md
 [t390]: 390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md

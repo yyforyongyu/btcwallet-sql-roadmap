@@ -34,6 +34,8 @@ Public derivation therefore regresses even though its XPub is sufficient.
   numberless-account derivation with collision and not-found coverage.
   [Task 329][t329] and [Task 376][t376] consume this task without waiting for
   modern-kvdb support.
+- [Task 441][t441] owns public itest assertions for the exported derivation
+  request. This task does not add or revise integration-test source.
 
 ## Suggested fix
 
@@ -47,15 +49,13 @@ expose a backend row identifier as the cross-backend selector.
 
 Locked public derivation works for imported-XPub accounts on SQLite, derived
 accounts still resolve by BIP44 number, and collision tests cannot select the
-wrong XPub. The public Signer derivation itest names and invokes the selector-
-bearing request through the imported `wallet` package without importing
-internal DB types; do not add a `package wallet_test` file for that check.
-Maintained implementations, callers, and mocks compile against only the final
-signature, and no numeric-path adapter remains. A private signing request for
-an imported identity never falls back to a numbered derived account and
-performs no secret lookup. An output-signing request for an imported-XPub child
-with no derivation metadata fails before `GetAddressSecret` or any raw-import
-secret path.
+wrong XPub. Focused package tests construct the final request and cover every
+selector, branch, and child-index path. Maintained implementations, callers,
+and mocks compile against only the final signature, and no numeric-path adapter
+remains. A private signing request for an imported identity never falls back to
+a numbered derived account and performs no secret lookup. An output-signing
+request for an imported-XPub child with no derivation metadata fails before
+`GetAddressSecret` or any raw-import secret path.
 
 ## Definition of done
 
@@ -71,3 +71,4 @@ secret path.
 [t329]: 329-atomic-wallet-account-creation.md
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t376]: 376-orchestrate-legacy-conversion.md
+[t441]: 441-signer-derivation-ecdh-itests.md

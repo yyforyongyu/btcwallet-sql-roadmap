@@ -34,6 +34,8 @@ account identity as a public number.
 - Do not add a new kvdb identity or storage format. If
   [Task 353](353-retire-modern-kvdb-backend.md) lands first, remove this pending
   modern-kvdb task instead of implementing temporary behavior.
+- [Task 441][t441] owns public itest assertions for the exported derivation
+  request. This task does not add or revise integration-test source.
 
 ## Suggested fix
 
@@ -48,8 +50,6 @@ derivation. Keep all backend identity conversion behind the adapter boundary.
   and ordinary derived accounts by BIP44 number.
 - Collision, neither-set, both-set, not-found, and inconsistent numeric-path
   cases fail before derivation or secret access.
-- The public Signer derivation itest continues to name the request through the
-  imported `wallet` package without importing kvdb or internal database types.
 - Maintained kvdb callers and mocks use only the final selector-bearing Signer
   signature.
 
@@ -60,3 +60,5 @@ derivation. Keep all backend identity conversion behind the adapter boundary.
 - Imported-XPub derivation remains public-only and cannot fall back to another
   account or raw-import secret path.
 - The PR contains only modern-kvdb acceptance and no new legacy format.
+
+[t441]: 441-signer-derivation-ecdh-itests.md

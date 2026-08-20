@@ -175,11 +175,13 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
   revealed by its required cases in the same task and implementation PR, and
   keep those cases as regression coverage. Do not include unrelated production
   changes.
-- Do not add a `package wallet_test` file merely to prove that an exported type
-  or field is accessible. Assert exported result values through the owning
-  public itest using the imported `wallet` package and real maintained
-  backends. Keep focused `package wallet` unit tests for conversion branches,
-  alias safety, and internal error paths.
+- A task that exports or reshapes a public type owns the production contract,
+  conversion, and focused `package wallet` tests. It does not add or revise
+  integration-test source merely to prove that the type or its fields are
+  accessible. The owning public itest task asserts exported values through the
+  imported `wallet` package and real maintained backends. Cross-link the tasks
+  to record that coverage ownership without importing itest scope into the
+  production task.
 - Keep benchmark tasks measurement-only. Record a defect exposed only by a
   benchmark as its own implementation task.
 - Register shared public integration-test and benchmark contracts for kvdb,

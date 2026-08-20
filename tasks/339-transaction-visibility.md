@@ -23,6 +23,9 @@ can look like ordinary unconfirmed transactions.
 - Do not fabricate terminal history for kvdb. Its deprecated store exposes only
   the pending/published facts it actually retains; document that narrower
   backend result until kvdb is retired.
+- [Task 436][t436] owns public itest assertions for the exported transaction
+  result and status values. This task does not add or revise integration-test
+  source.
 
 ## Suggested fix
 
@@ -39,9 +42,6 @@ pending/published history that kvdb can prove.
   ordinary pending state.
 - Exercise kvdb pending and published fixtures and confirm the public contract
   neither fabricates nor promises terminal history for that backend.
-- Assert exported `wallet.TxStatus` values through the public TxReader itest on
-  kvdb, SQLite, and PostgreSQL. Do not add a `package wallet_test` file solely
-  for exported status coverage.
 
 ## Definition of done
 
@@ -49,3 +49,5 @@ pending/published history that kvdb can prove.
   only the pending or published facts that kvdb can prove.
 - No internal database enum escapes the public API, and retained SQL audit
   history is neither hidden nor misclassified.
+
+[t436]: 436-transaction-read-itests.md
