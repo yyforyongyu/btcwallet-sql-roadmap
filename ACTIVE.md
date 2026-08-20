@@ -25,7 +25,7 @@ placement.
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
 | [Task 387][t387] | Define account-creation identity | Design | YY | — |
-| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | — | — |
+| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | — |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
 | [Task 425][t425] | Isolate transaction authoring | Refactor | YY | [#1327][pr1327] |
