@@ -48,7 +48,7 @@ SQL has one internal bounded invalidation operation over the authoritative
 graph with retained history and exact ambiguous-result reconciliation; no
 public exposure, publisher behavior, or generic journal is included.
 
-[t339]: 339-transaction-visibility.md
+[t339]: ../archive/tasks/339-transaction-visibility.md
 [t409]: 409-transaction-input-graph.md
 [t410]: 410-transaction-graph-admission.md
 [t411]: 411-terminal-parent-rejection.md

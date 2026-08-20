@@ -108,7 +108,6 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Transactions, UTXOs, and PSBTs
 
-- [Task 339](339-transaction-visibility.md): define public transaction visibility
   and status.
 - [Task 346](346-psbt-funding-metadata.md): preserve PSBT metadata during
   funding.

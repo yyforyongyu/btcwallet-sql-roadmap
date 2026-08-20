@@ -49,6 +49,6 @@ replay is deterministic.
 No active descendant of a retained terminal transaction survives activation,
 and no maintained Store ingestion path can create a new one afterward.
 
-[t339]: 339-transaction-visibility.md
+[t339]: ../archive/tasks/339-transaction-visibility.md
 [t409]: 409-transaction-input-graph.md
 [t410]: 410-transaction-graph-admission.md
