@@ -235,7 +235,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t336]: tasks/336-test-cleanup.md
 [t337]: tasks/337-imported-xpub-derivation.md
 [t338]: tasks/338-passphrase-result.md
-[t339]: tasks/339-transaction-visibility.md
+[t339]: archive/tasks/339-transaction-visibility.md
 [t340]: tasks/340-durable-database-identity.md
 [t341]: archive/tasks/341-public-role-contract.md
 [t342]: archive/tasks/342-recovery-window-validation.md
