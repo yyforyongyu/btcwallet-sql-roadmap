@@ -61,9 +61,9 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 345][t345] | Persist account discovery mode | Gap fix | YY | — |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | — | — |
 | [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | — | — |
-| [Task 348][t348] | Watch PSBT change before return | Bug fix | — | — |
+| [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
 | [Task 349][t349] | Implement transaction invalidation | Gap fix | — | — |
-| [Task 356][t356] | Defer change-script allocation | Bug fix | — | — |
+| [Task 356][t356] | Defer change-script allocation | Bug fix | Gustavo | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | YY | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | YY | — |
@@ -77,15 +77,15 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 393][t393] | Reject key-only receiving allocation | Gap fix | — | — |
 | [Task 394][t394] | Exclude key-only ownership locators | Gap fix | — | — |
 | [Task 395][t395] | Allocate durable key-only locators | Gap fix | — | — |
-| [Task 396][t396] | Return the oldest unused address | Bug fix | — | — |
+| [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 404][t404] | Validate transaction input amounts | Bug fix | — | — |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | — | — |
-| [Task 406][t406] | Release PSBT funding leases | Gap fix | — | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | Gustavo | — |
+| [Task 406][t406] | Release PSBT funding leases | Gap fix | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | — | — |
-| [Task 408][t408] | Watch direct transaction change | Bug fix | — | — |
+| [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
 | [Task 409][t409] | Normalize transaction input edges | Gap fix | — | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | — | — |
 | [Task 411][t411] | Reject children of terminal transactions | Bug fix | — | — |
