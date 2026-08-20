@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "source": {
-    "generated_from_commit": "b423d7af8c059b6410c9df5e125129707108a48d",
+    "generated_from_commit": "13d279fa1326d77b17da7065702692ccad66366a",
     "generated_on": "2026-08-21",
     "task_id_range": [
       329,
-      454
+      455
     ],
     "task_metadata": "tasks/*.md and archive/tasks/*.md",
     "phase_map": "QUEUE.md",
@@ -20,11 +20,11 @@
     "large_dependency_branch": "A task with at least 10 transitive dependents. This measures scheduling impact, not implementation scope or atomicity."
   },
   "summary": {
-    "total_tasks": 126,
-    "open_tasks": 114,
+    "total_tasks": 127,
+    "open_tasks": 115,
     "complete_tasks": 12,
-    "dependency_edges": 207,
-    "root_tasks": 42,
+    "dependency_edges": 209,
+    "root_tasks": 41,
     "terminal_tasks": 39,
     "dependency_ready_open_tasks": 40,
     "dependency_components": 12,
@@ -38,21 +38,21 @@
     "is_dag": true,
     "tasks_by_phase": {
       "1": 62,
-      "2": 19,
+      "2": 20,
       "3": 32,
       "4": 6,
       "5": 7
     },
     "open_tasks_by_phase": {
       "1": 53,
-      "2": 19,
+      "2": 20,
       "3": 29,
       "4": 6,
       "5": 7
     },
     "tasks_by_type": {
       "Benchmark": 5,
-      "Bug fix": 42,
+      "Bug fix": 43,
       "Design": 8,
       "Gap fix": 27,
       "Migration": 6,
@@ -84,7 +84,6 @@
     424,
     425,
     427,
-    428,
     429,
     430,
     431,
@@ -169,7 +168,6 @@
     424,
     425,
     427,
-    428,
     429,
     430,
     431,
@@ -185,7 +183,8 @@
     443,
     451,
     453,
-    454
+    454,
+    455
   ],
   "large_dependency_branches": [
     {
@@ -510,9 +509,9 @@
     },
     {
       "id": 2,
-      "task_count": 21,
-      "edge_count": 38,
-      "open_task_count": 18,
+      "task_count": 22,
+      "edge_count": 40,
+      "open_task_count": 19,
       "task_ids": [
         415,
         428,
@@ -534,7 +533,8 @@
         447,
         448,
         449,
-        450
+        450,
+        455
       ]
     },
     {
@@ -763,7 +763,6 @@
     396,
     426,
     427,
-    428,
     429,
     430,
     431,
@@ -783,7 +782,6 @@
     445,
     446,
     447,
-    448,
     449,
     450,
     451,
@@ -813,7 +811,10 @@
     422,
     423,
     454,
-    350
+    350,
+    455,
+    428,
+    448
   ],
   "edges": [
     {
@@ -1553,6 +1554,10 @@
       "to": 450
     },
     {
+      "from": 433,
+      "to": 455
+    },
+    {
       "from": 434,
       "to": 446
     },
@@ -1643,6 +1648,10 @@
     {
       "from": 454,
       "to": 350
+    },
+    {
+      "from": 455,
+      "to": 428
     }
   ],
   "tasks": [
@@ -5735,23 +5744,24 @@
       "component": "Controller Resync and Rescan integration tests",
       "path": "tasks/428-controller-sync-info-itests.md",
       "dependencies": [
-
+        455
       ],
       "open_dependencies": [
-
+        455
       ],
       "dependents": [
         448
       ],
       "transitive_dependencies": [
-
+        433,
+        455
       ],
       "transitive_dependents": [
         448
       ],
-      "dependency_count": 0,
+      "dependency_count": 1,
       "dependent_count": 1,
-      "ancestor_count": 0,
+      "ancestor_count": 2,
       "descendant_count": 1
     },
     {
@@ -5896,23 +5906,26 @@
         447,
         448,
         449,
-        450
+        450,
+        455
       ],
       "transitive_dependencies": [
 
       ],
       "transitive_dependents": [
+        428,
         444,
         446,
         447,
         448,
         449,
-        450
+        450,
+        455
       ],
       "dependency_count": 0,
-      "dependent_count": 6,
+      "dependent_count": 7,
       "ancestor_count": 0,
-      "descendant_count": 6
+      "descendant_count": 8
     },
     {
       "id": 434,
@@ -6396,14 +6409,15 @@
         415,
         428,
         433,
-        436
+        436,
+        455
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 4,
       "dependent_count": 0,
-      "ancestor_count": 4,
+      "ancestor_count": 5,
       "descendant_count": 0
     },
     {
@@ -6626,6 +6640,35 @@
       "dependent_count": 1,
       "ancestor_count": 0,
       "descendant_count": 1
+    },
+    {
+      "id": 455,
+      "title": "report exact wallet synchronization status",
+      "status": "open",
+      "phase": 2,
+      "type": "Bug fix",
+      "component": "Wallet Controller synchronization information",
+      "path": "tasks/455-exact-wallet-sync-status.md",
+      "dependencies": [
+        433
+      ],
+      "open_dependencies": [
+
+      ],
+      "dependents": [
+        428
+      ],
+      "transitive_dependencies": [
+        433
+      ],
+      "transitive_dependents": [
+        428,
+        448
+      ],
+      "dependency_count": 1,
+      "dependent_count": 1,
+      "ancestor_count": 1,
+      "descendant_count": 2
     }
   ]
 }
