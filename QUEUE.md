@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **127 tasks**, with **115 remaining open**. Open tasks are
+The roadmap contains **127 tasks**, with **114 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -123,7 +123,7 @@ ready Bug fix and Gap fix work.
 | [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
 | [Task 455][t455] | open | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | — |
 
-## Phase 3 — tests and benchmarks · 29 open
+## Phase 3 — tests and benchmarks · 28 open
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
@@ -143,7 +143,6 @@ three-backend performance measurements.
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
-| [Task 435][t435] | open | TxPublisher integration tests | Test | Cover transaction publication contracts | — |
 | [Task 436][t436] | open | TxReader integration tests | Test | Cover transaction read contracts | — |
 | [Task 437][t437] | open | TxWriter integration tests | Test | Cover transaction label contracts | — |
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
@@ -209,7 +208,7 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 12
+## Done · 13
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -225,6 +224,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 415][t415] | 3 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 433][t433] | 3 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |
 | [Task 434][t434] | 3 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |
+| [Task 435][t435] | 3 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md

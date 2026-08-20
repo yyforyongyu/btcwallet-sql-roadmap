@@ -171,7 +171,6 @@ that structural exclusion explicitly.
   and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
-- [Task 435](435-transaction-publication-itests.md): cover transaction
   publication contracts.
 - [Task 436](436-transaction-read-itests.md): cover transaction read contracts.
 - [Task 437](437-transaction-label-itests.md): cover transaction label

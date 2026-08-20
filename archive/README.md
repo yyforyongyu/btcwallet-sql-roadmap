@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 435](tasks/435-transaction-publication-itests.md) completed on 2026-08-21.
 - [Task 339](tasks/339-transaction-visibility.md) completed on 2026-08-21.
 - [Task 355](tasks/355-transaction-size-accounting.md) completed on 2026-08-20.
 - [Task 400](tasks/400-live-watch-semantics-adr.md) completed on 2026-08-20.

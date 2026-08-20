@@ -34,7 +34,6 @@ placement.
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 435][t435] | Test transaction publication | Test | Abdullahi | [#1334][pr1334] |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | — |
 | [Task 453][t453] | Serialize Manager Wallet publication | Bug fix | YY | [#1336][pr1336] |
@@ -181,7 +180,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t435]: tasks/435-transaction-publication-itests.md
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
@@ -197,5 +195,4 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1327]: https://github.com/btcsuite/btcwallet/pull/1327
 [pr1332]: https://github.com/btcsuite/btcwallet/pull/1332
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
-[pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
 [pr1336]: https://github.com/btcsuite/btcwallet/pull/1336
