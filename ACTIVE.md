@@ -19,7 +19,7 @@ placement.
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 339][t339] | Define transaction visibility | Gap fix | YY | [#1330][pr1330] |
-| [Task 355][t355] | Correct transaction size accounting | Bug fix | Gustavo | — |
+| [Task 355][t355] | Correct transaction size accounting | Bug fix | Gustavo | [#1338][pr1338] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
 | [Task 359][t359] | Revalidate database identity | Design | YY | [#1319][pr1319] |
 | [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
@@ -199,4 +199,4 @@ authorize implementation before every dependency and gate completes.
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
 [pr1330]: https://github.com/btcsuite/btcwallet/pull/1330
 [pr1334]: https://github.com/btcsuite/btcwallet/pull/1334
-[pr1336]: https://github.com/btcsuite/btcwallet/pull/1336
+[pr1336]: https://github.com/btcsuite/btcwallet/pull/1336[pr1338]: https://github.com/btcsuite/btcwallet/pull/1338
