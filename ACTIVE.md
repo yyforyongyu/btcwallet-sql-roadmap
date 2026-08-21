@@ -19,7 +19,7 @@ placement.
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | — |
-| [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
+| [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | — |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
