@@ -20,7 +20,6 @@ placement.
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | — | — |
-| [Task 377][t377] | Return wallet-owned accounts | Gap fix | YY | [#1329][pr1329] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | — | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
@@ -140,7 +139,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [t368]: tasks/368-wallet-startup-shutdown.md
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
-[t377]: tasks/377-account-manager-wallet-dto.md
 [t378]: tasks/378-account-manager-error-boundary.md
 [t379]: tasks/379-manager-load-error-boundary.md
 [t380]: tasks/380-address-lookup-error-boundary.md
@@ -190,7 +188,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
 [pr1326]: https://github.com/btcsuite/btcwallet/pull/1326
-[pr1329]: https://github.com/btcsuite/btcwallet/pull/1329
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1327]: https://github.com/btcsuite/btcwallet/pull/1327
 [pr1332]: https://github.com/btcsuite/btcwallet/pull/1332

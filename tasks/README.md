@@ -52,7 +52,6 @@ Grouping here does not create dependency or scheduling authority.
   derivation work.
 - [Task 364](364-durable-watch-registration.md): persist ordered SQL live-watch
   obligations.
-- [Task 377](377-account-manager-wallet-dto.md): make AccountManager results
   wallet-owned.
 - [Task 378](378-account-manager-error-boundary.md): translate AccountManager
   backend errors.
