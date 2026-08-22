@@ -54,8 +54,8 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 345][t345] | Persist account discovery mode | Gap fix | YY | — |
-| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | — | — |
-| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | — | — |
+| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | — |
+| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | Abdullahi | — |
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
 | [Task 349][t349] | Implement transaction invalidation | Gap fix | — | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | Gustavo | — |
@@ -75,10 +75,10 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
-| [Task 404][t404] | Validate transaction input amounts | Bug fix | — | — |
+| [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | Gustavo | — |
 | [Task 406][t406] | Release PSBT funding leases | Gap fix | Gustavo | — |
-| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | — | — |
+| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
 | [Task 409][t409] | Normalize transaction input edges | Gap fix | — | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | — | — |
