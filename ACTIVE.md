@@ -27,7 +27,6 @@ placement.
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | — |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | — |
-| [Task 425][t425] | Isolate transaction authoring | Refactor | YY | [#1327][pr1327] |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | — |
 | [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
@@ -171,7 +170,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [t422]: tasks/422-manager-load-cancellation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
-[t425]: tasks/425-separate-transaction-authoring-wrappers.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
 [t428]: tasks/428-controller-sync-info-itests.md
 [t429]: tasks/429-account-mutation-itests.md
@@ -189,7 +187,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1324]: https://github.com/btcsuite/btcwallet/pull/1324
 [pr1326]: https://github.com/btcsuite/btcwallet/pull/1326
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
-[pr1327]: https://github.com/btcsuite/btcwallet/pull/1327
 [pr1332]: https://github.com/btcsuite/btcwallet/pull/1332
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
 [pr1336]: https://github.com/btcsuite/btcwallet/pull/1336

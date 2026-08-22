@@ -49,4 +49,4 @@ lease semantics or duplicate allocation calculation.
 
 [t344]: 344-bulk-address-allocation.md
 [t356]: 356-defer-change-script-allocation.md
-[t425]: 425-separate-transaction-authoring-wrappers.md
+[t425]: ../archive/tasks/425-separate-transaction-authoring-wrappers.md

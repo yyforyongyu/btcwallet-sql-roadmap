@@ -53,4 +53,4 @@ count-one change-allocation path until Task 353.
 
 [t344]: 344-bulk-address-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
-[t425]: 425-separate-transaction-authoring-wrappers.md
+[t425]: ../archive/tasks/425-separate-transaction-authoring-wrappers.md

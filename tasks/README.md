@@ -148,7 +148,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 414](414-utxo-amount-bounds.md): bound persisted SQL UTXO amounts.
 - [Task 424](424-transaction-utxo-integrity-adr.md): define transaction and UTXO
   integrity ownership.
-- [Task 425](425-separate-transaction-authoring-wrappers.md): isolate shared
   transaction authoring from wrapper watch and lease effects.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
   transaction output aggregates.
