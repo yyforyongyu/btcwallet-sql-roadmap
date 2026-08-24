@@ -18,7 +18,7 @@ placement.
 | --- | --- | --- | --- | --- |
 | [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
-| [Task 340][t340] | Persist database identity | Bug fix | YY | — |
+| [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | — |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | Gustavo | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
@@ -194,3 +194,4 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1342]: https://github.com/btcsuite/btcwallet/pull/1342
 [pr1341]: https://github.com/btcsuite/btcwallet/pull/1341
+[pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
