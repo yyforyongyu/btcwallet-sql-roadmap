@@ -27,7 +27,7 @@ placement.
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | [#1341][pr1341] |
 | [Task 424][t424] | Define transaction integrity ownership | Design | YY | [#1343][pr1343] |
-| [Task 427][t427] | Test Controller credentials | Test | Gustavo | — |
+| [Task 427][t427] | Test Controller credentials | Test | Gustavo | [#1349][pr1349] |
 | [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -198,3 +198,4 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1347]: https://github.com/btcsuite/btcwallet/pull/1347
 [pr1346]: https://github.com/btcsuite/btcwallet/pull/1346
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
+[pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
