@@ -78,7 +78,7 @@ operation guard. Keep Wallet assembly unchanged.
 - No PSBT authorization, UnsafeSigner extraction, or unrelated script/address
   mutation is included.
 
-[t337]: 337-imported-xpub-derivation.md
+[t337]: ../archive/tasks/337-imported-xpub-derivation.md
 [t347]: 347-psbt-signing-authorization.md
 [t352]: 352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md

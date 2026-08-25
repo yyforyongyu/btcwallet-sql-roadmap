@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **127 tasks**, with **111 remaining open**. Open tasks are
+The roadmap contains **127 tasks**, with **109 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -30,7 +30,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 50 open
+## Phase 1 — lnd integration · 48 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -43,7 +43,6 @@ separately accepted task.
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | 331 |
 | [Task 331][t331] | open | Manager | Bug fix | Fence Manager admission and Store closure | 368 |
 | [Task 334][t334] | open | SQL wallet architecture documentation | Design | Supersede ADR 0002 with SQL shared-chain ownership | — |
-| [Task 337][t337] | open | Wallet and Signer public derivation | Bug fix | Restore SQL imported-XPub public derivation | — |
 | [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | 331, 368, 421 |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | 359 |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 377, 388, 392, 393, 394, 452 |
@@ -62,7 +61,6 @@ separately accepted task.
 | [Task 368][t368] | open | Manager and Wallet runtime lifecycle | Bug fix | Make Manager own Wallet lifecycle | 453 |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
 | [Task 379][t379] | open | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | — |
-| [Task 380][t380] | open | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | — |
 | [Task 387][t387] | open | ADR 0012 and ADR 0013 account-creation contract | Design | Define custom and path-bound account identity | — |
 | [Task 388][t388] | open | SQL AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 387 |
 | [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343 |
@@ -205,12 +203,13 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 16
+## Done · 18
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
 | [Task 332][t332] | 1 | Manager, AccountManager, and AddressManager | Gap fix | Define watch-only and script-import policy | [#1320][pr1320] |
 | [Task 333][t333] | 1 | Manager and integration-test harness | Gap fix | Add PostgreSQL Manager and harness support | [#1303][pr1303] |
+| [Task 337][t337] | 1 | Wallet and Signer public derivation | Bug fix | Restore SQL imported-XPub public derivation | [#1324][pr1324] |
 | [Task 339][t339] | 1 | TxReader | Gap fix | Define public transaction visibility and status | [#1330][pr1330] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
@@ -218,6 +217,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
 | [Task 377][t377] | 1 | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | [#1329][pr1329] |
+| [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 415][t415] | 3 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 425][t425] | 1 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |

@@ -37,7 +37,6 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Accounts, addresses, and recovery
 
-- [Task 337](337-imported-xpub-derivation.md): restore SQL imported-XPub public
   derivation.
 - [Task 343](343-exact-account-creation.md): create next-or-exact root-derived
   accounts.
@@ -54,7 +53,6 @@ Grouping here does not create dependency or scheduling authority.
   wallet-owned.
 - [Task 378](378-account-manager-error-boundary.md): translate AccountManager
   backend errors.
-- [Task 380](380-address-lookup-error-boundary.md): translate address lookup
   errors.
 - [Task 381](381-recovery-adapter-identity.md): hide recovery adapter identity.
 - [Task 387](387-account-creation-identity-adr.md): define custom and path-bound

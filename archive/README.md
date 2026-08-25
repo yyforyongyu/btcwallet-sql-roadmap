@@ -7,6 +7,8 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 380](tasks/380-address-lookup-error-boundary.md) completed on 2026-08-25.
+- [Task 337](tasks/337-imported-xpub-derivation.md) completed on 2026-08-25.
 - [Task 453](tasks/453-serialize-manager-wallet-publication.md) completed on 2026-08-25.
 - [Task 425](tasks/425-separate-transaction-authoring-wrappers.md) completed on 2026-08-22.
 - [Task 377](tasks/377-account-manager-wallet-dto.md) completed on 2026-08-21.
