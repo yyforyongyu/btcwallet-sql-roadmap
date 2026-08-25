@@ -34,7 +34,6 @@ placement.
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | [#1346][pr1346] |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
-| [Task 453][t453] | Serialize Manager Wallet publication | Bug fix | YY | [#1336][pr1336] |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
 
 ## Blocked Phase 1 Tasks
@@ -179,7 +178,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
-[t453]: tasks/453-serialize-manager-wallet-publication.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
@@ -189,7 +187,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1332]: https://github.com/btcsuite/btcwallet/pull/1332
 [pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
-[pr1336]: https://github.com/btcsuite/btcwallet/pull/1336
 [pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1342]: https://github.com/btcsuite/btcwallet/pull/1342

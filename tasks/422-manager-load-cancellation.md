@@ -79,4 +79,4 @@ return the published pointer on every post-publication path.
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t368]: 368-wallet-startup-shutdown.md
-[t453]: 453-serialize-manager-wallet-publication.md
+[t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md

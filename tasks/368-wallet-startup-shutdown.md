@@ -179,4 +179,4 @@ shim, eviction callback, or Store ownership to Wallet.
   semantics, passphrase completion, generic operation tracking, or chain
   ownership.
 
-[t453]: 453-serialize-manager-wallet-publication.md
+[t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md

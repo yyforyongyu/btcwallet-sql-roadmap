@@ -31,7 +31,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 379](379-manager-load-error-boundary.md): translate Manager load
   not-found errors.
 - [Task 422](422-manager-load-cancellation.md): make Manager loading cancellable.
-- [Task 453](453-serialize-manager-wallet-publication.md): serialize Manager
   Wallet publication.
 - [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.

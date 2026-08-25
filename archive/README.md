@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 453](tasks/453-serialize-manager-wallet-publication.md) completed on 2026-08-25.
 - [Task 425](tasks/425-separate-transaction-authoring-wrappers.md) completed on 2026-08-22.
 - [Task 377](tasks/377-account-manager-wallet-dto.md) completed on 2026-08-21.
 - [Task 435](tasks/435-transaction-publication-itests.md) completed on 2026-08-21.

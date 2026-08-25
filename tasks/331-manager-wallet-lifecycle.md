@@ -112,4 +112,4 @@ Close-versus-Start ordering needs no Manager-owned lease inside Wallet.
   create manifest, cross-process fence, or unrelated Controller behavior.
 
 [t368]: 368-wallet-startup-shutdown.md
-[t453]: 453-serialize-manager-wallet-publication.md
+[t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md
