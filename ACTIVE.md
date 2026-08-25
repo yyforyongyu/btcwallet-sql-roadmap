@@ -20,6 +20,7 @@ placement.
 | [Task 337][t337] | Restore imported-XPub derivation | Bug fix | YY | [#1324][pr1324] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
+| [Task 368][t368] | Manager-own Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | Gustavo | — |
 | [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 380][t380] | Translate address lookup errors | Bug fix | YY | [#1332][pr1332] |
@@ -61,7 +62,6 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | YY | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | YY | — |
-| [Task 368][t368] | Manager-own Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 388][t388] | Reject colliding account XPub identities | Bug fix | — | — |
 | [Task 389][t389] | Reconcile runtime account commits | Bug fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
