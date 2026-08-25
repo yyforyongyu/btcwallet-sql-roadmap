@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **127 tasks**, with **109 remaining open**. Open tasks are
+The roadmap contains **127 tasks**, with **108 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -30,7 +30,7 @@ The delivery stages are:
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 48 open
+## Phase 1 — lnd integration · 47 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -60,7 +60,6 @@ separately accepted task.
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | 329 |
 | [Task 368][t368] | open | Manager and Wallet runtime lifecycle | Bug fix | Make Manager own Wallet lifecycle | 453 |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
-| [Task 379][t379] | open | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | — |
 | [Task 387][t387] | open | ADR 0012 and ADR 0013 account-creation contract | Design | Define custom and path-bound account identity | — |
 | [Task 388][t388] | open | SQL AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 387 |
 | [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343 |
@@ -203,7 +202,7 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 18
+## Done · 19
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -217,6 +216,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
 | [Task 377][t377] | 1 | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | [#1329][pr1329] |
+| [Task 379][t379] | 1 | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | [#1331][pr1331] |
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 415][t415] | 3 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |

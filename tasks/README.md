@@ -28,7 +28,6 @@ Grouping here does not create dependency or scheduling authority.
   lifecycle.
 - [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
   without resetting timeout.
-- [Task 379](379-manager-load-error-boundary.md): translate Manager load
   not-found errors.
 - [Task 422](422-manager-load-cancellation.md): make Manager loading cancellable.
   Wallet publication.

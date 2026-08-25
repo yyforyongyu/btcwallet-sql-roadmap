@@ -21,7 +21,6 @@ placement.
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 368][t368] | Manager-own Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | Gustavo | — |
-| [Task 379][t379] | Translate Manager load errors | Bug fix | YY | [#1331][pr1331] |
 | [Task 387][t387] | Define account-creation identity | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | [#1341][pr1341] |
@@ -135,7 +134,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
 [t378]: tasks/378-account-manager-error-boundary.md
-[t379]: tasks/379-manager-load-error-boundary.md
 [t387]: tasks/387-account-creation-identity-adr.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
@@ -180,7 +178,6 @@ resume and PR #1321 must remain unmergeable until Task 454 completes.
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1326]: https://github.com/btcsuite/btcwallet/pull/1326
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
-[pr1331]: https://github.com/btcsuite/btcwallet/pull/1331
 [pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1342]: https://github.com/btcsuite/btcwallet/pull/1342
