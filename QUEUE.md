@@ -26,6 +26,12 @@ The delivery stages are:
 4. legacy migration and kvdb retirement; and
 5. Signer and Vault hardening.
 
+Phases 1 and 2 together form the wallet-side readiness gate for lnd
+integration. After every task in both phases completes, the separately
+accepted lnd integration PR may begin while Phase 3 proceeds in parallel.
+Phase 3 does not block that PR unless an explicit roadmap-priority decision
+moves a required task into the readiness gate.
+
 [ACTIVE.md](ACTIVE.md) separately owns the current focus, claims, in-progress
 PRs, and coordination.
 
