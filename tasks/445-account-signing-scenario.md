@@ -50,7 +50,7 @@ adding another signing abstraction.
   account or Vault behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t429]: 429-account-mutation-itests.md
+[t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
 [t441]: 441-signer-derivation-ecdh-itests.md
 [t442]: 442-signer-signing-itests.md

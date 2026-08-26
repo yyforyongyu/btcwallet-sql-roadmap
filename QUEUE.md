@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **127 tasks**, with **108 remaining open**. Open tasks are
+The roadmap contains **127 tasks**, with **107 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -87,7 +87,7 @@ separately accepted task.
 | [Task 422][t422] | open | Manager.Load | Gap fix | Make Manager loading cancellable | 331, 368, 453 |
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
 
-## Phase 2 — verification · 28 open
+## Phase 2 — verification · 27 open
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
@@ -103,7 +103,6 @@ three-backend performance measurements.
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 416 |
 | [Task 427][t427] | open | Controller credential integration tests | Test | Cover remaining Controller credential contracts | — |
 | [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | 455 |
-| [Task 429][t429] | open | AccountManager mutation integration tests | Test | Cover public account mutation contracts | — |
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
@@ -208,7 +207,7 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Done · 19
+## Done · 20
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -227,6 +226,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 415][t415] | 2 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 425][t425] | 1 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |
+| [Task 429][t429] | 2 | AccountManager mutation integration tests | Test | Cover public account mutation contracts | [#1326][pr1326] |
 | [Task 433][t433] | 2 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |
 | [Task 434][t434] | 2 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |
 | [Task 435][t435] | 2 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |

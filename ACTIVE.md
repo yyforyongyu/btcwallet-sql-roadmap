@@ -25,7 +25,6 @@ placement.
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | [#1341][pr1341] |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | [#1349][pr1349] |
-| [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
@@ -164,7 +163,6 @@ an explicit owner-approved priority exception.
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
 [t428]: tasks/428-controller-sync-info-itests.md
-[t429]: tasks/429-account-mutation-itests.md
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
@@ -175,7 +173,6 @@ an explicit owner-approved priority exception.
 [t455]: tasks/455-exact-wallet-sync-status.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
-[pr1326]: https://github.com/btcsuite/btcwallet/pull/1326
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343

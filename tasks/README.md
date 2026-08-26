@@ -158,7 +158,6 @@ that structural exclusion explicitly.
   Controller credential contracts.
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
-- [Task 429](429-account-mutation-itests.md): cover public account mutation
   contracts.
 - [Task 430](430-account-query-itests.md): cover public account query contracts.
 - [Task 431](431-address-allocation-lookup-itests.md): cover address allocation
