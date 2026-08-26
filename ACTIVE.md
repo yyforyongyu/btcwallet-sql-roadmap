@@ -90,17 +90,17 @@ authorize implementation before every dependency and gate completes.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
-| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 2 | YY | [#1321][pr1321] |
-| [Task 362][t362] | Return a definitive kvdb passphrase result | Bug fix | 2 | YY | — |
-| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2 | YY | — |
-| [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 2 | YY | — |
-| [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 2 | YY | — |
-| [Task 397][t397] | Define semantic-account recovery targets | Design | 2 | YY | — |
-| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 2 | YY | — |
-| [Task 416][t416] | Build database benchmark fixtures | Benchmark | 3 | YY | — |
-| [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 2 | YY | — |
-| [Task 428][t428] | Test resync and rescan | Test | 3 | Gustavo | — |
-| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2 | YY | — |
+| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 3 | YY | [#1321][pr1321] |
+| [Task 362][t362] | Return a definitive kvdb passphrase result | Bug fix | 3 | YY | — |
+| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 3 | YY | — |
+| [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 3 | YY | — |
+| [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 3 | YY | — |
+| [Task 397][t397] | Define semantic-account recovery targets | Design | 3 | YY | — |
+| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 3 | YY | — |
+| [Task 416][t416] | Build database benchmark fixtures | Benchmark | 2 | YY | — |
+| [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
+| [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
 
 ## Coordination
 
