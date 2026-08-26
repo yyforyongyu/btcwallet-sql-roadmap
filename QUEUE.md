@@ -36,7 +36,7 @@ moves a required task into the readiness gate.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 47 open
+## Phase 1 — lnd integration · 41 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -57,7 +57,6 @@ separately accepted task.
 | [Task 346][t346] | open | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | 357, 404 |
 | [Task 347][t347] | open | PsbtManager and Signer | Bug fix | Authorize explicit PSBT signatures | 346, 390 |
 | [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 406, 425 |
-| [Task 349][t349] | open | TxStore internal invalidation workflow | Gap fix | Implement idempotent transaction invalidation | 339, 409, 410, 411 |
 | [Task 356][t356] | open | TxCreator and `txauthor` | Bug fix | Defer change-script allocation until viable | 355, 357, 404 |
 | [Task 357][t357] | open | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 331, 366, 367 |
@@ -84,13 +83,8 @@ separately accepted task.
 | [Task 406][t406] | open | UTXO Store and PsbtManager cleanup | Gap fix | Release PSBT funding leases by exact token | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 347 |
 | [Task 408][t408] | open | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | 344, 356, 425 |
-| [Task 409][t409] | open | SQL schema and TxStore ingestion | Gap fix | Normalize transaction input edges | 340, 424 |
-| [Task 410][t410] | open | Wallet/Store transaction graph admission | Bug fix | Coordinate transaction graph mutations | 334, 409 |
-| [Task 411][t411] | open | TxStore activation preflight and direct/batch ingestion | Bug fix | Reject children of terminal transactions | 339, 409, 410 |
-| [Task 412][t412] | open | TxWriter public contract, TxPublisher, and transaction graph admission | Gap fix | Expose invalidation with publication ordering | 349 |
 | [Task 421][t421] | open | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | — |
 | [Task 422][t422] | open | Manager.Load | Gap fix | Make Manager loading cancellable | 331, 368, 453 |
-| [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
 
 ## Phase 2 — verification · 28 open
@@ -130,7 +124,7 @@ three-backend performance measurements.
 | [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | 431, 435, 436 |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 
-## Phase 3 — remaining wallet gaps and bugs · 20 open
+## Phase 3 — remaining wallet gaps and bugs · 26 open
 
 Fix the remaining known gaps and bugs in maintained wallet APIs, storage,
 lifecycle, synchronization, transactions, and recovery. Keep their enabling
@@ -139,6 +133,7 @@ ready Bug fix and Gap fix work.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
+| [Task 349][t349] | open | TxStore internal invalidation workflow | Gap fix | Implement idempotent transaction invalidation | 339, 409, 410, 411 |
 | [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
 | [Task 351][t351] | open | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | 340, 424 |
 | [Task 352][t352] | open | LegacyWalletVault and waddrmgr passphrase rotation | Bug fix | Rotate kvdb passphrases atomically | — |
@@ -153,9 +148,14 @@ ready Bug fix and Gap fix work.
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | 400 |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 345, 397, 399, 452 |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Persist raw imports with live-watch obligations | 364, 402 |
+| [Task 409][t409] | open | SQL schema and TxStore ingestion | Gap fix | Normalize transaction input edges | 340, 424 |
+| [Task 410][t410] | open | Wallet/Store transaction graph admission | Bug fix | Coordinate transaction graph mutations | 334, 409 |
+| [Task 411][t411] | open | TxStore activation preflight and direct/batch ingestion | Bug fix | Reject children of terminal transactions | 339, 409, 410 |
+| [Task 412][t412] | open | TxWriter public contract, TxPublisher, and transaction graph admission | Gap fix | Expose invalidation with publication ordering | 349 |
 | [Task 413][t413] | open | SQL UTXO and normalized-input schema | Bug fix | Constrain SQL UTXOs to exact spending inputs | 351, 409, 410 |
 | [Task 414][t414] | open | SQL UTXO schema | Bug fix | Bound persisted SQL UTXO amounts | 351 |
 | [Task 423][t423] | open | SQL Manager chain source adapter and coordinator activation | Refactor | Cut over SQL Manager chain notification ownership | 368, 370, 372, 412, 422 |
+| [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
 | [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
 | [Task 455][t455] | open | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | — |

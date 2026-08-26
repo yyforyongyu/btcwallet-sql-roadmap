@@ -24,7 +24,6 @@ placement.
 | [Task 387][t387] | Define account-creation identity | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | [#1341][pr1341] |
-| [Task 424][t424] | Define transaction integrity ownership | Design | YY | [#1343][pr1343] |
 | [Task 427][t427] | Test Controller credentials | Test | Gustavo | [#1349][pr1349] |
 | [Task 429][t429] | Test account mutations | Test | Gustavo | [#1326][pr1326] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
@@ -53,7 +52,6 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | — |
 | [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | Abdullahi | — |
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
-| [Task 349][t349] | Implement transaction invalidation | Gap fix | — | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | Gustavo | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | YY | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
@@ -75,10 +73,6 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 406][t406] | Release PSBT funding leases | Gap fix | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
-| [Task 409][t409] | Normalize transaction input edges | Gap fix | — | — |
-| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | — | — |
-| [Task 411][t411] | Reject children of terminal transactions | Bug fix | — | — |
-| [Task 412][t412] | Expose invalidation with publication ordering | Gap fix | — | — |
 | [Task 422][t422] | Make Manager loading cancellable | Gap fix | YY | — |
 | [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
 
@@ -99,6 +93,7 @@ authorize implementation before every dependency and gate completes.
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 3 | YY | — |
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 2 | YY | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
+| [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
 
@@ -107,6 +102,10 @@ authorize implementation before every dependency and gate completes.
 Task 350 and PR #1321 are paused behind the new hard dependency on Task 454.
 No stacked implementation exception is approved: implementation must not
 resume and PR #1321 must remain unmergeable until Task 454 completes.
+
+Task 424 and PR #1343 are paused after the transaction-integrity branch moved
+to non-blocking Phase 3. Resume them when Phase 3 becomes current or through
+an explicit owner-approved priority exception.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
