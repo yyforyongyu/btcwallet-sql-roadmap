@@ -21,9 +21,10 @@ instead of the authoritative operation result.
   cancellation.
 - Run the accepted SQL handler under one bounded handler-owned context that
   does not derive from `Wallet.lifetimeCtx`.
-- Register one ChangePassphrase-specific completion before mutation. Wallet
-  shutdown joins it through Task 368 before locking the Vault, and
-  Task 331 joins Wallet shutdown before closing the Store.
+- Register one ChangePassphrase-specific completion before mutation. Task 368's
+  Wallet teardown is the sole owner that joins it before locking the Vault.
+  Task 331's Manager Stop joins Wallet teardown before closing the Store and
+  does not join this completion separately.
 - Consume Task 421's proven-new, proven-old, or typed
   indeterminate result and translate its internal errors once to a
   wallet-owned public contract.
@@ -43,10 +44,10 @@ the public result, send it once, and close the completion on every exit.
 ## Verification
 
 - A cancellation barrier before handoff returns the caller context error.
-- Barriers immediately after handoff prove caller cancellation and Wallet
-  shutdown cannot replace or suppress the handler result.
-- Wallet shutdown waits for the accepted handler before Vault lock, and
-  Manager closure waits for that Wallet shutdown before Store close.
+- Barriers immediately after handoff prove caller cancellation and Manager Stop
+  cannot replace or suppress the handler result.
+- Wallet teardown waits for the accepted handler before locking the Vault;
+  Manager Stop reaches Store close only after joining that Wallet teardown.
 - Proven-new, proven-old, and indeterminate Vault outcomes each map to the
   exact public result without another Store read in the Controller.
 - Concurrent rotations on one published Wallet serialize and every caller

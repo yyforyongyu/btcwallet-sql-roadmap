@@ -11,7 +11,7 @@ Dependencies: **None**.
 [Issue #1250][issue1250] assigns Gustavo the AccountManager integration-test
 lane. `ListAccounts`, `ListAccountsByScope`, `ListAccountsByName`, and
 `GetAccount` expose the same public account view, but no focused real-backend
-suite proves their filtering, missing-account, ordering, lifecycle, and reopen
+suite proves their filtering, missing-account, ordering, and reopen
 contracts together across kvdb, SQLite, and PostgreSQL.
 
 ## Details
@@ -23,7 +23,7 @@ contracts together across kvdb, SQLite, and PostgreSQL.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover empty filters, exact and absent filters, multiple scopes and names,
-  stopped-wallet access, unknown identities, stable ordering where the public
+  unknown identities, stable ordering where the public
   contract promises it, and agreement between list and point results.
 - Compare every exported field of the wallet-owned `AccountInfo` from
   [Task 377][t377]. Cover the absent, present-zero, and present-nonzero optional
@@ -54,7 +54,7 @@ adding a `package wallet_test` file.
 ## Definition of done
 
 - Every maintained public account query has representative success, absence,
-  filter, lifecycle, and cross-method consistency coverage.
+  filter, and cross-method consistency coverage.
 - The public account view remains stable after durable reopen.
 - Shared cases use real kvdb, SQLite, and PostgreSQL Wallets without Store
   assertions or backend skip branches.

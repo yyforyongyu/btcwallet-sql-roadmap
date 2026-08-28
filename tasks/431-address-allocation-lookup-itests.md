@@ -21,7 +21,7 @@ reviewable real-wallet contract slice.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover supported external and internal address types, unknown accounts or
-  addresses, stopped and locked states where defined, oldest-unused behavior,
+  addresses, locked states where defined, oldest-unused behavior,
   stable public metadata, and agreement between point and list results.
 - Fund deterministic allocated addresses when needed to distinguish used from
   unused state, then reopen and prove addresses, metadata, and next allocation
@@ -47,7 +47,7 @@ public addresses and chain events, then compare list and point APIs.
 ## Definition of done
 
 - The four allocation/lookup APIs have representative success, absence,
-  lifecycle, address-type, and cross-method consistency coverage.
+  address-type, and cross-method consistency coverage.
 - Used state and allocation progress remain correct after durable reopen.
 - Tests use public APIs on real kvdb, SQLite, and PostgreSQL Wallets, with no
   backend skip branch in the shared contract.

@@ -1,115 +1,202 @@
-# Task 331 — fence Manager admission and Store closure
+# Task 331 — make Manager lifecycle terminal
 
-Component: **Manager**.
+Component: **Manager lifecycle, admission, and Store ownership**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 368][t368]**.
+Dependencies: **[Task 334][t334], [Task 453][t453], [Task 458][t458], and
+[Task 459][t459]**.
 
 ## Rationale
 
-After Task 368, Manager owns each terminal Wallet runtime and all public Start
-and Stop entry points, but Manager Close still needs one boundary around
-backend admission and runtime teardown. Without that boundary, Create, Load,
-or StartWallet can publish work while Close stops a stale snapshot or closes
-the shared backend. The legacy one-wallet kvdb path can also race Create and
-Load across different requested names.
+Manager owns the Store and the complete Wallet set, but today callers can race
+Create, Load, individual Wallet startup, and Close across independent owners.
+Closing a stale snapshot can leave startup work alive over a closed Store.
+Aggregate Manager lifecycle needs one terminal state owner before the obsolete
+per-Wallet lifecycle surface can be removed in Task 368.
 
 ## Details
 
-- Define one public wallet-owned `ErrManagerClosed` sentinel for Create, Load,
-  and StartWallet after Manager closure. Close is terminal for the Manager;
-  no later operation can load or start another runtime over its backend.
-- Give Manager one admission owner. Before backend work, Create and Load
-  either join the admitted-operation count or return `ErrManagerClosed`;
-  admission cannot be added after Close marks Manager closed.
-- Reuse Task 453's per-name publication entry and Task 368's exact-pointer
-  lifecycle extension. Do not add a second startup lease, lifecycle state
-  machine, Wallet callback, or parallel cache owner.
-- Serialize the entire legacy one-wallet kvdb Create and Load admission path
-  across requested names. Keep durable duplicate-create authority and
-  `ErrWalletExists` in Task 330; this task supplies only the in-memory
-  admission fast path that Task 330 consumes.
-- Admit StartWallet through the same Manager close boundary until its exact
-  lifecycle request is accepted or rejected by the Task 368 entry. Release
-  admission before waiting for the Start result. If StartWallet wins submission
-  admission, Close must stop and join that exact runtime whether it is created,
-  starting, or started. If Close wins, StartWallet returns `ErrManagerClosed`
-  without publishing setup or workers.
-- Make one Close owner atomically close admission, wait for every previously
-  admitted Create and Load to publish or fail and every admitted StartWallet to
-  submit or reject, stop every exact current runtime through its Manager-owned
-  coordinator, join every terminal completion, and only then close the shared
-  backend. Concurrent or repeated Close calls join the same completion and
-  return its result.
-- Permit StopWallet calls already targeting current entries to join teardown
-  while Close is in progress; they cannot reopen admission or replace a
-  runtime. Manager Close remains the final owner of backend closure regardless
-  of which caller first requested a Wallet stop.
-- Never wait for admitted operations, Wallet setup, worker teardown, or Close
-  completion while holding the admission gate or Manager cache lock. Close
-  takes its stable runtime snapshot only after admission is closed, Create and
-  Load work has settled, and admitted StartWallet submissions have drained.
-- Preserve Manager ownership of Store and legacy backend resources. Task 368
-  terminalizes runtime Wallet pointers but does not close their shared Store;
-  Close releases the backend only after every runtime coordinator has exited.
-- Exclude Task 358's context parameters and cancellation cutoff, Task 330's
-  durable duplicate classification, Task 338's accepted passphrase operation,
-  repeated Unlock behavior, arbitrary non-lifecycle Wallet call fencing,
-  generic operation registries, create manifests, and cross-process Manager
-  fencing.
+- Add final public `Manager.Start(ctx)` and `Manager.Stop(ctx)` operations.
+  Start returns a caller-owned slice containing the complete stable-ordered
+  Wallet pointer set assembled by Task 459; Stop is terminal and releases every
+  Manager-owned resource.
+- Define `Initialized -> Starting -> Running -> Stopping -> Stopped` under one
+  small Manager state boundary. The Manager instance cannot return to an
+  earlier state or be restarted after a failed or successful terminal stop.
+- Give every Start state an exact result. The first Start from `Initialized`
+  owns startup. A concurrent Start in `Starting` joins the canonical result
+  unless only that waiting caller's context ends first; waiter cancellation
+  cannot cancel shared startup. Start from `Running` returns a fresh slice view
+  of the already published canonical Wallet pointers without starting work
+  again, and that latched result wins over later caller cancellation. Start
+  from `Stopping` or `Stopped` returns one stable wallet-owned
+  `ErrManagerStopped` defined by Task 458.
+- Reject Create before Running with `ErrManagerNotStarted`. Acquire Task 458's
+  operation token before waiting for the distinct Manager-owned Create gate.
+  That token protects Store lifetime but is not Create acceptance. Define the
+  sole Create acceptance boundary after gate acquisition: under the Manager
+  state gate, atomically observe `Running` and admit the Create. If Stop has
+  already changed the state, release the Create gate and operation token and
+  return Task 458's `ErrManagerStopped`. Once accepted, the Create keeps its own
+  success or failure result, and Stop waits for its operation token to release.
+  Hold the Create gate from durable mutation through assembly, synchronous
+  transitional activation, and final publication. Do not hold the
+  Wallet-set/cache lock while assembling or activating. Acquire it only to
+  install the fully active exact pointer. Retained Load and Start entry points
+  enter the distinct gate before their cache lookup, so a racing lookup waits
+  for publication and returns the exact active pointer rather than observing
+  an in-flight Create. Task 368 later replaces the transitional activation
+  machinery without changing this result contract.
+- If activation fails after durable creation but before publication, record
+  the exact activation error, join every attempt-owned resource, and leave the
+  cache unchanged. Under the Manager state gate, enter `Stopping` if failure
+  wins, closing Task 458 admission as part of that transition, or join the
+  existing terminal transition if concurrent Stop won first. After releasing
+  the state gate, release the Create gate and then the failing Create's Task
+  458 operation token before owning or joining teardown. A pending Create that
+  holds an operation token but has not crossed the Create acceptance boundary,
+  or a retained Load or Start waiter, wakes at the Create gate and rechecks
+  Manager state before mutation or cache access. It returns
+  `ErrManagerStopped` and releases its token. After the Manager reaches
+  `Stopped`, the failing Create returns its recorded activation error, while
+  Stop and every later Stop return only the canonical teardown result. Neither
+  operation overwrites the other's result or waits on itself or a gate waiter.
+  This task does not define a second stopped sentinel.
+- Check the first Start caller's context before admission. After admission, its
+  cancellation, setup completion, and Stop enter one exact Manager result
+  arbitration. A winning owner cancellation or Stop before Running publication
+  cancels startup, joins all partial work, closes the Store, and leaves the
+  Manager terminally Stopped. Once Running is published, later owner or waiter
+  cancellation cannot replace the successful result.
+- Give every Stop state an exact result. Stop from `Initialized` performs
+  terminal resource closure without starting workers. Stop from `Starting`
+  enters the Start publication arbitration: if Stop wins, Start returns
+  `ErrManagerStopped`; if Running already won, Start keeps its success and Stop
+  begins teardown. Stop from `Running` initiates teardown. Stop from `Stopping`
+  or `Stopped` joins or returns the same recorded teardown result.
+- Make Stop caller-independent after acceptance. Concurrent Stops share one
+  completion; cancellation bounds only an individual Stop caller's wait and
+  never abandons teardown or changes the recorded result.
+- Close Task 458's operation admission before taking the final Wallet snapshot.
+  Drain every acquired operation token, including lifecycle-accepted Create
+  work and pending gate waiters that must reject, stop and join every Wallet
+  runtime, stop shared chain resources, lock every Vault, and close the
+  Manager-owned Store last and exactly once.
+- Never wait for startup, admitted work, Wallet teardown, or Store closure
+  while holding the state gate or Wallet-set lock. Give every helper goroutine
+  an owned cancellation and join path.
+- The Create gate may cover synchronous activation, but release it before
+  draining Task 458 admission or owning or joining terminal teardown. Never
+  wait for Store closure or the terminal result while holding that gate.
+- Preserve the modern-kvdb single-Wallet constraint and backend ownership.
+  Aggregate lifecycle must not open a second legacy Wallet or let a Wallet
+  close Manager-owned backend resources.
+- Keep the existing public per-Wallet lifecycle, Load, Unload, and Close
+  surfaces only until dependent Task 368 removes them. Map them exactly during
+  that interval:
+  - `Manager.Load` is lookup-only while Running and returns only the exact
+    active cached pointer. It returns `ErrManagerNotStarted` before Running,
+    Task 458's `ErrManagerStopped` after Stop wins, and the existing public
+    not-found result for an absent name. It never assembles or activates.
+  - `Manager.StartWallet`, `Wallet.Start`, and `Controller.Start` are
+    idempotent success only for an exact active Wallet while Running. They use
+    the same pre-Running, terminal, and absent/stale results as Load and never
+    start work.
+  - `Manager.StopWallet`, `Manager.Unload`, `Wallet.Stop`, and
+    `Controller.Stop` return the standard-library-owned
+    `errors.ErrUnsupported` sentinel unwrapped while Running, without changing
+    the active set. They return `ErrManagerNotStarted` before Running and Task
+    458's stopped result after Stop wins. This task reuses that existing
+    sentinel and defines no temporary wallet-owned error for Task 368 to
+    remove.
+  - `Manager.Close` synchronously performs or joins aggregate Manager Stop and
+    returns its recorded teardown result; it never closes the Store directly.
+- Exclude Task 358's Create mutation cutoff, individual lifecycle removal,
+  durable duplicate classification, passphrase result delivery, shared-chain
+  source takeover, Task 458's operation-admission implementation, generic
+  operation registries, stopped-error definition, and process- or
+  cross-process Manager leases.
 
 ## Suggested fix
 
-Add a small Manager close gate containing the closed bit, admitted-operation
-completion, and one Close completion and result. Use the gate to serialize
-admission against Close, then release it before backend work or waits. Retain
-Task 453's per-name publication entry with Task 368's lifecycle extension as
-the sole runtime cache owner.
+Add one Manager state gate with canonical Start and Stop completion records.
+Run Task 459 assembly and existing Wallet setup outside the gate, then publish
+the complete Wallet set and Running state as one event. Stop closes Task 458's
+admission, joins startup or the published Wallet set, closes the Store last,
+records one result, and wakes every waiter.
 
-Close first rejects new admission, joins admitted Create and Load work, and
-drains admitted StartWallet submissions. It then submits an internal terminal
-Stop to every exact current runtime entry and joins their completions before
-closing the backend. StartWallet releases admission once its request is
-accepted or rejected and waits for its result outside the gate, so
-Close-versus-Start ordering needs no Manager-owned lease inside Wallet.
+For Create, replace Task 453's long-held cache mutex with one distinct
+serialization gate. Activate under that gate, then take the cache lock only to
+publish the fully active exact pointer. Retained lookup paths enter the gate
+before taking the cache lock. On activation failure, leave the cache unchanged
+and use the state gate to choose the terminal owner. Release the Create gate,
+then the failing operation token, before owning or joining teardown. Every
+pending gate waiter rechecks terminal state before mutation or cache access.
 
 ## Verification
 
-- Add a kvdb cross-name Create and Load admission race proving the deprecated
-  backend never admits two live wallet assemblies.
-- Race Close against Create and Load on every maintained backend. Work admitted
-  before the close point must settle before backend closure; later work must
-  return `ErrManagerClosed`; no runtime may publish after backend closure.
-- Race Close against StartWallet before and after lifecycle request admission.
-  An admitted Start either publishes one complete runtime that Close then
-  stops or is canceled and joined during startup; a rejected Start returns
-  `ErrManagerClosed` without setup or worker publication.
-- Pause an admitted StartWallet before coordinator submission and prove Close
-  cannot take its runtime snapshot or close the backend until that submission
-  accepts or rejects. Prove Close does not wait for the Start caller's response
-  before submitting its terminal Stop.
-- Race external StopWallet with Close and prove both join the same Task 368
-  terminal completion without duplicate Vault lock, worker wait, or backend
-  closure.
-- Use an ordered fake backend and Wallet completion barriers to prove Close
-  invokes backend close only after admitted work settles and every exact
-  runtime coordinator exits. Concurrent Close calls must return the same
-  result and close the backend exactly once.
-- Run the focused Manager races under
-  `make unit-race pkg=wallet case=TestManager...`, followed by
-  `make unit pkg=wallet`.
+- Cover every state and repeated Start/Stop result on kvdb, SQLite, and
+  PostgreSQL, including exact Wallet-set identity and stable error identities.
+- Cancel the initial Start owner and a concurrent Start waiter separately on
+  both sides of Running publication. Only pre-publication owner cancellation
+  can cancel shared startup; waiter cancellation changes only its own wait.
+- Race Start cancellation and Stop immediately before and after Running
+  publication. No partial Wallet, worker, or success result escapes a losing
+  startup; a winning startup publishes the whole set once before Stop tears it
+  down.
+- Race Stop against Create immediately before and after the sole acceptance
+  boundary: Create-gate acquisition plus the atomic `Running` recheck. Before
+  that boundary, even a caller holding a Task 458 token returns
+  `ErrManagerStopped` without mutation if Stop wins. After that boundary, Stop
+  waits and cannot replace the Create's own result; a successful Create returns
+  only its active pointer. No Wallet publishes after Store closure.
+- Pause Create during transitional activation and prove another cache reader
+  can take the Wallet-set lock while retained Load and Start entry points wait
+  outside that lock at the Create gate. After final publication, both return
+  the fully active exact pointer rather than a transient not-found result.
+- Race Stop against a post-commit activation failure with each side winning
+  the `Stopping` transition. In both orders, Create returns the exact activation
+  error only after teardown, Stop returns its canonical teardown result, the
+  cache remains unchanged, and neither side waits on the Create operation
+  token.
+- Before the failure, give a second Create and retained lookup Task 458 tokens
+  and block both on the Create gate without accepting the second Create.
+  Failure releases the gate before waiting; each waiter observes `Stopping`,
+  returns `ErrManagerStopped` without mutation or cache access, releases its
+  token, and lets teardown complete.
+- Inject failure while assembling and starting each Wallet. Startup unwinds in
+  reverse ownership order, closes the Store exactly once, and leaves the
+  Manager terminally Stopped with no worker leak.
+- Use an ordered fake backend to prove Wallet and chain work join before Vault
+  lock and Store closure. Concurrent Stop callers return the same result.
+- Prove the legacy one-Wallet kvdb path never opens two runtimes or closes its
+  backend from a Wallet teardown.
+- Exercise every retained Load, Unload, Start, Stop, and Close entry point in
+  Initialized, Starting, Running, Stopping, and Stopped states. No call changes
+  the complete active set or bypasses Task 458 admission.
 
 ## Definition of done
 
-- Manager rejects later Create, Load, and StartWallet admission and joins all
-  earlier admitted work before backend closure.
-- Close terminalizes and joins every exact current Wallet runtime through Task
-  368, then closes the Manager-owned backend last and exactly once.
-- No startup lease or Wallet-local lifecycle owner is needed to order Start
-  against Close, and no lifecycle race publishes against a closed Store.
-- The PR adds no durable duplicate-create policy, generic operation registry,
-  create manifest, cross-process fence, or unrelated Controller behavior.
+- Manager has one terminal aggregate Start/Stop lifecycle and publishes either
+  every durable Wallet or none.
+- Start, Stop, cancellation, and failure have exact results at their documented
+  Manager-owned boundaries. Create has one acceptance boundary after Create-
+  gate acquisition and the atomic `Running` recheck; a Task 458 token alone
+  does not accept it.
+- Stop joins all accepted work, Wallets, and shared workers before closing the
+  Store last and exactly once.
+- Existing per-Wallet lifecycle entry points cannot bypass Manager state while
+  Task 368 remains outstanding. Retained stop and unload entry points use the
+  exact `errors.ErrUnsupported` identity while Running.
+- Create activation holds a distinct serialization gate rather than the
+  Wallet-set lock and publishes only a fully active pointer. Activation failure
+  releases that gate before entering or joining teardown and does not replace
+  either caller's result.
+- The PR adds no duplicate-create policy, generic operation registry,
+  shared-chain cutover, or Manager lease.
 
-[t368]: 368-wallet-startup-shutdown.md
+[t334]: 334-shared-chain-state.md
 [t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md
+[t458]: 458-manager-operation-admission.md
+[t459]: 459-manager-startup-wallet-assembly.md

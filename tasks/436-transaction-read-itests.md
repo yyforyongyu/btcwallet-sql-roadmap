@@ -10,7 +10,7 @@ Dependencies: **None**.
 
 [Issue #1250][issue1250] assigns Abdullahi the TxReader integration-test lane.
 `GetTx` and `ListTxns` expose the same durable transaction view, but their
-public lookup, ordering, filtering, lifecycle, and reload behavior lack focused
+public lookup, ordering, filtering, and reload behavior lack focused
 coverage through real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Details
@@ -49,7 +49,7 @@ compare the two public readers before and after a full durable reopen.
 ## Definition of done
 
 - Both TxReader methods have representative empty, missing, unmined, mined,
-  boundary, lifecycle, and cross-method consistency coverage.
+  boundary, and cross-method consistency coverage.
 - The public transaction view remains correct after durable reopen.
 - Shared cases use real kvdb, SQLite, and PostgreSQL Wallets without a backend
   skip branch.

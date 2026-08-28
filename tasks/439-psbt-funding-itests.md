@@ -22,7 +22,7 @@ and packet ownership, but it has no focused public integration-test task.
 - Cover automatic selection, caller-selected inputs, with-change and no-change
   results, representative fee boundaries, and deterministic change indexing.
 - Cover insufficient funds, locked or foreign inputs, invalid packets and
-  outputs, stopped, locked, and watch-only Wallet states where defined.
+  outputs, and locked or watch-only Wallet states where defined.
 - Verify selected inputs become unavailable through maintained public UTXO
   views and that observable durable funding state remains consistent after a
   full Wallet and Manager reopen.
@@ -45,7 +45,7 @@ UtxoManager, and AddressManager public calls rather than Store inspection.
 ## Definition of done
 
 - `FundPsbt` has representative selection, manual-input, change, fee,
-  lifecycle, watch-only, and stable-error coverage.
+  watch-only, and stable-error coverage.
 - Publicly observable accepted state survives a durable reopen.
 - Shared cases contain no backend skip branch and add no new funding behavior.
 

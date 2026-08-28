@@ -4,7 +4,13 @@ Component: **Manager.Load**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 331][t331], [Task 368][t368], and [Task 453][t453]**.
+Dependencies: **[Task 331][t331], [Task 368][t368], and
+[Task 453][t453]**.
+
+This task was superseded before implementation on 2026-08-28, when the roadmap
+adopted Task 368's planned removal of public Manager loading. Task 459 owns the
+distinct aggregate-startup assembly work. The original task identity and scope
+remain here as historical evidence.
 
 ## Rationale
 
@@ -77,6 +83,6 @@ return the published pointer on every post-publication path.
 - The PR contains no Create/genesis behavior, legacy wrapper, generic
   registry, or publication state machine.
 
-[t331]: 331-manager-wallet-lifecycle.md
-[t368]: 368-wallet-startup-shutdown.md
-[t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md
+[t331]: ../../tasks/331-manager-wallet-lifecycle.md
+[t368]: ../../tasks/368-wallet-startup-shutdown.md
+[t453]: 453-serialize-manager-wallet-publication.md

@@ -4,8 +4,9 @@ Component: **multi-Wallet SQL integration scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 415][t415], [Task 429][t429], [Task 431][t431],
-[Task 433][t433], [Task 434][t434], [Task 435][t435], and [Task 436][t436]**.
+Dependencies: **[Task 368][t368], [Task 415][t415], [Task 429][t429],
+[Task 431][t431], [Task 433][t433], [Task 434][t434], [Task 435][t435], and
+[Task 436][t436]**.
 
 ## Rationale
 
@@ -23,7 +24,8 @@ without making that broader production work part of this focused task.
 - Verify account, address, UTXO, transaction, and spend state never leaks
   between wallet identities while shared chain height and hash agree.
 - Spend from one Wallet, confirm it, and prove the other Wallet's owned state is
-  unchanged. Stop and reload both Wallets and repeat the isolation assertions.
+  unchanged. Stop the Manager, start a fresh Manager, and repeat the isolation
+  assertions with both Wallets from its returned active set.
 - Run the same source on SQLite and PostgreSQL through the shared Manager
   harness.
 - Do not register kvdb: its Manager intentionally supports one Wallet per
@@ -43,8 +45,8 @@ and synchronization harness without adding a scenario-specific coordinator.
 - Run the focused scenario on SQLite and PostgreSQL.
 - Verify the test registration documents the intentional kvdb exclusion
   instead of reaching it through a runtime skip branch.
-- Verify both Wallets load from the same Manager database after restart and all
-  coordinator, Wallet, Manager, miner, and backend resources join.
+- Verify both Wallets activate from the same Manager database after restart;
+  all coordinator, Wallet, Manager, miner, and backend resources join.
 
 ## Definition of done
 
@@ -55,6 +57,7 @@ and synchronization harness without adding a scenario-specific coordinator.
   because it cannot represent the scenario.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t368]: 368-wallet-startup-shutdown.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
