@@ -1,4 +1,4 @@
-# Task 334 — supersede ADR 0002 with SQL shared-chain ownership
+# Task 334 — define aggregate Manager and shared-chain ownership
 
 Component: **SQL wallet architecture documentation**.
 
@@ -104,14 +104,28 @@ database lock row, or a particular SQL locking statement.
 
 ## Definition of done
 
-- An accepted and merged ADR supersedes ADR 0002 for SQL Managers and defines
-  aggregate Manager lifecycle, one active set containing every durable Wallet,
+- An accepted and merged ADR supersedes ADR 0002 for SQL Managers and requires
+  aggregate lifecycle, one active set containing every durable Wallet,
   process-local database ownership, shared-chain ownership, and shutdown order.
-- The maintained public Manager surface contains no Load, Unload, individual
-  Wallet lifecycle, or separate Close contract.
-- The maintained modern-kvdb backend follows the aggregate lifecycle while
-  keeping its isolated source implementation until Task 353 completes.
-- Later lifecycle and shared-chain tasks cite this task and add no idle-Wallet
-  policy, generic framework, or cross-process guarantee.
+- The ADR assigns Manager lifecycle and final public-surface implementation to
+  [Tasks 331][t331], [358][t358], and [368][t368]. It assigns immutable runtime
+  configuration and startup assembly to [Tasks 456][t456] and [459][t459].
+- The ADR assigns process-local lease enforcement to [Task 457][t457] and
+  shared-chain preparation and cutover to [Tasks 370][t370], [371][t371],
+  [372][t372], and [423][t423].
+- The ADR records modern kvdb's temporary isolated source exception until
+  [Task 353][t353] completes. This task changes no production implementation.
+- Later implementation tasks cite this decision and add no idle-Wallet policy,
+  generic framework, or cross-process guarantee.
 
+[t331]: 331-manager-wallet-lifecycle.md
 [t353]: 353-retire-modern-kvdb-backend.md
+[t358]: 358-contextual-manager-operations.md
+[t368]: 368-wallet-startup-shutdown.md
+[t370]: 370-chain-source-delivery.md
+[t371]: 371-canonical-chain-frontier.md
+[t372]: 372-multi-wallet-rollback.md
+[t423]: 423-manager-chain-source-cutover.md
+[t456]: 456-manager-runtime-configuration.md
+[t457]: 457-process-local-manager-lease.md
+[t459]: 459-manager-startup-wallet-assembly.md

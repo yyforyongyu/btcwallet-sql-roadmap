@@ -20,8 +20,11 @@ owns the shared chain source, network, Store, and lifecycle.
   and retry policy, recovery window, auto-lock policy, and filter threshold.
 - Move the legacy kvdb runtime alias and public-passphrase input needed to open
   its sole Wallet into the documented kvdb-only Manager configuration boundary.
-  Require kvdb Create identity to match that configured alias; do not persist
-  restart-stable alias metadata in the legacy database.
+  For an empty kvdb database, require the first Create identity to match that
+  configured alias. Once the database is occupied, bypass alias matching and
+  preserve its existing duplicate path regardless of the requested identity;
+  [Task 330][t330] alone owns its final `ErrWalletExists` classification. Do
+  not persist restart-stable alias metadata in the legacy database.
 - Deep-copy network parameters, byte slices, and other mutable value input at
   Manager construction. Retain one source factory as the Manager's exclusive
   construction boundary, and expose no retained configuration pointer or byte
@@ -57,6 +60,9 @@ on their existing isolated configuration path.
   snapshot and prove their shared runtime policy is identical.
 - Reopen modern kvdb with its configured runtime alias and prove no alias row or
   other persistent metadata was introduced.
+- Prove an occupied kvdb database reaches its existing duplicate path for both
+  matching and different requested aliases. This task neither defines nor
+  translates the final duplicate result owned by Task 330.
 - Reject missing or conflicting Manager runtime input before Store mutation.
 - Compile maintained callers, interfaces, and mocks without a per-Wallet chain
   or runtime-policy argument to Manager Create.
@@ -76,4 +82,5 @@ on their existing isolated configuration path.
 - The PR changes no lifecycle, persistence, runtime manifest, CLI, RPC, lnd,
   or external-daemon behavior.
 
+[t330]: 330-duplicate-wallet-create.md
 [t334]: 334-shared-chain-state.md

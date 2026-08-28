@@ -48,7 +48,7 @@ successful durable genesis appear canceled or leave prepared secrets alive.
   the definitive result. A returned Wallet has a lifetime independent of the
   request context. Task 368 later replaces the transitional activation
   machinery without changing this immediate-active contract.
-- Exclude aggregate Manager startup discovery and cancellation; Task 422 owns
+- Exclude aggregate Manager startup discovery and cancellation; Task 459 owns
   attempt-local assembly and Task 331 owns startup publication.
 - Do not add a generic operation registry, create manifest, publication state
   machine, or cross-process fence. Task 329 remains transitive through Tasks
@@ -66,8 +66,8 @@ honest pre-Update/callback checkpoints and documented non-cancellable wait.
 
 - Barriers cover admission, Create-gate acquisition, SQL writer acquisition,
   every preparation checkpoint, and both backend claim points.
-- On kvdb, SQLite, and PostgreSQL, hold one Create in activation, admit a second
-  Create to Task 458 only, and cancel the second caller while it waits for Task
+- On kvdb, SQLite, and PostgreSQL, hold one Create in activation, give a second
+  Create a Task 458 token, and cancel the second caller while it waits for Task
   331's gate. The second call has not crossed the Create acceptance boundary;
   it returns its context error, releases its Task 458 token, and reaches no
   backend writer admission, durable mutation, or cache mutation.
@@ -95,5 +95,5 @@ honest pre-Update/callback checkpoints and documented non-cancellable wait.
 [t366]: 366-reconcile-sql-genesis-commit.md
 [t367]: 367-bound-sql-genesis-secrets.md
 [t368]: 368-wallet-startup-shutdown.md
-[t422]: 422-manager-startup-wallet-assembly.md
+[t459]: 459-manager-startup-wallet-assembly.md
 [t456]: 456-manager-runtime-configuration.md

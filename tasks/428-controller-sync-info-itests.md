@@ -4,7 +4,7 @@ Component: **Controller Resync and Rescan integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 455][t455]**.
+Dependencies: **[Task 331][t331] and [Task 455][t455]**.
 
 ## Rationale
 
@@ -61,4 +61,5 @@ requests, and observes completion only through maintained public APIs.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
+[t331]: 331-manager-wallet-lifecycle.md
 [t455]: 455-exact-wallet-sync-status.md

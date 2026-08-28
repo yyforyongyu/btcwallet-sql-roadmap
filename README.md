@@ -23,7 +23,7 @@ gate is complete.
 | Information | Source |
 | --- | --- |
 | Task type, scope, and complete dependency graph | Individual file under [tasks/](tasks/) |
-| Delivery phases, open dependencies, and completed PRs | [QUEUE.md](QUEUE.md) |
+| Delivery phases, open dependencies, completed PRs, and superseded replacements | [QUEUE.md](QUEUE.md) |
 | Active tasks, claims, and in-progress PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |

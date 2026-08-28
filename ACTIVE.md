@@ -42,9 +42,7 @@ and `QUEUE.md` owns their delivery phase.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | YY | — |
-| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | YY | — |
 | [Task 331][t331] | Make Manager lifecycle terminal | Bug fix | YY | — |
-| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 345][t345] | Persist account discovery mode | Gap fix | YY | — |
@@ -73,10 +71,9 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
 | [Task 368][t368] | Remove individual Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
-| [Task 422][t422] | Assemble startup Wallets | Gap fix | YY | — |
 | [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
 | [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | — |
-| [Task 457][t457] | Fence process-local Managers | Gap fix | YY | — |
+| [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | — |
 
 ## Claimed Tasks
 
@@ -86,6 +83,8 @@ authorize implementation before every dependency and gate completes.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
+| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 3 | YY | — |
+| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | 3 | YY | — |
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 3 | YY | [#1321][pr1321] |
 | [Task 362][t362] | Return a definitive kvdb passphrase result | Bug fix | 3 | YY | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 3 | YY | — |
@@ -98,6 +97,7 @@ authorize implementation before every dependency and gate completes.
 | [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
+| [Task 457][t457] | Fence process-local Managers | Gap fix | 3 | YY | — |
 
 ## Coordination
 
@@ -170,7 +170,6 @@ an explicit owner-approved priority exception.
 [t412]: tasks/412-transaction-publication-admission.md
 [t416]: tasks/416-database-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
-[t422]: tasks/422-manager-startup-wallet-assembly.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
@@ -186,6 +185,7 @@ an explicit owner-approved priority exception.
 [t456]: tasks/456-manager-runtime-configuration.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t458]: tasks/458-manager-operation-admission.md
+[t459]: tasks/459-manager-startup-wallet-assembly.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328

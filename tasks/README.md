@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **459**.
+The next free task number is **460**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -28,9 +28,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
   without resetting timeout.
   not-found errors.
-- [Task 422](422-manager-startup-wallet-assembly.md): assemble durable Wallets for
-  Manager startup.
-  Wallet publication.
 - [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.
 - [Task 456](456-manager-runtime-configuration.md): centralize managed Wallet
@@ -39,6 +36,8 @@ Grouping here does not create dependency or scheduling authority.
   Manager per database.
 - [Task 458](458-manager-operation-admission.md): fence Wallet operations
   against Manager teardown.
+- [Task 459](459-manager-startup-wallet-assembly.md): assemble durable Wallets
+  for Manager startup.
 
 ## Accounts, addresses, and recovery
 
@@ -98,8 +97,8 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Chain and synchronization
 
-- [Task 334](334-shared-chain-state.md): supersede ADR 0002 with SQL shared-
-  chain ownership.
+- [Task 334](334-shared-chain-state.md): define aggregate Manager and
+  shared-chain ownership.
 - [Task 370](370-chain-source-delivery.md): prepare ordered Manager chain
   delivery.
 - [Task 371](371-canonical-chain-frontier.md): serialize canonical chain-frontier

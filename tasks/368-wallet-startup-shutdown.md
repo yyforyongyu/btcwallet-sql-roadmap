@@ -18,10 +18,10 @@ serialized with another coordinator.
 ## Details
 
 - Remove `Wallet.Start`, `Wallet.Stop`, `Controller.Start`, `Controller.Stop`,
-  `Manager.StartWallet`, `Manager.StopWallet`, `Manager.Load`, and
-  `Manager.Close` from the maintained public surface. Do not retain wrappers,
-  deprecated aliases, hidden restart generations, or a second lifecycle
-  interface.
+  `Manager.StartWallet`, `Manager.StopWallet`, `Manager.Load`,
+  `Manager.Unload`, and `Manager.Close` from the maintained public surface. Do
+  not retain wrappers, deprecated aliases, hidden restart generations, or a
+  second lifecycle interface.
 - Remove the Load-only `ErrWalletNotFound` public boundary and its obsolete
   direct-lookup cases. Preserve only lower-level durable corruption or absence
   errors still consumed by aggregate startup; do not retain a compatibility
@@ -60,6 +60,10 @@ serialized with another coordinator.
 - Reopen durability only by constructing a fresh Manager over the same
   database and calling Manager Start. The returned complete Wallet set replaces
   public Load and lookup behavior.
+- Keep Task 458's operation token around every public component operation for
+  the complete interval in which it can touch the Store or publish
+  operation-owned work. Do not replace that token with a Manager state check;
+  a check before Store use would recreate the teardown check-to-use race.
 - Keep modern kvdb single-Wallet behavior isolated. It follows aggregate
   Manager lifecycle and reuses its Manager-owned opened data without opening a
   second legacy Wallet.
@@ -74,16 +78,16 @@ Delete the per-Wallet coordinator and exported lifecycle methods. Split the
 existing Wallet implementation into unexported one-shot activation and teardown
 called only by Task 331's Manager owner. Route Create through the same complete
 activation/publication path with a distinct Create gate and a final short cache
-publication, and use one cheap Manager terminal check at public Wallet
-component entry points before any Store access. Preserve Task 331's
-enter-or-join terminal arbitration and gate-release order when Create cannot
-activate a durable result.
+publication. Retain Task 458's operation token across every public Wallet
+component's complete Store-use interval. Preserve Task 331's enter-or-join
+terminal arbitration and gate-release order when Create cannot activate a
+durable result.
 
 ## Verification
 
-- Add compile-time and API checks proving the removed lifecycle, Load/Close
-  methods, and Load-only error are absent from maintained interfaces, mocks,
-  and callers.
+- Add compile-time and API checks proving the removed lifecycle,
+  Load/Unload/Close methods, and Load-only error are absent from maintained
+  interfaces, mocks, and callers.
 - Start Managers containing zero, one, and multiple durable SQL Wallets and
   prove every returned pointer is active exactly once without a per-Wallet
   coordinator or restart generation.
@@ -105,6 +109,9 @@ activate a durable result.
   returns fresh pointers for every durable Wallet with unchanged public state.
 - Prove all activation and teardown workers exit on start failure, Create
   failure, ordinary Stop, and Stop racing Create under the race detector.
+- Pause a public component after it acquires a Task 458 token and before its
+  final Store access. Manager Stop waits for the token; an operation arriving
+  afterward receives Task 458's stopped result without Store access.
 - Run focused Manager lifecycle tests followed by `make unit pkg=wallet`.
 
 ## Definition of done
@@ -122,3 +129,4 @@ activate a durable result.
 [t331]: 331-manager-wallet-lifecycle.md
 [t358]: 358-contextual-manager-operations.md
 [t456]: 456-manager-runtime-configuration.md
+[t458]: 458-manager-operation-admission.md

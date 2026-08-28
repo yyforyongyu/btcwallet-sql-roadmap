@@ -6,8 +6,9 @@ This repository contains planning documents, not btcwallet source code.
 
 - [README.md](README.md) explains how to use the repository.
 - [QUEUE.md](QUEUE.md) owns each roadmap task's delivery phase and status by
-  placing open work in a phase table and completed work with its closing PR in
-  `Done`.
+  placing open work in a phase table, completed work with its closing PR in
+  `Done`, and obsolete unimplemented work with its replacement in
+  `Superseded`.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
 - Individual files under [tasks/](tasks/) own type, scope, and dependencies.
@@ -191,6 +192,36 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
   scenario, keep the task backend-specific and document the structural
   exclusion explicitly.
 - Keep findings in the owning task instead of storing raw review reports.
+
+## Superseding a task
+
+Supersession is exceptional and is not completion. A task is eligible only
+when no implementation PR for its outcome has merged and an accepted roadmap
+decision makes that outcome obsolete or assigns the remaining outcome to a
+freshly numbered replacement task. Do not supersede work merely because it is
+blocked, difficult, partially implemented, or needs to be split. Account for
+and stop any open implementation PR before recording supersession.
+
+Use the roadmap update workflow to supersede an eligible task:
+
+1. preserve its number, title, scope, and dependencies under `archive/tasks/`,
+   adding only a short note with the decision, date, and replacement;
+2. remove it from [tasks/README.md](tasks/README.md), every
+   [ACTIVE.md](ACTIVE.md) list, and any obsolete coordination exception;
+3. move its [QUEUE.md](QUEUE.md) row from its former phase to `Superseded`,
+   record the former phase, and name the fresh replacement task that owns each
+   remaining outcome or the accepted decision that eliminated it;
+4. update remaining dependency edges to the replacement where ordering still
+   applies, while pointing historical references at the archived task; and
+5. update [archive/README.md](archive/README.md), the phase and roadmap counts,
+   the superseded count, and the next task number when a replacement is
+   allocated.
+
+Moving a task to `Superseded` decreases the open and former-phase counts and
+increases the superseded count; it does not change the total task count.
+Allocating a replacement independently increases both total and open counts.
+A superseded task has no closing PR, is never listed in `Done`, and its number
+is never reused.
 
 ## Completing a task
 

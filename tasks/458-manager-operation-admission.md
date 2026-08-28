@@ -20,7 +20,8 @@ Manager Stop own Store closure.
   Store access, every maintained Controller, AccountManager, AddressManager,
   UtxoManager, TxCreator, TxReader, TxWriter, TxPublisher, PsbtManager, Signer,
   and UnsafeSigner public operation either acquires one operation token or
-  returns a stable wallet-owned `ErrManagerStopped`.
+  returns the stable wallet-owned `ErrManagerStopped` defined by this task.
+  Later Manager lifecycle tasks reuse this sentinel and do not redefine it.
 - Hold the token until the synchronous operation can no longer touch the Store
   or publish operation-owned work. Release it on every success, error, panic-
   safe cleanup, and caller-cancellation path.
@@ -63,9 +64,11 @@ Stop.
   finish normally; later calls return `ErrManagerStopped` without Store access.
 - Cover success, Store error, panic-safe cleanup, and caller cancellation and
   prove every token releases exactly once with no waiter or goroutine leak.
-- Prove a Manager Create holding an operation token but waiting for Task 331's
-  acceptance boundary, and the temporary Load and lifecycle surfaces, cannot
-  publish after Close wins the terminal transition.
+- Race Manager Create and the temporary Load and lifecycle surfaces against
+  Close. An earlier token holder completes its existing result before backend
+  closure; a caller arriving after admission closes returns
+  `ErrManagerStopped`. Token acquisition does not define Task 331's later
+  semantic Create acceptance.
 - Prove internal Wallet teardown still completes after public admission closes
   and never increments the caller-operation count.
 - Run focused Manager admission tests under the race detector, followed by
@@ -76,7 +79,8 @@ Stop.
 - Every maintained managed-Wallet operation holds one Manager operation token
   for the complete interval in which it can touch the Store.
 - Manager teardown closes admission, drains every acquired token, and rejects
-  later calls with one stable error before backend closure.
+  later calls with the `ErrManagerStopped` sentinel owned here before backend
+  closure.
 - Internal teardown remains possible after public admission closes.
 - The PR adds no operation registry, lifecycle state machine, daemon change,
   process-local lease, or cross-process behavior.

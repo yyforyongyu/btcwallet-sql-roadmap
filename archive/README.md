@@ -7,6 +7,9 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 422](tasks/422-manager-load-cancellation.md) was superseded before
+  implementation on 2026-08-28 when the roadmap adopted Task 368's planned
+  removal of public Manager loading; Task 459 owns aggregate startup assembly.
 - [Task 429](tasks/429-account-mutation-itests.md) completed on 2026-08-26.
 - [Task 379](tasks/379-manager-load-error-boundary.md) completed on 2026-08-25.
 - [Task 380](tasks/380-address-lookup-error-boundary.md) completed on 2026-08-25.
