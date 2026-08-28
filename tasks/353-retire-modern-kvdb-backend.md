@@ -54,7 +54,8 @@ removals in the retirement PR description, not a runtime manifest.
 ## Verification
 
 - Run focused Manager backend-selection tests proving kvdb is rejected and
-  converted SQL wallets still create, load, close, and reopen.
+  converted SQL wallets still start, create, stop, and reopen through aggregate
+  Manager lifecycle.
 - Build the unchanged CLI, deprecated wallet, Loader, waddrmgr, and wtxmgr
   paths and audit the diff to prove none was modified.
 - Audit modern configuration, adapter, Vault, and canonical-task references

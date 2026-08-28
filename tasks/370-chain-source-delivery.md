@@ -4,7 +4,7 @@ Component: **Manager chain coordinator and Wallet processors**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 331][t331], [Task 333][t333], [Task 334][t334], and
+Dependencies: **[Task 333][t333], [Task 334][t334], [Task 368][t368], and
 [Task 371][t371]**.
 
 ## Rationale
@@ -18,10 +18,10 @@ unsafe between implementation PRs.
 
 ## Details
 
-- Add an internal Manager chain coordinator with a registry of bounded,
-  shutdown-aware per-Wallet processors. Give the coordinator explicit start,
-  stop, and join ownership without registering for or consuming live source
-  notifications in this task.
+- Add an internal Manager chain coordinator with bounded, shutdown-aware
+  processors for the complete active Wallet set. Give the coordinator explicit
+  aggregate start, Create-time registration, stop, and join ownership without
+  registering for or consuming live source notifications in this task.
 - Define the internal normalized event and result shapes needed for connected,
   filtered-block, and relevant-transaction delivery. Reserve disconnected
   admission for Task 372 rather than installing an incomplete fallback.
@@ -45,11 +45,12 @@ unsafe between implementation PRs.
   event can be offered safely to multiple Wallet processors without the
   coordinator inventing wallet-specific transaction policy.
 - Provide the stop-and-join contract that [Task 423][t423] can compose with
-  Task 331's Manager close owner. Do not wire it into maintained Manager
+  Task 331's Manager Stop owner. Do not wire it into maintained Manager
   admission or Store closure yet.
-- Handle direct Wallet registration, removal, backpressure, and processor
-  failure according to the accepted ADR. One failed processor cannot silently
-  drop an accepted event or deadlock coordinator shutdown.
+- Handle aggregate startup registration, Create-time registration,
+  backpressure, and processor failure according to the accepted ADR. Do not
+  remove one Wallet while its Manager remains Running. One failed processor
+  cannot silently drop an accepted event or deadlock aggregate shutdown.
 - Use Task 333's PostgreSQL Manager harness only for backend-neutral
   conformance. Add no PostgreSQL-specific coordinator behavior.
 - Leave maintained Manager and Wallet source selection, notification
@@ -83,8 +84,8 @@ existing path until Task 423.
 - Block one processor at queue capacity and exercise the ADR's exact
   backpressure/failure policy without dropping accepted events or spawning
   event-scoped goroutines.
-- Stop or remove one Wallet while another continues and prove direct delivery
-  neither targets the removed processor nor disrupts the surviving order.
+- Register a newly created Wallet while existing processors continue and prove
+  it joins at the documented boundary without disrupting their order.
 - Race direct coordinator stop with event admission and Wallet delivery. Stop
   joins every accepted delivery with no Store access afterward.
 - Run focused coordinator tests and repeat the two-Wallet direct-delivery case
@@ -99,15 +100,15 @@ existing path until Task 423.
 - Block-bearing connected and filtered-block events reach Wallet processors
   only after Task 371 proves their canonical extension; this task owns
   arbitration and fanout but no frontier mutation implementation.
-- The coordinator has explicit lifecycle, recovery, backpressure, and Wallet
-  removal behavior without worker leaks or lost accepted events.
+- The coordinator has explicit aggregate lifecycle, recovery, backpressure,
+  and Create-time registration without worker leaks or lost accepted events.
 - Maintained source ownership and reorg behavior remain unchanged; Task 423
   performs the later atomic cutover only after Task 372 completes rollback.
 - The PR changes no rollback mutation, live source registration, watch replay,
   targeted-rescan durability, or PostgreSQL-specific Wallet behavior.
 
-[t331]: 331-manager-wallet-lifecycle.md
 [t333]: ../archive/tasks/333-postgres-manager-harness.md
 [t334]: 334-shared-chain-state.md
+[t368]: 368-wallet-startup-shutdown.md
 [t371]: 371-canonical-chain-frontier.md
 [t423]: 423-manager-chain-source-cutover.md

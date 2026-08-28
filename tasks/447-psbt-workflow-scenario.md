@@ -4,8 +4,9 @@ Component: **public PSBT workflow scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 433][t433], [Task 435][t435], [Task 436][t436],
-[Task 438][t438], [Task 439][t439], and [Task 440][t440]**.
+Dependencies: **[Task 368][t368], [Task 433][t433], [Task 435][t435],
+[Task 436][t436], [Task 438][t438], [Task 439][t439], and
+[Task 440][t440]**.
 
 ## Rationale
 
@@ -22,7 +23,8 @@ publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
   through the maintained public methods, checking each returned handoff.
 - Extract and independently execute the final transaction, check mempool
   acceptance, broadcast it, mine it, and verify it through TxReader.
-- Reload the Wallet and prove the final transaction and change remain visible.
+- Stop the Manager, start a fresh Manager over the same database, and prove the
+  final transaction and change remain visible through the returned Wallet.
 - Keep this to one fully owned successful workflow. Exclude collaborative
   combination, partial ownership, error matrices, reorg, and Store inspection.
 
@@ -46,6 +48,7 @@ production hooks.
 - The shared scenario contains no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t368]: 368-wallet-startup-shutdown.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: 436-transaction-read-itests.md

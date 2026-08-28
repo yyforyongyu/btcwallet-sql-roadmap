@@ -20,7 +20,7 @@ widening safe Signer tests or allowing diagnostics to retain private material.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover a valid account path and owned address, unknown paths and foreign
-  addresses, and stopped, locked, and watch-only Wallet states.
+  addresses, and locked or watch-only Wallet states.
 - Compare only the returned key's public identity with independently obtained
   public results, then destroy or release raw key material promptly.
 - Reopen the same Wallet and prove the public identity remains stable without
@@ -41,7 +41,7 @@ bytes in assertion messages, golden files, and test artifacts.
 
 ## Definition of done
 
-- Both raw extraction methods have representative success, absence, lifecycle,
+- Both raw extraction methods have representative success, absence,
   locked, watch-only, and durable-identity coverage.
 - Tests retain no raw key material and make no Store assertions.
 - Shared cases contain no backend skip branch and do not widen the unsafe

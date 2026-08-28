@@ -4,8 +4,8 @@ Component: **public account signing scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 429][t429], [Task 431][t431], [Task 441][t441], and
-[Task 442][t442]**.
+Dependencies: **[Task 368][t368], [Task 429][t429], [Task 431][t431],
+[Task 441][t441], and [Task 442][t442]**.
 
 ## Rationale
 
@@ -25,7 +25,8 @@ database.
   methods.
 - Verify every result independently from public key, address, and previous-
   output facts; never read Store secrets or use UnsafeSigner as an oracle.
-- Reload the Wallet and repeat the public verification against the same account
+- Stop the Manager, start a fresh Manager over the same database, and repeat
+  the public verification with the returned Wallet against the same account
   and address identity.
 - Keep this to one spendable account. Exclude custom-scope and imported-XPub
   policy, transaction publication, PSBT, and component-level error matrices.
@@ -50,6 +51,7 @@ adding another signing abstraction.
   account or Vault behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t368]: 368-wallet-startup-shutdown.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
 [t441]: 441-signer-derivation-ecdh-itests.md

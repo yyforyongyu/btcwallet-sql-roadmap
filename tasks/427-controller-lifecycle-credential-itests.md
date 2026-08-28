@@ -9,8 +9,9 @@ Dependencies: **None**.
 ## Rationale
 
 [Issue #1250][issue1250] assigns Gustavo the Controller integration-test lane.
-Merged [PR #1300][pr1300] covers `Start`, `Stop`, basic `Unlock` and `Lock`, and
-`Info`. The remaining credential slice is passphrase change, timed unlock, and
+Merged [PR #1300][pr1300] covers basic `Unlock`, `Lock`, and `Info`;
+[Task 368][t368] removes the individual lifecycle methods and their obsolete
+cases. The remaining credential slice is passphrase change, timed unlock, and
 their durable behavior through a real persistent Wallet.
 
 ## Details
@@ -21,14 +22,15 @@ their durable behavior through a real persistent Wallet.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover successful passphrase change, wrong current credentials, invalid new
-  credentials, stopped and locked or unlocked states where defined, and an
+  credentials, locked and unlocked states where defined, and an
   unlock timeout that returns the Wallet to its public locked state.
 - Reopen the same wallet after a successful passphrase change and prove the old
   credential is rejected and the new credential unlocks it.
 - Do not absorb behavior owned by Tasks 338, 369, 421, or another task.
 - Exclude the Controller methods already covered by PR #1300, `Info`, `Resync`,
   `Rescan`, account/address APIs, RPC, deprecated interfaces, direct Store
-  assertions, and unrelated production changes.
+  assertions, lifecycle behavior owned by Task 368, and unrelated production
+  changes.
 
 ## Suggested fix
 
@@ -54,3 +56,4 @@ objects for the durable credential check.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
+[t368]: 368-wallet-startup-shutdown.md

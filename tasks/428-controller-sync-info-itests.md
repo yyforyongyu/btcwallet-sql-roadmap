@@ -10,8 +10,8 @@ Dependencies: **[Task 455][t455]**.
 
 [Issue #1250][issue1250] assigns Gustavo the Controller integration-test lane.
 Merged [PR #1300][pr1300] covers the baseline `Info` contract. `Resync` and
-`Rescan` remain without real-wallet coverage for lifecycle gates, bounded
-requests, completion, and durable results after reopen.
+`Rescan` remain without real-wallet coverage for bounded requests, completion,
+and durable results after reopen.
 
 ## Details
 
@@ -20,7 +20,7 @@ requests, completion, and durable results after reopen.
 - Register one shared public contract for all three database backends. Do not
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
-- Cover stopped and started calls, current and earlier valid boundaries,
+- Cover calls through a Running Manager, current and earlier valid boundaries,
   malformed or out-of-range requests, cancellation, and the public completion
   or progress contract actually exposed by each method.
 - Mine deterministic history, wait with bounded deadlines, and compare public
@@ -53,8 +53,8 @@ requests, and observes completion only through maintained public APIs.
 
 ## Definition of done
 
-- `Resync` and `Rescan` have representative public lifecycle, success,
-  invalid-boundary, and cancellation coverage.
+- `Resync` and `Rescan` have representative public success, invalid-boundary,
+  and cancellation coverage.
 - Completed synchronization results remain observable after durable reopen.
 - Assertions use real kvdb, SQLite, and PostgreSQL Wallets.
 - No future recovery policy is introduced.

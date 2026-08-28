@@ -4,8 +4,8 @@ Component: **public Wallet reorganization scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 415][t415], [Task 428][t428], [Task 433][t433], and
-[Task 436][t436]**.
+Dependencies: **[Task 368][t368], [Task 415][t415], [Task 428][t428],
+[Task 433][t433], and [Task 436][t436]**.
 
 ## Rationale
 
@@ -23,8 +23,9 @@ a real chain reorganization and remain coherent after reload.
   block and let the maintained chain backend deliver the reorganization.
 - Cross only Task 433's exact synchronization boundary, then assert the public
   transaction status, confirmations, UTXO state, and synced tip once.
-- Extend the winning branch, verify the next stable state, reload the Wallet,
-  and repeat the final public assertions.
+- Extend the winning branch, verify the next stable state, stop the Manager,
+  start a fresh Manager over the same database, and repeat the final public
+  assertions with the returned Wallet.
 - Keep this to one Wallet and one bounded shallow reorg. Exclude multi-Wallet
   coordination, resumable rescans, bitcoind parity, randomized chains, and
   direct Store assertions.
@@ -50,6 +51,7 @@ generic polling over wallet-owned state.
 - The shared scenario contains no backend skip branch and no recovery redesign.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t368]: 368-wallet-startup-shutdown.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t428]: 428-controller-sync-info-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md

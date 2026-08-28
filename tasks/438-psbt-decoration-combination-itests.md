@@ -11,7 +11,7 @@ Dependencies: **None**.
 [Issue #1250][issue1250] requires real-wallet integration coverage for every
 maintained public `wallet/` API. `DecorateInputs` and `CombinePsbt` are the
 side-effect-free PsbtManager packet transformations, but their public packet,
-error, lifecycle, and caller-ownership contracts lack focused coverage through
+error, and caller-ownership contracts lack focused coverage through
 real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Details
@@ -21,7 +21,7 @@ real kvdb, SQLite, and PostgreSQL Wallets.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover owned SegWit and Taproot inputs, mixed owned and unknown inputs, both
-  `skipUnknown` modes, malformed packets, and stopped-Wallet admission.
+  `skipUnknown` modes, and malformed packets.
 - Combine compatible copies with disjoint signatures or metadata. Reject
   different unsigned transactions, conflicting fields, empty input, and other
   malformed combinations according to the maintained contract.
@@ -45,7 +45,7 @@ and compare serialized inputs and outputs without reading Store rows.
 ## Definition of done
 
 - Both packet transformations have representative success, mixed-ownership,
-  malformed, conflict, lifecycle, and caller-ownership coverage.
+  malformed, conflict, and caller-ownership coverage.
 - Shared cases use public APIs on real kvdb, SQLite, and PostgreSQL Wallets
   without a backend skip branch.
 

@@ -22,7 +22,7 @@ coverage across kvdb, SQLite, and PostgreSQL.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover valid imports, repeated identical imports, malformed or unsupported
-  inputs, foreign outputs, stopped or locked states where defined, script
+  inputs, foreign outputs, locked states where defined, script
   lookup, and derivation information for derived and imported ownership forms.
 - Reopen after successful imports and prove public script resolution and
   derivation information remain identical without reimport.
@@ -48,7 +48,7 @@ reload checks.
 ## Definition of done
 
 - All four import/script APIs have representative success, duplicate, invalid,
-  foreign-output, lifecycle, and durable-reload coverage.
+  foreign-output, and durable-reload coverage.
 - Public script and derivation results survive a fresh reopen unchanged.
 - Tests use real kvdb, SQLite, and PostgreSQL storage, with no backend skip
   branch in the shared contract.

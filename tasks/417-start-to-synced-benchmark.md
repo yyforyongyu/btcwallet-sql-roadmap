@@ -26,16 +26,16 @@ backend-specific bottlenecks or tuning tasks can be justified.
 - Use a deterministic in-process chain implementation containing all hashes,
   headers, filters, and blocks before the timer starts. It must perform no
   network I/O, mining, sleep, or random generation during a sample.
-- Use `SyncMethodAuto` and the public `Manager.StartWallet`/`Wallet.Info`
-  boundary.
+- Use `SyncMethodAuto` and the public `Manager.Start`/`Wallet.Info` boundary.
 - In a cold sample, copy the base snapshot and construct the chain outside the
-  timer; start the timer immediately before `NewManager`, include `Load`,
-  `StartWallet`, and progress to the first `Info().Synced == true`, then stop the
-  timer before result validation and lifecycle teardown.
-- In a warm sample, open and load a fresh Wallet runtime outside the timer;
-  start immediately before `Manager.StartWallet`, include progress to the
-  first `Info().Synced == true`, and stop the timer before validation and
-  lifecycle teardown. Never reuse or restart a terminal Wallet pointer.
+  timer; start the timer immediately before `NewManager`, include Manager
+  Start, selecting the Wallet from its returned active set, and progress to the
+  first `Info().Synced == true`. Stop the timer before result validation and
+  Manager Stop.
+- In a warm sample, construct a fresh Manager outside the timer; start
+  immediately before `Manager.Start`, include Wallet activation and progress to
+  the first `Info().Synced == true`, and stop the timer before validation and
+  Manager Stop. Never reuse or restart a terminal Manager or Wallet pointer.
 - Poll without an artificial sleep. The public `Info` calls used to observe
   completion are part of the measured workflow.
 - Call `b.ReportAllocs`; assert exact final tip, wallet transaction count,

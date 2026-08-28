@@ -22,7 +22,7 @@ their current contract is covered only below the real persistent Wallet layer.
 - Cover ECDSA and Schnorr digest signatures, supported tweaks and sighashes,
   standard single-key unlocking scripts, and raw signature construction.
 - Cover invalid digest sizes, malformed intents, unsupported address or script
-  forms, foreign outputs, and stopped, locked, and watch-only Wallet states.
+  forms, foreign outputs, and locked or watch-only Wallet states.
 - Verify signatures, witnesses, and scripts independently against the expected
   public key and previous output. Never retrieve a private key to prove success.
 - Reopen the Wallet and prove the same durable key identity still produces
@@ -43,7 +43,7 @@ script verifiers for assertions.
 
 ## Definition of done
 
-- All three methods have representative algorithm, script, tweak, lifecycle,
+- All three methods have representative algorithm, script, tweak,
   watch-only, and invalid-input coverage.
 - Every successful result verifies independently without private-key access.
 - Shared cases contain no backend skip branch and add no new signing behavior.

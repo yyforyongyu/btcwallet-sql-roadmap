@@ -21,7 +21,7 @@ contract end to end.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover supported account paths, external and internal branches, invalid or
-  unknown paths, and stopped, locked, and watch-only states where defined.
+  unknown paths, and locked or watch-only states where defined.
 - Construct `DerivePubKey` inputs with the exported selector and request from
   [Task 337][t337]. Exercise name and numbered selectors, every exported
   request field, and numberless imported-XPub derivation on SQLite,
@@ -48,7 +48,7 @@ shared secrets, and never log or persist private material.
 
 ## Definition of done
 
-- Both methods have representative path, lifecycle, locked, watch-only,
+- Both methods have representative path, locked, watch-only,
   invalid-input, and durable-reopen coverage.
 - ECDH results are independently verified without Store or private-key reads.
 - Shared cases contain no backend skip branch.

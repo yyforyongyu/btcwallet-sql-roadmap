@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **127 tasks**, with **107 remaining open**. Open tasks are
+The roadmap contains **130 tasks**, with **110 remaining open**. Open tasks are
 grouped by delivery phase; completed roadmap tasks move to the `Done` table,
 which records the PR that completed each task.
 
@@ -36,7 +36,7 @@ moves a required task into the readiness gate.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 41 open
+## Phase 1 — lnd integration · 44 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -47,7 +47,7 @@ separately accepted task.
 | --- | --- | --- | --- | --- | --- |
 | [Task 329][t329] | open | Manager SQL genesis and SQL Store | Bug fix | Commit SQL wallet genesis atomically | 337, 345 |
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | 331 |
-| [Task 331][t331] | open | Manager | Bug fix | Fence Manager admission and Store closure | 368 |
+| [Task 331][t331] | open | Manager lifecycle, admission, and Store ownership | Bug fix | Make Manager lifecycle terminal | 334, 422, 458 |
 | [Task 334][t334] | open | SQL wallet architecture documentation | Design | Supersede ADR 0002 with SQL shared-chain ownership | — |
 | [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | 331, 368, 421 |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | 359 |
@@ -63,7 +63,7 @@ separately accepted task.
 | [Task 364][t364] | open | SQL watch-generation and obligation schema | Gap fix | Persist ordered SQL live-watch obligations | 345, 400 |
 | [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329 |
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | 329 |
-| [Task 368][t368] | open | Manager and Wallet runtime lifecycle | Bug fix | Make Manager own Wallet lifecycle | 453 |
+| [Task 368][t368] | open | Manager-owned Wallet activation and public lifecycle API | Bug fix | Remove individual Wallet lifecycle | 331, 358 |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
 | [Task 387][t387] | open | ADR 0012 and ADR 0013 account-creation contract | Design | Define custom and path-bound account identity | — |
 | [Task 388][t388] | open | SQL AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 387 |
@@ -84,8 +84,11 @@ separately accepted task.
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 347 |
 | [Task 408][t408] | open | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | 344, 356, 425 |
 | [Task 421][t421] | open | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | — |
-| [Task 422][t422] | open | Manager.Load | Gap fix | Make Manager loading cancellable | 331, 368, 453 |
+| [Task 422][t422] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 334, 456 |
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
+| [Task 456][t456] | open | ManagerConfig and managed Wallet construction | Refactor | Centralize managed Wallet runtime configuration | 334 |
+| [Task 457][t457] | open | Manager Start and process-local database ownership | Gap fix | Enforce one process-local Manager per database | 368 |
+| [Task 458][t458] | open | Manager operation admission and maintained Wallet components | Bug fix | Fence Wallet operations against Manager teardown | — |
 
 ## Phase 2 — verification · 27 open
 
@@ -96,7 +99,7 @@ three-backend performance measurements.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 369][t369] | open | Controller | Test | Reject repeated Wallet unlocks without resetting timeout | — |
-| [Task 416][t416] | open | wallet benchmark infrastructure | Benchmark | Build reusable database benchmark fixtures | — |
+| [Task 416][t416] | open | wallet benchmark infrastructure | Benchmark | Build reusable database benchmark fixtures | 368 |
 | [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 368, 416 |
 | [Task 418][t418] | open | wallet UtxoManager benchmarks | Benchmark | Measure ListUnspent performance | 416 |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 416 |
@@ -114,12 +117,12 @@ three-backend performance measurements.
 | [Task 441][t441] | open | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | — |
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
 | [Task 443][t443] | open | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | — |
-| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 429, 430, 431, 436 |
-| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 429, 431, 441, 442 |
-| [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | 435, 436 |
-| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 435, 436, 438, 439, 440 |
-| [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | 428, 436 |
-| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 429, 431, 435, 436 |
+| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 368, 430, 431, 436 |
+| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 368, 431, 441, 442 |
+| [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | 368, 436 |
+| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 368, 436, 438, 439, 440 |
+| [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | 368, 428, 436 |
+| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 368, 431, 436 |
 | [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | 431, 435, 436 |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 
@@ -140,7 +143,7 @@ ready Bug fix and Gap fix work.
 | [Task 362][t362] | open | Controller and LegacyWalletVault | Bug fix | Return a definitive kvdb passphrase result | 338, 352 |
 | [Task 363][t363] | open | recovery horizon derivation | Bug fix | Bound aggregate recovery derivation work | 342 |
 | [Task 365][t365] | open | Manager creation preflight | Bug fix | Validate wallet genesis key identities | — |
-| [Task 370][t370] | open | Manager chain coordinator and Wallet processors | Refactor | Prepare ordered Manager chain delivery | 331, 334, 371 |
+| [Task 370][t370] | open | Manager chain coordinator and Wallet processors | Refactor | Prepare ordered Manager chain delivery | 334, 368, 371 |
 | [Task 371][t371] | open | SQL Store canonical chain state | Bug fix | Serialize canonical chain-frontier mutation | 334, 340 |
 | [Task 372][t372] | open | Manager chain coordinator and SQL Store rollback | Bug fix | Prepare atomic multi-Wallet rollback | 349, 370, 371 |
 | [Task 381][t381] | open | RecoveryState public contract and internal Syncer adapter | Refactor | Hide recovery adapter identity | — |
@@ -153,7 +156,7 @@ ready Bug fix and Gap fix work.
 | [Task 412][t412] | open | TxWriter public contract, TxPublisher, and transaction graph admission | Gap fix | Expose invalidation with publication ordering | 349 |
 | [Task 413][t413] | open | SQL UTXO and normalized-input schema | Bug fix | Constrain SQL UTXOs to exact spending inputs | 351, 409, 410 |
 | [Task 414][t414] | open | SQL UTXO schema | Bug fix | Bound persisted SQL UTXO amounts | 351 |
-| [Task 423][t423] | open | SQL Manager chain source adapter and coordinator activation | Refactor | Cut over SQL Manager chain notification ownership | 368, 370, 372, 412, 422 |
+| [Task 423][t423] | open | SQL Manager chain source adapter and coordinator activation | Refactor | Cut over SQL Manager chain notification ownership | 368, 370, 372, 412, 457 |
 | [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
 | [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
@@ -325,7 +328,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
-[t422]: tasks/422-manager-load-cancellation.md
+[t422]: tasks/422-manager-startup-wallet-assembly.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t425]: tasks/425-separate-transaction-authoring-wrappers.md
@@ -359,6 +362,9 @@ phase. Every roadmap task must remain listed exactly once.
 [t453]: tasks/453-serialize-manager-wallet-publication.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
+[t456]: tasks/456-manager-runtime-configuration.md
+[t457]: tasks/457-process-local-manager-lease.md
+[t458]: tasks/458-manager-operation-admission.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308

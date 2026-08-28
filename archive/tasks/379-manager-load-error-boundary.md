@@ -42,4 +42,4 @@ existing real-SQLite test to assert the public contract.
 - No Create, cancellation, concurrency, or lifecycle policy changes are
   included.
 
-[t422]: 422-manager-load-cancellation.md
+[t422]: ../../tasks/422-manager-startup-wallet-assembly.md

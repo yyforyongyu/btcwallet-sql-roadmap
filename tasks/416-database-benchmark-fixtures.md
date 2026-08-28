@@ -4,7 +4,7 @@ Component: **wallet benchmark infrastructure**.
 
 Type: **Benchmark**.
 
-Dependencies: **None**.
+Dependencies: **[Task 368][t368]**.
 
 ## Rationale
 
@@ -17,8 +17,8 @@ measurements can be compared within each backend.
 
 ## Details
 
-- Add benchmark-only fixtures that create and load Wallets through real kvdb,
-  SQLite, and PostgreSQL Managers and Stores.
+- Add benchmark-only fixtures that start real kvdb, SQLite, and PostgreSQL
+  Managers and create or recover Wallets through the returned active set.
 - Register every shared fixture profile for all three database backends. Do
   not skip kvdb inside the shared fixture or benchmark paths; isolate only
   backend-specific setup and teardown.
@@ -28,20 +28,19 @@ measurements can be compared within each backend.
   scripts, and values; and one BIP84 scope with its default derived account
   unless a profile says otherwise.
 - Use no imported addresses, leases, labels, concurrent writers, or random
-  data. Every loaded Wallet uses the public Manager/Wallet boundary and its
+  data. Every active Wallet uses the public Manager/Wallet boundary and its
   real persistent Store.
 - Keep setup, embedded-database snapshot copying or equivalent PostgreSQL
   reset, deterministic chain construction, result checking, and teardown
   outside consumer timers.
 - For the address, UTXO, and transaction read profiles, `Cold` means the first
-  API call after opening a copied snapshot. `Warm` means the same loaded Wallet
+  API call after opening a copied snapshot. `Warm` means the same active Wallet
   receives one untimed priming call before repeated timed calls.
 - For sync profiles, define this lifecycle exception for
-  [Task 417][t417]: `Cold` includes Manager construction, Load, its required
-  public lifecycle start, and synchronization. `Warm` constructs a fresh
-  Manager and loads its current runtime outside the timer, then times Task 417's
-  required public lifecycle start and synchronization without priming or
-  restarting a terminal pointer.
+  [Task 417][t417]: `Cold` includes Manager construction, Manager Start, Wallet
+  activation, and synchronization. `Warm` constructs a fresh Manager outside
+  the timer, then times Manager Start, activation, and synchronization without
+  priming or restarting a terminal Manager.
 - Implement these exact address and calibration profiles:
   - `Smoke`: one account, 100 addresses, 100 confirmed transaction records,
     10 live UTXOs, and 10 blocks.
@@ -105,7 +104,7 @@ Add a small backend benchmark fixture in package `wallet`. Give it explicit
 kvdb, SQLite, and PostgreSQL factories that populate the same logical profile
 through maintained Store-backed wallet operations or deterministic Store
 fixture insertion. Return one immutable manifest plus a backend-specific
-reload handle. Keep reload mechanics below the API benchmarks so every
+restart handle. Keep restart mechanics below the API benchmarks so every
 consumer uses the same lifecycle and validation rules.
 
 ## Verification
@@ -131,7 +130,7 @@ consumer uses the same lifecycle and validation rules.
 
 - Every named profile has one deterministic manifest and exact semantic
   validation.
-- Cold reload and each profile's warm setup are controlled by one shared
+- Cold restart and each profile's warm setup are controlled by one shared
   helper.
 - The calibration benchmark and reload test pass with real kvdb, SQLite, and
   PostgreSQL Stores and identical logical manifests.
@@ -141,4 +140,5 @@ consumer uses the same lifecycle and validation rules.
 - The PR contains only reusable three-backend benchmark infrastructure.
 
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251
+[t368]: 368-wallet-startup-shutdown.md
 [t417]: 417-start-to-synced-benchmark.md

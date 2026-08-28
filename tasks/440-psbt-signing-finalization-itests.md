@@ -24,7 +24,7 @@ kvdb, SQLite, and PostgreSQL.
 - Cover fully owned, partially owned, unknown, already-signed, SegWit, and
   Taproot inputs plus supported multi-party partial-signature behavior.
 - Cover malformed previous-output metadata, unsupported scripts or sighashes,
-  incomplete finalization, and stopped, locked, and watch-only Wallet states.
+  incomplete finalization, and locked or watch-only Wallet states.
 - Verify produced signatures and finalized scripts independently with the
   maintained script engine; do not establish success by reading Store rows.
 - Verify errors leave the caller packet unchanged and successful signing does
@@ -45,7 +45,7 @@ final scripts against their previous outputs.
 ## Definition of done
 
 - Both methods have representative ownership, partial-signature, script,
-  lifecycle, watch-only, and invalid-packet coverage.
+  watch-only, and invalid-packet coverage.
 - Successful final packets execute, while rejected packets remain unchanged.
 - Shared cases contain no backend skip branch and add no new signing behavior.
 

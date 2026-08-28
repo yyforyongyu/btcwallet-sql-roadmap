@@ -21,7 +21,7 @@ safely make it the authoritative live notification owner.
   processors receive no raw disconnect and do not call the database-wide
   mutation through the new path.
 - Stop coordinator admission for the rollback boundary and quiesce every
-  loaded affected Wallet processor in stable wallet-ID order. Join accepted
+  affected Wallet processor in stable wallet-ID order. Join accepted
   chain and transaction mutations before opening the rollback transaction.
 - Consume [Task 410][t410]'s transaction-graph admission, reached transitively
   through Task 349, in the same stable wallet-ID order. Task 349 owns only the
@@ -32,9 +32,9 @@ safely make it the authoritative live notification owner.
   wallet-tip rewinds. Narrow or extend it only where the accepted frontier
   contract requires exact old/new state and result reporting.
 - Roll back from a verified fork point and update the canonical frontier and
-  every affected durable Wallet tip atomically with the detach. Unloaded
-  Wallets are reconciled through durable rows; only loaded processors require
-  runtime quiescence.
+  every affected durable Wallet tip atomically with the detach. While Manager
+  is Running, every durable Wallet has a processor and participates in runtime
+  quiescence.
 - Preserve the current foreign-key detach strategy unless a focused failing
   Store reproduction proves a schema change is required. Do not speculatively
   replace `ON DELETE SET NULL` or unrelated `RESTRICT` constraints.
@@ -83,8 +83,9 @@ the coordinator to the live notification channel until Task 423.
 - Repeat backend-neutral Store rollback conformance on PostgreSQL through Task
   333's completed harness path; no dialect-specific Wallet behavior is allowed.
 - Race direct rollback with coordinator delivery, canonical extension,
-  historical insertion, transaction insertion, invalidation, Wallet removal,
-  and coordinator stop. Stable admission ordering must avoid deadlock.
+  historical insertion, transaction insertion, invalidation, Create-time
+  Wallet registration, and coordinator stop. Stable admission ordering must
+  avoid deadlock.
 - Force definite pre-commit failure and ambiguous commit outcomes. Complete
   new state resumes once; definite failure, complete old state, and mixed or
   unresolved state keep admission closed and require a fresh verified source

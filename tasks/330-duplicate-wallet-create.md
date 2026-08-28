@@ -23,7 +23,8 @@ depend on backend-specific constraint errors.
   distinguish wallet-name duplication from account or other uniqueness
   failures. Other constraint and write failures retain their own
   classification.
-- Reject an already loaded wallet before opening another Store.
+- Reject a Wallet already present in the running Manager's active set before
+  opening another Store.
 - Prove a rejected create changes no rows, namespaces, or live Wallet.
 - kvdb supports one wallet. Do not add `Manager.kvdbWallet`.
 - kvdb persists no wallet name. Once its one database is occupied, every later
@@ -32,7 +33,7 @@ depend on backend-specific constraint errors.
 
 ## Suggested fix
 
-Use [Task 331][t331]'s Manager admission rule only as a loaded-wallet fast path;
+Use [Task 331][t331]'s Manager admission rule only as an active-set fast path;
 backend insert-only creation remains the durable authority for concurrent
 creates. On SQLite, use an operation-specific
 `ON CONFLICT(wallet_name) DO NOTHING RETURNING id` shape, or an equivalent

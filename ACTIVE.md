@@ -16,10 +16,9 @@ placement.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 334][t334] | Define shared-chain ownership | Design | YY | [#1323][pr1323] |
+| [Task 334][t334] | Define aggregate Manager ownership | Design | YY | [#1323][pr1323] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
-| [Task 368][t368] | Manager-own Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
 | [Task 378][t378] | Translate AccountManager errors | Bug fix | Gustavo | — |
 | [Task 387][t387] | Define account-creation identity | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
@@ -31,6 +30,7 @@ placement.
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | [#1346][pr1346] |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
+| [Task 458][t458] | Fence Wallet operations | Bug fix | YY | — |
 
 ## Blocked Phase 1 Tasks
 
@@ -43,7 +43,7 @@ and `QUEUE.md` owns their delivery phase.
 | --- | --- | --- | --- | --- |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | YY | — |
-| [Task 331][t331] | Fence Manager lifecycle | Bug fix | YY | — |
+| [Task 331][t331] | Make Manager lifecycle terminal | Bug fix | YY | — |
 | [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
@@ -72,8 +72,11 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 406][t406] | Release PSBT funding leases | Gap fix | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
-| [Task 422][t422] | Make Manager loading cancellable | Gap fix | YY | — |
+| [Task 368][t368] | Remove individual Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
+| [Task 422][t422] | Assemble startup Wallets | Gap fix | YY | — |
 | [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
+| [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | — |
+| [Task 457][t457] | Fence process-local Managers | Gap fix | YY | — |
 
 ## Claimed Tasks
 
@@ -97,6 +100,15 @@ authorize implementation before every dependency and gate completes.
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
 
 ## Coordination
+
+Task 334 and PR #1323 must adopt the aggregate Manager lifecycle, active-Wallet
+set, and process-local ownership contract before merge.
+
+Task 368 and draft PR #1328 are paused. The current PR implements the removed
+per-Wallet lifecycle coordinator and must be rewritten for Task 368's final
+individual-lifecycle removal after Tasks 331 and 358 complete. It remains
+unmergeable while those hard dependencies are open; no stacked implementation
+exception is approved.
 
 Task 350 and PR #1321 are paused behind the new hard dependency on Task 454.
 No stacked implementation exception is approved: implementation must not
@@ -158,7 +170,7 @@ an explicit owner-approved priority exception.
 [t412]: tasks/412-transaction-publication-admission.md
 [t416]: tasks/416-database-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
-[t422]: tasks/422-manager-load-cancellation.md
+[t422]: tasks/422-manager-startup-wallet-assembly.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
@@ -171,6 +183,9 @@ an explicit owner-approved priority exception.
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
+[t456]: tasks/456-manager-runtime-configuration.md
+[t457]: tasks/457-process-local-manager-lease.md
+[t458]: tasks/458-manager-operation-admission.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
