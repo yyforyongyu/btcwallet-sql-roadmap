@@ -23,9 +23,15 @@ and durable results after reopen.
 - Cover calls through a Running Manager, current and earlier valid boundaries,
   malformed or out-of-range requests, cancellation, and the public completion
   or progress contract actually exposed by each method.
+- Prove explicit historical rescan remains Wallet-scoped while live
+  synchronization continues independently. Rescan activity cannot overwrite
+  that Wallet's live readiness fields.
+- [Task 449][t449] owns the SQL two-Wallet isolation assertion. This shared
+  three-backend contract does not add multi-Wallet setup or duplicate that
+  scenario.
 - Mine deterministic history, wait with bounded deadlines, and compare public
-  information and recovered wallet-visible state before and after a full
-  reopen.
+  information and recovered wallet-visible state before and after constructing
+  a fresh Manager and selecting the Wallet from its Start result.
 - Do not define future recovery or live-watch semantics owned by Tasks 342,
   363, and 397–402.
 - Use `Info` to observe synchronization preconditions and postconditions.
@@ -47,7 +53,8 @@ requests, and observes completion only through maintained public APIs.
 - Run the focused Controller synchronization cases on kvdb, SQLite, and
   PostgreSQL without backend branches.
 - Compare every exported synchronization field through the imported `wallet`
-  package before and after resync or rescan.
+  package before, during, and after resync or rescan. Live readiness changes
+  only for live-chain work, while historical activity remains Wallet-scoped.
 - Verify cancellation and failure paths terminate polling and release the
   Wallet, Manager, chain backend, miner, and database resources.
 
@@ -56,6 +63,7 @@ requests, and observes completion only through maintained public APIs.
 - `Resync` and `Rescan` have representative public success, invalid-boundary,
   and cancellation coverage.
 - Completed synchronization results remain observable after durable reopen.
+- Rescan state never overwrites the Wallet's live readiness.
 - Assertions use real kvdb, SQLite, and PostgreSQL Wallets.
 - No future recovery policy is introduced.
 
@@ -63,3 +71,4 @@ requests, and observes completion only through maintained public APIs.
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
 [t331]: 331-manager-wallet-lifecycle.md
 [t455]: 455-exact-wallet-sync-status.md
+[t449]: 449-multi-wallet-sql-isolation-scenario.md

@@ -10,117 +10,186 @@ Dependencies: **None**.
 
 ADR 0002 assigns chain synchronization and database mutation to each Wallet
 Syncer. SQL Managers can own multiple Wallets over one database, while the
-database has one shared block table and a database-wide rollback operation.
-The old per-Wallet Start and Stop boundary also lets callers race two owners of
-the same runtime even though the Manager owns the shared Store and chain work.
+database has one shared block table, canonical chain, Store lifetime, and
+database-wide rollback boundary. Public per-Wallet lifecycle methods also let
+callers race two authorities over resources that must stop together.
 
-The final contract should make lifecycle and synchronization aggregate Manager
-properties. Wallets are inexpensive identity, component, watch, and accounting
-facades once the Manager owns the shared workers, so there is no accepted need
-to unload or independently stop one Wallet.
+The successor contract must distinguish Manager lifecycle authority from the
+private mechanics each Wallet needs to own its resources. It must also keep
+shared live-chain synchronization separate from Wallet-scoped historical
+recovery.
 
 ## Details
 
 - Supersede ADR 0002 with an accepted decision; preserve ADR 0002 as historical
   context and mark its status and successor explicitly.
-- Define one aggregate maintained lifecycle. `NewManager` constructs an
-  initialized Manager, `Manager.Start(ctx)` activates the Manager and every
-  durable Wallet, `Manager.Create(ctx, ...)` durably creates and immediately
-  activates one Wallet while the Manager is running, and `Manager.Stop(ctx)`
-  terminally stops every Wallet and releases every Manager-owned resource.
-- Have `Manager.Start` return a caller-owned stable Wallet-ID-ordered slice of
-  the complete activated pointer set so a caller can regain handles after
-  restart. Do not add a separate public lookup solely to replace `Load`.
+- Make `Manager` the sole public lifecycle authority. `NewManager` constructs
+  an Initialized Manager, `Manager.Start(ctx)` starts the Manager and all
+  durable Wallets, `Manager.Create(ctx, ...)` creates and starts one Wallet
+  only while Running, and `Manager.Stop(ctx)` terminally stops the runtime.
+- Use one terminal Manager state model: `Initialized -> Starting -> Running ->
+  Stopping -> Stopped`. A stopped or failed Manager cannot restart; durable
+  reopen constructs a fresh Manager.
+- Require `Manager.Start` to succeed with zero durable Wallets and return an
+  empty caller-owned slice. For existing Wallets, return the complete active
+  set in stable Wallet-ID order. Add no public lookup solely to replace Load.
+- Fix one shared Start result under the Manager state boundary. Running wins
+  with the stable Wallet slice; pre-publication owner cancellation wins with
+  the owner's context error; assembly or private-start failure wins with that
+  exact error; and Stop entering Stopping first wins with `ErrManagerStopped`.
+  A waiter's cancellation changes only its wait. After terminal failure, record
+  cleanup ownership and release accepted Start admission; the owner and other
+  waiters return the fixed result after cleanup, while cleanup errors enter only
+  Stop's cached aggregate. Every failed Start returns a nil Wallet slice; Start
+  from Stopping or Stopped returns a nil slice and `ErrManagerStopped`.
+- Keep pre-handoff assembly cleanup in Task 459. Its private one-shot outcome
+  returns the exact primary error separately from deterministic cleanup
+  outcomes. Manager fixes Start from only the primary error, records the cleanup
+  errors in Stop's cached aggregate before releasing Start admission, and never
+  cleans those resources again. After successful handoff, Manager owns the
+  complete candidate set.
+- While a Manager is Running, every durable Wallet it owns is active. There is
+  no public dormant, unloaded, restartable, or independently stoppable Wallet
+  state. A retained Wallet pointer is terminal and inert after Manager Stop.
+- Keep private one-shot Wallet `start(ctx)` and `stop()` mechanics. Manager is
+  their sole caller, while Wallet owns its call admission and drain, internal
+  workers, cancellation, Vault lifecycle, and Wallet-specific component state.
+  Use an unexported lifecycle interface only when a focused test seam requires
+  substitutability.
+- Make a Wallet admit or reject its own maintained public calls. A call that
+  wins admission keeps its ordinary result and drains before Store closure; a
+  later call returns stable `ErrWalletStopped` without Store access. Admission
+  bookkeeping cannot serialize the admitted operation bodies.
+- Keep Manager operation admission separate. Manager owns Start and Stop
+  arbitration, Create acceptance and serialization, the complete active set,
+  and stable `ErrManagerStopped`. Pass no Manager pointer, context, closed bit,
+  operation token, or callback capability into Wallet.
+- Define Create's sole acceptance point under the Manager state boundary after
+  any required Create serialization and a Running recheck. A winning Create
+  durably creates, assembles, privately starts, and publishes the exact fully
+  started pointer without holding the Wallet-set lock during backend work.
+- Treat a post-commit, pre-publication Create start failure as aggregate. Join
+  the failed candidate, then allow one bounded reconciliation only when an
+  exact durable reread matches the accepted Create, no Store or worker result
+  is indeterminate, and one fresh candidate fully starts before publication.
+  Reconciliation success publishes that exact pointer and Create returns it.
+  On mismatch, indeterminate state, or fresh-start failure, fix the exact Create
+  error and enter or observe Stopping. Privately stop and join every unpublished
+  candidate and attempt-owned resource before releasing Create serialization
+  and accepted-operation admission, recording every cleanup error in the cached
+  Stop aggregate. Stop's accepted-Create settlement completes at that release.
+  The caller waits outside admission, then returns its fixed reconciliation or
+  fresh-start error after shutdown; Stop's aggregate result remains independent.
 - Remove public `Wallet.Start`, `Wallet.Stop`, `Controller.Start`,
   `Controller.Stop`, `Manager.StartWallet`, `Manager.StopWallet`,
-  `Manager.Load`, `Manager.Unload`, and `Manager.Close` from the maintained
-  Manager surface. Do not retain compatibility wrappers or aliases.
-- While a Manager is running, every durable Wallet is active. There is no
-  dormant, unloaded, restartable, or independently stoppable Wallet state.
-  A Wallet pointer becomes terminal only when its Manager stops.
-- Move the non-durable runtime policy needed to assemble Wallets after restart
-  into one immutable Manager-owned configuration. Do not persist a per-Wallet
-  runtime manifest merely to recreate the removed Load contract.
-- Define one Manager state owner for `Initialized -> Starting -> Running ->
-  Stopping -> Stopped`. `Stopped` is terminal. Define exact repeated-call,
-  concurrent-call, caller-cancellation, failed-start, and Stop-during-Start
-  results at one Manager publication boundary.
-- Require one running Manager per canonical configured database target within
-  one process. The winning Start holds a process-local lease until complete
-  teardown; a losing Start returns one stable wallet-owned error without
-  publishing Wallets or workers. Multi-process coordination and cross-process
-  fencing remain caller responsibilities and outside this contract.
-- Scope shared-chain ownership to SQL Managers. Make each SQL Manager own
-  exactly one authoritative chain source constructed from `ManagerConfig`'s
-  Manager-owned source factory. SQL Manager-created Wallets cannot nominate or
-  override a second source.
-- Record the maintained modern-kvdb single-Wallet source path as an explicit
-  temporary implementation exception. It follows the same aggregate public
-  Manager lifecycle without moving onto the SQL coordinator before
-  [Task 353][t353] completes.
-- Define the Manager coordinator as the sole SQL notification consumer and the
-  owner of canonical chain extension, reorg detection, rollback admission,
-  ordered bounded Wallet delivery, backpressure, and processor-failure policy.
-- Distinguish database-wide canonical state from Wallet-scoped state. The
-  canonical frontier and canonical block identity are shared; account/address
-  scan horizons, relevant transactions, Wallet tips, birthday state, targeted
-  rescan intent, and accounting remain Wallet-owned.
-- Define rollback ownership and quiescence: stop new source dispatch, quiesce
-  every Wallet processor in stable Wallet-ID order, apply one durable mutation,
-  reconcile its exact result, and resume only a proven state.
-- Make Manager Stop close admission, join accepted Wallet work, stop the chain
-  coordinator and every Wallet processor, close the Store last, and release
-  the process-local lease only after teardown completes.
+  `Manager.Load`, `Manager.Unload`, and `Manager.Close` from the final
+  maintained surface without compatibility wrappers or aliases.
+- Make Manager own Store lifetime, database-wide mutation coordination, one
+  authoritative SQL chain source, canonical frontier and reorg decisions,
+  live ordering and backpressure, the Wallet registry, and aggregate failure
+  policy. Wallet components may use wallet-scoped Store adapters while their
+  Wallet admission is held, but never close the Store.
+- Define safe Stop ownership: reject new Manager operations; settle accepted
+  Start and Create work under the settlement rule above; freeze the final Wallet
+  set; close shared source admission; privately stop Wallets and drain their
+  calls and worker work; join accepted shared delivery and the coordinator;
+  then close Store last and exactly once.
+- Make accepted Stop work independent of every caller context. A caller
+  cancellation only stops that caller waiting; later Stop callers join or
+  receive the canonical Stop result.
+- Continue terminal shutdown after any teardown error. Preserve every non-nil
+  failure in a deterministic aggregate covering published Wallets and every
+  unpublished Start or Create attempt. Order by stable Wallet ID, then attempt
+  and fixed Wallet-resource order, followed by shared source, coordinator, and
+  Store ownership. Concurrent completion order cannot select or reorder the
+  result, later Stop callers receive the cached aggregate, and cleanup never
+  replaces a fixed Start or Create error.
+- Classify failures by ownership. Request validation, caller cancellation, and
+  determinate request-local Store errors stay local. Recoverable source errors
+  are retried or reconciled. Wallet historical-rescan failures stay scoped.
+  Fatal Wallet invariants, indeterminate persistence, processor failures, and
+  unsafe shared Store, frontier, rollback, or coordinator failures terminally
+  stop Manager unless isolation is proven without violating the complete
+  active-set invariant.
+- Require at most one starting or Running Manager per canonical database target
+  in one process. Hold the process-local lease through worker joins and Store
+  closure. Make no global-singleton or cross-process fencing claim.
+- Keep Manager canonical source/frontier state, Wallet live readiness/tip, and
+  Wallet historical-rescan state independent. Account import does not rescan;
+  address or script import registers a live-watch obligation at the live tip;
+  explicit historical recovery is Wallet-scoped and cannot change another
+  Wallet or the canonical frontier.
+- Scope shared-chain ownership to SQL Managers. Preserve modern kvdb's
+  maintained single-Wallet source path as an isolated implementation exception
+  until [Task 353][t353] completes.
 - Exclude implementation, durable rescan jobs, generic write locks, replay
   state machines, create manifests, idle-Wallet eviction, and cross-process
   leadership or fencing.
 
 ## Suggested fix
 
-Add a successor ADR that records the aggregate Manager lifecycle, immutable
-runtime configuration, active-Wallet set, process-local lease, Manager chain
-coordinator, Wallet processor, canonical frontier, delivery, rollback, and
-shutdown contracts. Mark ADR 0002 superseded and update the ADR index. Keep the
-ADR at the contract level; do not prescribe a generic event framework, a
-database lock row, or a particular SQL locking statement.
+Add a successor ADR that records the authority/mechanics split, terminal
+Manager lifecycle, complete active-Wallet set, Wallet call drain, Create
+acceptance and publication, Store-close-last ordering, process-local lease,
+shared chain coordinator, Wallet processors, failure categories, and separate
+live-sync and historical-rescan state. Keep the ADR at contract level without
+prescribing a mutex, channel, SQL lock, or generic event framework.
 
 ## Verification
 
-- Walk fresh startup, existing-wallet startup, Create while running, repeated
-  Start, concurrent Start, failed Start, Stop during Start, Create during Stop,
-  repeated Stop, and replacement-Manager startup. Assign one owner and exact
-  result to every accepted operation and resource.
-- Walk connected block, filtered block, relevant transaction, disconnect,
-  initial birthday, targeted historical match, rollback, and Manager shutdown
-  sequences and assign one owner to every source read, durable mutation, and
-  Wallet delivery.
-- Confirm every durable Wallet is active while its Manager runs and that no
-  maintained use case requires Load, Unload, or individual Wallet Start/Stop.
-- Confirm the lease guarantee is process-local and keyed by a non-secret
-  canonical database target; the ADR must make no cross-process claim.
-- Confirm that SQLite and PostgreSQL share one contract and that modern kvdb
-  retains only its documented internal source exception.
-- Validate ADR links and index entries; this task runs no btcwallet code tests.
+- Walk empty and populated startup, Create while Running, repeated and
+  concurrent Start, failed Start, Stop during Start, Create during Stop,
+  repeated Stop, and replacement-Manager startup. Assign one authority, exact
+  result, and resource owner to every boundary, including owner and waiter
+  cancellation.
+- Combine each terminal Start cause with partial-Wallet and shared cleanup
+  failures. Start retains its fixed error and repeated Stop exposes every
+  cleanup identity in deterministic order.
+- Combine a Task 459 primary assembly failure with multiple pre-handoff cleanup
+  failures. Start returns only the primary identity; repeated Stop returns every
+  reported cleanup identity in stable order without a second cleanup attempt.
+- Fail Create start after a proven commit. Exact reread plus one successful
+  fresh start returns the published pointer; mismatch, indeterminate state, or
+  another start failure returns its exact reconciliation or fresh-start error
+  after terminal shutdown.
+- Inject simultaneous published and unpublished Wallet attempt, source,
+  coordinator, Vault, adapter, and Store-close failures. Every cleanup step
+  runs, every error remains identifiable, and repeated Stop returns the same
+  deterministically ordered aggregate.
+- Walk a public Wallet call racing private stop in both orders. An admitted
+  call retains its ordinary result and delays Store closure; a late call
+  returns `ErrWalletStopped` before Store access without serializing unrelated
+  admitted calls.
+- Walk connected and disconnected blocks, rollback, import live-watch
+  registration, explicit historical rescan, processor failure, and Manager
+  Stop. Assign one owner to every source read, durable mutation, delivery,
+  failure decision, and join.
+- Confirm a Wallet receives no Manager lifecycle capability or retained
+  Manager context and cannot close Store.
+- Confirm the lease is process-local and keyed by canonical database target,
+  SQLite and PostgreSQL share one contract, and modern kvdb retains only its
+  documented internal-source exception.
+- Validate ADR links and index entries; this design task runs no btcwallet code
+  tests.
 
 ## Definition of done
 
-- An accepted and merged ADR supersedes ADR 0002 for SQL Managers and requires
-  aggregate lifecycle, one active set containing every durable Wallet,
-  process-local database ownership, shared-chain ownership, and shutdown order.
-- The ADR assigns Manager lifecycle and final public-surface implementation to
-  [Tasks 331][t331], [358][t358], and [368][t368]. It assigns immutable runtime
-  configuration and startup assembly to [Tasks 456][t456] and [459][t459].
-- The ADR assigns process-local lease enforcement to [Task 457][t457] and
-  shared-chain preparation and cutover to [Tasks 370][t370], [371][t371],
-  [372][t372], and [423][t423].
-- The ADR records modern kvdb's temporary isolated source exception until
-  [Task 353][t353] completes. This task changes no production implementation.
-- Later implementation tasks cite this decision and add no idle-Wallet policy,
-  generic framework, or cross-process guarantee.
+- An accepted and merged ADR supersedes ADR 0002 and assigns every public
+  lifecycle, private Wallet mechanic, admission boundary, shared chain state,
+  historical rescan, failure category, and shutdown resource to one owner.
+- The ADR assigns Manager lifecycle to [Task 331][t331], Wallet call drain and
+  private mechanics to [Task 458][t458], and final public-surface removal to
+  [Task 368][t368].
+- It assigns runtime configuration and startup assembly to [Tasks 456][t456]
+  and [459][t459], the process-local lease to [Task 457][t457], and shared-chain
+  preparation and cutover to [Tasks 370][t370], [371][t371], [372][t372], and
+  [423][t423].
+- It records modern kvdb's temporary isolated source exception until Task 353
+  completes and adds no idle-Wallet policy, generic framework, or cross-process
+  guarantee.
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t353]: 353-retire-modern-kvdb-backend.md
-[t358]: 358-contextual-manager-operations.md
 [t368]: 368-wallet-startup-shutdown.md
 [t370]: 370-chain-source-delivery.md
 [t371]: 371-canonical-chain-frontier.md
@@ -128,4 +197,5 @@ database lock row, or a particular SQL locking statement.
 [t423]: 423-manager-chain-source-cutover.md
 [t456]: 456-manager-runtime-configuration.md
 [t457]: 457-process-local-manager-lease.md
+[t458]: 458-manager-operation-admission.md
 [t459]: 459-manager-startup-wallet-assembly.md

@@ -4,7 +4,7 @@ Component: **Manager lifecycle and Syncer benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 368][t368] and [Task 416][t416]**.
+Dependencies: **[Task 368][t368], [Task 416][t416], and [Task 455][t455]**.
 
 ## Rationale
 
@@ -33,9 +33,10 @@ backend-specific bottlenecks or tuning tasks can be justified.
   first `Info().Synced == true`. Stop the timer before result validation and
   Manager Stop.
 - In a warm sample, construct a fresh Manager outside the timer; start
-  immediately before `Manager.Start`, include Wallet activation and progress to
-  the first `Info().Synced == true`, and stop the timer before validation and
-  Manager Stop. Never reuse or restart a terminal Manager or Wallet pointer.
+  immediately before `Manager.Start`, include private Wallet start and progress
+  to the first `Info().Synced == true`, and stop the timer before validation
+  and Manager Stop. Never reuse or restart a terminal Manager or Wallet
+  pointer.
 - Poll without an artificial sleep. The public `Info` calls used to observe
   completion are part of the measured workflow.
 - Call `b.ReportAllocs`; assert exact final tip, wallet transaction count,
@@ -83,4 +84,5 @@ benchmarks unchanged.
 
 [t368]: 368-wallet-startup-shutdown.md
 [t416]: 416-database-benchmark-fixtures.md
+[t455]: 455-exact-wallet-sync-status.md
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

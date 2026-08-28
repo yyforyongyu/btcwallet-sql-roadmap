@@ -18,15 +18,14 @@ successful durable genesis appear canceled or leave prepared secrets alive.
   `context.Context` first and consuming Task 456's Manager-owned runtime
   configuration. Migrate maintained callers without a background legacy
   wrapper.
-- Carry the caller context through Task 458 operation-token acquisition,
-  validation, context-aware acquisition of Task 331's distinct Create gate,
-  SQL writer acquisition, and safe preparation checkpoints.
+- Carry the caller context through validation, context-aware entry to Task
+  331's Manager/Create admission and distinct Create gate, SQL writer
+  acquisition, and safe preparation checkpoints.
 - Acquire the Create gate before SQL writer admission, kvdb update admission,
-  or any durable mutation. Cancellation while waiting for the gate wins,
-  releases the Task 458 operation token, and leaves no durable or cached state.
-  After acquisition, cross Task 331's sole Create acceptance boundary by
-  atomically rechecking `Running` under the Manager state gate. Task 458 token
-  acquisition alone does not accept the Create.
+  or any durable mutation. Cancellation while waiting for the gate wins and
+  leaves no durable or cached state. After acquisition, cross Task 331's sole
+  Create acceptance boundary by atomically rechecking `Running` under the
+  Manager state gate; waiting for admission does not accept the Create.
 - Define successful claim of the backend create transaction as the mutation
   cutoff. Cancellation before the claim wins and leaves no durable or cached
   state; at or after the claim, the caller context no longer controls the
@@ -43,11 +42,10 @@ successful durable genesis appear canceled or leave prepared secrets alive.
   before atomically claiming mutation. Document that its writer-lock wait and
   post-claim scrypt are not cooperatively cancellable; do not race them with a
   cancellation goroutine.
-- After the cutoff, finish assembly, Task 331's required synchronous
-  activation, and admission-protected active-set publication before returning
-  the definitive result. A returned Wallet has a lifetime independent of the
-  request context. Task 368 later replaces the transitional activation
-  machinery without changing this immediate-active contract.
+- After the cutoff, finish assembly, Task 331's required synchronous private
+  Wallet start, and Manager-owned active-set publication before returning the
+  definitive result. A returned Wallet has a lifetime independent of the
+  request context and retains no Manager context.
 - Exclude aggregate Manager startup discovery and cancellation; Task 459 owns
   attempt-local assembly and Task 331 owns startup publication.
 - Do not add a generic operation registry, create manifest, publication state
@@ -66,15 +64,15 @@ honest pre-Update/callback checkpoints and documented non-cancellable wait.
 
 - Barriers cover admission, Create-gate acquisition, SQL writer acquisition,
   every preparation checkpoint, and both backend claim points.
-- On kvdb, SQLite, and PostgreSQL, hold one Create in activation, give a second
-  Create a Task 458 token, and cancel the second caller while it waits for Task
-  331's gate. The second call has not crossed the Create acceptance boundary;
-  it returns its context error, releases its Task 458 token, and reaches no
-  backend writer admission, durable mutation, or cache mutation.
+- On kvdb, SQLite, and PostgreSQL, hold one Create in private Wallet start and
+  cancel a second caller while it waits for Task 331's Manager/Create gate.
+  The second call has not crossed the Create acceptance boundary; it returns
+  its context error and reaches no backend writer admission, durable mutation,
+  or cache mutation.
 - Pre-claim cancellation leaves no durable row, kvdb namespace, cached
   Wallet, or prepared secret. Post-claim cancellation cannot replace the
-  definitive create, activation, or reconciliation result, and success returns
-  only the active Wallet pointer required by Task 331.
+  definitive create, private-start, or reconciliation result, and success
+  returns only the fully started Wallet pointer required by Task 331.
 - SQL ambiguous committed/absent/indeterminate outcomes match Task 366, and
   Task 367 probes prove all canceled prepared secrets are destroyed.
 - kvdb tests document writer-wait and post-claim-scrypt limitations without a
@@ -86,14 +84,12 @@ honest pre-Update/callback checkpoints and documented non-cancellable wait.
 - Public Manager creation accepts `context.Context` first and honors it only
   before the documented backend mutation claim, including while waiting for
   Task 331's Create gate.
-- Post-claim mutation, reconciliation, assembly, activation, and publication
-  return one definitive Manager-owned result.
+- Post-claim mutation, reconciliation, assembly, private Wallet start, and
+  publication return one definitive Manager-owned result.
 - The PR contains no aggregate startup work, generic registry, legacy wrapper,
   or new reconciliation/secret contract.
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t366]: 366-reconcile-sql-genesis-commit.md
 [t367]: 367-bound-sql-genesis-secrets.md
-[t368]: 368-wallet-startup-shutdown.md
-[t459]: 459-manager-startup-wallet-assembly.md
 [t456]: 456-manager-runtime-configuration.md

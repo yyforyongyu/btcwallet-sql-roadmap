@@ -4,7 +4,7 @@ Component: **Manager Start and process-local database ownership**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 368][t368]**.
+Dependencies: **[Task 331][t331]**.
 
 ## Rationale
 
@@ -32,11 +32,11 @@ cross-process leadership remains a separate problem.
   itself or acquire a second lease.
 - Release the lease only after failed-start unwind or Manager Stop has joined
   every Wallet and shared worker and closed the Store. A replacement Manager
-  cannot Start while old teardown can still access the database.
+  cannot Start while the old terminal stop can still access the database.
 - Permit Managers for different canonical database targets to run concurrently
   in one process, including different temporary databases on the same network.
 - Keep the registry synchronized and release test owners only through the same
-  owner-checked teardown path. Expose no public registry or mutable global
+  owner-checked Manager stop path. Expose no public registry or mutable global
   configuration.
 - State the exact guarantee: syntactically equivalent supported configuration
   forms normalize to one key, but alternate host aliases or external routing
@@ -49,8 +49,8 @@ cross-process leadership remains a separate problem.
 
 Add a package-private synchronized registry from canonical target key to one
 opaque Manager owner token. Acquire through one compare-and-insert called by
-Task 331's Start owner and release with an owner-checked delete at the final
-teardown boundary. Keep the canonical key and raw DataSource out of public
+Task 331's Start owner and release with an owner-checked delete after terminal
+Manager Stop. Keep the canonical key and raw DataSource out of public
 errors and logging.
 
 ## Verification
@@ -62,10 +62,10 @@ errors and logging.
   retaining or logging credentials.
 - Start Managers for distinct targets concurrently and prove neither blocks
   the other.
-- Pause old Manager teardown before worker join, Store close, and lease release.
+- Pause old Manager Stop before worker join, Store close, and lease release.
   A replacement cannot Start until every old resource is gone.
-- Inject startup failure before and after partial Wallet activation. The lease
-  remains held through unwind and is released exactly once afterward.
+- Inject startup failure before and after partial private Wallet start. The
+  lease remains held through unwind and is released exactly once afterward.
 - Race repeated Start and Stop on the owning Manager and prove no stale or
   foreign owner can release its lease.
 
@@ -74,10 +74,10 @@ errors and logging.
 - At most one Manager per canonical configured database target can be Running
   or starting in one process.
 - Lease acquisition precedes all runtime publication and owner-checked release
-  follows complete teardown and Store closure.
+  follows complete Manager Stop and Store closure.
 - Same-owner repeated calls and distinct databases behave independently.
 - Errors and registry state expose no database credentials.
 - The PR makes no cross-process, distributed-leadership, advisory-lock, or
   filesystem-fencing claim.
 
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md

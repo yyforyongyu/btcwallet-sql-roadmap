@@ -23,8 +23,8 @@ Grouping here does not create dependency or scheduling authority.
   identities.
 - [Task 366](366-reconcile-sql-genesis-commit.md): reconcile ambiguous SQL
   genesis commits.
-- [Task 368](368-wallet-startup-shutdown.md): remove individual Wallet
-  lifecycle.
+- [Task 368](368-wallet-startup-shutdown.md): make Wallet lifecycle
+  Manager-internal.
 - [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
   without resetting timeout.
   not-found errors.
@@ -34,8 +34,8 @@ Grouping here does not create dependency or scheduling authority.
   runtime configuration.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
-- [Task 458](458-manager-operation-admission.md): fence Wallet operations
-  against Manager teardown.
+- [Task 458](458-manager-operation-admission.md): drain Wallet calls during
+  terminal stop.
 - [Task 459](459-manager-startup-wallet-assembly.md): assemble durable Wallets
   for Manager startup.
 
@@ -88,8 +88,8 @@ Grouping here does not create dependency or scheduling authority.
   historical recovery.
 - [Task 401](401-live-tip-chain-watch.md): add an idempotent live-tip-only chain
   watch.
-- [Task 402](402-replay-live-watch-obligations.md): replay live-watch obligations
-  through the Syncer.
+- [Task 402](402-replay-live-watch-obligations.md): replay Wallet live-watch
+  obligations.
 - [Task 403](403-raw-import-watch-obligations.md): persist raw imports with
   live-watch obligations.
 - [Task 452](452-key-only-recovery-derivation.md): exclude key-only accounts

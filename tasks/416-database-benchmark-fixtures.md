@@ -37,10 +37,10 @@ measurements can be compared within each backend.
   API call after opening a copied snapshot. `Warm` means the same active Wallet
   receives one untimed priming call before repeated timed calls.
 - For sync profiles, define this lifecycle exception for
-  [Task 417][t417]: `Cold` includes Manager construction, Manager Start, Wallet
-  activation, and synchronization. `Warm` constructs a fresh Manager outside
-  the timer, then times Manager Start, activation, and synchronization without
-  priming or restarting a terminal Manager.
+  [Task 417][t417]: `Cold` includes Manager construction, Manager Start, private
+  Wallet start, and synchronization. `Warm` constructs a fresh Manager outside
+  the timer, then times Manager Start, private Wallet start, and synchronization
+  without priming or restarting a terminal Manager.
 - Implement these exact address and calibration profiles:
   - `Smoke`: one account, 100 addresses, 100 confirmed transaction records,
     10 live UTXOs, and 10 blocks.

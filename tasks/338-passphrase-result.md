@@ -21,10 +21,11 @@ instead of the authoritative operation result.
   cancellation.
 - Run the accepted SQL handler under one bounded handler-owned context that
   does not derive from `Wallet.lifetimeCtx`.
-- Register one ChangePassphrase-specific completion before mutation. Task 368's
-  Wallet teardown is the sole owner that joins it before locking the Vault.
-  Task 331's Manager Stop joins Wallet teardown before closing the Store and
-  does not join this completion separately.
+- Register one ChangePassphrase-specific completion before mutation. The
+  private Wallet stop owned by [Task 458][t458] and retained by Task 368 is the
+  sole owner that joins it before locking the Vault. Task 331's Manager Stop
+  joins private Wallet stop before closing Store and does not join this
+  completion separately.
 - Consume Task 421's proven-new, proven-old, or typed
   indeterminate result and translate its internal errors once to a
   wallet-owned public contract.
@@ -46,8 +47,8 @@ the public result, send it once, and close the completion on every exit.
 - A cancellation barrier before handoff returns the caller context error.
 - Barriers immediately after handoff prove caller cancellation and Manager Stop
   cannot replace or suppress the handler result.
-- Wallet teardown waits for the accepted handler before locking the Vault;
-  Manager Stop reaches Store close only after joining that Wallet teardown.
+- Private Wallet stop waits for the accepted handler before locking the Vault;
+  Manager Stop reaches Store close only after joining that Wallet stop.
 - Proven-new, proven-old, and indeterminate Vault outcomes each map to the
   exact public result without another Store read in the Controller.
 - Concurrent rotations on one published Wallet serialize and every caller
@@ -64,3 +65,4 @@ the public result, send it once, and close the completion on every exit.
 [t331]: 331-manager-wallet-lifecycle.md
 [t368]: 368-wallet-startup-shutdown.md
 [t421]: 421-sql-passphrase-commit-reconciliation.md
+[t458]: 458-manager-operation-admission.md

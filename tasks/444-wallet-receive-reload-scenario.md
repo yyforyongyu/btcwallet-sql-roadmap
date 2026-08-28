@@ -14,7 +14,7 @@ Dependencies: **[Task 368][t368], [Task 415][t415], [Task 429][t429],
 layer. The first foundation scenario should prove that one Wallet on each
 maintained database can create an account and address, receive confirmed funds,
 expose consistent account, UTXO, and transaction views, and preserve them
-through a full Manager restart.
+through a fresh Manager startup over the same database.
 
 ## Details
 

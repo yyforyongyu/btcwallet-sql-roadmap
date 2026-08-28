@@ -1,89 +1,112 @@
-# Task 458 — fence Wallet operations against Manager teardown
+# Task 458 — drain Wallet calls during terminal stop
 
-Component: **Manager operation admission and maintained Wallet components**.
+Component: **Wallet lifecycle state and maintained public Wallet components**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 453][t453]**.
+Dependencies: **[Task 334][t334]**.
 
 ## Rationale
 
-A managed Wallet method can begin while its Manager is open and still touch the
-Store after concurrent Manager teardown closes it. A state check alone leaves a
-check-to-use race. Aggregate lifecycle needs one lightweight Manager-owned
-admission boundary for synchronous public Wallet work before Task 331 can make
-Manager Stop own Store closure.
+A maintained Wallet call can begin before Manager Stop and still touch the
+shared Store after another owner closes it. A Manager state check leaves a
+check-to-use race, while a Manager-owned token passed into every Wallet leaks
+public lifecycle authority into Wallet internals. Each Wallet instead needs a
+terminal boundary that admits and drains its own calls before Store closure.
 
 ## Details
 
-- Give each managed Wallet access to one Manager-owned operation gate. Before
-  Store access, every maintained Controller, AccountManager, AddressManager,
-  UtxoManager, TxCreator, TxReader, TxWriter, TxPublisher, PsbtManager, Signer,
-  and UnsafeSigner public operation either acquires one operation token or
-  returns the stable wallet-owned `ErrManagerStopped` defined by this task.
-  Later Manager lifecycle tasks reuse this sentinel and do not redefine it.
-- Hold the token until the synchronous operation can no longer touch the Store
-  or publish operation-owned work. Release it on every success, error, panic-
-  safe cleanup, and caller-cancellation path.
-- Give Manager Create and the temporary maintained Load and per-Wallet
-  lifecycle surfaces operation tokens through the same gate until Tasks 331
-  and 368 replace or remove them. A token protects Store lifetime only; it is
-  not semantic Create acceptance. Task 331 owns the sole Create acceptance
-  boundary after its distinct Create gate is acquired and Manager state is
-  atomically rechecked.
-- Make the existing Manager Close boundary close admission atomically, wait for
-  every acquired token, and reject every later acquisition before backend
-  closure. Preserve its current precondition that callers stop Wallet runtimes
-  before Close; Task 331 later replaces that precondition with aggregate Stop.
-- Permit Manager-owned teardown to use explicit internal methods after public
-  admission closes. Internal teardown cannot reacquire public admission or be
-  mistaken for a caller operation.
-- Keep this to one synchronized closed bit, active count, and drain completion.
-  Record no operation identities, callbacks, results, or replay state and add
-  no generic operation registry.
-- Limit changes to maintained managed-Wallet APIs. Deprecated constructors,
+- Define stable wallet-owned `ErrWalletStopped`. Every maintained public
+  Controller, AccountManager, AddressManager, UtxoManager, TxCreator, TxReader,
+  TxWriter, TxPublisher, PsbtManager, Signer, and UnsafeSigner operation that
+  can access Store or publish Wallet-owned work must pass one Wallet-owned
+  admission boundary.
+- Give that boundary `admit`, `complete`, and `closeAndDrain`
+  responsibilities. Admission atomically rejects a terminal Wallet or counts
+  one call; completion releases exactly that admitted call; closing rejects
+  later calls and waits until earlier calls cannot touch Store or publish
+  unowned work.
+- Hold synchronization only for accepting-state and active-count bookkeeping.
+  Calls that both win admission continue concurrently. Do not prescribe a
+  mutex, condition variable, channel actor, or atomic implementation, and do
+  not use unchecked WaitGroup Add/Wait ordering as the admission cutoff.
+- Release admission exactly once on success, Store error, panic-safe cleanup,
+  and caller cancellation. An admitted call retains its ordinary operation
+  result; shutdown cannot replace it after work has committed.
+- Prevent nested public calls from re-entering admission after stop begins.
+  Move shared behavior into unexported non-admitting helpers or explicitly
+  reuse the outer admission so a winning call cannot fail halfway through.
+- If a public call hands work to a Wallet worker, retain admission until that
+  work cannot touch Store or transfer explicit responsibility to a
+  Wallet-owned worker that private stop joins. Leave no unowned asynchronous
+  Store access.
+- Add private one-shot Wallet `start(ctx)` and `stop()` mechanics. Manager is
+  their sole caller. Startup context bounds synchronous startup only;
+  long-lived workers use Wallet-owned cancellation and are joined by stop.
+- Make private stop terminal and non-restartable. It closes public-call
+  admission, drains admitted calls and accepted Wallet processor work, stops
+  and joins Wallet-owned workers, locks the Vault, and records one result.
+- Continue private stop after any worker or Vault failure. Preserve each
+  non-nil teardown error in stable Wallet-owned worker/resource order followed
+  by Vault, and record one result independent of concurrent completion order.
+- Permit private stop to use non-admitting helpers after public admission
+  closes. Stop cannot re-enter public wrappers.
+- Existing public Wallet Start and Stop methods may temporarily delegate to
+  the final private mechanics only where needed to keep this prerequisite
+  independently mergeable. Add no new wrapper or parallel lifecycle API;
+  [Task 368][t368] removes the existing public surface.
+- Limit the change to maintained managed-Wallet APIs. Deprecated constructors,
   Loader, RPC, CLI, lnd, daemons, and unmanaged Wallet behavior remain outside
   this task.
-- Exclude Manager Start/Stop state, Wallet activation, long-lived chain worker
-  ownership, accepted passphrase completion from [Task 338][t338], process-local
-  Manager leases, and cross-process fencing.
+- Exclude Manager state, `ErrManagerStopped`, Start/Stop result arbitration,
+  Create acceptance and publication, Store closure, shared source/coordinator
+  shutdown, a Manager capability inside Wallet, a generic operation registry,
+  and cross-process fencing.
 
 ## Suggested fix
 
-Add a small Manager-owned admission gate and pass its internal handle to each
-managed Wallet assembled through Task 453. Use one narrow enter/leave helper at
-public component boundaries. Manager Close closes and drains the gate before
-backend closure; Task 331 later reuses the same final primitive from Manager
-Stop.
+Add one small terminal call tracker owned by each Wallet and invoke it at the
+maintained public component boundaries. Route shared internal behavior through
+non-admitting helpers. Build private Wallet start and stop around Wallet-owned
+cancellation, worker joins, call draining, Vault lock, and one terminal result,
+without retaining Manager context or lifecycle state.
 
 ## Verification
 
-- Pause one Store call in each maintained public component group, begin Manager
-  Close, and prove backend closure waits until the admitted call returns.
-- Race admission immediately before and after the close point. Earlier calls
-  finish normally; later calls return `ErrManagerStopped` without Store access.
+- Admit a Store call immediately before stop closes admission and prove it
+  completes with its ordinary result while delaying Wallet stop.
+- Start a call after admission closes and prove it returns
+  `ErrWalletStopped` without reaching Store or publishing worker work.
 - Cover success, Store error, panic-safe cleanup, and caller cancellation and
-  prove every token releases exactly once with no waiter or goroutine leak.
-- Race Manager Create and the temporary Load and lifecycle surfaces against
-  Close. An earlier token holder completes its existing result before backend
-  closure; a caller arriving after admission closes returns
-  `ErrManagerStopped`. Token acquisition does not define Task 331's later
-  semantic Create acceptance.
-- Prove internal Wallet teardown still completes after public admission closes
-  and never increments the caller-operation count.
-- Run focused Manager admission tests under the race detector, followed by
-  `make unit pkg=wallet`.
+  prove every admission completes exactly once with no waiter or goroutine
+  leak.
+- Pause an outer public call, begin stop, and prove its unexported helper does
+  not re-admit or convert the already accepted call into a shutdown failure.
+- Admit two public operations together and prove their operation bodies
+  overlap rather than serialize.
+- Hand Store work to each Wallet-owned asynchronous path and prove private
+  stop either retains the admission or joins the responsible worker before
+  returning.
+- Exercise repeated stop and a retained Wallet pointer after Manager Stop;
+  stop has one terminal result and every late maintained operation returns
+  `ErrWalletStopped` before Store access.
+- Fail multiple Wallet-owned workers and Vault lock together. Every cleanup
+  runs, each error identity is preserved in fixed order, and repeated stop
+  returns the same result.
+- Run focused Wallet lifecycle and admission tests under the race detector,
+  followed by `make unit pkg=wallet`.
 
 ## Definition of done
 
-- Every maintained managed-Wallet operation holds one Manager operation token
-  for the complete interval in which it can touch the Store.
-- Manager teardown closes admission, drains every acquired token, and rejects
-  later calls with the `ErrManagerStopped` sentinel owned here before backend
-  closure.
-- Internal teardown remains possible after public admission closes.
-- The PR adds no operation registry, lifecycle state machine, daemon change,
-  process-local lease, or cross-process behavior.
+- Every maintained Wallet operation that can use Store or publish Wallet work
+  is either admitted and drained by that Wallet or returns
+  `ErrWalletStopped` before Store access.
+- Admitted operation bodies remain concurrent, nested helpers do not re-admit,
+  and asynchronous Store work has one Wallet-owned join path.
+- Wallet has private one-shot start and terminal stop mechanics with owned
+  worker lifetime and no retained Manager lifecycle capability.
+- The PR adds no Manager state, Manager sentinel, Store-close owner, operation
+  registry, daemon change, process-local lease, or cross-process behavior.
 
-[t338]: 338-passphrase-result.md
-[t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md
+[t334]: 334-shared-chain-state.md
+[t368]: 368-wallet-startup-shutdown.md

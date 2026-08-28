@@ -23,14 +23,11 @@ placement.
 | [Task 387][t387] | Define account-creation identity | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | [#1341][pr1341] |
-| [Task 427][t427] | Test Controller credentials | Test | Gustavo | [#1349][pr1349] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 436][t436] | Test transaction reads | Test | Abdullahi | [#1346][pr1346] |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
-| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
-| [Task 458][t458] | Fence Wallet operations | Bug fix | YY | — |
 
 ## Blocked Phase 1 Tasks
 
@@ -70,9 +67,10 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 406][t406] | Release PSBT funding leases | Gap fix | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
-| [Task 368][t368] | Remove individual Wallet lifecycle | Bug fix | YY | [#1328][pr1328] |
+| [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
 | [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
 | [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | — |
+| [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | — |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | — |
 
 ## Claimed Tasks
@@ -95,20 +93,29 @@ authorize implementation before every dependency and gate completes.
 | [Task 416][t416] | Build database benchmark fixtures | Benchmark | 2 | YY | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
+| [Task 427][t427] | Test Controller credentials | Test | 2 | Gustavo | [#1349][pr1349] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
+| [Task 455][t455] | Report exact wallet sync status | Bug fix | 2 | Gustavo | — |
 | [Task 457][t457] | Fence process-local Managers | Gap fix | 3 | YY | — |
 
 ## Coordination
 
-Task 334 and PR #1323 must adopt the aggregate Manager lifecycle, active-Wallet
-set, and process-local ownership contract before merge.
+Task 334 and PR #1323 must adopt Manager public lifecycle authority, private
+Wallet `start`/`stop` mechanics, Wallet-owned call draining, the complete
+active-Wallet set, Store-close-last ordering, and separate live-sync and
+historical-rescan state before merge.
 
 Task 368 and draft PR #1328 are paused. The current PR implements the removed
-per-Wallet lifecycle coordinator and must be rewritten for Task 368's final
-individual-lifecycle removal after Tasks 331 and 358 complete. It remains
-unmergeable while those hard dependencies are open; no stacked implementation
-exception is approved.
+per-Wallet lifecycle coordinator and must be rewritten around private Wallet
+`start`/`stop`, Wallet-owned call draining, and Task 368's final public-surface
+cutover after Tasks 331 and 358 complete. It remains unmergeable while those
+hard dependencies are open; no stacked implementation exception is approved.
+
+Task 427 and PR #1349 are paused behind Task 331 because the durable-reopen
+case consumes final Manager Stop and fresh Manager Start behavior. No stacked
+implementation exception is approved; PR #1349 remains unmergeable until Task
+331 completes.
 
 Task 350 and PR #1321 are paused behind the new hard dependency on Task 454.
 No stacked implementation exception is approved: implementation must not

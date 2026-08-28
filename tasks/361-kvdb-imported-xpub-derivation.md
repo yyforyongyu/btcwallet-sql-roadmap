@@ -4,22 +4,23 @@ Component: **modern kvdb public derivation adapter**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 337](337-imported-xpub-derivation.md)**.
+Dependencies: **[Task 337](../archive/tasks/337-imported-xpub-derivation.md)**.
 
 ## Rationale
 
-[Task 337](337-imported-xpub-derivation.md) restores the wallet-owned selector
-and SQL numberless-account path, but the maintained modern kvdb adapter still
-needs to resolve imported-XPub accounts without presenting its internal
+[Task 337](../archive/tasks/337-imported-xpub-derivation.md) restores the
+wallet-owned selector and SQL numberless-account path, but the maintained
+modern kvdb adapter still needs to resolve imported-XPub accounts without
+presenting its internal
 account identity as a public number.
 
 ## Details
 
 - Reuse [Task 341](../archive/tasks/341-public-role-contract.md)'s wallet-owned
   scope-plus-exactly-one-name-or-number selector and
-  [Task 337](337-imported-xpub-derivation.md)'s final `Signer` derivation
-  request directly. Do not restore the removed numeric-path signature or add a
-  backend-specific public interface.
+  [Task 337](../archive/tasks/337-imported-xpub-derivation.md)'s final `Signer`
+  derivation request directly. Do not restore the removed numeric-path
+  signature or add a backend-specific public interface.
 - Map the selector to kvdb's stable scope-local adapter identity internally;
   never expose that identity or reinterpret it as a SQL row or BIP44 number.
 - Derive public children from the resolved imported XPub while the Wallet is
@@ -41,8 +42,9 @@ account identity as a public number.
 
 Add a narrow adapter resolution from the wallet-owned selector to the existing
 scope-local kvdb identity, then reuse
-[Task 337](337-imported-xpub-derivation.md)'s in-memory branch and child
-derivation. Keep all backend identity conversion behind the adapter boundary.
+[Task 337](../archive/tasks/337-imported-xpub-derivation.md)'s in-memory branch
+and child derivation. Keep all backend identity conversion behind the adapter
+boundary.
 
 ## Verification
 

@@ -9,7 +9,7 @@ Dependencies: **[Task 349][t349], [Task 370][t370], and [Task 371][t371]**.
 ## Rationale
 
 `Store.RollbackToBlock` is already database-wide and atomic, but any one
-Wallet Syncer can invoke it while other Wallet processors continue reading or
+Wallet worker can invoke it while other Wallet processors continue reading or
 writing the affected chain and transaction graph. The prepared Manager
 coordinator needs one complete disconnect path before [Task 423][t423] can
 safely make it the authoritative live notification owner.
@@ -55,9 +55,10 @@ safely make it the authoritative live notification owner.
   post-rollback frontier result and never fan out the raw disconnect as a
   second rollback trigger.
 - Keep manual `RewindWallet` and targeted rescans wallet-scoped. They never
-  delete shared blocks or invoke database-wide rollback.
+  delete shared blocks, invoke database-wide rollback, move the canonical
+  frontier, or change another Wallet's live readiness.
 - Leave the maintained source consumer and its existing reorg behavior
-  unchanged. Task 423 activates this completed rollback path together with
+  unchanged. Task 423 cuts over to this completed rollback path together with
   Task 370's forward path in one later cutover PR.
 - Exclude live source takeover, forward frontier implementation, durable rescan
   jobs, generic replay markers, multi-Manager leases, and cross-process
@@ -110,7 +111,7 @@ the coordinator to the live notification channel until Task 423.
   quiescence and redrives only from a fresh verified source snapshot; an
   unverifiable result is typed indeterminate and remains safely quiesced.
 - Maintained notification and reorg behavior remain unchanged until Task 423
-  atomically activates the complete forward and rollback paths.
+  atomically cuts over to the complete forward and rollback paths.
 - The PR adds no live source cutover, generic Store lock, replay framework,
   speculative detach rewrite, durable rescan job, or cross-process guarantee.
 

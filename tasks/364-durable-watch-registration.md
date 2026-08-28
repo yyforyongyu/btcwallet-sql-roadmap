@@ -22,15 +22,15 @@ wallet-scoped persistence contract before chain I/O.
 - Provide exact readers for generation snapshots, pending ordered replay,
   delivery lookup, and producer-side ambiguous-result reconciliation.
 - Make delivery completion idempotent and wallet-scoped on both SQL dialects.
-- Keep chain calls, Syncer replay, address allocation, raw import mutation, and
-  public pending results out of this task.
+- Keep chain calls, Wallet delivery replay, address allocation, raw import
+  mutation, and public pending results out of this task.
 - Add no modern-kvdb durable format.
 
 ## Suggested fix
 
 Land one two-dialect migration and small Store API for
 watch generations, obligations, and completion, with all chain I/O delegated
-to later Wallet/Syncer code.
+to the later Wallet delivery component.
 
 ## Verification
 

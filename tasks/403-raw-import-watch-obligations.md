@@ -35,9 +35,11 @@ re-read, then delete Wallet-side chain notification on the SQL branch.
 
 ## Verification
 
-SQLite and PostgreSQL cover commit-before-chain ordering,
-ambiguous exact/absent/conflicting outcomes, chain failure, restart replay,
-duplicate import, and no historical scan. kvdb on-disk behavior is unchanged.
+SQLite and PostgreSQL cover commit-before-chain ordering, ambiguous
+exact/absent/conflicting outcomes, chain failure, fresh-Manager replay, and
+duplicate import. Each accepted public-key and Taproot raw import persists one
+obligation that Task 402 registers only at the live tip, without starting a
+historical scan. kvdb on-disk behavior is unchanged.
 
 ## Definition of done
 

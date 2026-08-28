@@ -32,17 +32,22 @@ owns the shared chain source, network, Store, and lifecycle.
 - Reduce maintained Manager Create input to durable Wallet identity and
   initialization material. A created Wallet cannot select another chain source,
   network, backend, or runtime policy.
+- Construct each Wallet with immutable wallet-local policy and a wallet-scoped
+  Store adapter. Pass no Manager context, admission state, lifecycle callback,
+  per-Wallet SQL chain source, or Store-close authority into Wallet.
 - Preserve `wallet.Config` only for deprecated non-Manager constructors that
   remain outside the maintained SQL design. Do not add an adapter between the
   old and final Manager APIs solely for compatibility.
-- Keep source-instance ownership out of this task. Before Task 423, existing
-  internal Wallet setup may consume the Manager-owned factory through its
-  maintained adapter; Task 423 becomes the sole caller that constructs the one
-  final SQL Manager source. Do not expose that transition in public config.
+- Keep source-instance ownership out of this task. Before Task 423, a narrow
+  internal adapter may feed the existing source path from the Manager-owned
+  factory; it cannot become public API or contradict the final one-source
+  design. Task 423 becomes the sole caller that constructs the final SQL
+  Manager source.
 - Update maintained Wallet construction, callers, mocks, and tests for the
   final ownership shape without starting workers or changing lifecycle.
-- Exclude durable Wallet enumeration, Manager Start/Stop, Create activation,
-  config persistence, runtime manifests, CLI, RPC, lnd, and daemon changes.
+- Exclude durable Wallet enumeration, Manager Start/Stop, private Wallet
+  start, worker ownership, config persistence, runtime manifests, CLI, RPC,
+  lnd, and daemon changes.
 
 ## Suggested fix
 
@@ -78,7 +83,8 @@ on their existing isolated configuration path.
 - Maintained Create input contains only durable Wallet identity and
   initialization material.
 - Managed Wallets cannot override Manager-owned chain, network, backend, or
-  runtime policy.
+  runtime policy and receive no Manager lifecycle capability or Store-close
+  authority.
 - The PR changes no lifecycle, persistence, runtime manifest, CLI, RPC, lnd,
   or external-daemon behavior.
 

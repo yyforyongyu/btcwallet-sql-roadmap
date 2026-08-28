@@ -4,7 +4,7 @@ Component: **Manager chain coordinator and Wallet processors**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 333][t333], [Task 334][t334], [Task 368][t368], and
+Dependencies: **[Task 333][t333], [Task 334][t334], [Task 331][t331], and
 [Task 371][t371]**.
 
 ## Rationale
@@ -45,17 +45,20 @@ unsafe between implementation PRs.
   event can be offered safely to multiple Wallet processors without the
   coordinator inventing wallet-specific transaction policy.
 - Provide the stop-and-join contract that [Task 423][t423] can compose with
-  Task 331's Manager Stop owner. Do not wire it into maintained Manager
-  admission or Store closure yet.
+  Task 331's Manager Stop owner. Closing coordinator admission must reject new
+  delivery, settle every accepted event, and join every processor before Store
+  closure. Do not wire it into the live source or Store closure yet.
 - Handle aggregate startup registration, Create-time registration,
   backpressure, and processor failure according to the accepted ADR. Do not
   remove one Wallet while its Manager remains Running. One failed processor
-  cannot silently drop an accepted event or deadlock aggregate shutdown.
+  cannot silently drop an accepted event or deadlock aggregate shutdown; a
+  fatal processor failure terminally stops Manager unless safe isolation is
+  proven without violating the complete active set.
 - Use Task 333's PostgreSQL Manager harness only for backend-neutral
   conformance. Add no PostgreSQL-specific coordinator behavior.
 - Leave maintained Manager and Wallet source selection, notification
   registration, and `Notifications()` consumption unchanged until Task 423
-  atomically activates the coordinator after Task 372 is complete.
+  atomically cuts over to the coordinator after Task 372 is complete.
 - Exclude live source takeover, disconnected-event admission, rollback,
   canonical frontier schema, durable watch replay, durable rescan jobs,
   generic event buses, and cross-Manager fencing.
@@ -109,6 +112,6 @@ existing path until Task 423.
 
 [t333]: ../archive/tasks/333-postgres-manager-harness.md
 [t334]: 334-shared-chain-state.md
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t371]: 371-canonical-chain-frontier.md
 [t423]: 423-manager-chain-source-cutover.md
