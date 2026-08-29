@@ -1,70 +1,124 @@
-# Task 391 — create exact path-bound watch-only XPub accounts
+# Task 391 — create exact path-bound XPub accounts
 
-Component: **AccountManager path-bound identity and SQL AccountStore schema**.
+Component: **AccountManager and SQL account, address, and UTXO identity
+shape**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 332][t332], [Task 337][t337], [Task 387][t387],
-[Task 388][t388], [Task 389][t389], and [Task 390][t390]**.
+Dependencies: **[Task 332][t332], [Task 337][t337], [Task 378][t378],
+[Task 387][t387], [Task 388][t388], [Task 389][t389], [Task 390][t390], and
+[Task 392][t392]**.
 
 ## Rationale
 
-A watch-only shell needs exact depth-three account XPub
-installation without pretending the account was derived from a wallet root or
-collapsing it into arbitrary numberless `ImportAccount` identity.
+A uniformly watch-only wallet needs exact depth-three account XPub
+installation without pretending the XPub came from its wallet root or
+collapsing a known account number into arbitrary numberless import identity.
 
 ## Details
 
-- Add the final optional account XPub and caller-declared key-origin fields to
-  `NewAccountParams`, preserving the optional wallet-owned master fingerprint.
+- Activate Task 392's dormant optional account XPub and optional
+  caller-supplied master fingerprint in `NewAccountParams`, preserving absent
+  versus present-zero fingerprint exactly without redefining the request.
 - Accept this shape only for uniformly watch-only SQL wallets and only with an
-  explicit exact account number. Spendable wallets and private supplied account
-  keys remain unsupported in this task.
-- Require a public key, matching network version, depth three, and a hardened
-  child number matching the exact account. Validate that the declared
-  purpose/coin/account path matches the requested scope and account, but do not
-  claim the XPub or optional master fingerprint cryptographically proves its
-  hardened ancestors.
-- Persist the ADR's explicitly caller-declared path provenance without marking
-  the account root-derived or authenticated by the wallet. Preserve absent
-  versus present-zero fingerprint exactly.
-- Reuse custom-scope validation, immutable discovery mode, wallet-wide XPub
-  collision admission, cursor handling, and account-specific reconciliation.
-- Extend the Task 389/390 result reader with the supplied XPub, declared path,
-  fingerprint, and path-bound provenance facts introduced here; Task 389 does
-  not preimplement or verify them.
+  explicit exact account number. Spendable wallets and private supplied
+  account keys remain unsupported.
+- Require a public key with the correct network version, depth three, and a
+  hardened child number matching the exact account. Treat the requested
+  purpose and coin as caller-declared scope metadata because neither the XPub
+  nor optional fingerprint can prove those hardened ancestors.
+- Persist the account with `is_derived=false`, its real account number, public
+  key, optional fingerprint, scope, schema, and requested `NoChainSync`.
+  Introduce no new provenance enum or column.
+- Own the two-dialect migration that relaxes the existing account-shape check
+  to admit a non-root-derived account with a non-null real account number.
+  Preserve the root-derived numbered and arbitrary imported-XPub numberless
+  shapes and the existing scope/account-number uniqueness rule.
+- Update every maintained AccountStore, AddressStore, and UTXOStore SQL query,
+  row-shape check, and public conversion that currently treats
+  `is_derived=false` as equivalent to a null account number. Keep address
+  derivation-path presence separate from account root provenance, and retain
+  the real account number through address and UTXO results.
+- Keep SQL source and generated output in their repository-required separate
+  commits. Do not edit generated files manually or add a table, column, or
+  second persisted discriminator.
+- Reuse custom-scope validation, wallet-wide XPub collision admission, cursor
+  handling, and account-specific reconciliation. Extend the result reader only
+  with the supplied facts introduced here.
 - Preserve ordinary `ImportAccount` as the arbitrary numberless imported-XPub
   operation. Do not reinterpret its rows or fabricate account zero.
-- Return unsupported before mutation on modern kvdb.
+- Reuse the existing Signer and AddressManager behavior. Do not add a
+  key-family manager, derivation service, lookup service, signer adapter, or
+  purpose-1017 storage.
+- Return Task 378's canonical `ErrAccountOperationUnsupported` before mutation
+  for modern kvdb or a valid supplied-XPub shape that wallet custody cannot
+  support. Preserve Task 392's occupied-name precedence before this backend or
+  custody check. Map invalid request combinations to `ErrInvalidParam` and
+  invalid account keys to the existing `ErrInvalidAccountKey`; add no task-
+  specific sentinel.
+- Keep implementation local to existing AccountManager, account/address/UTXO
+  Store queries and conversions, the required two-dialect migration, generated
+  outputs, and colocated tests. Add no parallel interface, arbitrary helper,
+  unrelated production file, or standalone test file; justify any unavoidable
+  new file against the repository's current layout in the implementation PR.
+- Cross-link [Task 464][t464] as the imported-`wallet` account-query owner and
+  [Task 463][t463] as the public UTXO-attribution owner for this newly
+  representable account shape. Keep focused colocated coverage for path-bound
+  allocation and address-result conversion in this production task when
+  `NoChainSync=false`: `NewAddress` and `GetAddressInfo` retain the real
+  derivation, list lookup retains membership and balance, and reopen preserves
+  the same result. Task 395 owns the later `NoChainSync=true` allocation branch.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
-Extend the account schema with the smallest immutable
-provenance/number shape accepted by the ADR, validate the supplied depth-three
-XPub and caller-declared origin shape before Store access, then reuse the custom
-account CAS without a Vault secret lookup.
+Migrate the existing account-shape constraint and conversions once, validate
+the supplied depth-three XPub and path facts at the existing account creation
+boundary, then reuse the custom account CAS without a Vault secret lookup or
+new persisted identity type.
 
 ## Verification
 
-Canonical and purpose-1017 watch-only XPub fixtures reopen
-with exact path/provenance and optional fingerprint on both dialects. Wrong
-network/depth/account child or internally inconsistent declared path,
-spendable wallet, collision, and numberless misuse fail before mutation.
-Tests state explicitly that purpose/coin ancestry is not cryptographically
-proven from the account XPub. Ambiguous results compare every new provenance
-fact. Ordinary numberless imports remain unchanged.
+Canonical and purpose-1017 watch-only XPub fixtures with both `NoChainSync`
+values reopen with exact account identity on SQLite and PostgreSQL. Wrong
+network, depth, account child, wallet custody, collision, and numberless misuse
+fail before mutation, while purpose and coin remain caller-declared metadata.
+Ambiguous results compare every supplied fact, and ordinary numberless imports
+remain unchanged. Migration fixtures preserve all existing account shapes,
+while AccountStore lookup, derived-address point and list conversion, and UTXO
+ownership results accept the new shape and retain its real account number on
+both dialects; the previous mismatched shapes still fail as corruption. Public
+rejection tests prove unsupported custody and kvdb cases match
+`ErrAccountOperationUnsupported`, invalid request combinations match
+`ErrInvalidParam`, and malformed keys match `ErrInvalidAccountKey` with
+`errors.Is`. Focused colocated tests prove `NewAddress` and `GetAddressInfo`
+retain the real derivation through reopen and `ListAddresses` retains only
+membership and balance on both SQL dialects for `NoChainSync=false`, without
+adding a public field. Account identity and reopen fixtures still cover both
+`NoChainSync` values. Task 463 separately proves public `ListUnspent` and
+`GetUtxo` attribution, while Task 395 owns true-value allocation behavior.
 
 ## Definition of done
 
-SQL watch-only wallets can install a truthful exact
-path-bound XPub account through the generic account API, while arbitrary
-imports remain numberless and no spendable or kvdb path is invented. Ambiguous
-results compare the supplied XPub, declared origin, fingerprint, and provenance
-introduced by this task.
+Uniformly watch-only SQL wallets can install a truthful exact path-bound XPub
+account through the generic account API, with chain synchronization selected
+independently. The complete maintained SQL read surface accepts its
+non-root-derived numbered identity without a new provenance field, component,
+table, column, or kvdb path.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
+[t378]: 378-account-manager-error-boundary.md
 [t387]: 387-account-creation-identity-adr.md
 [t388]: 388-runtime-account-xpub-collisions.md
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t390]: 390-custom-scope-account-creation.md
+[t392]: 392-discovery-mode-account-creation.md
+[t463]: 463-path-bound-utxo-identity-itests.md
+[t464]: 464-no-chain-sync-account-query-itests.md

@@ -4,7 +4,7 @@ Component: **ADR 0004 targeted-recovery contract**.
 
 Type: **Design**.
 
-Dependencies: **[Task 341][t341] and [Task 400][t400]**.
+Dependencies: **[Task 341][t341], [Task 387][t387], and [Task 400][t400]**.
 
 ## Rationale
 
@@ -17,7 +17,7 @@ address/script import targets rather than explicit semantic accounts.
 - Amend ADR 0004 to make an explicit targeted recovery request select semantic
   accounts by scope plus exactly one name or optional BIP44 number.
 - Reject SQL row IDs and kvdb adapter IDs as public identity.
-- Define target deduplication, not-found behavior, key-only exclusion, and
+- Define target deduplication, not-found behavior, `NoChainSync` exclusion, and
   accountless raw-import exclusion.
 - State that accountless raw imports are recovered only by an explicit full
   wallet scan.
@@ -26,8 +26,8 @@ address/script import targets rather than explicit semantic accounts.
 
 ## Suggested fix
 
-Add one semantic-target section and examples for numbered,
-numberless imported-XPub, key-only, renamed, and accountless identities.
+Add one semantic-target section and examples for numbered, numberless
+imported-XPub, `NoChainSync`, renamed, and accountless identities.
 
 ## Verification
 
@@ -41,4 +41,5 @@ Accepted ADR 0004 text fixes one backend-neutral
 semantic-account recovery target and no implementation or live-watch behavior.
 
 [t341]: ../archive/tasks/341-public-role-contract.md
+[t387]: 387-account-creation-identity-adr.md
 [t400]: ../archive/tasks/400-live-watch-semantics-adr.md

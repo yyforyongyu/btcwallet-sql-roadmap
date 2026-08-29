@@ -34,11 +34,29 @@ write. This gives Wallet and Store transaction code secret ownership that ADR
   Migrate the sequential and exact callers from [Task 343][t343] and the
   validated custom-scope caller from [Task 390][t390] without adding a second
   preparation workflow.
-- Exclude account-number allocation, exact-account policy, invalid-child and
-  CAS sequencing from Task 343, custom-scope schema admission from Task 390,
+- On maintained modern kvdb, route only its existing sequential root-derived
+  subset through LegacyWalletVault. Preserve Task 378's canonical
+  `ErrAccountOperationUnsupported` for Task 343 exact requests and Task 390
+  custom scopes after Task 392's required read-only occupied-name lookup but
+  before Vault preparation or Store mutation.
+- Exclude account-number allocation and exact-account CAS policy from Task 343,
+  sequential invalid-child allocation from [Task 460][t460], custom-scope
+  schema admission from Task 390,
   supplied XPub/path-bound creation from [Task 391][t391], initial SQL genesis
   from Tasks 329 and 367, creation validation from Task 365, and ambiguous
   genesis reconciliation from Task 366.
+- Keep implementation local to existing AccountManager, WalletVault,
+  LegacyWalletVault, source files, and colocated tests. Add no parallel
+  interface, arbitrary helper, unrelated production file, or standalone test
+  file; justify any unavoidable new file against the repository's current
+  layout in the implementation PR.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
@@ -50,8 +68,10 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 ## Verification
 
 - Public AccountManager itests create sequential, exact, and custom-scope
-  accounts on every supported maintained backend with unchanged exported
-  results.
+  accounts on SQLite and PostgreSQL with unchanged exported results. Modern
+  kvdb covers sequential creation only and proves exact and custom-scope
+  requests match `ErrAccountOperationUnsupported` after the permitted read-only
+  occupied-name lookup and before Vault preparation or Store mutation.
 - Spies prove AccountManager never calls Store secret reads or raw `Decrypt`
   and no Vault call executes while a Store write is open.
 - Concurrency tests cover Lock and combined passphrase rotation against account
@@ -62,8 +82,9 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 ## Definition of done
 
 - Root-derived account creation obtains prepared secret material only through
-  one wallet-scoped Vault operation; the existing sequential, exact, and
-  custom-scope callers all use it without changing their public behavior.
+  one wallet-scoped Vault operation. SQL sequential, exact, and custom-scope
+  callers use it, while maintained modern kvdb uses it only for its supported
+  sequential subset without changing public behavior.
 - Store writes receive ciphertext and public facts only and contain no secret
   work.
 - No exact/custom, genesis, validation, reconciliation, or PSBT behavior is
@@ -74,3 +95,4 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 [t343]: 343-exact-account-creation.md
 [t390]: 390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t460]: 460-sequential-account-invalid-children.md

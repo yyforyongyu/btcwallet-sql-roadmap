@@ -34,7 +34,7 @@ payloads can describe overlapping child scripts under different metadata.
 - Consume [Task 332][t332]'s accepted root and shell mode matrix. Do not reopen
   watch-only or script-import policy here.
 - Exclude atomic persistence, ambiguous-commit handling, secret lifetime,
-  discovery-mode policy, numbered/custom account creation, modern-kvdb parity,
+  `NoChainSync` policy, numbered/custom account creation, modern-kvdb parity,
   and public cancellation.
 
 ## Suggested fix

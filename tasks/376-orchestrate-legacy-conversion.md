@@ -31,7 +31,7 @@ chosen cutover.
   turn an exact or indeterminate destination into an unclassified result.
 - On an ambiguous import response, close and reopen the SQLite destination and
   compare the exact attempted wallet, ciphertext/public identity, sync state,
-  scopes, accounts, discovery modes, cursors, addresses, graph, statuses,
+  scopes, accounts, `NoChainSync` values, cursors, addresses, graph, statuses,
   leases, and blocks. Classify only exact committed, absent, or conflicting
   state. Never retry the import.
 - After any exact commit, reopen through the maintained SQLite Manager path and

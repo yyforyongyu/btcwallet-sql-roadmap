@@ -4,7 +4,7 @@ Component: **AccountManager query integration tests**.
 
 Type: **Test**.
 
-Dependencies: **None**.
+Dependencies: **[Task 378][t378]**.
 
 ## Rationale
 
@@ -23,8 +23,10 @@ contracts together across kvdb, SQLite, and PostgreSQL.
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
 - Cover empty filters, exact and absent filters, multiple scopes and names,
-  unknown identities, stable ordering where the public
-  contract promises it, and agreement between list and point results.
+  unknown identities, stable ordering where the public contract promises it,
+  and agreement between list and point results. An absent `GetAccount` matches
+  `ErrAccountNotFound` through `errors.Is`, while list misses return an empty
+  result and nil error without exposing a Store or legacy-manager sentinel.
 - Compare every exported field of the wallet-owned `AccountInfo` from
   [Task 377][t377]. Cover the absent, present-zero, and present-nonzero optional
   identities from [Task 341][t341], plus counts, balances, schema, public key,
@@ -33,6 +35,14 @@ contracts together across kvdb, SQLite, and PostgreSQL.
 - Reopen the same wallet and prove the complete public query view is unchanged.
 - Exclude account mutation implementation, configurable identity semantics,
   addresses, direct Store access, RPC, and unrelated production changes.
+- Keep implementation local to the existing AccountManager integration-test
+  file and its repository-conventional helpers. Add no arbitrary helper,
+  production file, or standalone test file; justify any unavoidable new file
+  against the repository's current layout in the implementation PR.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement. Give
+  every test detailed Arrange, Act, and Assert comments explaining its setup,
+  operation, and evidence.
 
 ## Suggested fix
 
@@ -63,3 +73,4 @@ adding a `package wallet_test` file.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t377]: ../archive/tasks/377-account-manager-wallet-dto.md
+[t378]: 378-account-manager-error-boundary.md

@@ -22,11 +22,11 @@ independent of derivation budgeting and zero-lookahead Store queries.
   starting a scan.
 - Resolve names and optional numbers to internal durable account identities
   once, preserving rename-safe horizon updates without exposing those IDs.
-- Preserve Task 452's pre-derivation rejection of explicit key-only targets
-  and its `wallet.ErrKeyOnlyRecoveryTarget` identity when replacing the numeric
-  selector, and reject accountless raw-import aliases.
-- Preserve Task 452's default full positive-lookahead discovery-mode filter.
-  Semantic target admission must not make key-only accounts implicit or
+- Preserve Task 452's pre-derivation rejection of explicit `NoChainSync`
+  targets and its `wallet.ErrNoChainSyncRecoveryTarget` identity when replacing
+  the numeric selector, and reject accountless raw-import aliases.
+- Preserve Task 452's default full positive-lookahead `NoChainSync` filter.
+  Semantic target admission must not make excluded accounts implicit or
   explicit recovery targets again.
 - Resolve semantic targets into Task 399's completed internal account-identity
   input, then use its exact persisted address/outpoint set for both zero and
@@ -50,10 +50,10 @@ exposing the public selector.
 ## Verification
 
 SQL numbered and numberless-name targets, kvdb ordinary
-numeric targets, rename, collision, neither/both, duplicate, key-only, and
+numeric targets, rename, collision, neither/both, duplicate, `NoChainSync`, and
 accountless cases prove exact admission without backend IDs. Regression
 coverage proves semantic admission preserves both Task 452 recovery guards and
-its `errors.Is(err, wallet.ErrKeyOnlyRecoveryTarget)` result.
+its `errors.Is(err, wallet.ErrNoChainSyncRecoveryTarget)` result.
 
 ## Definition of done
 

@@ -7,6 +7,10 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 394](tasks/394-key-only-transaction-ownership.md) was superseded before
+  implementation on 2026-08-30 when `NoChainSync` was defined as chain-sync
+  policy rather than an ownership rule, eliminating the old outcome; Task 395
+  owns only the separate managed-child allocation.
 - [Task 436](tasks/436-transaction-read-itests.md) completed on 2026-08-30.
 - [Task 422](tasks/422-manager-load-cancellation.md) was superseded before
   implementation on 2026-08-28 when the roadmap adopted Task 368's planned

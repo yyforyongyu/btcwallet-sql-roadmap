@@ -1,4 +1,4 @@
-# Task 452 — exclude key-only accounts from recovery derivation
+# Task 452 — exclude NoChainSync accounts from recovery
 
 Component: **Syncer positive-lookahead account admission and enumeration**.
 
@@ -8,63 +8,61 @@ Dependencies: **[Task 345][t345]**.
 
 ## Rationale
 
-Configurable account creation can persist `key-only` accounts before semantic
-recovery targeting lands. Ordinary full recovery can enumerate those accounts,
-and the maintained numeric selector can target one explicitly. Either positive-
-lookahead path can derive address horizons and add scripts to chain watches,
-contradicting the account's immutable discovery mode and lnd's key-family
-contract.
+Ordinary full recovery enumerates accounts, and targeted recovery can select
+one explicitly. Either positive-lookahead path would derive horizons and add
+scripts for a `NoChainSync` account unless recovery admission applies its
+persisted policy.
 
 ## Details
 
-- For an ordinary full positive-lookahead SQL recovery with no explicit
-  targets, enumerate derivation horizons only for persisted `watch-chain`
-  accounts.
+- For a full positive-lookahead SQL recovery with no explicit targets,
+  enumerate derivation horizons only for accounts with
+  `NoChainSync=false`.
 - For an explicit positive-lookahead SQL target admitted by the maintained
-  numeric selector, resolve its persisted discovery mode and reject a
-  `key-only` account before horizon derivation or watch construction.
-- Return the wallet-owned `wallet.ErrKeyOnlyRecoveryTarget` sentinel for that
-  rejection. Preserve optional operation and target context by wrapping it
-  with `%w`; do not expose or wrap an internal Store error as part of the
-  public `errors.Is` contract. SQLite and PostgreSQL must return this same
-  identity.
-- Apply both guards before derivation, horizon mutation, or watch construction
-  so a `key-only` account is never an implicit or explicit recovery target.
-- Preserve recovery-window limits and existing watch-chain derivation counts.
-  Task 398 solely owns the final public recovery selector; this task adds no
-  alternate selector or legacy adapter and does not change derivation
-  budgets.
-- Keep zero-lookahead persisted-target isolation in Task 399 and semantic
-  target selection in Task 398. Task 398 must preserve this admission guard
-  when replacing the selector. Do not add another persisted-target loader.
-- Keep modern kvdb behavior unchanged. Its format cannot represent the SQL
-  discovery-mode distinction, so this contract is structurally SQL-specific.
+  numeric selector, resolve `NoChainSync` and reject true before horizon
+  derivation or watch construction.
+- Return one wallet-owned `ErrNoChainSyncRecoveryTarget` sentinel. Preserve
+  optional context by wrapping it with `%w`; do not expose a Store error as
+  part of the public `errors.Is` contract.
+- Apply both guards before derivation, horizon mutation, or watch construction.
+  Preserve recovery-window limits and ordinary-account derivation counts.
+- Task 398 owns the final public recovery selector, and Task 399 owns
+  zero-lookahead persisted-target isolation. Add no alternate selector or
+  duplicate persisted-target loader.
+- Keep modern kvdb unchanged because its format cannot represent this
+  SQL-specific account property.
+- Keep implementation local to existing Syncer admission/enumeration source
+  and colocated tests. Add no parallel interface, arbitrary helper,
+  production file, or standalone test file; justify any unavoidable new file
+  against the repository's current layout in the implementation PR.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
-Use Task 345's persisted mode at SQL recovery admission: filter untargeted
-full-recovery enumeration to `watch-chain` accounts and reject an explicitly
-targeted `key-only` account. Keep account-scoped persisted-target work in its
-own task and add no public request surface here.
+Use the persisted account boolean at existing SQL recovery admission: filter
+untargeted enumeration and reject an explicitly targeted account before any
+derivation or watch construction.
 
 ## Verification
 
-SQLite and PostgreSQL fixtures with mixed `watch-chain` and `key-only`
-accounts prove that a full positive-lookahead recovery derives and watches
-only watch-chain horizons. Existing numeric-selector cases prove a watch-chain
-target remains accepted and a key-only target is rejected before derivation,
-horizon mutation, or watch construction. Identical assertions for SQLite and
-PostgreSQL require
-`errors.Is(err, wallet.ErrKeyOnlyRecoveryTarget)` and prove no backend-specific
-Store error becomes publicly matchable. Spies prove no key-only child work
-occurs. Modern-kvdb fixtures preserve their existing behavior.
+SQLite and PostgreSQL fixtures with mixed boolean values prove full recovery
+derives only ordinary-account horizons. Existing selector cases prove an
+ordinary target remains accepted and a `NoChainSync` target returns
+`errors.Is(err, wallet.ErrNoChainSyncRecoveryTarget)` before derivation,
+horizon mutation, or watch construction. Modern-kvdb fixtures remain
+unchanged.
 
 ## Definition of done
 
-Full and explicitly targeted positive-lookahead SQL recovery never derive or
-watch a `key-only` account. SQLite and PostgreSQL return the same wallet-owned,
-`errors.Is`-matchable `wallet.ErrKeyOnlyRecoveryTarget` identity without
-exposing internal errors, and the change introduces no public target contract,
-zero-lookahead behavior, or duplicate persisted-target loader.
+Full and explicitly targeted positive-lookahead SQL recovery never derives or
+watches a `NoChainSync` account, both dialects expose the same wallet-owned
+error identity, and no public selector, zero-lookahead loader, or new
+component is introduced.
 
 [t345]: 345-durable-watch-registration.md

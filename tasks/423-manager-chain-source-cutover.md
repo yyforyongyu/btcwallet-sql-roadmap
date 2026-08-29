@@ -29,10 +29,11 @@ one Wallet outside database-wide rollback.
   457 acquires database ownership and before Task 331 publishes Running.
   Register every Wallet returned by startup assembly as one complete active
   set; there is no Load, dormant Wallet, or individual Start path.
-- Drive [Task 402][t402]'s owner-neutral delivery/replay component through the
-  same coordinator. Register the startup Wallet set before Running, attach a
-  new Wallet before Create publication, and close admission and settle accepted
-  replay during Stop. Do not add a second replay component or Store state.
+- Drive [Task 402][t402]'s internal delivery and replay behavior at the
+  existing Wallet synchronization boundary through the same coordinator.
+  Register the startup Wallet set before Running, attach a new Wallet before
+  Create publication, and close admission and settle accepted replay during
+  Stop. Do not add another replay implementation or Store state.
 - Aggregate the earliest durable history requirement across every Wallet and
   supply that optimization hint before source startup. Never substitute the
   canonical frontier for Wallet history requirements.
@@ -92,8 +93,9 @@ for Create-time processor registration and aggregate Stop.
   targeted history, and Wallet delivery. Every accepted operation joins before
   Vault lock and Store closure.
 - Pre-seed pending Task 402 obligations at startup, Create registration, and
-  Stop. The same Wallet component replays or settles each obligation without a
-  gap, duplicate driver, or accepted delivery surviving shutdown.
+  Stop. The existing Wallet synchronization boundary replays or settles each
+  obligation without a gap, duplicate driver, or accepted delivery surviving
+  shutdown.
 - Prove only the Manager consumes the SQL notification stream, targeted rescans
   cannot move the frontier, and the modern-kvdb source path remains isolated.
 

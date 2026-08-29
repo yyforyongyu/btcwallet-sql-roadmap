@@ -26,8 +26,9 @@ reviewable real-wallet contract slice.
 - Fund deterministic allocated addresses when needed to distinguish used from
   unused state, then reopen and prove addresses, metadata, and next allocation
   remain durable.
-- Keep unsettled watch-only, key-only, batch-allocation, and live-watch behavior
-  in their owning production tasks; do not encode those future contracts here.
+- Keep unsettled watch-only, explicit `NoChainSync` allocation,
+  batch-allocation, and live-watch behavior in their owning production tasks;
+  do not encode those future contracts here.
 - Exclude import/script APIs, direct Store inspection, RPC, deprecated helpers,
   and unrelated production changes.
 

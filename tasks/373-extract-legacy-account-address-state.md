@@ -4,7 +4,7 @@ Component: **Legacy migration account and secret extraction**.
 
 Type: **Migration**.
 
-Dependencies: **[Task 332][t332] and [Task 335][t335]**.
+Dependencies: **[Task 332][t332], [Task 335][t335], and [Task 387][t387]**.
 
 ## Rationale
 
@@ -29,8 +29,8 @@ rows directly would not produce SQL's single-passphrase Vault format.
   next numbered account cursor from legacy allocation state and the greatest
   ordinary account with checked arithmetic; synthetic and numberless accounts
   cannot advance it.
-- Normalize every legacy account and raw import to immutable `watch-chain`.
-  Legacy kvdb has no key-only mode, so do not infer one.
+- Normalize every legacy account to immutable `NoChainSync=false`. Legacy kvdb
+  has no no-chain-sync state, so do not infer it for an account or raw import.
 - Consume Task 332's accepted custody policy. Refuse mixed spendable/watch-only
   material, root-neutered or other unrepresentable custody, conflicting
   per-account schema overrides, and any shape that would require splitting a
@@ -80,8 +80,8 @@ unrepresentable identity or custody before constructing a destination Store.
 - Imported-XPub fixtures become numberless accounts and raw imported scripts
   become accountless addresses; neither synthetic identity moves a numbered
   cursor.
-- Every migrated account and raw import is `watch-chain`, with no inferred
-  key-only state.
+- Every migrated account has `NoChainSync=false`, with no inferred
+  no-chain-sync state for accounts or raw imports.
 - Per-record public-key and script-key ciphertext fixtures decrypt and
   re-encrypt correctly. Using one key class for the whole wallet fails the
   focused vector.
@@ -111,3 +111,4 @@ unrepresentable identity or custody before constructing a destination Store.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md
+[t387]: 387-account-creation-identity-adr.md

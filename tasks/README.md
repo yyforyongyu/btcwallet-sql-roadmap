@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **460**.
+The next free task number is **468**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -46,8 +46,8 @@ Grouping here does not create dependency or scheduling authority.
   accounts.
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
   atomically.
-- [Task 345](345-durable-watch-registration.md): persist SQL account discovery
-  mode.
+- [Task 345](345-durable-watch-registration.md): persist SQL account
+  `NoChainSync` state.
 - [Task 361](361-kvdb-imported-xpub-derivation.md): support kvdb imported-XPub
   derivation.
 - [Task 363](363-recovery-scan-work-bound.md): bound aggregate recovery
@@ -59,8 +59,8 @@ Grouping here does not create dependency or scheduling authority.
   backend errors.
   errors.
 - [Task 381](381-recovery-adapter-identity.md): hide recovery adapter identity.
-- [Task 387](387-account-creation-identity-adr.md): define custom and path-bound
-  account identity.
+- [Task 387](387-account-creation-identity-adr.md): define account identity and
+  chain-sync policy.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): reconcile ambiguous
@@ -68,15 +68,13 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 390](390-custom-scope-account-creation.md): create root-derived accounts
   in custom scopes.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
-  watch-only XPub accounts.
-- [Task 392](392-discovery-mode-account-creation.md): consume discovery mode in
-  existing account creation.
-- [Task 393](393-key-only-receiving-rejection.md): reject receiving allocation
-  for key-only accounts.
-- [Task 394](394-key-only-transaction-ownership.md): exclude key-only locators
-  from wallet ownership.
-- [Task 395](395-key-only-locator-allocation.md): allocate one durable key-only
-  locator.
+  XPub accounts.
+- [Task 392](392-discovery-mode-account-creation.md): carry `NoChainSync`
+  through account creation.
+- [Task 393](393-key-only-receiving-rejection.md): guard receiving APIs for
+  `NoChainSync` accounts.
+- [Task 395](395-key-only-locator-allocation.md): allocate one durable
+  `NoChainSync` child.
 - [Task 396](396-oldest-unused-address.md): make NewAddress return the oldest
   unused address.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
@@ -92,8 +90,12 @@ Grouping here does not create dependency or scheduling authority.
   obligations.
 - [Task 403](403-raw-import-watch-obligations.md): persist raw imports with
   live-watch obligations.
-- [Task 452](452-key-only-recovery-derivation.md): exclude key-only accounts
-  from recovery derivation.
+- [Task 452](452-key-only-recovery-derivation.md): exclude `NoChainSync`
+  accounts from recovery.
+- [Task 460](460-sequential-account-invalid-children.md): make sequential
+  account allocation invalid-child safe.
+- [Task 467](467-indeterminate-commit-identity.md): define the indeterminate
+  commit identity.
 
 ## Chain and synchronization
 
@@ -184,6 +186,18 @@ that structural exclusion explicitly.
   contracts.
 - [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.
+- [Task 461](461-address-batch-itests.md): cover public address batch
+  contracts.
+- [Task 462](462-account-mutation-error-itests.md): cover public account
+  mutation errors.
+- [Task 463](463-path-bound-utxo-identity-itests.md): verify path-bound UTXO
+  account identity.
+- [Task 464](464-no-chain-sync-account-query-itests.md): verify `NoChainSync`
+  account queries.
+- [Task 465](465-new-address-result-itests.md): verify `NoChainSync` address
+  results.
+- [Task 466](466-oldest-unused-address-itests.md): verify final oldest-unused
+  allocation.
 
 ## Integration-test scenarios
 

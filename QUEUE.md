@@ -1,7 +1,7 @@
 # Task delivery phases
 
-The roadmap contains **131 tasks**, with **109 remaining open**, **20 done**,
-and **1 superseded**. Open tasks are grouped by delivery phase; completed
+The roadmap contains **139 tasks**, with **116 remaining open**, **21 done**,
+and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
 
@@ -37,7 +37,7 @@ moves a required task into the readiness gate.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 41 open
+## Phase 1 — lnd integration · 42 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -50,9 +50,9 @@ separately accepted task.
 | [Task 331][t331] | open | Manager lifecycle, admission, and Store ownership | Bug fix | Make Manager lifecycle terminal | 334, 458, 459 |
 | [Task 334][t334] | open | SQL wallet architecture documentation | Design | Define aggregate Manager and shared-chain ownership | — |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | — |
-| [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 388, 392, 393, 394, 452 |
-| [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore mutation | Gap fix | Allocate receiving-address batches atomically | 364, 393, 402 |
-| [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account discovery mode | 340 |
+| [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 378, 388, 392, 393, 452, 467 |
+| [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore mutation | Gap fix | Allocate receiving-address batches atomically | 364, 392, 393, 402, 467 |
+| [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | 340, 387 |
 | [Task 346][t346] | open | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | 357, 404 |
 | [Task 347][t347] | open | PsbtManager and Signer | Bug fix | Authorize explicit PSBT signatures | 346, 390 |
 | [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 406 |
@@ -60,19 +60,18 @@ separately accepted task.
 | [Task 357][t357] | open | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 331, 366, 367 |
 | [Task 364][t364] | open | SQL watch-generation and obligation schema | Gap fix | Persist ordered SQL live-watch obligations | 345 |
-| [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329 |
+| [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329, 467 |
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | 329 |
 | [Task 368][t368] | open | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | 331, 358 |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
-| [Task 387][t387] | open | ADR 0012 and ADR 0013 account-creation contract | Design | Define custom and path-bound account identity | — |
-| [Task 388][t388] | open | SQL AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 387 |
-| [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343 |
-| [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 387, 389 |
-| [Task 391][t391] | open | AccountManager path-bound identity and SQL AccountStore schema | Gap fix | Create exact path-bound watch-only XPub accounts | 387, 388, 389, 390 |
-| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Consume discovery mode in existing account creation | 345, 387 |
-| [Task 393][t393] | open | AddressManager receiving entry points and AddressStore account lookup | Gap fix | Reject receiving allocation for key-only accounts | 345 |
-| [Task 394][t394] | open | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | 345 |
-| [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Allocate one durable key-only locator | 393, 394, 399 |
+| [Task 387][t387] | open | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | — |
+| [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 378, 387 |
+| [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343, 467 |
+| [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 387, 389, 460 |
+| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 378, 387, 388, 389, 390, 392 |
+| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345, 378, 387 |
+| [Task 393][t393] | open | AddressManager receiving entry points and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | 345, 392 |
+| [Task 395][t395] | open | AddressManager child allocation and SQL branch-counter mutation | Gap fix | Allocate one durable NoChainSync child | 344, 391, 393, 396, 399, 452, 467 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344, 348, 408 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 345 |
 | [Task 401][t401] | open | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | — |
@@ -83,12 +82,14 @@ separately accepted task.
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 347 |
 | [Task 408][t408] | open | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | 344, 356 |
 | [Task 421][t421] | open | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | — |
-| [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude key-only accounts from recovery derivation | 345 |
+| [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | 345 |
 | [Task 456][t456] | open | ManagerConfig and managed Wallet construction | Refactor | Centralize managed Wallet runtime configuration | 334 |
 | [Task 458][t458] | open | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | 334 |
 | [Task 459][t459] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 334, 456, 458 |
+| [Task 460][t460] | open | AccountManager sequential creation and SQL AccountStore cursor CAS | Bug fix | Make sequential account allocation invalid-child safe | 378, 389, 467 |
+| [Task 467][t467] | open | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | — |
 
-## Phase 2 — verification · 27 open
+## Phase 2 — verification · 33 open
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
@@ -104,7 +105,7 @@ three-backend performance measurements.
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 416 |
 | [Task 427][t427] | open | Controller credential integration tests | Test | Cover remaining Controller credential contracts | 331 |
 | [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | 331, 455 |
-| [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
+| [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | 378 |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
 | [Task 437][t437] | open | TxWriter integration tests | Test | Cover transaction label contracts | — |
@@ -114,15 +115,21 @@ three-backend performance measurements.
 | [Task 441][t441] | open | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | — |
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
 | [Task 443][t443] | open | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | — |
-| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 368, 430, 431, 436 |
+| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 368, 430, 431 |
 | [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 368, 431, 441, 442 |
-| [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | 368, 436 |
-| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 368, 436, 438, 439, 440 |
-| [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | 368, 428, 436 |
-| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 368, 431, 436, 455 |
-| [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | 431, 436 |
+| [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | 368 |
+| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 368, 438, 439, 440 |
+| [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | 368, 428 |
+| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 368, 431, 455 |
+| [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | 431 |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 | [Task 455][t455] | open | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | 334 |
+| [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 343, 344 |
+| [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Cover public account mutation errors | 391 |
+| [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
+| [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391, 430 |
+| [Task 465][t465] | open | AddressManager NoChainSync result integration tests | Test | Verify NoChainSync address results | 395, 431 |
+| [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 395, 396, 431 |
 
 ## Phase 3 — remaining wallet gaps and bugs · 28 open
 
@@ -147,9 +154,9 @@ ready Bug fix and Gap fix work.
 | [Task 371][t371] | open | SQL Store canonical chain state | Bug fix | Serialize canonical chain-frontier mutation | 334, 340 |
 | [Task 372][t372] | open | Manager chain coordinator and SQL Store rollback | Bug fix | Prepare atomic multi-Wallet rollback | 349, 370, 371 |
 | [Task 381][t381] | open | RecoveryState public contract and internal Syncer adapter | Refactor | Hide recovery adapter identity | — |
-| [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
+| [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | 387 |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 345, 397, 399, 452 |
-| [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Persist raw imports with live-watch obligations | 364, 402 |
+| [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Persist raw imports with live-watch obligations | 364, 402, 467 |
 | [Task 409][t409] | open | SQL schema and TxStore ingestion | Gap fix | Normalize transaction input edges | 340, 424 |
 | [Task 410][t410] | open | Wallet/Store transaction graph admission | Bug fix | Coordinate transaction graph mutations | 334, 409 |
 | [Task 411][t411] | open | TxStore activation preflight and direct/batch ingestion | Bug fix | Reject children of terminal transactions | 409, 410 |
@@ -161,7 +168,6 @@ ready Bug fix and Gap fix work.
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
 | [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
 | [Task 457][t457] | open | Manager Start and process-local database ownership | Gap fix | Enforce one process-local Manager per database | 331 |
-
 ## Phase 4 — migration and retirement · 6 open
 
 Validate and convert legacy wallets only after their wallet and consumer
@@ -172,7 +178,7 @@ cutover evidence.
 | --- | --- | --- | --- | --- | --- |
 | [Task 335][t335] | open | Legacy migration source snapshot | Migration | Validate an immutable legacy wallet source | — |
 | [Task 353][t353] | open | Manager backend selection | Migration | Retire kvdb from the modern wallet API | 376 |
-| [Task 373][t373] | open | Legacy migration account and secret extraction | Migration | Extract legacy account and address state | 335 |
+| [Task 373][t373] | open | Legacy migration account and secret extraction | Migration | Extract legacy account and address state | 335, 387 |
 | [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 373 |
 | [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 329, 374, 411 |
 | [Task 376][t376] | open | Manager migration orchestration | Migration | Orchestrate and verify legacy conversion | 375 |
@@ -210,11 +216,12 @@ continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
 
-## Superseded · 1
+## Superseded · 2
 
 | Task | Former phase | Component | Type | Outcome | Replacement |
 | --- | ---: | --- | --- | --- | --- |
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
+| [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
 ## Done · 21
 
@@ -307,7 +314,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t392]: tasks/392-discovery-mode-account-creation.md
 [t393]: tasks/393-key-only-receiving-rejection.md
-[t394]: tasks/394-key-only-transaction-ownership.md
+[t394]: archive/tasks/394-key-only-transaction-ownership.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
@@ -349,7 +356,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t433]: archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: archive/tasks/434-transaction-creation-itests.md
 [t435]: archive/tasks/435-transaction-publication-itests.md
-[t436]: tasks/436-transaction-read-itests.md
+[t436]: archive/tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
 [t438]: tasks/438-psbt-decoration-combination-itests.md
 [t439]: tasks/439-psbt-funding-itests.md
@@ -373,6 +380,14 @@ phase. Every roadmap task must remain listed exactly once.
 [t457]: tasks/457-process-local-manager-lease.md
 [t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
+[t460]: tasks/460-sequential-account-invalid-children.md
+[t461]: tasks/461-address-batch-itests.md
+[t462]: tasks/462-account-mutation-error-itests.md
+[t463]: tasks/463-path-bound-utxo-identity-itests.md
+[t464]: tasks/464-no-chain-sync-account-query-itests.md
+[t465]: tasks/465-new-address-result-itests.md
+[t466]: tasks/466-oldest-unused-address-itests.md
+[t467]: tasks/467-indeterminate-commit-identity.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308

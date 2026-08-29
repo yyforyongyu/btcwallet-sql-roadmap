@@ -4,87 +4,95 @@ Component: **AccountManager root-derived creation and SQL AccountStore CAS**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 332][t332], [Task 377][t377], [Task 388][t388],
-[Task 392][t392], [Task 393][t393], [Task 394][t394], and [Task 452][t452]**.
+Dependencies: **[Task 332][t332], [Task 377][t377], [Task 378][t378],
+[Task 388][t388], [Task 392][t392], [Task 393][t393], [Task 452][t452], and
+[Task 467][t467]**.
 
 ## Rationale
 
-The maintained account API cannot create a sparse exact account,
-and a sequential invalid BIP32 child rolls back to the same cursor. lnd needs
-exact purpose-1017 family numbers without filler accounts, but custom-scope and
-external-XPub identity are independent extensions.
+The maintained account API cannot create a sparse exact account. Lnd needs
+exact purpose-1017 account numbers without filler accounts, while custom-scope
+and supplied-XPub identity remain independent extensions.
 
 ## Details
 
-- Consume Task 392's final wallet-owned `NewAccountParams` containing scope,
-  optional exact account number, name, and discovery mode. Implement the
-  exact-number behavior while nil preserves sequential creation; do not add a
-  second entry point or restore the removed positional signature.
+- Activate Task 392's dormant optional exact account number and `NoChainSync`
+  fields for wallet-root-derived `NewAccountParams`. Nil preserves sequential
+  creation; do not add an lnd-specific entry point, redefine the request, or
+  retain the positional signature.
 - Limit this task to existing canonical scopes and wallet-root-derived account
-  material. Reject a schema override or external account key until their
+  material. Reject schema overrides and supplied account keys until their
   follow-ups land.
-- Validate every account component at or below the public maximum before adding
-  the hardened bit or touching Vault/Store.
+- Validate each account component at or below the public maximum before adding
+  the hardened bit or touching Vault or Store.
 - For exact creation, require a vacant number and atomically update the cursor
   to checked `max(current, exact+1)`. Lower sparse holes remain available for
-  later exact creation.
-- Read and validate the expected account cursor, then use the maintained raw
-  Vault decrypt/encrypt boundary and wallet derivation helpers to prepare the
-  account key, both branches, ciphertext, and public facts outside the Store
-  write. An invalid exact child leaves account and cursor unchanged.
-- For sequential creation, skip and durably consume invalid account or branch
-  children in one bounded CAS. Persist terminal exhaustion so retry cannot
-  loop forever.
-- Persist account, encrypted account secret, fingerprint, discovery mode, and
-  cursor in one method-specific SQL transaction. Consume
-  Task 388 in that same admission.
-- On `runtime.ErrAmbiguousTxCommit`, return one wallet-owned indeterminate
-  result and never retry from the transport error. Exact reconciliation is the
-  next task.
+  later exact creation. An invalid exact child leaves account and cursor
+  unchanged.
+- Enforce Task 378's public precedence before Task 388 collision admission. A
+  replay whose name or exact number is already occupied returns
+  `ErrAccountAlreadyExists`, even when its derived XPub also overlaps; only an
+  otherwise-vacant request can return `ErrAccountIdentityCollision`.
+- Prepare the account key, both branches, ciphertext, and public facts through
+  the maintained Vault and derivation helpers before opening the Store write.
+- Persist the account, encrypted account secret, fingerprint, `NoChainSync`,
+  and cursor in one method-specific SQL transaction, including Task 388's
+  collision admission.
+- On `runtime.ErrAmbiguousTxCommit`, return Task 467's wallet-owned
+  `ErrIndeterminateCommit` and never retry from the transport error. Task 389
+  owns exact result reconciliation.
 - Do not create an initial live-watch obligation: an account row exposes no
-  receiving script. Address allocation owns the first watchable script.
-- On modern kvdb, preserve its existing sequential root-derived creation
-  subset. Adapt only requests equivalent to that legacy operation: no exact
-  number and no SQL-only field or semantic. Return a stable unsupported error
-  before mutation for the exact form or another unsupported extension; do not
-  extend the legacy format.
-- Exclude custom scopes, supplied XPub accounts, arbitrary numberless import
-  changes, Manager genesis (Task 329), and genesis secret ownership
-  (Task 367).
-- [Task 382](382-vault-account-derivation.md) later moves this preparation
-  behind a typed Vault operation without changing allocation, invalid-child
-  handling, CAS sequencing, or public behavior.
+  receiving script. Address allocation owns the first script.
+- Preserve modern kvdb's existing sequential root-derived subset only when
+  `NoChainSync` is false. Preserve Task 392's validation and occupied-name
+  precedence, then return Task 378's canonical
+  `ErrAccountOperationUnsupported` before mutation for an exact number or
+  another SQL-only extension; do not change its format.
+- Keep sequential invalid-child cursor repair in [Task 460][t460]. Exclude
+  custom scopes, supplied XPub accounts, Manager genesis, watch delivery, and
+  generic reconciliation.
+- Keep implementation local to existing components, source files, and
+  colocated test files. Add no parallel interface, arbitrary helper,
+  production file, or standalone test file; justify any unavoidable new file
+  against the repository's existing layout in the implementation PR.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
-Prepare root-derived material with the maintained Vault before opening the
-Store write, then commit one expected-cursor account CAS that handles
-nil/exact allocation, skipped children, account facts, secrets, and discovery
-mode. Keep the maintained kvdb adapter on its existing sequential operation
-instead of sending it through the SQL CAS.
+Extend the existing account request and method-specific SQL CAS with an
+optional exact number and `NoChainSync`, while reusing the maintained Vault,
+account cursor, and collision paths.
 
 ## Verification
 
-SQLite and PostgreSQL cover sequential and sparse exact
-creation, lower-hole exact fill, bounds, concurrent exact/sequential requests,
-invalid account and branch children, exhaustion, mode selection, restart, and
-ambiguous return without retry. Modern-kvdb fixtures preserve the existing
-sequential subset and prove exact or SQL-only requests fail before Vault or
-Store mutation. Spies prove derivation and Vault decrypt/encrypt work finish
-before the Store write opens.
+SQLite and PostgreSQL cover sequential and sparse exact creation, lower-hole
+fill, bounds, concurrent exact/sequential requests, invalid exact children,
+both `NoChainSync` values, restart, deterministic occupied-name/number before
+XPub-collision precedence, and ambiguous return without retry.
+Modern-kvdb fixtures preserve the existing sequential subset and prove exact
+or `NoChainSync` requests fail before Vault or Store mutation and satisfy
+`errors.Is(err, wallet.ErrAccountOperationUnsupported)`. Spies prove derivation
+and Vault work finish before the Store write opens.
 
 ## Definition of done
 
-Canonical SQL scopes support one final next-or-exact
-root-derived operation with atomic account/secret/mode/cursor facts; invalid
-children cannot wedge. Maintained modern kvdb retains its existing sequential
-subset until Task 353 retires it; no custom, XPub, genesis, watch-delivery, or
-generic reconciliation work is included.
+Canonical SQL scopes support one final next-or-exact root-derived operation
+with atomic account, secret, chain-sync, and cursor facts. Modern kvdb retains
+its existing sequential subset, and no custom-scope, supplied-XPub, genesis,
+watch-delivery, or sequential invalid-child repair is included.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t377]: ../archive/tasks/377-account-manager-wallet-dto.md
+[t378]: 378-account-manager-error-boundary.md
 [t388]: 388-runtime-account-xpub-collisions.md
 [t392]: 392-discovery-mode-account-creation.md
 [t393]: 393-key-only-receiving-rejection.md
-[t394]: 394-key-only-transaction-ownership.md
 [t452]: 452-key-only-recovery-derivation.md
+[t460]: 460-sequential-account-invalid-children.md
+[t467]: 467-indeterminate-commit-identity.md

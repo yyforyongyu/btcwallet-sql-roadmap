@@ -6,6 +6,12 @@ Type: **Gap fix**.
 
 Dependencies: **[Task 345][t345]**.
 
+Superseded before implementation on 2026-08-30. The accepted `NoChainSync`
+design disables automatic chain synchronization without changing managed
+address ownership, eliminating this ownership-exclusion outcome.
+[Task 395][t395] owns the separate remaining allocation outcome and is not a
+replacement for the eliminated policy.
+
 ## Rationale
 
 A persisted key-only locator may map to a normal account child,
@@ -42,4 +48,5 @@ Key-only child scripts are uniformly non-owned for
 maintained SQL ingestion without rejecting their containing transaction or
 duplicating ownership policy in callers.
 
-[t345]: 345-durable-watch-registration.md
+[t345]: ../../tasks/345-durable-watch-registration.md
+[t395]: ../../tasks/395-key-only-locator-allocation.md
