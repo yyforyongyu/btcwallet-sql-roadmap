@@ -78,5 +78,5 @@ and synchronization harness without adding a scenario-specific coordinator.
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: ../archive/tasks/434-transaction-creation-itests.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
-[t436]: 436-transaction-read-itests.md
+[t436]: ../archive/tasks/436-transaction-read-itests.md
 [t455]: 455-exact-wallet-sync-status.md

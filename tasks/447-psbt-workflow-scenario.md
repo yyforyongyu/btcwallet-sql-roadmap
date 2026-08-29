@@ -51,7 +51,7 @@ production hooks.
 [t368]: 368-wallet-startup-shutdown.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
-[t436]: 436-transaction-read-itests.md
+[t436]: ../archive/tasks/436-transaction-read-itests.md
 [t438]: 438-psbt-decoration-combination-itests.md
 [t439]: 439-psbt-funding-itests.md
 [t440]: 440-psbt-signing-finalization-itests.md

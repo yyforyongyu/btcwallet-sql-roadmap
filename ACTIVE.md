@@ -26,7 +26,6 @@ placement.
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 436][t436] | Test transaction reads | Test | Abdullahi | [#1346][pr1346] |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
 
 ## Blocked Phase 1 Tasks
@@ -184,7 +183,6 @@ an explicit owner-approved priority exception.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t436]: tasks/436-transaction-read-itests.md
 [t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t454]: tasks/454-postgres-transaction-isolation.md
@@ -202,6 +200,5 @@ an explicit owner-approved priority exception.
 [pr1341]: https://github.com/btcsuite/btcwallet/pull/1341
 [pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
 [pr1347]: https://github.com/btcsuite/btcwallet/pull/1347
-[pr1346]: https://github.com/btcsuite/btcwallet/pull/1346
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1349]: https://github.com/btcsuite/btcwallet/pull/1349

@@ -55,4 +55,4 @@ generic polling over wallet-owned state.
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t428]: 428-controller-sync-info-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
-[t436]: 436-transaction-read-itests.md
+[t436]: ../archive/tasks/436-transaction-read-itests.md

@@ -58,4 +58,4 @@ UTXO, and transaction fixtures. Use one-shot wallet assertions after
 [t430]: 430-account-query-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
-[t436]: 436-transaction-read-itests.md
+[t436]: ../archive/tasks/436-transaction-read-itests.md

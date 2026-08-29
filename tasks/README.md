@@ -170,7 +170,6 @@ that structural exclusion explicitly.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
   publication contracts.
-- [Task 436](436-transaction-read-itests.md): cover transaction read contracts.
 - [Task 437](437-transaction-label-itests.md): cover transaction label
   contracts.
 - [Task 438](438-psbt-decoration-combination-itests.md): cover PSBT decoration

@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 436](tasks/436-transaction-read-itests.md) completed on 2026-08-30.
 - [Task 422](tasks/422-manager-load-cancellation.md) was superseded before
   implementation on 2026-08-28 when the roadmap adopted Task 368's planned
   removal of public Manager loading; Task 459 owns aggregate startup assembly.
