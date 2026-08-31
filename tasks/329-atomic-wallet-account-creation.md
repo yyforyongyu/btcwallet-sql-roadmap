@@ -21,21 +21,23 @@ contain the accounts its supported create request promised.
   through the direct dependencies; do not add duplicate direct edges.
 - Prepare the supported request's ciphertext and public genesis facts before
   opening the SQL write transaction. Consume the accepted watch-only policy,
-  wallet-owned selector, and persisted discovery mode from the dependencies;
+  wallet-owned selector, and persisted `NoChainSync` state from dependencies;
   do not redesign them here.
 - Extend one backend-local SQL wallet-create transaction to insert the wallet,
   encrypted wallet secrets, sync state, key scopes, default or numberless
-  shell accounts, encrypted account secrets, immutable discovery modes, and
-  checked `next_account_number` cursors.
+  shell accounts, encrypted account secrets, immutable `NoChainSync` values,
+  and checked `next_account_number` cursors.
 - Create the canonical default accounts promised by a supported private-root
-  request. Persist every default genesis account as `watch-chain`; reject a
-  request that attempts a key-only genesis override before derivation,
-  encryption, or SQL mutation. A scope containing canonical account zero
-  starts its next-account cursor at one.
+  request. The public Manager create request exposes no `NoChainSync` input;
+  its private genesis planner assigns false to every default account. A scope
+  containing canonical account zero starts its next-account cursor at one.
 - Create exactly the numberless initial accounts promised by a supported shell
-  request. Persist every shell genesis account as `watch-chain` and reject a
-  key-only override at the same pre-mutation boundary. Those accounts do not
-  advance a numbered account cursor.
+  request. The same private planner assigns false to every shell account, and
+  those accounts do not advance a numbered account cursor.
+- Treat the method-specific private genesis-account payload passed into the
+  SQL transaction as the invariant boundary. Reject a malformed internal
+  payload containing `NoChainSync=true` before any SQL mutation; do not invent
+  a public override or a public rejection case for a field callers cannot set.
 - Keep derivation and encryption outside the SQL transaction. The transaction
   receives only prepared ciphertext and public persistence facts.
 - Treat every definite insertion or commit failure as failure of the complete
@@ -56,11 +58,22 @@ contain the accounts its supported create request promised.
   [Task 358][t358], numbered root-derived account creation in
   [Task 343][t343], custom-scope creation in [Task 390][t390], and path-bound
   watch-only XPub creation in [Task 391][t391].
-- Leave configurable key-only creation to Task 343's guarded runtime account
-  path after its allocation, ownership, and recovery prerequisites complete;
-  genesis does not expose that mode.
+- Leave configurable `NoChainSync` creation to Task 343's guarded runtime
+  account path after its receiving and recovery prerequisites complete;
+  genesis does not expose that property.
 - Do not add a create manifest, replay state, generic write lock, Store
   callback, or cross-process coordination.
+- Keep implementation local to existing Manager genesis, SQL Store, source
+  files, and colocated tests. Add no parallel interface, arbitrary helper,
+  unrelated production file, or standalone test file; justify any unavoidable
+  new file against the repository's current layout in the implementation PR.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
@@ -73,17 +86,18 @@ runtime assembly and cache publication after the transaction succeeds.
 ## Verification
 
 - Shared transaction-stage tests inject a definite failure at each wallet,
-  secret, sync, scope, account, account-secret, discovery-mode, and cursor
+  secret, sync, scope, account, account-secret, chain-sync-state, and cursor
   boundary and prove complete rollback.
 - The same Store conformance runs on SQLite and PostgreSQL and reopens the
-  wallet to prove the promised account set, discovery modes, and cursors.
+  wallet to prove the promised account set, `NoChainSync` values, and cursors.
 - Private-root fixtures prove each canonical scope contains account zero and
   advances its cursor to one; shell fixtures prove numberless initial accounts
   leave each numbered cursor unchanged. Reopen proves every default and shell
-  genesis account is `watch-chain` on both dialects.
-- Private-root and shell requests that attempt a key-only genesis mode fail
-  before derivation, encryption, Store mutation, or cache publication and
-  leave no wallet artifact.
+  genesis account has `NoChainSync=false` on both dialects.
+- Planner tests prove public private-root and shell requests materialize only
+  false account facts. Store-boundary tests inject a malformed private
+  genesis-account payload with true and prove rejection before SQL mutation
+  or cache publication; no public request fixture fabricates that field.
 - Manager fault injection proves no Wallet is cached after a definite backend
   failure and publication occurs only after committed genesis and successful
   runtime assembly.
@@ -97,9 +111,9 @@ runtime assembly and cache publication after the transaction succeeds.
 - A definite failure leaves no SQL artifact and publishes no Wallet.
 - Reopened wallets expose the exact promised account set and checked scope
   cursors on both SQL dialects, with every genesis account fixed to
-  `watch-chain`.
-- Key-only mode is unavailable during genesis and remains confined to the
-  guarded runtime account-creation path.
+  `NoChainSync=false`.
+- `NoChainSync=true` is unavailable during genesis and remains confined to
+  the guarded runtime account-creation path.
 - The PR contains no modern-kvdb, manifest, replay, generic-lock, or unrelated
   public API work.
 

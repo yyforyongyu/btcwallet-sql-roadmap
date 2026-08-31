@@ -1,53 +1,67 @@
-# Task 345 — persist SQL account discovery mode
+# Task 345 — persist SQL account NoChainSync state
 
 Component: **SQL account schema and AccountStore persistence**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 340][t340]**.
+Dependencies: **[Task 340][t340] and [Task 387][t387]**.
 
 ## Rationale
 
-SQL has no durable distinction between receiving accounts and
-key-only locator accounts. The storage fact must exist, backfill safely, and
-remain immutable before any caller can select key-only behavior.
+SQL cannot record that an account must stay out of automatic chain
+synchronization. That behavior is independent from whether the wallet holds
+private material and must survive reopen before public callers can select it.
 
 ## Details
 
-- Define the wallet/store `watch-chain` and `key-only` enum with checked
-  conversion at the Store boundary.
-- Add the field in the SQLite and PostgreSQL schema, backfill every existing
-  account as `watch-chain`, then make it required and immutable.
-- Include discovery mode in account reads and method-specific create inputs.
-  Reject omitted, unknown, or changed modes at the Store boundary. Update every
-  maintained SQL derived/imported caller in the same PR to pass `watch-chain`
-  explicitly; do not add an omitted-mode form or defaulting adapter. Task 392
-  owns the final public account-creation request shapes.
-- Treat accountless raw imports as implicitly `watch-chain`; do not invent an
-  account row or a key-only raw-import form.
-- Keep public selection policy and wallet consumers in the three follow-ups
-  below.
+- Add one immutable `accounts.no_chain_sync BOOLEAN NOT NULL DEFAULT FALSE`
+  column in SQLite and PostgreSQL. Backfill every existing account as false
+  before enforcing the non-null constraint in each dialect.
+- Include `NoChainSync` in account reads and method-specific creation inputs.
+  Update every maintained SQL derived and imported caller in the same PR to
+  create ordinary accounts with false.
+- Reject any attempt to change the value after account creation. Do not add a
+  discovery-mode enum, account kind, custody column, key-only marker, or new
+  table.
+- Treat accountless raw imports as implicitly chain-synchronized; do not
+  invent an account row or a no-chain-sync raw-import form.
+- Keep wallet-level signing custody and `IsWatchOnly` unchanged. This property
+  says only whether automatic chain synchronization includes the account.
+- Keep public account request and result shapes in Task 392 and consumer
+  policy in Tasks 393, 399, and 452.
+- Keep implementation local to the existing account schema, queries, Store,
+  and colocated tests. The required migration and regenerated sqlc files are
+  the only expected new or generated files; add no arbitrary helper,
+  production file, or standalone test file.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
-Land one SQL migration and regenerated query set for both
-dialects, plus the smallest Store enum/conversion and reopen conformance.
-Require mode in the Store create inputs and update maintained SQL callers to
-pass `watch-chain` directly. Make the migration itself the only mutation
-owner.
+Land one two-dialect account migration, regenerated queries, and the smallest
+Store conversion needed to carry the immutable boolean through existing
+account rows and creation calls.
 
 ## Verification
 
-Migration fixtures prove old accounts become `watch-chain`, explicit new rows
-require a valid mode, maintained derived/imported callers explicitly create
-`watch-chain`, updates cannot change mode, and reopen returns the exact mode on
-SQLite and PostgreSQL. Generated output matches source SQL.
+Migration fixtures prove old accounts reopen with `NoChainSync=false`, new
+rows preserve both boolean values, and updates cannot change the value on
+SQLite and PostgreSQL. Fresh and migrated schemas reject an explicit NULL on
+insert or update instead of silently treating it as false. Maintained creation
+callers explicitly exercise false, Store conversion rejects malformed
+persisted values, and generated output matches source SQL.
 
 ## Definition of done
 
-Every SQL account has one immutable, validated discovery mode after migration;
-all maintained SQL creation callers provide it explicitly and no omitted-mode
-adapter remains. No public selection behavior, delivery row, chain call, or
-transaction-ownership change is included.
+Every SQL account has one immutable, non-null `NoChainSync` value after
+migration, all maintained SQL creation callers supply it, and no public
+selection behavior, signing-custody change, chain call, enum, account kind, or
+new table is added.
 
 [t340]: 340-durable-database-identity.md
+[t387]: 387-account-creation-identity-adr.md

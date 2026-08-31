@@ -14,13 +14,14 @@ watched outputs even after horizons are narrowed.
 
 ## Details
 
-- For a full zero-lookahead scan, load every persisted `watch-chain` address,
-  accountless raw import, watched outpoint, and required block identity while
-  excluding key-only locators.
-- For a targeted zero-lookahead scan, load only persisted watch-chain addresses
-  and watched outpoints owned by an internal set of resolved durable account
-  identities plus required block identities. Exclude unrelated accounts and
-  all accountless imports without exposing those IDs publicly.
+- For a full zero-lookahead scan, load every persisted address whose account
+  has `NoChainSync=false`, accountless raw import, watched outpoint, and
+  required block identity while excluding children of `NoChainSync` accounts.
+- For a targeted zero-lookahead scan, load only persisted addresses whose
+  accounts have `NoChainSync=false` and watched outpoints owned by an internal
+  set of resolved durable account identities plus required block identities.
+  Exclude unrelated accounts and all accountless imports without exposing
+  those IDs publicly.
 - Add only the narrow account-scoped address/outpoint Store queries needed by
   this initialization path.
 - Preserve the same exact persisted target sets for positive lookahead; this
@@ -40,7 +41,8 @@ resolves semantic selectors into that internal input.
 ## Verification
 
 Zero and positive lookahead fixtures with multiple internal account identities,
-numberless imported XPub, key-only locators, raw imports, and watched outpoints
+numberless imported XPub, `NoChainSync` children, raw imports, and watched
+outpoints
 prove the exact full and targeted sets on both SQL dialects. No zero scan
 performs derivation, and no test needs the later public semantic selector.
 

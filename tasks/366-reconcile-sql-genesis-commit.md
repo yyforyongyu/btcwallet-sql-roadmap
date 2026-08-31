@@ -4,7 +4,7 @@ Component: **Manager and SQL Store genesis result**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 329][t329]**.
+Dependencies: **[Task 329][t329] and [Task 467][t467]**.
 
 ## Rationale
 
@@ -18,13 +18,14 @@ conflicting state as an ordinary retryable failure.
 - Handle `runtime.ErrAmbiguousTxCommit` only for the atomic SQL genesis
   operation introduced by [Task 329][t329].
 - Reopen and read the exact wallet, encrypted secrets, sync state, key scopes,
-  default or initial accounts, account secrets, discovery modes, and checked
+  default or initial accounts, account secrets, `NoChainSync` values, and checked
   cursors described by the attempted genesis plan.
 - Return success only when every persisted fact exactly matches the committed
   plan. Complete runtime assembly before publishing the Wallet.
 - Return ordinary failure when no artifact from the attempted genesis exists.
-- Return a wallet-owned indeterminate error for every partial, conflicting, or
-  otherwise unprovable state. Never publish an indeterminate Wallet.
+- Return Task 467's wallet-owned `ErrIndeterminateCommit` for every partial,
+  conflicting, or otherwise unprovable state. Never publish an indeterminate
+  Wallet.
 - Use one bounded Manager-owned reconciliation context so later public caller
   cancellation cannot interrupt determination. [Task 358][t358] owns the
   public cancellation cutoff and contextual API.
@@ -33,6 +34,18 @@ conflicting state as an ordinary retryable failure.
 - Do not retry genesis from the transport error or add a manifest, replay
   marker, generic reconciliation framework, write lock, or cross-process
   Manager fence.
+- Keep implementation local to existing Manager genesis reconciliation, SQL
+  Store readers, source files, and colocated tests. Add no parallel interface,
+  arbitrary helper, unrelated production file, or standalone test file;
+  justify any unavoidable new file against the repository's current layout in
+  the implementation PR.
+- Document every added code block inline with why it exists and how it works;
+  comments that merely restate the code do not satisfy this requirement.
+- Give every unit test detailed Arrange, Act, and Assert comments explaining
+  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
+  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
+  (`Once()` for one required call), and call `AssertExpectations(t)` directly
+  in Assert without duplicate call assertions or a `require.True` wrapper.
 
 ## Suggested fix
 
@@ -49,8 +62,9 @@ then assemble and publish only an exact committed result.
 - Exact committed state returns success and publishes one usable Wallet;
   absent state returns ordinary failure and publishes none.
 - Missing or conflicting wallet, secret, sync, scope, account,
-  discovery-mode, and cursor facts each return the wallet-owned indeterminate
-  error and publish nothing.
+  `NoChainSync`, and cursor facts each return the wallet-owned indeterminate
+  error, satisfy `errors.Is(err, wallet.ErrIndeterminateCommit)`, and publish
+  nothing.
 - Cancellation after the mutation cutoff cannot interrupt reconciliation or
   change the definitive result.
 - Tests prove the implementation adds no retry, manifest, replay, generic
@@ -69,3 +83,4 @@ then assemble and publish only an exact committed result.
 [t329]: 329-atomic-wallet-account-creation.md
 [t330]: 330-duplicate-wallet-create.md
 [t358]: 358-contextual-manager-operations.md
+[t467]: 467-indeterminate-commit-identity.md

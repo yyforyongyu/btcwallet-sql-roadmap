@@ -19,14 +19,14 @@ placement.
 | [Task 334][t334] | Define aggregate Manager ownership | Design | YY | [#1323][pr1323] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
-| [Task 378][t378] | Translate AccountManager errors | Bug fix | Gustavo | — |
-| [Task 387][t387] | Define account-creation identity | Design | YY | [#1342][pr1342] |
+| [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | — |
+| [Task 387][t387] | Define account identity and chain-sync policy | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | YY | [#1341][pr1341] |
-| [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
+| [Task 467][t467] | Define indeterminate commit identity | Gap fix | — | — |
 
 ## Blocked Phase 1 Tasks
 
@@ -41,23 +41,22 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 331][t331] | Make Manager lifecycle terminal | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
-| [Task 345][t345] | Persist account discovery mode | Gap fix | YY | — |
+| [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | — |
 | [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | Abdullahi | — |
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | Gustavo | — |
-| [Task 358][t358] | Make Manager creation cancellable | Gap fix | YY | — |
+| [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
-| [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | YY | — |
+| [Task 366][t366] | Reconcile SQL genesis commits | Bug fix | — | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | YY | — |
 | [Task 388][t388] | Reject colliding account XPub identities | Bug fix | — | — |
 | [Task 389][t389] | Reconcile runtime account commits | Bug fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
-| [Task 391][t391] | Create path-bound watch-only accounts | Gap fix | — | — |
-| [Task 392][t392] | Consume account discovery mode | Gap fix | — | — |
-| [Task 393][t393] | Reject key-only receiving allocation | Gap fix | — | — |
-| [Task 394][t394] | Exclude key-only ownership locators | Gap fix | — | — |
-| [Task 395][t395] | Allocate durable key-only locators | Gap fix | — | — |
+| [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | — | — |
+| [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | — | — |
+| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | — | — |
+| [Task 395][t395] | Allocate a durable NoChainSync child | Gap fix | — | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
@@ -67,10 +66,11 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
 | [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
-| [Task 452][t452] | Exclude key-only recovery derivation | Gap fix | — | — |
+| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | — | — |
 | [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | — |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | — |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | — |
+| [Task 460][t460] | Make sequential account allocation invalid-child safe | Bug fix | — | — |
 
 ## Claimed Tasks
 
@@ -81,32 +81,35 @@ authorize implementation before every dependency and gate completes.
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 3 | YY | — |
-| [Task 338][t338] | Latch accepted SQL passphrase results | Bug fix | 3 | YY | — |
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 3 | YY | [#1321][pr1321] |
-| [Task 362][t362] | Return a definitive kvdb passphrase result | Bug fix | 3 | YY | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 3 | YY | — |
 | [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 3 | YY | — |
 | [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 3 | YY | — |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 3 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 3 | YY | — |
-| [Task 416][t416] | Build database benchmark fixtures | Benchmark | 2 | YY | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
 | [Task 427][t427] | Test Controller credentials | Test | 2 | Gustavo | [#1349][pr1349] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
+| [Task 430][t430] | Test account queries | Test | 2 | Gustavo | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | 2 | Gustavo | — |
 | [Task 457][t457] | Fence process-local Managers | Gap fix | 3 | YY | — |
 
 ## Coordination
 
+Task 387 and PR #1342 must be revised around one `NoChainSync` boolean that is
+orthogonal to wallet-level signing custody. The ADR change must reuse the
+existing account, address, and signer boundaries and must not introduce a
+discovery-mode enum, key-family manager, or additional provenance column.
+
 Task 334 and PR #1323 must adopt Manager public lifecycle authority, private
 Wallet `start`/`stop` mechanics, Wallet-owned call draining, the complete
 active-Wallet set, Store-close-last ordering, and separate live-sync and
 historical-rescan state before merge.
 
-Task 368 and draft PR #1328 are paused. The current PR implements the removed
-per-Wallet lifecycle coordinator and must be rewritten around private Wallet
+Task 368 and draft PR #1328 are paused. The draft implements the removed per-
+Wallet lifecycle coordinator and must be rewritten around private Wallet
 `start`/`stop`, Wallet-owned call draining, and Task 368's final public-surface
 cutover after Tasks 331 and 358 complete. It remains unmergeable while those
 hard dependencies are open; no stacked implementation exception is approved.
@@ -128,7 +131,6 @@ an explicit owner-approved priority exception.
 [t330]: tasks/330-duplicate-wallet-create.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
 [t334]: tasks/334-shared-chain-state.md
-[t338]: tasks/338-passphrase-result.md
 [t340]: tasks/340-durable-database-identity.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
@@ -141,7 +143,6 @@ an explicit owner-approved priority exception.
 [t356]: tasks/356-defer-change-script-allocation.md
 [t357]: tasks/357-transaction-amount-validation.md
 [t358]: tasks/358-contextual-manager-operations.md
-[t362]: tasks/362-kvdb-definitive-passphrase-result.md
 [t364]: tasks/364-durable-watch-registration.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
 [t366]: tasks/366-reconcile-sql-genesis-commit.md
@@ -157,7 +158,6 @@ an explicit owner-approved priority exception.
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t392]: tasks/392-discovery-mode-account-creation.md
 [t393]: tasks/393-key-only-receiving-rejection.md
-[t394]: tasks/394-key-only-transaction-ownership.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
@@ -174,7 +174,6 @@ an explicit owner-approved priority exception.
 [t410]: tasks/410-transaction-graph-admission.md
 [t411]: tasks/411-terminal-parent-rejection.md
 [t412]: tasks/412-transaction-publication-admission.md
-[t416]: tasks/416-database-benchmark-fixtures.md
 [t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
@@ -191,6 +190,8 @@ an explicit owner-approved priority exception.
 [t457]: tasks/457-process-local-manager-lease.md
 [t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
+[t460]: tasks/460-sequential-account-invalid-children.md
+[t467]: tasks/467-indeterminate-commit-identity.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328

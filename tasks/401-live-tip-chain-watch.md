@@ -24,7 +24,8 @@ start a birthday-based rescan or widen the active historical rescan.
 - Limit production changes to btcwallet's Wallet-owned chain interface and
   adapters. Use existing btcd, bitcoind, and Neutrino interfaces; do not modify
   daemon source, RPC contracts, CLI, RPC frontends, or deprecated-wallet code.
-- Keep Store generations, replay, pending results, and recovery out of scope.
+- Keep Store generations, replay state, producer results, and recovery out of
+  scope.
 
 ## Suggested fix
 

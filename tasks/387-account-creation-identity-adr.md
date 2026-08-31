@@ -1,4 +1,4 @@
-# Task 387 — define custom and path-bound account identity
+# Task 387 — define account identity and chain-sync policy
 
 Component: **ADR 0012 and ADR 0013 account-creation contract**.
 
@@ -8,10 +8,9 @@ Dependencies: **[Task 332][t332] and [Task 360][t360]**.
 
 ## Rationale
 
-Custom root-derived accounts and exact external XPub accounts
-need a final public request and truthful persisted identity. ADR 0013 currently
-makes every numbered account wallet-derived and every imported XPub numberless;
-ADR 0012 forbids public-only material in a spendable SQL wallet.
+Custom root-derived accounts and exact external XPub accounts need truthful
+identity, while purpose-1017 accounts need to opt out of chain synchronization
+without inventing a new signing or custody model.
 
 ## Details
 
@@ -19,42 +18,68 @@ ADR 0012 forbids public-only material in a spendable SQL wallet.
   numberless imported-XPub accounts, and exact path-bound external-XPub
   accounts whose known hardened account component is real but whose custody is
   not root-derived.
-- Define immutable provenance, optional account number, optional fingerprint,
-  scope, schema, and discovery-mode facts without exposing SQL row IDs.
-- For a depth-three external account XPub, define the full key origin as
-  caller-declared provenance. The wallet validates network, depth, hardened
-  account child, and consistency of the declared purpose/coin/account path,
-  but cannot authenticate hardened ancestor derivation from that XPub or an
-  optional master fingerprint; the ADR must not present those facts as proof.
-- Amend ADR 0012 only as needed to confirm that a supplied XPub account is
-  accepted in a uniformly watch-only SQL wallet and is not a route for
-  public-only material into a spendable wallet.
-- Fix the final `NewAccountParams` shape. Do not create a separate
-  lnd-specific `EnsureExactAccount` method.
-- Decide scope-schema conflict behavior and supported account-key-derivable
-  branch forms.
-- Do not remove `coin_pub_key`, `key_scope_secrets`, or any schema column;
-  cleanup requires separately demonstrated deadness.
+- Preserve `is_derived` as one provenance fact: true means the account XPub was
+  derived from the wallet root. Represent a path-bound external depth-three
+  XPub with `is_derived=false` and its real non-null account number; add no
+  provenance enum or column.
+- Define `NoChainSync` as an immutable boolean orthogonal to wallet-level
+  signing custody. Both spendable and uniformly watch-only wallets may have
+  accounts with either value; false includes the account in automatic chain
+  synchronization and true excludes it.
+- Define `NoChainSync` narrowly: it excludes the account's derived scripts from
+  automatic discovery and live script registration. It does not change
+  address ownership, public derivation, or signing capability, and it does not
+  discard an owned transaction learned through an existing ingestion path.
+  The wallet signs whenever its existing custody model supplies the required
+  private operation.
+- For a depth-three external account XPub, validate its network, depth, and
+  hardened child against the requested account number. Treat purpose and coin
+  as caller-declared scope metadata because neither the XPub nor its optional
+  fingerprint can prove those hardened ancestors.
+- Amend ADR 0012 only as needed to retain uniform wallet-level custody: a
+  supplied XPub account is accepted in a uniformly watch-only SQL wallet and
+  is not a route for public-only material into a spendable wallet.
+- Define one final `NewAccountParams` and `AccountInfo` field contract carrying
+  scope, name, optional exact number, optional schema, optional external
+  account XPub, optional master fingerprint, and `NoChainSync`. [Task 392][t392]
+  owns introducing those complete public types once; Tasks 343, 390, and 391
+  activate and validate their initially dormant fields. Do not add an
+  lnd-specific API or a key-family manager.
+- Preserve the existing ordinary numberless-import boundary as
+  `ImportAccount(context.Context, string, *hdkeychain.ExtendedKey, uint32,
+  waddrmgr.AddressType, bool) (*AccountInfo, error)`. Its fingerprint is a
+  required value, including present zero; the XPub version and address type
+  retain their current scope and schema selection. It has no account number,
+  schema override, or `NoChainSync` input and always creates
+  `NoChainSync=false`. Do not add an `ImportAccountParams` wrapper for behavior
+  that the operation does not support.
+- Keep the future `IsWatchOnly` to `CanSign` terminology change out of scope;
+  it is tracked by [roadmap issue 22][issue22].
+- Amend only the existing ADR files. Do not create another ADR or prescribe
+  new components, interfaces, helpers, tables, or test files.
 
 ## Suggested fix
 
-Record one focused account-creation amendment across the
-two owning ADRs, with a truth table for custody/provenance/number/fingerprint
-and the final request fields.
+Record one focused amendment across ADR 0012 and ADR 0013, including an
+identity table and the four wallet-custody/`NoChainSync` combinations, while
+reusing the existing account, address, and signer ownership boundaries.
 
 ## Verification
 
-Walk generated-seed, imported-root, watch-only depth-three
-XPub, arbitrary numberless XPub, canonical scope, and custom-scope examples
-through the truth table. Confirm Task 332 policy remains intact and no
-implementation is prescribed. Confirm the external-XPub row distinguishes
-validated XPub facts from caller-declared, unauthenticated ancestor provenance.
+Walk generated-seed, imported-root, watch-only depth-three XPub, arbitrary
+numberless XPub, canonical-scope, and custom-scope examples through the
+identity contract. Confirm all four signing-custody/chain-sync combinations
+are coherent, Task 332 remains intact, and no new implementation component or
+persisted identity fact beyond `NoChainSync` is required.
 
 ## Definition of done
 
-Accepted ADR text fixes the final custom/path-bound
-identity and request contract so later tasks need no product decision, while
-changing no Go or SQL source.
+Accepted ADR text fixes the final account identity, new-account request,
+retained import signature, result, and chain-sync contracts so implementation
+tasks need no product decision, while changing no Go or SQL source and adding
+no new ADR file.
 
+[issue22]: https://github.com/yyforyongyu/btcwallet-sql-roadmap/issues/22
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md
+[t392]: 392-discovery-mode-account-creation.md

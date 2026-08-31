@@ -27,7 +27,7 @@ genesis transaction shape without widening the general Store API.
   it cannot leave any migrated wallet row or child artifact.
 - Add one migration-specific SQLite write transaction that inserts the wallet,
   ciphertext secrets, sync state, scopes, accounts, account secrets, immutable
-  discovery modes, checked cursors, addresses, derivation paths, blocks,
+  `NoChainSync` values, checked cursors, addresses, derivation paths, blocks,
   transactions, statuses, labels, UTXOs, spend/replacement edges, and active
   leases.
 - Before the first write, apply Task 411's terminal-parent admission predicate
@@ -64,7 +64,7 @@ same definite-versus-ambiguous commit classification as other SQL writes.
   a raw reopen observes every identity, account, script, graph, lease, block,
   and sync fact.
 - Stage-level fault injection at wallet, secret, sync, scope, account,
-  account-secret, discovery-mode, cursor, address, derivation, block,
+  account-secret, chain-sync-state, cursor, address, derivation, block,
   transaction, credit/debit, UTXO, replacement, and lease insertion proves a
   definite failure leaves no wallet state.
 - A non-fresh, wrong-network, foreign, dirty, or mismatched destination fails
