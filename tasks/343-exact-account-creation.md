@@ -5,8 +5,7 @@ Component: **AccountManager root-derived creation and SQL AccountStore CAS**.
 Type: **Gap fix**.
 
 Dependencies: **[Task 332][t332], [Task 377][t377], [Task 378][t378],
-[Task 388][t388], [Task 392][t392], [Task 393][t393], [Task 452][t452], and
-[Task 467][t467]**.
+[Task 392][t392], [Task 393][t393], [Task 452][t452], and [Task 467][t467]**.
 
 ## Rationale
 
@@ -16,10 +15,11 @@ and supplied-XPub identity remain independent extensions.
 
 ## Details
 
-- Activate Task 392's dormant optional exact account number and `NoChainSync`
-  fields for wallet-root-derived `NewAccountParams`. Nil preserves sequential
-  creation; do not add an lnd-specific entry point, redefine the request, or
-  retain the positional signature.
+- Add an optional exact account number to Task 392's `NewAccountParams`. Nil
+  preserves sequential creation. Activate Task 392's existing `NoChainSync`
+  true value for SQL root-derived next-or-exact creation only after this task's
+  receiving and recovery guards are complete; do not add an lnd-specific entry
+  point, another request, or a positional compatibility signature.
 - Limit this task to existing canonical scopes and wallet-root-derived account
   material. Reject schema overrides and supplied account keys until their
   follow-ups land.
@@ -29,15 +29,14 @@ and supplied-XPub identity remain independent extensions.
   to checked `max(current, exact+1)`. Lower sparse holes remain available for
   later exact creation. An invalid exact child leaves account and cursor
   unchanged.
-- Enforce Task 378's public precedence before Task 388 collision admission. A
-  replay whose name or exact number is already occupied returns
-  `ErrAccountAlreadyExists`, even when its derived XPub also overlaps; only an
-  otherwise-vacant request can return `ErrAccountIdentityCollision`.
+- After lifecycle and request validation, resolve an occupied name before an
+  occupied exact number and before mutation. Both conditions wrap Task 378's
+  `ErrAccountAlreadyExists`; runtime XPub-collision admission remains in Task
+  388 and follows those checks when it lands.
 - Prepare the account key, both branches, ciphertext, and public facts through
   the maintained Vault and derivation helpers before opening the Store write.
 - Persist the account, encrypted account secret, fingerprint, `NoChainSync`,
-  and cursor in one method-specific SQL transaction, including Task 388's
-  collision admission.
+  and cursor in one method-specific SQL transaction.
 - On `runtime.ErrAmbiguousTxCommit`, return Task 467's wallet-owned
   `ErrIndeterminateCommit` and never retry from the transport error. Task 389
   owns exact result reconciliation.
@@ -66,19 +65,21 @@ and supplied-XPub identity remain independent extensions.
 ## Suggested fix
 
 Extend the existing account request and method-specific SQL CAS with an
-optional exact number and `NoChainSync`, while reusing the maintained Vault,
-account cursor, and collision paths.
+optional exact number while reusing Task 392's `NoChainSync`, the maintained
+Vault, and the account cursor.
 
 ## Verification
 
 SQLite and PostgreSQL cover sequential and sparse exact creation, lower-hole
 fill, bounds, concurrent exact/sequential requests, invalid exact children,
-both `NoChainSync` values, restart, deterministic occupied-name/number before
-XPub-collision precedence, and ambiguous return without retry.
+both `NoChainSync` values, restart, and deterministic validation, occupied-name,
+occupied-number, then mutation precedence. Occupied names and numbers both
+match `ErrAccountAlreadyExists`; ambiguous returns never retry.
 Modern-kvdb fixtures preserve the existing sequential subset and prove exact
-or `NoChainSync` requests fail before Vault or Store mutation and satisfy
-`errors.Is(err, wallet.ErrAccountOperationUnsupported)`. Spies prove derivation
-and Vault work finish before the Store write opens.
+requests fail before Vault or Store mutation and satisfy
+`errors.Is(err, wallet.ErrAccountOperationUnsupported)`; Task 392 owns the
+corresponding `NoChainSync` rejection. Spies prove derivation and Vault work
+finish before the Store write opens.
 
 ## Definition of done
 
@@ -90,7 +91,6 @@ watch-delivery, or sequential invalid-child repair is included.
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t377]: ../archive/tasks/377-account-manager-wallet-dto.md
 [t378]: 378-account-manager-error-boundary.md
-[t388]: 388-runtime-account-xpub-collisions.md
 [t392]: 392-discovery-mode-account-creation.md
 [t393]: 393-key-only-receiving-rejection.md
 [t452]: 452-key-only-recovery-derivation.md

@@ -4,8 +4,8 @@ Component: **AddressManager child allocation and SQL branch-counter mutation**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 341][t341], [Task 344][t344], [Task 391][t391],
-[Task 393][t393], [Task 396][t396], [Task 399][t399], [Task 452][t452], and
+Dependencies: **[Task 341][t341], [Task 344][t344], [Task 393][t393],
+[Task 390][t390], [Task 396][t396], [Task 399][t399], [Task 452][t452], and
 [Task 467][t467]**.
 
 ## Rationale
@@ -28,6 +28,9 @@ obligations that a `NoChainSync` account explicitly disables.
   than a per-call override. Replace Task 393's `NewAddress` rejection: a true
   value force-allocates the next external or internal child. Preserve Task
   396's oldest-unused behavior for an ordinary chain-synchronized SQL account.
+- Prove the initial lnd path with Task 390's root-derived exact custom-scope
+  accounts. Supplied-XPub parity may reuse the same persisted-policy branch
+  after Task 391 lands, but it is not a hard dependency or scope of this task.
 - Preserve Task 341's selector validation, reuse Task 344's wallet-owned
   `ErrAddressDerivationExhausted` identity, and reuse
   Task 467's shared `ErrIndeterminateCommit`. Map the internal Store boundary
@@ -121,8 +124,8 @@ table, ownership rule, attempt identity, or signer path.
 
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t344]: 344-bulk-address-allocation.md
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t393]: 393-key-only-receiving-rejection.md
+[t390]: 390-custom-scope-account-creation.md
 [t396]: 396-oldest-unused-address.md
 [t399]: 399-zero-lookahead-persisted-targets.md
 [t465]: 465-new-address-result-itests.md

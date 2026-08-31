@@ -1,6 +1,6 @@
-# Task 406 — release PSBT funding leases by exact token
+# Task 406 — clean up failed PSBT funding leases
 
-Component: **UTXO Store and PsbtManager cleanup**.
+Component: **PsbtManager private failure cleanup and UTXO Store**.
 
 Type: **Gap fix**.
 
@@ -8,37 +8,50 @@ Dependencies: **[Task 405][t405]**.
 
 ## Rationale
 
-Expose one narrow atomic release operation for the
-complete operation-owned set.
+`FundPsbt` must not return a packet after a later watch or assembly failure,
+but its newly reserved inputs must not remain leased or release a replacement
+owner.
 
 ## Details
 
-It accepts the typed token/result rather than
-caller-reconstructed outpoints, uses a bounded wallet-owned context after
-caller cancellation, and reconciles ambiguous cleanup as all gone, all still
-owned by that token, replaced by another token, or indeterminate. It never
-releases a replacement token.
+- Keep exact-set cleanup private to failures before `FundPsbt` returns. It
+  receives the selected outpoints and expected `FundIntent.LeaseID` from the
+  funding attempt; do not add a public PsbtManager cleanup method or result.
+- Use a bounded wallet-owned context after caller cancellation and release
+  only leases still owned by the expected ID.
+- Reconcile cleanup as all gone, all still owned by the expected ID, replaced
+  by another owner, partial, or unavailable. Never release a replacement
+  owner; wrap unresolved state with Task 467's shared
+  `ErrIndeterminateCommit` and keep operation-specific states private.
+- After successful `FundPsbt`, callers use the packet outpoints, their lease
+  ID, and existing idempotent `ReleaseOutput` rather than this private path.
 
-Exclusions: input selection, token generation, watched-change delivery,
-per-outpoint public lease semantics, durable cleanup daemons, and generic
-replay state.
+Exclusions: input selection, lease-ID generation, watched-change delivery,
+public batch cleanup, new per-outpoint lease semantics, durable cleanup
+daemons, and generic replay state.
 
 ## Suggested fix
 
-Add one Store delete-by-exact-token-and-set operation and a
-matching set-state read, then expose a PsbtManager cleanup method that owns its
-bounded context and outcome translation.
+Add only the private exact-set delete and matching state read needed by the
+existing `FundPsbt` failure path, then translate unresolved outcomes through
+the shared public identity.
 
 ## Verification
 
-Exact-set release is atomic; cancellation still invokes the
-bounded cleanup; all-gone/all-owned/replaced/partial/unavailable outcomes are
-classified; delayed old-token cleanup cannot affect a later lease.
+Exact-set cleanup is atomic; cancellation still invokes its bounded context;
+all-gone/all-owned/replaced/partial/unavailable outcomes are classified; and
+cleanup never affects a lease owned by another ID. Public success cleanup uses
+focused `ReleaseOutput` coverage instead of a new method.
+[Task 439][t439] owns shared public integration coverage for definitive
+pre-return cleanup and the final caller-visible funding contract; this task
+retains focused private classification coverage.
 
 ## Definition of done
 
-Callers holding only the wallet-owned funding result
-can atomically release exactly its set, and no cleanup outcome is reported as
-definite unless reconciled.
+Every failure before `FundPsbt` returns either removes exactly the attempt's
+leases or reports shared indeterminacy without releasing a replacement. No new
+public result, cleanup method, or PSBT-specific error is added.
 
 [t405]: 405-psbt-funding-lease-admission.md
+[t467]: 467-indeterminate-commit-identity.md
+[t439]: 439-psbt-funding-itests.md

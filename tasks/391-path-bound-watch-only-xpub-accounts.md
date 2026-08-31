@@ -17,9 +17,9 @@ collapsing a known account number into arbitrary numberless import identity.
 
 ## Details
 
-- Activate Task 392's dormant optional account XPub and optional
-  caller-supplied master fingerprint in `NewAccountParams`, preserving absent
-  versus present-zero fingerprint exactly without redefining the request.
+- Add optional account XPub and caller-supplied master-fingerprint fields to
+  Task 392's `NewAccountParams`, preserving absent versus present-zero
+  fingerprint exactly without adding another request or method.
 - Accept this shape only for uniformly watch-only SQL wallets and only with an
   explicit exact account number. Spendable wallets and private supplied
   account keys remain unsupported.

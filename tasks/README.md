@@ -133,8 +133,8 @@ Grouping here does not create dependency or scheduling authority.
   amounts.
 - [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
   atomically.
-- [Task 406](406-psbt-funding-lease-release.md): release PSBT funding leases by
-  exact token.
+- [Task 406](406-psbt-funding-lease-release.md): clean up failed PSBT funding
+  leases.
 - [Task 407](407-psbt-finalization-authorization.md): authorize PSBT
   auto-finalization.
 - [Task 408](408-direct-transaction-change-watch.md): watch direct transaction
