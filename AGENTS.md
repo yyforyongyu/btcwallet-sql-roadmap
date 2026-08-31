@@ -35,9 +35,9 @@ Use these terms precisely:
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
 - **In progress** means implementation has started. Represent it with both a
-  claimant and linked PR. If a series starts before its individual PRs open,
-  record the exception under ACTIVE's Coordination section and link each PR
-  when opened.
+  claimant and linked PR. A stacked dependent remains in progress even while
+  an open dependency keeps it under `Blocked Phase 1 Tasks` or `Claimed
+  Tasks`. Open draft PRs early so ACTIVE records every layer of the stack.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
@@ -47,18 +47,23 @@ recommended for clear ownership, but is not required. A claimed task may have
 unclaimed prerequisites. When assigning a chain, use the dependent task's
 claimant by default; an existing or explicitly coordinated different claimant
 may remain. Chain assignment does not make a prerequisite active or in
-progress. Implementation may start only after every hard dependency and gate
-is complete; a claim, active status, review approval, or passing CI is not
-completion.
+progress. Hard dependencies control merge order and completion, not when
+implementation may start. A claim, active status, review approval, passing CI,
+or an open prerequisite PR is not completion.
 
-Each developer may have only one task in progress at a time unless an explicit
-temporary exception is recorded under ACTIVE's Coordination section. Archive
-the task after its implementation PR merges. Additional claims do not
-authorize parallel implementation by the same developer.
+Each developer may have one independent task or one coherent dependency stack
+in progress at a time. Give every task in a stack its own branch, PR, claimant,
+and ACTIVE entry. Unrelated parallel implementation still requires an explicit
+temporary exception under ACTIVE's Coordination section. Archive each task
+after its own implementation PR merges.
 
-Do not use stacked implementation PRs to bypass dependency completion. YY must
-approve an exception explicitly, the prerequisite contract must be frozen, and
-the dependent PR must remain unmergeable until the prerequisite merges.
+Prefer stacked implementation PRs when they let a claimed dependency chain
+advance without combining task scopes. Base each dependent branch and PR on
+its immediate prerequisite, state the stack order in every PR description,
+and rebase downstream layers whenever a prerequisite changes. Keep one atomic
+task per PR and merge the stack bottom-up; a dependent PR must not merge before
+all of its hard dependencies. Stacking needs no special approval and does not
+require the prerequisite contract to be frozen.
 
 Refresh ACTIVE's three task lists whenever a claim, task dependency, task
 phase, or task status changes. `Active Tasks` and `Blocked Phase 1 Tasks` must
@@ -123,10 +128,11 @@ Start from [TASK_TEMPLATE.md](TASK_TEMPLATE.md). Create every task as
 [tasks/README.md](tasks/README.md).
 
 Admit one small, atomic outcome per task and implementation PR. The task must
-be independently reviewable and mergeable. Split it before claiming when it
-contains unrelated fixes, multiple independently useful behaviors, or more
-than one independently changeable implementation boundary. Dependencies
-establish ordering only; they do not import another task's scope.
+be independently reviewable and land in its own PR. A stacked dependent
+becomes mergeable after its hard dependencies land. Split it before claiming
+when it contains unrelated fixes, multiple independently useful behaviors, or
+more than one independently changeable implementation boundary. Dependencies
+establish merge ordering only; they do not import another task's scope.
 
 Keep this section order:
 

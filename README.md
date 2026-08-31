@@ -10,13 +10,15 @@ maintained SQL-backed `wallet/` library.
    dependencies.
 3. Check [ACTIVE.md](ACTIVE.md) for active tasks, claims, and conflicts.
 4. Select one dependency-complete active task.
-5. Claim it in [ACTIVE.md](ACTIVE.md) before implementation.
-6. Implement exactly one task in one btcwallet branch and PR.
+5. Claim it and any dependent tasks you plan to stack in
+   [ACTIVE.md](ACTIVE.md) before implementation.
+6. Implement exactly one task per btcwallet branch and PR, stacking dependent
+   PRs when that advances the chain.
 7. After merge, archive the task and refresh the state map directly on `main`.
 
 Claiming a task does not claim its dependencies. A task may be claimed before
-it becomes active, but implementation cannot start until every dependency and
-gate is complete.
+it becomes active, and its PR may be stacked on an open prerequisite. Hard
+dependencies still control bottom-up merge order and completion.
 
 ## Sources of truth
 

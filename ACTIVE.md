@@ -12,7 +12,8 @@ all Phase 1 work with open hard dependencies under `Blocked Phase 1 Tasks`,
 whether claimed or unclaimed. Park claimed later-phase work under `Claimed
 Tasks` unless the active rule above places it under `Active Tasks`. Type guides
 which ready work to select first; it does not change readiness or list
-placement.
+placement. Open dependencies block direct merge, not implementation in a
+recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
@@ -29,10 +30,10 @@ placement.
 
 ## Blocked Phase 1 Tasks
 
-These Phase 1 tasks have open hard dependencies. They remain outside the
-current focus until every hard dependency completes, while claimant and PR
-columns preserve any existing ownership. Task files own all dependency edges,
-and `QUEUE.md` owns their delivery phase.
+These Phase 1 tasks have open hard dependencies and therefore cannot merge
+yet. They may still advance in recorded stacked PRs; claimant and PR columns
+show that work without making the task dependency-ready. Task files own all
+dependency edges, and `QUEUE.md` owns their delivery phase.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
@@ -69,8 +70,9 @@ and `QUEUE.md` owns their delivery phase.
 ## Claimed Tasks
 
 These claimed tasks sit outside the current Phase 1 delivery phase and are not
-listed under `Active Tasks` by the placement rule above. A claim does not
-authorize implementation before every dependency and gate completes.
+listed under `Active Tasks` by the placement rule above. When phase priority
+permits implementation, a claimed task may proceed as a stacked PR, but it
+cannot merge before every hard dependency and gate completes.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
@@ -102,20 +104,18 @@ Wallet `start`/`stop` mechanics, Wallet-owned call draining, the complete
 active-Wallet set, Store-close-last ordering, and separate live-sync and
 historical-rescan state before merge.
 
-Task 368 and draft PR #1328 are paused. The draft implements the removed per-
-Wallet lifecycle coordinator and must be rewritten around private Wallet
+Task 368 and draft PR #1328 must be rewritten around private Wallet
 `start`/`stop`, Wallet-owned call draining, and Task 368's final public-surface
-cutover after Tasks 331 and 358 complete. It remains unmergeable while those
-hard dependencies are open; no stacked implementation exception is approved.
+cutover. It may proceed at the top of the Task 331 -> Task 358 -> Task 368
+stack. Keep it rebased on the prerequisite work and merge the stack bottom-up.
 
-Task 427 and PR #1349 are paused behind Task 331 because the durable-reopen
-case consumes final Manager Stop and fresh Manager Start behavior. No stacked
-implementation exception is approved; PR #1349 remains unmergeable until Task
-331 completes.
+Task 427 and PR #1349 may proceed as a stacked dependent of Task 331 because
+the durable-reopen case consumes final Manager Stop and fresh Manager Start
+behavior. Keep it rebased on Task 331 and merge it only after Task 331.
 
-Task 350 and PR #1321 are paused behind the new hard dependency on Task 454.
-No stacked implementation exception is approved: implementation must not
-resume and PR #1321 must remain unmergeable until Task 454 completes.
+Task 350 and PR #1321 may resume as a stacked dependent of Task 454 when Phase
+3 work is prioritized. Keep it rebased on Task 454 and merge it only after
+Task 454.
 
 Task 424 and PR #1343 are paused after the transaction-integrity branch moved
 to non-blocking Phase 3. Resume them when Phase 3 becomes current or through

@@ -4,10 +4,11 @@ Copy this file to `tasks/NNN-kebab-case.md` using the next free task number in
 [tasks/README.md](tasks/README.md).
 
 A task is ready to enter the backlog only when it owns one small, independently
-reviewable outcome that can be delivered in one PR. Split it before assignment
-when it contains unrelated fixes, multiple independently useful behaviors, or
-more than one implementation owner. Dependencies establish ordering; they do
-not add their scope to this task.
+reviewable outcome that can be delivered in one PR. A dependent PR may be
+stacked and becomes mergeable after its hard dependencies land. Split the task
+before assignment when it contains unrelated fixes, multiple independently
+useful behaviors, or more than one implementation owner. Dependencies
+establish merge ordering; they do not add their scope to this task.
 
 Component: **one primary component or tightly coupled boundary**.
 
@@ -25,7 +26,7 @@ task. Do not use this section to collect adjacent cleanup.
 - Describe the exact behavior in scope.
 - Name the relevant API or storage boundary.
 - List explicit exclusions and follow-up work.
-- Keep the result useful and independently mergeable.
+- Keep the result useful and mergeable as its own PR after dependencies land.
 
 ## Suggested fix
 
