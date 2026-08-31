@@ -25,7 +25,7 @@ placement.
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
-| [Task 467][t467] | Define indeterminate commit identity | Gap fix | — | — |
+| [Task 467][t467] | Define indeterminate commit identity | Gap fix | YY | — |
 
 ## Blocked Phase 1 Tasks
 
