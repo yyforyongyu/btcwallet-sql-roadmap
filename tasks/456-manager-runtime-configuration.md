@@ -30,8 +30,9 @@ owns the shared chain source, network, Store, and lifecycle.
   construction boundary, and expose no retained configuration pointer or byte
   slice through Wallet information APIs.
 - Reduce maintained Manager Create input to durable Wallet identity and
-  initialization material. A created Wallet cannot select another chain source,
-  network, backend, or runtime policy.
+  initialization material. A created Wallet cannot select another chain
+  source, network, backend, or runtime policy. [Task 358][t358] alone owns the
+  context-first signature and moves identity into `CreateWalletParams`.
 - Construct each Wallet with immutable wallet-local policy and a wallet-scoped
   Store adapter. Pass no Manager context, admission state, lifecycle callback,
   per-Wallet SQL chain source, or Store-close authority into Wallet.
@@ -52,9 +53,9 @@ owns the shared chain source, network, Store, and lifecycle.
 ## Suggested fix
 
 Extend `ManagerConfig` with the final Manager-owned runtime fields and retain
-one validated immutable snapshot. Build managed Wallet configuration internally
-from that snapshot plus durable Wallet identity. Keep deprecated constructors
-on their existing isolated configuration path.
+one validated immutable snapshot. Build managed Wallet configuration
+internally from that snapshot plus durable Wallet identity. Keep deprecated
+constructors on their existing isolated configuration path.
 
 ## Verification
 
@@ -70,7 +71,8 @@ on their existing isolated configuration path.
   translates the final duplicate result owned by Task 330.
 - Reject missing or conflicting Manager runtime input before Store mutation.
 - Compile maintained callers, interfaces, and mocks without a per-Wallet chain
-  or runtime-policy argument to Manager Create.
+  or runtime-policy argument to Manager Create; Task 358 owns the later
+  context-first signature and identity placement.
 - Confirm deprecated constructors still build without importing their config
   path into managed Wallet construction.
 - Confirm Task 423 can change internal source construction from the pre-cutover
@@ -81,7 +83,8 @@ on their existing isolated configuration path.
 - Manager owns one validated immutable runtime policy sufficient to recreate
   every durable Wallet after restart.
 - Maintained Create input contains only durable Wallet identity and
-  initialization material.
+  initialization material, independent of the final signature owned by Task
+  358.
 - Managed Wallets cannot override Manager-owned chain, network, backend, or
   runtime policy and receive no Manager lifecycle capability or Store-close
   authority.
@@ -90,3 +93,4 @@ on their existing isolated configuration path.
 
 [t330]: 330-duplicate-wallet-create.md
 [t334]: 334-shared-chain-state.md
+[t358]: 358-contextual-manager-operations.md

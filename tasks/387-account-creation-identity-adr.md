@@ -39,12 +39,12 @@ without inventing a new signing or custody model.
 - Amend ADR 0012 only as needed to retain uniform wallet-level custody: a
   supplied XPub account is accepted in a uniformly watch-only SQL wallet and
   is not a route for public-only material into a spendable wallet.
-- Define one final `NewAccountParams` and `AccountInfo` field contract carrying
-  scope, name, optional exact number, optional schema, optional external
-  account XPub, optional master fingerprint, and `NoChainSync`. [Task 392][t392]
-  owns introducing those complete public types once; Tasks 343, 390, and 391
-  activate and validate their initially dormant fields. Do not add an
-  lnd-specific API or a key-family manager.
+- Define one extensible `NewAccountParams` operation. [Task 392][t392]
+  introduces it with the existing scope and name inputs plus `NoChainSync` and
+  adds `NoChainSync` to `AccountInfo`; Tasks 343, 390, and 391 later add and
+  own the optional exact-number, schema, and supplied-XPub/fingerprint fields.
+  Do not publish dormant fields, add an lnd-specific API, or add a key-family
+  manager.
 - Preserve the existing ordinary numberless-import boundary as
   `ImportAccount(context.Context, string, *hdkeychain.ExtendedKey, uint32,
   waddrmgr.AddressType, bool) (*AccountInfo, error)`. Its fingerprint is a

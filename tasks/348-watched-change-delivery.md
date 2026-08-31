@@ -15,10 +15,9 @@ count-one change-allocation path until Task 353 retires that backend.
 
 ## Details
 
-On registration
-failure or cancellation, invoke the exact-token set release and reconcile
+On registration failure or cancellation, invoke Task 406's private exact-set
 cleanup before returning. Immediately before success, verify the full selected
-set is active, unexpired, and owned by the funding result token. Do not send a
+set is active, unexpired, and owned by `FundIntent.LeaseID`. Do not send a
 modern-kvdb wallet through SQL-only `NewBulkAddresses`; preserve its existing
 count-one allocation and watch flow without adding SQL durable-obligation
 semantics.
@@ -32,25 +31,29 @@ perform this watch or lease cleanup on the wrapper's behalf.
 
 Consume Task 344's watched allocation for SQL PSBT change and the retained
 count-one allocator for modern-kvdb change. Gate publication on delivery and
-an exact funding-set verification; route every post-funding failure through
-the canonical set-release API.
+an exact funding-set verification; route every pre-return post-funding failure
+through Task 406's private cleanup.
 
 ## Verification
 
-Every returned funded PSBT has watched change and an active exact token-owned
-set. SQL fixtures use Task 344, while maintained modern-kvdb fixtures preserve
-the legacy count-one allocator and never call `NewBulkAddresses`. Registration
-failure returns no packet and either releases the complete set or returns the
-typed cleanup-indeterminate result. No-change funding performs no watch
-registration.
+Every returned funded PSBT has watched change and an active exact set owned by
+the caller's lease ID. SQL fixtures use Task 344, while maintained modern-kvdb
+fixtures preserve the legacy count-one allocator and never call
+`NewBulkAddresses`. Registration failure returns no packet and either releases
+the attempt's complete set or matches shared `ErrIndeterminateCommit`.
+No-change funding performs no watch registration.
+[Task 439][t439] owns shared public integration coverage for this final watch,
+lease-cleanup, and success contract on every maintained backend.
 
 ## Definition of done
 
 PSBT success is gated on durable watch delivery and
-last-moment exact lease ownership; all cleanup is delegated to the canonical
-release operation. SQL uses Task 344, while maintained modern kvdb retains its
-count-one change-allocation path until Task 353.
+last-moment exact lease ownership; pre-return cleanup stays private and
+successful callers retain existing `ReleaseOutput`. SQL uses Task 344, while
+maintained modern kvdb retains its count-one change-allocation path until Task
+353.
 
 [t344]: 344-bulk-address-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
 [t425]: ../archive/tasks/425-separate-transaction-authoring-wrappers.md
+[t439]: 439-psbt-funding-itests.md

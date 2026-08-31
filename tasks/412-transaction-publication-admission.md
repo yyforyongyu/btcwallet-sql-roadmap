@@ -16,11 +16,13 @@ against its durable decision.
 
 Use [Task 410][t410]'s graph admission, reached transitively through Task 349,
 with Task 349's internal durable invalidation status/result so invalidation
-can atomically reject a pre-send transition. Add the SQL TxWriter public
-operation in this same PR, after both sides use that admission boundary. Keep
-the modern kvdb public call unsupported. Never hold a database transaction
-across the network call. Preserve current already-known/confirmed behavior and
-exact publisher cleanup errors.
+can atomically reject a pre-send transition. Promote or reuse the existing
+`RemoveDescendants(*wire.MsgTx) error` concept on maintained `TxWriter` in this
+same PR, after both sides use that admission boundary; do not add a differently
+named invalidation method or result. Keep the modern kvdb implementation
+unsupported. Never hold a database transaction across the network call.
+Preserve current already-known/confirmed behavior and exact publisher cleanup
+errors.
 
 Persist one publication-specific attempt marker with the exact wallet,
 transaction identity, and bytes before releasing admission for the network
@@ -39,16 +41,17 @@ and publisher performance work.
 
 Add a durable pre-send transition under Task 410 graph admission, release the
 database transaction before network I/O, and make Task 349 invalidation
-atomically reject or order against that transition. Expose the SQL TxWriter
-call only after this complete path is wired. Reconcile an existing attempt by
-checking the exact transaction's chain/mempool visibility with a bounded
-context, then finalize, retry the same send, or preserve the fence as
-indeterminate according to the operation-specific rules above.
+atomically reject or order against that transition. Promote
+`RemoveDescendants` to maintained TxWriter only after this complete path is
+wired. Reconcile an existing attempt by checking the exact transaction's
+chain/mempool visibility with a bounded context, then finalize, retry the same
+send, or preserve the fence as indeterminate according to the
+operation-specific rules above.
 
 ## Verification
 
-Before this PR, SQL and kvdb public invalidation calls remain unsupported. In
-this PR, the SQL public call becomes available only with a
+Before this PR, maintained SQL and kvdb TxWriter descendant removal remains
+unsupported. In this PR, SQL `RemoveDescendants` becomes available only with a
 publication-versus-invalidation barrier that permits the two documented
 serial orders; no order sends a transaction after durable invalidation;
 network errors preserve the original error plus exact cleanup state; kvdb
@@ -60,11 +63,11 @@ result.
 
 ## Definition of done
 
-The SQL public invalidation operation and publication admission become
+Maintained SQL `TxWriter.RemoveDescendants` and publication admission become
 available atomically, publication cannot cross invalidation between durable
 admission and send, every crash boundary has deterministic retry or
 indeterminate settlement, and no database transaction is held during network
-I/O.
+I/O or parallel invalidation method is added.
 
 [t349]: 349-transaction-invalidation.md
 [t410]: 410-transaction-graph-admission.md

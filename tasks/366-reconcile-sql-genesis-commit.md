@@ -4,7 +4,7 @@ Component: **Manager and SQL Store genesis result**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 329][t329] and [Task 467][t467]**.
+Dependencies: **[Task 329][t329], [Task 358][t358], and [Task 467][t467]**.
 
 ## Rationale
 
@@ -23,9 +23,11 @@ conflicting state as an ordinary retryable failure.
 - Return success only when every persisted fact exactly matches the committed
   plan. Complete runtime assembly before publishing the Wallet.
 - Return ordinary failure when no artifact from the attempted genesis exists.
-- Return Task 467's wallet-owned `ErrIndeterminateCommit` for every partial,
-  conflicting, or otherwise unprovable state. Never publish an indeterminate
-  Wallet.
+- For every partial, conflicting, or otherwise unprovable state, fix Task
+  467's wallet-owned `ErrIndeterminateCommit` and enter or observe
+  [Task 331][t331]'s existing terminal Create path. Privately stop and join
+  every unpublished candidate, and initiate or join Manager shutdown before
+  returning. Never publish an indeterminate Wallet.
 - Use one bounded Manager-owned reconciliation context so later public caller
   cancellation cannot interrupt determination. [Task 358][t358] owns the
   public cancellation cutoff and contextual API.
@@ -51,8 +53,10 @@ conflicting state as an ordinary retryable failure.
 
 Add an operation-specific SQL genesis reader that compares the persisted state
 with the attempted ciphertext/public plan after an ambiguous commit response.
-Map its exact, absent, and conflicting outcomes once at the Manager boundary,
-then assemble and publish only an exact committed result.
+Map its exact, absent, and conflicting outcomes once at the Manager boundary.
+Assemble and publish only an exact committed result, preserve clean absence as
+ordinary failure, and route every unprovable result through Task 331's existing
+terminal cleanup before returning the fixed error.
 
 ## Verification
 
@@ -60,11 +64,22 @@ then assemble and publish only an exact committed result.
   exact commit, before any commit, and after representative partial or
   conflicting state.
 - Exact committed state returns success and publishes one usable Wallet;
-  absent state returns ordinary failure and publishes none.
+  absent state returns ordinary failure and publishes none. Neither definitive
+  result enters terminal cleanup.
 - Missing or conflicting wallet, secret, sync, scope, account,
   `NoChainSync`, and cursor facts each return the wallet-owned indeterminate
-  error, satisfy `errors.Is(err, wallet.ErrIndeterminateCommit)`, and publish
-  nothing.
+  error, satisfy `errors.Is(err, wallet.ErrIndeterminateCommit)`, publish
+  nothing, and leave Manager stopped after private candidate cleanup. A queued
+  Create returns `ErrManagerStopped` before backend or cache work.
+- One barrier regression uses detailed Arrange, Act, and Assert comments.
+  Arrange injects an unprovable reconciliation, arms Task 331's existing
+  private-candidate cleanup barrier, and prepares backend/cache spies. Act
+  starts the originating Create, waits until cleanup pauses, and only then
+  invokes a second Create. Assert proves no Wallet is published, the originating
+  result has not returned, and the second Create fails with
+  `ErrManagerStopped` before backend or cache work; after releasing the barrier,
+  the originating Create returns `ErrIndeterminateCommit` and Manager is
+  stopped.
 - Cancellation after the mutation cutoff cannot interrupt reconciliation or
   change the definitive result.
 - Tests prove the implementation adds no retry, manifest, replay, generic
@@ -74,7 +89,8 @@ then assemble and publish only an exact committed result.
 
 - Every ambiguous SQL genesis response resolves to exact committed, absent, or
   wallet-owned indeterminate state on both SQL dialects.
-- Only exact committed state can assemble and publish a Wallet.
+- Only exact committed state can assemble and publish a Wallet; every residual
+  indeterminate result returns after Task 331's terminal cleanup.
 - Reconciliation compares the complete Task 329 genesis plan without a new
   durable marker or generic framework.
 - The PR contains no definite-failure transaction rewrite, duplicate policy,
@@ -82,5 +98,6 @@ then assemble and publish only an exact committed result.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t330]: 330-duplicate-wallet-create.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t358]: 358-contextual-manager-operations.md
 [t467]: 467-indeterminate-commit-identity.md

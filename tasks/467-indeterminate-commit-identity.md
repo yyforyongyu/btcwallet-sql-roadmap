@@ -8,27 +8,31 @@ Dependencies: **None**.
 
 ## Rationale
 
-Account, address, and genesis mutations can receive an ambiguous SQL commit
-response whose persisted outcome cannot be proved. Those independent
-operations need one wallet-owned caller identity without expanding any one
-operation's implementation task into a generic error-boundary redesign.
+Account, address, genesis, and funding mutations can receive an ambiguous SQL
+commit response whose persisted outcome is not definitive at the public
+boundary. Those independent operations need one wallet-owned caller identity
+without expanding any one operation's implementation task into a generic
+error-boundary redesign.
 
 ## Details
 
 - Define exactly one shared public `ErrIndeterminateCommit` identity in
   `package wallet`. It means a durable mutation returned an ambiguous commit
-  response and operation-specific reconciliation could prove neither exact
-  success nor clean absence.
+  response and the owning public boundary cannot prove a definitive result.
+  An operation may map conservatively before later reconciliation exists or
+  classify exact state immediately; the public identity remains the same.
 - Require callers to identify the result with `errors.Is`. Preserve useful
   operation context with `%w`, but never expose the SQL runtime sentinel as a
   second public identity.
-- Leave each operation's classification in its owning task: exact root account
-  creation in [Task 343][t343], batch allocation in [Task 344][t344], Manager
-  genesis in [Task 366][t366], runtime account reconciliation in
-  [Task 389][t389], count-one allocation in [Task 395][t395], raw import in
-  [Task 403][t403], and sequential account allocation in [Task 460][t460].
-  Each owner proves exact success, clean absence, and unprovable state without
-  retrying the mutation.
+- Leave each operation's mapping or classification in its owning task.
+  [Task 358][t358], [Task 343][t343], and [Task 390][t390] own conservative
+  Phase 1 mapping for Manager Create and root/custom account creation;
+  [Task 366][t366] and [Task 389][t389] own later exact reconciliation for
+  Manager genesis and the Task 343/390 account operations.
+  [Task 405][t405] and [Task 406][t406] own funding admission and private
+  pre-return cleanup classification. [Task 344][t344], [Task 395][t395],
+  [Task 403][t403], and [Task 460][t460] own their exact address or account
+  result classification. No owner retries an ambiguous mutation.
 - Do not define operation-specific validation, collision, exhaustion, retry,
   replay, or concurrency behavior. Do not add a generic reconciliation
   framework, error registry, adapter, interface, or persisted state.
@@ -56,8 +60,10 @@ reconciliation result at its existing public boundary.
 - A representative contextual wrapper satisfies
   `errors.Is(err, wallet.ErrIndeterminateCommit)` while the SQL runtime
   sentinel remains outside the public contract.
-- Focused dependency-task tests prove exact success and clean absence do not
-  match this identity, while unprovable states do.
+- Focused exact-classifier task tests prove exact success and clean absence do
+  not match this identity, while unprovable states do. Conservative-mapper
+  tests instead prove an unreconciled ambiguous response matches this identity
+  without asserting whether the durable state is absent.
 - The diff adds no operation implementation, public method, storage change,
   reconciliation helper, or new file.
 
@@ -70,8 +76,12 @@ reconciliation result at its existing public boundary.
 
 [t344]: 344-bulk-address-allocation.md
 [t343]: 343-exact-account-creation.md
+[t358]: 358-contextual-manager-operations.md
 [t366]: 366-reconcile-sql-genesis-commit.md
 [t389]: 389-runtime-account-commit-reconciliation.md
+[t390]: 390-custom-scope-account-creation.md
 [t395]: 395-key-only-locator-allocation.md
 [t403]: 403-raw-import-watch-obligations.md
+[t405]: 405-psbt-funding-lease-admission.md
+[t406]: 406-psbt-funding-lease-release.md
 [t460]: 460-sequential-account-invalid-children.md
