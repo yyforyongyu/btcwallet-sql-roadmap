@@ -48,9 +48,9 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
-| [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | — | — |
-| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | — | — |
-| [Task 395][t395] | Allocate a durable NoChainSync child | Gap fix | — | — |
+| [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | — |
+| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | — |
+| [Task 395][t395] | Allocate a durable NoChainSync child | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
@@ -60,7 +60,7 @@ and `QUEUE.md` owns their delivery phase.
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
 | [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
-| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | — | — |
+| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
 | [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | — |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | — |
