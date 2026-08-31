@@ -234,7 +234,6 @@ that structural exclusion explicitly.
   extraction.
 - [Task 386](386-remove-raw-wallet-secret-seams.md): remove raw Wallet secret
   seams.
-- [Task 421](421-sql-passphrase-commit-reconciliation.md): reconcile SQL
   passphrase commits.
 
 ## Migration and retirement

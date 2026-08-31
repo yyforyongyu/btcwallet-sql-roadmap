@@ -82,7 +82,6 @@ authorize implementation before every dependency and gate completes.
 | [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 3 | YY | — |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 3 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 3 | YY | — |
-| [Task 421][t421] | Reconcile SQL passphrase commits | Bug fix | 3 | YY | [#1341][pr1341] |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
 | [Task 427][t427] | Test Controller credentials | Test | 2 | Gustavo | [#1349][pr1349] |
@@ -173,7 +172,6 @@ implementation.
 [t410]: tasks/410-transaction-graph-admission.md
 [t411]: tasks/411-terminal-parent-rejection.md
 [t412]: tasks/412-transaction-publication-admission.md
-[t421]: tasks/421-sql-passphrase-commit-reconciliation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
@@ -197,7 +195,6 @@ implementation.
 [pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1342]: https://github.com/btcsuite/btcwallet/pull/1342
-[pr1341]: https://github.com/btcsuite/btcwallet/pull/1341
 [pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
 [pr1347]: https://github.com/btcsuite/btcwallet/pull/1347
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348

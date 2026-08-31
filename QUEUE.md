@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **139 tasks**, with **116 remaining open**, **21 done**,
+The roadmap contains **139 tasks**, with **115 remaining open**, **21 done**,
 and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
@@ -126,7 +126,7 @@ three-backend performance measurements.
 | [Task 465][t465] | open | AddressManager NoChainSync result integration tests | Test | Verify NoChainSync address results | 395, 431 |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 395, 396, 431 |
 
-## Phase 3 — remaining wallet gaps and bugs · 35 open
+## Phase 3 — remaining wallet gaps and bugs · 34 open
 
 Fix the remaining known gaps and bugs in maintained wallet APIs, storage,
 lifecycle, synchronization, transactions, and recovery. Keep their enabling
@@ -163,7 +163,6 @@ ready Bug fix and Gap fix work.
 | [Task 412][t412] | open | TxWriter public contract, TxPublisher, and transaction graph admission | Gap fix | Expose invalidation with publication ordering | 349 |
 | [Task 413][t413] | open | SQL UTXO and normalized-input schema | Bug fix | Constrain SQL UTXOs to exact spending inputs | 351, 409, 410 |
 | [Task 414][t414] | open | SQL UTXO schema | Bug fix | Bound persisted SQL UTXO amounts | 351 |
-| [Task 421][t421] | open | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | — |
 | [Task 423][t423] | open | SQL Manager chain source adapter and coordinator cutover | Refactor | Cut over SQL Manager chain notification ownership | 370, 372, 402, 412, 456, 457 |
 | [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
@@ -225,7 +224,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 21
+## Done · 22
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -243,6 +242,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 415][t415] | 2 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
+| [Task 421][t421] | 3 | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | [#1341][pr1341] |
 | [Task 425][t425] | 1 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |
 | [Task 429][t429] | 2 | AccountManager mutation integration tests | Test | Cover public account mutation contracts | [#1326][pr1326] |
 | [Task 433][t433] | 2 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |

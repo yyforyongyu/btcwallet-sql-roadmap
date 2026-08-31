@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 421](tasks/421-sql-passphrase-commit-reconciliation.md) completed on 2026-08-31.
 - [Task 394](tasks/394-key-only-transaction-ownership.md) was superseded before
   implementation on 2026-08-30 when `NoChainSync` was defined as chain-sync
   policy rather than an ownership rule, eliminating the old outcome; Task 395
