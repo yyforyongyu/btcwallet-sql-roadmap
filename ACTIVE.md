@@ -65,7 +65,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
 | [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | [#1353][pr1353] |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
-| [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | — |
+| [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 
 ## Claimed Tasks
 
@@ -202,3 +202,4 @@ implementation.
 [pr1355]: https://github.com/btcsuite/btcwallet/pull/1355
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1353]: https://github.com/btcsuite/btcwallet/pull/1353
+[pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
