@@ -20,7 +20,7 @@ recorded PR stack.
 | [Task 334][t334] | Define aggregate Manager ownership | Design | YY | [#1323][pr1323] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
-| [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | — |
+| [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
 | [Task 387][t387] | Define account identity and chain-sync policy | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -55,7 +55,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
-| [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | — |
+| [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | [#1357][pr1357] |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | Gustavo | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
@@ -203,3 +203,5 @@ implementation.
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1353]: https://github.com/btcsuite/btcwallet/pull/1353
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
+[pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
+[pr1357]: https://github.com/btcsuite/btcwallet/pull/1357
