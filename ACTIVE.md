@@ -42,7 +42,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
-| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | — |
+| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | Abdullahi | — |
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | Gustavo | — |
@@ -205,3 +205,4 @@ implementation.
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
 [pr1357]: https://github.com/btcsuite/btcwallet/pull/1357
+[pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
