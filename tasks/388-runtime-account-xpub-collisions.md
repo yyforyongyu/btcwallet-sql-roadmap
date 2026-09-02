@@ -74,4 +74,4 @@ classification without changing Manager genesis validation.
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t343]: 343-exact-account-creation.md
 [t378]: 378-account-manager-error-boundary.md
-[t387]: 387-account-creation-identity-adr.md
+[t387]: ../archive/tasks/387-account-creation-identity-adr.md

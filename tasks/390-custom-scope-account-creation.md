@@ -76,7 +76,7 @@ lnd-specific methods, or a new component.
 
 [t343]: 343-exact-account-creation.md
 [t378]: 378-account-manager-error-boundary.md
-[t387]: 387-account-creation-identity-adr.md
+[t387]: ../archive/tasks/387-account-creation-identity-adr.md
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t392]: 392-discovery-mode-account-creation.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

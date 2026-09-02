@@ -111,4 +111,4 @@ unrepresentable identity or custody before constructing a destination Store.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md
-[t387]: 387-account-creation-identity-adr.md
+[t387]: ../archive/tasks/387-account-creation-identity-adr.md

@@ -20,7 +20,6 @@ recorded PR stack.
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
-| [Task 387][t387] | Define account identity and chain-sync policy | Design | YY | [#1342][pr1342] |
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
@@ -145,7 +144,6 @@ implementation.
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
 [t378]: tasks/378-account-manager-error-boundary.md
-[t387]: tasks/387-account-creation-identity-adr.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t390]: tasks/390-custom-scope-account-creation.md
@@ -187,7 +185,6 @@ implementation.
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1342]: https://github.com/btcsuite/btcwallet/pull/1342
 [pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1349]: https://github.com/btcsuite/btcwallet/pull/1349

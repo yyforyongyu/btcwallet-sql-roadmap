@@ -59,7 +59,6 @@ Grouping here does not create dependency or scheduling authority.
   backend errors.
   errors.
 - [Task 381](381-recovery-adapter-identity.md): hide recovery adapter identity.
-- [Task 387](387-account-creation-identity-adr.md): define account identity and
   chain-sync policy.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.

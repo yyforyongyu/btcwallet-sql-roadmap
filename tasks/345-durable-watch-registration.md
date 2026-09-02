@@ -64,4 +64,4 @@ selection behavior, signing-custody change, chain call, enum, account kind, or
 new table is added.
 
 [t340]: 340-durable-database-identity.md
-[t387]: 387-account-creation-identity-adr.md
+[t387]: ../archive/tasks/387-account-creation-identity-adr.md

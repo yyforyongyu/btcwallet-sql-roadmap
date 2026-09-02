@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **139 tasks**, with **112 remaining open**, **21 done**,
+The roadmap contains **139 tasks**, with **111 remaining open**, **21 done**,
 and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
@@ -39,7 +39,7 @@ start of integration.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 34 open
+## Phase 1 — lnd integration · 33 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -63,7 +63,6 @@ separately accepted task.
 | [Task 364][t364] | open | SQL watch-generation and obligation schema | Gap fix | Persist ordered SQL live-watch obligations | 345 |
 | [Task 368][t368] | open | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | 331, 358 |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
-| [Task 387][t387] | open | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | — |
 | [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 387 |
 | [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345, 378, 387 |
 | [Task 393][t393] | open | AddressManager receiving entry points and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | 345, 392 |
@@ -221,7 +220,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 25
+## Done · 26
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -238,6 +237,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 377][t377] | 1 | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | [#1329][pr1329] |
 | [Task 379][t379] | 1 | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | [#1331][pr1331] |
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
+| [Task 387][t387] | 1 | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | [#1342][pr1342] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 415][t415] | 2 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 421][t421] | 3 | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | [#1341][pr1341] |
