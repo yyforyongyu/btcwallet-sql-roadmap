@@ -25,6 +25,9 @@ recorded PR stack.
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
+| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
+| [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | [#1353][pr1353] |
+| [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
 
 ## Blocked Phase 1 Tasks
 
@@ -60,9 +63,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
 | [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
-| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
-| [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | [#1353][pr1353] |
-| [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 
 ## Claimed Tasks
