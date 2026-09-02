@@ -95,4 +95,4 @@ watch-delivery, or sequential invalid-child repair is included.
 [t393]: 393-key-only-receiving-rejection.md
 [t452]: 452-key-only-recovery-derivation.md
 [t460]: 460-sequential-account-invalid-children.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

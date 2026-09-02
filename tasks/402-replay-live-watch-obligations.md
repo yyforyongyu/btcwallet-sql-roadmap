@@ -95,6 +95,6 @@ private.
   public API, implementing component requirement, historical scan, source
   cutover, or generic notification framework.
 
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t364]: 364-durable-watch-registration.md
 [t401]: 401-live-tip-chain-watch.md

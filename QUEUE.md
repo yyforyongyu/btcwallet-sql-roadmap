@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **139 tasks**, with **115 remaining open**, **21 done**,
+The roadmap contains **139 tasks**, with **113 remaining open**, **21 done**,
 and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
@@ -39,7 +39,7 @@ start of integration.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 36 open
+## Phase 1 — lnd integration · 34 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -50,7 +50,6 @@ separately accepted task.
 | --- | --- | --- | --- | --- | --- |
 | [Task 329][t329] | open | Manager SQL genesis and SQL Store | Bug fix | Commit SQL wallet genesis atomically | 345 |
 | [Task 331][t331] | open | Manager lifecycle, admission, and Store ownership | Bug fix | Make Manager lifecycle terminal | 334, 458, 459 |
-| [Task 334][t334] | open | SQL wallet architecture documentation | Design | Define aggregate Manager and shared-chain ownership | — |
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | — |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 378, 392, 393, 452, 467 |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore mutation | Gap fix | Allocate receiving-address batches atomically | 364, 392, 393, 402, 467 |
@@ -83,7 +82,6 @@ separately accepted task.
 | [Task 456][t456] | open | ManagerConfig and managed Wallet construction | Refactor | Centralize managed Wallet runtime configuration | 334 |
 | [Task 458][t458] | open | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | 334 |
 | [Task 459][t459] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 334, 456, 458 |
-| [Task 467][t467] | open | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | — |
 
 ## Phase 2 — verification · 32 open
 
@@ -224,12 +222,13 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 22
+## Done · 24
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
 | [Task 332][t332] | 1 | Manager, AccountManager, and AddressManager | Gap fix | Define watch-only and script-import policy | [#1320][pr1320] |
 | [Task 333][t333] | 1 | Manager and integration-test harness | Gap fix | Add PostgreSQL Manager and harness support | [#1303][pr1303] |
+| [Task 334][t334] | 1 | SQL wallet architecture documentation | Design | Define aggregate Manager and shared-chain ownership | [#1323][pr1323] |
 | [Task 337][t337] | 1 | Wallet and Signer public derivation | Bug fix | Restore SQL imported-XPub public derivation | [#1324][pr1324] |
 | [Task 339][t339] | 1 | TxReader | Gap fix | Define public transaction visibility and status | [#1330][pr1330] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
@@ -250,6 +249,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 435][t435] | 2 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |
 | [Task 436][t436] | 2 | TxReader integration tests | Test | Cover transaction read contracts | [#1346][pr1346] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
+| [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md

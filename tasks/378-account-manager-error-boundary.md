@@ -120,4 +120,4 @@ legacy-manager, or Vault exit and remove the current
 [t460]: 460-sequential-account-invalid-children.md
 [t462]: 462-account-mutation-error-itests.md
 [t430]: 430-account-query-itests.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

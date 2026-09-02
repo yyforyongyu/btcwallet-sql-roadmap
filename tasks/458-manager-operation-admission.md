@@ -108,5 +108,5 @@ without retaining Manager context or lifecycle state.
 - The PR adds no Manager state, Manager sentinel, Store-close owner, operation
   registry, daemon change, process-local lease, or cross-process behavior.
 
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t368]: 368-wallet-startup-shutdown.md

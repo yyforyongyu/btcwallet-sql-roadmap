@@ -124,4 +124,4 @@ partial list nor public recovery bookkeeping.
 [t393]: 393-key-only-receiving-rejection.md
 [t402]: 402-replay-live-watch-obligations.md
 [t461]: 461-address-batch-itests.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

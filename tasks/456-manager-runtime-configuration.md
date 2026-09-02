@@ -92,5 +92,5 @@ constructors on their existing isolated configuration path.
   or external-daemon behavior.
 
 [t330]: 330-duplicate-wallet-create.md
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t358]: 358-contextual-manager-operations.md

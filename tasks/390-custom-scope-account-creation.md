@@ -79,4 +79,4 @@ lnd-specific methods, or a new component.
 [t387]: 387-account-creation-identity-adr.md
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t392]: 392-discovery-mode-account-creation.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

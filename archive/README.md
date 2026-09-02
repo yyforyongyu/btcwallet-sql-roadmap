@@ -7,6 +7,8 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 467](tasks/467-indeterminate-commit-identity.md) completed on 2026-09-02.
+- [Task 334](tasks/334-shared-chain-state.md) completed on 2026-09-02.
 - [Task 421](tasks/421-sql-passphrase-commit-reconciliation.md) completed on 2026-08-31.
 - [Task 394](tasks/394-key-only-transaction-ownership.md) was superseded before
   implementation on 2026-08-30 when `NoChainSync` was defined as chain-sync

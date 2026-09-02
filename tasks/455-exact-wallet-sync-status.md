@@ -87,4 +87,4 @@ compatibility views.
 
 [t428]: 428-controller-sync-info-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md

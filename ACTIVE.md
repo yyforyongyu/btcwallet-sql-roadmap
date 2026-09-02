@@ -17,7 +17,6 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 334][t334] | Define aggregate Manager ownership | Design | YY | [#1323][pr1323] |
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
@@ -26,7 +25,6 @@ recorded PR stack.
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
-| [Task 467][t467] | Define indeterminate commit identity | Gap fix | YY | [#1355][pr1355] |
 
 ## Blocked Phase 1 Tasks
 
@@ -128,7 +126,6 @@ implementation.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
-[t334]: tasks/334-shared-chain-state.md
 [t340]: tasks/340-durable-database-identity.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
@@ -188,9 +185,7 @@ implementation.
 [t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
 [t460]: tasks/460-sequential-account-invalid-children.md
-[t467]: tasks/467-indeterminate-commit-identity.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
-[pr1323]: https://github.com/btcsuite/btcwallet/pull/1323
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
@@ -199,7 +194,6 @@ implementation.
 [pr1347]: https://github.com/btcsuite/btcwallet/pull/1347
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
-[pr1355]: https://github.com/btcsuite/btcwallet/pull/1355
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1353]: https://github.com/btcsuite/btcwallet/pull/1353
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356

@@ -65,5 +65,5 @@ the PR adds no public result, cleanup method, duration, or token.
 [t346]: 346-psbt-funding-metadata.md
 [t356]: 356-defer-change-script-allocation.md
 [t404]: 404-transaction-input-amounts.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md
 [t439]: 439-psbt-funding-itests.md

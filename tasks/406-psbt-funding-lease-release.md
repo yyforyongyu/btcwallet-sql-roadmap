@@ -53,5 +53,5 @@ leases or reports shared indeterminacy without releasing a replacement. No new
 public result, cleanup method, or PSBT-specific error is added.
 
 [t405]: 405-psbt-funding-lease-admission.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md
 [t439]: 439-psbt-funding-itests.md

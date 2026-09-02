@@ -211,7 +211,7 @@ waiter.
 - The PR adds no Wallet admission implementation, duplicate-create policy,
   shared-chain cutover, generic operation registry, or Manager lease.
 
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t368]: 368-wallet-startup-shutdown.md
 [t458]: 458-manager-operation-admission.md
 [t459]: 459-manager-startup-wallet-assembly.md

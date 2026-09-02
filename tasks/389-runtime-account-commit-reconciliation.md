@@ -83,4 +83,4 @@ generic reconciliation mechanism is added.
 
 [t343]: 343-exact-account-creation.md
 [t390]: 390-custom-scope-account-creation.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

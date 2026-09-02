@@ -111,7 +111,7 @@ existing path until Task 423.
   targeted-rescan durability, or PostgreSQL-specific Wallet behavior.
 
 [t333]: ../archive/tasks/333-postgres-manager-harness.md
-[t334]: 334-shared-chain-state.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t331]: 331-manager-wallet-lifecycle.md
 [t371]: 371-canonical-chain-frontier.md
 [t423]: 423-manager-chain-source-cutover.md

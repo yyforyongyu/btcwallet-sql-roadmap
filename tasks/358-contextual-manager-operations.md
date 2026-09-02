@@ -106,4 +106,4 @@ without retry or publication.
 [t329]: 329-atomic-wallet-account-creation.md
 [t331]: 331-manager-wallet-lifecycle.md
 [t456]: 456-manager-runtime-configuration.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

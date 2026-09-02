@@ -100,4 +100,4 @@ terminal cleanup before returning the fixed error.
 [t330]: 330-duplicate-wallet-create.md
 [t331]: 331-manager-wallet-lifecycle.md
 [t358]: 358-contextual-manager-operations.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

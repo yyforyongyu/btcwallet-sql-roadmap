@@ -130,4 +130,4 @@ table, ownership rule, attempt identity, or signer path.
 [t399]: 399-zero-lookahead-persisted-targets.md
 [t465]: 465-new-address-result-itests.md
 [t452]: 452-key-only-recovery-derivation.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md

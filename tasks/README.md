@@ -94,12 +94,10 @@ Grouping here does not create dependency or scheduling authority.
   accounts from recovery.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
-- [Task 467](467-indeterminate-commit-identity.md): define the indeterminate
   commit identity.
 
 ## Chain and synchronization
 
-- [Task 334](334-shared-chain-state.md): define aggregate Manager and
   shared-chain ownership.
 - [Task 370](370-chain-source-delivery.md): prepare ordered Manager chain
   delivery.

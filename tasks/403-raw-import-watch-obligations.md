@@ -77,4 +77,4 @@ chain operation.
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t364]: 364-durable-watch-registration.md
 [t402]: 402-replay-live-watch-obligations.md
-[t467]: 467-indeterminate-commit-identity.md
+[t467]: ../archive/tasks/467-indeterminate-commit-identity.md
