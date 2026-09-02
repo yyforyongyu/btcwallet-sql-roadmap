@@ -53,24 +53,24 @@ separately accepted task.
 | [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | — |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 378, 392, 393, 452, 467 |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore mutation | Gap fix | Allocate receiving-address batches atomically | 364, 392, 393, 402, 467 |
-| [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | 340, 387 |
+| [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | 340 |
 | [Task 346][t346] | open | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | 357, 404 |
 | [Task 347][t347] | open | PsbtManager and Signer | Bug fix | Authorize explicit PSBT signatures | 346, 390 |
-| [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 406 |
-| [Task 356][t356] | open | TxCreator and `txauthor` | Bug fix | Defer change-script allocation until viable | 357, 404 |
+| [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 356, 406 |
+| [Task 356][t356] | open | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | 344, 357, 404 |
 | [Task 357][t357] | open | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 329, 331, 456, 467 |
 | [Task 364][t364] | open | SQL watch-generation and obligation schema | Gap fix | Persist ordered SQL live-watch obligations | 345 |
 | [Task 368][t368] | open | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | 331, 358 |
 | [Task 378][t378] | open | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | — |
-| [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 387 |
-| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345, 378, 387 |
+| [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343 |
+| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345, 378 |
 | [Task 393][t393] | open | AddressManager receiving entry points and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | 345, 392 |
 | [Task 395][t395] | open | AddressManager child allocation and SQL branch-counter mutation | Gap fix | Allocate one durable NoChainSync child | 344, 390, 393, 396, 399, 452, 467 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344, 348, 408 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 345 |
-| [Task 402][t402] | open | Wallet live-watch delivery and replay | Gap fix | Replay Wallet live-watch obligations | 334, 364, 401 |
-| [Task 404][t404] | open | `txauthor` input sources and TxCreator source adapters | Bug fix | Validate transaction input-source amounts | 357 |
+| [Task 402][t402] | open | Wallet live-watch delivery and replay | Gap fix | Replay Wallet live-watch obligations | 334, 364 |
+| [Task 404][t404] | open | TxCreator and PsbtManager input-source adapters | Bug fix | Validate Wallet transaction input amounts | 357 |
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | 346, 356, 404, 467 |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 347 |
@@ -135,7 +135,7 @@ ready Bug fix and Gap fix work.
 | [Task 349][t349] | open | TxStore internal invalidation workflow | Gap fix | Implement idempotent transaction invalidation | 409, 410, 411 |
 | [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
 | [Task 351][t351] | open | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | 340, 424 |
-| [Task 352][t352] | open | LegacyWalletVault and waddrmgr passphrase rotation | Bug fix | Rotate kvdb passphrases atomically | — |
+| [Task 352][t352] | open | Controller and LegacyWalletVault | Bug fix | Contain uncertain kvdb passphrase rotation | 368 |
 | [Task 361][t361] | open | modern kvdb public derivation adapter | Gap fix | Support kvdb imported-XPub derivation | — |
 | [Task 362][t362] | open | Controller and LegacyWalletVault | Bug fix | Return a definitive kvdb passphrase result | 338, 352 |
 | [Task 363][t363] | open | recovery horizon derivation | Bug fix | Bound aggregate recovery derivation work | — |
@@ -146,10 +146,10 @@ ready Bug fix and Gap fix work.
 | [Task 371][t371] | open | SQL Store canonical chain state | Bug fix | Serialize canonical chain-frontier mutation | 334, 340 |
 | [Task 372][t372] | open | Manager chain coordinator and SQL Store rollback | Bug fix | Prepare atomic multi-Wallet rollback | 349, 370, 371 |
 | [Task 381][t381] | open | RecoveryState public contract and internal Syncer adapter | Refactor | Hide recovery adapter identity | — |
-| [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 343, 378, 387 |
+| [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 343, 378 |
 | [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343, 390, 467 |
-| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 378, 387, 388, 389, 390, 392 |
-| [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | 387 |
+| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 378, 388, 389, 390, 392 |
+| [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 345, 397, 399, 452 |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Persist raw imports with live-watch obligations | 364, 402, 467 |
 | [Task 409][t409] | open | SQL schema and TxStore ingestion | Gap fix | Normalize transaction input edges | 340, 424 |
@@ -174,7 +174,7 @@ cutover evidence.
 | --- | --- | --- | --- | --- | --- |
 | [Task 335][t335] | open | Legacy migration source snapshot | Migration | Validate an immutable legacy wallet source | — |
 | [Task 353][t353] | open | Manager backend selection | Migration | Retire kvdb from the modern wallet API | 376 |
-| [Task 373][t373] | open | Legacy migration account and secret extraction | Migration | Extract legacy account and address state | 335, 387 |
+| [Task 373][t373] | open | Legacy migration account and secret extraction | Migration | Extract legacy account and address state | 335 |
 | [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 373 |
 | [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 329, 374, 411 |
 | [Task 376][t376] | open | Manager migration orchestration | Migration | Orchestrate and verify legacy conversion | 375 |
@@ -309,7 +309,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t384]: tasks/384-vault-safe-signing.md
 [t385]: tasks/385-unsafe-signer-key-extraction.md
 [t386]: tasks/386-remove-raw-wallet-secret-seams.md
-[t387]: tasks/387-account-creation-identity-adr.md
+[t387]: archive/tasks/387-account-creation-identity-adr.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t390]: tasks/390-custom-scope-account-creation.md
@@ -323,7 +323,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t399]: tasks/399-zero-lookahead-persisted-targets.md
 [t400]: archive/tasks/400-live-watch-semantics-adr.md
-[t401]: tasks/401-live-tip-chain-watch.md
+[t401]: archive/tasks/401-live-tip-chain-watch.md
 [t402]: tasks/402-replay-live-watch-obligations.md
 [t403]: tasks/403-raw-import-watch-obligations.md
 [t404]: tasks/404-transaction-input-amounts.md

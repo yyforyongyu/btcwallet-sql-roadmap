@@ -59,14 +59,20 @@ rows directly would not produce SQL's single-passphrase Vault format.
   string itself was wiped.
 - Return only ciphertext and normalized public facts. Keep the snapshot,
   refusal reasons, Vault preparation types, and decoder interfaces internal.
+- Keep the reader and preparation helper in Wallet-owned migration code and
+  consume existing `waddrmgr`, `wtxmgr`, and `walletdb` APIs and persisted
+  formats unchanged.
 - Exclude transaction and sync extraction, usedness-versus-credit proof, SQL
   writes, Task 367's ordinary-genesis cleanup, Vault API redesign, watch-only
-  wallet splitting, custody transformation, and public orchestration.
+  wallet splitting, custody transformation, public orchestration, Loader
+  changes, deprecated Wallet methods or tests, and production, API, test, or
+  disk-format changes in `waddrmgr`, `wtxmgr`, or `walletdb`.
 
 ## Suggested fix
 
 Add a migration-only raw namespace reader over Task 335's snapshot and a narrow
-WalletVault preparation helper. Walk scopes and imported buckets directly,
+Wallet-owned WalletVault preparation helper. Walk scopes and imported buckets
+through unchanged legacy formats,
 normalize them into SQL-shaped internal facts, decrypt each secret with its
 recorded provenance, and re-encrypt it with the distinct destination SQL
 passphrase before allowing ciphertext to leave the helper. Reject
@@ -107,7 +113,9 @@ unrepresentable identity or custody before constructing a destination Store.
 - Migration plaintext is bounded and destroyed on every exit by this task,
   independently of Task 367.
 - The PR contains no transaction extraction, SQL mutation, public converter,
-  kvdb rotation, wallet splitting, or general Vault redesign.
+  kvdb rotation, wallet splitting, general Vault redesign, Loader or
+  deprecated-method change, or legacy-package production, API, test, or
+  disk-format change.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md

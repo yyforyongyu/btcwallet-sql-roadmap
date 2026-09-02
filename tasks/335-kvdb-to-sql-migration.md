@@ -47,9 +47,13 @@ legacy adapter's caller-supplied defaults.
   Do not open, create, inspect, or mutate a destination database.
 - Keep every request, result, refusal detail, and snapshot type internal. Do not
   expose the public conversion API or claim conversion completeness here.
+- Keep all new implementation in Wallet-owned migration code. Consume existing
+  `waddrmgr`, `wtxmgr`, and `walletdb` APIs and persisted formats unchanged.
 - Exclude account/address extraction, secret re-encryption, transaction
   extraction, SQL import, PostgreSQL, generic manifests, generic locks, source
-  mutation, and caller cutover.
+  mutation, caller cutover, Loader changes, deprecated Wallet methods or tests,
+  and production, API, test, or disk-format changes in `waddrmgr`, `wtxmgr`, or
+  `walletdb`.
 
 ## Suggested fix
 
@@ -57,7 +61,8 @@ Add a migration-only source opener that snapshots the closed bbolt file into a
 task-owned immutable extraction image, verifies before/after source digests,
 clones that image for every upgrade-capable open, and returns one closeable
 internal source handle plus trusted normalized metadata. Keep it separate from
-`newKVDBManagerBackend` and the ordinary kvdb `OpenStore` entry point.
+`newKVDBManagerBackend` and the ordinary kvdb `OpenStore` entry point, and read
+legacy state only through unchanged APIs and formats.
 
 ## Verification
 
@@ -86,4 +91,5 @@ internal source handle plus trusted normalized metadata. Keep it separate from
 - Every failure and cancellation closes task-owned state, removes scratch
   artifacts, returns a typed internal refusal, and leaves the source unchanged.
 - The task adds no destination mutation, public converter, generic lock,
-  manifest, PostgreSQL path, or automatic cutover.
+  manifest, PostgreSQL path, automatic cutover, Loader or deprecated-method
+  change, or legacy-package production, API, test, or disk-format change.

@@ -52,18 +52,21 @@ not a sequence of ordinary adapter reads.
 - Bound allocations and return a typed resource-limit refusal instead of
   exhausting memory on an unsupported source. Keep every graph and sync type
   internal until Task 376 introduces the public result.
+- Keep the reader in Wallet-owned migration code and consume existing
+  `waddrmgr`, `wtxmgr`, and `walletdb` APIs and persisted formats unchanged.
 - Exclude destination mutation, rescanning instead of history import, generic
   manifests, BIP30 normalization, transaction-policy redesign, and caller
-  cutover.
+  cutover, Loader changes, deprecated Wallet methods or tests, and production,
+  API, test, or disk-format changes in `waddrmgr`, `wtxmgr`, or `walletdb`.
 
 ## Suggested fix
 
-Add a migration-only wtxmgr reader that decodes primary records into an
-internal normalized graph, derives all expected indexes from that graph, and
-then compares each legacy index and aggregate exactly. Join credits to
-Task 373's normalized script identities and return one complete internal
-snapshot only after every graph, lease, usedness, block, and sync invariant
-passes.
+Add a Wallet-owned migration reader of the unchanged legacy `wtxmgr` format.
+Decode primary records into an internal normalized graph, derive all expected
+indexes from that graph, and then compare each legacy index and aggregate
+exactly. Join credits to Task 373's normalized script identities and return one
+complete internal snapshot only after every graph, lease, usedness, block, and
+sync invariant passes.
 
 ## Verification
 
@@ -95,6 +98,8 @@ passes.
 - Unsupported history is refused rather than discarded, rescanned,
   arbitrarily selected, or BIP30-normalized.
 - The PR performs no source or destination mutation and exposes no public
-  converter or generic import representation.
+  converter or generic import representation. It changes no Loader,
+  deprecated Wallet method or test, or legacy-package production, API, test,
+  or disk format.
 
 [t373]: 373-extract-legacy-account-address-state.md

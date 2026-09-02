@@ -125,8 +125,8 @@ Grouping here does not create dependency or scheduling authority.
   allocation until viable.
 - [Task 357](357-transaction-amount-validation.md): validate transaction output
   and fee arithmetic.
-- [Task 404](404-transaction-input-amounts.md): validate transaction input-source
-  amounts.
+- [Task 404](404-transaction-input-amounts.md): validate Wallet transaction
+  input amounts.
 - [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
   atomically.
 - [Task 406](406-psbt-funding-lease-release.md): clean up failed PSBT funding
@@ -212,8 +212,8 @@ that structural exclusion explicitly.
 ## Secrets and credentials
 
 - [Task 338](338-passphrase-result.md): latch accepted SQL passphrase results.
-- [Task 352](352-kvdb-combined-passphrase-rotation.md): rotate kvdb passphrases
-  atomically.
+- [Task 352](352-kvdb-combined-passphrase-rotation.md): contain uncertain kvdb
+  passphrase rotation.
 - [Task 354](354-vault-owned-secret-resolution.md): define Vault secret-operation
   ownership.
 - [Task 362](362-kvdb-definitive-passphrase-result.md): return a definitive kvdb

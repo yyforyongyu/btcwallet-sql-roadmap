@@ -9,24 +9,30 @@ Dependencies: **[Task 338](338-passphrase-result.md) and
 
 ## Rationale
 
-The SQL Controller result contract in
-[Task 338](338-passphrase-result.md) does not prove that a maintained modern
-kvdb request reports the coherent result of its dual-credential rotation.
+The maintained modern-kvdb `Controller.ChangePassphrase` can accept a request
+and settle its Vault operation after caller cancellation or Wallet shutdown
+has already won the response wait. The caller then receives a transport result
+instead of Task 352's exact success, determinate failure, or
+`ErrWalletReopenRequired` result.
 
 ## Details
 
-- Reuse [Task 338](338-passphrase-result.md)'s pre-handoff cancellation and
-  accepted-request result latch for modern kvdb `ChangePassphrase`.
-- Consume [Task 352](352-kvdb-combined-passphrase-rotation.md)'s atomic public
-  and private credential result rather than adding another rotation path.
-- Once accepted, run rotation and any bbolt commit reconciliation under the
-  bounded handler-owned context and operation-specific completion that Wallet
-  and Manager shutdown join.
-- Publish exactly one buffered result; post-acceptance caller or Wallet
-  cancellation cannot replace or suppress it.
-- Reconcile an ambiguous bbolt commit as proven old, proven new, or a
-  wallet-owned indeterminate result before reporting which credential is
-  authoritative.
+- Reuse [Task 338](338-passphrase-result.md)'s pre-handoff cancellation,
+  buffered accepted-request result, bounded handler context, and
+  operation-specific completion for modern kvdb `ChangePassphrase`.
+- Once accepted, run the existing `LegacyWalletVault.ChangePassphrase` under
+  the handler-owned context and publish exactly one result. Caller or Wallet
+  cancellation after acceptance cannot replace or suppress it.
+- Return Task 352's success, determinate pre-mutation error, or
+  `ErrWalletReopenRequired` result unchanged at the public Controller boundary
+  with its `errors.Is` identity. Do not reinterpret the terminal result as
+  proof of an old or new durable credential.
+- Join the accepted handler before private Wallet stop calls the permitted
+  Vault Lock. A reopen-required caller must complete Manager Stop before
+  constructing a fresh Manager and selecting the reopened Wallet from Start.
+- Do not add another rotation path, retry a credential mutation, probe both
+  passphrases while the old Manager is live, or bypass Task 352's terminal
+  latch.
 - Keep cross-Manager and multi-process credential fencing unsupported, and add
   no generic Controller operation registry.
 - If [Task 353](353-retire-modern-kvdb-backend.md) lands first, archive this
@@ -34,27 +40,32 @@ kvdb request reports the coherent result of its dual-credential rotation.
 
 ## Suggested fix
 
-Route the accepted kvdb handler through
-[Task 352](352-kvdb-combined-passphrase-rotation.md)'s guarded rotation result
-and [Task 338](338-passphrase-result.md)'s acceptance-latched response and
-shutdown completion. Reconcile the exact verifier state after ambiguous
-commit before sending the one result.
+Route the accepted kvdb handler through Task 338's acceptance-latched response
+and shutdown completion, and forward Task 352's exact classified Vault result
+once. Keep durable recovery caller-driven through Manager Stop and a fresh
+Manager Start instead of adding live-manager reconciliation.
 
 ## Verification
 
 - Barrier tests prove cancellation before handoff returns the context error,
   while cancellation or shutdown after acceptance joins and returns the
   handler result.
-- Injected bbolt outcomes prove old, new, readable-neither, and unavailable
-  reconciliation without claiming an unprovable passphrase.
-- Concurrent rotations on one published Wallet admit one transition and give
-  the loser a definitive result without changing live or durable key state.
+- Inject a determinate pre-mutation failure, successful combined rotation, and
+  each post-mutation second-half or commit failure. Every caller receives the
+  exact Task 352 result once.
+- For a reopen-required result, prove later credential calls reach no legacy
+  manager method, Manager Stop still locks the Vault, and fresh Manager Start
+  reads the durable credential state.
+- Concurrent rotations on one published Wallet serialize through Task 352's
+  guard and give every caller one classified result without a second mutation
+  path.
 
 ## Definition of done
 
-- Every accepted modern-kvdb passphrase request returns exactly one coherent
-  success, failure, or typed indeterminate result.
-- Shutdown joins the accepted operation before Vault lock or Store close.
-- The PR adds no rotation implementation beyond
-  [Task 352](352-kvdb-combined-passphrase-rotation.md) and no generic
-  Controller lifecycle machinery.
+- Every accepted modern-kvdb passphrase request returns exactly one success,
+  determinate failure, or `ErrWalletReopenRequired` result from Task 352.
+- Shutdown joins accepted passphrase work before Vault Lock and Store close,
+  and terminal recovery uses a fresh Manager rather than the uncertain one.
+- The PR adds no rotation implementation beyond Task 352, live credential
+  inference, generic Controller lifecycle machinery, or excluded legacy
+  production change.

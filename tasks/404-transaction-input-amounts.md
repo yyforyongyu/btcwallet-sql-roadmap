@@ -1,6 +1,6 @@
-# Task 404 — validate transaction input-source amounts
+# Task 404 — validate Wallet transaction input amounts
 
-Component: **`txauthor` input sources and TxCreator source adapters**.
+Component: **TxCreator and PsbtManager input-source adapters**.
 
 Type: **Bug fix**.
 
@@ -8,38 +8,56 @@ Dependencies: **[Task 357][t357]**.
 
 ## Rationale
 
-Validate every input-source result immediately after
-the callback.
+Maintained `TxCreator.CreateTransaction` and `PsbtManager.FundPsbt` calls rely
+on Wallet-produced automatic, manual, and selected input-source results. A
+malformed or corrupt Store result can currently contribute a negative,
+over-maximum, overflowing, or internally inconsistent amount and cause the
+public call to overfund inputs or calculate invalid change.
 
 ## Details
 
-Each value and the reported total must be in `0..MaxSatoshi`, the
-checked aggregate must remain bounded, and the aggregate must equal the
-reported total. Use Task 357's released checked-add primitive. Apply the same
-primitive while automatic and selected Wallet sources build results so those
-sources never accumulate unchecked amounts.
+Validate every Wallet-produced input-source result at its private
+TxCreator/PsbtManager adapter boundary before the unchanged authoring
+dependency consumes it. Require one value for every returned input, require
+each value and the reported total to be in `0..MaxSatoshi`, accumulate with
+checked addition, and require the bounded aggregate to equal the reported
+total.
 
-Exclusions: output/fee arithmetic, coin-selection policy, leasing,
-change allocation, persisted SQL transaction admission (Task 426), and UTXO
-schema constraints.
+Apply the same private checked addition while the existing automatic, manual,
+and selected Wallet closures construct their results. A failed addition must
+not partially mutate the closure's accumulated amount or drop a selected coin.
+Task 357 remains a hard dependency for stack and merge order, but its private
+authoring helper is not exported or consumed here.
+
+Exclusions: arbitrary direct `txauthor.InputSource` callers; changes to
+`wallet/txauthor`; output or fee arithmetic owned by Task 357; coin-selection
+policy; leasing; change allocation; persisted SQL transaction admission from
+Task 426; UTXO schema constraints; deprecated Wallet methods and tests; and
+new public result or helper types.
 
 ## Suggested fix
 
-Wrap each `txauthor.InputSource` result with one validator
-that uses Task 357's checked add, and use the same add while Wallet source
-closures accumulate their result.
+Add one private Wallet-owned checked-add/result validator beside the existing
+TxCreator and PsbtManager source adapters. Reuse it in the automatic, manual,
+and selected source closures and at their final result boundary, then pass only
+a validated result into unchanged authoring. Keep Task 357's checked arithmetic
+private to its output and fee boundary.
 
 ## Verification
 
-Malicious nested input sources and direct Wallet automatic,
-manual, and selected sources cover negative, overflowing, over-maximum,
-length/total mismatch, and reported-total mismatch cases. Failures occur
-before change allocation or lease mutation.
+Focused `package wallet` tests drive public `TxCreator.CreateTransaction` and
+`PsbtManager.FundPsbt` calls through mocked Store results. Positive cases
+accept a bounded, consistent source. Regression cases cover a negative value,
+a value or total above `MaxSatoshi`, overflowing addition, input/value length
+mismatch, and a reported-total mismatch, and prove rejection before change
+allocation or lease mutation. Do not add direct nested `txauthor` or
+deprecated-method tests.
 
 ## Definition of done
 
-Every maintained transaction-creation input source
-returns one checked, internally consistent amount set, and PSBT funding and
-change allocation can consume that contract without copying arithmetic.
+Every automatic, manual, and selected input result produced for maintained
+transaction creation or PSBT funding is bounded and internally consistent
+before authoring. Task 404 changes only Wallet-owned adapters and leaves Task
+357's private authoring arithmetic and excluded callers untouched.
 
 [t357]: 357-transaction-amount-validation.md

@@ -89,10 +89,14 @@ cannot merge before every hard dependency and gate completes.
 
 ## Coordination
 
-Task 387 and PR #1342 must be revised around one `NoChainSync` boolean that is
-orthogonal to wallet-level signing custody. The ADR change must reuse the
-existing account, address, and signer boundaries and must not introduce a
-discovery-mode enum, key-family manager, or additional provenance column.
+Task 357 and PR #1348 may retain their accepted `wallet/txauthor`,
+`wallet/txrules`, root-module wiring, and Wallet changes as a narrow historical
+exception. They must drop deprecated Wallet behavior and
+`wallet/deprecated_test.go` unless a separate roadmap exception is approved.
+
+Task 404 and draft PR #1357 own only the Wallet-local input-source layer. Drop
+its `wallet/txauthor` changes, keep Task 357's arithmetic private, and restack
+the PR on Task 357's final base and result before merge.
 
 Task 334 and PR #1323 must adopt Manager public lifecycle authority, private
 Wallet `start`/`stop` mechanics, Wallet-owned call draining, the complete
