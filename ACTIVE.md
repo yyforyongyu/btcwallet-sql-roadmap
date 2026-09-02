@@ -24,7 +24,6 @@ recorded PR stack.
 | [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 437][t437] | Test transaction labels | Test | Abdullahi | [#1347][pr1347] |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
 | [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | [#1353][pr1353] |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
@@ -176,7 +175,6 @@ implementation.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t437]: tasks/437-transaction-label-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
@@ -191,7 +189,6 @@ implementation.
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1342]: https://github.com/btcsuite/btcwallet/pull/1342
 [pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
-[pr1347]: https://github.com/btcsuite/btcwallet/pull/1347
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354

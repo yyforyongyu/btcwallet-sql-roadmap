@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 437](tasks/437-transaction-label-itests.md) completed on 2026-09-03.
 - [Task 467](tasks/467-indeterminate-commit-identity.md) completed on 2026-09-02.
 - [Task 334](tasks/334-shared-chain-state.md) completed on 2026-09-02.
 - [Task 421](tasks/421-sql-passphrase-commit-reconciliation.md) completed on 2026-08-31.

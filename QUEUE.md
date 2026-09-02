@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **139 tasks**, with **113 remaining open**, **21 done**,
+The roadmap contains **139 tasks**, with **112 remaining open**, **21 done**,
 and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
@@ -83,7 +83,7 @@ separately accepted task.
 | [Task 458][t458] | open | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | 334 |
 | [Task 459][t459] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 334, 456, 458 |
 
-## Phase 2 — verification · 32 open
+## Phase 2 — verification · 31 open
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
@@ -102,7 +102,6 @@ three-backend performance measurements.
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | 378 |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
-| [Task 437][t437] | open | TxWriter integration tests | Test | Cover transaction label contracts | — |
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
 | [Task 439][t439] | open | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | 348 |
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
@@ -222,7 +221,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 24
+## Done · 25
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -248,6 +247,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 434][t434] | 2 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |
 | [Task 435][t435] | 2 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |
 | [Task 436][t436] | 2 | TxReader integration tests | Test | Cover transaction read contracts | [#1346][pr1346] |
+| [Task 437][t437] | 2 | TxWriter integration tests | Test | Cover transaction label contracts | [#1347][pr1347] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 
