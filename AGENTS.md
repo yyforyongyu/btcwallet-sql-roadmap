@@ -161,7 +161,10 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
 
 ## Scope rules
 
-- Focus on the maintained public APIs under `wallet/`.
+- Focus on the maintained public APIs under `wallet/`. A roadmap Bug fix must
+  name the affected maintained public component, a reachable input or
+  interleaving, and the wrong public result. Tests, benchmarks, designs, and
+  migrations retain their type-appropriate evidence rules.
 - Treat the maintained wallet library as development-stage software. Public
   and private Go API source and binary compatibility are not requirements.
   Build directly toward the final request, result, interface, and method
@@ -171,19 +174,33 @@ atomicity rule. Do not mechanically expand an unchanged task to fill sections.
   does not relax accepted behavioral contracts, safety properties, persisted-
   data compatibility, maintained backend parity, daemon-version support, or
   task scope.
-- Limit production changes to maintained public Wallet APIs and their directly
-  owned storage, cryptographic, chain, and migration adapters.
-- Do not modify CLI, RPC, deprecated-wallet frontend, lnd, or external-daemon
-  production code. Tests may drive or provision daemons only through existing
+- Keep normal production fixes in `package wallet` and its directly owned
+  `wallet/internal` storage, cryptographic, chain, and migration
+  implementations. They may consume existing external or legacy types and
+  APIs unchanged; importing or calling one does not transfer ownership of its
+  package into the task.
+- Do not modify `waddrmgr`, `wtxmgr`, `walletdb`, `wallet/txauthor`,
+  `wallet/txrules`, `wallet/txsizes`, CLI, RPC, Loader, lnd, external-daemon
+  production code, or deprecated Wallet methods as a normal Wallet fix. Do not
+  add or update deprecated-method tests merely because a shared dependency
+  changes. Tests may drive or provision daemons only through existing
   interfaces and must not change daemon or RPC contracts. Do not use a
   mechanical compile fix to broaden a Wallet task into one of these areas.
+- Task 357's accepted authoring work and Task 401's accepted chain interface
+  and adapter work are narrow historical exceptions. They are not precedent
+  for another task or permission to preserve deprecated Wallet behavior.
+- If the required public behavior cannot be implemented inside the allowed
+  production boundary, narrow, defer, or supersede the task, or obtain an
+  explicit task-specific exception before implementation. Do not silently
+  broaden the task into an excluded package.
 - Keep kvdb legacy and single-wallet behavior isolated from the SQL design.
 - Do not add create manifests, generic write locks, replay state machines, or
   cross-process Manager fencing without a separately accepted task.
-- An integration-test task owns the tested public contract. Fix production bugs
-  revealed by its required cases in the same task and implementation PR, and
-  keep those cases as regression coverage. Do not include unrelated production
-  changes.
+- An integration-test task owns the tested public contract. Test and CI files
+  may live outside `wallet`, but production bugs revealed by required cases
+  must still be fixed at the maintained Wallet API or its Wallet-owned
+  implementation in the same task and implementation PR. Keep those cases as
+  regression coverage and do not include unrelated production changes.
 - A task that exports or reshapes a public type owns the production contract,
   conversion, and focused `package wallet` tests. It does not add or revise
   integration-test source merely to prove that the type or its fields are

@@ -44,12 +44,23 @@ state.
 
 ## Scope
 
-The maintained public APIs under `wallet/` are the target. Avoid voluntary
-changes to RPC, deprecated wallet APIs, or unrelated daemon behavior.
+The maintained public APIs under `wallet/` are the target. A Bug fix must name
+the maintained public component, a reachable trigger, and the wrong public
+result. Normal production corrections stay in `package wallet` and directly
+owned `wallet/internal` implementations. Existing legacy and external types
+may be consumed unchanged, but their packages do not become part of the task.
 
-An integration-test task owns the tested public contract. Fix bugs revealed by
-its required cases in the same task and implementation PR, keep the regression
-coverage, and leave unrelated production changes out.
+Do not expand an ordinary Wallet fix into `waddrmgr`, `wtxmgr`, `walletdb`, the
+`wallet/txauthor`, `wallet/txrules`, or `wallet/txsizes` modules, CLI, RPC,
+Loader, lnd, daemon production, or deprecated Wallet methods and tests. Tasks
+357 and 401 are narrow historical exceptions, not precedent. If the required
+behavior cannot stay Wallet-owned, revise the task or obtain explicit approval
+before implementation.
+
+An integration-test task owns the tested public contract. Test and CI files may
+live elsewhere, but any production correction remains Wallet-owned. Fix bugs
+revealed by required cases in the same task and implementation PR, keep the
+regression coverage, and leave unrelated production changes out.
 Keep benchmark tasks measurement-only and record defects they expose as
 separate implementation tasks.
 Run shared public contracts on kvdb, SQLite, and PostgreSQL. If a backend

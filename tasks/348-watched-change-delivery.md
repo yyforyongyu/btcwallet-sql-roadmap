@@ -4,14 +4,16 @@ Component: **PsbtManager and AddressManager**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 344][t344], [Task 406][t406], and [Task 425][t425]**.
+Dependencies: **[Task 344][t344], [Task 356][t356], [Task 406][t406], and
+[Task 425][t425]**.
 
 ## Rationale
 
 After Task 425 isolates shared authoring from wrapper effects, route PSBT
-change for SQL wallets through Task 344's durable watched allocation and return
-the funded result only after delivery. Maintained modern kvdb keeps its legacy
-count-one change-allocation path until Task 353 retires that backend.
+change using the script and durable obligation that Task 356 committed through
+Task 344, and return the funded result only after live delivery. Maintained
+modern kvdb keeps its legacy count-one change-allocation path until Task 353
+retires that backend.
 
 ## Details
 
@@ -29,10 +31,11 @@ perform this watch or lease cleanup on the wrapper's behalf.
 
 ## Suggested fix
 
-Consume Task 344's watched allocation for SQL PSBT change and the retained
-count-one allocator for modern-kvdb change. Gate publication on delivery and
-an exact funding-set verification; route every pre-return post-funding failure
-through Task 406's private cleanup.
+Consume Task 356's committed script and durable obligation for SQL PSBT change
+and its committed count-one result for modern-kvdb change. Perform no second
+allocation or Store mutation. Gate publication on live delivery and an exact
+funding-set verification; route every pre-return post-funding failure through
+Task 406's private cleanup.
 
 ## Verification
 
@@ -54,6 +57,7 @@ maintained modern kvdb retains its count-one change-allocation path until Task
 353.
 
 [t344]: 344-bulk-address-allocation.md
+[t356]: 356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
 [t425]: ../archive/tasks/425-separate-transaction-authoring-wrappers.md
 [t439]: 439-psbt-funding-itests.md

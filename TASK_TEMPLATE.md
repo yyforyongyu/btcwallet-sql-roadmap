@@ -10,7 +10,8 @@ before assignment when it contains unrelated fixes, multiple independently
 useful behaviors, or more than one implementation owner. Dependencies
 establish merge ordering; they do not add their scope to this task.
 
-Component: **one primary component or tightly coupled boundary**.
+Component: **one primary component or tightly coupled allowed implementation
+boundary**.
 
 Type: **one allowed primary type**.
 
@@ -19,24 +20,34 @@ Dependencies: **linked tasks or None**.
 ## Rationale
 
 State the concrete problem, why it matters now, and why it belongs in this
-task. Do not use this section to collect adjacent cleanup.
+task. For a Bug fix, name the maintained public Wallet API, a reachable input
+or interleaving, and the wrong public result. Do not use this section to
+collect adjacent cleanup.
 
 ## Details
 
 - Describe the exact behavior in scope.
-- Name the relevant API or storage boundary.
+- For a direct production Bug fix or Gap fix, name the affected maintained
+  public Wallet API and the allowed production boundary in `package wallet`
+  or directly owned `wallet/internal` code.
+- Identify any unchanged legacy or external types and APIs the implementation
+  consumes without taking ownership of their packages.
 - List explicit exclusions and follow-up work.
 - Keep the result useful and mergeable as its own PR after dependencies land.
 
 ## Suggested fix
 
-Describe the smallest likely implementation shape, including the component
-that should own the behavior. This is guidance, not permission to broaden the
-task when implementation uncovers an adjacent issue.
+Describe the smallest likely implementation shape, its owner, and the existing
+mechanisms it reuses. When production changes are in scope, keep them at the
+Wallet-owned boundary. This is guidance, not permission to broaden the task
+when implementation uncovers an adjacent issue.
 
 ## Verification
 
-- Name the narrowest unit or package test that proves the behavior.
+- For a Bug fix, name the narrowest public-contract test and demonstrated
+  regression that prove the behavior.
+- For a Gap fix, name the narrowest public-contract verification. For other
+  task types, name the narrowest type-appropriate evidence.
 - Name backend-specific or integration coverage only when the task requires it.
 - State any manual inspection needed for generated or migration output.
 - Do not use broad CI completion as the primary verification plan.
