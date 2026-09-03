@@ -97,4 +97,4 @@ private.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t364]: 364-durable-watch-registration.md
-[t401]: 401-live-tip-chain-watch.md
+[t401]: ../archive/tasks/401-live-tip-chain-watch.md

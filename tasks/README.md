@@ -83,7 +83,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 399](399-zero-lookahead-persisted-targets.md): isolate persisted targets
   in zero-lookahead recovery.
   historical recovery.
-- [Task 401](401-live-tip-chain-watch.md): add an idempotent live-tip-only chain
   watch.
 - [Task 402](402-replay-live-watch-obligations.md): replay Wallet live-watch
   obligations.

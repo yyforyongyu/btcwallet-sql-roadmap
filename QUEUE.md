@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **139 tasks**, with **111 remaining open**, **21 done**,
+The roadmap contains **139 tasks**, with **110 remaining open**, **21 done**,
 and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
@@ -39,7 +39,7 @@ start of integration.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 33 open
+## Phase 1 — lnd integration · 32 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -69,7 +69,6 @@ separately accepted task.
 | [Task 395][t395] | open | AddressManager child allocation and SQL branch-counter mutation | Gap fix | Allocate one durable NoChainSync child | 344, 390, 393, 396, 399, 452, 467 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344, 348, 408 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 345 |
-| [Task 401][t401] | open | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | — |
 | [Task 402][t402] | open | Wallet live-watch delivery and replay | Gap fix | Replay Wallet live-watch obligations | 334, 364, 401 |
 | [Task 404][t404] | open | `txauthor` input sources and TxCreator source adapters | Bug fix | Validate transaction input-source amounts | 357 |
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | 346, 356, 404, 467 |
@@ -220,7 +219,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 26
+## Done · 27
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -239,6 +238,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
 | [Task 387][t387] | 1 | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | [#1342][pr1342] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
+| [Task 401][t401] | 1 | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | [#1344][pr1344] |
 | [Task 415][t415] | 2 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 421][t421] | 3 | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | [#1341][pr1341] |
 | [Task 425][t425] | 1 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |

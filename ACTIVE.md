@@ -20,7 +20,6 @@ recorded PR stack.
 | [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
-| [Task 401][t401] | Add a live-tip-only chain watch | Gap fix | YY | [#1344][pr1344] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
@@ -155,7 +154,6 @@ implementation.
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t399]: tasks/399-zero-lookahead-persisted-targets.md
-[t401]: tasks/401-live-tip-chain-watch.md
 [t402]: tasks/402-replay-live-watch-obligations.md
 [t404]: tasks/404-transaction-input-amounts.md
 [t405]: tasks/405-psbt-funding-lease-admission.md
@@ -183,7 +181,6 @@ implementation.
 [t460]: tasks/460-sequential-account-invalid-children.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
-[pr1344]: https://github.com/btcsuite/btcwallet/pull/1344
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
