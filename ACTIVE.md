@@ -17,6 +17,7 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
+| [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -37,7 +38,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 331][t331] | Make Manager lifecycle terminal | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
-| [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | Abdullahi | — |
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
