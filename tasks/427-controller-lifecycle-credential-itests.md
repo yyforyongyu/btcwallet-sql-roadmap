@@ -10,7 +10,7 @@ Dependencies: **[Task 331][t331]**.
 
 [Issue #1250][issue1250] assigns Gustavo the Controller integration-test lane.
 Merged [PR #1300][pr1300] covers basic `Unlock`, `Lock`, and `Info`;
-[Task 368][t368] removes the individual lifecycle methods and their obsolete
+[Task 331][t331] removes the individual lifecycle methods and their obsolete
 cases. The remaining credential slice is passphrase change, timed unlock, and
 their durable behavior through a real persistent Wallet.
 
@@ -30,7 +30,7 @@ their durable behavior through a real persistent Wallet.
 - Do not absorb behavior owned by Tasks 338, 369, 421, or another task.
 - Exclude the Controller methods already covered by PR #1300, `Info`, `Resync`,
   `Rescan`, account/address APIs, RPC, deprecated interfaces, direct Store
-  assertions, lifecycle behavior owned by Task 368, and unrelated production
+  assertions, lifecycle behavior owned by Task 331, and unrelated production
   changes.
 
 ## Suggested fix
@@ -58,4 +58,3 @@ objects for the durable credential check.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
 [t331]: 331-manager-wallet-lifecycle.md
-[t368]: 368-wallet-startup-shutdown.md

@@ -34,13 +34,12 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 331][t331] | Make Manager lifecycle terminal | Bug fix | YY | — |
+| [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
-| [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
 | [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | — |
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | — |
@@ -103,7 +102,6 @@ cannot merge before every hard dependency and gate completes.
 [t365]: tasks/365-validate-wallet-genesis-keys.md
 [t366]: tasks/366-reconcile-sql-genesis-commit.md
 [t367]: tasks/367-bound-sql-genesis-secrets.md
-[t368]: tasks/368-wallet-startup-shutdown.md
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
 [t378]: tasks/378-account-manager-error-boundary.md

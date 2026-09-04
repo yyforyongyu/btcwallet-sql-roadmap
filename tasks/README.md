@@ -12,7 +12,8 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
   atomically.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
-- [Task 331](331-manager-wallet-lifecycle.md): make Manager lifecycle terminal.
+- [Task 331](331-manager-wallet-lifecycle.md): make Manager the sole lifecycle
+  authority.
   network identity.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
@@ -22,8 +23,6 @@ Grouping here does not create dependency or scheduling authority.
   identities.
 - [Task 366](366-reconcile-sql-genesis-commit.md): reconcile ambiguous SQL
   genesis commits.
-- [Task 368](368-wallet-startup-shutdown.md): make Wallet lifecycle
-  Manager-internal.
 - [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
   without resetting timeout.
   not-found errors.

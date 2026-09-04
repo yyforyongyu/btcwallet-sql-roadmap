@@ -7,6 +7,10 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 368](tasks/368-wallet-startup-shutdown.md) was superseded on
+  2026-09-05 when its public lifecycle cutover was absorbed into
+  [Task 331](../tasks/331-manager-wallet-lifecycle.md) as part of one atomic
+  Manager lifecycle outcome; PR #1328 was retargeted to Task 331.
 - [Task 340](tasks/340-durable-database-identity.md) completed on 2026-09-05.
 - [Task 456](tasks/456-manager-runtime-configuration.md) completed on 2026-09-04.
 - [Task 401](tasks/401-live-tip-chain-watch.md) completed on 2026-09-03.

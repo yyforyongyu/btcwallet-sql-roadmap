@@ -31,7 +31,7 @@ the two components. Wallet needs its own terminal admission and drain boundary.
   stop; Wallet cannot restart.
 - Stop continues through worker and Vault cleanup failures and returns a
   stable aggregate result. Existing public lifecycle methods may delegate
-  temporarily until Task 368 removes them.
+  temporarily until Task 331 removes them in the aggregate lifecycle cutover.
 - Do not retain Manager context or a Manager admission capability in Wallet.
   Exclude Manager state, Create publication, Store closure, chain-coordinator
   shutdown, RPC, CLI, deprecated-wallet behavior, and cross-process fencing.
@@ -63,4 +63,4 @@ before Store access, and private Wallet lifecycle is terminal, concurrent, and
 independent of Manager lifecycle state.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md

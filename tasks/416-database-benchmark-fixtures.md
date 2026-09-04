@@ -4,7 +4,7 @@ Component: **wallet benchmark infrastructure**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 368][t368]**.
+Dependencies: **[Task 331][t331]**.
 
 ## Rationale
 
@@ -140,5 +140,5 @@ consumer uses the same lifecycle and validation rules.
 - The PR contains only reusable three-backend benchmark infrastructure.
 
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t417]: 417-start-to-synced-benchmark.md

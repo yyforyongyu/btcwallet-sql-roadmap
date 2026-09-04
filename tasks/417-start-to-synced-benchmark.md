@@ -4,7 +4,7 @@ Component: **Manager lifecycle and Syncer benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 368][t368], [Task 416][t416], and [Task 455][t455]**.
+Dependencies: **[Task 331][t331], [Task 416][t416], and [Task 455][t455]**.
 
 ## Rationale
 
@@ -82,7 +82,7 @@ benchmarks unchanged.
   included.
 - The PR contains only the start-to-synced benchmark outcome.
 
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t416]: 416-database-benchmark-fixtures.md
 [t455]: 455-exact-wallet-sync-status.md
 [issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

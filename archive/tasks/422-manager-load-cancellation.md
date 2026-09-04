@@ -84,5 +84,5 @@ return the published pointer on every post-publication path.
   registry, or publication state machine.
 
 [t331]: ../../tasks/331-manager-wallet-lifecycle.md
-[t368]: ../../tasks/368-wallet-startup-shutdown.md
+[t368]: 368-wallet-startup-shutdown.md
 [t453]: 453-serialize-manager-wallet-publication.md
