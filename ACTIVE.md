@@ -17,12 +17,11 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 340][t340] | Persist database identity | Bug fix | YY | [#1345][pr1345] |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
+| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
 
 ## Blocked Phase 1 Tasks
@@ -126,7 +125,6 @@ implementation.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
-[t340]: tasks/340-durable-database-identity.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
 [t345]: tasks/345-durable-watch-registration.md
@@ -184,7 +182,6 @@ implementation.
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
@@ -192,3 +189,4 @@ implementation.
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
 [pr1357]: https://github.com/btcsuite/btcwallet/pull/1357
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
+[pr1363]: https://github.com/btcsuite/btcwallet/pull/1363

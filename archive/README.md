@@ -7,6 +7,7 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+- [Task 340](tasks/340-durable-database-identity.md) completed on 2026-09-05.
 - [Task 456](tasks/456-manager-runtime-configuration.md) completed on 2026-09-04.
 - [Task 401](tasks/401-live-tip-chain-watch.md) completed on 2026-09-03.
 - [Task 387](tasks/387-account-creation-identity-adr.md) completed on 2026-09-03.

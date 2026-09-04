@@ -120,7 +120,7 @@ runtime assembly and cache publication after the transaction succeeds.
 [t330]: 330-duplicate-wallet-create.md
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
-[t340]: 340-durable-database-identity.md
+[t340]: ../archive/tasks/340-durable-database-identity.md
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t343]: 343-exact-account-creation.md
 [t345]: 345-durable-watch-registration.md

@@ -13,7 +13,6 @@ Grouping here does not create dependency or scheduling authority.
   atomically.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
 - [Task 331](331-manager-wallet-lifecycle.md): make Manager lifecycle terminal.
-- [Task 340](340-durable-database-identity.md): bind SQL databases to schema and
   network identity.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation

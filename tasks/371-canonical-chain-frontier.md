@@ -98,4 +98,4 @@ operation-specific result boundary.
   durable rescan machinery, or multi-Manager/cross-process fencing.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
-[t340]: 340-durable-database-identity.md
+[t340]: ../archive/tasks/340-durable-database-identity.md

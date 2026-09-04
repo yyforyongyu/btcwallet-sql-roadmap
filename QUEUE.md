@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **139 tasks**, with **109 remaining open**, **21 done**,
+The roadmap contains **139 tasks**, with **108 remaining open**, **21 done**,
 and **2 superseded**. Open tasks are grouped by delivery phase; completed
 roadmap tasks move to `Done`, while superseded tasks retain their identity and
 replacement in `Superseded`.
@@ -39,7 +39,7 @@ start of integration.
 PRs, and coordination.
 
 
-## Phase 1 — lnd integration · 31 open
+## Phase 1 — lnd integration · 30 open
 
 Close the btcwallet-side contracts needed to exercise the wallet from lnd.
 This phase contains the direct lnd integration tasks and every open hard
@@ -50,7 +50,6 @@ separately accepted task.
 | --- | --- | --- | --- | --- | --- |
 | [Task 329][t329] | open | Manager SQL genesis and SQL Store | Bug fix | Commit SQL wallet genesis atomically | 345 |
 | [Task 331][t331] | open | Manager lifecycle, admission, and Store ownership | Bug fix | Make Manager lifecycle terminal | 334, 458, 459 |
-| [Task 340][t340] | open | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | — |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore CAS | Gap fix | Create next-or-exact root-derived accounts | 378, 392, 393, 452, 467 |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore mutation | Gap fix | Allocate receiving-address batches atomically | 364, 392, 393, 402, 467 |
 | [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | 340 |
@@ -218,7 +217,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 368][t368] and [459][t459] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 28
+## Done · 29
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -227,6 +226,7 @@ phase. Every roadmap task must remain listed exactly once.
 | [Task 334][t334] | 1 | SQL wallet architecture documentation | Design | Define aggregate Manager and shared-chain ownership | [#1323][pr1323] |
 | [Task 337][t337] | 1 | Wallet and Signer public derivation | Bug fix | Restore SQL imported-XPub public derivation | [#1324][pr1324] |
 | [Task 339][t339] | 1 | TxReader | Gap fix | Define public transaction visibility and status | [#1330][pr1330] |
+| [Task 340][t340] | 1 | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | [#1345][pr1345] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
 | [Task 355][t355] | 1 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |

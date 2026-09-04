@@ -55,5 +55,5 @@ edge source on both dialects, all ingestion/deletion paths maintain them, and
 their input positions and previous-output indexes are constrained to
 `0..MaxUint32`; ADR/data-model text matches the cutover.
 
-[t340]: 340-durable-database-identity.md
+[t340]: ../archive/tasks/340-durable-database-identity.md
 [t424]: 424-transaction-utxo-integrity-adr.md

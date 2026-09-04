@@ -43,5 +43,5 @@ UTXO and lease tenancy plus UTXO-carried wire-index ranges are enforced by
 composite constraints rather than backend triggers, with no normalized-input,
 exact-spend, or amount work bundled in.
 
-[t340]: 340-durable-database-identity.md
+[t340]: ../archive/tasks/340-durable-database-identity.md
 [t424]: 424-transaction-utxo-integrity-adr.md
