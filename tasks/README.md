@@ -210,7 +210,7 @@ that structural exclusion explicitly.
 - [Task 386](386-remove-raw-wallet-secret-seams.md): remove raw Wallet secret
   seams.
 
-## Migration and retirement
+## Migration
 
 - [Task 335](335-kvdb-to-sql-migration.md): validate an immutable legacy wallet
   source.
@@ -222,8 +222,6 @@ that structural exclusion explicitly.
   into SQLite.
 - [Task 376](376-orchestrate-legacy-conversion.md): convert a legacy wallet
   through Manager.Create.
-- [Task 353](353-retire-modern-kvdb-backend.md): retire kvdb from the modern
-  wallet API.
 
 ## Benchmarks
 

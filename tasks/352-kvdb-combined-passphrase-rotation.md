@@ -63,8 +63,8 @@ rotation or leaving later credential operations free to use the stale manager.
 - Do not modify `waddrmgr`, `walletdb`, Loader, deprecated Wallet methods, or
   their tests. Do not add a rotation plan, compatibility adapter, generic
   lifecycle state, cross-Manager fencing, or multi-process guarantee.
-- If Task 353 retires modern kvdb first, archive this task instead of
-  implementing behavior that retirement immediately removes.
+- Modern kvdb remains maintained for the current and next release. Deferred
+  retirement does not eliminate this correction.
 
 ## Suggested fix
 

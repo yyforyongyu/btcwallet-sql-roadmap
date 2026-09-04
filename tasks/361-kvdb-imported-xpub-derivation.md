@@ -32,9 +32,9 @@ account identity as a public number.
   metadata.
 - Return stable collision and not-found results without selecting another
   account.
-- Do not add a new kvdb identity or storage format. If
-  [Task 353](353-retire-modern-kvdb-backend.md) lands first, remove this pending
-  modern-kvdb task instead of implementing temporary behavior.
+- Do not add a new kvdb identity or storage format. Modern kvdb remains
+  maintained for the current and next release; deferred retirement does not
+  eliminate this gap.
 - [Task 441][t441] owns common three-backend derivation/ECDH coverage and the
   SQL imported-XPub case. This task owns one focused real-kvdb public
   regression for the imported-XPub behavior it adds. Reuse the existing

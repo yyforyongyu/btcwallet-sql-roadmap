@@ -8,7 +8,7 @@ This repository contains planning documents, not btcwallet source code.
 - [QUEUE.md](QUEUE.md) owns each roadmap task's delivery phase and status by
   placing open work in a phase table, completed work with its closing PR in
   `Done`, and obsolete unimplemented work with its replacement in
-  `Superseded`.
+  `Superseded`, and approved future-cycle work in `Deferred`.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
 - Individual files under [tasks/](tasks/) own type, scope, and dependencies.
@@ -263,6 +263,20 @@ Allocating a replacement independently increases both total and open counts.
 A superseded task has no closing PR, is never listed in `Done`, and its number
 is never reused.
 
+## Deferring a task beyond this roadmap
+
+Use `Deferred` only for an explicit decision to archive still-valid work for
+a future release cycle, not for ordinary later-phase work. Deferral is neither
+completion nor supersession. Account for any implementation PR before moving
+the task; do not silently abandon in-progress work.
+
+Preserve the task under `archive/tasks/` with a short dated decision and
+reactivation gate. Remove it from the open catalog and ACTIVE, move its QUEUE
+row to `Deferred`, and update archive links and counts. No open task may retain
+a hard dependency on deferred work. Preserve its number and original scope;
+reactivate that same task through an explicit roadmap update when its gate is
+met. Deferral reduces the open count, not the total, and adds no closing PR.
+
 ## Completing a task
 
 After the implementation PR merges, use the roadmap update workflow to:
@@ -287,4 +301,4 @@ A task is complete only when **every** PR linked to it has merged. If a
 linked PR is closed unmerged, or cannot be accounted for, the task is not
 complete.
 
-Preserve task numbers. Never reuse an archived or superseded number.
+Preserve task numbers. Never reuse an archived number for a different task.

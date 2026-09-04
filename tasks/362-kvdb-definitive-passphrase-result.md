@@ -35,8 +35,8 @@ instead of Task 352's exact success, determinate failure, or
   latch.
 - Keep cross-Manager and multi-process credential fencing unsupported, and add
   no generic Controller operation registry.
-- If [Task 353](353-retire-modern-kvdb-backend.md) lands first, archive this
-  task rather than implementing behavior that retirement immediately removes.
+- Modern kvdb remains maintained for the current and next release. Deferred
+  retirement does not eliminate this correction.
 
 ## Suggested fix
 

@@ -1,9 +1,9 @@
 # Task delivery phases
 
-The roadmap contains **141 tasks**, with **106 remaining open**, **29 done**,
-and **6 superseded**. Open tasks are grouped by delivery phase; completed
-roadmap tasks move to `Done`, while superseded tasks retain their identity and
-replacement in `Superseded`.
+The roadmap contains **141 tasks**, with **105 remaining open**, **29 done**,
+**6 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
+completed tasks move to `Done`, while superseded tasks retain their identity
+and replacement in `Superseded`. Approved future-cycle work is in `Deferred`.
 
 Every roadmap task appears exactly once below. The phases are thematic delivery
 stages, not computed dependency depths or strict phase barriers. Individual
@@ -131,15 +131,13 @@ general wallet hardening does not gate conversion.
 | [Task 373][t373] | open | Legacy migration account, address, and secret extraction | Migration | Extract legacy account and address state | 335 |
 | [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 373 |
 
-## Phase 4 — conversion and retirement · 3 open
+## Phase 4 — conversion · 2 open
 
 Import the validated source through the existing Manager creation boundary,
-then retire modern kvdb only after real consumer cutover evidence and an
-explicit decision.
+without retiring modern kvdb in the current release cycle.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 353][t353] | open | Manager backend selection | Migration | Retire kvdb from the modern wallet API | 376 |
 | [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 374 |
 | [Task 376][t376] | open | Manager.Create legacy conversion mode | Migration | Convert a legacy wallet through Manager.Create | 331, 358, 375 |
 
@@ -208,10 +206,11 @@ and raw-key ownership boundaries, then remove the superseded secret seams.
 
 ## Conditional route state
 
-The board records the current route in which modern kvdb remains maintained.
-If Task 353 retires it first, affected task files replace or remove their
-modern-kvdb clauses and dependencies. Their delivery phases do not change
-automatically; any move requires an explicit roadmap-priority decision.
+Modern kvdb remains supported for the current release (N) and the next (N+1).
+Task 353 is deferred to no earlier than N+2 and still requires verified
+migration, consumer cutover, and explicit approval. Migration does not imply
+retirement. Keep current kvdb behavior and shared three-backend verification;
+do not remove pending kvdb clauses in anticipation of future retirement.
 
 ## Maintaining the phases
 
@@ -222,6 +221,15 @@ roadmap rephasing may update both open and completed rows so the `Phase` column
 continues to reflect the current thematic map. When dependency edges change,
 update the owning task and its open-dependency cell without deriving a new
 phase. Every roadmap task must remain listed exactly once.
+
+## Deferred · 1
+
+These tasks remain valid but are outside this release roadmap. They are not
+done or superseded; reactivation preserves the original task number.
+
+| Task | Type | Outcome | Reactivation gate |
+| --- | --- | --- | --- |
+| [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
 ## Superseded · 6
 
@@ -292,7 +300,7 @@ phase. Every roadmap task must remain listed exactly once.
 [t350]: tasks/350-native-pgx-postgres.md
 [t351]: tasks/351-sql-utxo-integrity.md
 [t352]: tasks/352-kvdb-combined-passphrase-rotation.md
-[t353]: tasks/353-retire-modern-kvdb-backend.md
+[t353]: archive/tasks/353-retire-modern-kvdb-backend.md
 [t354]: tasks/354-vault-owned-secret-resolution.md
 [t355]: archive/tasks/355-transaction-size-accounting.md
 [t356]: tasks/356-defer-change-script-allocation.md

@@ -46,9 +46,8 @@ contain the accounts its supported create request promised.
 - Assemble and publish the Wallet in `Manager.wallets` only after the complete
   transaction commits and runtime assembly succeeds. A definite genesis
   failure must leave no cached Wallet.
-- Keep modern-kvdb creation parity outside this task. No maintained non-test
-  shell-creation caller currently justifies temporary parity before
-  [Task 353](353-retire-modern-kvdb-backend.md) retires that backend.
+- Keep modern-kvdb creation parity outside this SQL genesis task. Preserve its
+  maintained behavior; deferred [Task 353][t353] does not authorize its removal.
 - Keep enhanced key-identity validation in
   [Task 365](365-validate-wallet-genesis-keys.md), ambiguous SQL commit
   reconciliation in [Task 366](366-reconcile-sql-genesis-commit.md), and
@@ -124,6 +123,7 @@ runtime assembly and cache publication after the transaction succeeds.
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t343]: 343-exact-account-creation.md
 [t345]: 345-durable-watch-registration.md
+[t353]: ../archive/tasks/353-retire-modern-kvdb-backend.md
 [t358]: 358-contextual-manager-operations.md
 [t390]: 390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md

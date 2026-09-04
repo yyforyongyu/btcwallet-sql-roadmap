@@ -1,5 +1,11 @@
 # Task 353 — retire kvdb from the modern wallet API
 
+Deferred on 2026-09-05, not completed or superseded. Retain modern kvdb for
+the current release (N) and the next release (N+1). Reconsider retirement no
+earlier than N+2, after verified migration and consumer cutover, with an
+explicit retirement decision. This is not a migration-completion gate. Keep
+this number when reactivating the task; the original scope follows.
+
 Component: **Manager backend selection**.
 
 Type: **Migration**.
@@ -48,4 +54,4 @@ The modern Manager and its public configuration contain no kvdb backend after
 verified conversion, completed consumer cutover, and explicit retirement,
 while legacy packages and disk formats remain unchanged.
 
-[t376]: 376-orchestrate-legacy-conversion.md
+[t376]: ../../tasks/376-orchestrate-legacy-conversion.md

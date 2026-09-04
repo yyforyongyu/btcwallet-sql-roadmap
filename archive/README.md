@@ -6,6 +6,14 @@ reference material, not active instructions. Use the root
 delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
+## Deferred
+
+- [Task 353](tasks/353-retire-modern-kvdb-backend.md) was deferred on
+  2026-09-05, not completed or superseded. Modern kvdb remains supported for
+  the current and next release; retirement is no earlier than two releases
+  out and still requires verified migration, consumer cutover, and an explicit
+  decision. Reactivate Task 353 rather than allocating a replacement number.
+
 ## History
 
 - [Task 349](tasks/349-transaction-invalidation.md) was superseded on
