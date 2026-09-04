@@ -1,63 +1,69 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source": {
-    "generated_from_commit": "0016c20bfea81a54f6614949949cca2a4cda00c0",
-    "generated_on": "2026-08-21",
+    "generated_from_commit": "e475ae120f11656679d9fe6d353ef759bcaf596d",
+    "generated_on": "2026-09-05",
     "task_id_range": [
       329,
-      455
+      469
     ],
     "task_metadata": "tasks/*.md and archive/tasks/*.md",
     "phase_map": "QUEUE.md",
-    "status_map": "tasks/*.md for open tasks and archive/tasks/*.md for completed tasks",
-    "authority": "Derived snapshot only; task files own dependency edges and QUEUE.md owns phases.",
-    "edge_direction": "dependency -> dependent"
+    "status_map": "QUEUE.md",
+    "authority": "Derived snapshot only; task files own dependency edges, QUEUE.md owns phases and status, ACTIVE.md owns claims.",
+    "edge_direction": "dependency -> dependent",
+    "graph_scope": "Open and complete tasks only. Superseded and deferred tasks retain metadata and historical_dependencies but have no current phase or scheduling edges."
   },
   "definitions": {
-    "root_task": "A task with no hard dependencies in the current roadmap graph.",
-    "terminal_task": "A task with no direct dependents in the current roadmap graph.",
-    "dependency_component": "A weakly connected group when edge direction is ignored.",
-    "large_dependency_branch": "A task with at least 10 transitive dependents. This measures scheduling impact, not implementation scope or atomicity."
+    "root_task": "A current task with no recorded hard dependencies.",
+    "terminal_task": "A current task with no direct dependents.",
+    "dependency_component": "A weakly connected current group when edge direction is ignored.",
+    "large_dependency_branch": "At least 10 transitive dependents; scheduling impact, not implementation scope.",
+    "completed_edges": "Completed prerequisites remain recorded; later caller migrations are follow-ups, not retroactive hard dependencies.",
+    "inactive_task": "A superseded or deferred task excluded from current graph metrics."
   },
   "summary": {
-    "total_tasks": 127,
-    "open_tasks": 115,
-    "complete_tasks": 12,
-    "dependency_edges": 209,
-    "root_tasks": 41,
-    "terminal_tasks": 39,
-    "dependency_ready_open_tasks": 40,
-    "dependency_components": 12,
-    "multi_task_dependency_components": 3,
-    "isolated_tasks": 9,
+    "total_tasks": 141,
+    "current_graph_tasks": 134,
+    "open_tasks": 104,
+    "complete_tasks": 30,
+    "superseded_tasks": 6,
+    "deferred_tasks": 1,
+    "dependency_edges": 254,
+    "root_tasks": 38,
+    "terminal_tasks": 48,
+    "dependency_ready_open_tasks": 24,
+    "dependency_components": 10,
+    "multi_task_dependency_components": 2,
+    "isolated_tasks": 8,
     "large_dependency_branch_threshold": 10,
-    "large_dependency_branches": 24,
-    "open_large_dependency_branches": 19,
-    "complete_large_dependency_branches": 5,
+    "large_dependency_branches": 31,
+    "open_large_dependency_branches": 17,
+    "complete_large_dependency_branches": 14,
     "maximum_dependency_depth_edges": 11,
     "is_dag": true,
     "tasks_by_phase": {
-      "1": 62,
-      "2": 20,
-      "3": 32,
-      "4": 6,
-      "5": 7
+      "1": 55,
+      "2": 28,
+      "3": 5,
+      "4": 40,
+      "5": 6
     },
     "open_tasks_by_phase": {
-      "1": 53,
-      "2": 20,
-      "3": 29,
-      "4": 6,
-      "5": 7
+      "1": 28,
+      "2": 25,
+      "3": 5,
+      "4": 40,
+      "5": 6
     },
     "tasks_by_type": {
       "Benchmark": 5,
-      "Bug fix": 43,
+      "Bug fix": 45,
       "Design": 8,
-      "Gap fix": 27,
+      "Gap fix": 30,
       "Migration": 6,
-      "Refactor": 10,
-      "Test": 28
+      "Refactor": 13,
+      "Test": 34
     }
   },
   "root_task_ids": [
@@ -67,7 +73,6 @@
     335,
     339,
     342,
-    352,
     354,
     355,
     357,
@@ -79,13 +84,11 @@
     380,
     400,
     415,
-    416,
     421,
     424,
     425,
     427,
     429,
-    430,
     431,
     432,
     433,
@@ -94,35 +97,36 @@
     436,
     437,
     438,
-    439,
     440,
     441,
     442,
     443,
     451,
     453,
-    454
+    454,
+    467
   ],
   "terminal_task_ids": [
     330,
-    336,
     350,
-    353,
-    358,
     361,
+    362,
     363,
     365,
+    366,
+    367,
     369,
-    378,
+    376,
     379,
     380,
-    381,
-    391,
-    395,
-    396,
+    386,
     398,
     403,
     407,
+    408,
+    409,
+    411,
+    412,
     413,
     414,
     417,
@@ -132,6 +136,7 @@
     423,
     426,
     427,
+    428,
     432,
     437,
     443,
@@ -142,95 +147,77 @@
     448,
     449,
     450,
-    451
+    451,
+    460,
+    461,
+    462,
+    463,
+    464,
+    465,
+    466
   ],
   "dependency_ready_open_task_ids": [
-    334,
     335,
-    337,
-    340,
-    352,
+    345,
     354,
     357,
+    361,
     363,
     365,
     369,
-    377,
+    371,
     378,
-    379,
-    380,
-    381,
-    387,
     397,
-    401,
-    416,
-    421,
+    412,
     424,
-    425,
-    427,
-    429,
-    430,
     431,
     432,
-    435,
-    436,
-    437,
     438,
-    439,
     440,
     441,
     442,
     443,
     451,
-    453,
     454,
-    455
+    455,
+    458
+  ],
+  "inactive_task_ids": [
+    336,
+    349,
+    353,
+    368,
+    381,
+    394,
+    422
   ],
   "large_dependency_branches": [
+    {
+      "task_id": 360,
+      "title": "document kvdb adapter identity",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 2,
+      "descendant_count": 53,
+      "open_descendant_count": 49
+    },
+    {
+      "task_id": 334,
+      "title": "define aggregate Manager and shared-chain ownership",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 10,
+      "descendant_count": 51,
+      "open_descendant_count": 50
+    },
     {
       "task_id": 359,
       "title": "revalidate database identity design",
       "status": "complete",
       "phase": 1,
       "direct_dependent_count": 1,
-      "descendant_count": 46,
-      "open_descendant_count": 46
-    },
-    {
-      "task_id": 340,
-      "title": "bind SQL databases to schema and network identity",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 4,
-      "descendant_count": 45,
-      "open_descendant_count": 45
-    },
-    {
-      "task_id": 360,
-      "title": "document kvdb adapter identity",
-      "status": "complete",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 35,
-      "open_descendant_count": 34
-    },
-    {
-      "task_id": 345,
-      "title": "persist SQL account discovery mode",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 8,
-      "descendant_count": 32,
-      "open_descendant_count": 32
-    },
-    {
-      "task_id": 341,
-      "title": "define semantic account identity",
-      "status": "complete",
-      "phase": 1,
-      "direct_dependent_count": 9,
-      "descendant_count": 31,
-      "open_descendant_count": 31
+      "descendant_count": 50,
+      "open_descendant_count": 49
     },
     {
       "task_id": 332,
@@ -238,152 +225,125 @@
       "status": "complete",
       "phase": 1,
       "direct_dependent_count": 7,
-      "descendant_count": 25,
-      "open_descendant_count": 25
+      "descendant_count": 49,
+      "open_descendant_count": 48
     },
     {
-      "task_id": 393,
-      "title": "reject receiving allocation for key-only accounts",
-      "status": "open",
+      "task_id": 340,
+      "title": "bind SQL databases to schema and network identity",
+      "status": "complete",
       "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 16,
-      "open_descendant_count": 16
-    },
-    {
-      "task_id": 357,
-      "title": "validate transaction output and fee arithmetic",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 14,
-      "open_descendant_count": 14
-    },
-    {
-      "task_id": 424,
-      "title": "define transaction and UTXO integrity ownership",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 14,
-      "open_descendant_count": 14
-    },
-    {
-      "task_id": 337,
-      "title": "restore SQL imported-XPub public derivation",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 4,
-      "descendant_count": 13,
-      "open_descendant_count": 13
+      "direct_dependent_count": 5,
+      "descendant_count": 49,
+      "open_descendant_count": 49
     },
     {
       "task_id": 387,
-      "title": "define custom and path-bound account identity",
+      "title": "define account identity and chain-sync policy",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 7,
+      "descendant_count": 47,
+      "open_descendant_count": 47
+    },
+    {
+      "task_id": 345,
+      "title": "persist SQL account NoChainSync state",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 7,
+      "descendant_count": 41,
+      "open_descendant_count": 41
+    },
+    {
+      "task_id": 341,
+      "title": "define semantic account identity",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 9,
+      "descendant_count": 39,
+      "open_descendant_count": 37
+    },
+    {
+      "task_id": 467,
+      "title": "define the indeterminate commit identity",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 11,
+      "descendant_count": 36,
+      "open_descendant_count": 36
+    },
+    {
+      "task_id": 378,
+      "title": "translate AccountManager backend errors",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 6,
+      "descendant_count": 33,
+      "open_descendant_count": 33
+    },
+    {
+      "task_id": 392,
+      "title": "carry NoChainSync through account creation",
       "status": "open",
       "phase": 1,
       "direct_dependent_count": 4,
-      "descendant_count": 13,
-      "open_descendant_count": 13
-    },
-    {
-      "task_id": 404,
-      "title": "validate transaction input-source amounts",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 13,
-      "open_descendant_count": 13
-    },
-    {
-      "task_id": 334,
-      "title": "supersede ADR 0002 with SQL shared-chain ownership",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 3,
-      "descendant_count": 12,
-      "open_descendant_count": 12
-    },
-    {
-      "task_id": 394,
-      "title": "exclude key-only locators from wallet ownership",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 2,
-      "descendant_count": 12,
-      "open_descendant_count": 12
-    },
-    {
-      "task_id": 452,
-      "title": "exclude key-only accounts from recovery derivation",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 2,
-      "descendant_count": 12,
-      "open_descendant_count": 12
+      "descendant_count": 30,
+      "open_descendant_count": 30
     },
     {
       "task_id": 453,
       "title": "serialize Manager Wallet assembly",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 1,
+      "descendant_count": 30,
+      "open_descendant_count": 30
+    },
+    {
+      "task_id": 456,
+      "title": "centralize managed Wallet runtime configuration",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 3,
+      "descendant_count": 30,
+      "open_descendant_count": 30
+    },
+    {
+      "task_id": 458,
+      "title": "drain Wallet calls during terminal stop",
       "status": "open",
       "phase": 1,
       "direct_dependent_count": 2,
-      "descendant_count": 12,
-      "open_descendant_count": 12
+      "descendant_count": 30,
+      "open_descendant_count": 30
     },
     {
-      "task_id": 368,
-      "title": "make Manager own Wallet lifecycle",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 5,
-      "descendant_count": 11,
-      "open_descendant_count": 11
-    },
-    {
-      "task_id": 377,
-      "title": "make AccountManager results wallet-owned",
+      "task_id": 459,
+      "title": "assemble durable Wallets for Manager startup",
       "status": "open",
       "phase": 1,
       "direct_dependent_count": 1,
-      "descendant_count": 11,
-      "open_descendant_count": 11
+      "descendant_count": 29,
+      "open_descendant_count": 29
     },
     {
-      "task_id": 388,
-      "title": "reject colliding runtime account XPub identities",
+      "task_id": 331,
+      "title": "make Manager the sole lifecycle authority",
       "status": "open",
       "phase": 1,
-      "direct_dependent_count": 2,
-      "descendant_count": 11,
-      "open_descendant_count": 11
+      "direct_dependent_count": 16,
+      "descendant_count": 28,
+      "open_descendant_count": 28
     },
     {
-      "task_id": 392,
-      "title": "consume discovery mode in existing account creation",
+      "task_id": 393,
+      "title": "guard receiving APIs for NoChainSync accounts",
       "status": "open",
       "phase": 1,
-      "direct_dependent_count": 1,
-      "descendant_count": 11,
-      "open_descendant_count": 11
-    },
-    {
-      "task_id": 343,
-      "title": "create next-or-exact root-derived accounts",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 2,
-      "descendant_count": 10,
-      "open_descendant_count": 10
-    },
-    {
-      "task_id": 346,
-      "title": "preserve PSBT metadata during funding",
-      "status": "open",
-      "phase": 1,
-      "direct_dependent_count": 2,
-      "descendant_count": 10,
-      "open_descendant_count": 10
+      "direct_dependent_count": 3,
+      "descendant_count": 27,
+      "open_descendant_count": 27
     },
     {
       "task_id": 400,
@@ -391,25 +351,133 @@
       "status": "complete",
       "phase": 1,
       "direct_dependent_count": 3,
-      "descendant_count": 10,
-      "open_descendant_count": 10
+      "descendant_count": 20,
+      "open_descendant_count": 19
     },
     {
-      "task_id": 409,
-      "title": "normalize transaction input edges",
+      "task_id": 377,
+      "title": "make AccountManager results wallet-owned",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 1,
+      "descendant_count": 19,
+      "open_descendant_count": 19
+    },
+    {
+      "task_id": 343,
+      "title": "create next-or-exact root-derived accounts",
       "status": "open",
       "phase": 1,
+      "direct_dependent_count": 5,
+      "descendant_count": 18,
+      "open_descendant_count": 18
+    },
+    {
+      "task_id": 452,
+      "title": "exclude NoChainSync accounts from recovery",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 3,
+      "descendant_count": 18,
+      "open_descendant_count": 18
+    },
+    {
+      "task_id": 364,
+      "title": "persist ordered SQL live-watch obligations",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 3,
+      "descendant_count": 16,
+      "open_descendant_count": 16
+    },
+    {
+      "task_id": 401,
+      "title": "add an idempotent live-tip-only chain watch",
+      "status": "complete",
+      "phase": 1,
+      "direct_dependent_count": 1,
+      "descendant_count": 16,
+      "open_descendant_count": 16
+    },
+    {
+      "task_id": 468,
+      "title": "activate NoChainSync account creation",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 2,
+      "descendant_count": 16,
+      "open_descendant_count": 16
+    },
+    {
+      "task_id": 357,
+      "title": "validate transaction output and fee arithmetic",
+      "status": "open",
+      "phase": 2,
+      "direct_dependent_count": 3,
+      "descendant_count": 15,
+      "open_descendant_count": 15
+    },
+    {
+      "task_id": 402,
+      "title": "replay Wallet live-watch obligations",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 3,
+      "descendant_count": 15,
+      "open_descendant_count": 15
+    },
+    {
+      "task_id": 390,
+      "title": "create root-derived accounts in custom scopes",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 5,
+      "descendant_count": 14,
+      "open_descendant_count": 14
+    },
+    {
+      "task_id": 404,
+      "title": "validate Wallet transaction input amounts",
+      "status": "open",
+      "phase": 2,
+      "direct_dependent_count": 3,
+      "descendant_count": 14,
+      "open_descendant_count": 14
+    },
+    {
+      "task_id": 344,
+      "title": "allocate receiving-address batches atomically",
+      "status": "open",
+      "phase": 1,
+      "direct_dependent_count": 6,
+      "descendant_count": 12,
+      "open_descendant_count": 12
+    },
+    {
+      "task_id": 337,
+      "title": "restore SQL imported-XPub public derivation",
+      "status": "complete",
+      "phase": 1,
       "direct_dependent_count": 4,
-      "descendant_count": 10,
-      "open_descendant_count": 10
+      "descendant_count": 11,
+      "open_descendant_count": 11
+    },
+    {
+      "task_id": 346,
+      "title": "preserve PSBT metadata during funding",
+      "status": "open",
+      "phase": 2,
+      "direct_dependent_count": 2,
+      "descendant_count": 11,
+      "open_descendant_count": 11
     }
   ],
   "dependency_components": [
     {
       "id": 1,
-      "task_count": 94,
-      "edge_count": 168,
-      "open_task_count": 85,
+      "task_count": 124,
+      "edge_count": 253,
+      "open_task_count": 98,
       "task_ids": [
         329,
         330,
@@ -418,7 +486,6 @@
         333,
         334,
         335,
-        336,
         337,
         338,
         339,
@@ -431,10 +498,8 @@
         346,
         347,
         348,
-        349,
         351,
         352,
-        353,
         354,
         355,
         356,
@@ -449,7 +514,6 @@
         365,
         366,
         367,
-        368,
         370,
         371,
         372,
@@ -458,7 +522,7 @@
         375,
         376,
         377,
-        381,
+        378,
         382,
         383,
         384,
@@ -471,7 +535,6 @@
         391,
         392,
         393,
-        394,
         395,
         396,
         397,
@@ -492,28 +555,17 @@
         412,
         413,
         414,
+        415,
         416,
         417,
         418,
         419,
         420,
         421,
-        422,
         423,
         424,
         425,
         426,
-        452,
-        453
-      ]
-    },
-    {
-      "id": 2,
-      "task_count": 22,
-      "edge_count": 40,
-      "open_task_count": 19,
-      "task_ids": [
-        415,
         428,
         429,
         430,
@@ -534,11 +586,27 @@
         448,
         449,
         450,
-        455
+        452,
+        453,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "task_count": 2,
       "edge_count": 1,
       "open_task_count": 2,
@@ -548,7 +616,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 3,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -557,21 +625,30 @@
       ]
     },
     {
+      "id": 4,
+      "task_count": 1,
+      "edge_count": 0,
+      "open_task_count": 0,
+      "task_ids": [
+        379
+      ]
+    },
+    {
       "id": 5,
       "task_count": 1,
       "edge_count": 0,
-      "open_task_count": 1,
+      "open_task_count": 0,
       "task_ids": [
-        378
+        380
       ]
     },
     {
       "id": 6,
       "task_count": 1,
       "edge_count": 0,
-      "open_task_count": 1,
+      "open_task_count": 0,
       "task_ids": [
-        379
+        427
       ]
     },
     {
@@ -580,16 +657,16 @@
       "edge_count": 0,
       "open_task_count": 1,
       "task_ids": [
-        380
+        432
       ]
     },
     {
       "id": 8,
       "task_count": 1,
       "edge_count": 0,
-      "open_task_count": 1,
+      "open_task_count": 0,
       "task_ids": [
-        427
+        437
       ]
     },
     {
@@ -598,29 +675,11 @@
       "edge_count": 0,
       "open_task_count": 1,
       "task_ids": [
-        432
-      ]
-    },
-    {
-      "id": 10,
-      "task_count": 1,
-      "edge_count": 0,
-      "open_task_count": 1,
-      "task_ids": [
-        437
-      ]
-    },
-    {
-      "id": 11,
-      "task_count": 1,
-      "edge_count": 0,
-      "open_task_count": 1,
-      "task_ids": [
         443
       ]
     },
     {
-      "id": 12,
+      "id": 10,
       "task_count": 1,
       "edge_count": 0,
       "open_task_count": 1,
@@ -631,143 +690,200 @@
   ],
   "longest_dependency_chains": [
     [
+      332,
+      387,
+      345,
+      364,
+      402,
+      344,
+      356,
+      405,
+      406,
+      348,
+      439,
+      447
+    ],
+    [
+      332,
+      387,
+      345,
+      392,
+      393,
+      344,
+      356,
+      405,
+      406,
+      348,
+      439,
+      447
+    ],
+    [
+      359,
+      340,
+      345,
+      364,
+      402,
+      344,
+      356,
+      405,
+      406,
+      348,
+      439,
+      447
+    ],
+    [
       359,
       340,
       345,
       392,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
-    ],
-    [
-      359,
-      340,
-      345,
       393,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
+      344,
+      356,
+      405,
+      406,
+      348,
+      439,
+      447
     ],
     [
-      359,
-      340,
+      360,
+      387,
       345,
-      394,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
+      364,
+      402,
+      344,
+      356,
+      405,
+      406,
+      348,
+      439,
+      447
     ],
     [
-      359,
-      340,
+      360,
+      387,
       345,
-      452,
-      343,
-      389,
-      390,
-      347,
-      384,
-      385,
-      386,
-      336
+      392,
+      393,
+      344,
+      356,
+      405,
+      406,
+      348,
+      439,
+      447
     ]
   ],
   "topological_order": [
     332,
-    333,
-    334,
-    335,
-    339,
-    342,
-    352,
-    354,
-    355,
-    357,
-    359,
-    340,
-    345,
     360,
     341,
     337,
+    359,
+    340,
+    387,
+    345,
     329,
+    334,
+    458,
+    453,
+    456,
+    459,
+    331,
+    333,
+    330,
+    335,
+    421,
+    338,
+    339,
+    342,
+    377,
+    378,
+    392,
+    467,
+    343,
+    400,
+    364,
+    393,
+    401,
+    402,
+    344,
+    357,
+    404,
+    346,
+    347,
+    355,
+    356,
+    405,
+    406,
+    425,
+    348,
+    454,
+    350,
+    424,
+    351,
+    352,
+    354,
+    358,
     361,
+    362,
     363,
     365,
     366,
     367,
     369,
+    370,
     371,
+    372,
     373,
     374,
-    377,
-    378,
+    375,
+    376,
     379,
     380,
-    381,
+    452,
+    468,
+    390,
+    382,
     383,
-    387,
+    469,
+    384,
+    385,
+    386,
     388,
-    392,
-    393,
-    394,
+    389,
+    391,
+    396,
     399,
     395,
-    400,
-    364,
     397,
-    401,
-    402,
-    344,
+    398,
     403,
-    404,
-    346,
-    356,
-    405,
-    406,
-    415,
-    416,
-    418,
-    419,
-    420,
-    421,
-    424,
-    351,
+    407,
+    408,
     409,
     410,
     411,
-    349,
-    375,
-    376,
-    353,
     412,
     413,
     414,
-    425,
-    348,
-    408,
-    396,
+    415,
+    416,
+    433,
+    455,
+    417,
+    418,
+    419,
+    420,
+    457,
+    423,
     426,
     427,
+    428,
     429,
     430,
     431,
     432,
-    433,
     434,
     435,
     436,
@@ -782,39 +898,17 @@
     445,
     446,
     447,
+    448,
     449,
     450,
     451,
-    452,
-    343,
-    389,
-    390,
-    347,
-    382,
-    384,
-    385,
-    386,
-    391,
-    398,
-    407,
-    453,
-    368,
-    331,
-    330,
-    338,
-    358,
-    362,
-    336,
-    370,
-    372,
-    417,
-    422,
-    423,
-    454,
-    350,
-    455,
-    428,
-    448
+    460,
+    461,
+    462,
+    463,
+    464,
+    465,
+    466
   ],
   "edges": [
     {
@@ -826,16 +920,16 @@
       "to": 367
     },
     {
-      "from": 329,
-      "to": 375
-    },
-    {
       "from": 331,
       "to": 330
     },
     {
       "from": 331,
       "to": 338
+    },
+    {
+      "from": 331,
+      "to": 352
     },
     {
       "from": 331,
@@ -847,7 +941,47 @@
     },
     {
       "from": 331,
-      "to": 422
+      "to": 376
+    },
+    {
+      "from": 331,
+      "to": 416
+    },
+    {
+      "from": 331,
+      "to": 417
+    },
+    {
+      "from": 331,
+      "to": 428
+    },
+    {
+      "from": 331,
+      "to": 444
+    },
+    {
+      "from": 331,
+      "to": 445
+    },
+    {
+      "from": 331,
+      "to": 446
+    },
+    {
+      "from": 331,
+      "to": 447
+    },
+    {
+      "from": 331,
+      "to": 448
+    },
+    {
+      "from": 331,
+      "to": 449
+    },
+    {
+      "from": 331,
+      "to": 457
     },
     {
       "from": 332,
@@ -882,8 +1016,8 @@
       "to": 330
     },
     {
-      "from": 333,
-      "to": 370
+      "from": 334,
+      "to": 331
     },
     {
       "from": 334,
@@ -895,7 +1029,31 @@
     },
     {
       "from": 334,
+      "to": 372
+    },
+    {
+      "from": 334,
+      "to": 402
+    },
+    {
+      "from": 334,
       "to": 410
+    },
+    {
+      "from": 334,
+      "to": 455
+    },
+    {
+      "from": 334,
+      "to": 456
+    },
+    {
+      "from": 334,
+      "to": 458
+    },
+    {
+      "from": 334,
+      "to": 459
     },
     {
       "from": 335,
@@ -919,19 +1077,15 @@
     },
     {
       "from": 338,
-      "to": 336
-    },
-    {
-      "from": 338,
       "to": 362
     },
     {
       "from": 339,
-      "to": 349
+      "to": 411
     },
     {
       "from": 339,
-      "to": 411
+      "to": 412
     },
     {
       "from": 340,
@@ -944,6 +1098,10 @@
     {
       "from": 340,
       "to": 371
+    },
+    {
+      "from": 340,
+      "to": 375
     },
     {
       "from": 340,
@@ -995,6 +1153,10 @@
     },
     {
       "from": 343,
+      "to": 388
+    },
+    {
+      "from": 343,
       "to": 389
     },
     {
@@ -1002,8 +1164,24 @@
       "to": 390
     },
     {
+      "from": 343,
+      "to": 461
+    },
+    {
+      "from": 343,
+      "to": 468
+    },
+    {
       "from": 344,
       "to": 348
+    },
+    {
+      "from": 344,
+      "to": 356
+    },
+    {
+      "from": 344,
+      "to": 395
     },
     {
       "from": 344,
@@ -1012,6 +1190,10 @@
     {
       "from": 344,
       "to": 408
+    },
+    {
+      "from": 344,
+      "to": 461
     },
     {
       "from": 345,
@@ -1028,10 +1210,6 @@
     {
       "from": 345,
       "to": 393
-    },
-    {
-      "from": 345,
-      "to": 394
     },
     {
       "from": 345,
@@ -1055,31 +1233,15 @@
     },
     {
       "from": 347,
-      "to": 384
-    },
-    {
-      "from": 347,
-      "to": 407
+      "to": 469
     },
     {
       "from": 348,
-      "to": 396
-    },
-    {
-      "from": 349,
-      "to": 372
-    },
-    {
-      "from": 349,
-      "to": 412
+      "to": 439
     },
     {
       "from": 351,
       "to": 413
-    },
-    {
-      "from": 351,
-      "to": 414
     },
     {
       "from": 352,
@@ -1115,6 +1277,10 @@
     },
     {
       "from": 356,
+      "to": 348
+    },
+    {
+      "from": 356,
       "to": 405
     },
     {
@@ -1134,6 +1300,14 @@
       "to": 404
     },
     {
+      "from": 358,
+      "to": 366
+    },
+    {
+      "from": 358,
+      "to": 376
+    },
+    {
       "from": 359,
       "to": 340
     },
@@ -1143,15 +1317,7 @@
     },
     {
       "from": 360,
-      "to": 381
-    },
-    {
-      "from": 360,
       "to": 387
-    },
-    {
-      "from": 362,
-      "to": 336
     },
     {
       "from": 364,
@@ -1166,34 +1332,6 @@
       "to": 403
     },
     {
-      "from": 366,
-      "to": 358
-    },
-    {
-      "from": 367,
-      "to": 358
-    },
-    {
-      "from": 368,
-      "to": 331
-    },
-    {
-      "from": 368,
-      "to": 338
-    },
-    {
-      "from": 368,
-      "to": 417
-    },
-    {
-      "from": 368,
-      "to": 422
-    },
-    {
-      "from": 368,
-      "to": 423
-    },
-    {
       "from": 370,
       "to": 372
     },
@@ -1203,11 +1341,11 @@
     },
     {
       "from": 371,
-      "to": 370
+      "to": 372
     },
     {
       "from": 371,
-      "to": 372
+      "to": 423
     },
     {
       "from": 372,
@@ -1226,12 +1364,32 @@
       "to": 376
     },
     {
-      "from": 376,
-      "to": 353
-    },
-    {
       "from": 377,
       "to": 343
+    },
+    {
+      "from": 378,
+      "to": 343
+    },
+    {
+      "from": 378,
+      "to": 388
+    },
+    {
+      "from": 378,
+      "to": 391
+    },
+    {
+      "from": 378,
+      "to": 392
+    },
+    {
+      "from": 378,
+      "to": 430
+    },
+    {
+      "from": 378,
+      "to": 460
     },
     {
       "from": 382,
@@ -1258,8 +1416,12 @@
       "to": 386
     },
     {
-      "from": 386,
-      "to": 336
+      "from": 387,
+      "to": 345
+    },
+    {
+      "from": 387,
+      "to": 373
     },
     {
       "from": 387,
@@ -1278,8 +1440,8 @@
       "to": 392
     },
     {
-      "from": 388,
-      "to": 343
+      "from": 387,
+      "to": 397
     },
     {
       "from": 388,
@@ -1287,15 +1449,11 @@
     },
     {
       "from": 389,
-      "to": 390
-    },
-    {
-      "from": 389,
       "to": 391
     },
     {
-      "from": 390,
-      "to": 347
+      "from": 389,
+      "to": 460
     },
     {
       "from": 390,
@@ -1303,15 +1461,47 @@
     },
     {
       "from": 390,
+      "to": 389
+    },
+    {
+      "from": 390,
       "to": 391
+    },
+    {
+      "from": 390,
+      "to": 395
+    },
+    {
+      "from": 390,
+      "to": 469
+    },
+    {
+      "from": 391,
+      "to": 462
+    },
+    {
+      "from": 391,
+      "to": 463
+    },
+    {
+      "from": 391,
+      "to": 464
     },
     {
       "from": 392,
       "to": 343
     },
     {
-      "from": 393,
-      "to": 343
+      "from": 392,
+      "to": 344
+    },
+    {
+      "from": 392,
+      "to": 391
+    },
+    {
+      "from": 392,
+      "to": 393
     },
     {
       "from": 393,
@@ -1322,12 +1512,20 @@
       "to": 395
     },
     {
-      "from": 394,
-      "to": 343
+      "from": 393,
+      "to": 468
     },
     {
-      "from": 394,
+      "from": 395,
+      "to": 465
+    },
+    {
+      "from": 396,
       "to": 395
+    },
+    {
+      "from": 396,
+      "to": 466
     },
     {
       "from": 397,
@@ -1366,6 +1564,10 @@
       "to": 403
     },
     {
+      "from": 402,
+      "to": 423
+    },
+    {
       "from": 404,
       "to": 346
     },
@@ -1386,48 +1588,12 @@
       "to": 348
     },
     {
-      "from": 408,
-      "to": 396
-    },
-    {
-      "from": 409,
-      "to": 349
-    },
-    {
-      "from": 409,
-      "to": 410
-    },
-    {
-      "from": 409,
-      "to": 411
-    },
-    {
-      "from": 409,
-      "to": 413
-    },
-    {
-      "from": 410,
-      "to": 349
-    },
-    {
       "from": 410,
       "to": 411
     },
     {
       "from": 410,
       "to": 413
-    },
-    {
-      "from": 411,
-      "to": 349
-    },
-    {
-      "from": 411,
-      "to": 375
-    },
-    {
-      "from": 412,
-      "to": 423
     },
     {
       "from": 415,
@@ -1470,16 +1636,20 @@
       "to": 338
     },
     {
-      "from": 422,
-      "to": 423
-    },
-    {
       "from": 424,
       "to": 351
     },
     {
       "from": 424,
       "to": 409
+    },
+    {
+      "from": 424,
+      "to": 410
+    },
+    {
+      "from": 424,
+      "to": 414
     },
     {
       "from": 424,
@@ -1492,10 +1662,6 @@
     {
       "from": 425,
       "to": 408
-    },
-    {
-      "from": 428,
-      "to": 448
     },
     {
       "from": 429,
@@ -1514,6 +1680,10 @@
       "to": 444
     },
     {
+      "from": 430,
+      "to": 464
+    },
+    {
       "from": 431,
       "to": 444
     },
@@ -1528,6 +1698,14 @@
     {
       "from": 431,
       "to": 450
+    },
+    {
+      "from": 431,
+      "to": 465
+    },
+    {
+      "from": 431,
+      "to": 466
     },
     {
       "from": 433,
@@ -1631,19 +1809,19 @@
     },
     {
       "from": 452,
-      "to": 343
+      "to": 395
     },
     {
       "from": 452,
       "to": 398
     },
     {
-      "from": 453,
-      "to": 368
+      "from": 452,
+      "to": 468
     },
     {
       "from": 453,
-      "to": 422
+      "to": 459
     },
     {
       "from": 454,
@@ -1651,7 +1829,103 @@
     },
     {
       "from": 455,
+      "to": 417
+    },
+    {
+      "from": 455,
       "to": 428
+    },
+    {
+      "from": 455,
+      "to": 449
+    },
+    {
+      "from": 456,
+      "to": 358
+    },
+    {
+      "from": 456,
+      "to": 423
+    },
+    {
+      "from": 456,
+      "to": 459
+    },
+    {
+      "from": 457,
+      "to": 423
+    },
+    {
+      "from": 458,
+      "to": 331
+    },
+    {
+      "from": 458,
+      "to": 459
+    },
+    {
+      "from": 459,
+      "to": 331
+    },
+    {
+      "from": 467,
+      "to": 343
+    },
+    {
+      "from": 467,
+      "to": 344
+    },
+    {
+      "from": 467,
+      "to": 352
+    },
+    {
+      "from": 467,
+      "to": 356
+    },
+    {
+      "from": 467,
+      "to": 358
+    },
+    {
+      "from": 467,
+      "to": 366
+    },
+    {
+      "from": 467,
+      "to": 389
+    },
+    {
+      "from": 467,
+      "to": 395
+    },
+    {
+      "from": 467,
+      "to": 403
+    },
+    {
+      "from": 467,
+      "to": 405
+    },
+    {
+      "from": 467,
+      "to": 460
+    },
+    {
+      "from": 468,
+      "to": 390
+    },
+    {
+      "from": 468,
+      "to": 461
+    },
+    {
+      "from": 469,
+      "to": 384
+    },
+    {
+      "from": 469,
+      "to": 407
     }
   ],
   "tasks": [
@@ -1659,7 +1933,7 @@
       "id": 329,
       "title": "commit SQL wallet genesis atomically",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Manager SQL genesis and SQL Store",
       "path": "tasks/329-atomic-wallet-account-creation.md",
@@ -1669,13 +1943,11 @@
         345
       ],
       "open_dependencies": [
-        337,
         345
       ],
       "dependents": [
         366,
-        367,
-        375
+        367
       ],
       "transitive_dependencies": [
         332,
@@ -1684,26 +1956,23 @@
         341,
         345,
         359,
-        360
+        360,
+        387
       ],
       "transitive_dependents": [
-        353,
-        358,
         366,
-        367,
-        375,
-        376
+        367
       ],
       "dependency_count": 3,
-      "dependent_count": 3,
-      "ancestor_count": 7,
-      "descendant_count": 6
+      "dependent_count": 2,
+      "ancestor_count": 8,
+      "descendant_count": 2
     },
     {
       "id": 330,
       "title": "reject duplicate wallet creation",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Manager",
       "path": "tasks/330-duplicate-wallet-create.md",
@@ -1720,57 +1989,96 @@
       "transitive_dependencies": [
         331,
         333,
-        368,
-        453
+        334,
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 2,
       "dependent_count": 0,
-      "ancestor_count": 4,
+      "ancestor_count": 7,
       "descendant_count": 0
     },
     {
       "id": 331,
-      "title": "fence Manager admission and Store closure",
+      "title": "make Manager the sole lifecycle authority",
       "status": "open",
       "phase": 1,
       "type": "Bug fix",
-      "component": "Manager",
+      "component": "Manager lifecycle, public API cutover, and Store ownership",
       "path": "tasks/331-manager-wallet-lifecycle.md",
       "dependencies": [
-        368
+        334,
+        458,
+        459
       ],
       "open_dependencies": [
-        368
+        458,
+        459
       ],
       "dependents": [
         330,
         338,
+        352,
         358,
         370,
-        422
+        376,
+        416,
+        417,
+        428,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        457
       ],
       "transitive_dependencies": [
-        368,
-        453
+        334,
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
         330,
-        336,
         338,
+        352,
         358,
         362,
+        366,
         370,
         372,
-        422,
-        423
+        376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        416,
+        417,
+        418,
+        419,
+        420,
+        423,
+        428,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        457
       ],
-      "dependency_count": 1,
-      "dependent_count": 5,
-      "ancestor_count": 2,
-      "descendant_count": 9
+      "dependency_count": 3,
+      "dependent_count": 16,
+      "ancestor_count": 5,
+      "descendant_count": 28
     },
     {
       "id": 332,
@@ -1800,11 +2108,12 @@
       ],
       "transitive_dependents": [
         329,
-        336,
         343,
-        347,
-        353,
-        358,
+        344,
+        345,
+        348,
+        356,
+        364,
         365,
         366,
         367,
@@ -1822,13 +2131,36 @@
         390,
         391,
         392,
+        393,
+        395,
+        396,
+        397,
+        398,
+        399,
+        402,
         403,
-        407
+        405,
+        406,
+        407,
+        408,
+        423,
+        439,
+        447,
+        452,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 0,
       "dependent_count": 7,
       "ancestor_count": 0,
-      "descendant_count": 25
+      "descendant_count": 49
     },
     {
       "id": 333,
@@ -1845,31 +2177,27 @@
 
       ],
       "dependents": [
-        330,
-        370
+        330
       ],
       "transitive_dependencies": [
 
       ],
       "transitive_dependents": [
-        330,
-        370,
-        372,
-        423
+        330
       ],
       "dependency_count": 0,
-      "dependent_count": 2,
+      "dependent_count": 1,
       "ancestor_count": 0,
-      "descendant_count": 4
+      "descendant_count": 1
     },
     {
       "id": 334,
-      "title": "supersede ADR 0002 with SQL shared-chain ownership",
-      "status": "open",
+      "title": "define aggregate Manager and shared-chain ownership",
+      "status": "complete",
       "phase": 1,
       "type": "Design",
       "component": "SQL wallet architecture documentation",
-      "path": "tasks/334-shared-chain-state.md",
+      "path": "archive/tasks/334-shared-chain-state.md",
       "dependencies": [
 
       ],
@@ -1877,37 +2205,83 @@
 
       ],
       "dependents": [
+        331,
         370,
         371,
-        410
+        372,
+        402,
+        410,
+        455,
+        456,
+        458,
+        459
       ],
       "transitive_dependencies": [
 
       ],
       "transitive_dependents": [
-        349,
-        353,
+        330,
+        331,
+        338,
+        344,
+        348,
+        352,
+        356,
+        358,
+        362,
+        366,
         370,
         371,
         372,
-        375,
         376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        395,
+        396,
+        402,
+        403,
+        405,
+        406,
+        408,
         410,
         411,
-        412,
         413,
-        423
+        416,
+        417,
+        418,
+        419,
+        420,
+        423,
+        428,
+        439,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        455,
+        456,
+        457,
+        458,
+        459,
+        461,
+        465,
+        466
       ],
       "dependency_count": 0,
-      "dependent_count": 3,
+      "dependent_count": 10,
       "ancestor_count": 0,
-      "descendant_count": 12
+      "descendant_count": 51
     },
     {
       "id": 335,
       "title": "validate an immutable legacy wallet source",
       "status": "open",
-      "phase": 4,
+      "phase": 3,
       "type": "Migration",
       "component": "Legacy migration source snapshot",
       "path": "tasks/335-kvdb-to-sql-migration.md",
@@ -1924,7 +2298,6 @@
 
       ],
       "transitive_dependents": [
-        353,
         373,
         374,
         375,
@@ -1933,81 +2306,50 @@
       "dependency_count": 0,
       "dependent_count": 1,
       "ancestor_count": 0,
-      "descendant_count": 5
+      "descendant_count": 4
     },
     {
       "id": 336,
       "title": "remove redundant Wallet passphrase tests",
-      "status": "open",
-      "phase": 5,
+      "status": "superseded",
+      "phase": null,
       "type": "Test",
       "component": "Controller and Wallet passphrase test suite",
-      "path": "tasks/336-test-cleanup.md",
+      "path": "archive/tasks/336-test-cleanup.md",
       "dependencies": [
+
+      ],
+      "historical_dependencies": [
         338,
         362,
         386
       ],
+      "former_phase": 5,
       "open_dependencies": [
-        338,
-        362,
-        386
+
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
-        331,
-        332,
-        337,
-        338,
-        340,
-        341,
-        343,
-        345,
-        346,
-        347,
-        352,
-        354,
-        357,
-        359,
-        360,
-        362,
-        368,
-        377,
-        382,
-        383,
-        384,
-        385,
-        386,
-        387,
-        388,
-        389,
-        390,
-        392,
-        393,
-        394,
-        404,
-        421,
-        452,
-        453
+
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 3,
+      "dependency_count": 0,
       "dependent_count": 0,
-      "ancestor_count": 34,
+      "ancestor_count": 0,
       "descendant_count": 0
     },
     {
       "id": 337,
       "title": "restore SQL imported-XPub public derivation",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "Wallet and Signer public derivation",
-      "path": "tasks/337-imported-xpub-derivation.md",
+      "path": "archive/tasks/337-imported-xpub-derivation.md",
       "dependencies": [
         341
       ],
@@ -2026,60 +2368,56 @@
       ],
       "transitive_dependents": [
         329,
-        336,
-        353,
-        358,
         361,
         366,
         367,
-        375,
-        376,
         384,
         385,
         386,
-        391
+        391,
+        462,
+        463,
+        464
       ],
       "dependency_count": 1,
       "dependent_count": 4,
       "ancestor_count": 2,
-      "descendant_count": 13
+      "descendant_count": 11
     },
     {
       "id": 338,
       "title": "latch accepted SQL passphrase results",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Controller",
       "path": "tasks/338-passphrase-result.md",
       "dependencies": [
         331,
-        368,
         421
       ],
       "open_dependencies": [
-        331,
-        368,
-        421
+        331
       ],
       "dependents": [
-        336,
         362
       ],
       "transitive_dependencies": [
         331,
-        368,
+        334,
         421,
-        453
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
-        336,
         362
       ],
-      "dependency_count": 3,
-      "dependent_count": 2,
-      "ancestor_count": 4,
-      "descendant_count": 2
+      "dependency_count": 2,
+      "dependent_count": 1,
+      "ancestor_count": 7,
+      "descendant_count": 1
     },
     {
       "id": 339,
@@ -2096,35 +2434,29 @@
 
       ],
       "dependents": [
-        349,
-        411
+        411,
+        412
       ],
       "transitive_dependencies": [
 
       ],
       "transitive_dependents": [
-        349,
-        353,
-        372,
-        375,
-        376,
         411,
-        412,
-        423
+        412
       ],
       "dependency_count": 0,
       "dependent_count": 2,
       "ancestor_count": 0,
-      "descendant_count": 8
+      "descendant_count": 2
     },
     {
       "id": 340,
       "title": "bind SQL databases to schema and network identity",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "Manager and SQL Store",
-      "path": "tasks/340-durable-database-identity.md",
+      "path": "archive/tasks/340-durable-database-identity.md",
       "dependencies": [
         359
       ],
@@ -2135,6 +2467,7 @@
         345,
         351,
         371,
+        375,
         409
       ],
       "transitive_dependencies": [
@@ -2142,20 +2475,15 @@
       ],
       "transitive_dependents": [
         329,
-        336,
         343,
         344,
         345,
-        347,
         348,
-        349,
         351,
-        353,
-        358,
+        356,
         364,
         366,
         367,
-        370,
         371,
         372,
         375,
@@ -2164,33 +2492,42 @@
         384,
         385,
         386,
+        388,
         389,
         390,
         391,
         392,
         393,
-        394,
         395,
         396,
         398,
         399,
         402,
         403,
+        405,
+        406,
         407,
         408,
         409,
-        410,
-        411,
-        412,
         413,
-        414,
         423,
-        452
+        439,
+        447,
+        452,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 1,
-      "dependent_count": 4,
+      "dependent_count": 5,
       "ancestor_count": 1,
-      "descendant_count": 45
+      "descendant_count": 49
     },
     {
       "id": 341,
@@ -2222,20 +2559,15 @@
       ],
       "transitive_dependents": [
         329,
-        336,
         337,
         343,
         344,
-        347,
         348,
-        353,
-        358,
+        356,
         361,
         365,
         366,
         367,
-        375,
-        376,
         377,
         382,
         384,
@@ -2250,13 +2582,26 @@
         396,
         397,
         398,
+        405,
+        406,
         407,
-        408
+        408,
+        439,
+        447,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 1,
       "dependent_count": 9,
       "ancestor_count": 1,
-      "descendant_count": 31
+      "descendant_count": 39
     },
     {
       "id": 342,
@@ -2283,12 +2628,13 @@
         363,
         395,
         398,
-        399
+        399,
+        465
       ],
       "dependency_count": 0,
       "dependent_count": 2,
       "ancestor_count": 0,
-      "descendant_count": 4
+      "descendant_count": 5
     },
     {
       "id": 343,
@@ -2296,28 +2642,25 @@
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "AccountManager root-derived creation and SQL AccountStore CAS",
+      "component": "AccountManager root-derived creation and SQL AccountStore",
       "path": "tasks/343-exact-account-creation.md",
       "dependencies": [
         332,
         377,
-        388,
+        378,
         392,
-        393,
-        394,
-        452
+        467
       ],
       "open_dependencies": [
-        377,
-        388,
-        392,
-        393,
-        394,
-        452
+        378,
+        392
       ],
       "dependents": [
+        388,
         389,
-        390
+        390,
+        461,
+        468
       ],
       "transitive_dependencies": [
         332,
@@ -2327,29 +2670,35 @@
         359,
         360,
         377,
+        378,
         387,
-        388,
         392,
-        393,
-        394,
-        452
+        467
       ],
       "transitive_dependents": [
-        336,
-        347,
         382,
         384,
         385,
         386,
+        388,
         389,
         390,
         391,
-        407
+        395,
+        407,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        468,
+        469
       ],
-      "dependency_count": 7,
-      "dependent_count": 2,
-      "ancestor_count": 13,
-      "descendant_count": 10
+      "dependency_count": 5,
+      "dependent_count": 5,
+      "ancestor_count": 11,
+      "descendant_count": 18
     },
     {
       "id": 344,
@@ -2357,118 +2706,151 @@
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "AddressManager receiving batches and SQL AddressStore mutation",
+      "component": "AddressManager receiving batches and SQL AddressStore",
       "path": "tasks/344-bulk-address-allocation.md",
       "dependencies": [
         341,
         364,
+        392,
         393,
-        402
+        402,
+        467
       ],
       "open_dependencies": [
         364,
+        392,
         393,
         402
       ],
       "dependents": [
         348,
+        356,
+        395,
         396,
-        408
+        408,
+        461
       ],
       "transitive_dependencies": [
+        332,
+        334,
         340,
         341,
         345,
         359,
         360,
         364,
+        378,
+        387,
+        392,
         393,
         400,
         401,
-        402
+        402,
+        467
       ],
       "transitive_dependents": [
         348,
+        356,
+        395,
         396,
-        408
+        405,
+        406,
+        408,
+        439,
+        447,
+        461,
+        465,
+        466
       ],
-      "dependency_count": 4,
-      "dependent_count": 3,
-      "ancestor_count": 10,
-      "descendant_count": 3
+      "dependency_count": 6,
+      "dependent_count": 6,
+      "ancestor_count": 16,
+      "descendant_count": 12
     },
     {
       "id": 345,
-      "title": "persist SQL account discovery mode",
+      "title": "persist SQL account NoChainSync state",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
       "component": "SQL account schema and AccountStore persistence",
       "path": "tasks/345-durable-watch-registration.md",
       "dependencies": [
-        340
+        340,
+        387
       ],
       "open_dependencies": [
-        340
+
       ],
       "dependents": [
         329,
         364,
         392,
         393,
-        394,
         398,
         399,
         452
       ],
       "transitive_dependencies": [
+        332,
         340,
-        359
+        359,
+        360,
+        387
       ],
       "transitive_dependents": [
         329,
-        336,
         343,
         344,
-        347,
         348,
-        353,
-        358,
+        356,
         364,
         366,
         367,
-        375,
-        376,
         382,
         384,
         385,
         386,
+        388,
         389,
         390,
         391,
         392,
         393,
-        394,
         395,
         396,
         398,
         399,
         402,
         403,
+        405,
+        406,
         407,
         408,
-        452
+        423,
+        439,
+        447,
+        452,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
-      "dependency_count": 1,
-      "dependent_count": 8,
-      "ancestor_count": 2,
-      "descendant_count": 32
+      "dependency_count": 2,
+      "dependent_count": 7,
+      "ancestor_count": 5,
+      "descendant_count": 41
     },
     {
       "id": 346,
       "title": "preserve PSBT metadata during funding",
       "status": "open",
-      "phase": 1,
+      "phase": 2,
       "type": "Bug fix",
       "component": "PsbtManager packet validation and transformation",
       "path": "tasks/346-psbt-funding-metadata.md",
@@ -2489,97 +2871,82 @@
         404
       ],
       "transitive_dependents": [
-        336,
         347,
         348,
         384,
         385,
         386,
-        396,
         405,
         406,
-        407
+        407,
+        439,
+        447,
+        469
       ],
       "dependency_count": 2,
       "dependent_count": 2,
       "ancestor_count": 2,
-      "descendant_count": 10
+      "descendant_count": 11
     },
     {
       "id": 347,
-      "title": "authorize explicit PSBT signatures",
+      "title": "authorize existing PSBT signatures",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "PsbtManager and Signer",
+      "component": "PsbtManager existing-signature validation",
       "path": "tasks/347-psbt-signing-authorization.md",
       "dependencies": [
-        346,
-        390
+        346
       ],
       "open_dependencies": [
-        346,
-        390
+        346
       ],
       "dependents": [
-        384,
-        407
+        469
       ],
       "transitive_dependencies": [
-        332,
-        340,
-        341,
-        343,
-        345,
         346,
         357,
-        359,
-        360,
-        377,
-        387,
-        388,
-        389,
-        390,
-        392,
-        393,
-        394,
-        404,
-        452
+        404
       ],
       "transitive_dependents": [
-        336,
         384,
         385,
         386,
-        407
+        407,
+        469
       ],
-      "dependency_count": 2,
-      "dependent_count": 2,
-      "ancestor_count": 19,
+      "dependency_count": 1,
+      "dependent_count": 1,
+      "ancestor_count": 3,
       "descendant_count": 5
     },
     {
       "id": 348,
       "title": "watch PSBT change before returning funding",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "PsbtManager and AddressManager",
       "path": "tasks/348-watched-change-delivery.md",
       "dependencies": [
         344,
+        356,
         406,
         425
       ],
       "open_dependencies": [
         344,
-        406,
-        425
+        356,
+        406
       ],
       "dependents": [
-        396
+        439
       ],
       "transitive_dependencies": [
+        332,
+        334,
         340,
         341,
         344,
@@ -2591,6 +2958,9 @@
         359,
         360,
         364,
+        378,
+        387,
+        392,
         393,
         400,
         401,
@@ -2598,64 +2968,58 @@
         404,
         405,
         406,
-        425
+        425,
+        467
       ],
       "transitive_dependents": [
-        396
+        439,
+        447
       ],
-      "dependency_count": 3,
+      "dependency_count": 4,
       "dependent_count": 1,
-      "ancestor_count": 19,
-      "descendant_count": 1
+      "ancestor_count": 25,
+      "descendant_count": 2
     },
     {
       "id": 349,
       "title": "implement idempotent transaction invalidation",
-      "status": "open",
-      "phase": 1,
+      "status": "superseded",
+      "phase": null,
       "type": "Gap fix",
       "component": "TxStore internal invalidation workflow",
-      "path": "tasks/349-transaction-invalidation.md",
+      "path": "archive/tasks/349-transaction-invalidation.md",
       "dependencies": [
+
+      ],
+      "historical_dependencies": [
         339,
         409,
         410,
         411
       ],
+      "former_phase": 3,
       "open_dependencies": [
-        409,
-        410,
-        411
+
       ],
       "dependents": [
-        372,
-        412
+
       ],
       "transitive_dependencies": [
-        334,
-        339,
-        340,
-        359,
-        409,
-        410,
-        411,
-        424
+
       ],
       "transitive_dependents": [
-        372,
-        412,
-        423
+
       ],
-      "dependency_count": 4,
-      "dependent_count": 2,
-      "ancestor_count": 8,
-      "descendant_count": 3
+      "dependency_count": 0,
+      "dependent_count": 0,
+      "ancestor_count": 0,
+      "descendant_count": 0
     },
     {
       "id": 350,
       "title": "use native pgx for PostgreSQL storage",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Refactor",
       "component": "PostgreSQL Store",
       "path": "tasks/350-native-pgx-postgres.md",
@@ -2683,7 +3047,7 @@
       "id": 351,
       "title": "bind SQL UTXOs to wallet tenancy",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "SQL UTXO and lease schema",
       "path": "tasks/351-sql-utxo-integrity.md",
@@ -2692,12 +3056,10 @@
         424
       ],
       "open_dependencies": [
-        340,
         424
       ],
       "dependents": [
-        413,
-        414
+        413
       ],
       "transitive_dependencies": [
         340,
@@ -2705,27 +3067,27 @@
         424
       ],
       "transitive_dependents": [
-        413,
-        414
+        413
       ],
       "dependency_count": 2,
-      "dependent_count": 2,
+      "dependent_count": 1,
       "ancestor_count": 3,
-      "descendant_count": 2
+      "descendant_count": 1
     },
     {
       "id": 352,
-      "title": "rotate kvdb passphrases atomically",
+      "title": "contain uncertain kvdb passphrase rotation",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "LegacyWalletVault and waddrmgr passphrase rotation",
+      "component": "Controller and LegacyWalletVault",
       "path": "tasks/352-kvdb-combined-passphrase-rotation.md",
       "dependencies": [
-
+        331,
+        467
       ],
       "open_dependencies": [
-
+        331
       ],
       "dependents": [
         362,
@@ -2734,10 +3096,15 @@
         384
       ],
       "transitive_dependencies": [
-
+        331,
+        334,
+        453,
+        456,
+        458,
+        459,
+        467
       ],
       "transitive_dependents": [
-        336,
         362,
         382,
         383,
@@ -2745,55 +3112,40 @@
         385,
         386
       ],
-      "dependency_count": 0,
+      "dependency_count": 2,
       "dependent_count": 4,
-      "ancestor_count": 0,
-      "descendant_count": 7
+      "ancestor_count": 7,
+      "descendant_count": 6
     },
     {
       "id": 353,
       "title": "retire kvdb from the modern wallet API",
-      "status": "open",
-      "phase": 4,
+      "status": "deferred",
+      "phase": null,
       "type": "Migration",
       "component": "Manager backend selection",
-      "path": "tasks/353-retire-modern-kvdb-backend.md",
+      "path": "archive/tasks/353-retire-modern-kvdb-backend.md",
       "dependencies": [
+
+      ],
+      "historical_dependencies": [
         376
       ],
       "open_dependencies": [
-        376
+
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
-        329,
-        332,
-        334,
-        335,
-        337,
-        339,
-        340,
-        341,
-        345,
-        359,
-        360,
-        373,
-        374,
-        375,
-        376,
-        409,
-        410,
-        411,
-        424
+
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 1,
+      "dependency_count": 0,
       "dependent_count": 0,
-      "ancestor_count": 19,
+      "ancestor_count": 0,
       "descendant_count": 0
     },
     {
@@ -2819,7 +3171,6 @@
 
       ],
       "transitive_dependents": [
-        336,
         382,
         383,
         384,
@@ -2829,13 +3180,13 @@
       "dependency_count": 0,
       "dependent_count": 3,
       "ancestor_count": 0,
-      "descendant_count": 6
+      "descendant_count": 5
     },
     {
       "id": 355,
       "title": "correct transaction size accounting",
       "status": "complete",
-      "phase": 1,
+      "phase": 2,
       "type": "Bug fix",
       "component": "TxCreator and the `txsizes` module",
       "path": "archive/tasks/355-transaction-size-accounting.md",
@@ -2854,59 +3205,82 @@
       "transitive_dependents": [
         348,
         356,
-        396,
         405,
         406,
-        408
+        408,
+        439,
+        447
       ],
       "dependency_count": 0,
       "dependent_count": 1,
       "ancestor_count": 0,
-      "descendant_count": 6
+      "descendant_count": 7
     },
     {
       "id": 356,
       "title": "defer change-script allocation until viable",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "TxCreator and `txauthor`",
+      "component": "TxCreator, PsbtManager, and Wallet-owned address storage",
       "path": "tasks/356-defer-change-script-allocation.md",
       "dependencies": [
+        344,
         355,
         357,
-        404
+        404,
+        467
       ],
       "open_dependencies": [
+        344,
         357,
         404
       ],
       "dependents": [
+        348,
         405,
         408
       ],
       "transitive_dependencies": [
+        332,
+        334,
+        340,
+        341,
+        344,
+        345,
         355,
         357,
-        404
+        359,
+        360,
+        364,
+        378,
+        387,
+        392,
+        393,
+        400,
+        401,
+        402,
+        404,
+        467
       ],
       "transitive_dependents": [
         348,
-        396,
         405,
         406,
-        408
+        408,
+        439,
+        447
       ],
-      "dependency_count": 3,
-      "dependent_count": 2,
-      "ancestor_count": 3,
-      "descendant_count": 5
+      "dependency_count": 5,
+      "dependent_count": 3,
+      "ancestor_count": 20,
+      "descendant_count": 6
     },
     {
       "id": 357,
       "title": "validate transaction output and fee arithmetic",
       "status": "open",
-      "phase": 1,
+      "phase": 2,
       "type": "Bug fix",
       "component": "`txauthor` and TxCreator",
       "path": "tasks/357-transaction-amount-validation.md",
@@ -2925,7 +3299,6 @@
 
       ],
       "transitive_dependents": [
-        336,
         346,
         347,
         348,
@@ -2933,17 +3306,19 @@
         384,
         385,
         386,
-        396,
         404,
         405,
         406,
         407,
-        408
+        408,
+        439,
+        447,
+        469
       ],
       "dependency_count": 0,
       "dependent_count": 3,
       "ancestor_count": 0,
-      "descendant_count": 14
+      "descendant_count": 15
     },
     {
       "id": 358,
@@ -2955,39 +3330,33 @@
       "path": "tasks/358-contextual-manager-operations.md",
       "dependencies": [
         331,
-        366,
-        367
+        456,
+        467
       ],
       "open_dependencies": [
-        331,
-        366,
-        367
+        331
       ],
       "dependents": [
-
+        366,
+        376
       ],
       "transitive_dependencies": [
-        329,
         331,
-        332,
-        337,
-        340,
-        341,
-        345,
-        359,
-        360,
-        366,
-        367,
-        368,
-        453
+        334,
+        453,
+        456,
+        458,
+        459,
+        467
       ],
       "transitive_dependents": [
-
+        366,
+        376
       ],
       "dependency_count": 3,
-      "dependent_count": 0,
-      "ancestor_count": 13,
-      "descendant_count": 0
+      "dependent_count": 2,
+      "ancestor_count": 7,
+      "descendant_count": 2
     },
     {
       "id": 359,
@@ -3011,21 +3380,16 @@
       ],
       "transitive_dependents": [
         329,
-        336,
         340,
         343,
         344,
         345,
-        347,
         348,
-        349,
         351,
-        353,
-        358,
+        356,
         364,
         366,
         367,
-        370,
         371,
         372,
         375,
@@ -3034,33 +3398,42 @@
         384,
         385,
         386,
+        388,
         389,
         390,
         391,
         392,
         393,
-        394,
         395,
         396,
         398,
         399,
         402,
         403,
+        405,
+        406,
         407,
         408,
         409,
-        410,
-        411,
-        412,
         413,
-        414,
         423,
-        452
+        439,
+        447,
+        452,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 0,
       "dependent_count": 1,
       "ancestor_count": 0,
-      "descendant_count": 46
+      "descendant_count": 50
     },
     {
       "id": 360,
@@ -3078,7 +3451,6 @@
       ],
       "dependents": [
         341,
-        381,
         387
       ],
       "transitive_dependencies": [
@@ -3086,23 +3458,23 @@
       ],
       "transitive_dependents": [
         329,
-        336,
         337,
         341,
         343,
         344,
-        347,
+        345,
         348,
-        353,
-        358,
+        356,
         361,
+        364,
         365,
         366,
         367,
+        373,
+        374,
         375,
         376,
         377,
-        381,
         382,
         384,
         385,
@@ -3118,19 +3490,37 @@
         396,
         397,
         398,
+        399,
+        402,
+        403,
+        405,
+        406,
         407,
-        408
+        408,
+        423,
+        439,
+        447,
+        452,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 0,
-      "dependent_count": 3,
+      "dependent_count": 2,
       "ancestor_count": 0,
-      "descendant_count": 35
+      "descendant_count": 53
     },
     {
       "id": 361,
       "title": "support kvdb imported-XPub derivation",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Gap fix",
       "component": "modern kvdb public derivation adapter",
       "path": "tasks/361-kvdb-imported-xpub-derivation.md",
@@ -3138,7 +3528,7 @@
         337
       ],
       "open_dependencies": [
-        337
+
       ],
       "dependents": [
 
@@ -3160,7 +3550,7 @@
       "id": 362,
       "title": "return a definitive kvdb passphrase result",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Controller and LegacyWalletVault",
       "path": "tasks/362-kvdb-definitive-passphrase-result.md",
@@ -3173,29 +3563,33 @@
         352
       ],
       "dependents": [
-        336
+
       ],
       "transitive_dependencies": [
         331,
+        334,
         338,
         352,
-        368,
         421,
-        453
+        453,
+        456,
+        458,
+        459,
+        467
       ],
       "transitive_dependents": [
-        336
+
       ],
       "dependency_count": 2,
-      "dependent_count": 1,
-      "ancestor_count": 6,
-      "descendant_count": 1
+      "dependent_count": 0,
+      "ancestor_count": 10,
+      "descendant_count": 0
     },
     {
       "id": 363,
       "title": "bound aggregate recovery derivation work",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "recovery horizon derivation",
       "path": "tasks/363-recovery-scan-work-bound.md",
@@ -3225,7 +3619,7 @@
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "SQL watch-generation and obligation schema",
+      "component": "SQL live-watch persistence",
       "path": "tasks/364-durable-watch-registration.md",
       "dependencies": [
         345,
@@ -3240,29 +3634,42 @@
         403
       ],
       "transitive_dependencies": [
+        332,
         340,
         345,
         359,
+        360,
+        387,
         400
       ],
       "transitive_dependents": [
         344,
         348,
+        356,
+        395,
         396,
         402,
         403,
-        408
+        405,
+        406,
+        408,
+        423,
+        439,
+        447,
+        461,
+        465,
+        466
       ],
       "dependency_count": 2,
       "dependent_count": 3,
-      "ancestor_count": 4,
-      "descendant_count": 6
+      "ancestor_count": 7,
+      "descendant_count": 16
     },
     {
       "id": 365,
       "title": "validate wallet genesis key identities",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Manager creation preflight",
       "path": "tasks/365-validate-wallet-genesis-keys.md",
@@ -3293,42 +3700,54 @@
       "id": 366,
       "title": "reconcile ambiguous SQL genesis commits",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Manager and SQL Store genesis result",
       "path": "tasks/366-reconcile-sql-genesis-commit.md",
       "dependencies": [
-        329
+        329,
+        358,
+        467
       ],
       "open_dependencies": [
-        329
+        329,
+        358
       ],
       "dependents": [
-        358
+
       ],
       "transitive_dependencies": [
         329,
+        331,
         332,
+        334,
         337,
         340,
         341,
         345,
+        358,
         359,
-        360
+        360,
+        387,
+        453,
+        456,
+        458,
+        459,
+        467
       ],
       "transitive_dependents": [
-        358
+
       ],
-      "dependency_count": 1,
-      "dependent_count": 1,
-      "ancestor_count": 8,
-      "descendant_count": 1
+      "dependency_count": 3,
+      "dependent_count": 0,
+      "ancestor_count": 17,
+      "descendant_count": 0
     },
     {
       "id": 367,
       "title": "bound SQL genesis secret lifetime",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "Manager and WalletVault genesis preparation",
       "path": "tasks/367-bound-sql-genesis-secrets.md",
@@ -3339,7 +3758,7 @@
         329
       ],
       "dependents": [
-        358
+
       ],
       "transitive_dependencies": [
         329,
@@ -3349,63 +3768,55 @@
         341,
         345,
         359,
-        360
+        360,
+        387
       ],
       "transitive_dependents": [
-        358
+
       ],
       "dependency_count": 1,
-      "dependent_count": 1,
-      "ancestor_count": 8,
-      "descendant_count": 1
+      "dependent_count": 0,
+      "ancestor_count": 9,
+      "descendant_count": 0
     },
     {
       "id": 368,
-      "title": "make Manager own Wallet lifecycle",
-      "status": "open",
-      "phase": 1,
+      "title": "make Wallet lifecycle Manager-internal",
+      "status": "superseded",
+      "phase": null,
       "type": "Bug fix",
-      "component": "Manager and Wallet runtime lifecycle",
-      "path": "tasks/368-wallet-startup-shutdown.md",
+      "component": "Maintained Wallet lifecycle public API cutover",
+      "path": "archive/tasks/368-wallet-startup-shutdown.md",
       "dependencies": [
-        453
+
       ],
+      "historical_dependencies": [
+        331,
+        358
+      ],
+      "former_phase": 1,
       "open_dependencies": [
-        453
+
       ],
       "dependents": [
-        331,
-        338,
-        417,
-        422,
-        423
+
       ],
       "transitive_dependencies": [
-        453
+
       ],
       "transitive_dependents": [
-        330,
-        331,
-        336,
-        338,
-        358,
-        362,
-        370,
-        372,
-        417,
-        422,
-        423
+
       ],
-      "dependency_count": 1,
-      "dependent_count": 5,
-      "ancestor_count": 1,
-      "descendant_count": 11
+      "dependency_count": 0,
+      "dependent_count": 0,
+      "ancestor_count": 0,
+      "descendant_count": 0
     },
     {
       "id": 369,
       "title": "reject repeated Wallet unlocks without resetting timeout",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "Controller",
       "path": "tasks/369-repeated-wallet-unlock.md",
@@ -3431,22 +3842,18 @@
     },
     {
       "id": 370,
-      "title": "prepare ordered Manager chain delivery",
+      "title": "fan out ordered Manager chain events",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Refactor",
-      "component": "Manager chain coordinator and Wallet processors",
+      "component": "Manager chain-event fanout and Wallet processors",
       "path": "tasks/370-chain-source-delivery.md",
       "dependencies": [
         331,
-        333,
-        334,
-        371
+        334
       ],
       "open_dependencies": [
-        331,
-        334,
-        371
+        331
       ],
       "dependents": [
         372,
@@ -3454,28 +3861,26 @@
       ],
       "transitive_dependencies": [
         331,
-        333,
         334,
-        340,
-        359,
-        368,
-        371,
-        453
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
         372,
         423
       ],
-      "dependency_count": 4,
+      "dependency_count": 2,
       "dependent_count": 2,
-      "ancestor_count": 8,
+      "ancestor_count": 6,
       "descendant_count": 2
     },
     {
       "id": 371,
       "title": "serialize canonical chain-frontier mutation",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "SQL Store canonical chain state",
       "path": "tasks/371-canonical-chain-frontier.md",
@@ -3484,12 +3889,11 @@
         340
       ],
       "open_dependencies": [
-        334,
-        340
+
       ],
       "dependents": [
-        370,
-        372
+        372,
+        423
       ],
       "transitive_dependencies": [
         334,
@@ -3497,30 +3901,28 @@
         359
       ],
       "transitive_dependents": [
-        370,
         372,
         423
       ],
       "dependency_count": 2,
       "dependent_count": 2,
       "ancestor_count": 3,
-      "descendant_count": 3
+      "descendant_count": 2
     },
     {
       "id": 372,
-      "title": "prepare atomic multi-Wallet rollback",
+      "title": "coordinate multi-Wallet rollback",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "Manager chain coordinator and SQL Store rollback",
+      "component": "Manager chain dispatcher and SQL Store rollback",
       "path": "tasks/372-multi-wallet-rollback.md",
       "dependencies": [
-        349,
+        334,
         370,
         371
       ],
       "open_dependencies": [
-        349,
         370,
         371
       ],
@@ -3529,40 +3931,36 @@
       ],
       "transitive_dependencies": [
         331,
-        333,
         334,
-        339,
         340,
-        349,
         359,
-        368,
         370,
         371,
-        409,
-        410,
-        411,
-        424,
-        453
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
         423
       ],
       "dependency_count": 3,
       "dependent_count": 1,
-      "ancestor_count": 15,
+      "ancestor_count": 10,
       "descendant_count": 1
     },
     {
       "id": 373,
       "title": "extract legacy account and address state",
       "status": "open",
-      "phase": 4,
+      "phase": 3,
       "type": "Migration",
-      "component": "Legacy migration account and secret extraction",
+      "component": "Legacy migration account, address, and secret extraction",
       "path": "tasks/373-extract-legacy-account-address-state.md",
       "dependencies": [
         332,
-        335
+        335,
+        387
       ],
       "open_dependencies": [
         335
@@ -3572,24 +3970,25 @@
       ],
       "transitive_dependencies": [
         332,
-        335
+        335,
+        360,
+        387
       ],
       "transitive_dependents": [
-        353,
         374,
         375,
         376
       ],
-      "dependency_count": 2,
+      "dependency_count": 3,
       "dependent_count": 1,
-      "ancestor_count": 2,
-      "descendant_count": 4
+      "ancestor_count": 4,
+      "descendant_count": 3
     },
     {
       "id": 374,
       "title": "extract legacy transaction and sync state",
       "status": "open",
-      "phase": 4,
+      "phase": 3,
       "type": "Migration",
       "component": "Legacy migration transaction and sync extraction",
       "path": "tasks/374-extract-legacy-transaction-sync-state.md",
@@ -3605,120 +4004,111 @@
       "transitive_dependencies": [
         332,
         335,
-        373
+        360,
+        373,
+        387
       ],
       "transitive_dependents": [
-        353,
         375,
         376
       ],
       "dependency_count": 1,
       "dependent_count": 1,
-      "ancestor_count": 3,
-      "descendant_count": 3
+      "ancestor_count": 5,
+      "descendant_count": 2
     },
     {
       "id": 375,
       "title": "import one legacy snapshot into SQLite",
       "status": "open",
-      "phase": 4,
+      "phase": 3,
       "type": "Migration",
       "component": "SQLite migration importer",
       "path": "tasks/375-import-legacy-snapshot-sqlite.md",
       "dependencies": [
-        329,
-        374,
-        411
+        340,
+        374
       ],
       "open_dependencies": [
-        329,
-        374,
-        411
+        374
       ],
       "dependents": [
         376
       ],
       "transitive_dependencies": [
-        329,
         332,
-        334,
         335,
-        337,
-        339,
         340,
-        341,
-        345,
         359,
         360,
         373,
         374,
-        409,
-        410,
-        411,
-        424
+        387
       ],
       "transitive_dependents": [
-        353,
         376
       ],
-      "dependency_count": 3,
+      "dependency_count": 2,
       "dependent_count": 1,
-      "ancestor_count": 17,
-      "descendant_count": 2
+      "ancestor_count": 8,
+      "descendant_count": 1
     },
     {
       "id": 376,
-      "title": "orchestrate and verify legacy conversion",
+      "title": "convert a legacy wallet through Manager.Create",
       "status": "open",
-      "phase": 4,
+      "phase": 3,
       "type": "Migration",
-      "component": "Manager migration orchestration",
+      "component": "Manager.Create legacy conversion mode",
       "path": "tasks/376-orchestrate-legacy-conversion.md",
       "dependencies": [
+        331,
+        358,
         375
       ],
       "open_dependencies": [
+        331,
+        358,
         375
       ],
       "dependents": [
-        353
+
       ],
       "transitive_dependencies": [
-        329,
+        331,
         332,
         334,
         335,
-        337,
-        339,
         340,
-        341,
-        345,
+        358,
         359,
         360,
         373,
         374,
         375,
-        409,
-        410,
-        411,
-        424
+        387,
+        453,
+        456,
+        458,
+        459,
+        467
       ],
       "transitive_dependents": [
-        353
+
       ],
-      "dependency_count": 1,
-      "dependent_count": 1,
-      "ancestor_count": 18,
-      "descendant_count": 1
+      "dependency_count": 3,
+      "dependent_count": 0,
+      "ancestor_count": 17,
+      "descendant_count": 0
     },
     {
       "id": 377,
       "title": "make AccountManager results wallet-owned",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Gap fix",
       "component": "AccountManager public result contract",
-      "path": "tasks/377-account-manager-wallet-dto.md",
+      "path": "archive/tasks/377-account-manager-wallet-dto.md",
       "dependencies": [
         341
       ],
@@ -3733,22 +4123,30 @@
         360
       ],
       "transitive_dependents": [
-        336,
         343,
-        347,
         382,
         384,
         385,
         386,
+        388,
         389,
         390,
         391,
-        407
+        395,
+        407,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        468,
+        469
       ],
       "dependency_count": 1,
       "dependent_count": 1,
       "ancestor_count": 2,
-      "descendant_count": 11
+      "descendant_count": 19
     },
     {
       "id": 378,
@@ -3765,27 +4163,64 @@
 
       ],
       "dependents": [
-
+        343,
+        388,
+        391,
+        392,
+        430,
+        460
       ],
       "transitive_dependencies": [
 
       ],
       "transitive_dependents": [
-
+        343,
+        344,
+        348,
+        356,
+        382,
+        384,
+        385,
+        386,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        395,
+        396,
+        405,
+        406,
+        407,
+        408,
+        430,
+        439,
+        444,
+        447,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 0,
-      "dependent_count": 0,
+      "dependent_count": 6,
       "ancestor_count": 0,
-      "descendant_count": 0
+      "descendant_count": 33
     },
     {
       "id": 379,
       "title": "translate Manager load not-found errors",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "Manager Load public error boundary",
-      "path": "tasks/379-manager-load-error-boundary.md",
+      "path": "archive/tasks/379-manager-load-error-boundary.md",
       "dependencies": [
 
       ],
@@ -3809,11 +4244,11 @@
     {
       "id": 380,
       "title": "translate address lookup errors",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "AddressManager GetAddressInfo error boundary",
-      "path": "tasks/380-address-lookup-error-boundary.md",
+      "path": "archive/tasks/380-address-lookup-error-boundary.md",
       "dependencies": [
 
       ],
@@ -3837,14 +4272,18 @@
     {
       "id": 381,
       "title": "hide recovery adapter identity",
-      "status": "open",
-      "phase": 2,
+      "status": "superseded",
+      "phase": null,
       "type": "Refactor",
       "component": "RecoveryState public contract and internal Syncer adapter",
-      "path": "tasks/381-recovery-adapter-identity.md",
+      "path": "archive/tasks/381-recovery-adapter-identity.md",
       "dependencies": [
+
+      ],
+      "historical_dependencies": [
         360
       ],
+      "former_phase": 3,
       "open_dependencies": [
 
       ],
@@ -3852,14 +4291,14 @@
 
       ],
       "transitive_dependencies": [
-        360
+
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 1,
+      "dependency_count": 0,
       "dependent_count": 0,
-      "ancestor_count": 1,
+      "ancestor_count": 0,
       "descendant_count": 0
     },
     {
@@ -3884,7 +4323,9 @@
         386
       ],
       "transitive_dependencies": [
+        331,
         332,
+        334,
         340,
         341,
         343,
@@ -3894,23 +4335,26 @@
         359,
         360,
         377,
+        378,
         387,
-        388,
-        389,
         390,
         392,
         393,
-        394,
-        452
+        452,
+        453,
+        456,
+        458,
+        459,
+        467,
+        468
       ],
       "transitive_dependents": [
-        336,
         386
       ],
       "dependency_count": 3,
       "dependent_count": 1,
-      "ancestor_count": 18,
-      "descendant_count": 2
+      "ancestor_count": 24,
+      "descendant_count": 1
     },
     {
       "id": 383,
@@ -3933,19 +4377,25 @@
         386
       ],
       "transitive_dependencies": [
+        331,
+        334,
         352,
-        354
+        354,
+        453,
+        456,
+        458,
+        459,
+        467
       ],
       "transitive_dependents": [
-        336,
         384,
         385,
         386
       ],
       "dependency_count": 2,
       "dependent_count": 2,
-      "ancestor_count": 2,
-      "descendant_count": 4
+      "ancestor_count": 9,
+      "descendant_count": 3
     },
     {
       "id": 384,
@@ -3957,24 +4407,25 @@
       "path": "tasks/384-vault-safe-signing.md",
       "dependencies": [
         337,
-        347,
         352,
         354,
-        383
+        383,
+        469
       ],
       "open_dependencies": [
-        337,
-        347,
         352,
         354,
-        383
+        383,
+        469
       ],
       "dependents": [
         385,
         386
       ],
       "transitive_dependencies": [
+        331,
         332,
+        334,
         337,
         340,
         341,
@@ -3988,26 +4439,30 @@
         359,
         360,
         377,
+        378,
         383,
         387,
-        388,
-        389,
         390,
         392,
         393,
-        394,
         404,
-        452
+        452,
+        453,
+        456,
+        458,
+        459,
+        467,
+        468,
+        469
       ],
       "transitive_dependents": [
-        336,
         385,
         386
       ],
       "dependency_count": 5,
       "dependent_count": 2,
-      "ancestor_count": 24,
-      "descendant_count": 3
+      "ancestor_count": 31,
+      "descendant_count": 2
     },
     {
       "id": 385,
@@ -4027,7 +4482,9 @@
         386
       ],
       "transitive_dependencies": [
+        331,
         332,
+        334,
         337,
         340,
         341,
@@ -4041,26 +4498,30 @@
         359,
         360,
         377,
+        378,
         383,
         384,
         387,
-        388,
-        389,
         390,
         392,
         393,
-        394,
         404,
-        452
+        452,
+        453,
+        456,
+        458,
+        459,
+        467,
+        468,
+        469
       ],
       "transitive_dependents": [
-        336,
         386
       ],
       "dependency_count": 1,
       "dependent_count": 1,
-      "ancestor_count": 25,
-      "descendant_count": 2
+      "ancestor_count": 32,
+      "descendant_count": 1
     },
     {
       "id": 386,
@@ -4083,10 +4544,12 @@
         385
       ],
       "dependents": [
-        336
+
       ],
       "transitive_dependencies": [
+        331,
         332,
+        334,
         337,
         340,
         341,
@@ -4100,36 +4563,41 @@
         359,
         360,
         377,
+        378,
         382,
         383,
         384,
         385,
         387,
-        388,
-        389,
         390,
         392,
         393,
-        394,
         404,
-        452
+        452,
+        453,
+        456,
+        458,
+        459,
+        467,
+        468,
+        469
       ],
       "transitive_dependents": [
-        336
+
       ],
       "dependency_count": 4,
-      "dependent_count": 1,
-      "ancestor_count": 27,
-      "descendant_count": 1
+      "dependent_count": 0,
+      "ancestor_count": 34,
+      "descendant_count": 0
     },
     {
       "id": 387,
-      "title": "define custom and path-bound account identity",
-      "status": "open",
+      "title": "define account identity and chain-sync policy",
+      "status": "complete",
       "phase": 1,
       "type": "Design",
       "component": "ADR 0012 and ADR 0013 account-creation contract",
-      "path": "tasks/387-account-creation-identity-adr.md",
+      "path": "archive/tasks/387-account-creation-identity-adr.md",
       "dependencies": [
         332,
         360
@@ -4138,19 +4606,32 @@
 
       ],
       "dependents": [
+        345,
+        373,
         388,
         390,
         391,
-        392
+        392,
+        397
       ],
       "transitive_dependencies": [
         332,
         360
       ],
       "transitive_dependents": [
-        336,
+        329,
         343,
-        347,
+        344,
+        345,
+        348,
+        356,
+        364,
+        366,
+        367,
+        373,
+        374,
+        375,
+        376,
         382,
         384,
         385,
@@ -4160,72 +4641,56 @@
         390,
         391,
         392,
-        407
+        393,
+        395,
+        396,
+        397,
+        398,
+        399,
+        402,
+        403,
+        405,
+        406,
+        407,
+        408,
+        423,
+        439,
+        447,
+        452,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
       "dependency_count": 2,
-      "dependent_count": 4,
+      "dependent_count": 7,
       "ancestor_count": 2,
-      "descendant_count": 13
+      "descendant_count": 47
     },
     {
       "id": 388,
       "title": "reject colliding runtime account XPub identities",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "SQL AccountStore account-creation admission",
+      "component": "AccountStore account-creation admission",
       "path": "tasks/388-runtime-account-xpub-collisions.md",
       "dependencies": [
         341,
+        343,
+        378,
         387
       ],
       "open_dependencies": [
-        387
+        343,
+        378
       ],
       "dependents": [
-        343,
-        391
-      ],
-      "transitive_dependencies": [
-        332,
-        341,
-        360,
-        387
-      ],
-      "transitive_dependents": [
-        336,
-        343,
-        347,
-        382,
-        384,
-        385,
-        386,
-        389,
-        390,
-        391,
-        407
-      ],
-      "dependency_count": 2,
-      "dependent_count": 2,
-      "ancestor_count": 4,
-      "descendant_count": 11
-    },
-    {
-      "id": 389,
-      "title": "reconcile ambiguous runtime account commits",
-      "status": "open",
-      "phase": 1,
-      "type": "Bug fix",
-      "component": "AccountManager and SQL AccountStore account result reader",
-      "path": "tasks/389-runtime-account-commit-reconciliation.md",
-      "dependencies": [
-        343
-      ],
-      "open_dependencies": [
-        343
-      ],
-      "dependents": [
-        390,
         391
       ],
       "transitive_dependencies": [
@@ -4237,28 +4702,72 @@
         359,
         360,
         377,
+        378,
         387,
-        388,
         392,
-        393,
-        394,
-        452
+        467
       ],
       "transitive_dependents": [
-        336,
-        347,
-        382,
-        384,
-        385,
-        386,
-        390,
         391,
-        407
+        462,
+        463,
+        464
       ],
-      "dependency_count": 1,
+      "dependency_count": 4,
+      "dependent_count": 1,
+      "ancestor_count": 12,
+      "descendant_count": 4
+    },
+    {
+      "id": 389,
+      "title": "reconcile ambiguous runtime account commits",
+      "status": "open",
+      "phase": 4,
+      "type": "Bug fix",
+      "component": "AccountManager and SQL AccountStore account result reader",
+      "path": "tasks/389-runtime-account-commit-reconciliation.md",
+      "dependencies": [
+        343,
+        390,
+        467
+      ],
+      "open_dependencies": [
+        343,
+        390
+      ],
+      "dependents": [
+        391,
+        460
+      ],
+      "transitive_dependencies": [
+        332,
+        340,
+        341,
+        343,
+        345,
+        359,
+        360,
+        377,
+        378,
+        387,
+        390,
+        392,
+        393,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+        391,
+        460,
+        462,
+        463,
+        464
+      ],
+      "dependency_count": 3,
       "dependent_count": 2,
-      "ancestor_count": 14,
-      "descendant_count": 9
+      "ancestor_count": 16,
+      "descendant_count": 5
     },
     {
       "id": 390,
@@ -4271,17 +4780,18 @@
       "dependencies": [
         343,
         387,
-        389
+        468
       ],
       "open_dependencies": [
         343,
-        387,
-        389
+        468
       ],
       "dependents": [
-        347,
         382,
-        391
+        389,
+        391,
+        395,
+        469
       ],
       "transitive_dependencies": [
         332,
@@ -4292,54 +4802,64 @@
         359,
         360,
         377,
+        378,
         387,
-        388,
-        389,
         392,
         393,
-        394,
-        452
+        452,
+        467,
+        468
       ],
       "transitive_dependents": [
-        336,
-        347,
         382,
         384,
         385,
         386,
+        389,
         391,
-        407
+        395,
+        407,
+        460,
+        462,
+        463,
+        464,
+        465,
+        469
       ],
       "dependency_count": 3,
-      "dependent_count": 3,
+      "dependent_count": 5,
       "ancestor_count": 15,
-      "descendant_count": 8
+      "descendant_count": 14
     },
     {
       "id": 391,
-      "title": "create exact path-bound watch-only XPub accounts",
+      "title": "create exact path-bound XPub accounts",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Gap fix",
-      "component": "AccountManager path-bound identity and SQL AccountStore schema",
+      "component": "AccountManager and SQL account, address, and UTXO identity shape",
       "path": "tasks/391-path-bound-watch-only-xpub-accounts.md",
       "dependencies": [
         332,
         337,
+        378,
         387,
         388,
         389,
-        390
+        390,
+        392
       ],
       "open_dependencies": [
-        337,
-        387,
+        378,
         388,
         389,
-        390
+        390,
+        392
       ],
       "dependents": [
-
+        462,
+        463,
+        464
       ],
       "transitive_dependencies": [
         332,
@@ -4351,26 +4871,30 @@
         359,
         360,
         377,
+        378,
         387,
         388,
         389,
         390,
         392,
         393,
-        394,
-        452
+        452,
+        467,
+        468
       ],
       "transitive_dependents": [
-
+        462,
+        463,
+        464
       ],
-      "dependency_count": 6,
-      "dependent_count": 0,
-      "ancestor_count": 17,
-      "descendant_count": 0
+      "dependency_count": 8,
+      "dependent_count": 3,
+      "ancestor_count": 19,
+      "descendant_count": 3
     },
     {
       "id": 392,
-      "title": "consume discovery mode in existing account creation",
+      "title": "carry NoChainSync through account creation",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
@@ -4378,14 +4902,18 @@
       "path": "tasks/392-discovery-mode-account-creation.md",
       "dependencies": [
         345,
+        378,
         387
       ],
       "open_dependencies": [
         345,
-        387
+        378
       ],
       "dependents": [
-        343
+        343,
+        344,
+        391,
+        393
       ],
       "transitive_dependencies": [
         332,
@@ -4393,59 +4921,83 @@
         345,
         359,
         360,
+        378,
         387
       ],
       "transitive_dependents": [
-        336,
         343,
-        347,
+        344,
+        348,
+        356,
         382,
         384,
         385,
         386,
+        388,
         389,
         390,
         391,
-        407
+        393,
+        395,
+        396,
+        405,
+        406,
+        407,
+        408,
+        439,
+        447,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
-      "dependency_count": 2,
-      "dependent_count": 1,
-      "ancestor_count": 6,
-      "descendant_count": 11
+      "dependency_count": 3,
+      "dependent_count": 4,
+      "ancestor_count": 7,
+      "descendant_count": 30
     },
     {
       "id": 393,
-      "title": "reject receiving allocation for key-only accounts",
+      "title": "guard receiving APIs for NoChainSync accounts",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "AddressManager receiving entry points and AddressStore account lookup",
+      "component": "AddressManager receiving APIs and AddressStore account lookup",
       "path": "tasks/393-key-only-receiving-rejection.md",
       "dependencies": [
         341,
-        345
+        345,
+        392
       ],
       "open_dependencies": [
-        345
+        345,
+        392
       ],
       "dependents": [
-        343,
         344,
-        395
+        395,
+        468
       ],
       "transitive_dependencies": [
+        332,
         340,
         341,
         345,
         359,
-        360
+        360,
+        378,
+        387,
+        392
       ],
       "transitive_dependents": [
-        336,
-        343,
         344,
-        347,
         348,
+        356,
         382,
         384,
         385,
@@ -4455,96 +5007,122 @@
         391,
         395,
         396,
+        405,
+        406,
         407,
-        408
+        408,
+        439,
+        447,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
       ],
-      "dependency_count": 2,
+      "dependency_count": 3,
       "dependent_count": 3,
-      "ancestor_count": 5,
-      "descendant_count": 16
+      "ancestor_count": 9,
+      "descendant_count": 27
     },
     {
       "id": 394,
       "title": "exclude key-only locators from wallet ownership",
-      "status": "open",
-      "phase": 1,
+      "status": "superseded",
+      "phase": null,
       "type": "Gap fix",
       "component": "AddressStore ownership resolution and transaction ingestion",
-      "path": "tasks/394-key-only-transaction-ownership.md",
+      "path": "archive/tasks/394-key-only-transaction-ownership.md",
       "dependencies": [
+
+      ],
+      "historical_dependencies": [
         345
       ],
+      "former_phase": 1,
       "open_dependencies": [
-        345
+
       ],
       "dependents": [
-        343,
-        395
+
       ],
       "transitive_dependencies": [
-        340,
-        345,
-        359
+
       ],
       "transitive_dependents": [
-        336,
-        343,
-        347,
-        382,
-        384,
-        385,
-        386,
-        389,
-        390,
-        391,
-        395,
-        407
+
       ],
-      "dependency_count": 1,
-      "dependent_count": 2,
-      "ancestor_count": 3,
-      "descendant_count": 12
+      "dependency_count": 0,
+      "dependent_count": 0,
+      "ancestor_count": 0,
+      "descendant_count": 0
     },
     {
       "id": 395,
-      "title": "allocate one durable key-only locator",
+      "title": "allocate one durable NoChainSync child",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "AddressManager key allocation and SQL branch-counter mutation",
+      "component": "AddressManager child allocation and SQL branch-counter mutation",
       "path": "tasks/395-key-only-locator-allocation.md",
       "dependencies": [
         341,
+        344,
+        390,
         393,
-        394,
-        399
+        396,
+        399,
+        452,
+        467
       ],
       "open_dependencies": [
+        344,
+        390,
         393,
-        394,
-        399
+        396,
+        399,
+        452
       ],
       "dependents": [
-
+        465
       ],
       "transitive_dependencies": [
+        332,
+        334,
         340,
         341,
         342,
+        343,
+        344,
         345,
         359,
         360,
+        364,
+        377,
+        378,
+        387,
+        390,
+        392,
         393,
-        394,
-        399
+        396,
+        399,
+        400,
+        401,
+        402,
+        452,
+        467,
+        468
       ],
       "transitive_dependents": [
-
+        465
       ],
-      "dependency_count": 4,
-      "dependent_count": 0,
-      "ancestor_count": 9,
-      "descendant_count": 0
+      "dependency_count": 8,
+      "dependent_count": 1,
+      "ancestor_count": 25,
+      "descendant_count": 1
     },
     {
       "id": 396,
@@ -4555,59 +5133,55 @@
       "component": "AddressManager count-one semantics",
       "path": "tasks/396-oldest-unused-address.md",
       "dependencies": [
-        344,
-        348,
-        408
+        344
       ],
       "open_dependencies": [
-        344,
-        348,
-        408
+        344
       ],
       "dependents": [
-
+        395,
+        466
       ],
       "transitive_dependencies": [
+        332,
+        334,
         340,
         341,
         344,
         345,
-        346,
-        348,
-        355,
-        356,
-        357,
         359,
         360,
         364,
+        378,
+        387,
+        392,
         393,
         400,
         401,
         402,
-        404,
-        405,
-        406,
-        408,
-        425
+        467
       ],
       "transitive_dependents": [
-
+        395,
+        465,
+        466
       ],
-      "dependency_count": 3,
-      "dependent_count": 0,
-      "ancestor_count": 21,
-      "descendant_count": 0
+      "dependency_count": 1,
+      "dependent_count": 2,
+      "ancestor_count": 17,
+      "descendant_count": 3
     },
     {
       "id": 397,
       "title": "define semantic-account recovery targets",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Design",
       "component": "ADR 0004 targeted-recovery contract",
       "path": "tasks/397-semantic-recovery-targets-adr.md",
       "dependencies": [
         341,
+        387,
         400
       ],
       "open_dependencies": [
@@ -4617,23 +5191,25 @@
         398
       ],
       "transitive_dependencies": [
+        332,
         341,
         360,
+        387,
         400
       ],
       "transitive_dependents": [
         398
       ],
-      "dependency_count": 2,
+      "dependency_count": 3,
       "dependent_count": 1,
-      "ancestor_count": 3,
+      "ancestor_count": 5,
       "descendant_count": 1
     },
     {
       "id": 398,
       "title": "accept semantic account recovery targets",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Gap fix",
       "component": "Controller and Syncer recovery account selection",
       "path": "tasks/398-semantic-account-recovery-targets.md",
@@ -4654,12 +5230,14 @@
 
       ],
       "transitive_dependencies": [
+        332,
         340,
         341,
         342,
         345,
         359,
         360,
+        387,
         397,
         399,
         400,
@@ -4670,7 +5248,7 @@
       ],
       "dependency_count": 5,
       "dependent_count": 0,
-      "ancestor_count": 10,
+      "ancestor_count": 12,
       "descendant_count": 0
     },
     {
@@ -4693,19 +5271,23 @@
         398
       ],
       "transitive_dependencies": [
+        332,
         340,
         342,
         345,
-        359
+        359,
+        360,
+        387
       ],
       "transitive_dependents": [
         395,
-        398
+        398,
+        465
       ],
       "dependency_count": 2,
       "dependent_count": 2,
-      "ancestor_count": 4,
-      "descendant_count": 2
+      "ancestor_count": 7,
+      "descendant_count": 3
     },
     {
       "id": 400,
@@ -4732,28 +5314,38 @@
       "transitive_dependents": [
         344,
         348,
+        356,
         364,
+        395,
         396,
         397,
         398,
         401,
         402,
         403,
-        408
+        405,
+        406,
+        408,
+        423,
+        439,
+        447,
+        461,
+        465,
+        466
       ],
       "dependency_count": 0,
       "dependent_count": 3,
       "ancestor_count": 0,
-      "descendant_count": 10
+      "descendant_count": 20
     },
     {
       "id": 401,
       "title": "add an idempotent live-tip-only chain watch",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Gap fix",
       "component": "chain interface and Neutrino/btcd/bitcoind adapters",
-      "path": "tasks/401-live-tip-chain-watch.md",
+      "path": "archive/tasks/401-live-tip-chain-watch.md",
       "dependencies": [
         400
       ],
@@ -4769,68 +5361,94 @@
       "transitive_dependents": [
         344,
         348,
+        356,
+        395,
         396,
         402,
         403,
-        408
+        405,
+        406,
+        408,
+        423,
+        439,
+        447,
+        461,
+        465,
+        466
       ],
       "dependency_count": 1,
       "dependent_count": 1,
       "ancestor_count": 1,
-      "descendant_count": 6
+      "descendant_count": 16
     },
     {
       "id": 402,
-      "title": "replay live-watch obligations through the Syncer",
+      "title": "replay Wallet live-watch obligations",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "Controller/Syncer watch initialization and delivery completion",
+      "component": "Wallet live-watch delivery and replay",
       "path": "tasks/402-replay-live-watch-obligations.md",
       "dependencies": [
+        334,
         364,
         401
       ],
       "open_dependencies": [
-        364,
-        401
+        364
       ],
       "dependents": [
         344,
-        403
+        403,
+        423
       ],
       "transitive_dependencies": [
+        332,
+        334,
         340,
         345,
         359,
+        360,
         364,
+        387,
         400,
         401
       ],
       "transitive_dependents": [
         344,
         348,
+        356,
+        395,
         396,
         403,
-        408
+        405,
+        406,
+        408,
+        423,
+        439,
+        447,
+        461,
+        465,
+        466
       ],
-      "dependency_count": 2,
-      "dependent_count": 2,
-      "ancestor_count": 6,
-      "descendant_count": 5
+      "dependency_count": 3,
+      "dependent_count": 3,
+      "ancestor_count": 10,
+      "descendant_count": 15
     },
     {
       "id": 403,
       "title": "persist raw imports with live-watch obligations",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "AddressManager SQL raw-import mutation",
       "path": "tasks/403-raw-import-watch-obligations.md",
       "dependencies": [
         332,
         364,
-        402
+        402,
+        467
       ],
       "open_dependencies": [
         364,
@@ -4841,29 +5459,33 @@
       ],
       "transitive_dependencies": [
         332,
+        334,
         340,
         345,
         359,
+        360,
         364,
+        387,
         400,
         401,
-        402
+        402,
+        467
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 3,
+      "dependency_count": 4,
       "dependent_count": 0,
-      "ancestor_count": 8,
+      "ancestor_count": 12,
       "descendant_count": 0
     },
     {
       "id": 404,
-      "title": "validate transaction input-source amounts",
+      "title": "validate Wallet transaction input amounts",
       "status": "open",
-      "phase": 1,
+      "phase": 2,
       "type": "Bug fix",
-      "component": "`txauthor` input sources and TxCreator source adapters",
+      "component": "TxCreator and PsbtManager input-source adapters",
       "path": "tasks/404-transaction-input-amounts.md",
       "dependencies": [
         357
@@ -4880,7 +5502,6 @@
         357
       ],
       "transitive_dependents": [
-        336,
         346,
         347,
         348,
@@ -4888,29 +5509,32 @@
         384,
         385,
         386,
-        396,
         405,
         406,
         407,
-        408
+        408,
+        439,
+        447,
+        469
       ],
       "dependency_count": 1,
       "dependent_count": 3,
       "ancestor_count": 1,
-      "descendant_count": 13
+      "descendant_count": 14
     },
     {
       "id": 405,
       "title": "reserve PSBT funding inputs atomically",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Gap fix",
       "component": "PsbtManager and UTXO Store funding admission",
       "path": "tasks/405-psbt-funding-lease-admission.md",
       "dependencies": [
         346,
         356,
-        404
+        404,
+        467
       ],
       "open_dependencies": [
         346,
@@ -4921,29 +5545,47 @@
         406
       ],
       "transitive_dependencies": [
+        332,
+        334,
+        340,
+        341,
+        344,
+        345,
         346,
         355,
         356,
         357,
-        404
+        359,
+        360,
+        364,
+        378,
+        387,
+        392,
+        393,
+        400,
+        401,
+        402,
+        404,
+        467
       ],
       "transitive_dependents": [
         348,
-        396,
-        406
+        406,
+        439,
+        447
       ],
-      "dependency_count": 3,
+      "dependency_count": 4,
       "dependent_count": 1,
-      "ancestor_count": 5,
-      "descendant_count": 3
+      "ancestor_count": 22,
+      "descendant_count": 4
     },
     {
       "id": 406,
-      "title": "release PSBT funding leases by exact token",
+      "title": "clean up failed PSBT funding leases",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Gap fix",
-      "component": "UTXO Store and PsbtManager cleanup",
+      "component": "PsbtManager private failure cleanup and UTXO Store",
       "path": "tasks/406-psbt-funding-lease-release.md",
       "dependencies": [
         405
@@ -4955,35 +5597,53 @@
         348
       ],
       "transitive_dependencies": [
+        332,
+        334,
+        340,
+        341,
+        344,
+        345,
         346,
         355,
         356,
         357,
+        359,
+        360,
+        364,
+        378,
+        387,
+        392,
+        393,
+        400,
+        401,
+        402,
         404,
-        405
+        405,
+        467
       ],
       "transitive_dependents": [
         348,
-        396
+        439,
+        447
       ],
       "dependency_count": 1,
       "dependent_count": 1,
-      "ancestor_count": 6,
-      "descendant_count": 2
+      "ancestor_count": 23,
+      "descendant_count": 3
     },
     {
       "id": 407,
       "title": "authorize PSBT auto-finalization",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "PsbtManager FinalizePsbt",
       "path": "tasks/407-psbt-finalization-authorization.md",
       "dependencies": [
-        347
+        469
       ],
       "open_dependencies": [
-        347
+        469
       ],
       "dependents": [
 
@@ -5000,29 +5660,30 @@
         359,
         360,
         377,
+        378,
         387,
-        388,
-        389,
         390,
         392,
         393,
-        394,
         404,
-        452
+        452,
+        467,
+        468,
+        469
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 1,
       "dependent_count": 0,
-      "ancestor_count": 20,
+      "ancestor_count": 21,
       "descendant_count": 0
     },
     {
       "id": 408,
       "title": "watch direct transaction change before return",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
       "component": "TxCreator and AddressManager",
       "path": "tasks/408-direct-transaction-change-watch.md",
@@ -5033,13 +5694,14 @@
       ],
       "open_dependencies": [
         344,
-        356,
-        425
+        356
       ],
       "dependents": [
-        396
+
       ],
       "transitive_dependencies": [
+        332,
+        334,
         340,
         341,
         344,
@@ -5050,42 +5712,42 @@
         359,
         360,
         364,
+        378,
+        387,
+        392,
         393,
         400,
         401,
         402,
         404,
-        425
+        425,
+        467
       ],
       "transitive_dependents": [
-        396
+
       ],
       "dependency_count": 3,
-      "dependent_count": 1,
-      "ancestor_count": 16,
-      "descendant_count": 1
+      "dependent_count": 0,
+      "ancestor_count": 22,
+      "descendant_count": 0
     },
     {
       "id": 409,
-      "title": "normalize transaction input edges",
+      "title": "simplify transaction input graph reads",
       "status": "open",
-      "phase": 1,
-      "type": "Gap fix",
-      "component": "SQL schema and TxStore ingestion",
+      "phase": 4,
+      "type": "Refactor",
+      "component": "SQL TxStore input-graph representation",
       "path": "tasks/409-transaction-input-graph.md",
       "dependencies": [
         340,
         424
       ],
       "open_dependencies": [
-        340,
         424
       ],
       "dependents": [
-        349,
-        410,
-        411,
-        413
+
       ],
       "transitive_dependencies": [
         340,
@@ -5093,162 +5755,119 @@
         424
       ],
       "transitive_dependents": [
-        349,
-        353,
-        372,
-        375,
-        376,
-        410,
-        411,
-        412,
-        413,
-        423
+
       ],
       "dependency_count": 2,
-      "dependent_count": 4,
+      "dependent_count": 0,
       "ancestor_count": 3,
-      "descendant_count": 10
+      "descendant_count": 0
     },
     {
       "id": 410,
       "title": "coordinate transaction graph mutations",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "Wallet/Store transaction graph admission",
+      "component": "Wallet-owned SQL transaction mutation ordering",
       "path": "tasks/410-transaction-graph-admission.md",
       "dependencies": [
         334,
-        409
+        424
       ],
       "open_dependencies": [
-        334,
-        409
+        424
       ],
       "dependents": [
-        349,
         411,
         413
       ],
       "transitive_dependencies": [
         334,
-        340,
-        359,
-        409,
         424
       ],
       "transitive_dependents": [
-        349,
-        353,
-        372,
-        375,
-        376,
         411,
-        412,
-        413,
-        423
+        413
       ],
       "dependency_count": 2,
-      "dependent_count": 3,
-      "ancestor_count": 5,
-      "descendant_count": 9
+      "dependent_count": 2,
+      "ancestor_count": 2,
+      "descendant_count": 2
     },
     {
       "id": 411,
       "title": "reject children of terminal transactions",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "TxStore activation preflight and direct/batch ingestion",
+      "component": "Wallet-owned SQL transaction ingestion",
       "path": "tasks/411-terminal-parent-rejection.md",
       "dependencies": [
         339,
-        409,
         410
       ],
       "open_dependencies": [
-        409,
         410
       ],
       "dependents": [
-        349,
-        375
+
       ],
       "transitive_dependencies": [
         334,
         339,
-        340,
-        359,
-        409,
         410,
         424
       ],
       "transitive_dependents": [
-        349,
-        353,
-        372,
-        375,
-        376,
-        412,
-        423
+
       ],
-      "dependency_count": 3,
-      "dependent_count": 2,
-      "ancestor_count": 7,
-      "descendant_count": 7
+      "dependency_count": 2,
+      "dependent_count": 0,
+      "ancestor_count": 4,
+      "descendant_count": 0
     },
     {
       "id": 412,
-      "title": "expose invalidation with publication ordering",
+      "title": "expose transaction invalidation on TxWriter",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
-      "component": "TxWriter public contract, TxPublisher, and transaction graph admission",
-      "path": "tasks/412-transaction-publication-admission.md",
+      "component": "TxWriter transaction invalidation",
+      "path": "tasks/412-transaction-invalidation.md",
       "dependencies": [
-        349
+        339
       ],
       "open_dependencies": [
-        349
+
       ],
       "dependents": [
-        423
+
       ],
       "transitive_dependencies": [
-        334,
-        339,
-        340,
-        349,
-        359,
-        409,
-        410,
-        411,
-        424
+        339
       ],
       "transitive_dependents": [
-        423
+
       ],
       "dependency_count": 1,
-      "dependent_count": 1,
-      "ancestor_count": 9,
-      "descendant_count": 1
+      "dependent_count": 0,
+      "ancestor_count": 1,
+      "descendant_count": 0
     },
     {
       "id": 413,
-      "title": "constrain SQL UTXOs to exact spending inputs",
+      "title": "validate exact UTXO spending inputs",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
-      "component": "SQL UTXO and normalized-input schema",
+      "component": "Wallet-owned SQL UTXO spend assignment",
       "path": "tasks/413-utxo-spend-identity.md",
       "dependencies": [
         351,
-        409,
         410
       ],
       "open_dependencies": [
         351,
-        409,
         410
       ],
       "dependents": [
@@ -5259,39 +5878,35 @@
         340,
         351,
         359,
-        409,
         410,
         424
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 3,
+      "dependency_count": 2,
       "dependent_count": 0,
-      "ancestor_count": 7,
+      "ancestor_count": 6,
       "descendant_count": 0
     },
     {
       "id": 414,
       "title": "bound persisted SQL UTXO amounts",
       "status": "open",
-      "phase": 2,
-      "type": "Bug fix",
-      "component": "SQL UTXO schema",
+      "phase": 4,
+      "type": "Refactor",
+      "component": "SQL UTXO amount integrity backstop",
       "path": "tasks/414-utxo-amount-bounds.md",
       "dependencies": [
-        351
+        424
       ],
       "open_dependencies": [
-        351
+        424
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
-        340,
-        351,
-        359,
         424
       ],
       "transitive_dependents": [
@@ -5299,14 +5914,14 @@
       ],
       "dependency_count": 1,
       "dependent_count": 0,
-      "ancestor_count": 4,
+      "ancestor_count": 1,
       "descendant_count": 0
     },
     {
       "id": 415,
       "title": "cover public UTXO contracts end to end",
       "status": "complete",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "UtxoManager integration tests",
       "path": "archive/tasks/415-utxo-public-integration-tests.md",
@@ -5340,17 +5955,17 @@
     },
     {
       "id": 416,
-      "title": "build reusable database benchmark fixtures",
+      "title": "provide minimal three-backend benchmark setup",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Benchmark",
       "component": "wallet benchmark infrastructure",
       "path": "tasks/416-database-benchmark-fixtures.md",
       "dependencies": [
-
+        331
       ],
       "open_dependencies": [
-
+        331
       ],
       "dependents": [
         417,
@@ -5359,7 +5974,12 @@
         420
       ],
       "transitive_dependencies": [
-
+        331,
+        334,
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
         417,
@@ -5367,48 +5987,56 @@
         419,
         420
       ],
-      "dependency_count": 0,
+      "dependency_count": 1,
       "dependent_count": 4,
-      "ancestor_count": 0,
+      "ancestor_count": 6,
       "descendant_count": 4
     },
     {
       "id": 417,
       "title": "measure start-to-synced performance",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Benchmark",
       "component": "Manager lifecycle and Syncer benchmarks",
       "path": "tasks/417-start-to-synced-benchmark.md",
       "dependencies": [
-        368,
-        416
+        331,
+        416,
+        455
       ],
       "open_dependencies": [
-        368,
-        416
+        331,
+        416,
+        455
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
-        368,
+        331,
+        334,
         416,
-        453
+        433,
+        453,
+        455,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 2,
+      "dependency_count": 3,
       "dependent_count": 0,
-      "ancestor_count": 3,
+      "ancestor_count": 9,
       "descendant_count": 0
     },
     {
       "id": 418,
       "title": "measure ListUnspent performance",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Benchmark",
       "component": "wallet UtxoManager benchmarks",
       "path": "tasks/418-list-unspent-benchmark.md",
@@ -5422,21 +6050,27 @@
 
       ],
       "transitive_dependencies": [
-        416
+        331,
+        334,
+        416,
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 1,
       "dependent_count": 0,
-      "ancestor_count": 1,
+      "ancestor_count": 7,
       "descendant_count": 0
     },
     {
       "id": 419,
       "title": "measure address-read performance",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Benchmark",
       "component": "wallet AddressManager benchmarks",
       "path": "tasks/419-address-read-benchmark.md",
@@ -5450,21 +6084,27 @@
 
       ],
       "transitive_dependencies": [
-        416
+        331,
+        334,
+        416,
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 1,
       "dependent_count": 0,
-      "ancestor_count": 1,
+      "ancestor_count": 7,
       "descendant_count": 0
     },
     {
       "id": 420,
       "title": "measure transaction-read performance",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Benchmark",
       "component": "wallet TxReader benchmarks",
       "path": "tasks/420-transaction-read-benchmark.md",
@@ -5478,24 +6118,30 @@
 
       ],
       "transitive_dependencies": [
-        416
+        331,
+        334,
+        416,
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 1,
       "dependent_count": 0,
-      "ancestor_count": 1,
+      "ancestor_count": 7,
       "descendant_count": 0
     },
     {
       "id": 421,
       "title": "reconcile SQL passphrase commits",
-      "status": "open",
-      "phase": 1,
+      "status": "complete",
+      "phase": 2,
       "type": "Bug fix",
       "component": "WalletVault and SQL wallet-secret persistence",
-      "path": "tasks/421-sql-passphrase-commit-reconciliation.md",
+      "path": "archive/tasks/421-sql-passphrase-commit-reconciliation.md",
       "dependencies": [
 
       ],
@@ -5509,107 +6155,109 @@
 
       ],
       "transitive_dependents": [
-        336,
         338,
         362
       ],
       "dependency_count": 0,
       "dependent_count": 1,
       "ancestor_count": 0,
-      "descendant_count": 3
+      "descendant_count": 2
     },
     {
       "id": 422,
       "title": "make Manager loading cancellable",
-      "status": "open",
-      "phase": 1,
+      "status": "superseded",
+      "phase": null,
       "type": "Gap fix",
       "component": "Manager.Load",
-      "path": "tasks/422-manager-load-cancellation.md",
+      "path": "archive/tasks/422-manager-load-cancellation.md",
       "dependencies": [
+
+      ],
+      "historical_dependencies": [
         331,
         368,
         453
       ],
+      "former_phase": 1,
       "open_dependencies": [
-        331,
-        368,
-        453
+
       ],
       "dependents": [
-        423
+
       ],
       "transitive_dependencies": [
-        331,
-        368,
-        453
+
       ],
       "transitive_dependents": [
-        423
+
       ],
-      "dependency_count": 3,
-      "dependent_count": 1,
-      "ancestor_count": 3,
-      "descendant_count": 1
+      "dependency_count": 0,
+      "dependent_count": 0,
+      "ancestor_count": 0,
+      "descendant_count": 0
     },
     {
       "id": 423,
-      "title": "cut over SQL Manager chain notification ownership",
+      "title": "cut over Manager chain notification ownership",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Refactor",
-      "component": "SQL Manager chain source adapter and coordinator activation",
+      "component": "SQL Manager chain source and dispatcher wiring",
       "path": "tasks/423-manager-chain-source-cutover.md",
       "dependencies": [
-        368,
         370,
+        371,
         372,
-        412,
-        422
+        402,
+        456,
+        457
       ],
       "open_dependencies": [
-        368,
         370,
+        371,
         372,
-        412,
-        422
+        402,
+        457
       ],
       "dependents": [
 
       ],
       "transitive_dependencies": [
         331,
-        333,
+        332,
         334,
-        339,
         340,
-        349,
+        345,
         359,
-        368,
+        360,
+        364,
         370,
         371,
         372,
-        409,
-        410,
-        411,
-        412,
-        422,
-        424,
-        453
+        387,
+        400,
+        401,
+        402,
+        453,
+        456,
+        457,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
-      "dependency_count": 5,
+      "dependency_count": 6,
       "dependent_count": 0,
-      "ancestor_count": 18,
+      "ancestor_count": 20,
       "descendant_count": 0
     },
     {
       "id": 424,
       "title": "define transaction and UTXO integrity ownership",
       "status": "open",
-      "phase": 1,
+      "phase": 4,
       "type": "Design",
       "component": "ADR 0006 transaction and UTXO integrity contract",
       "path": "tasks/424-transaction-utxo-integrity-adr.md",
@@ -5622,40 +6270,35 @@
       "dependents": [
         351,
         409,
+        410,
+        414,
         426
       ],
       "transitive_dependencies": [
 
       ],
       "transitive_dependents": [
-        349,
         351,
-        353,
-        372,
-        375,
-        376,
         409,
         410,
         411,
-        412,
         413,
         414,
-        423,
         426
       ],
       "dependency_count": 0,
-      "dependent_count": 3,
+      "dependent_count": 5,
       "ancestor_count": 0,
-      "descendant_count": 14
+      "descendant_count": 7
     },
     {
       "id": 425,
       "title": "isolate shared transaction authoring from wrapper watch and lease effects",
-      "status": "open",
-      "phase": 1,
+      "status": "complete",
+      "phase": 2,
       "type": "Refactor",
       "component": "Wallet transaction-authoring wrapper boundary",
-      "path": "tasks/425-separate-transaction-authoring-wrappers.md",
+      "path": "archive/tasks/425-separate-transaction-authoring-wrappers.md",
       "dependencies": [
 
       ],
@@ -5671,19 +6314,20 @@
       ],
       "transitive_dependents": [
         348,
-        396,
-        408
+        408,
+        439,
+        447
       ],
       "dependency_count": 0,
       "dependent_count": 2,
       "ancestor_count": 0,
-      "descendant_count": 3
+      "descendant_count": 4
     },
     {
       "id": 426,
       "title": "validate persisted transaction output aggregates",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "SQL TxStore ingestion amount validation",
       "path": "tasks/426-sql-transaction-output-aggregates.md",
@@ -5710,11 +6354,11 @@
     {
       "id": 427,
       "title": "cover remaining Controller credential contracts",
-      "status": "open",
-      "phase": 3,
+      "status": "complete",
+      "phase": 1,
       "type": "Test",
       "component": "Controller credential integration tests",
-      "path": "tasks/427-controller-lifecycle-credential-itests.md",
+      "path": "archive/tasks/427-controller-lifecycle-credential-itests.md",
       "dependencies": [
 
       ],
@@ -5739,39 +6383,47 @@
       "id": 428,
       "title": "cover Controller resync and rescan contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "Controller Resync and Rescan integration tests",
       "path": "tasks/428-controller-sync-info-itests.md",
       "dependencies": [
+        331,
         455
       ],
       "open_dependencies": [
+        331,
         455
       ],
       "dependents": [
-        448
+
       ],
       "transitive_dependencies": [
+        331,
+        334,
         433,
-        455
+        453,
+        455,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
-        448
+
       ],
-      "dependency_count": 1,
-      "dependent_count": 1,
-      "ancestor_count": 2,
-      "descendant_count": 1
+      "dependency_count": 2,
+      "dependent_count": 0,
+      "ancestor_count": 8,
+      "descendant_count": 0
     },
     {
       "id": 429,
       "title": "cover public account mutation contracts",
-      "status": "open",
-      "phase": 3,
+      "status": "complete",
+      "phase": 1,
       "type": "Test",
       "component": "AccountManager mutation integration tests",
-      "path": "tasks/429-account-mutation-itests.md",
+      "path": "archive/tasks/429-account-mutation-itests.md",
       "dependencies": [
 
       ],
@@ -5800,35 +6452,37 @@
       "id": 430,
       "title": "cover public account query contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "AccountManager query integration tests",
       "path": "tasks/430-account-query-itests.md",
       "dependencies": [
-
+        378
       ],
       "open_dependencies": [
-
+        378
       ],
       "dependents": [
-        444
+        444,
+        464
       ],
       "transitive_dependencies": [
-
+        378
       ],
       "transitive_dependents": [
-        444
+        444,
+        464
       ],
-      "dependency_count": 0,
-      "dependent_count": 1,
-      "ancestor_count": 0,
-      "descendant_count": 1
+      "dependency_count": 1,
+      "dependent_count": 2,
+      "ancestor_count": 1,
+      "descendant_count": 2
     },
     {
       "id": 431,
       "title": "cover address allocation and lookup contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "AddressManager allocation and lookup integration tests",
       "path": "tasks/431-address-allocation-lookup-itests.md",
@@ -5842,7 +6496,9 @@
         444,
         445,
         449,
-        450
+        450,
+        465,
+        466
       ],
       "transitive_dependencies": [
 
@@ -5851,18 +6507,20 @@
         444,
         445,
         449,
-        450
+        450,
+        465,
+        466
       ],
       "dependency_count": 0,
-      "dependent_count": 4,
+      "dependent_count": 6,
       "ancestor_count": 0,
-      "descendant_count": 4
+      "descendant_count": 6
     },
     {
       "id": 432,
       "title": "cover address import and script contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "AddressManager import and script integration tests",
       "path": "tasks/432-address-import-script-itests.md",
@@ -5890,7 +6548,7 @@
       "id": 433,
       "title": "enforce the wallet sync test boundary",
       "status": "complete",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "Wallet sync-state publication and integration-test harness",
       "path": "archive/tasks/433-wallet-sync-test-boundary.md",
@@ -5913,6 +6571,7 @@
 
       ],
       "transitive_dependents": [
+        417,
         428,
         444,
         446,
@@ -5925,13 +6584,13 @@
       "dependency_count": 0,
       "dependent_count": 7,
       "ancestor_count": 0,
-      "descendant_count": 8
+      "descendant_count": 9
     },
     {
       "id": 434,
       "title": "cover transaction creation contracts",
       "status": "complete",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "TxCreator integration tests",
       "path": "archive/tasks/434-transaction-creation-itests.md",
@@ -5962,11 +6621,11 @@
     {
       "id": 435,
       "title": "cover transaction publication contracts",
-      "status": "open",
-      "phase": 3,
+      "status": "complete",
+      "phase": 1,
       "type": "Test",
       "component": "TxPublisher integration tests",
-      "path": "tasks/435-transaction-publication-itests.md",
+      "path": "archive/tasks/435-transaction-publication-itests.md",
       "dependencies": [
 
       ],
@@ -5996,11 +6655,11 @@
     {
       "id": 436,
       "title": "cover transaction read contracts",
-      "status": "open",
-      "phase": 3,
+      "status": "complete",
+      "phase": 1,
       "type": "Test",
       "component": "TxReader integration tests",
-      "path": "tasks/436-transaction-read-itests.md",
+      "path": "archive/tasks/436-transaction-read-itests.md",
       "dependencies": [
 
       ],
@@ -6034,11 +6693,11 @@
     {
       "id": 437,
       "title": "cover transaction label contracts",
-      "status": "open",
-      "phase": 3,
+      "status": "complete",
+      "phase": 1,
       "type": "Test",
       "component": "TxWriter integration tests",
-      "path": "tasks/437-transaction-label-itests.md",
+      "path": "archive/tasks/437-transaction-label-itests.md",
       "dependencies": [
 
       ],
@@ -6063,7 +6722,7 @@
       "id": 438,
       "title": "cover PSBT decoration and combination contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "PsbtManager packet integration tests",
       "path": "tasks/438-psbt-decoration-combination-itests.md",
@@ -6091,35 +6750,60 @@
       "id": 439,
       "title": "cover PSBT funding contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "PsbtManager funding integration tests",
       "path": "tasks/439-psbt-funding-itests.md",
       "dependencies": [
-
+        348
       ],
       "open_dependencies": [
-
+        348
       ],
       "dependents": [
         447
       ],
       "transitive_dependencies": [
-
+        332,
+        334,
+        340,
+        341,
+        344,
+        345,
+        346,
+        348,
+        355,
+        356,
+        357,
+        359,
+        360,
+        364,
+        378,
+        387,
+        392,
+        393,
+        400,
+        401,
+        402,
+        404,
+        405,
+        406,
+        425,
+        467
       ],
       "transitive_dependents": [
         447
       ],
-      "dependency_count": 0,
+      "dependency_count": 1,
       "dependent_count": 1,
-      "ancestor_count": 0,
+      "ancestor_count": 26,
       "descendant_count": 1
     },
     {
       "id": 440,
       "title": "cover PSBT signing and finalization contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "PsbtManager signing integration tests",
       "path": "tasks/440-psbt-signing-finalization-itests.md",
@@ -6147,7 +6831,7 @@
       "id": 441,
       "title": "cover public derivation and ECDH contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "Signer derivation integration tests",
       "path": "tasks/441-signer-derivation-ecdh-itests.md",
@@ -6175,7 +6859,7 @@
       "id": 442,
       "title": "cover public signing contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "Signer signature integration tests",
       "path": "tasks/442-signer-signing-itests.md",
@@ -6203,7 +6887,7 @@
       "id": 443,
       "title": "cover UnsafeSigner extraction contracts",
       "status": "open",
-      "phase": 3,
+      "phase": 1,
       "type": "Test",
       "component": "UnsafeSigner integration tests",
       "path": "tasks/443-unsafe-signer-itests.md",
@@ -6231,11 +6915,12 @@
       "id": 444,
       "title": "cover the wallet receive and reload scenario",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "public wallet receive scenario",
       "path": "tasks/444-wallet-receive-reload-scenario.md",
       "dependencies": [
+        331,
         415,
         429,
         430,
@@ -6244,230 +6929,291 @@
         436
       ],
       "open_dependencies": [
+        331,
+        430,
+        431
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        331,
+        334,
+        378,
+        415,
         429,
         430,
         431,
-        436
-      ],
-      "dependents": [
-
-      ],
-      "transitive_dependencies": [
-        415,
-        429,
-        430,
-        431,
-        433,
-        436
-      ],
-      "transitive_dependents": [
-
-      ],
-      "dependency_count": 6,
-      "dependent_count": 0,
-      "ancestor_count": 6,
-      "descendant_count": 0
-    },
-    {
-      "id": 445,
-      "title": "cover account derivation and signing",
-      "status": "open",
-      "phase": 3,
-      "type": "Test",
-      "component": "public account signing scenario",
-      "path": "tasks/445-account-signing-scenario.md",
-      "dependencies": [
-        429,
-        431,
-        441,
-        442
-      ],
-      "open_dependencies": [
-        429,
-        431,
-        441,
-        442
-      ],
-      "dependents": [
-
-      ],
-      "transitive_dependencies": [
-        429,
-        431,
-        441,
-        442
-      ],
-      "transitive_dependents": [
-
-      ],
-      "dependency_count": 4,
-      "dependent_count": 0,
-      "ancestor_count": 4,
-      "descendant_count": 0
-    },
-    {
-      "id": 446,
-      "title": "cover transaction creation and publication",
-      "status": "open",
-      "phase": 3,
-      "type": "Test",
-      "component": "public transaction spend scenario",
-      "path": "tasks/446-transaction-spend-publish-scenario.md",
-      "dependencies": [
-        415,
-        433,
-        434,
-        435,
-        436
-      ],
-      "open_dependencies": [
-        435,
-        436
-      ],
-      "dependents": [
-
-      ],
-      "transitive_dependencies": [
-        415,
-        433,
-        434,
-        435,
-        436
-      ],
-      "transitive_dependents": [
-
-      ],
-      "dependency_count": 5,
-      "dependent_count": 0,
-      "ancestor_count": 5,
-      "descendant_count": 0
-    },
-    {
-      "id": 447,
-      "title": "cover the complete PSBT workflow",
-      "status": "open",
-      "phase": 3,
-      "type": "Test",
-      "component": "public PSBT workflow scenario",
-      "path": "tasks/447-psbt-workflow-scenario.md",
-      "dependencies": [
-        433,
-        435,
-        436,
-        438,
-        439,
-        440
-      ],
-      "open_dependencies": [
-        435,
-        436,
-        438,
-        439,
-        440
-      ],
-      "dependents": [
-
-      ],
-      "transitive_dependencies": [
-        433,
-        435,
-        436,
-        438,
-        439,
-        440
-      ],
-      "transitive_dependents": [
-
-      ],
-      "dependency_count": 6,
-      "dependent_count": 0,
-      "ancestor_count": 6,
-      "descendant_count": 0
-    },
-    {
-      "id": 448,
-      "title": "cover synchronization and rollback",
-      "status": "open",
-      "phase": 3,
-      "type": "Test",
-      "component": "public Wallet reorganization scenario",
-      "path": "tasks/448-sync-rollback-scenario.md",
-      "dependencies": [
-        415,
-        428,
-        433,
-        436
-      ],
-      "open_dependencies": [
-        428,
-        436
-      ],
-      "dependents": [
-
-      ],
-      "transitive_dependencies": [
-        415,
-        428,
         433,
         436,
-        455
-      ],
-      "transitive_dependents": [
-
-      ],
-      "dependency_count": 4,
-      "dependent_count": 0,
-      "ancestor_count": 5,
-      "descendant_count": 0
-    },
-    {
-      "id": 449,
-      "title": "cover multi-Wallet SQL isolation",
-      "status": "open",
-      "phase": 3,
-      "type": "Test",
-      "component": "multi-Wallet SQL integration scenario",
-      "path": "tasks/449-multi-wallet-sql-isolation-scenario.md",
-      "dependencies": [
-        415,
-        429,
-        431,
-        433,
-        434,
-        435,
-        436
-      ],
-      "open_dependencies": [
-        429,
-        431,
-        435,
-        436
-      ],
-      "dependents": [
-
-      ],
-      "transitive_dependencies": [
-        415,
-        429,
-        431,
-        433,
-        434,
-        435,
-        436
+        453,
+        456,
+        458,
+        459
       ],
       "transitive_dependents": [
 
       ],
       "dependency_count": 7,
       "dependent_count": 0,
-      "ancestor_count": 7,
+      "ancestor_count": 13,
+      "descendant_count": 0
+    },
+    {
+      "id": 445,
+      "title": "cover account derivation and signing",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "public account signing scenario",
+      "path": "tasks/445-account-signing-scenario.md",
+      "dependencies": [
+        331,
+        429,
+        431,
+        441,
+        442
+      ],
+      "open_dependencies": [
+        331,
+        431,
+        441,
+        442
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        331,
+        334,
+        429,
+        431,
+        441,
+        442,
+        453,
+        456,
+        458,
+        459
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 5,
+      "dependent_count": 0,
+      "ancestor_count": 10,
+      "descendant_count": 0
+    },
+    {
+      "id": 446,
+      "title": "cover transaction creation and publication",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "public transaction spend scenario",
+      "path": "tasks/446-transaction-spend-publish-scenario.md",
+      "dependencies": [
+        331,
+        415,
+        433,
+        434,
+        435,
+        436
+      ],
+      "open_dependencies": [
+        331
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        331,
+        334,
+        415,
+        433,
+        434,
+        435,
+        436,
+        453,
+        456,
+        458,
+        459
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 6,
+      "dependent_count": 0,
+      "ancestor_count": 11,
+      "descendant_count": 0
+    },
+    {
+      "id": 447,
+      "title": "cover the complete PSBT workflow",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "public PSBT workflow scenario",
+      "path": "tasks/447-psbt-workflow-scenario.md",
+      "dependencies": [
+        331,
+        433,
+        435,
+        436,
+        438,
+        439,
+        440
+      ],
+      "open_dependencies": [
+        331,
+        438,
+        439,
+        440
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        331,
+        332,
+        334,
+        340,
+        341,
+        344,
+        345,
+        346,
+        348,
+        355,
+        356,
+        357,
+        359,
+        360,
+        364,
+        378,
+        387,
+        392,
+        393,
+        400,
+        401,
+        402,
+        404,
+        405,
+        406,
+        425,
+        433,
+        435,
+        436,
+        438,
+        439,
+        440,
+        453,
+        456,
+        458,
+        459,
+        467
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 7,
+      "dependent_count": 0,
+      "ancestor_count": 37,
+      "descendant_count": 0
+    },
+    {
+      "id": 448,
+      "title": "cover synchronization and rollback",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "public Wallet reorganization scenario",
+      "path": "tasks/448-sync-rollback-scenario.md",
+      "dependencies": [
+        331,
+        415,
+        433,
+        436
+      ],
+      "open_dependencies": [
+        331
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        331,
+        334,
+        415,
+        433,
+        436,
+        453,
+        456,
+        458,
+        459
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 4,
+      "dependent_count": 0,
+      "ancestor_count": 9,
+      "descendant_count": 0
+    },
+    {
+      "id": 449,
+      "title": "cover multi-Wallet SQL isolation",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "multi-Wallet SQL integration scenario",
+      "path": "tasks/449-multi-wallet-sql-isolation-scenario.md",
+      "dependencies": [
+        331,
+        415,
+        429,
+        431,
+        433,
+        434,
+        435,
+        436,
+        455
+      ],
+      "open_dependencies": [
+        331,
+        431,
+        455
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        331,
+        334,
+        415,
+        429,
+        431,
+        433,
+        434,
+        435,
+        436,
+        453,
+        455,
+        456,
+        458,
+        459
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 9,
+      "dependent_count": 0,
+      "ancestor_count": 14,
       "descendant_count": 0
     },
     {
       "id": 450,
       "title": "compare public wallet state with bitcoind",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "bitcoind compatibility integration scenario",
       "path": "tasks/450-bitcoind-compatibility-scenario.md",
@@ -6480,9 +7226,7 @@
         436
       ],
       "open_dependencies": [
-        431,
-        435,
-        436
+        431
       ],
       "dependents": [
 
@@ -6507,7 +7251,7 @@
       "id": 451,
       "title": "run itests across supported chain releases",
       "status": "open",
-      "phase": 3,
+      "phase": 2,
       "type": "Test",
       "component": "integration-test CI matrix and chain daemon provisioning",
       "path": "tasks/451-chain-version-itest-matrix.md",
@@ -6533,7 +7277,7 @@
     },
     {
       "id": 452,
-      "title": "exclude key-only accounts from recovery derivation",
+      "title": "exclude NoChainSync accounts from recovery",
       "status": "open",
       "phase": 1,
       "type": "Gap fix",
@@ -6546,18 +7290,19 @@
         345
       ],
       "dependents": [
-        343,
-        398
+        395,
+        398,
+        468
       ],
       "transitive_dependencies": [
+        332,
         340,
         345,
-        359
+        359,
+        360,
+        387
       ],
       "transitive_dependents": [
-        336,
-        343,
-        347,
         382,
         384,
         385,
@@ -6565,22 +7310,31 @@
         389,
         390,
         391,
+        395,
         398,
-        407
+        407,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        468,
+        469
       ],
       "dependency_count": 1,
-      "dependent_count": 2,
-      "ancestor_count": 3,
-      "descendant_count": 12
+      "dependent_count": 3,
+      "ancestor_count": 6,
+      "descendant_count": 18
     },
     {
       "id": 453,
       "title": "serialize Manager Wallet assembly",
-      "status": "open",
+      "status": "complete",
       "phase": 1,
       "type": "Bug fix",
       "component": "Manager Wallet assembly and cache installation",
-      "path": "tasks/453-serialize-manager-wallet-publication.md",
+      "path": "archive/tasks/453-serialize-manager-wallet-publication.md",
       "dependencies": [
 
       ],
@@ -6588,8 +7342,7 @@
 
       ],
       "dependents": [
-        368,
-        422
+        459
       ],
       "transitive_dependencies": [
 
@@ -6597,27 +7350,45 @@
       "transitive_dependents": [
         330,
         331,
-        336,
         338,
+        352,
         358,
         362,
-        368,
+        366,
         370,
         372,
+        376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        416,
         417,
-        422,
-        423
+        418,
+        419,
+        420,
+        423,
+        428,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        457,
+        459
       ],
       "dependency_count": 0,
-      "dependent_count": 2,
+      "dependent_count": 1,
       "ancestor_count": 0,
-      "descendant_count": 12
+      "descendant_count": 30
     },
     {
       "id": 454,
       "title": "make PostgreSQL transaction isolation explicit",
       "status": "open",
-      "phase": 2,
+      "phase": 4,
       "type": "Bug fix",
       "component": "PostgreSQL Store transaction runtime",
       "path": "tasks/454-postgres-transaction-isolation.md",
@@ -6645,30 +7416,781 @@
       "id": 455,
       "title": "report exact wallet synchronization status",
       "status": "open",
-      "phase": 2,
+      "phase": 1,
       "type": "Bug fix",
       "component": "Wallet Controller synchronization information",
       "path": "tasks/455-exact-wallet-sync-status.md",
       "dependencies": [
+        334,
         433
       ],
       "open_dependencies": [
 
       ],
       "dependents": [
-        428
+        417,
+        428,
+        449
       ],
       "transitive_dependencies": [
+        334,
         433
       ],
       "transitive_dependents": [
+        417,
         428,
-        448
+        449
+      ],
+      "dependency_count": 2,
+      "dependent_count": 3,
+      "ancestor_count": 2,
+      "descendant_count": 3
+    },
+    {
+      "id": 456,
+      "title": "centralize managed Wallet runtime configuration",
+      "status": "complete",
+      "phase": 1,
+      "type": "Refactor",
+      "component": "ManagerConfig and managed Wallet construction",
+      "path": "archive/tasks/456-manager-runtime-configuration.md",
+      "dependencies": [
+        334
+      ],
+      "open_dependencies": [
+
+      ],
+      "dependents": [
+        358,
+        423,
+        459
+      ],
+      "transitive_dependencies": [
+        334
+      ],
+      "transitive_dependents": [
+        330,
+        331,
+        338,
+        352,
+        358,
+        362,
+        366,
+        370,
+        372,
+        376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        416,
+        417,
+        418,
+        419,
+        420,
+        423,
+        428,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        457,
+        459
+      ],
+      "dependency_count": 1,
+      "dependent_count": 3,
+      "ancestor_count": 1,
+      "descendant_count": 30
+    },
+    {
+      "id": 457,
+      "title": "enforce one process-local Manager per database",
+      "status": "open",
+      "phase": 4,
+      "type": "Gap fix",
+      "component": "Manager Start and process-local database ownership",
+      "path": "tasks/457-process-local-manager-lease.md",
+      "dependencies": [
+        331
+      ],
+      "open_dependencies": [
+        331
+      ],
+      "dependents": [
+        423
+      ],
+      "transitive_dependencies": [
+        331,
+        334,
+        453,
+        456,
+        458,
+        459
+      ],
+      "transitive_dependents": [
+        423
       ],
       "dependency_count": 1,
       "dependent_count": 1,
+      "ancestor_count": 6,
+      "descendant_count": 1
+    },
+    {
+      "id": 458,
+      "title": "drain Wallet calls during terminal stop",
+      "status": "open",
+      "phase": 1,
+      "type": "Bug fix",
+      "component": "Wallet lifecycle state and maintained public Wallet components",
+      "path": "tasks/458-manager-operation-admission.md",
+      "dependencies": [
+        334
+      ],
+      "open_dependencies": [
+
+      ],
+      "dependents": [
+        331,
+        459
+      ],
+      "transitive_dependencies": [
+        334
+      ],
+      "transitive_dependents": [
+        330,
+        331,
+        338,
+        352,
+        358,
+        362,
+        366,
+        370,
+        372,
+        376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        416,
+        417,
+        418,
+        419,
+        420,
+        423,
+        428,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        457,
+        459
+      ],
+      "dependency_count": 1,
+      "dependent_count": 2,
       "ancestor_count": 1,
-      "descendant_count": 2
+      "descendant_count": 30
+    },
+    {
+      "id": 459,
+      "title": "assemble durable Wallets for Manager startup",
+      "status": "open",
+      "phase": 1,
+      "type": "Gap fix",
+      "component": "Manager startup Wallet discovery and assembly",
+      "path": "tasks/459-manager-startup-wallet-assembly.md",
+      "dependencies": [
+        334,
+        453,
+        456,
+        458
+      ],
+      "open_dependencies": [
+        458
+      ],
+      "dependents": [
+        331
+      ],
+      "transitive_dependencies": [
+        334,
+        453,
+        456,
+        458
+      ],
+      "transitive_dependents": [
+        330,
+        331,
+        338,
+        352,
+        358,
+        362,
+        366,
+        370,
+        372,
+        376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        416,
+        417,
+        418,
+        419,
+        420,
+        423,
+        428,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        457
+      ],
+      "dependency_count": 4,
+      "dependent_count": 1,
+      "ancestor_count": 4,
+      "descendant_count": 29
+    },
+    {
+      "id": 460,
+      "title": "make sequential account allocation invalid-child safe",
+      "status": "open",
+      "phase": 4,
+      "type": "Bug fix",
+      "component": "AccountManager sequential creation and SQL AccountStore cursor CAS",
+      "path": "tasks/460-sequential-account-invalid-children.md",
+      "dependencies": [
+        378,
+        389,
+        467
+      ],
+      "open_dependencies": [
+        378,
+        389
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        340,
+        341,
+        343,
+        345,
+        359,
+        360,
+        377,
+        378,
+        387,
+        389,
+        390,
+        392,
+        393,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 3,
+      "dependent_count": 0,
+      "ancestor_count": 17,
+      "descendant_count": 0
+    },
+    {
+      "id": 461,
+      "title": "cover public address batch contracts",
+      "status": "open",
+      "phase": 1,
+      "type": "Test",
+      "component": "AddressManager batch integration tests",
+      "path": "tasks/461-address-batch-itests.md",
+      "dependencies": [
+        343,
+        344,
+        468
+      ],
+      "open_dependencies": [
+        343,
+        344,
+        468
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        334,
+        340,
+        341,
+        343,
+        344,
+        345,
+        359,
+        360,
+        364,
+        377,
+        378,
+        387,
+        392,
+        393,
+        400,
+        401,
+        402,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 3,
+      "dependent_count": 0,
+      "ancestor_count": 21,
+      "descendant_count": 0
+    },
+    {
+      "id": 462,
+      "title": "cover public account mutation errors",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "AccountManager mutation-error integration tests",
+      "path": "tasks/462-account-mutation-error-itests.md",
+      "dependencies": [
+        391
+      ],
+      "open_dependencies": [
+        391
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        337,
+        340,
+        341,
+        343,
+        345,
+        359,
+        360,
+        377,
+        378,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 1,
+      "dependent_count": 0,
+      "ancestor_count": 20,
+      "descendant_count": 0
+    },
+    {
+      "id": 463,
+      "title": "verify path-bound UTXO account identity",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "UtxoManager path-bound account integration tests",
+      "path": "tasks/463-path-bound-utxo-identity-itests.md",
+      "dependencies": [
+        391
+      ],
+      "open_dependencies": [
+        391
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        337,
+        340,
+        341,
+        343,
+        345,
+        359,
+        360,
+        377,
+        378,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 1,
+      "dependent_count": 0,
+      "ancestor_count": 20,
+      "descendant_count": 0
+    },
+    {
+      "id": 464,
+      "title": "verify NoChainSync account queries",
+      "status": "open",
+      "phase": 2,
+      "type": "Test",
+      "component": "AccountManager NoChainSync query integration tests",
+      "path": "tasks/464-no-chain-sync-account-query-itests.md",
+      "dependencies": [
+        391,
+        430
+      ],
+      "open_dependencies": [
+        391,
+        430
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        337,
+        340,
+        341,
+        343,
+        345,
+        359,
+        360,
+        377,
+        378,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        430,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 2,
+      "dependent_count": 0,
+      "ancestor_count": 21,
+      "descendant_count": 0
+    },
+    {
+      "id": 465,
+      "title": "verify NoChainSync address results",
+      "status": "open",
+      "phase": 1,
+      "type": "Test",
+      "component": "AddressManager NoChainSync result integration tests",
+      "path": "tasks/465-new-address-result-itests.md",
+      "dependencies": [
+        395,
+        431
+      ],
+      "open_dependencies": [
+        395,
+        431
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        334,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        359,
+        360,
+        364,
+        377,
+        378,
+        387,
+        390,
+        392,
+        393,
+        395,
+        396,
+        399,
+        400,
+        401,
+        402,
+        431,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 2,
+      "dependent_count": 0,
+      "ancestor_count": 27,
+      "descendant_count": 0
+    },
+    {
+      "id": 466,
+      "title": "verify final oldest-unused allocation",
+      "status": "open",
+      "phase": 1,
+      "type": "Test",
+      "component": "AddressManager final count-one integration tests",
+      "path": "tasks/466-oldest-unused-address-itests.md",
+      "dependencies": [
+        396,
+        431
+      ],
+      "open_dependencies": [
+        396,
+        431
+      ],
+      "dependents": [
+
+      ],
+      "transitive_dependencies": [
+        332,
+        334,
+        340,
+        341,
+        344,
+        345,
+        359,
+        360,
+        364,
+        378,
+        387,
+        392,
+        393,
+        396,
+        400,
+        401,
+        402,
+        431,
+        467
+      ],
+      "transitive_dependents": [
+
+      ],
+      "dependency_count": 2,
+      "dependent_count": 0,
+      "ancestor_count": 19,
+      "descendant_count": 0
+    },
+    {
+      "id": 467,
+      "title": "define the indeterminate commit identity",
+      "status": "complete",
+      "phase": 1,
+      "type": "Gap fix",
+      "component": "wallet public durable-mutation error identity",
+      "path": "archive/tasks/467-indeterminate-commit-identity.md",
+      "dependencies": [
+
+      ],
+      "open_dependencies": [
+
+      ],
+      "dependents": [
+        343,
+        344,
+        352,
+        356,
+        358,
+        366,
+        389,
+        395,
+        403,
+        405,
+        460
+      ],
+      "transitive_dependencies": [
+
+      ],
+      "transitive_dependents": [
+        343,
+        344,
+        348,
+        352,
+        356,
+        358,
+        362,
+        366,
+        376,
+        382,
+        383,
+        384,
+        385,
+        386,
+        388,
+        389,
+        390,
+        391,
+        395,
+        396,
+        403,
+        405,
+        406,
+        407,
+        408,
+        439,
+        447,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469
+      ],
+      "dependency_count": 0,
+      "dependent_count": 11,
+      "ancestor_count": 0,
+      "descendant_count": 36
+    },
+    {
+      "id": 468,
+      "title": "activate NoChainSync account creation",
+      "status": "open",
+      "phase": 1,
+      "type": "Gap fix",
+      "component": "AccountManager NoChainSync creation admission",
+      "path": "tasks/468-activate-no-chain-sync-account-creation.md",
+      "dependencies": [
+        343,
+        393,
+        452
+      ],
+      "open_dependencies": [
+        343,
+        393,
+        452
+      ],
+      "dependents": [
+        390,
+        461
+      ],
+      "transitive_dependencies": [
+        332,
+        340,
+        341,
+        343,
+        345,
+        359,
+        360,
+        377,
+        378,
+        387,
+        392,
+        393,
+        452,
+        467
+      ],
+      "transitive_dependents": [
+        382,
+        384,
+        385,
+        386,
+        389,
+        390,
+        391,
+        395,
+        407,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        469
+      ],
+      "dependency_count": 3,
+      "dependent_count": 2,
+      "ancestor_count": 14,
+      "descendant_count": 16
+    },
+    {
+      "id": 469,
+      "title": "sign PSBT inputs with effective keys",
+      "status": "open",
+      "phase": 4,
+      "type": "Bug fix",
+      "component": "PsbtManager and Signer effective-key signing",
+      "path": "tasks/469-sign-psbt-with-effective-keys.md",
+      "dependencies": [
+        347,
+        390
+      ],
+      "open_dependencies": [
+        347,
+        390
+      ],
+      "dependents": [
+        384,
+        407
+      ],
+      "transitive_dependencies": [
+        332,
+        340,
+        341,
+        343,
+        345,
+        346,
+        347,
+        357,
+        359,
+        360,
+        377,
+        378,
+        387,
+        390,
+        392,
+        393,
+        404,
+        452,
+        467,
+        468
+      ],
+      "transitive_dependents": [
+        384,
+        385,
+        386,
+        407
+      ],
+      "dependency_count": 2,
+      "dependent_count": 2,
+      "ancestor_count": 20,
+      "descendant_count": 4
     }
   ]
 }
