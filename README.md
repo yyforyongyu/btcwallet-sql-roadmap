@@ -42,6 +42,18 @@ file. Each task owns its type, scope, and dependency contract, QUEUE groups the
 work into delivery phases, and `ACTIVE.md` separately owns live execution
 state.
 
+## Delivery milestones
+
+Finish Phase 1's public APIs, required runtime behavior, and basic itests before
+starting the main lnd port PR. Phase 2's critical fixes, scenarios, and simple
+benchmarks can then proceed alongside that port; relevant correctness evidence,
+not benchmark completion, gates enabling an affected path.
+
+Phase 3 converts kvdb wallets to SQL, Phase 4 handles remaining gaps and bugs,
+and Phase 5 handles Signer/Vault hardening. Modern kvdb stays supported for the
+current and next release. Task 353's retirement is deferred, not a conversion
+requirement. [QUEUE.md](QUEUE.md) owns task placement and the precise gates.
+
 ## Scope
 
 The maintained public APIs under `wallet/` are the target. A Bug fix must name

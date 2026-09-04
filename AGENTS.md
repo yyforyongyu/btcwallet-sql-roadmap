@@ -68,7 +68,8 @@ require the prerequisite contract to be frozen.
 Refresh ACTIVE's three task lists whenever a claim, task dependency, task
 phase, or task status changes. `Active Tasks` and `Blocked Phase 1 Tasks` must
 partition every open Phase 1 task exactly once. `Claimed Tasks` contains parked
-claims outside the current phase. No task appears in more than one list.
+claims outside the current phase, sorted by ascending phase and then task
+number. No task appears in more than one list.
 
 ## Task types and priority
 
@@ -98,12 +99,20 @@ current boundary cannot implement the fix safely. Type guides which ready work
 to select first; it does not replace dependency readiness or the Active and
 Claimed rules above.
 
-Admit direct btcwallet work to Phase 1 only when its main motivation is a Bug
-fix or Gap fix required for lnd integration. Its transitive open dependency
-closure stays in Phase 1 and keeps each prerequisite's honest primary type. A
-Design or Refactor may remain in that closure only when the current boundary
-cannot safely deliver the integration fix without it; otherwise remove the
-hard edge and defer that follow-up.
+Phase 1 owns the final public APIs and minimum runtime capabilities needed by
+the initial lnd adapter, plus focused basic public itests proving them. Keep
+their transitive open prerequisite closure here, with honest primary types.
+Keep a Design or Refactor prerequisite only when the current boundary cannot
+safely deliver that contract without it; otherwise remove the hard edge and
+defer the follow-up. Do not pull optional features forward to complete a test
+matrix, or prescribe private architecture merely to stabilize a public API.
+
+Finish Phase 1 before starting the main lnd port PR. Phase 2's critical fixes,
+scenario tests, and benchmarks can proceed in parallel with that port. Relevant
+defects and scenarios gate merge or enablement of affected paths; benchmarks
+do not. Phase 3 owns kvdb-to-SQL migration, Phase 4 remaining gaps and bugs, and
+Phase 5 Signer/Vault hardening. Later work is not a blanket earlier-phase gate;
+retain concrete dependencies and require proof for the paths actually enabled.
 
 ## Roadmap update workflow
 

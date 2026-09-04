@@ -23,6 +23,9 @@ recorded PR stack.
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
+| [Task 441][t441] | Cover public derivation and ECDH contracts | Test | — | — |
+| [Task 442][t442] | Cover public signing contracts | Test | — | — |
+| [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
 
@@ -38,7 +41,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
-| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
@@ -48,9 +50,12 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
-| [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | [#1357][pr1357] |
+| [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
+| [Task 461][t461] | Cover public address batch contracts | Test | — | — |
+| [Task 465][t465] | Verify NoChainSync address results | Test | — | — |
+| [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
 | [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | — |
 
 ## Claimed Tasks
@@ -58,33 +63,35 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 These claimed tasks sit outside the current Phase 1 delivery phase and are not
 listed under `Active Tasks` by the placement rule above. When phase priority
 permits implementation, a claimed task may proceed as a stacked PR, but it
-cannot merge before every hard dependency and gate completes.
+cannot merge before every hard dependency and gate completes. Sort this list
+by ascending phase, then ascending task number.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
-| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 5 | YY | — |
-| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 5 | YY | — |
-| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 5 | Abdullahi | — |
-| [Task 348][t348] | Watch PSBT change before return | Bug fix | 5 | Gustavo | — |
-| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 5 | YY | [#1321][pr1321] |
-| [Task 356][t356] | Defer change-script allocation | Bug fix | 5 | Gustavo | — |
-| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 5 | YY | — |
-| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 5 | YY | — |
-| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 5 | YY | — |
-| [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 5 | YY | — |
-| [Task 397][t397] | Define semantic-account recovery targets | Design | 5 | YY | — |
-| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 5 | YY | — |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 5 | Gustavo | — |
-| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 5 | Gustavo | — |
-| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 5 | Abdullahi | — |
-| [Task 408][t408] | Watch direct transaction change | Bug fix | 5 | Gustavo | — |
-| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 5 | YY | — |
-| [Task 424][t424] | Define transaction integrity ownership | Design | 5 | YY | [#1343][pr1343] |
-| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 5 | YY | — |
-| [Task 457][t457] | Fence process-local Managers | Gap fix | 5 | YY | — |
-| [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 5 | Abdullahi | — |
+| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | 2 | Abdullahi | [#1359][pr1359] |
+| [Task 404][t404] | Validate transaction input amounts | Bug fix | 2 | Abdullahi | [#1357][pr1357] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
-| [Task 430][t430] | Test account queries | Test | 2 | Gustavo | — |
+| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 4 | YY | — |
+| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 4 | YY | — |
+| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 4 | Abdullahi | — |
+| [Task 348][t348] | Watch PSBT change before return | Bug fix | 4 | Gustavo | — |
+| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 4 | YY | [#1321][pr1321] |
+| [Task 356][t356] | Defer change-script allocation | Bug fix | 4 | Gustavo | — |
+| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 4 | YY | — |
+| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 4 | YY | — |
+| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 4 | YY | — |
+| [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 4 | YY | — |
+| [Task 397][t397] | Define semantic-account recovery targets | Design | 4 | YY | — |
+| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 4 | YY | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 4 | Gustavo | — |
+| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 4 | Gustavo | — |
+| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 4 | Abdullahi | — |
+| [Task 408][t408] | Watch direct transaction change | Bug fix | 4 | Gustavo | — |
+| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 4 | YY | — |
+| [Task 424][t424] | Define transaction integrity ownership | Design | 4 | YY | [#1343][pr1343] |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 4 | YY | — |
+| [Task 457][t457] | Fence process-local Managers | Gap fix | 4 | YY | — |
+| [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 4 | Abdullahi | — |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
@@ -134,6 +141,9 @@ cannot merge before every hard dependency and gate completes.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
+[t441]: tasks/441-signer-derivation-ecdh-itests.md
+[t442]: tasks/442-signer-signing-itests.md
+[t443]: tasks/443-unsafe-signer-itests.md
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
@@ -141,6 +151,9 @@ cannot merge before every hard dependency and gate completes.
 [t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
 [t460]: tasks/460-sequential-account-invalid-children.md
+[t461]: tasks/461-address-batch-itests.md
+[t465]: tasks/465-new-address-result-itests.md
+[t466]: tasks/466-oldest-unused-address-itests.md
 [t468]: tasks/468-activate-no-chain-sync-account-creation.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
