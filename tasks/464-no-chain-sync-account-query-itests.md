@@ -15,6 +15,12 @@ public integration-test outcome after their production contracts land.
 
 ## Details
 
+- Keep ordinary-false and root-derived-true fixtures independent of Task
+  391's path-bound shape. Add the path-bound case separately after its
+  production contract lands; completion of this full task still requires 391.
+- This final field/account-shape matrix remains Phase 2 verification, not a
+  blanket prerequisite for legacy conversion, whose input has NoChainSync
+  false. Do not skip a required case to declare this task complete.
 - Extend Task 430's imported-`wallet` query suite without changing that task's
   original cases or definition of done.
 - On kvdb, SQLite, and PostgreSQL, prove ordinary accounts report
@@ -32,10 +38,9 @@ public integration-test outcome after their production contracts land.
 - Extend the existing `itest/account_manager_test.go` suite. Add no arbitrary
   helper, production file, or standalone test file; justify any unavoidable
   new file against the repository's current layout in the implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

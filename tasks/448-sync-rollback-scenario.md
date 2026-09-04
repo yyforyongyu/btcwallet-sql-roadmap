@@ -4,8 +4,8 @@ Component: **public Wallet reorganization scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 331][t331], [Task 415][t415], [Task 428][t428],
-[Task 433][t433], and [Task 436][t436]**.
+Dependencies: **[Task 331][t331], [Task 415][t415], [Task 433][t433], and
+[Task 436][t436]**.
 
 ## Rationale
 
@@ -29,6 +29,8 @@ a real chain reorganization and remain coherent after reload.
 - Keep this to one Wallet and one bounded shallow reorg. Exclude multi-Wallet
   coordination, resumable rescans, bitcoind parity, randomized chains, and
   direct Store assertions.
+- Use the existing chain-event and Task 433 synchronization helpers. Explicit
+  Resync/Rescan coverage in Task 428 is independent, not a prerequisite.
 
 ## Suggested fix
 

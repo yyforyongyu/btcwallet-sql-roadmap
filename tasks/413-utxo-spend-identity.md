@@ -1,55 +1,58 @@
-# Task 413 — constrain SQL UTXOs to exact spending inputs
+# Task 413 — validate exact UTXO spending inputs
 
-Component: **SQL UTXO and normalized-input schema**.
+Component: **Wallet-owned SQL UTXO spend assignment**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 351][t351], [Task 409][t409], and [Task 410][t410]**.
+Dependencies: **[Task 351][t351] and [Task 410][t410]**.
 
 ## Rationale
 
-Replace the loose `(spent_by_tx_id,
-spent_input_index)` pointer with a referenceable normalized-input identity that
-also proves the input spends this UTXO's exact creating outpoint. Task 424's
-accepted design is consumed transitively through both dependencies.
+The stored spender transaction and input index do not themselves prove that
+the input references this UTXO's creating outpoint or that the spender remains
+active. An incorrect assignment during Wallet ingestion or late-parent
+enrichment makes UtxoManager hide an available output or attribute a spend to
+the wrong transaction. Task 424 must identify the reachable writer and gaps in
+its existing checks; an artificially corrupted SQL row is not enough evidence.
 
 ## Details
 
-Define
-late-parent enrichment before allowing the pointer. Preflight mismatched,
-missing, duplicate, cross-wallet, and terminal-spender pointers with
-deterministic refusal or repair. Run every late-parent enrichment under Task
-410 graph admission and, in the same SQL transaction that installs the spend
-pointer, require the referenced spender/input row to retain an active status.
-A terminal transaction cannot acquire or regain UTXO spend ownership.
-
-Exclusions: general UTXO tenancy, amount bounds, graph traversal,
-invalidation, replacement policy, and application-side monetary checks.
+- Close only the accepted exact-spend assignment defect. Require the spender
+  input to reference the UTXO's exact creating outpoint in the same Wallet.
+- Keep the spender's active-state check and spend assignment atomic, including
+  when a child arrives before its parent and enrichment installs the relation
+  later. Task 410 owns ordering with competing graph mutations.
+- Validate existing facts before any storage cutover. Refuse inconsistent
+  identities without silently rewriting transaction meaning or spendability.
+- Reuse existing raw transaction/input data and local predicates or
+  constraints. Do not require Task 409's optional representation, a composite
+  foreign-key shape, a new input table, or another admission handle.
+- Preserve Task 351's tenancy. Exclude amount bounds, graph traversal,
+  replacement policy, public APIs, and unrelated schema cleanup.
+- If current writers already enforce the full invariant, use Task 424's
+  evidence to supersede this fix instead of adding redundant infrastructure.
 
 ## Suggested fix
 
-Make normalized inputs expose one unique
-wallet/spender/input/previous-outpoint key and reference it from each non-null
-UTXO spend relation. Make late-parent enrichment an explicit Task 410 graph
-mutation whose conditional write joins the same spender/input identity and
-active transaction status in one SQL transaction.
+Validate the exact input and active spender at the existing spend-assignment
+boundary. Choose a predicate, constraint, or other local correction according
+to the reproduced failure; the storage representation is not the outcome.
 
 ## Verification
 
-Both dialects reject an existing input index that spends a
-different outpoint, accept exact and late-parent vectors, and refuse/repair
-every populated mismatch before the new constraint becomes authoritative.
-Barrier tests race enrichment with invalidation and terminal transition;
-neither ordering lets a terminal spender retain or regain the pointer, and
-the status predicate is evaluated in the same SQL transaction as enrichment.
+- Reproduce the accepted wrong-outpoint or stale-spender assignment and prove
+  maintained public UTXO results remain correct after the fix on both dialects.
+- Cover exact and late-parent arrivals and a mismatched input that belongs to
+  a real transaction but spends another outpoint.
+- Race enrichment with invalidation or terminal transition; a terminal spender
+  must not acquire or regain spend ownership.
+- If storage changes, test atomic refusal of inconsistent populated data and
+  preserve valid state through reopen.
 
 ## Definition of done
 
-Every non-null UTXO spend pointer declaratively names
-the exact normalized transaction input that spends its creating outpoint, and
-the pointer can be installed only while that same spender is active under Task
-410 admission.
+Each persisted spend assignment names the exact active spending input under
+the existing Wallet mutation contract, without mandating a graph redesign.
 
 [t351]: 351-sql-utxo-integrity.md
-[t409]: 409-transaction-input-graph.md
 [t410]: 410-transaction-graph-admission.md

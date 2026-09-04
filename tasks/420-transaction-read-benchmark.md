@@ -8,68 +8,40 @@ Dependencies: **[Task 416][t416]**.
 
 ## Rationale
 
-`GetTx` and `ListTxns` are the P0 public TxReader paths over transaction detail
-and range queries. Existing benchmarks use legacy walletdb state and vary
-transaction pool and I/O dimensions with growth functions. Equivalent
-immutable kvdb, SQLite, and PostgreSQL history fixtures give
-[Issue #1251][issue1251] stable, named measurements of both reads without
-combining their timers.
+GetTx and ListTxns measure point and range reads over transaction history.
+Existing legacy fixtures and growth functions obscure the workload. A few
+explicit history sizes are enough for an initial three-backend comparison.
 
 ## Details
 
-- Add exactly `BenchmarkTransactionReads` with backend, `GetTx`, and `ListTxns`
-  sub-benchmark trees.
-- Run every profile and API on kvdb, SQLite, and PostgreSQL without a kvdb skip
-  branch.
-- For both APIs, run `Cold` and `Warm` against `Tx-T100`, `Tx-T1000`, and
-  `Tx-T10000`.
-- `GetTx` always requests the deterministic median confirmed transaction hash
-  from the manifest. `ListTxns` always requests heights `0` through `-1`, the
-  maintained all-history boundary.
-- A cold iteration reloads outside the timer and times exactly one public API
-  call. A warm sub-benchmark opens once, performs one untimed call to the same
-  API, resets the timer, and times one call per iteration.
-- Stop before checking the target transaction detail or the complete list's
-  count, ordering, confirmation state, inputs, outputs, and block membership.
-- Call `b.ReportAllocs` in every leaf benchmark.
-- Exclude concurrent reads, different input/output shapes, labels, writes,
-  invalidation, tuning, and P1 paths.
+- Measure each method separately on real kvdb, SQLite, and PostgreSQL Wallets
+  using Task 416's setup.
+- Vary only transaction count across a few explicit sizes. Fix account count,
+  transaction shape, confirmed/unmined mix, the point-selection rule, and
+  ListTxns filters. Include the whole seeded history in the list request.
+- Seed and validate once per case, then repeatedly call the selected method
+  on the same active Wallet. Do not reopen or reset between reads.
+- Check the point result and complete list outside timing. Keep setup and
+  cleanup outside timing and fail on unexpected operation errors.
+- Report time, allocations, transaction count, mix, and request parameters.
+- Exclude cold/warm modes, deprecated comparisons, labels, writes,
+  invalidation, concurrency, tuning, and production changes.
 
 ## Suggested fix
 
-Add three-backend sub-benchmarks beside `tx_reader_benchmark_test.go`. Reuse
-one logical profile manifest for the `GetTx` target and `ListTxns` expected
-history, but retain one timer per public method and leave existing comparison
-benchmarks unchanged.
+Use a short explicit size table and a small loop for each method. Keep the
+data and request visible without growth functions or profile abstractions.
 
 ## Verification
 
-- Run:
-
-  ```text
-  go test ./wallet -run '^$' \
-    -bench '^BenchmarkTransactionReads$' -benchmem \
-    -benchtime=3s -count=10 | tee transaction-reads.txt
-  benchstat transaction-reads.txt
-  ```
-
-- Compare revisions with
-  `benchstat transaction-reads-base.txt transaction-reads-change.txt`.
-- Confirm all twelve API/cache/profile leaves for each backend report `ns/op`,
-  `B/op`, and `allocs/op`.
-- Confirm no fixture construction, reload, or correctness traversal runs
-  within either API timer.
+- Run each method and size on all three backends and require equivalent
+  public results.
+- Confirm only the selected operation is timed, each result names its workload,
+  and every fixture is cleaned up.
 
 ## Definition of done
 
-- Both P0 TxReader APIs run against equivalent stable kvdb, SQLite, and
-  PostgreSQL history profiles.
-- Each API has an independent cold and warm timing boundary.
-- Correctness checks cover confirmed/unmined state and complete public detail
-  outside the timer.
-- Allocation reporting and repeatable benchstat comparison are documented.
-- No tuning, write path, invalidation work, or P1 benchmark is included.
-- The PR contains only the coherent TxReader measurement outcome.
+Both public transaction reads have simple, repeatable three-backend baselines
+with transaction count as the scaling dimension and no production changes.
 
 [t416]: 416-database-benchmark-fixtures.md
-[issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

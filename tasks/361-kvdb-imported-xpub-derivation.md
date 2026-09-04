@@ -35,8 +35,13 @@ account identity as a public number.
 - Do not add a new kvdb identity or storage format. If
   [Task 353](353-retire-modern-kvdb-backend.md) lands first, remove this pending
   modern-kvdb task instead of implementing temporary behavior.
-- [Task 441][t441] owns public itest assertions for the exported derivation
-  request. This task does not add or revise integration-test source.
+- [Task 441][t441] owns common three-backend derivation/ECDH coverage and the
+  SQL imported-XPub case. This task owns one focused real-kvdb public
+  regression for the imported-XPub behavior it adds. Reuse the existing
+  Signer itest setup and assertions where available; do not depend on all of
+  Task 441 or duplicate its general request-field matrix.
+- This task consumes existing public types unchanged. Its public regression
+  proves the backend acceptance fix, not merely exported-field accessibility.
 
 ## Suggested fix
 
@@ -54,6 +59,10 @@ boundary.
   cases fail before derivation or secret access.
 - Maintained kvdb callers and mocks use only the final selector-bearing Signer
   signature.
+- A real-kvdb public Signer regression imports an XPub, locks the Wallet,
+  derives a known child by name, and gets the same public key after reopen.
+  Use the same expected key and public assertions as the SQL contract, with
+  no Store inspection or backend skip in a shared case.
 
 ## Definition of done
 
@@ -62,5 +71,7 @@ boundary.
 - Imported-XPub derivation remains public-only and cannot fall back to another
   account or raw-import secret path.
 - The PR contains only modern-kvdb acceptance and no new legacy format.
+- The acceptance fix and its focused public regression land together; no
+  later test task is implicitly responsible for adding the missing kvdb case.
 
 [t441]: 441-signer-derivation-ecdh-itests.md

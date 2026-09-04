@@ -1,120 +1,79 @@
-# Task 423 — cut over SQL Manager chain notification ownership
+# Task 423 — cut over Manager chain notification ownership
 
-Component: **SQL Manager chain source adapter and coordinator cutover**.
+Component: **SQL Manager chain source and dispatcher wiring**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 370][t370], [Task 372][t372], [Task 402][t402],
-[Task 412][t412], [Task 456][t456], and [Task 457][t457]**.
+Dependencies: **[Task 370][t370], [Task 371][t371], [Task 372][t372],
+[Task 402][t402], [Task 456][t456], and [Task 457][t457]**.
 
 ## Rationale
 
-SQL Wallets still register and consume chain sources separately after Tasks 370
-and 372 prepare complete forward and rollback processing. The SQL Manager
-cannot become the sole live notification owner before the aggregate lifecycle,
-process-local ownership, transaction publication ordering, and both prepared
-chain paths are complete. A partial cutover could lose ordered events or leave
-one Wallet outside database-wide rollback.
+After fanout and rollback are ready, SQL Wallets still register and consume
+chain notifications independently. The Manager must become the single live
+source owner in one cutover so every active Wallet receives the same ordered
+stream and shutdown can join it before Store closure.
 
 ## Details
 
-- Construct exactly one authoritative chain source from Task 456's immutable
-  Manager-owned factory. Remove the pre-cutover per-Wallet factory calls from
-  maintained managed construction. Do not add a compatibility field or modify
-  CLI, RPC, deprecated-wallet, lnd, or daemon production code.
-- Make the SQL Manager source adapter the sole maintained consumer of
-  `Notifications()` and the sole owner of live block-notification
-  registration. Keep modern kvdb on its documented isolated source path.
-- Start the source and coordinator inside aggregate Manager Start after Task
-  457 acquires database ownership and before Task 331 publishes Running.
-  Register every Wallet returned by startup assembly as one complete active
-  set; there is no Load, dormant Wallet, or individual Start path.
-- Drive [Task 402][t402]'s internal delivery and replay behavior at the
-  existing Wallet synchronization boundary through the same coordinator.
-  Register the startup Wallet set before Running, attach a new Wallet before
-  Create publication, and close admission and settle accepted replay during
-  Stop. Do not add another replay implementation or Store state.
-- Aggregate the earliest durable history requirement across every Wallet and
-  supply that optimization hint before source startup. Never substitute the
-  canonical frontier for Wallet history requirements.
-- Begin in a buffering state. Reconcile Task 371's exact canonical frontier,
-  every durable Wallet tip, and the source's exact current best chain before
-  releasing buffered notifications or publishing Running.
-- If the frontier is absent, prove all durable Wallet tips share one persisted
-  ancestry and bootstrap at the highest verified tip. With no durable tip, use
-  the source's exact current best. Refuse unverifiable or divergent ancestry.
-- If the durable frontier is off the source chain, use Task 372 once to move
-  the frontier and every affected Wallet to a verified common ancestor. Then
-  submit each parent-linked forward block through Task 370 until the frontier
-  reaches the source best.
-- Register a Wallet created while Running under closed coordinator admission.
-  Align its durable tip to the current proven frontier, deliver the complete
-  closed-admission suffix, and atomically publish its processor with Task 331's
-  fully started Create result before reopening admission.
-- Do not unregister or stop one Wallet while Manager remains Running. A
-  processor failure follows Task 334's aggregate failure policy and cannot
-  silently remove that Wallet or let later accepted events pass it.
-- Preserve targeted rescans through one restricted coordinator request for
-  verified historical chain data. Such results remain Wallet-scoped and never
-  enter the notification stream or move the canonical frontier.
-- On Manager Stop, close source admission, finish or reject every accepted
-  event, and stop new delivery before Task 331 privately stops Wallets and
-  joins their processors. Join the source/coordinator after accepted delivery
-  settles, then allow Task 331 to close Store. No source event or targeted
-  response may outlive Store ownership.
-- Exclude durable rescan jobs, a generic event bus, idle-Wallet eviction,
-  individual lifecycle, process-external leadership, and cross-process
-  fencing.
+- Construct one authoritative SQL chain source from Task 456's Manager-owned
+  configuration. Remove per-Wallet source construction from the maintained
+  Manager path.
+- Make Manager the sole caller of live notification registration and
+  `Notifications()`, forwarding normalized events through Tasks 370 and 372.
+- Gate every connected or filtered-block candidate on Task 371's canonical
+  frontier before Task 370 fanout. Deliver only after an applied or idempotent
+  result; keep delivery quiesced on stale, conflicting, failed, or
+  indeterminate results.
+- Treat connected and filtered notifications for the same height and hash as
+  representations of one block. Coalesce their block application without
+  dropping relevant transaction payloads or applying a Wallet effect twice.
+  Reuse existing event normalization; add no durable deduplication framework.
+- During Manager Start, register the complete Wallet set, align the canonical
+  frontier and Wallet tips with the source, then publish Running. Buffer or
+  reject live events until that no-gap boundary is established.
+- Register a newly created Wallet at a closed delivery boundary before its
+  public Create result is returned.
+- Drive Task 402's existing live-watch replay through the same Wallet
+  processing boundary; do not add another replay mechanism.
+- On Stop, close source admission, settle accepted delivery, and join the
+  source and dispatcher before Store closure.
+- Keep modern kvdb on its isolated single-Wallet source path. Preserve
+  Wallet-scoped targeted rescans without letting them consume the live stream
+  or move the canonical frontier.
+- Exclude a generic event bus, durable rescan jobs, individual Wallet
+  lifecycle, daemon changes, and cross-process leadership.
 
 ## Suggested fix
 
-Move the maintained SQL notification registration into one Manager-owned
-adapter. During Manager Start, buffer source events, reconcile the durable
-frontier and all Wallet tips, catch up through the prepared rollback and
-forward paths, register the complete active set, and publish Running only after
-the no-gap boundary is established. Reuse the same closed-admission boundary
-for Create-time processor registration and aggregate Stop.
+Move the current SQL notification loop to Manager and connect it to the
+prepared dispatcher. Startup buffering and Wallet registration mechanics are
+private choices as long as the public no-gap and shutdown boundaries hold.
 
 ## Verification
 
-- Start empty, one-Wallet, and two-Wallet SQLite and PostgreSQL Managers with
-  absent, current, behind, and off-chain durable frontiers. Startup publishes
-  either one fully aligned active set or no Running Manager.
-- Interleave connected, filtered, transaction, and disconnected notifications
-  with startup buffering. Every accepted event applies once in source order and
-  no Wallet misses the catch-up/live boundary.
-- Create a Wallet while the source advances. Its public Create result appears
-  only after exact alignment and atomic processor registration; existing
-  Wallets retain ordered delivery.
-- Force forward failure, rollback failure, ambiguous commit, divergent Wallet
-  ancestry, processor failure, and source shutdown. Admission remains closed
-  unless exact durable state proves safe continuation.
-- Race Manager Stop with source receipt, Create-time registration, rollback,
-  targeted history, and Wallet delivery. Every accepted operation joins before
-  Vault lock and Store closure.
-- Pre-seed pending Task 402 obligations at startup, Create registration, and
-  Stop. The existing Wallet synchronization boundary replays or settles each
-  obligation without a gap, duplicate driver, or accepted delivery surviving
-  shutdown.
-- Prove only the Manager consumes the SQL notification stream, targeted rescans
-  cannot move the frontier, and the modern-kvdb source path remains isolated.
+- Start empty, one-Wallet, and two-Wallet Managers with current, behind, and
+  off-chain tips on SQLite and PostgreSQL. Publish Running only after exact
+  alignment or fail without partial activation.
+- Interleave connected, filtered-block, transaction, and disconnected events
+  with startup, Create, replay, and Stop. Every normalized effect is delivered
+  once in order and no Wallet misses a cutover boundary.
+- Exercise connected-only, filtered-only, and equal mixed representations.
+  Every block advances or confirms the frontier before Wallet delivery, with
+  no duplicate block effect or lost filtered transaction. No processor sees a
+  block whose frontier result is stale, conflicting, failed, or indeterminate.
+- Prove only Manager consumes the SQL stream, targeted rescans remain scoped,
+  modern kvdb remains isolated, and no source work outlives Store ownership.
 
 ## Definition of done
 
-- One running SQL Manager owns the only live source consumer and the complete
-  active Wallet processor set.
-- Startup and Create establish explicit no-gap alignment before publishing
-  Wallet availability; there is no Load or individual registration path.
-- Forward delivery, reorg rollback, targeted history, processor failure, and
-  aggregate shutdown follow the accepted ADR without lost or duplicated work.
-- Manager Stop joins all source and Wallet work before Store closure.
-- The PR adds no individual lifecycle, idle eviction, generic replay system,
-  daemon change, or cross-process guarantee.
+One running SQL Manager owns the live chain source and ordered delivery to its
+complete Wallet set, with no per-Wallet notification consumer on the maintained
+path.
 
-[t331]: 331-manager-wallet-lifecycle.md
-[t402]: 402-replay-live-watch-obligations.md
 [t370]: 370-chain-source-delivery.md
+[t371]: 371-canonical-chain-frontier.md
 [t372]: 372-multi-wallet-rollback.md
-[t412]: 412-transaction-publication-admission.md
-[t457]: 457-process-local-manager-lease.md
+[t402]: 402-replay-live-watch-obligations.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md
+[t457]: 457-process-local-manager-lease.md

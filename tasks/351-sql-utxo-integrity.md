@@ -13,8 +13,8 @@ unique keys and composite wallet/creating-transaction/address/spending-
 transaction foreign keys; give leases a composite `(wallet_id, utxo_id)`
 reference; use explicit RESTRICT plus application-owned pointer clearing; and
 make every wire index introduced or retained by this UTXO migration cover
-`0..MaxUint32` on both dialects. Task 409 separately owns its normalized input
-positions. Task 424 supplies the accepted declarative ownership contract.
+`0..MaxUint32` on both dialects. Task 409 separately owns any justified input
+representation follow-up. Task 424 supplies the accepted ownership contract.
 
 ## Details
 

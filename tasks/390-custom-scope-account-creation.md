@@ -4,7 +4,8 @@ Component: **AccountManager custom scope and SQL key-scope/account mutation**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 343][t343] and [Task 387][t387]**.
+Dependencies: **[Task 343][t343], [Task 387][t387], and
+[Task 468][t468]**.
 
 ## Rationale
 
@@ -15,15 +16,16 @@ purpose-1017 key-family accounts through the generic Wallet API.
 
 ## Details
 
-- Add an optional scope schema to Task 392's `NewAccountParams`; do not add a
-  key-family-specific method or another request type.
+- Add an optional scope schema to [Task 392][t392]'s `NewAccountParams`; do not
+  add a key-family-specific method or another request type.
 - Require both a schema and an exact account number when creating an account
-  in an unknown scope. Use Task 343 for exact-number creation.
+  in an unknown scope. Use Task 343 for exact-number creation and Task 468 for
+  `NoChainSync=true` activation.
 - Accept only supported account-key branch schemas and reject invalid,
   hardened-overflow, or conflicting scope requests before secret preparation
   or Store mutation.
 - If the scope already exists, require any supplied schema to match it.
-- Return the public errors established by Task 378. Modern kvdb remains
+- Return the public errors established by [Task 378][t378]. Modern kvdb remains
   unsupported for new custom-scope creation.
 - Keep supplied-XPub accounts, sequential invalid-child repair, and exact
   ambiguous-commit reconciliation in their existing tasks.
@@ -57,3 +59,4 @@ in a validated custom scope without a purpose-specific API or new component.
 [t378]: 378-account-manager-error-boundary.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
 [t392]: 392-discovery-mode-account-creation.md
+[t468]: 468-activate-no-chain-sync-account-creation.md

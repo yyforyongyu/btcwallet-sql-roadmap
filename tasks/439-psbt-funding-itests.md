@@ -9,12 +9,16 @@ Dependencies: **[Task 348][t348]**.
 ## Rationale
 
 [Issue #1250][issue1250] calls out `FundPsbt` as a public contract requiring
-real-backend happy-path, error, boundary, and durable-state coverage. Phase 1
-now makes lease ownership and watched change part of the final public funding
-contract, but no focused public integration task proves those effects together.
+real-backend happy-path, error, boundary, and durable-state coverage. Deferred
+Tasks 348, 405, and 406 add final lease, cleanup, and watched-change guarantees;
+this task proves those effects together after the production contracts land.
 
 ## Details
 
+- Keep this final-contract suite in Phase 2's verification inventory, with its
+  real Task 348 dependency. It does not gate legacy conversion that never
+  invokes PSBT funding. Enabling the affected funding path still requires its
+  fixes and this coverage; do not weaken assertions or skip missing behavior.
 - Exercise `FundPsbt` through funded real kvdb, SQLite, and PostgreSQL Wallets.
 - Register one shared public contract for all three database backends. Do not
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
@@ -50,10 +54,9 @@ contract, but no focused public integration task proves those effects together.
 - Keep the funding cases in this task's planned itest source and place the
   narrow failure gate in the existing integration harness setup rather than a
   standalone helper file.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

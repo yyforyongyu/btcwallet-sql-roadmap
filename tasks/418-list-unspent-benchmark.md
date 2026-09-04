@@ -8,71 +8,41 @@ Dependencies: **[Task 416][t416]**.
 
 ## Rationale
 
-`Wallet.ListUnspent` loads Store UTXO rows, enriches them into public values,
-applies the account-name filter, and sorts the result. The existing benchmark
-uses the legacy walletdb fixture, so it cannot compare how the maintained
-kvdb, SQLite, and PostgreSQL paths scale with both the live set and relevant
-transaction history required by [Issue #1251][issue1251].
+ListUnspent loads, enriches, filters, and sorts UTXOs. Existing benchmarks vary
+accounts, addresses, and history together, making the result hard to explain.
+One fixed request over a few explicit live-set sizes provides a useful baseline.
 
 ## Details
 
-- Add exactly `BenchmarkListUnspent`, with explicit `kvdb`, `sqlite`, and
-  `postgres` backend sub-benchmarks.
-- Run every profile and cache mode on all three database backends without a
-  kvdb skip branch.
-- Run `Cold` and `Warm` sub-benchmarks for
-  `Utxo-U100-H100`, `Utxo-U100-H10000`,
-  `Utxo-U10000-H10000`, and `Utxo-U10000-H100000`.
-- Query all accounts with `Account: ""`, `MinConfs: 0`, and
-  `MaxConfs: math.MaxInt32`. Do not add account-filter, lease, concurrency, or
-  mutation variants in this task.
-- A cold iteration reloads its snapshot outside the timer and times exactly
-  one call to `Wallet.ListUnspent`. A warm sub-benchmark opens once, performs
-  one untimed priming call, resets the timer, and times one public call per
-  iteration.
-- Stop the timer before checking result length, ordering, outpoint identity,
-  and values.
-- Call `b.ReportAllocs`. Keep fixture construction, reload, validation, and
-  teardown outside the timer.
-- Do not change UTXO queries, indexes, sorting, allocation strategy, cache
-  behavior, or wallet semantics. A measured problem becomes a separate task.
+- Measure the same public ListUnspent request on real kvdb, SQLite, and
+  PostgreSQL Wallets using Task 416's setup.
+- Vary only live UTXO count across a few explicit sizes. Fix account selection,
+  confirmation filters, and transaction shape; record the supporting history
+  without adding an independent history-size matrix.
+- Seed and validate once per case, then repeatedly call ListUnspent on the
+  same active Wallet. Do not reopen or reset it between reads.
+- Keep setup, full result checks, and cleanup outside timing. Validate count,
+  order, outpoint identity, and values; fail on unexpected operation errors.
+- Report time, allocations, exact UTXO count, and request parameters.
+- Exclude cold/warm modes, deprecated APIs, leases, mutation, concurrency,
+  query changes, indexes, tuning, and production fixes.
 
 ## Suggested fix
 
-Add the three-backend cases beside the existing UtxoManager benchmarks while
-preserving their names and comparison purpose. Instantiate each stable
-snapshot through the reusable fixture and use one helper to enforce identical
-cold and warm boundaries.
+Use a small explicit size table and an ordinary benchmark loop containing one
+public call. Keep the workload readable without growth functions or profile
+abstractions.
 
 ## Verification
 
-- Run:
-
-  ```text
-  go test ./wallet -run '^$' \
-    -bench '^BenchmarkListUnspent$' -benchmem \
-    -benchtime=3s -count=10 | tee listunspent.txt
-  benchstat listunspent.txt
-  ```
-
-- Compare revisions with
-  `benchstat listunspent-base.txt listunspent-change.txt`.
-- Confirm all eight profile/cache combinations for each backend report
-  `ns/op`, `B/op`, and `allocs/op` and return exactly the named `U` live
-  outputs.
-- Confirm no database creation, population, or reload falls inside the timed
-  public call.
+- Run each size on all three backends and require the same public results.
+- Confirm only the repeated operation is timed and every result identifies
+  its dataset size and fixed request.
+- Verify complete cleanup and report time and allocations.
 
 ## Definition of done
 
-- kvdb, SQLite, and PostgreSQL `ListUnspent` results scale across both named
-  live-set and history dimensions.
-- Cold and warm measurements time exactly one public read.
-- Allocations and repeatable benchstat comparison are documented.
-- Correctness checks prove count, identity, value, and sort order outside the
-  timer.
-- No tuning, mutation benchmark, or P1 work is included.
-- The PR contains only the ListUnspent measurement outcome.
+ListUnspent has a simple, repeatable three-backend scaling baseline without
+changing production behavior.
 
 [t416]: 416-database-benchmark-fixtures.md
-[issue1251]: https://github.com/btcsuite/btcwallet/issues/1251

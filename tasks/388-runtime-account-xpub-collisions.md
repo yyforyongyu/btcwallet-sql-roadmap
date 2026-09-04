@@ -41,13 +41,13 @@ scripts.
   files, and colocated tests. Add no arbitrary helper, production file, or
   standalone test file; justify any unavoidable new file against the current
   repository layout in the implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement.
-- Give every unit test detailed Arrange, Act, and Assert comments explaining
-  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Document non-obvious code blocks with the contract, rationale, invariant, or
+  consequence they preserve; do not restate the code.
+- Keep unit tests clearly structured as Arrange, Act, and Assert.
+- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
+  expectations during Arrange with the narrowest correct cardinality (`Once()`
+  for one required call). During Assert, call `AssertExpectations(t)` directly;
+  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 

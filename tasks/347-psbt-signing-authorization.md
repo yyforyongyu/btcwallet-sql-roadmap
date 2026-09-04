@@ -1,127 +1,54 @@
-# Task 347 — authorize explicit PSBT signatures
+# Task 347 — authorize existing PSBT signatures
 
-Component: **PsbtManager and Signer**.
+Component: **PsbtManager existing-signature validation**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 346][t346] and [Task 390][t390]**.
+Dependencies: **[Task 346][t346]**.
 
 ## Rationale
 
-Retain the current explicit SignPsbt authorization
-contract: validate previous outputs and script commitments; infer spend type
-from validated scripts; validate scope/account/branch/index, fingerprints,
-derivation uniqueness, sighash forms, and exact persisted key identity before
-secret lookup or clone mutation. After key lookup, apply an authorized tweak
-exactly once and validate the effective key against the script commitment
-before signing.
+`SignPsbt` can receive existing ECDSA, Taproot script-path, or Taproot key-path
+signatures. A malformed or unrelated record must not suppress wallet signing,
+survive as trusted output, or trigger private-key access before its transaction
+and script commitments are proven.
 
 ## Details
 
-Permit spendable custom-scope signing only after Task 390 establishes matching
-private account material. Path-bound external XPub accounts remain watch-only.
-Complete every secret-independent authorization check before invoking the
-maintained Signer. Replace the maintained `InputTweakers`/`PrivKeyTweaker`
-callback seam with the smallest immutable authorization-bound tweak descriptor
-and update maintained callers and mocks in the same PR. After the Signer looks
-up the base key, apply the authorized tweak exactly once, validate the effective
-public key against the authorized script commitment, and continue only on a
-match. Reject secret-independent failures before secret lookup or tweak
-application, and reject tweak or effective-key failures before signing or clone
-mutation. Do not keep a callback wrapper solely for old callers.
-
-Emit each successful signature under its validated effective-key identity:
-use the effective compressed key in ECDSA `PartialSig.PubKey` and the effective
-x-only key in Taproot script-path `TaprootScriptSpendSig.XOnlyPubKey`. For a
-Taproot key-path spend, validate the effective internal key, apply the BIP341
-key tweak after the caller tweak, validate the resulting output key, and write
-only the signature bytes to `TaprootKeySpendSig`.
-
-Keep Task 346's original `Bip32Derivation` and `TaprootBip32Derivation`
-records byte-for-byte unchanged. They continue to identify the persisted base
-key/path and must never be rewritten to the effective-key identity, including
-across subsequent signing passes.
-
-Before key lookup or any tweak application, authorize every admitted ECDSA
-`PartialSig` and Taproot script-path `TaprootScriptSpendSig`. Validate its
-sighash form, bind its effective compressed or x-only key to the validated
-previous output and script position, recompute the digest from that output and
-script, and cryptographically verify the signature. Taproot script-path
-records must also bind to the exact validated leaf hash. Preserve only fully
-authorized records; reject any malformed, mismatched, or invalid record before
-secret access, tweak application, signing, or clone mutation. After applying
-the descriptor, compare only these already-verified record identities with the
-wallet's validated effective key and leaf. A match suppresses signing and
-prevents a duplicate PSBT map key. A verified foreign record remains preserved
-but does not suppress the wallet's signature. Do not compare signature-record
-keys against the persisted base-key derivation identity.
-
-For Taproot key-path, treat the non-empty `TaprootKeySpendSig` field as the
-singleton existing-signature record. After secret-independent transaction,
-prevout, script, ownership, and sighash validation, verify that signature
-against the authorized Taproot output key and digest. Preserve a valid record
-byte-for-byte and treat the input as already signed before key lookup or tweak
-application; reject a malformed or invalid record before either side effect.
-
-[Task 384](384-vault-safe-signing.md) later moves primitive key use and tweak
-application behind typed Vault operations without changing this task's
-authorization contract. This task owns the final immutable Signer tweak
-descriptor; do not define the later Vault API here.
-
-Exclusions: FinalizePsbt auto-signing, funding, leasing, metadata merging,
-and Vault interface invention.
+- Validate the previous output, script position, derivation metadata, sighash,
+  digest, effective public key, and signature before secret lookup or packet
+  mutation.
+- Bind Taproot script-path records to the exact validated leaf. Validate the
+  singleton Taproot key-path record against the authorized output key.
+- Preserve valid existing records and Task 346's base-key derivation metadata
+  byte-for-byte. Reject malformed, duplicate, mismatched, or invalid records.
+- A valid foreign record remains but does not suppress the wallet's own
+  signature. A valid record for the wallet's effective key suppresses a
+  duplicate.
+- Validate a clone and leave the caller packet unchanged on every error.
+- Exclude new signature generation, tweak application, callback replacement,
+  funding, leasing, finalization, and Vault API changes. [Task 469][t469] owns
+  effective-key signing and caller migration.
 
 ## Suggested fix
 
-Centralize a side-effect-free per-input authorization result
-containing the validated previous output, spend form, persisted account/path,
-sighash, script commitment, authorized tweak, and verified existing-signature
-identities. Pass that result and its immutable tweak descriptor directly to the
-maintained Signer. Once the secret-independent checks find no valid existing
-Taproot key-path signature, let the Signer resolve the base key, apply the
-tweak once, validate the effective key, and compare its public identity only
-with the preverified records. A matching record suppresses signing; otherwise
-permit the Signer to produce a signature. Mutate only a packet clone while
-copying the base-key derivation metadata unchanged.
+Build one side-effect-free authorization result from each existing signature
+record and the validated input context. The private helper shape is flexible;
+the observable cutoff before key access and packet mutation is the contract.
 
 ## Verification
 
-Standard/custom-scope, multisig, SegWit, and Taproot vectors
-sign only one authorized identity on a clone. Forged or ambiguous metadata,
-invalid branches/children/accounts/sighashes, and missing-output
-`SIGHASH_SINGLE` fail before key lookup, tweak application, and caller
-mutation. Tweak errors and effective-key/script mismatches fail after exactly
-one application but before signing or caller mutation.
-Successful ECDSA and Taproot script-path records contain the effective
-compressed and x-only identities respectively. Taproot key-path vectors
-validate the caller-tweaked internal key and BIP341 output key while recording
-only signature bytes.
-Repeated signing passes retain every original `Bip32Derivation` and
-`TaprootBip32Derivation` record byte-for-byte while adding signature records
-under the appropriate effective-key identity. A second pass detects the
-existing effective-key record, verifies its sighash, recomputed digest,
-previous-output/script commitment, signature, and Taproot leaf where
-applicable, then emits no additional signature. Corrupt signatures, wrong
-sighashes or digests, mismatched effective keys, outputs, script positions, or
-leaves fail before key lookup, tweak application, signing, or caller mutation.
-Valid foreign records are preserved without suppressing the wallet's
-signature; a verified matching record is compared with the descriptor-derived
-effective identity and suppresses signing after exactly one tweak application.
-Repeated Taproot key-path signing validates and preserves the singleton
-`TaprootKeySpendSig` byte-for-byte, preserves base-key derivations, and performs
-no key lookup or tweak application on the second pass.
+- Cover valid and invalid ECDSA, Taproot script-path, and Taproot key-path
+  records, including wrong keys, outputs, leaves, sighashes, and digests.
+- Prove invalid records fail before key lookup and caller mutation.
+- Prove valid foreign records remain, matching wallet records suppress a
+  duplicate, and all base-key derivation records remain byte-for-byte stable.
 
 ## Definition of done
 
-SignPsbt emits signatures only after one complete
-wallet-owned authorization decision and never mutates the caller packet on
-error. Every emitted record uses the validated effective-key identity required
-by its PSBT signature form without changing the persisted-base-key derivation
-metadata. Every preserved signature record is cryptographically authorized
-against the validated transaction context. No signing pass emits a duplicate
-effective-key record or replaces a validated Taproot key-path signature;
-FinalizePsbt behavior remains owned by the follow-up task. Maintained signing
-uses the final immutable tweak descriptor and retains no callback wrapper.
+`SignPsbt` trusts or preserves an existing signature only after complete
+wallet-owned authorization against the input context, without adding signing,
+tweak, or finalization scope.
 
 [t346]: 346-psbt-funding-metadata.md
-[t390]: 390-custom-scope-account-creation.md
+[t469]: 469-sign-psbt-with-effective-keys.md

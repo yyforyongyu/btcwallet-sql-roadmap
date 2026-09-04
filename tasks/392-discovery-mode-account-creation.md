@@ -22,13 +22,13 @@ accounts that must not participate in chain discovery.
   account-creation tasks extend the same request instead of adding parallel
   methods.
 - Preserve current sequential creation when the value is false. Reject true
-  with Task 378's public unsupported-operation error until Task 343 enables it
-  after the receiving and recovery guards are complete.
+  with Task 378's public unsupported-operation error until [Task 468][t468]
+  activates it after the receiving and recovery guards are complete.
 - Keep the existing `ImportAccount` signature and its false value unchanged.
   Do not infer the policy from purpose, backend, or signing ability.
 - Keep production changes within AccountManager, its request/result types,
-  and its wallet-owned Store boundary. Task 464 owns real-backend assertions
-  for the exported value.
+  and its wallet-owned Store boundary. [Task 464][t464] owns real-backend
+  assertions for the exported value.
 
 ## Suggested fix
 
@@ -41,7 +41,7 @@ The internal conversion is not part of the contract.
 - Focused Wallet tests prove false reaches SQL Store creation and the stored
   value is returned through `AccountInfo`.
 - Prove true is rejected before secret or Store mutation on every maintained
-  backend until Task 343 activates it.
+  backend until Task 468 activates it.
 - Prove invalid requests and occupied names retain Task 378's public errors.
 - Prove maintained callers compile against the new signature and
   `ImportAccount` remains unchanged.
@@ -52,8 +52,8 @@ The generic account-creation request explicitly accepts and reports
 `NoChainSync` without an enum, inferred meaning, compatibility adapter, or
 second import request.
 
-[t343]: 343-exact-account-creation.md
 [t345]: 345-durable-watch-registration.md
 [t378]: 378-account-manager-error-boundary.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
 [t464]: 464-no-chain-sync-account-query-itests.md
+[t468]: 468-activate-no-chain-sync-account-creation.md

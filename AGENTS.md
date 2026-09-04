@@ -162,6 +162,17 @@ map in [QUEUE.md](QUEUE.md).
 Do not add status or claimant fields to a task. Before a task is claimed or
 materially revised, bring it to this format and split it if it fails the
 atomicity rule. Do not mechanically expand an unchanged task to fill sections.
+Do not mechanically add comment requirements to unchanged tasks. A task may
+require inline code-block or detailed Arrange/Act/Assert comments when that
+acceptance constraint is stated in its task file. Otherwise require comments
+only where they preserve a non-obvious contract, rationale, invariant,
+constraint, or consequence.
+
+For implementation unit tests, use `mock.Mock` for interface mocks. Set
+`On(...).Return(...)` expectations during Arrange with the narrowest correct
+cardinality, including `Once()` for one required call. During Assert, call
+`AssertExpectations(t)` directly; do not duplicate the same call assertion or
+wrap the result in `require.True`.
 
 ## Scope rules
 

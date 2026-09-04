@@ -24,14 +24,18 @@ contract end to end.
   unknown paths, and locked or watch-only states where defined.
 - Construct `DerivePubKey` inputs with the exported selector and request from
   [Task 337][t337]. Exercise name and numbered selectors, every exported
-  request field, and numberless imported-XPub derivation on SQLite,
-  PostgreSQL, and modern kvdb after [Task 361][t361].
+  request field, and numberless imported-XPub derivation on SQLite and
+  PostgreSQL.
 - Verify ECDH against an independently generated peer key in both directions
   and reject nil or unsupported inputs without exposing secret material.
 - Reopen the same Wallet and prove public derivation and the shared secret are
   stable for the same durable identity.
-- Tasks 337 and 361 own imported-XPub production behavior. This task owns its
-  public itest assertions; Vault routing from Task 384 remains out of scope.
+- Task 337 owns the SQL imported-XPub behavior asserted in a separate SQL
+  case here. Modern kvdb lacks that behavior today; this is a tracked gap, not
+  a permanent structural inability. [Task 361][t361] owns the kvdb acceptance
+  fix and its focused public imported-XPub regression in the same PR. Keep
+  the common derivation/ECDH cases three-backend and do not skip kvdb in them.
+  Do not block this baseline on Task 361 or add Vault routing from Task 384.
 
 ## Suggested fix
 
@@ -52,6 +56,8 @@ shared secrets, and never log or persist private material.
   invalid-input, and durable-reopen coverage.
 - ECDH results are independently verified without Store or private-key reads.
 - Shared cases contain no backend skip branch.
+- SQL imported-XPub behavior is covered here; Task 361 explicitly owns the
+  remaining kvdb behavior and public regression.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md

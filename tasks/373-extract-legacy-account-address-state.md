@@ -1,121 +1,60 @@
 # Task 373 — extract legacy account and address state
 
-Component: **Legacy migration account and secret extraction**.
+Component: **Legacy migration account, address, and secret extraction**.
 
 Type: **Migration**.
 
-Dependencies: **[Task 332][t332], [Task 335][t335], and [Task 387][t387]**.
+Dependencies: **[Task 332][t332], [Task 335][t335], and
+[Task 387][t387]**.
 
 ## Rationale
 
-Legacy waddrmgr represents ordinary accounts, imported-XPub accounts, and raw
-imports through different scoped buckets and a synthetic imported account.
-Its encrypted scripts also select their protecting crypto key per record. The
-public kvdb Store projection loses some of this identity, and copying encrypted
-rows directly would not produce SQL's single-passphrase Vault format.
+The modern kvdb adapter omits legacy identity and encryption facts needed for
+an exact SQL import. Imported XPub accounts, raw scripts, and per-record secret
+provenance cannot be reconstructed safely from its public projection.
 
 ## Details
 
-- Read only Task 335's private legacy snapshot. Do not access the original
-  source path and do not open or mutate a SQL destination.
-- Produce one bounded internal snapshot of master/public roots, scopes,
-  ordinary accounts, names, schemas, encrypted account material, external and
-  internal counters, persisted child paths, imported-XPub identity, raw
-  scripts, optional fingerprints, sticky legacy usedness, and custody facts.
-- Map the synthetic imported-address pseudo-account to accountless SQL raw
-  addresses. Map each true imported XPub to a numberless SQL account without
-  copying a synthetic waddrmgr account number.
-- Preserve every ordinary scope and derived account. Normalize each scope's
-  next numbered account cursor from legacy allocation state and the greatest
-  ordinary account with checked arithmetic; synthetic and numberless accounts
-  cannot advance it.
-- Normalize every legacy account to immutable `NoChainSync=false`. Legacy kvdb
-  has no no-chain-sync state, so do not infer it for an account or raw import.
-- Consume Task 332's accepted custody policy. Refuse mixed spendable/watch-only
-  material, root-neutered or other unrepresentable custody, conflicting
-  per-account schema overrides, and any shape that would require splitting a
-  wallet or transforming custody.
-- Compare normalized account-XPub identities and script identities before
-  mutation. Merge only semantically identical all-raw duplicates. Refuse
-  latent overlapping-XPub branches, raw-versus-derived collisions,
-  derived-versus-derived collisions, or conflicting raw duplicates.
-- Accept a required destination SQL passphrase independently from the legacy
-  credentials. Decrypt each legacy script with its persisted crypto-key class
-  and re-encrypt every target secret with that destination passphrase through
-  a migration-specific WalletVault preparation boundary.
-- Require and validate a borrowed legacy private credential only when custody
-  facts prove that spendable source secrets must be decrypted. Watch-only
-  extraction uses the required legacy public credential and recorded
-  public/script key provenance without requesting or validating a nonexistent
-  legacy private passphrase. Task 352 remains the only owner of in-place kvdb
-  rotation.
-- Give every plaintext root, account key, private key, script, decoder buffer,
-  and temporary serialization one explicit owner and one deferred destruction
-  path covering success, refusal, cancellation, panic, and later extraction
-  failure.
-- Prefer byte-oriented extended-key decoding. If upstream parsing forces an
-  immutable plaintext string, confine it to the migration Vault call, retain no
-  reference, document the bounded exception, and never claim the immutable
-  string itself was wiped.
-- Return only ciphertext and normalized public facts. Keep the snapshot,
-  refusal reasons, Vault preparation types, and decoder interfaces internal.
-- Keep the reader and preparation helper in Wallet-owned migration code and
-  consume existing `waddrmgr`, `wtxmgr`, and `walletdb` APIs and persisted
-  formats unchanged.
-- Exclude transaction and sync extraction, usedness-versus-credit proof, SQL
-  writes, Task 367's ordinary-genesis cleanup, Vault API redesign, watch-only
-  wallet splitting, custody transformation, public orchestration, Loader
-  changes, deprecated Wallet methods or tests, and production, API, test, or
-  disk-format changes in `waddrmgr`, `wtxmgr`, or `walletdb`.
+- Read only Task 335's immutable snapshot and produce one bounded internal
+  account/address snapshot.
+- Preserve scopes, ordinary accounts, names, schemas, counters, derived paths,
+  imported XPub identity, raw scripts, usedness, and custody facts.
+- Map true imported XPub accounts to numberless SQL accounts and raw imports to
+  accountless addresses. Do not persist synthetic legacy identifiers.
+- Set `NoChainSync=false`; legacy kvdb cannot represent that independent
+  policy.
+- Reject identity collisions, unsupported custody, or another legacy shape
+  that cannot be represented without changing meaning.
+- Decrypt each secret according to its recorded legacy key class and prepare
+  ciphertext for the independently supplied SQL passphrase. Require a private
+  legacy credential only for spendable source material.
+- Bound and destroy migration plaintext on success, error, cancellation, and
+  panic. Return only ciphertext and normalized public facts.
+- Keep implementation in Wallet-owned migration code and legacy packages
+  unchanged.
+- Exclude transaction and sync extraction, SQL writes, custody transformation,
+  public APIs, and in-place kvdb passphrase rotation.
 
 ## Suggested fix
 
-Add a migration-only raw namespace reader over Task 335's snapshot and a narrow
-Wallet-owned WalletVault preparation helper. Walk scopes and imported buckets
-through unchanged legacy formats,
-normalize them into SQL-shaped internal facts, decrypt each secret with its
-recorded provenance, and re-encrypt it with the distinct destination SQL
-passphrase before allowing ciphertext to leave the helper. Reject
-unrepresentable identity or custody before constructing a destination Store.
+Use a migration-specific raw legacy reader and a narrow Wallet-owned secret
+preparation boundary. Private snapshot and decoder shapes are not prescribed.
 
 ## Verification
 
-- Spendable and watch-only fixtures preserve roots, every ordinary scope and
-  account, account names, schemas, optional fingerprints, child paths,
-  counters, and normalized next-account cursors.
-- Imported-XPub fixtures become numberless accounts and raw imported scripts
-  become accountless addresses; neither synthetic identity moves a numbered
-  cursor.
-- Every migrated account has `NoChainSync=false`, with no inferred
-  no-chain-sync state for accounts or raw imports.
-- Per-record public-key and script-key ciphertext fixtures decrypt and
-  re-encrypt correctly. Using one key class for the whole wallet fails the
-  focused vector.
-- A spendable source requires its legacy private credential, and a missing or
-  wrong value returns the typed credential refusal without destination access
-  or retained plaintext.
-- A watch-only source converts with no legacy private credential, rejects an
-  invalid destination SQL passphrase under the Vault policy, and produces
-  ciphertext protected by the independently supplied destination passphrase.
-- Mixed custody, root-neutered custody, conflicting schema overrides,
-  overlapping equal XPub payloads, and each script-collision class return their
-  typed refusal before destination access.
-- Cleanup probes cover success, each refusal, cancellation, Vault error, and
-  injected panic. Every wipeable value is zero and no immutable parser string
-  is retained.
+- Spendable, watch-only, imported-XPub, and raw-script fixtures preserve every
+  supported identity, schema, counter, path, usedness, and custody fact.
+- Per-record key-class fixtures decrypt and re-encrypt correctly with the
+  destination credential.
+- Unsupported custody, identity collisions, and malformed state fail before
+  destination access.
+- Cleanup probes demonstrate bounded plaintext ownership on every exit.
 
 ## Definition of done
 
-- A supported legacy source yields one bounded, ciphertext-only normalized
-  account/address snapshot with truthful SQL identity and custody.
-- Every unsupported account, script, schema, or custody shape is refused before
-  destination access without changing the source.
-- Migration plaintext is bounded and destroyed on every exit by this task,
-  independently of Task 367.
-- The PR contains no transaction extraction, SQL mutation, public converter,
-  kvdb rotation, wallet splitting, general Vault redesign, Loader or
-  deprecated-method change, or legacy-package production, API, test, or
-  disk-format change.
+A supported legacy source yields one ciphertext-only normalized account and
+address snapshot without mutating the source or changing its identity and
+custody semantics.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md

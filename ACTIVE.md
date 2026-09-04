@@ -20,6 +20,7 @@ recorded PR stack.
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
 | [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
+| [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
@@ -50,6 +51,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | [#1357][pr1357] |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
+| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | — | — |
 
 ## Claimed Tasks
 
@@ -60,26 +62,27 @@ cannot merge before every hard dependency and gate completes.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
-| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
-| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 3 | YY | — |
-| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | 3 | Abdullahi | — |
-| [Task 348][t348] | Watch PSBT change before return | Bug fix | 3 | Gustavo | — |
-| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 3 | YY | [#1321][pr1321] |
-| [Task 356][t356] | Defer change-script allocation | Bug fix | 3 | Gustavo | — |
-| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 3 | YY | — |
-| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 3 | YY | — |
-| [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 3 | YY | — |
-| [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 3 | YY | — |
-| [Task 397][t397] | Define semantic-account recovery targets | Design | 3 | YY | — |
-| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 3 | YY | — |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 3 | Gustavo | — |
-| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 3 | Gustavo | — |
-| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 3 | Abdullahi | — |
-| [Task 408][t408] | Watch direct transaction change | Bug fix | 3 | Gustavo | — |
-| [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
-| [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
-| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
-| [Task 457][t457] | Fence process-local Managers | Gap fix | 3 | YY | — |
+| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 5 | YY | — |
+| [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 5 | YY | — |
+| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 5 | Abdullahi | — |
+| [Task 348][t348] | Watch PSBT change before return | Bug fix | 5 | Gustavo | — |
+| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 5 | YY | [#1321][pr1321] |
+| [Task 356][t356] | Defer change-script allocation | Bug fix | 5 | Gustavo | — |
+| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 5 | YY | — |
+| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 5 | YY | — |
+| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 5 | YY | — |
+| [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 5 | YY | — |
+| [Task 397][t397] | Define semantic-account recovery targets | Design | 5 | YY | — |
+| [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 5 | YY | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 5 | Gustavo | — |
+| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 5 | Gustavo | — |
+| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 5 | Abdullahi | — |
+| [Task 408][t408] | Watch direct transaction change | Bug fix | 5 | Gustavo | — |
+| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 5 | YY | — |
+| [Task 424][t424] | Define transaction integrity ownership | Design | 5 | YY | [#1343][pr1343] |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 5 | YY | — |
+| [Task 457][t457] | Fence process-local Managers | Gap fix | 5 | YY | — |
+| [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 5 | Abdullahi | — |
 | [Task 427][t427] | Test Controller credentials | Test | 2 | Gustavo | [#1349][pr1349] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 430][t430] | Test account queries | Test | 2 | Gustavo | — |
@@ -93,7 +96,7 @@ cannot merge before every hard dependency and gate completes.
 [t346]: tasks/346-psbt-funding-metadata.md
 [t347]: tasks/347-psbt-signing-authorization.md
 [t348]: tasks/348-watched-change-delivery.md
-[t349]: tasks/349-transaction-invalidation.md
+[t349]: archive/tasks/349-transaction-invalidation.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t357]: tasks/357-transaction-amount-validation.md
@@ -125,7 +128,7 @@ cannot merge before every hard dependency and gate completes.
 [t409]: tasks/409-transaction-input-graph.md
 [t410]: tasks/410-transaction-graph-admission.md
 [t411]: tasks/411-terminal-parent-rejection.md
-[t412]: tasks/412-transaction-publication-admission.md
+[t412]: tasks/412-transaction-invalidation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t427]: tasks/427-controller-lifecycle-credential-itests.md
@@ -140,6 +143,8 @@ cannot merge before every hard dependency and gate completes.
 [t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
 [t460]: tasks/460-sequential-account-invalid-children.md
+[t468]: tasks/468-activate-no-chain-sync-account-creation.md
+[t469]: tasks/469-sign-psbt-with-effective-keys.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343

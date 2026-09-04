@@ -15,6 +15,9 @@ account identity through SQL UTXO conversion.
 
 ## Details
 
+- This tests the new runtime account shape from Task 391, not legacy snapshot
+  conversion. Keep it in Phase 2 with that real dependency; it is not a
+  migration gate. Tasks 373–376 own converted legacy account/UTXO equivalence.
 - Exercise `ListUnspent` and `GetUtxo` only through the imported `wallet`
   package on real SQLite and PostgreSQL Wallets.
 - Create a uniformly watch-only, path-bound XPub account with
@@ -41,10 +44,9 @@ account identity through SQL UTXO conversion.
   RPC, deprecated APIs, and unrelated production changes out of scope. Fix
   only a production defect required by this public attribution contract and
   keep its regression in this task's implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

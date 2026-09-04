@@ -25,7 +25,7 @@ paths.
   receive its plaintext result.
 - Keep `Encrypt` or other still-required typed preparation operations intact.
 - Update only tests and mocks required for compilation and focused behavior.
-  Redundant test deletion remains Task 336.
+  Do not perform an unrelated duplicate-test purge.
 - Do not touch SQL genesis preparation from Task 367 or broaden deprecated
   wallet cleanup.
 
@@ -43,7 +43,7 @@ operations. Leave backend-private crypto implementation below keyvault.
   suites from the predecessor tasks remain green.
 - Focused keyvault tests prove typed operations still preserve lock and zeroing
   behavior.
-- The diff contains no redundant-test purge or genesis secret work.
+- The diff contains no unrelated test purge or genesis secret work.
 
 ## Definition of done
 
@@ -51,7 +51,8 @@ operations. Leave backend-private crypto implementation below keyvault.
   runtimeCache.
 - All maintained consumers use their typed operation or explicit raw-return
   exception.
-- Task 336 can remove redundant cache-era tests without owning behavior.
+- Obsolete cache-era tests are changed only when this task removes the
+  production seam they exercise.
 
 [t382]: 382-vault-account-derivation.md
 [t383]: 383-vault-output-script-resolution.md

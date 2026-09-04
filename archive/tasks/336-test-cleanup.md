@@ -6,6 +6,10 @@ Type: **Test**.
 
 Dependencies: **[Task 338][t338], [Task 362][t362], and [Task 386][t386]**.
 
+> **Superseded 2026-09-05:** Test deletion has no independent behavioral
+> outcome. Task 386 owns only the test and mock changes required by its
+> production cleanup; unrelated duplicate tests remain untouched.
+
 ## Rationale
 
 After the definitive Controller contracts land, the Wallet-level passphrase
@@ -46,6 +50,6 @@ per surviving backend.
 - The PR is test-only and contains no runtime-cache, signer, Vault, or daemon
   behavior change.
 
-[t338]: 338-passphrase-result.md
-[t362]: 362-kvdb-definitive-passphrase-result.md
-[t386]: 386-remove-raw-wallet-secret-seams.md
+[t338]: ../../tasks/338-passphrase-result.md
+[t362]: ../../tasks/362-kvdb-definitive-passphrase-result.md
+[t386]: ../../tasks/386-remove-raw-wallet-secret-seams.md

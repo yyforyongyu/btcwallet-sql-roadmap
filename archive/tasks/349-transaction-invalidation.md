@@ -7,6 +7,10 @@ Type: **Gap fix**.
 Dependencies: **[Task 339][t339], [Task 409][t409], [Task 410][t410], and
 [Task 411][t411]**.
 
+> **Superseded 2026-09-05:** SQL already has the internal wallet-scoped branch
+> invalidation required by the maintained caller. Task 412 owns the remaining
+> public `TxWriter` exposure without this speculative graph prerequisite.
+
 ## Rationale
 
 Implement a narrow internal SQL operation that idempotently invalidates one
@@ -48,7 +52,7 @@ SQL has one internal bounded invalidation operation over the authoritative
 graph with retained history and exact ambiguous-result reconciliation; no
 public exposure, publisher behavior, or generic journal is included.
 
-[t339]: ../archive/tasks/339-transaction-visibility.md
-[t409]: 409-transaction-input-graph.md
-[t410]: 410-transaction-graph-admission.md
-[t411]: 411-terminal-parent-rejection.md
+[t339]: 339-transaction-visibility.md
+[t409]: ../../tasks/409-transaction-input-graph.md
+[t410]: ../../tasks/410-transaction-graph-admission.md
+[t411]: ../../tasks/411-terminal-parent-rejection.md

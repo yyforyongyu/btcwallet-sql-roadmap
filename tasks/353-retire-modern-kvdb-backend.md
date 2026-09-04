@@ -4,84 +4,48 @@ Component: **Manager backend selection**.
 
 Type: **Migration**.
 
-Dependencies: **[Task 376][t376]**, plus production conversion evidence, an
-identified completed consumer-cutover artifact or release proving maintained
-consumers and deployed wallets no longer select kvdb, and an explicit
-retirement decision.
+Dependencies: **[Task 376][t376]**.
 
 ## Rationale
 
-After supported wallets can be converted to SQL, the maintained wallet library
-should not continue carrying a second legacy Manager backend and its public
-passphrase configuration.
+After supported wallets can be converted and maintained consumers use SQL, the
+modern Manager no longer needs a second kvdb backend or its public passphrase
+configuration. Conversion alone is not evidence that removal is safe.
 
 ## Details
 
-- Require verified [Task 376][t376] conversion, identified completed consumer-
-  cutover evidence or a release proving maintained consumers and deployed
-  wallets no longer select kvdb, and an explicit retirement decision before
-  scheduling. Conversion readiness alone is not cutover evidence.
-- At scheduling time, enumerate and remove every implemented or pending
-  modern-kvdb clause in the canonical backlog. Do not implement temporary
-  behavior only to delete it. This includes, but is not limited to,
-  [Task 330][t330], [Task 331][t331], [Task 343][t343], [Task 344][t344],
-  [Task 352][t352], and the modern-kvdb clauses of
-  [Task 382][t382] through [Task 385][t385].
-  It also includes [Task 361][t361], [Task 362][t362], and the modern-kvdb
-  clause of [Task 364][t364]. [Task 352][t352], [Task 361][t361], and
-  [Task 362][t362] are archived entirely if retirement lands first; other
-  tasks retain only their SQL or backend-neutral clauses. Preserve
-  [Task 354][t354]'s accepted design record, and narrow [Task 386][t386] to
-  cleanup for the surviving SQL consumers.
-- Remove kvdb from the modern `NewManager` backend selection and configuration.
-- Remove modern kvdb adapter and Vault wiring that has no remaining caller.
-- Retire kvdb-only deprecated passphrase fields from modern public configs.
-- Keep CLI, deprecated Loader and RPC wallet frontends, waddrmgr, and wtxmgr
-  entirely outside the retirement. Proceed only when the required consumer-
-  cutover evidence proves none of them constructs the modern Manager path. Do
-  not update them for compilation or change their Go APIs or on-disk formats.
+- Schedule only after Task 376 is verified, a named consumer artifact or
+  release proves maintained consumers no longer select modern kvdb, and the
+  retirement decision is explicit.
+- Remove modern kvdb Manager selection, adapter and Vault wiring, and
+  kvdb-only fields from modern configuration.
+- At implementation time, remove or supersede pending roadmap clauses that
+  exist solely for modern kvdb. Do not implement temporary behavior only to
+  delete it.
+- Keep CLI, RPC, Loader, deprecated Wallet paths, `waddrmgr`, and `wtxmgr`
+  unchanged. If one still constructs the modern Manager kvdb path, the cutover
+  gate is unmet.
+- Preserve the legacy source format and files used as conversion inputs.
 
 ## Suggested fix
 
-Delete the modern Manager's kvdb backend case and its internal adapter wiring,
-then simplify the unified configs around SQL ownership. If the removal would
-require any excluded CLI, RPC, deprecated-wallet, waddrmgr, or wtxmgr caller
-change, the consumer-cutover gate is unmet and this task remains blocked.
-Revalidate and reduce every remaining task after removal; do not carry obsolete
-kvdb prerequisites or acceptance criteria forward. Record the task-by-task
-removals in the retirement PR description, not a runtime manifest.
+Delete the modern Manager's kvdb branch and simplify only its now-unused
+configuration and Wallet-owned adapters. Record the affected task decisions in
+the implementation PR rather than maintaining a speculative ledger here.
 
 ## Verification
 
-- Run focused Manager backend-selection tests proving kvdb is rejected and
-  converted SQL wallets still start, create, stop, and reopen through aggregate
-  Manager lifecycle.
-- Build the unchanged CLI, deprecated wallet, Loader, waddrmgr, and wtxmgr
-  paths and audit the diff to prove none was modified.
-- Audit modern configuration, adapter, Vault, and canonical-task references
-  against the retirement ledger so no implemented or pending kvdb clause
-  remains.
+- Prove modern Manager selection rejects kvdb and converted SQLite Wallets
+  still create, start, stop, and reopen.
+- Build unchanged legacy callers and audit the diff to prove no excluded
+  package changed.
+- Confirm no maintained consumer or remaining roadmap task requires the
+  removed modern kvdb path.
 
 ## Definition of done
 
-- The modern Manager, Vault, adapters, and public configuration contain no
-  kvdb backend path after verified conversion, completed consumer-cutover
-  evidence, and the explicit retirement decision.
-- Every canonical task's implemented or pending modern-kvdb clause is removed
-  or archived according to the retirement ledger.
-- CLI, deprecated Loader and RPC wallet frontends, waddrmgr, and wtxmgr code,
-  Go APIs, behavior, and on-disk formats remain unchanged.
+The modern Manager and its public configuration contain no kvdb backend after
+verified conversion, completed consumer cutover, and explicit retirement,
+while legacy packages and disk formats remain unchanged.
 
-[t330]: 330-duplicate-wallet-create.md
-[t331]: 331-manager-wallet-lifecycle.md
-[t343]: 343-exact-account-creation.md
-[t344]: 344-bulk-address-allocation.md
-[t352]: 352-kvdb-combined-passphrase-rotation.md
-[t354]: 354-vault-owned-secret-resolution.md
-[t361]: 361-kvdb-imported-xpub-derivation.md
-[t362]: 362-kvdb-definitive-passphrase-result.md
-[t364]: 364-durable-watch-registration.md
 [t376]: 376-orchestrate-legacy-conversion.md
-[t382]: 382-vault-account-derivation.md
-[t385]: 385-unsafe-signer-key-extraction.md
-[t386]: 386-remove-raw-wallet-secret-seams.md

@@ -4,12 +4,12 @@ Component: **PsbtManager FinalizePsbt**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 347][t347]**.
+Dependencies: **[Task 469][t469]**.
 
 ## Rationale
 
-Make FinalizePsbt consume Task 347's shared packet,
-ownership, script, derivation, and sighash authorization.
+Make FinalizePsbt consume Tasks 347 and 469's shared packet,
+ownership, script, derivation, sighash, and effective-key authorization.
 
 ## Details
 
@@ -23,7 +23,7 @@ funding, and PSBT metadata authority.
 
 ## Suggested fix
 
-Call Task 347's authorization helper in an auto-finalize
+Call the completed signing authorization in an auto-finalize
 mode that rejects any required tweak, patch a clone with allowed unlocking
 scripts, execute it, and only then publish the finalized packet.
 
@@ -36,7 +36,7 @@ failures leave the caller unchanged.
 
 ## Definition of done
 
-FinalizePsbt cannot bypass Task 347 authorization or
+FinalizePsbt cannot bypass the completed signing authorization or
 silently sign a tweaked input and returns no partially mutated packet on error.
 
-[t347]: 347-psbt-signing-authorization.md
+[t469]: 469-sign-psbt-with-effective-keys.md

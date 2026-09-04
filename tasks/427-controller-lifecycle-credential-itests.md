@@ -11,8 +11,8 @@ Dependencies: **[Task 331][t331]**.
 [Issue #1250][issue1250] assigns Gustavo the Controller integration-test lane.
 Merged [PR #1300][pr1300] covers basic `Unlock`, `Lock`, and `Info`;
 [Task 331][t331] removes the individual lifecycle methods and their obsolete
-cases. The remaining credential slice is passphrase change, timed unlock, and
-their durable behavior through a real persistent Wallet.
+cases. The remaining credential slice is passphrase change, timed unlock,
+and their durable behavior through a real persistent Wallet.
 
 ## Details
 
@@ -27,7 +27,9 @@ their durable behavior through a real persistent Wallet.
 - Stop the Manager after a successful passphrase change, construct a fresh
   Manager over the same database, select the Wallet from its Start result, and
   prove the old credential is rejected and the new credential unlocks it.
-- Do not absorb behavior owned by Tasks 338, 369, 421, or another task.
+- Do not absorb behavior owned by Tasks 338, 421, or another task.
+- [Task 369][t369] independently owns repeated-unlock rejection and unchanged
+  deadline coverage; do not absorb it into this in-progress task.
 - Exclude the Controller methods already covered by PR #1300, `Info`, `Resync`,
   `Rescan`, account/address APIs, RPC, deprecated interfaces, direct Store
   assertions, lifecycle behavior owned by Task 331, and unrelated production
@@ -49,12 +51,13 @@ objects for the durable credential check.
 
 ## Definition of done
 
-- `ChangePassphrase` and timed `Unlock` have representative public success,
-  stable-error, state-transition, and timeout coverage on real kvdb, SQLite,
-  and PostgreSQL Wallets.
+- `ChangePassphrase` and timed `Unlock` have representative
+  public success, stable-error, state-transition, and timeout coverage on real
+  kvdb, SQLite, and PostgreSQL Wallets.
 - A changed passphrase remains authoritative after a full durable reopen.
 - Shared cases contain no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
 [t331]: 331-manager-wallet-lifecycle.md
+[t369]: 369-repeated-wallet-unlock.md

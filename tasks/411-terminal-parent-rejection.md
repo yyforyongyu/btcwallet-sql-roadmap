@@ -1,54 +1,54 @@
 # Task 411 — reject children of terminal transactions
 
-Component: **TxStore activation preflight and direct/batch ingestion**.
+Component: **Wallet-owned SQL transaction ingestion**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 339][t339], [Task 409][t409], and [Task 410][t410]**.
+Dependencies: **[Task 339][t339] and [Task 410][t410]**.
 
 ## Rationale
 
-Inside the same Store transaction and graph
-admission that writes normalized inputs, reject any direct, sync-batch, or
-scan-batch transaction whose input names a retained terminal parent. Close the
-upgrade interval after Task 409 by refusing activation while an existing
-active child still names a retained terminal parent.
+A transaction learned through maintained Wallet ingestion must not remain
+active when one of its retained parents is terminal. Otherwise TxReader can
+report an active branch and UtxoManager can retain effects from a parent that
+the Wallet has invalidated. Existing and newly arriving children need the
+same admission rule, independent of how input relationships are represented.
 
 ## Details
 
-Before enabling the new admission rule, acquire Task 410's graph admission and
-scan every existing active transaction against its normalized parents. Abort
-activation atomically with exact wallet, child, input, and terminal-parent
-diagnostics if any violation exists; do not silently delete history or choose
-a replacement status. After a clean preflight, reject new violations before
-credits, debits, labels, or normalized edges become visible. Define idempotent
-replay of the same active transaction without legitimizing a terminal-parent
-branch.
-
-Exclusions: public invalidation, descendant traversal, publication,
-replacement policy, and raw transaction backfill.
+- Under Task 410's mutation-ordering contract, reject a new child whose input
+  references a retained terminal parent before any Wallet effect is committed.
+- Validate existing active transactions before enabling the rule. Refuse an
+  inconsistent state with exact Wallet, child, input, and parent diagnostics;
+  do not silently delete history or select a replacement status.
+- Cover maintained direct and batch ingestion and preserve deterministic
+  replay without legitimizing a terminal-parent branch.
+- Read parent hashes from existing raw transaction/input data. Task 409's
+  optional representation is not a prerequisite; do not require normalized
+  rows, a graph-admission handle, or a new coordinator.
+- Exclude public invalidation, descendant traversal, publication policy,
+  replacement policy, and an independent input-graph migration.
 
 ## Suggested fix
 
-Add one activation preflight over existing normalized edges under graph
-admission, then query the status of all normalized parent hashes inside the
-same admitted Store transaction before inserting the child row, edge rows, or
-wallet effects. Share the parent-status predicate across preflight, direct,
-and batch paths so cutover and future admission enforce the same invariant.
+Reuse the existing decoded inputs and parent-status checks inside the narrow
+mutation boundary. Share the accepted predicate between existing-state
+validation and future ingestion without prescribing private helper shapes.
 
 ## Verification
 
-SQLite/PostgreSQL fixtures inserted after Task 409 but before this task cause
-activation to fail atomically with exact diagnostics, while a clean fixture
-enables admission. Every ingestion path then rejects terminal-parent children
-with zero partial effects; active-parent and unrelated-input cases succeed;
-replay is deterministic.
+- On SQLite and PostgreSQL, refuse an existing active child of a terminal
+  parent before partial activation and admit a clean state.
+- Through maintained ingestion, reject terminal-parent children with no
+  partial public transaction or UTXO effect. Accept active-parent and unrelated
+  inputs and preserve idempotent replay.
+- Race the parent transition with child admission under Task 410 and prove
+  neither ordering leaves an active terminal-parent branch.
 
 ## Definition of done
 
-No active descendant of a retained terminal transaction survives activation,
-and no maintained Store ingestion path can create a new one afterward.
+No active child of a retained terminal transaction survives activation or
+maintained ingestion, without depending on a new input representation.
 
 [t339]: ../archive/tasks/339-transaction-visibility.md
-[t409]: 409-transaction-input-graph.md
 [t410]: 410-transaction-graph-admission.md
