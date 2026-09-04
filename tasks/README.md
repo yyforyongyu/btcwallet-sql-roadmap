@@ -30,7 +30,6 @@ Grouping here does not create dependency or scheduling authority.
   not-found errors.
 - [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.
-- [Task 456](456-manager-runtime-configuration.md): centralize managed Wallet
   runtime configuration.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.

@@ -23,7 +23,6 @@ recorded PR stack.
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | — |
-| [Task 456][t456] | Centralize Wallet runtime config | Refactor | YY | [#1353][pr1353] |
 | [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
 
 ## Blocked Phase 1 Tasks
@@ -178,7 +177,6 @@ implementation.
 [t452]: tasks/452-key-only-recovery-derivation.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
-[t456]: tasks/456-manager-runtime-configuration.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
@@ -190,7 +188,6 @@ implementation.
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
-[pr1353]: https://github.com/btcsuite/btcwallet/pull/1353
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
 [pr1357]: https://github.com/btcsuite/btcwallet/pull/1357

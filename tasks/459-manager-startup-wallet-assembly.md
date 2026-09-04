@@ -101,5 +101,5 @@ start and exact publication.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t453]: ../archive/tasks/453-serialize-manager-wallet-publication.md
-[t456]: 456-manager-runtime-configuration.md
+[t456]: ../archive/tasks/456-manager-runtime-configuration.md
 [t458]: 458-manager-operation-admission.md
