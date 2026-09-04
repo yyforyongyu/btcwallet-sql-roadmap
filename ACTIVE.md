@@ -46,12 +46,12 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | — |
 | [Task 395][t395] | Allocate a durable NoChainSync child | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
+| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | [#1357][pr1357] |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
-| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | — | — |
+| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | — |
 
 ## Claimed Tasks
 
