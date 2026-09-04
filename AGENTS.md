@@ -146,10 +146,14 @@ Keep this section order:
 8. `## Verification`
 9. `## Definition of done`
 
-Use `Rationale` for the concrete problem, `Details` for minimal scope and
-explicit exclusions, `Suggested fix` for the smallest likely implementation,
-`Verification` for focused evidence, and `Definition of done` for measurable
-completion.
+Use `Rationale` for the concrete issue, reachable cause, and impact. Use
+`Details` for observable behavior, required invariants, minimal scope, and
+explicit exclusions. Use `Suggested fix` for a non-binding local direction,
+not a prescribed implementation. Use `Verification` for focused behavioral
+evidence and `Definition of done` for measurable completion. Except where an
+exact public or storage shape is the accepted outcome, do not require private
+helper or type names, synchronization primitives, query decomposition, file
+layout, or an internal state machine.
 
 Link every dependency to its task file. Add the task to
 [tasks/README.md](tasks/README.md) and add it exactly once to the delivery phase

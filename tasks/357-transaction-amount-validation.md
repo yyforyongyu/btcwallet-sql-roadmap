@@ -37,9 +37,9 @@ Wallet methods, and `wallet/deprecated_test.go`.
 
 ## Suggested fix
 
-Add one checked amount-add helper, one checked output-set
-validator, and one checked fee helper in `txauthor`; carry their returned
-values through construction and translate errors once at TxCreator.
+One likely direction is checked addition, output-set validation, and checked
+fee calculation in `txauthor`, with one translation at TxCreator. The private
+helper boundaries are not part of the accepted contract.
 
 ## Verification
 

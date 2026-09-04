@@ -8,60 +8,46 @@ Dependencies: **[Task 340][t340] and [Task 387][t387]**.
 
 ## Rationale
 
-SQL cannot record that an account must stay out of automatic chain
-synchronization. That behavior is independent from whether the wallet holds
-private material and must survive reopen before public callers can select it.
+SQL account rows cannot record that an account must stay out of automatic
+chain synchronization. Lnd's purpose-1017 key-family accounts hold protocol
+keys rather than receiving addresses, so treating them as ordinary accounts
+adds irrelevant recovery derivation and chain watches. The policy is an
+account property, independent of signing custody, and must survive reopen.
 
 ## Details
 
-- Add one immutable `accounts.no_chain_sync BOOLEAN NOT NULL DEFAULT FALSE`
-  column in SQLite and PostgreSQL. Backfill every existing account as false
-  before enforcing the non-null constraint in each dialect.
-- Include `NoChainSync` in account reads and method-specific creation inputs.
-  Update every maintained SQL derived and imported caller in the same PR to
-  create ordinary accounts with false.
-- Reject any attempt to change the value after account creation. Do not add a
-  discovery-mode enum, account kind, custody column, key-only marker, or new
-  table.
-- Treat accountless raw imports as implicitly chain-synchronized; do not
-  invent an account row or a no-chain-sync raw-import form.
-- Keep wallet-level signing custody and `IsWatchOnly` unchanged. This property
-  says only whether automatic chain synchronization includes the account.
-- Keep public account request and result shapes in Task 392 and consumer
-  policy in Tasks 393, 399, and 452.
-- Keep implementation local to the existing account schema, queries, Store,
-  and colocated tests. The required migration and regenerated sqlc files are
-  the only expected new or generated files; add no arbitrary helper,
-  production file, or standalone test file.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement.
-- Give every unit test detailed Arrange, Act, and Assert comments explaining
-  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Persist one immutable, non-null `NoChainSync` boolean for every SQL account.
+  Existing accounts migrate to false.
+- Carry the value through existing SQL account creation and read paths. All
+  callers that do not explicitly request the policy continue writing false.
+- Reject an attempt to change the value after account creation.
+- Keep accountless raw imports chain-synchronized and leave wallet-level
+  watch-only and signing capability unchanged.
+- Public request, result, receiving, and recovery behavior remains in Tasks
+  392, 393, 399, and 452.
+- Do not add an account kind, discovery enum, custody flag, or modern-kvdb
+  format.
 
 ## Suggested fix
 
-Land one two-dialect account migration, regenerated queries, and the smallest
-Store conversion needed to carry the immutable boolean through existing
-account rows and creation calls.
+Add the smallest two-dialect schema and Store conversion needed to persist the
+boolean. Column and query organization may follow existing SQL conventions;
+only the durable value and immutability are contractual.
 
 ## Verification
 
-Migration fixtures prove old accounts reopen with `NoChainSync=false`, new
-rows preserve both boolean values, and updates cannot change the value on
-SQLite and PostgreSQL. Fresh and migrated schemas reject an explicit NULL on
-insert or update instead of silently treating it as false. Maintained creation
-callers explicitly exercise false, Store conversion rejects malformed
-persisted values, and generated output matches source SQL.
+- Migrate an existing SQLite and PostgreSQL wallet and verify every account
+  reopens with `NoChainSync=false`.
+- Create and reopen accounts with both values and verify exact round trips.
+- Prove null and update attempts cannot produce mutable or missing policy.
+- Verify ordinary creation paths explicitly retain false and no public chain
+  behavior changes in this task.
 
 ## Definition of done
 
-Every SQL account has one immutable, non-null `NoChainSync` value after
-migration, all maintained SQL creation callers supply it, and no public
-selection behavior, signing-custody change, chain call, enum, account kind, or
-new table is added.
+Every SQL account has one immutable `NoChainSync` value that survives migration
+and reopen, without changing custody, public selection, recovery, or chain
+behavior.
 
 [t340]: ../archive/tasks/340-durable-database-identity.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
