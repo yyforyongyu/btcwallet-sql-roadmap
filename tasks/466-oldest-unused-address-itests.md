@@ -4,20 +4,19 @@ Component: **AddressManager final count-one integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 395][t395], [Task 396][t396], and [Task 431][t431]**.
+Dependencies: **[Task 396][t396] and [Task 431][t431]**.
 
 ## Rationale
 
 [Issue #1250][issue1250] requires AddressManager integration coverage. Task 431
 owns the existing allocation and lookup contract and must remain unchanged.
-Task 396 replaces the SQL count-one semantics and removes `GetUnusedAddress`,
-while Task 395 adds the independent `NoChainSync` branch and its extended
-result metadata. The final SQL and modern-kvdb divergence still needs a
-separate public integration-test outcome.
+Task 396 replaces the SQL count-one semantics and removes `GetUnusedAddress`.
+The final SQL and modern-kvdb divergence needs a separate public integration
+outcome; it does not require Task 395's independent `NoChainSync` branch.
 
 ## Details
 
-- Extend Task 431's final-API suite after Tasks 395, 396, and 431 land. Preserve
+- Extend Task 431's final-API suite after Tasks 396 and 431 land. Preserve
   its backend-common assertions and do not duplicate either production task's
   mechanical caller migration.
 - On SQLite and PostgreSQL, require `NewAddress` for a chain-synchronized
@@ -40,13 +39,13 @@ separate public integration-test outcome.
   by Task 431. Add no arbitrary helper, production file, or standalone test
   file; justify any unavoidable new file against the repository's current
   layout in the implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence. Interface mocks, if needed, embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
+- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
+  expectations during Arrange with the narrowest correct cardinality (`Once()`
+  for one required call). During Assert, call `AssertExpectations(t)` directly;
+  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 

@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **468**.
+The next free task number is **470**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -14,21 +14,15 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
 - [Task 331](331-manager-wallet-lifecycle.md): make Manager the sole lifecycle
   authority.
-  network identity.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
-  identity design.
 - [Task 365](365-validate-wallet-genesis-keys.md): validate wallet genesis key
   identities.
 - [Task 366](366-reconcile-sql-genesis-commit.md): reconcile ambiguous SQL
   genesis commits.
-- [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
-  without resetting timeout.
-  not-found errors.
 - [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.
-  runtime configuration.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
 - [Task 458](458-manager-operation-admission.md): drain Wallet calls during
@@ -38,7 +32,6 @@ Grouping here does not create dependency or scheduling authority.
 
 ## Accounts, addresses, and recovery
 
-  derivation.
 - [Task 343](343-exact-account-creation.md): create next-or-exact root-derived
   accounts.
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
@@ -51,12 +44,8 @@ Grouping here does not create dependency or scheduling authority.
   derivation work.
 - [Task 364](364-durable-watch-registration.md): persist ordered SQL live-watch
   obligations.
-  wallet-owned.
 - [Task 378](378-account-manager-error-boundary.md): translate AccountManager
   backend errors.
-  errors.
-- [Task 381](381-recovery-adapter-identity.md): hide recovery adapter identity.
-  chain-sync policy.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): reconcile ambiguous
@@ -79,8 +68,6 @@ Grouping here does not create dependency or scheduling authority.
   recovery targets.
 - [Task 399](399-zero-lookahead-persisted-targets.md): isolate persisted targets
   in zero-lookahead recovery.
-  historical recovery.
-  watch.
 - [Task 402](402-replay-live-watch-obligations.md): replay Wallet live-watch
   obligations.
 - [Task 403](403-raw-import-watch-obligations.md): persist raw imports with
@@ -89,35 +76,30 @@ Grouping here does not create dependency or scheduling authority.
   accounts from recovery.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
-  commit identity.
+- [Task 468](468-activate-no-chain-sync-account-creation.md): activate
+  `NoChainSync` account creation.
 
 ## Chain and synchronization
 
-  shared-chain ownership.
-- [Task 370](370-chain-source-delivery.md): prepare ordered Manager chain
-  delivery.
+- [Task 370](370-chain-source-delivery.md): fan out ordered Manager chain
+  events.
 - [Task 371](371-canonical-chain-frontier.md): serialize canonical chain-frontier
   mutation.
-- [Task 372](372-multi-wallet-rollback.md): prepare atomic multi-Wallet
-  rollback.
-- [Task 423](423-manager-chain-source-cutover.md): cut over SQL Manager chain
+- [Task 372](372-multi-wallet-rollback.md): coordinate multi-Wallet rollback.
+- [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
 - [Task 455](455-exact-wallet-sync-status.md): report exact wallet
   synchronization status.
 
 ## Transactions, UTXOs, and PSBTs
 
-  and status.
 - [Task 346](346-psbt-funding-metadata.md): preserve PSBT metadata during
   funding.
-- [Task 347](347-psbt-signing-authorization.md): authorize explicit PSBT
+- [Task 347](347-psbt-signing-authorization.md): authorize existing PSBT
   signatures.
 - [Task 348](348-watched-change-delivery.md): watch PSBT change before returning
   funding.
-- [Task 349](349-transaction-invalidation.md): implement idempotent transaction
-  invalidation.
 - [Task 351](351-sql-utxo-integrity.md): bind SQL UTXOs to wallet tenancy.
-  accounting.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
 - [Task 357](357-transaction-amount-validation.md): validate transaction output
@@ -132,21 +114,23 @@ Grouping here does not create dependency or scheduling authority.
   auto-finalization.
 - [Task 408](408-direct-transaction-change-watch.md): watch direct transaction
   change before return.
-- [Task 409](409-transaction-input-graph.md): normalize transaction input edges.
+- [Task 409](409-transaction-input-graph.md): simplify transaction input graph
+  reads.
 - [Task 410](410-transaction-graph-admission.md): coordinate transaction graph
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
   transactions.
-- [Task 412](412-transaction-publication-admission.md): expose invalidation with
-  publication ordering.
-- [Task 413](413-utxo-spend-identity.md): constrain SQL UTXOs to exact spending
+- [Task 412](412-transaction-invalidation.md): expose transaction
+  invalidation on TxWriter.
+- [Task 413](413-utxo-spend-identity.md): validate exact UTXO spending
   inputs.
 - [Task 414](414-utxo-amount-bounds.md): bound persisted SQL UTXO amounts.
 - [Task 424](424-transaction-utxo-integrity-adr.md): define transaction and UTXO
   integrity ownership.
-  transaction authoring from wrapper watch and lease effects.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
   transaction output aggregates.
+- [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
+  effective keys.
 
 ## Integration tests
 
@@ -158,14 +142,11 @@ that structural exclusion explicitly.
   Controller credential contracts.
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
-  contracts.
 - [Task 430](430-account-query-itests.md): cover public account query contracts.
 - [Task 431](431-address-allocation-lookup-itests.md): cover address allocation
   and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
-  publication contracts.
-  contracts.
 - [Task 438](438-psbt-decoration-combination-itests.md): cover PSBT decoration
   and combination contracts.
 - [Task 439](439-psbt-funding-itests.md): cover PSBT funding contracts.
@@ -217,6 +198,8 @@ that structural exclusion explicitly.
   passphrase result.
 - [Task 367](367-bound-sql-genesis-secrets.md): bound SQL genesis secret
   lifetime.
+- [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
+  without resetting timeout.
 - [Task 382](382-vault-account-derivation.md): move account derivation into the
   Vault.
 - [Task 383](383-vault-output-script-resolution.md): resolve output scripts
@@ -226,7 +209,6 @@ that structural exclusion explicitly.
   extraction.
 - [Task 386](386-remove-raw-wallet-secret-seams.md): remove raw Wallet secret
   seams.
-  passphrase commits.
 
 ## Migration and retirement
 
@@ -238,18 +220,19 @@ that structural exclusion explicitly.
   transaction and sync state.
 - [Task 375](375-import-legacy-snapshot-sqlite.md): import one legacy snapshot
   into SQLite.
-- [Task 376](376-orchestrate-legacy-conversion.md): orchestrate and verify legacy
-  conversion.
+- [Task 376](376-orchestrate-legacy-conversion.md): convert a legacy wallet
+  through Manager.Create.
 - [Task 353](353-retire-modern-kvdb-backend.md): retire kvdb from the modern
   wallet API.
 
 ## Benchmarks
 
-Each public benchmark uses the same logical profiles on kvdb, SQLite, and
-PostgreSQL so regressions remain attributable within each backend.
+Task 416 provides minimal deterministic setup and cleanup on kvdb, SQLite,
+and PostgreSQL. Each consumer uses a few explicit dataset sizes and a simple
+measurement loop; no cold/warm matrix or workload framework is required.
 
-- [Task 416](416-database-benchmark-fixtures.md): build reusable database
-  benchmark fixtures.
+- [Task 416](416-database-benchmark-fixtures.md): provide minimal three-backend
+  benchmark setup.
 - [Task 417](417-start-to-synced-benchmark.md): measure start-to-synced
   performance.
 - [Task 418](418-list-unspent-benchmark.md): measure ListUnspent
@@ -258,7 +241,3 @@ PostgreSQL so regressions remain attributable within each backend.
   performance.
 - [Task 420](420-transaction-read-benchmark.md): measure transaction-read
   performance.
-
-## Cleanup
-
-- [Task 336](336-test-cleanup.md): remove redundant Wallet passphrase tests.

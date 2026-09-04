@@ -17,6 +17,10 @@ publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Details
 
+- This verifies Task 439's final funding contract end to end. Keep its hard
+  dependencies and Phase 2 ownership, but do not make this optional PSBT path a
+  prerequisite for legacy conversion. An integration that enables this path
+  must wait for the required fixes and complete scenario.
 - Register the same deterministic PSBT flow for kvdb, SQLite, and PostgreSQL.
   Do not skip kvdb inside the shared flow.
 - Decorate the funded inputs, sign the owned inputs, and finalize the packet

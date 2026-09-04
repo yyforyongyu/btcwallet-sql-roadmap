@@ -15,6 +15,13 @@ lacks focused real-backend evidence.
 
 ## Details
 
+- Separate baseline cases for ordinary/root-derived requests from deferred
+  supplied-XPub and collision cases in the test table. Keep the former
+  fixtures independent of optional account shapes. The complete task retains
+  its Task 391 dependency; do not declare it done after only baseline cases.
+- This later-feature verification remains in Phase 2, but is not a prerequisite
+  for converting legacy account shapes. Task 373 owns migration identity
+  validation. An enabled runtime path must still satisfy its required errors.
 - Exercise only public AccountManager mutation APIs through the imported
   `wallet` package on real kvdb, SQLite, and PostgreSQL Wallets.
 - Register shared cases on all three backends whenever they can represent the
@@ -64,10 +71,9 @@ lacks focused real-backend evidence.
 - Extend the existing `itest/account_manager_test.go` suite. Add no arbitrary
   helper, production file, or standalone test file; justify any unavoidable
   new file against the repository's current layout in the implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

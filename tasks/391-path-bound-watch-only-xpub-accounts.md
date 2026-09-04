@@ -68,13 +68,13 @@ collapsing a known account number into arbitrary numberless import identity.
   `NoChainSync=false`: `NewAddress` and `GetAddressInfo` retain the real
   derivation, list lookup retains membership and balance, and reopen preserves
   the same result. Task 395 owns the later `NoChainSync=true` allocation branch.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement.
-- Give every unit test detailed Arrange, Act, and Assert comments explaining
-  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Document non-obvious code blocks with the contract, rationale, invariant, or
+  consequence they preserve; do not restate the code.
+- Keep unit tests clearly structured as Arrange, Act, and Assert.
+- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
+  expectations during Arrange with the narrowest correct cardinality (`Once()`
+  for one required call). During Assert, call `AssertExpectations(t)` directly;
+  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 

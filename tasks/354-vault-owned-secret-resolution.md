@@ -4,8 +4,7 @@ Component: **ADR 0010 secret-use contract**.
 
 Type: **Design**.
 
-Dependencies: **None**, plus durable disposition of draft btcwallet PR #1279
-before ADR acceptance.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -17,6 +16,8 @@ backend AccountID.
 
 ## Details
 
+- Require a durable disposition of draft btcwallet PR #1279 before accepting
+  the ADR amendment.
 - Amend ADR 0010 before implementation to define operation-scoped secret
   ownership, synchronization against `Lock`, reentrancy, and zeroing on
   success, error, and panic.
@@ -41,8 +42,8 @@ backend AccountID.
 - Record PR #1279's exact disposition. Reject its proposed public AccountID
   locator. If an accepted revision is consumed, record the exact merge commit
   and delete duplicate roadmap surface.
-- Keep SQL genesis secret lifetime in Task 367, PSBT authorization in Task 347,
-  and redundant test cleanup in Task 336.
+- Keep SQL genesis secret lifetime in Task 367, PSBT authorization in Tasks
+  347 and 469, and required test cleanup in each production task.
 
 ## Suggested fix
 
@@ -67,5 +68,5 @@ accepted/superseded/non-overlap outcome.
   four consumer tasks.
 - PR #1279 overlap is removed, accepted by exact commit, or explicitly frozen
   as non-overlapping.
-- The PR changes no Go code and does not absorb genesis, PSBT authorization, or
-  test cleanup.
+- The PR changes no Go code and does not absorb genesis, PSBT authorization,
+  or production-task test cleanup.

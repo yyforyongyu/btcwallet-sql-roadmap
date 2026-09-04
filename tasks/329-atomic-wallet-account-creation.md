@@ -58,22 +58,22 @@ contain the accounts its supported create request promised.
   [Task 358][t358], numbered root-derived account creation in
   [Task 343][t343], custom-scope creation in [Task 390][t390], and path-bound
   watch-only XPub creation in [Task 391][t391].
-- Leave configurable `NoChainSync` creation to Task 343's guarded runtime
-  account path after its receiving and recovery prerequisites complete;
-  genesis does not expose that property.
+- Leave configurable `NoChainSync` creation to
+  [Task 468](468-activate-no-chain-sync-account-creation.md)'s guarded runtime
+  account path; genesis does not expose that property.
 - Do not add a create manifest, replay state, generic write lock, Store
   callback, or cross-process coordination.
 - Keep implementation local to existing Manager genesis, SQL Store, source
   files, and colocated tests. Add no parallel interface, arbitrary helper,
   unrelated production file, or standalone test file; justify any unavoidable
   new file against the repository's current layout in the implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement.
-- Give every unit test detailed Arrange, Act, and Assert comments explaining
-  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Document non-obvious code blocks with the contract, rationale, invariant, or
+  consequence they preserve; do not restate the code.
+- Keep unit tests clearly structured as Arrange, Act, and Assert.
+- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
+  expectations during Arrange with the narrowest correct cardinality (`Once()`
+  for one required call). During Assert, call `AssertExpectations(t)` directly;
+  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 

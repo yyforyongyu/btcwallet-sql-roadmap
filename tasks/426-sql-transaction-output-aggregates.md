@@ -25,9 +25,9 @@ monetary maximum must not become durable merely because it bypassed authoring.
   admission contract. Decode the stored bytes, recompute the txid, and refuse
   an invalid value, arithmetic overflow, or aggregate-over-maximum set with the
   exact transaction and output position.
-- Keep this task merge-safe with Task 409 in either order. Amount validation
-  gates the raw transaction before any normalized input row is written; input-
-  graph creation neither substitutes for nor bypasses that gate.
+- Keep amount validation independent of Task 409's optional input
+  representation. Validate raw transactions before related writes, whether
+  the existing representation remains or an accepted refactor changes it.
 - Apply identical validation and refusal semantics on SQLite and PostgreSQL.
   Do not repair monetary values or retain a partial batch.
 - Exclude authoring, input-source totals, fees, UTXO-row amount constraints,
@@ -49,9 +49,9 @@ preflight, preserving exact diagnostic identity and transaction atomicity.
   maximum fixtures fail before any raw transaction or related row is written.
 - Populated upgrades refuse each invalid class with the exact txid and output
   position and leave the prior schema and data unchanged.
-- Run the same fixtures with Task 409's normalized-input migration applied
-  before and after this change and prove neither merge order bypasses amount
-  admission or leaves a partial input graph.
+- Prove amount admission works with the current input representation. If Task
+  409 has landed, run against its accepted representation too; neither path
+  may bypass admission or leave partial transaction effects.
 
 ## Definition of done
 

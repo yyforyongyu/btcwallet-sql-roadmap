@@ -4,7 +4,8 @@ Component: **AddressManager batch integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 343][t343] and [Task 344][t344]**.
+Dependencies: **[Task 343][t343], [Task 344][t344], and
+[Task 468][t468]**.
 
 ## Rationale
 
@@ -40,7 +41,8 @@ separate from count-one allocation and lookup behavior in Task 431.
   outside the SQL success and pending cases rather than skipping it inside a
   shared contract.
 - On SQLite and PostgreSQL, create a `NoChainSync=true` account through Task
-  343's public account request. A valid batch request must match Task 378's
+  468's activation of the public account request. A valid batch request must
+  match Task 378's
   canonical `ErrAccountOperationUnsupported`, with Task 392's precedence,
   before any publicly observable address result or branch progression on both
   dialects. Task 344's colocated injected-boundary tests own the unexposed
@@ -54,13 +56,13 @@ separate from count-one allocation and lookup behavior in Task 431.
   cases. Add no arbitrary helper or standalone test file; if the repository
   has no suitable file, justify one repository-conventional itest file in the
   implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence. Interface mocks, if needed, embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
+- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
+  expectations during Arrange with the narrowest correct cardinality (`Once()`
+  for one required call). During Assert, call `AssertExpectations(t)` directly;
+  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 
@@ -97,3 +99,4 @@ the returned batch and cursor state.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t343]: 343-exact-account-creation.md
 [t344]: 344-bulk-address-allocation.md
+[t468]: 468-activate-no-chain-sync-account-creation.md

@@ -4,8 +4,8 @@ Component: **Signer and primitive key-use Vault operations**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 337][t337], [Task 347][t347], [Task 352][t352],
-[Task 354][t354], and [Task 383][t383]**.
+Dependencies: **[Task 337][t337], [Task 352][t352], [Task 354][t354],
+[Task 383][t383], and [Task 469][t469]**.
 
 ## Rationale
 
@@ -30,15 +30,13 @@ to own transaction and digest policy.
   Return only public keys, fixed-size shared secrets, or signature values.
 - Wallet computes and validates transaction digests, sighash semantics,
   scripts, witnesses, and spend policy before invoking primitive Vault signing.
-- Consume Task 347's authorization-bound tweak validation while preserving it
-  as the sole PSBT ownership, persisted-identity, sighash, and
-  tweak-authorization owner. This later refactor replaces primitive key and
-  tweak ownership without changing the check ordering, authorization result,
-  or which inputs may be signed.
-- Consume Task 347's immutable authorization-bound tweak descriptor, validate
-  it before secret lookup, and apply it inside Vault. Update or remove affected
-  maintained callbacks directly; do not preserve a callback API through a
-  legacy wrapper.
+- Consume Tasks 347 and 469's authorization and effective-key signing
+  contracts. This later refactor replaces primitive key and tweak ownership
+  without changing check ordering, authorization results, or which inputs may
+  be signed.
+- Consume Task 469's immutable authorization-bound tweak description,
+  validate it before secret lookup, and apply it inside Vault. Do not restore
+  the removed callback through a wrapper.
 - Reuse Task 383 for script material rather than adding a second
   script-decryption route.
 - Preserve lock, watch-only, not-mine, imported-XPub public-only, and signature
@@ -79,7 +77,7 @@ operation guard. Keep Wallet assembly unchanged.
   mutation is included.
 
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
-[t347]: 347-psbt-signing-authorization.md
 [t352]: 352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
 [t383]: 383-vault-output-script-resolution.md
+[t469]: 469-sign-psbt-with-effective-keys.md

@@ -7,6 +7,16 @@ delivery phase map, and [tasks/](../tasks/) for executable task
 specifications.
 
 ## History
+
+- [Task 349](tasks/349-transaction-invalidation.md) was superseded on
+  2026-09-05 because SQL already has the required internal branch invalidation;
+  Task 412 owns only the remaining maintained `TxWriter` exposure.
+- [Task 381](tasks/381-recovery-adapter-identity.md) was superseded on
+  2026-09-05 because no maintained public consumer needs the identity-only
+  refactor; the current shape remains until a concrete need is demonstrated.
+- [Task 336](tasks/336-test-cleanup.md) was superseded on 2026-09-05 because
+  deleting duplicate tests has no independent outcome; Task 386 owns only the
+  test updates required by its production cleanup.
 - [Task 368](tasks/368-wallet-startup-shutdown.md) was superseded on
   2026-09-05 when its public lifecycle cutover was absorbed into
   [Task 331](../tasks/331-manager-wallet-lifecycle.md) as part of one atomic

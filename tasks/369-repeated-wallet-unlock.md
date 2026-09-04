@@ -23,9 +23,9 @@ rely on the observed behavior.
 - A rejected repeated Unlock leaves the first successful Unlock's auto-lock
   schedule exactly unchanged. A new positive, zero/defaulted, or negative
   timeout cannot extend, shorten, disable, or re-enable that schedule.
-- Keep `mainLoop` as the sole owner that serializes authentication requests and
-  timer mutation. Return the Vault's already-unlocked result before any timer
-  reset, stop, or drain.
+- Preserve the existing serialized authentication/timer behavior. Return the
+  already-unlocked result without changing the timer; no new coordinator,
+  reauthentication operation, or lifecycle mechanism is required.
 - Document this behavior on the public Controller/Wallet Unlock contract and
   prove it at the Controller boundary for both maintained backends. Preserve
   the Vault-level `ErrVaultUnlocked` behavior; do not invent a Vault
@@ -34,6 +34,9 @@ rely on the observed behavior.
   a new public error taxonomy, Task 338's ChangePassphrase result delivery,
   passphrase rotation, Unlock request cancellation redesign, Manager
   publication, lifecycle Start/Stop, and timer-framework cleanup.
+- This remains a narrow Controller contract/documentation and regression task:
+  existing production behavior does not make its missing coverage obsolete.
+  Task 427 keeps its original passphrase-change and first-unlock timeout scope.
 
 ## Suggested fix
 

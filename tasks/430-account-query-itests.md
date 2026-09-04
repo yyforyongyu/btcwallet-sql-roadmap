@@ -39,10 +39,9 @@ contracts together across kvdb, SQLite, and PostgreSQL.
   file and its repository-conventional helpers. Add no arbitrary helper,
   production file, or standalone test file; justify any unavoidable new file
   against the repository's current layout in the implementation PR.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement. Give
-  every test detailed Arrange, Act, and Assert comments explaining its setup,
-  operation, and evidence.
+- Document only non-obvious test contracts, rationales, invariants, and
+  consequences. Keep Arrange, Act, and Assert structure clear without
+  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

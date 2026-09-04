@@ -8,98 +8,50 @@ Dependencies: **[Task 373][t373]**.
 
 ## Rationale
 
-Legacy wtxmgr stores canonical transaction records alongside mined and unmined
-indexes that can disagree after corruption. Its modern kvdb adapter deliberately
-does not implement SQL's complete confirmed-history, replacement, or spend-edge
-contract. A trustworthy importer needs one independently reconstructed graph,
-not a sequence of ordinary adapter reads.
+Legacy transaction state is spread across primary records and mined, unmined,
+credit, debit, lease, and synchronization indexes. The modern kvdb projection
+does not expose enough information to prove that an SQL import is complete and
+internally consistent.
 
 ## Details
 
-- Read only Task 335's private snapshot and consume Task 373's normalized
-  address identities and sticky usedness. Do not access the original source or
-  open a destination.
-- Preserve the original pre-upgrade snapshot as the extraction authority. If
-  an old source version requires maintained upgrade code for interpretation,
-  upgrade only a separate scratch image and compare it with facts extracted
-  from the untouched original; never replace or mutate the authoritative
-  snapshot.
-- Extract confirmed and unmined raw transactions, receive times, labels,
-  coinbase and block membership, block order, pending/published state,
-  credits, debits, UTXOs, spent edges, replacement/conflict facts, active
-  leases with absolute expirations, birthday state, synced-to state, and the
-  retained block history required to interpret them.
-- Decode every transaction and require its computed txid to equal the
-  independent legacy record key. Use checked monetary arithmetic for every
-  output, aggregate, credit, and debit.
-- Reconstruct the canonical graph from raw transactions and primary records.
-  Require exact bidirectional agreement with credit/debit pointers, mined
-  balance, block-membership indexes, unspent-outpoint indexes, and unmined-input
-  spender indexes. Secondary indexes are evidence, not authority.
-- Map legacy pending and published membership to SQL's closed status model.
-  Preserve labels, receive times, change provenance, and supported conflict or
-  replacement facts exactly.
-- Require each credit and debit index, amount, outpoint, and spender pointer to
-  resolve in both directions. Normalize a change flag only from its proven
-  internal derivation and refuse a conflicting persisted flag.
-- Prove sticky legacy address usedness equals the presence of a retained credit
-  row in the normalized destination graph. Refuse true-without-credit and
-  false-with-credit sources.
-- Refuse multiple unmined spenders for one outpoint, duplicate txids, an active
-  lease that cannot be represented exactly, unsupported status, or another
-  historical shape that cannot fit the current SQL model. Do not select one
-  spender or add BIP30 normalization.
-- Bound allocations and return a typed resource-limit refusal instead of
-  exhausting memory on an unsupported source. Keep every graph and sync type
-  internal until Task 376 introduces the public result.
-- Keep the reader in Wallet-owned migration code and consume existing
-  `waddrmgr`, `wtxmgr`, and `walletdb` APIs and persisted formats unchanged.
-- Exclude destination mutation, rescanning instead of history import, generic
-  manifests, BIP30 normalization, transaction-policy redesign, and caller
-  cutover, Loader changes, deprecated Wallet methods or tests, and production,
-  API, test, or disk-format changes in `waddrmgr`, `wtxmgr`, or `walletdb`.
+- Read only [Task 335][t335]'s immutable source and join ownership through Task
+  373's normalized address identities.
+- Extract raw transactions, block membership, status, labels, credits, debits,
+  UTXOs, spends, supported conflict facts, active leases, birthday, sync tip,
+  and the block history required to interpret them.
+- Decode each transaction, verify its identity, use checked monetary
+  arithmetic, and reconstruct graph and balance facts from primary records.
+- Compare independently stored indexes and pointers with that reconstruction.
+  Refuse contradictory or unrepresentable history instead of selecting one
+  version, dropping it, or substituting a rescan.
+- Bound allocations and publish no partial snapshot on error or cancellation.
+- Keep implementation in Wallet-owned migration code and legacy packages
+  unchanged.
+- Exclude destination mutation, public APIs, transaction-policy redesign, and
+  normalization of unsupported history.
 
 ## Suggested fix
 
-Add a Wallet-owned migration reader of the unchanged legacy `wtxmgr` format.
-Decode primary records into an internal normalized graph, derive all expected
-indexes from that graph, and then compare each legacy index and aggregate
-exactly. Join credits to Task 373's normalized script identities and return one
-complete internal snapshot only after every graph, lease, usedness, block, and
-sync invariant passes.
+Build one private normalized graph from primary legacy records, derive its
+expected indexes and aggregates, then compare the stored secondary facts. The
+internal graph representation is not part of the contract.
 
 ## Verification
 
-- Representative mined, unmined, spent, replaced/conflicted, labeled,
-  coinbase, leased, and reorg-retained histories round-trip into one normalized
-  graph with the exact birthday and sync state.
-- Use an old-version fixture with non-empty confirmed and unconfirmed history.
-  Upgrade only a separate scratch image, extract from the preserved pre-upgrade
-  image, and prove every original transaction survives later reopened SQL
-  equivalence without source mutation.
-- Confirmed and unmined record-key mismatches, output and aggregate overflows,
-  invalid credit/debit indexes or amounts, wrong outpoints, and one-sided spent
-  pointers return typed refusals.
-- Missing, extra, malformed, and misdirected mined-balance,
-  block-membership, unspent, and unmined-input index fixtures fail before any
-  destination access.
-- Multiple unmined spenders, duplicate txids, unsupported statuses,
-  unrepresentable leases, conflicting change flags, and both directions of
-  sticky-usedness disagreement are refused without source mutation.
-- Cancellation and allocation-limit tests close iteration state and retain no
-  partially published normalized snapshot.
+- Representative mined, unmined, spent, conflicted, labeled, leased, and
+  reorg-retained histories preserve exact transaction and sync facts.
+- Corrupt identities, indexes, pointers, amounts, statuses, and usedness fail
+  before destination access.
+- Unsupported multiple-spender or lease shapes are refused without source
+  mutation.
+- Cancellation and resource limits retain no partial published snapshot.
 
 ## Definition of done
 
-- A supported legacy history yields one internally consistent normalized
-  transaction, UTXO, lease, block, and synchronization snapshot.
-- Every independently stored identity, amount, edge, index, status, usedness,
-  and sync fact is validated before destination access.
-- Unsupported history is refused rather than discarded, rescanned,
-  arbitrarily selected, or BIP30-normalized.
-- The PR performs no source or destination mutation and exposes no public
-  converter or generic import representation. It changes no Loader,
-  deprecated Wallet method or test, or legacy-package production, API, test,
-  or disk format.
+A supported legacy history yields one internally consistent normalized
+transaction, UTXO, lease, block, and synchronization snapshot without source
+or destination mutation.
 
+[t335]: 335-kvdb-to-sql-migration.md
 [t373]: 373-extract-legacy-account-address-state.md

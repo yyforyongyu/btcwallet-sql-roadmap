@@ -1,117 +1,70 @@
-# Task 370 — prepare ordered Manager chain delivery
+# Task 370 — fan out ordered Manager chain events
 
-Component: **Manager chain coordinator and Wallet processors**.
+Component: **Manager chain-event fanout and Wallet processors**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 333][t333], [Task 334][t334], [Task 331][t331], and
-[Task 371][t371]**.
+Dependencies: **[Task 331][t331] and [Task 334][t334]**.
 
 ## Rationale
 
-Every managed Wallet currently retains its own chain source, registers block
-notifications, and consumes the source notification channel. A Manager-owned
-coordinator needs bounded ordered Wallet delivery and canonical forward-event
-admission before it can replace that maintained path. Activating the source
-takeover before the complete rollback path exists would make reorg handling
-unsafe between implementation PRs.
+Every managed SQL Wallet currently consumes chain notifications independently.
+Multiple Wallets can therefore compete for one notification channel instead of
+receiving the same ordered events, and their workers have no shared shutdown
+boundary before Manager closes the Store.
 
 ## Details
 
-- Add an internal Manager chain coordinator with bounded, shutdown-aware
-  processors for the complete active Wallet set. Give the coordinator explicit
-  aggregate start, Create-time registration, stop, and join ownership without
-  registering for or consuming live source notifications in this task.
-- Define the internal normalized event and result shapes needed for connected,
-  filtered-block, and relevant-transaction delivery. Reserve disconnected
-  admission for Task 372 rather than installing an incomplete fallback.
-- Treat every block-bearing connected or filtered-block event as one canonical
-  candidate. Invoke Task 371's completed canonical extension contract exactly
-  once for that candidate before any block-bearing fanout, coalescing equal
-  connected and filtered representations rather than advancing twice.
-  Dispatch only after an applied extension or idempotent exact-candidate
-  result proves the durable state.
-- A stale frontier, mismatch, ordinary failure, or typed indeterminate result
-  admits no Wallet delivery and halts the prepared coordinator. Resume only
-  after an explicit durable-frontier reread establishes a determinate next
-  candidate; never retry the cached candidate from an ambiguous response.
-- Deliver every accepted forward event to each affected Wallet processor in
-  order through a bounded queue or the exact synchronous handoff accepted by
-  Task 334. Use at most one long-lived delivery worker per Wallet, never one
-  goroutine per event.
-- Let Wallet processors retain ownership of address/account scan state,
-  transaction ownership resolution, wallet tips, and targeted scans.
-- Preserve Store-time ownership resolution for relevant transactions so one
-  event can be offered safely to multiple Wallet processors without the
-  coordinator inventing wallet-specific transaction policy.
-- Provide the stop-and-join contract that [Task 423][t423] can compose with
-  Task 331's Manager Stop owner. Closing coordinator admission must reject new
-  delivery, settle every accepted event, and join every processor before Store
-  closure. Do not wire it into the live source or Store closure yet.
-- Handle aggregate startup registration, Create-time registration,
-  backpressure, and processor failure according to the accepted ADR. Do not
-  remove one Wallet while its Manager remains Running. One failed processor
-  cannot silently drop an accepted event or deadlock aggregate shutdown; a
-  fatal processor failure terminally stops Manager unless safe isolation is
-  proven without violating the complete active set.
-- Use Task 333's PostgreSQL Manager harness only for backend-neutral
-  conformance. Add no PostgreSQL-specific coordinator behavior.
-- Leave maintained Manager and Wallet source selection, notification
-  registration, and `Notifications()` consumption unchanged until Task 423
-  atomically cuts over to the coordinator after Task 372 is complete.
-- Exclude live source takeover, disconnected-event admission, rollback,
-  canonical frontier schema, durable watch replay, durable rescan jobs,
-  generic event buses, and cross-Manager fencing.
+- Add one internal Manager-owned dispatcher that accepts normalized connected,
+  filtered-block, and relevant-transaction events.
+- Deliver each accepted event to every affected Wallet processor in source
+  order. Use bounded, shutdown-aware delivery and no goroutine per event.
+- Let Wallet processors retain wallet-scoped address, transaction, tip, and
+  historical-rescan work. The dispatcher adds no wallet-specific ownership
+  policy.
+- Register the complete startup Wallet set and Wallets created while Manager
+  is running. One failed processor follows Task 334's aggregate failure policy
+  rather than silently dropping events.
+- Closing admission must settle accepted delivery and join every processor
+  before Task 331 closes the Store.
+- Keep the maintained live source path unchanged in this task.
+  [Task 423][t423] owns the later source cutover, [Task 371][t371] owns durable
+  canonical state, and [Task 372][t372] owns database-wide rollback.
+- Task 423 gates all connected and filtered-block candidates on Task 371 and
+  normalizes equal block representations before this prepared fanout path.
+  This task does not add a second canonical gate or deduplication mechanism.
+- Exclude disconnected-event admission, a generic event bus, durable replay
+  system, canonical Store mutation, rollback, targeted-rescan redesign, and
+  cross-process coordination. Task 372 owns the complete disconnect path.
 
 ## Suggested fix
 
-Build one internal coordinator that accepts directly submitted normalized
-forward events and dispatches them through bounded per-Wallet processors. Gate
-every block-bearing connected or filtered-block fanout on Task 371's final
-classified Store result and expose an explicit lifecycle plus the narrow
-extension point Task 372 needs. Keep all maintained notification wiring on the
-existing path until Task 423.
+Use one small dispatcher with a bounded mailbox per Wallet or an equivalent
+synchronous handoff. Private queue, worker, and event types are not part of the
+contract.
 
 ## Verification
 
-- Instantiate the prepared coordinator directly with two Wallet processors
-  and submit mixed connected, filtered, and transaction events. Both receive
-  their applicable events in identical order.
-- Inject stale, mismatch, ordinary-failure, and indeterminate canonical
-  outcomes for connected and filtered-block candidates. Neither the candidate
-  nor later block-bearing events reach a Wallet until an explicit
-  fresh-frontier recovery establishes continuation.
-- Submit a filtered block without a paired connected event, then submit equal
-  connected and filtered representations. The first advances the frontier
-  before fanout and the equal pair performs exactly one canonical mutation.
-- Block one processor at queue capacity and exercise the ADR's exact
-  backpressure/failure policy without dropping accepted events or spawning
-  event-scoped goroutines.
-- Register a newly created Wallet while existing processors continue and prove
-  it joins at the documented boundary without disrupting their order.
-- Race direct coordinator stop with event admission and Wallet delivery. Stop
-  joins every accepted delivery with no Store access afterward.
-- Run focused coordinator tests and repeat the two-Wallet direct-delivery case
-  on SQLite and PostgreSQL through Task 333's harness.
-- Add a regression assertion that maintained Manager/Wallet construction still
-  uses the existing source registration and notification-consumption path.
+- Register two Wallet processors and submit mixed events directly. Both
+  receive applicable events in identical order.
+- Exercise bounded backpressure and processor failure without dropping an
+  accepted event or leaking a worker.
+- Register a newly created Wallet at a documented event boundary.
+- Race admission, delivery, and stop; all accepted delivery finishes before
+  Store closure and later delivery is rejected.
+- Prove disconnected events are not admitted through this task's prepared
+  connected-event path.
+- Prove the maintained source consumer remains unchanged until Task 423.
 
 ## Definition of done
 
-- One internal Manager coordinator supplies bounded ordered forward events to
-  all directly registered Wallet processors.
-- Block-bearing connected and filtered-block events reach Wallet processors
-  only after Task 371 proves their canonical extension; this task owns
-  arbitration and fanout but no frontier mutation implementation.
-- The coordinator has explicit aggregate lifecycle, recovery, backpressure,
-  and Create-time registration without worker leaks or lost accepted events.
-- Maintained source ownership and reorg behavior remain unchanged; Task 423
-  performs the later atomic cutover only after Task 372 completes rollback.
-- The PR changes no rollback mutation, live source registration, watch replay,
-  targeted-rescan durability, or PostgreSQL-specific Wallet behavior.
+One internal Manager dispatcher can fan out ordered connected-block,
+filtered-block, and relevant-transaction events to the complete SQL Wallet set
+and shut down safely. Task 372 remains the sole owner of disconnect admission
+and rollback.
 
-[t333]: ../archive/tasks/333-postgres-manager-harness.md
-[t334]: ../archive/tasks/334-shared-chain-state.md
 [t331]: 331-manager-wallet-lifecycle.md
+[t334]: ../archive/tasks/334-shared-chain-state.md
 [t371]: 371-canonical-chain-frontier.md
+[t372]: 372-multi-wallet-rollback.md
 [t423]: 423-manager-chain-source-cutover.md

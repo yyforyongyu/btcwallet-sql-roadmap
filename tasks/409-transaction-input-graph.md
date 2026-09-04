@@ -1,59 +1,59 @@
-# Task 409 — normalize transaction input edges
+# Task 409 — simplify transaction input graph reads
 
-Component: **SQL schema and TxStore ingestion**.
+Component: **SQL TxStore input-graph representation**.
 
-Type: **Gap fix**.
+Type: **Refactor**.
 
 Dependencies: **[Task 340][t340] and [Task 424][t424]**.
 
 ## Rationale
 
-Add one wallet-scoped normalized row for every
-transaction input, including external inputs, with input position and previous
-outpoint. The new persisted input position and previous-output index must each
-cover the wire range `0..MaxUint32` in both SQL dialects. Task 424 supplies the
-accepted normalized-input contract.
+Current SQL invalidation decodes raw transactions to discover descendants,
+including relationships through external inputs. That already represents the
+graph; normalization is not a missing public API. This deferred refactor is
+justified only if Task 424 identifies a concrete consumer need that the
+existing representation cannot serve adequately.
 
 ## Details
 
-Persist it atomically with `raw_tx` in direct and batch ingestion.
-Backfill existing transactions by decoding raw bytes; recompute and compare
-each txid; reject hash mismatch, an input position or previous-output index
-outside `0..MaxUint32`, duplicate input positions/outpoints, malformed raw
-bytes, or an active child of an already terminal parent with exact diagnostics
-before cutover. Add dialect-equivalent range constraints to both new index
-columns. Switch invalidation, rollback descendant reads, and deletion/cascade
-behavior to normalized edges and update maintained graph documentation in the
-same migration.
-
-Exclusions: public invalidation, terminal-parent admission for concurrent
-new writes, mutation admission, UTXO spend-pointer constraints, publication,
-and raw transaction removal.
+- Preserve every input relationship, wallet identity, transaction status, and
+  observable invalidation, rollback, and deletion result.
+- Change only the input representation or reads justified by Task 424.
+  Retaining raw-transaction decoding is valid; do not require a new table,
+  materialized graph, or removal of decoding merely for architectural
+  uniformity.
+- If the accepted solution persists new input facts, maintain them atomically
+  with raw transactions on each ingestion path. Preflight existing data and
+  preserve wire-range indexes, including the coinbase previous-output marker.
+- Any required forward migration must refuse inconsistent source facts without
+  partial cutover. Do not invent a repair that changes transaction meaning.
+- Keep this optional refactor out of the hard dependency chain for Tasks 410,
+  411, and 413. Their behavior must not require its preferred representation.
+- If Task 424 finds no necessary change, supersede this task rather than
+  implementing temporary schema work. Exclude new public APIs, concurrent
+  mutation policy, spend-pointer semantics, and legacy-package changes.
 
 ## Suggested fix
 
-Add a wallet-scoped `transaction_inputs` table with a
-referenceable unique input identity, a constrained wire-range position, and an
-indexed previous outpoint whose index has the same wire-range constraint.
-Populate it in every ingestion transaction, then use a preflighted forward
-migration to switch graph readers.
+Reuse the existing decoded input graph first. A narrower query or normalized
+relation is an option only when the accepted evidence requires it; private
+row and helper shapes are not part of this task's contract.
 
 ## Verification
 
-SQLite/PostgreSQL empty and populated migrations produce
-identical input rows and reject adjacent out-of-range input positions and
-previous-output indexes before cutover. Boundary fixtures accept zero and
-`MaxUint32`, including the valid coinbase previous-output index. Corrupt
-hash/raw/edge fixtures fail atomically; direct, batch, scan, delete, rollback,
-and invalidation fixtures no longer decode raw transactions for graph
-traversal.
+- Compare existing and revised results for internal, external, and late-parent
+  edges through invalidation, rollback, and leaf deletion on both dialects.
+- Preserve transaction identity and exact previous outpoints across reopen.
+- If storage changes, test empty/populated migrations and atomic rejection of
+  inconsistent raw bytes, identities, or input facts.
+- Demonstrate the concrete benefit accepted by Task 424 without adding public
+  behavior or making another fix depend on the representation.
 
 ## Definition of done
 
-Normalized inputs are the sole authoritative graph
-edge source on both dialects, all ingestion/deletion paths maintain them, and
-their input positions and previous-output indexes are constrained to
-`0..MaxUint32`; ADR/data-model text matches the cutover.
+The justified input-read change preserves the complete existing graph and
+public results with the smallest local implementation. If no change is needed,
+use supersession instead of recording implementation completion.
 
 [t340]: ../archive/tasks/340-durable-database-identity.md
 [t424]: 424-transaction-utxo-integrity-adr.md

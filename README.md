@@ -6,7 +6,7 @@ maintained SQL-backed `wallet/` library.
 ## How to use this repository
 
 1. Read [AGENTS.md](AGENTS.md) for the workflow and task rules.
-2. Read [QUEUE.md](QUEUE.md) for the five delivery phases and open
+2. Read [QUEUE.md](QUEUE.md) for the delivery phases and open
    dependencies.
 3. Check [ACTIVE.md](ACTIVE.md) for active tasks, claims, and conflicts.
 4. Select one dependency-complete active task.

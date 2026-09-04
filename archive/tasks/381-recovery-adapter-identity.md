@@ -6,6 +6,10 @@ Type: **Refactor**.
 
 Dependencies: **[Task 360][t360]**.
 
+> **Superseded 2026-09-05:** No maintained public consumer requires this
+> identity-only refactor. The roadmap retains the current shape until a
+> concrete public contract demonstrates a need to change it.
+
 ## Rationale
 
 `RecoveryState.AccountID` exports SQL row or kvdb adapter identity even though
@@ -49,4 +53,4 @@ portable.
 - Syncer behavior is unchanged for SQL and modern kvdb.
 - No scan algorithm, window, DTO, or public selector behavior is included.
 
-[t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md
+[t360]: 360-document-kvdb-adapter-identity.md
