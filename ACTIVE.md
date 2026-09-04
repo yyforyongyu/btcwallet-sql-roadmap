@@ -34,16 +34,13 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | YY | — |
 | [Task 331][t331] | Make Manager lifecycle terminal | Bug fix | YY | — |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | — | — |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
-| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | Abdullahi | — |
-| [Task 348][t348] | Watch PSBT change before return | Bug fix | Gustavo | — |
-| [Task 356][t356] | Defer change-script allocation | Bug fix | Gustavo | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
+| [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
 | [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | — |
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | — |
@@ -52,11 +49,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | — | — |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 404][t404] | Validate transaction input amounts | Bug fix | Abdullahi | [#1357][pr1357] |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | Gustavo | — |
-| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | Gustavo | — |
-| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | Abdullahi | — |
-| [Task 408][t408] | Watch direct transaction change | Bug fix | Gustavo | — |
-| [Task 368][t368] | Make Wallet lifecycle Manager-internal | Bug fix | YY | [#1328][pr1328] |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 
@@ -69,58 +61,29 @@ cannot merge before every hard dependency and gate completes.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
+| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 3 | YY | — |
+| [Task 347][t347] | Authorize explicit PSBT signatures | Bug fix | 3 | Abdullahi | — |
+| [Task 348][t348] | Watch PSBT change before return | Bug fix | 3 | Gustavo | — |
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 3 | YY | [#1321][pr1321] |
+| [Task 356][t356] | Defer change-script allocation | Bug fix | 3 | Gustavo | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 3 | YY | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 3 | YY | — |
 | [Task 370][t370] | Prepare ordered Manager chain delivery | Refactor | 3 | YY | — |
 | [Task 372][t372] | Prepare atomic multi-Wallet rollback | Bug fix | 3 | YY | — |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 3 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 3 | YY | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 3 | Gustavo | — |
+| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 3 | Gustavo | — |
+| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 3 | Abdullahi | — |
+| [Task 408][t408] | Watch direct transaction change | Bug fix | 3 | Gustavo | — |
 | [Task 423][t423] | Cut over SQL Manager chain notification ownership | Refactor | 3 | YY | — |
 | [Task 424][t424] | Define transaction integrity ownership | Design | 3 | YY | [#1343][pr1343] |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
+| [Task 457][t457] | Fence process-local Managers | Gap fix | 3 | YY | — |
 | [Task 427][t427] | Test Controller credentials | Test | 2 | Gustavo | [#1349][pr1349] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 430][t430] | Test account queries | Test | 2 | Gustavo | — |
-| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 3 | YY | — |
-| [Task 457][t457] | Fence process-local Managers | Gap fix | 3 | YY | — |
-
-## Coordination
-
-Task 357 and PR #1348 may retain their accepted `wallet/txauthor`,
-`wallet/txrules`, root-module wiring, and Wallet changes as a narrow historical
-exception. They must drop deprecated Wallet behavior and
-`wallet/deprecated_test.go` unless a separate roadmap exception is approved.
-
-Task 404 and draft PR #1357 own only the Wallet-local input-source layer. Drop
-its `wallet/txauthor` changes, keep Task 357's arithmetic private, and restack
-the PR on Task 357's final base and result before merge.
-
-Task 334 and PR #1323 must adopt Manager public lifecycle authority, private
-Wallet `start`/`stop` mechanics, Wallet-owned call draining, the complete
-active-Wallet set, Store-close-last ordering, and separate live-sync and
-historical-rescan state before merge.
-
-Task 368 and draft PR #1328 must be rewritten around private Wallet
-`start`/`stop`, Wallet-owned call draining, and Task 368's final public-surface
-cutover. It may proceed at the top of the Task 331 -> Task 358 -> Task 368
-stack. Keep it rebased on the prerequisite work and merge the stack bottom-up.
-
-Task 427 and PR #1349 may proceed as a stacked dependent of Task 331 because
-the durable-reopen case consumes final Manager Stop and fresh Manager Start
-behavior. Keep it rebased on Task 331 and merge it only after Task 331.
-
-Task 350 and PR #1321 may resume as a stacked dependent of Task 454 when Phase
-3 work is prioritized. Keep it rebased on Task 454 and merge it only after
-Task 454.
-
-Task 424 and PR #1343 are paused after the transaction-integrity branch moved
-to non-blocking Phase 3. Resume them when Phase 3 becomes current or through
-an explicit owner-approved priority exception.
-
-Task 421 and PR #1341 may finish as an already-started Phase 3 exception. Its
-rephasing preserves YY's ownership and does not authorize another concurrent
-implementation.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
