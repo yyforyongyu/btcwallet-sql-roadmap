@@ -83,7 +83,6 @@ cannot merge before every hard dependency and gate completes.
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 5 | YY | — |
 | [Task 457][t457] | Fence process-local Managers | Gap fix | 5 | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 5 | Abdullahi | — |
-| [Task 427][t427] | Test Controller credentials | Test | 2 | Gustavo | [#1349][pr1349] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 430][t430] | Test account queries | Test | 2 | Gustavo | — |
 
@@ -131,7 +130,6 @@ cannot merge before every hard dependency and gate completes.
 [t412]: tasks/412-transaction-invalidation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
-[t427]: tasks/427-controller-lifecycle-credential-itests.md
 [t428]: tasks/428-controller-sync-info-itests.md
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
@@ -149,7 +147,6 @@ cannot merge before every hard dependency and gate completes.
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
-[pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358

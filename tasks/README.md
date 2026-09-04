@@ -138,8 +138,6 @@ Shared public contracts run on kvdb, SQLite, and PostgreSQL. A task may exclude
 a backend only when that backend cannot represent the scenario, and must state
 that structural exclusion explicitly.
 
-- [Task 427](427-controller-lifecycle-credential-itests.md): cover remaining
-  Controller credential contracts.
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
 - [Task 430](430-account-query-itests.md): cover public account query contracts.

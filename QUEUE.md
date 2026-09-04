@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **141 tasks**, with **105 remaining open**, **29 done**,
+The roadmap contains **141 tasks**, with **104 remaining open**, **30 done**,
 **6 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
 completed tasks move to `Done`, while superseded tasks retain their identity
 and replacement in `Superseded`. Approved future-cycle work is in `Deferred`.
@@ -74,7 +74,7 @@ Any lnd-repository change requires a separately accepted task.
 | [Task 459][t459] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 458 |
 | [Task 468][t468] | open | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | 343, 393, 452 |
 
-## Phase 2 — verification · 31 open
+## Phase 2 — verification · 30 open
 
 Complete the btcwallet component suites, composed public scenarios, chain
 daemon compatibility coverage, integration-test CI matrix, and selected
@@ -93,7 +93,6 @@ ahead of conversion; Phases 3 and 4 own the migration path.
 | [Task 418][t418] | open | wallet UtxoManager benchmarks | Benchmark | Measure ListUnspent performance | 416 |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 416 |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 416 |
-| [Task 427][t427] | open | Controller credential integration tests | Test | Cover remaining Controller credential contracts | 331 |
 | [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | 331, 455 |
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | 378 |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
@@ -242,7 +241,7 @@ done or superseded; reactivation preserves the original task number.
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 29
+## Done · 30
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -266,6 +265,7 @@ done or superseded; reactivation preserves the original task number.
 | [Task 415][t415] | 2 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 421][t421] | 3 | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | [#1341][pr1341] |
 | [Task 425][t425] | 1 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |
+| [Task 427][t427] | 2 | Controller credential integration tests | Test | Cover remaining Controller credential contracts | [#1349][pr1349] |
 | [Task 429][t429] | 2 | AccountManager mutation integration tests | Test | Cover public account mutation contracts | [#1326][pr1326] |
 | [Task 433][t433] | 2 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |
 | [Task 434][t434] | 2 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |
@@ -374,7 +374,7 @@ done or superseded; reactivation preserves the original task number.
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t425]: archive/tasks/425-separate-transaction-authoring-wrappers.md
 [t426]: tasks/426-sql-transaction-output-aggregates.md
-[t427]: tasks/427-controller-lifecycle-credential-itests.md
+[t427]: archive/tasks/427-controller-lifecycle-credential-itests.md
 [t428]: tasks/428-controller-sync-info-itests.md
 [t429]: archive/tasks/429-account-mutation-itests.md
 [t430]: tasks/430-account-query-itests.md
@@ -444,5 +444,6 @@ done or superseded; reactivation preserves the original task number.
 [pr1345]: https://github.com/btcsuite/btcwallet/pull/1345
 [pr1346]: https://github.com/btcsuite/btcwallet/pull/1346
 [pr1347]: https://github.com/btcsuite/btcwallet/pull/1347
+[pr1349]: https://github.com/btcsuite/btcwallet/pull/1349
 [pr1353]: https://github.com/btcsuite/btcwallet/pull/1353
 [pr1355]: https://github.com/btcsuite/btcwallet/pull/1355

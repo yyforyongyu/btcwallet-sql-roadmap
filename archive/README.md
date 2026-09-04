@@ -16,6 +16,9 @@ specifications.
 
 ## History
 
+- [Task 427](tasks/427-controller-lifecycle-credential-itests.md) completed
+  through [PR #1349](https://github.com/btcsuite/btcwallet/pull/1349) on
+  2026-09-04 (UTC). Task 331 owns later lifecycle caller migration.
 - [Task 349](tasks/349-transaction-invalidation.md) was superseded on
   2026-09-05 because SQL already has the required internal branch invalidation;
   Task 412 owns only the remaining maintained `TxWriter` exposure.
