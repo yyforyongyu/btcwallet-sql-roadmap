@@ -8,7 +8,7 @@ This repository contains planning documents, not btcwallet source code.
 - [QUEUE.md](QUEUE.md) owns each roadmap task's delivery phase and status by
   placing open work in a phase table, completed work with its closing PR in
   `Done`, and obsolete unimplemented work with its replacement in
-  `Superseded`.
+  `Superseded`, and approved future-cycle work in `Deferred`.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
 - Individual files under [tasks/](tasks/) own type, scope, and dependencies.
@@ -68,7 +68,8 @@ require the prerequisite contract to be frozen.
 Refresh ACTIVE's three task lists whenever a claim, task dependency, task
 phase, or task status changes. `Active Tasks` and `Blocked Phase 1 Tasks` must
 partition every open Phase 1 task exactly once. `Claimed Tasks` contains parked
-claims outside the current phase. No task appears in more than one list.
+claims outside the current phase, sorted by ascending phase and then task
+number. No task appears in more than one list.
 
 ## Task types and priority
 
@@ -98,12 +99,20 @@ current boundary cannot implement the fix safely. Type guides which ready work
 to select first; it does not replace dependency readiness or the Active and
 Claimed rules above.
 
-Admit direct btcwallet work to Phase 1 only when its main motivation is a Bug
-fix or Gap fix required for lnd integration. Its transitive open dependency
-closure stays in Phase 1 and keeps each prerequisite's honest primary type. A
-Design or Refactor may remain in that closure only when the current boundary
-cannot safely deliver the integration fix without it; otherwise remove the
-hard edge and defer that follow-up.
+Phase 1 owns the final public APIs and minimum runtime capabilities needed by
+the initial lnd adapter, plus focused basic public itests proving them. Keep
+their transitive open prerequisite closure here, with honest primary types.
+Keep a Design or Refactor prerequisite only when the current boundary cannot
+safely deliver that contract without it; otherwise remove the hard edge and
+defer the follow-up. Do not pull optional features forward to complete a test
+matrix, or prescribe private architecture merely to stabilize a public API.
+
+Finish Phase 1 before starting the main lnd port PR. Phase 2's critical fixes,
+scenario tests, and benchmarks can proceed in parallel with that port. Relevant
+defects and scenarios gate merge or enablement of affected paths; benchmarks
+do not. Phase 3 owns kvdb-to-SQL migration, Phase 4 remaining gaps and bugs, and
+Phase 5 Signer/Vault hardening. Later work is not a blanket earlier-phase gate;
+retain concrete dependencies and require proof for the paths actually enabled.
 
 ## Roadmap update workflow
 
@@ -263,6 +272,20 @@ Allocating a replacement independently increases both total and open counts.
 A superseded task has no closing PR, is never listed in `Done`, and its number
 is never reused.
 
+## Deferring a task beyond this roadmap
+
+Use `Deferred` only for an explicit decision to archive still-valid work for
+a future release cycle, not for ordinary later-phase work. Deferral is neither
+completion nor supersession. Account for any implementation PR before moving
+the task; do not silently abandon in-progress work.
+
+Preserve the task under `archive/tasks/` with a short dated decision and
+reactivation gate. Remove it from the open catalog and ACTIVE, move its QUEUE
+row to `Deferred`, and update archive links and counts. No open task may retain
+a hard dependency on deferred work. Preserve its number and original scope;
+reactivate that same task through an explicit roadmap update when its gate is
+met. Deferral reduces the open count, not the total, and adds no closing PR.
+
 ## Completing a task
 
 After the implementation PR merges, use the roadmap update workflow to:
@@ -287,4 +310,4 @@ A task is complete only when **every** PR linked to it has merged. If a
 linked PR is closed unmerged, or cannot be accounted for, the task is not
 complete.
 
-Preserve task numbers. Never reuse an archived or superseded number.
+Preserve task numbers. Never reuse an archived number for a different task.

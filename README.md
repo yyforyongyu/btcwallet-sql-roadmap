@@ -25,7 +25,7 @@ dependencies still control bottom-up merge order and completion.
 | Information | Source |
 | --- | --- |
 | Task type, scope, and complete dependency graph | Individual file under [tasks/](tasks/) |
-| Delivery phases, open dependencies, completed PRs, and superseded replacements | [QUEUE.md](QUEUE.md) |
+| Delivery phases, open dependencies, completed PRs, supersession, and deferral | [QUEUE.md](QUEUE.md) |
 | Active tasks, claims, and in-progress PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
 | Task shape | [TASK_TEMPLATE.md](TASK_TEMPLATE.md) |
@@ -41,6 +41,18 @@ Do not duplicate task types, dependencies, or the complete backlog in this
 file. Each task owns its type, scope, and dependency contract, QUEUE groups the
 work into delivery phases, and `ACTIVE.md` separately owns live execution
 state.
+
+## Delivery milestones
+
+Finish Phase 1's public APIs, required runtime behavior, and basic itests before
+starting the main lnd port PR. Phase 2's critical fixes, scenarios, and simple
+benchmarks can then proceed alongside that port; relevant correctness evidence,
+not benchmark completion, gates enabling an affected path.
+
+Phase 3 converts kvdb wallets to SQL, Phase 4 handles remaining gaps and bugs,
+and Phase 5 handles Signer/Vault hardening. Modern kvdb stays supported for the
+current and next release. Task 353's retirement is deferred, not a conversion
+requirement. [QUEUE.md](QUEUE.md) owns task placement and the precise gates.
 
 ## Scope
 

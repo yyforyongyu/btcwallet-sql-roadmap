@@ -138,8 +138,6 @@ Shared public contracts run on kvdb, SQLite, and PostgreSQL. A task may exclude
 a backend only when that backend cannot represent the scenario, and must state
 that structural exclusion explicitly.
 
-- [Task 427](427-controller-lifecycle-credential-itests.md): cover remaining
-  Controller credential contracts.
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
 - [Task 430](430-account-query-itests.md): cover public account query contracts.
@@ -210,7 +208,7 @@ that structural exclusion explicitly.
 - [Task 386](386-remove-raw-wallet-secret-seams.md): remove raw Wallet secret
   seams.
 
-## Migration and retirement
+## Migration
 
 - [Task 335](335-kvdb-to-sql-migration.md): validate an immutable legacy wallet
   source.
@@ -222,8 +220,6 @@ that structural exclusion explicitly.
   into SQLite.
 - [Task 376](376-orchestrate-legacy-conversion.md): convert a legacy wallet
   through Manager.Create.
-- [Task 353](353-retire-modern-kvdb-backend.md): retire kvdb from the modern
-  wallet API.
 
 ## Benchmarks
 

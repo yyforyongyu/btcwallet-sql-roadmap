@@ -4,7 +4,13 @@ Component: **Controller credential integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 331][t331]**.
+Dependencies: **None**.
+
+Dependency correction on 2026-09-05: PR #1349 completed the credential contract
+using the existing lifecycle. [Task 331][t331] owns later migration of these
+cases to aggregate Manager Start/Stop; it is a follow-up, not a prerequisite.
+Lifecycle references below describe that later caller migration, not unfinished
+credential coverage.
 
 ## Rationale
 
@@ -59,5 +65,5 @@ objects for the durable credential check.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
-[t331]: 331-manager-wallet-lifecycle.md
-[t369]: 369-repeated-wallet-unlock.md
+[t331]: ../../tasks/331-manager-wallet-lifecycle.md
+[t369]: ../../tasks/369-repeated-wallet-unlock.md
