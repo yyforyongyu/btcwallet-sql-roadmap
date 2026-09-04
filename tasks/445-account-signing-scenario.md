@@ -4,7 +4,7 @@ Component: **public account signing scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 368][t368], [Task 429][t429], [Task 431][t431],
+Dependencies: **[Task 331][t331], [Task 429][t429], [Task 431][t431],
 [Task 441][t441], and [Task 442][t442]**.
 
 ## Rationale
@@ -51,7 +51,7 @@ adding another signing abstraction.
   account or Vault behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
 [t441]: 441-signer-derivation-ecdh-itests.md

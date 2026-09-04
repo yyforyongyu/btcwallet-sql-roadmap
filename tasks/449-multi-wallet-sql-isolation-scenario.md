@@ -4,7 +4,7 @@ Component: **multi-Wallet SQL integration scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 368][t368], [Task 415][t415], [Task 429][t429],
+Dependencies: **[Task 331][t331], [Task 415][t415], [Task 429][t429],
 [Task 431][t431], [Task 433][t433], [Task 434][t434], [Task 435][t435],
 [Task 436][t436], and [Task 455][t455]**.
 
@@ -71,7 +71,7 @@ and synchronization harness without adding a scenario-specific coordinator.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t428]: 428-controller-sync-info-itests.md
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md

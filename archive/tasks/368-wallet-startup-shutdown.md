@@ -83,5 +83,12 @@ owned exclusively by Manager sequencing.
 - The PR adds no compatibility surface, runtime manifest, lookup replacement,
   eviction policy, generic operation registry, or cross-process behavior.
 
-[t331]: 331-manager-wallet-lifecycle.md
-[t358]: 358-contextual-manager-operations.md
+## Supersession
+
+Superseded on 2026-09-05. Removing the competing public lifecycle entry points
+is not independently safe after Manager becomes the terminal Store owner, so
+[Task 331][t331] absorbs this cutover as part of one atomic lifecycle outcome.
+The open implementation PR was retargeted to Task 331.
+
+[t331]: ../../tasks/331-manager-wallet-lifecycle.md
+[t358]: ../../tasks/358-contextual-manager-operations.md

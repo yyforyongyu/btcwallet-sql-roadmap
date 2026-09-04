@@ -4,7 +4,7 @@ Component: **public wallet receive scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 368][t368], [Task 415][t415], [Task 429][t429],
+Dependencies: **[Task 331][t331], [Task 415][t415], [Task 429][t429],
 [Task 430][t430], [Task 431][t431], [Task 433][t433], and
 [Task 436][t436]**.
 
@@ -52,7 +52,7 @@ UTXO, and transaction fixtures. Use one-shot wallet assertions after
 - The shared scenario contains no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t430]: 430-account-query-itests.md

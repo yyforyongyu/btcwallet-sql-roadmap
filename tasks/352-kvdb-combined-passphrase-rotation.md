@@ -4,7 +4,7 @@ Component: **Controller and LegacyWalletVault**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 368](368-wallet-startup-shutdown.md) and
+Dependencies: **[Task 331](331-manager-wallet-lifecycle.md) and
 [Task 467](../archive/tasks/467-indeterminate-commit-identity.md)**.
 
 ## Rationale

@@ -1,6 +1,6 @@
 # Task 364 — persist ordered SQL live-watch obligations
 
-Component: **SQL watch-generation and obligation schema**.
+Component: **SQL live-watch persistence**.
 
 Type: **Gap fix**.
 
@@ -8,52 +8,48 @@ Dependencies: **[Task 345][t345] and [Task 400][t400]**.
 
 ## Rationale
 
-SQL has no durable fact connecting an accepted chain-synchronized script with
-required live registration. Producers and replay need one ordered,
-wallet-scoped persistence contract before chain I/O.
+SQL can commit an address or script before the chain backend accepts its live
+watch. A crash or transient chain failure in that interval leaves durable
+wallet state with no durable record that registration is still required. An
+address returned through lnd could then receive funds the running wallet does
+not observe.
+
+Producers and startup replay need one wallet-scoped ordering fact that survives
+restart without exposing delivery bookkeeping publicly.
 
 ## Details
 
-- Add per-wallet watch generation and ordered obligation rows with exact
-  script/address facts and pending/delivered state. Leave internal row keys and
-  sequence representation to the smallest conventional Store implementation.
-- Provide method-specific Store primitives that allocation and import
-  transactions can call inside their own mutation. Do not add a Store callback
-  or a generic notification outbox.
-- Provide exact readers for generation snapshots, pending ordered replay, and
-  producer-side ambiguous-result reconciliation.
-- Make delivery completion idempotent and wallet-scoped on both SQL dialects.
-- Keep chain calls, Wallet delivery replay, address allocation, raw import
-  mutation, and public delivery state out of this task.
-- Add no modern-kvdb durable format.
-- Keep implementation local to the existing SQL schema, Store files, and
-  colocated tests. Add no public delivery identifier, parallel interface,
-  arbitrary helper, production file, or standalone test file; justify the
-  required migration and generated output using repository conventions.
-- Document every added code block inline with why it exists and how it works;
-  comments that merely restate the code do not satisfy this requirement.
-- Give every unit test detailed Arrange, Act, and Assert comments explaining
-  its setup, operation, and evidence. Interface mocks embed `mock.Mock`, set
-  `On(...).Return(...)` expectations in Arrange with the narrowest cardinality
-  (`Once()` for one required call), and call `AssertExpectations(t)` directly
-  in Assert without duplicate call assertions or a `require.True` wrapper.
+- Persist wallet-scoped live-watch obligations with enough script/address and
+  ordering information to deliver them deterministically.
+- Let an address or import mutation record its obligation in the same SQL
+  transaction as the owned wallet fact.
+- Support coherent startup snapshots, ordered pending reads, idempotent
+  completion, and exact durable-state inspection after an ambiguous result.
+- Keep chain I/O outside Store transactions and leave delivery and retry to
+  Task 402.
+- Support SQLite and PostgreSQL without adding a modern-kvdb format.
+- Do not expose a delivery identifier, generic outbox, Store callback, public
+  replay API, or chain-specific state.
 
 ## Suggested fix
 
-Land one two-dialect migration and small Store API for
-watch generations, obligations, and completion, with all chain I/O delegated
-to the later Wallet delivery component.
+Add a conventional two-dialect persistence shape and narrow Store operations
+for recording, reading, and completing obligations. Table layout, sequence
+representation, and query decomposition are not part of the task contract.
 
 ## Verification
 
-SQLite and PostgreSQL conformance proves durable ordering, Wallet isolation,
-snapshot generations, idempotent completion, restart, and exact pending reads.
-No test invokes a chain backend or mutates an address.
+- On both SQL dialects, record obligations with their producing mutation and
+  verify rollback removes both.
+- Verify wallet isolation, durable order, coherent snapshots, idempotent
+  completion, and reopen of pending work.
+- Exercise ambiguous-result inspection without performing chain calls.
 
 ## Definition of done
 
-SQL can persist and query ordered wallet-specific live
-watch obligations durably, without producing, replaying, or exposing them.
+SQL producers can atomically retain an ordered live-watch obligation that
+survives restart and can be completed idempotently, without delivering it or
+exposing new public state.
 
 [t345]: 345-durable-watch-registration.md
 [t400]: ../archive/tasks/400-live-watch-semantics-adr.md

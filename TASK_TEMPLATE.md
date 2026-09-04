@@ -19,14 +19,15 @@ Dependencies: **linked tasks or None**.
 
 ## Rationale
 
-State the concrete problem, why it matters now, and why it belongs in this
-task. For a Bug fix, name the maintained public Wallet API, a reachable input
-or interleaving, and the wrong public result. Do not use this section to
-collect adjacent cleanup.
+State the concrete problem, its observed or directly reachable cause, why it
+matters now, and why it belongs in this task. For a Bug fix, name the
+maintained public Wallet API, a reachable input or interleaving, and the wrong
+public result. Give enough causal detail that an implementer can evaluate more
+than one valid fix. Do not use this section to collect adjacent cleanup.
 
 ## Details
 
-- Describe the exact behavior in scope.
+- Describe the externally observable behavior and invariants in scope.
 - For a direct production Bug fix or Gap fix, name the affected maintained
   public Wallet API and the allowed production boundary in `package wallet`
   or directly owned `wallet/internal` code.
@@ -34,13 +35,17 @@ collect adjacent cleanup.
   consumes without taking ownership of their packages.
 - List explicit exclusions and follow-up work.
 - Keep the result useful and mergeable as its own PR after dependencies land.
+- Do not prescribe private helper or type names, synchronization primitives,
+  file layout, query decomposition, or an internal state machine unless that
+  exact shape is itself an accepted contract.
 
 ## Suggested fix
 
-Describe the smallest likely implementation shape, its owner, and the existing
-mechanisms it reuses. When production changes are in scope, keep them at the
-Wallet-owned boundary. This is guidance, not permission to broaden the task
-when implementation uncovers an adjacent issue.
+Describe one small likely implementation direction and the existing mechanisms
+it may reuse. Treat it as non-binding guidance: another local solution is
+valid when it satisfies the same public behavior, invariants, scope, and
+verification. When production changes are in scope, keep them at the Wallet-
+owned boundary. Implementation discoveries do not permit adjacent work.
 
 ## Verification
 
@@ -51,6 +56,8 @@ when implementation uncovers an adjacent issue.
 - Name backend-specific or integration coverage only when the task requires it.
 - State any manual inspection needed for generated or migration output.
 - Do not use broad CI completion as the primary verification plan.
+- Assert public results, persisted facts, and relevant interleavings rather
+  than a suggested private implementation shape.
 
 ## Definition of done
 

@@ -37,11 +37,10 @@ new public result or helper types.
 
 ## Suggested fix
 
-Add one private Wallet-owned checked-add/result validator beside the existing
-TxCreator and PsbtManager source adapters. Reuse it in the automatic, manual,
-and selected source closures and at their final result boundary, then pass only
-a validated result into unchanged authoring. Keep Task 357's checked arithmetic
-private to its output and fee boundary.
+A small Wallet-owned checked-add and result-validation path beside the existing
+TxCreator and PsbtManager adapters is one likely implementation. Its private
+helper layout is flexible, and Task 357's authoring arithmetic remains outside
+this task.
 
 ## Verification
 

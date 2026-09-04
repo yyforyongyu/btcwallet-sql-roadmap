@@ -4,7 +4,7 @@ Component: **public transaction spend scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 368][t368], [Task 415][t415], [Task 433][t433],
+Dependencies: **[Task 331][t331], [Task 415][t415], [Task 433][t433],
 [Task 434][t434], [Task 435][t435], and [Task 436][t436]**.
 
 ## Rationale
@@ -50,7 +50,7 @@ only for named external mempool and mining events.
   component error matrices.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t368]: 368-wallet-startup-shutdown.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: ../archive/tasks/434-transaction-creation-itests.md

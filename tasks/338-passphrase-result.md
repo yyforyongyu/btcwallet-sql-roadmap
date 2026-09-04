@@ -4,7 +4,7 @@ Component: **Controller**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 331][t331], [Task 368][t368], and [Task 421][t421]**.
+Dependencies: **[Task 331][t331] and [Task 421][t421]**.
 
 ## Rationale
 
@@ -22,8 +22,8 @@ instead of the authoritative operation result.
 - Run the accepted SQL handler under one bounded handler-owned context that
   does not derive from `Wallet.lifetimeCtx`.
 - Register one ChangePassphrase-specific completion before mutation. The
-  private Wallet stop owned by [Task 458][t458] and retained by Task 368 is the
-  sole owner that joins it before locking the Vault. Task 331's Manager Stop
+  private Wallet stop owned by [Task 458][t458] and integrated by Task 331 is
+  the sole owner that joins it before locking the Vault. Task 331's Manager Stop
   joins private Wallet stop before closing Store and does not join this
   completion separately.
 - Consume Task 421's proven-new, proven-old, or typed
@@ -63,6 +63,5 @@ the public result, send it once, and close the completion on every exit.
   operation registry or cross-Manager guarantee.
 
 [t331]: 331-manager-wallet-lifecycle.md
-[t368]: 368-wallet-startup-shutdown.md
 [t421]: ../archive/tasks/421-sql-passphrase-commit-reconciliation.md
 [t458]: 458-manager-operation-admission.md
