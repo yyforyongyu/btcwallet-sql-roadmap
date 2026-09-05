@@ -52,5 +52,5 @@ are implementation choices.
 `FundPsbt` returns a validated transformation without mutating the caller,
 losing or misassigning metadata, or adding funding-lease behavior.
 
-[t357]: 357-transaction-amount-validation.md
+[t357]: ../archive/tasks/357-transaction-amount-validation.md
 [t404]: 404-transaction-input-amounts.md

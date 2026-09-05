@@ -60,6 +60,6 @@ policy or excluded-package change.
 
 [t344]: 344-bulk-address-allocation.md
 [t355]: ../archive/tasks/355-transaction-size-accounting.md
-[t357]: 357-transaction-amount-validation.md
+[t357]: ../archive/tasks/357-transaction-amount-validation.md
 [t404]: 404-transaction-input-amounts.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

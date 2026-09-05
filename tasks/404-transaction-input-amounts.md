@@ -59,4 +59,4 @@ transaction creation or PSBT funding is bounded and internally consistent
 before authoring. Task 404 changes only Wallet-owned adapters and leaves Task
 357's private authoring arithmetic and excluded callers untouched.
 
-[t357]: 357-transaction-amount-validation.md
+[t357]: ../archive/tasks/357-transaction-amount-validation.md

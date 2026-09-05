@@ -18,7 +18,6 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
-| [Task 357][t357] | Validate transaction amounts | Bug fix | Abdullahi | [#1348][pr1348] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -105,7 +104,6 @@ by ascending phase, then ascending task number.
 [t349]: archive/tasks/349-transaction-invalidation.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
-[t357]: tasks/357-transaction-amount-validation.md
 [t358]: tasks/358-contextual-manager-operations.md
 [t364]: tasks/364-durable-watch-registration.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
@@ -159,7 +157,6 @@ by ascending phase, then ascending task number.
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1348]: https://github.com/btcsuite/btcwallet/pull/1348
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358

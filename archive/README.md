@@ -15,6 +15,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 357](tasks/357-transaction-amount-validation.md) completed on 2026-09-05.
 
 - [Task 427](tasks/427-controller-lifecycle-credential-itests.md) completed
   through [PR #1349](https://github.com/btcsuite/btcwallet/pull/1349) on

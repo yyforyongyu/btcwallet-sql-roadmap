@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **141 tasks**, with **104 remaining open**, **30 done**,
+The roadmap contains **141 tasks**, with **103 remaining open**, **30 done**,
 **6 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
 completed tasks move to `Done`, while superseded tasks retain their identity
 and replacement in `Superseded`. Approved future-cycle work is in `Deferred`.
@@ -82,7 +82,7 @@ Phase 1 smaller. General hardening and composed scenarios remain later work.
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396, 431 |
 | [Task 468][t468] | open | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | 343, 393, 452 |
 
-## Phase 2 — critical correctness and verification · 25 open
+## Phase 2 — critical correctness and verification · 24 open
 
 Fix critical transaction/PSBT defects in Tasks 346, 357, and 404, retain their
 existing owners and PRs, and complete scenario coverage, remaining component
@@ -96,7 +96,6 @@ defect still gates any adapter or migration path that would actually expose it.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 346][t346] | open | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | 357, 404 |
-| [Task 357][t357] | open | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | — |
 | [Task 369][t369] | open | Controller | Test | Reject repeated Wallet unlocks without resetting timeout | — |
 | [Task 404][t404] | open | TxCreator and PsbtManager input-source adapters | Bug fix | Validate Wallet transaction input amounts | 357 |
 | [Task 416][t416] | open | wallet benchmark infrastructure | Benchmark | Provide minimal three-backend benchmark setup | 331 |
@@ -243,7 +242,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 30
+## Done · 31
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -256,6 +255,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
 | [Task 355][t355] | 2 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |
+| [Task 357][t357] | 2 | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | [#1348][pr1348] |
 | [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
 | [Task 377][t377] | 1 | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | [#1329][pr1329] |

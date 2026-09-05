@@ -102,7 +102,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 351](351-sql-utxo-integrity.md): bind SQL UTXOs to wallet tenancy.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
-- [Task 357](357-transaction-amount-validation.md): validate transaction output
   and fee arithmetic.
 - [Task 404](404-transaction-input-amounts.md): validate Wallet transaction
   input amounts.
