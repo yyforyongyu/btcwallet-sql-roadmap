@@ -17,7 +17,7 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | — |
+| [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -163,3 +163,4 @@ by ascending phase, then ascending task number.
 [pr1357]: https://github.com/btcsuite/btcwallet/pull/1357
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
 [pr1363]: https://github.com/btcsuite/btcwallet/pull/1363
+[pr1365]: https://github.com/btcsuite/btcwallet/pull/1365
