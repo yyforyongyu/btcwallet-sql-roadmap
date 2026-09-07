@@ -22,7 +22,7 @@ recorded PR stack.
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | — |
+| [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
 | [Task 442][t442] | Cover public signing contracts | Test | — | — |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
@@ -68,7 +68,6 @@ by ascending phase, then ascending task number.
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | 2 | Abdullahi | [#1359][pr1359] |
-| [Task 404][t404] | Validate transaction input amounts | Bug fix | 2 | Abdullahi | [#1357][pr1357] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 4 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 4 | YY | — |
@@ -124,7 +123,6 @@ by ascending phase, then ascending task number.
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t399]: tasks/399-zero-lookahead-persisted-targets.md
 [t402]: tasks/402-replay-live-watch-obligations.md
-[t404]: tasks/404-transaction-input-amounts.md
 [t405]: tasks/405-psbt-funding-lease-admission.md
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
@@ -160,7 +158,6 @@ by ascending phase, then ascending task number.
 [pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
-[pr1357]: https://github.com/btcsuite/btcwallet/pull/1357
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
 [pr1363]: https://github.com/btcsuite/btcwallet/pull/1363
 [pr1365]: https://github.com/btcsuite/btcwallet/pull/1365
@@ -171,3 +168,4 @@ by ascending phase, then ascending task number.
 [pr1366]: https://github.com/btcsuite/btcwallet/pull/1366
 [pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
 [pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
+[pr1374]: https://github.com/btcsuite/btcwallet/pull/1374

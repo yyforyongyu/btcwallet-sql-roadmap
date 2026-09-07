@@ -53,4 +53,4 @@ are implementation choices.
 losing or misassigning metadata, or adding funding-lease behavior.
 
 [t357]: ../archive/tasks/357-transaction-amount-validation.md
-[t404]: 404-transaction-input-amounts.md
+[t404]: ../archive/tasks/404-transaction-input-amounts.md

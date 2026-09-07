@@ -103,7 +103,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
   and fee arithmetic.
-- [Task 404](404-transaction-input-amounts.md): validate Wallet transaction
   input amounts.
 - [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
   atomically.
