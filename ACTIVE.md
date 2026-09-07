@@ -43,19 +43,19 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | — | — |
-| [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | — |
-| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | — |
+| [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | [#1366][pr1366] |
+| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
 | [Task 395][t395] | Allocate a durable NoChainSync child | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | — |
+| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
-| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | — |
+| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify NoChainSync address results | Test | — | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
-| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | — |
+| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | [#1370][pr1370] |
 
 ## Claimed Tasks
 
@@ -164,3 +164,8 @@ by ascending phase, then ascending task number.
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
 [pr1363]: https://github.com/btcsuite/btcwallet/pull/1363
 [pr1365]: https://github.com/btcsuite/btcwallet/pull/1365
+[pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
+[pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
+[pr1368]: https://github.com/btcsuite/btcwallet/pull/1368
+[pr1367]: https://github.com/btcsuite/btcwallet/pull/1367
+[pr1366]: https://github.com/btcsuite/btcwallet/pull/1366
