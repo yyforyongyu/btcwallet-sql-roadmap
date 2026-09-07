@@ -22,7 +22,7 @@ recorded PR stack.
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 441][t441] | Cover public derivation and ECDH contracts | Test | — | — |
+| [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | — |
 | [Task 442][t442] | Cover public signing contracts | Test | — | — |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
