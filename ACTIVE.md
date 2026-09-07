@@ -41,7 +41,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
-| [Task 364][t364] | Persist live-watch obligations | Gap fix | — | — |
+| [Task 364][t364] | Persist live-watch obligations | Gap fix | YY | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | [#1366][pr1366] |
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
