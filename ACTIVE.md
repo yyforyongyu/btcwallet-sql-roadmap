@@ -26,6 +26,7 @@ recorded PR stack.
 | [Task 442][t442] | Cover public signing contracts | Test | — | — |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
+| [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 
 ## Blocked Phase 1 Tasks
 
@@ -50,7 +51,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
-| [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify NoChainSync address results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
