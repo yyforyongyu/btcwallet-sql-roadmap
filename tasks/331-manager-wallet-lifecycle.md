@@ -151,5 +151,5 @@ observable.
 [t358]: 358-contextual-manager-operations.md
 [t423]: 423-manager-chain-source-cutover.md
 [t457]: 457-process-local-manager-lease.md
-[t458]: 458-manager-operation-admission.md
+[t458]: ../archive/tasks/458-manager-operation-admission.md
 [t459]: 459-manager-startup-wallet-assembly.md

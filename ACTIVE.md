@@ -26,7 +26,6 @@ recorded PR stack.
 | [Task 442][t442] | Cover public signing contracts | Test | — | — |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
-| [Task 458][t458] | Drain Wallet calls during terminal stop | Bug fix | YY | [#1354][pr1354] |
 
 ## Blocked Phase 1 Tasks
 
@@ -144,7 +143,6 @@ by ascending phase, then ascending task number.
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t455]: tasks/455-exact-wallet-sync-status.md
 [t457]: tasks/457-process-local-manager-lease.md
-[t458]: tasks/458-manager-operation-admission.md
 [t459]: tasks/459-manager-startup-wallet-assembly.md
 [t460]: tasks/460-sequential-account-invalid-children.md
 [t461]: tasks/461-address-batch-itests.md
@@ -155,7 +153,6 @@ by ascending phase, then ascending task number.
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1354]: https://github.com/btcsuite/btcwallet/pull/1354
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
 [pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359

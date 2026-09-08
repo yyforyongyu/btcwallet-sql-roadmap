@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **141 tasks**, with **102 remaining open**, **30 done**,
+The roadmap contains **141 tasks**, with **101 remaining open**, **30 done**,
 **6 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
 completed tasks move to `Done`, while superseded tasks retain their identity
 and replacement in `Superseded`. Approved future-cycle work is in `Deferred`.
@@ -39,7 +39,7 @@ still requires separate authorization; these tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
-## Phase 1 — API stabilization and basic itests · 28 open
+## Phase 1 — API stabilization and basic itests · 27 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle and contextual creation, purpose-1017 key families, final address
@@ -75,7 +75,6 @@ Phase 1 smaller. General hardening and composed scenarios remain later work.
 | [Task 443][t443] | open | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | — |
 | [Task 452][t452] | open | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | 345 |
 | [Task 455][t455] | open | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | — |
-| [Task 458][t458] | open | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | — |
 | [Task 459][t459] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 458 |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 343, 344, 468 |
 | [Task 465][t465] | open | AddressManager NoChainSync result integration tests | Test | Verify NoChainSync address results | 395, 431 |
@@ -241,7 +240,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 32
+## Done · 33
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -276,6 +275,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 437][t437] | 1 | TxWriter integration tests | Test | Cover transaction label contracts | [#1347][pr1347] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
 | [Task 456][t456] | 1 | ManagerConfig and managed Wallet construction | Refactor | Centralize managed Wallet runtime configuration | [#1353][pr1353] |
+| [Task 458][t458] | 1 | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | [#1354][pr1354] |
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md

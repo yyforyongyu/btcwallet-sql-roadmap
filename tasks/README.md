@@ -25,7 +25,6 @@ Grouping here does not create dependency or scheduling authority.
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
-- [Task 458](458-manager-operation-admission.md): drain Wallet calls during
   terminal stop.
 - [Task 459](459-manager-startup-wallet-assembly.md): assemble durable Wallets
   for Manager startup.

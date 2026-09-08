@@ -64,4 +64,4 @@ the public result, send it once, and close the completion on every exit.
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t421]: ../archive/tasks/421-sql-passphrase-commit-reconciliation.md
-[t458]: 458-manager-operation-admission.md
+[t458]: ../archive/tasks/458-manager-operation-admission.md
