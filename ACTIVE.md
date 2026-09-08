@@ -19,7 +19,7 @@ recorded PR stack.
 | --- | --- | --- | --- | --- |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
 | [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
-| [Task 412][t412] | Expose transaction invalidation | Gap fix | — | — |
+| [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
