@@ -53,7 +53,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 459][t459] | Assemble startup Wallets | Gap fix | YY | [#1356][pr1356] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
-| [Task 465][t465] | Verify NoChainSync address results | Test | — | — |
+| [Task 465][t465] | Verify NoChainSync address results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
 | [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | — |
 
