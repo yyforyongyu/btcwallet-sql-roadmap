@@ -30,8 +30,11 @@ oldest-unused behavior and `NewBulkAddresses` for deliberate force allocation.
   backend is retired.
 - This task owns only the mechanical fresh-address caller migration. It does
   not absorb the PSBT or transaction correctness fixes in Tasks 348, 356, or
-  408. Task 395 owns the later `NoChainSync` branch, and Task 466 owns public
-  integration assertions.
+  408. Task 395 owns the separate `AllocateNextKey` API, and Task 466 owns
+  public integration assertions.
+- Preserve the `NoChainSync` receiving rejection in `NewAddress`, including
+  its public documentation. Key allocation must not enter the oldest-unused
+  lookup or receiving batch fallback.
 - Do not add a first-unused pointer, recovery method, result wrapper, or
   parallel public interface.
 
@@ -57,7 +60,8 @@ part of the public contract.
 
 SQL `NewAddress` safely returns the oldest unused address, deliberate fresh
 allocation uses `NewBulkAddresses`, and modern kvdb retains its legacy
-count-one behavior without expanding this task into adjacent transaction bugs.
+count-one behavior. `NoChainSync` receiving remains unsupported, without
+expanding this task into key allocation or adjacent transaction bugs.
 
 [t344]: 344-bulk-address-allocation.md
 [t348]: 348-watched-change-delivery.md

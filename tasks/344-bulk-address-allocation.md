@@ -35,8 +35,8 @@ Lnd needs an explicit force-allocation operation for batches while
   preserve Task 467's indeterminate-commit identity without reusing a
   potentially committed child.
 - Reject `NoChainSync` accounts and modern kvdb with Task 378's
-  `ErrAccountOperationUnsupported` before mutation. Task 395 owns count-one
-  key allocation for `NoChainSync` accounts.
+  `ErrAccountOperationUnsupported` before mutation. Task 395 owns the separate
+  `AllocateNextKey` operation for `NoChainSync` accounts.
 - Return wallet-owned `AddressInfo` values with truthful imported and
   derivation metadata. Task 461 owns public three-backend integration tests.
 - Do not add a request wrapper, delivery handle, recovery API, public

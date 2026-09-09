@@ -57,8 +57,8 @@ Grouping here does not create dependency or scheduling authority.
   through account creation.
 - [Task 393](393-key-only-receiving-rejection.md): guard receiving APIs for
   `NoChainSync` accounts.
-- [Task 395](395-key-only-locator-allocation.md): allocate one durable
-  `NoChainSync` child.
+- [Task 395](395-key-only-locator-allocation.md): add `AllocateNextKey` for
+  durable key allocation.
 - [Task 396](396-oldest-unused-address.md): make NewAddress return the oldest
   unused address.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
@@ -162,7 +162,7 @@ that structural exclusion explicitly.
   account identity.
 - [Task 464](464-no-chain-sync-account-query-itests.md): verify `NoChainSync`
   account queries.
-- [Task 465](465-new-address-result-itests.md): verify `NoChainSync` address
+- [Task 465](465-new-address-result-itests.md): verify durable key allocation
   results.
 - [Task 466](466-oldest-unused-address-itests.md): verify final oldest-unused
   allocation.

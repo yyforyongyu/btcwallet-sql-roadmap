@@ -12,7 +12,7 @@ Dependencies: **[Task 396][t396] and [Task 431][t431]**.
 owns the existing allocation and lookup contract and must remain unchanged.
 Task 396 replaces the SQL count-one semantics and removes `GetUnusedAddress`.
 The final SQL and modern-kvdb divergence needs a separate public integration
-outcome; it does not require Task 395's independent `NoChainSync` branch.
+outcome; it does not require Task 395's separate `AllocateNextKey` API.
 
 ## Details
 
@@ -32,7 +32,7 @@ outcome; it does not require Task 395's independent `NoChainSync` branch.
 - Restrict shared three-backend assertions to common public address metadata,
   point/list agreement, errors, and durable cleanup. Keep the divergent
   allocation expectation in the two explicit backend branches.
-- Keep `NoChainSync` result shapes in Task 465, batch allocation in Task 461,
+- Keep `AllocateNextKey` results in Task 465, batch allocation in Task 461,
   and production fault injection in Tasks 395 and 396. Do not restore
   `GetUnusedAddress` or add a compatibility alias.
 - Extend the repository-conventional address integration-test file introduced
