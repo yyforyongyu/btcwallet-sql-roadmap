@@ -45,14 +45,14 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | [#1366][pr1366] |
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
-| [Task 395][t395] | Allocate a durable NoChainSync child | Gap fix | YY | — |
+| [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
-| [Task 465][t465] | Verify NoChainSync address results | Test | YY | — |
+| [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
 | [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | — |
 
@@ -89,6 +89,12 @@ by ascending phase, then ascending task number.
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 4 | YY | — |
 | [Task 457][t457] | Fence process-local Managers | Gap fix | 4 | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 4 | Abdullahi | — |
+
+## Coordination
+
+The receiving/key-allocation split keeps Task 393's receiving guards and gives
+Task 395 the separate `AddressManager.AllocateNextKey` API. [#1367][pr1367]
+owns the receiving guards. Task 396 remains receiving-only.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md

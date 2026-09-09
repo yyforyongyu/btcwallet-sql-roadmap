@@ -46,10 +46,11 @@ lifecycle and contextual creation, purpose-1017 key families, final address
 allocation, transaction invalidation, and truthful synchronization status.
 Basic component tests prove these contracts and existing key/signing APIs.
 
-Keep the complete prerequisite closure. In particular, Tasks 344 and 396 own
-the final allocation API consumed by Task 395; Tasks 364 and 402 make returned
-receiving addresses durably watched. Do not remove those edges merely to make
-Phase 1 smaller. General hardening and composed scenarios remain later work.
+Keep the complete prerequisite closure. Task 395 reuses Task 344's durable
+child allocation for `AllocateNextKey`; it does not depend on Task 396's
+receiving-address semantics. Tasks 364 and 402 make returned receiving
+addresses durably watched. General hardening and composed scenarios remain
+later work.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
@@ -63,7 +64,7 @@ Phase 1 smaller. General hardening and composed scenarios remain later work.
 | [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 468 |
 | [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345, 378 |
 | [Task 393][t393] | open | AddressManager receiving APIs and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | 345, 392 |
-| [Task 395][t395] | open | AddressManager child allocation and SQL branch-counter mutation | Gap fix | Allocate one durable NoChainSync child | 344, 390, 393, 396, 399, 452 |
+| [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344, 390, 393, 399, 452 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 345 |
 | [Task 402][t402] | open | Wallet live-watch delivery and replay | Gap fix | Replay Wallet live-watch obligations | 364 |
@@ -77,7 +78,7 @@ Phase 1 smaller. General hardening and composed scenarios remain later work.
 | [Task 455][t455] | open | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | — |
 | [Task 459][t459] | open | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | 458 |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 343, 344, 468 |
-| [Task 465][t465] | open | AddressManager NoChainSync result integration tests | Test | Verify NoChainSync address results | 395, 431 |
+| [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395, 431 |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396, 431 |
 | [Task 468][t468] | open | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | 343, 393, 452 |
 
@@ -162,7 +163,7 @@ it explicitly; a component name alone does not make it an integration blocker.
 | [Task 372][t372] | open | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | 370, 371 |
 | [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | 343, 378 |
 | [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | 343, 390 |
-| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 378, 388, 389, 390, 392 |
+| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 378, 388, 389, 390, 392, 395 |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 345, 397, 399, 452 |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Persist raw imports with live-watch obligations | 364, 402 |

@@ -6,8 +6,8 @@ shape**.
 Type: **Gap fix**.
 
 Dependencies: **[Task 332][t332], [Task 337][t337], [Task 378][t378],
-[Task 387][t387], [Task 388][t388], [Task 389][t389], [Task 390][t390], and
-[Task 392][t392]**.
+[Task 387][t387], [Task 388][t388], [Task 389][t389], [Task 390][t390],
+[Task 392][t392], and [Task 395][t395]**.
 
 ## Rationale
 
@@ -67,7 +67,13 @@ collapsing a known account number into arbitrary numberless import identity.
   allocation and address-result conversion in this production task when
   `NoChainSync=false`: `NewAddress` and `GetAddressInfo` retain the real
   derivation, list lookup retains membership and balance, and reopen preserves
-  the same result. Task 395 owns the later `NoChainSync=true` allocation branch.
+  the same result.
+- Adapt Task 395's existing `AllocateNextKey` to this newly representable
+  path-bound XPub shape when `NoChainSync=true`. Reuse the account XPub and
+  allocation machinery, preserving the supplied path identity and fingerprint
+  without requiring wallet-root provenance or creating a watch obligation.
+  Extend existing focused allocation tests for this shape on both SQL
+  dialects; do not duplicate Task 395's general allocation matrix.
 - Document non-obvious code blocks with the contract, rationale, invariant, or
   consequence they preserve; do not restate the code.
 - Keep unit tests clearly structured as Arrange, Act, and Assert.
@@ -100,17 +106,20 @@ rejection tests prove unsupported custody and kvdb cases match
 `errors.Is`. Focused colocated tests prove `NewAddress` and `GetAddressInfo`
 retain the real derivation through reopen and `ListAddresses` retains only
 membership and balance on both SQL dialects for `NoChainSync=false`, without
-adding a public field. Account identity and reopen fixtures still cover both
-`NoChainSync` values. Task 463 separately proves public `ListUnspent` and
-`GetUtxo` attribution, while Task 395 owns true-value allocation behavior.
+adding a public field. For `NoChainSync=true`, focused `AllocateNextKey`
+cases prove fresh child allocation from the supplied XPub, complete truthful
+key metadata through reopen, and no chain-watch side effects. Account
+identity and reopen fixtures still cover both `NoChainSync` values. Task 463
+separately proves public `ListUnspent` and `GetUtxo` attribution.
 
 ## Definition of done
 
 Uniformly watch-only SQL wallets can install a truthful exact path-bound XPub
 account through the generic account API, with chain synchronization selected
-independently. The complete maintained SQL read surface accepts its
-non-root-derived numbered identity without a new provenance field, component,
-table, column, or kvdb path.
+independently. The maintained SQL read and allocation paths accept its
+non-root-derived numbered identity, including `AllocateNextKey` results for
+`NoChainSync=true`, without a new provenance field, component, table, column,
+or kvdb path.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
@@ -120,5 +129,6 @@ table, column, or kvdb path.
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t390]: 390-custom-scope-account-creation.md
 [t392]: 392-discovery-mode-account-creation.md
+[t395]: 395-key-only-locator-allocation.md
 [t463]: 463-path-bound-utxo-identity-itests.md
 [t464]: 464-no-chain-sync-account-query-itests.md

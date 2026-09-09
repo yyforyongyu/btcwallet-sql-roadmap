@@ -1,6 +1,6 @@
-# Task 465 — verify NoChainSync address results
+# Task 465 — verify durable key allocation results
 
-Component: **AddressManager NoChainSync result integration tests**.
+Component: **AddressManager AllocateNextKey integration tests**.
 
 Type: **Test**.
 
@@ -10,25 +10,30 @@ Dependencies: **[Task 395][t395] and [Task 431][t431]**.
 
 [Issue #1250][issue1250] requires AddressManager integration coverage. Task 431
 owns the existing count-one allocation and lookup contract and must remain
-unchanged. Task 395 adds the independently changeable `NoChainSync` result
-that needs one separate public integration-test outcome.
+unchanged. Task 395 adds `AllocateNextKey` for durable `NoChainSync` key
+allocation, which needs focused public integration evidence.
 
 ## Details
 
-- Extend Task 431's imported-`wallet` address suite without changing that
-  task's original cases or definition of done.
-- On SQLite and PostgreSQL, create a numbered `NoChainSync=true` account and
-  allocate through the final existing `NewAddress` method. Require the result
-  and `GetAddressInfo` to contain its public key and complete derivation path,
-  remain visible by address and balance through list lookup after reopen,
-  progress uniquely under concurrency, and retain the selected account
-  identity.
+- Extend Task 431's imported-`wallet` address suite while preserving its
+  existing receiving assertions and definition of done.
+- On SQLite and PostgreSQL, create a root-derived numbered account with
+  `NoChainSync=true` and allocate through `AddressManager.AllocateNextKey`,
+  including a purpose-1017 scope and numbered key-family account. Require the
+  returned public key and complete derivation metadata to match the selected
+  account and branch.
+- Use the fixture's account XPub and returned child index to independently
+  derive the expected key and address. Check `GetAddressInfo` and list lookup
+  retain the same key, path, account membership, and balance after reopen.
+- Extend existing concurrency and reopen cases to prove fresh, distinct paths
+  even while all earlier allocated children have no observed chain use.
 - Modern kvdb cannot represent the persisted `NoChainSync` property. Keep it
   outside the SQL-only allocation case and do not invent a backend-only
   request or synthetic account state.
-- Keep path-bound XPub result coverage in Task 391's focused tests and
-  numberless imported-XPub result coverage in Task 344's focused tests. Do not
-  import either production outcome into this public integration task.
+- Task 391 depends on Task 395 and owns the `AllocateNextKey` adaptation and
+  focused tests for path-bound supplied-XPub accounts with `NoChainSync=true`.
+  Keep numberless imported-XPub receiving results in Task 344's focused tests.
+  Do not import either account-shape outcome into this integration task.
 - Match only wallet-owned errors reachable through ordinary public setup.
   Keep terminal exhaustion and ambiguous-commit injection in Tasks 344 and
   395's colocated tests rather than adding a production fault seam.
@@ -49,9 +54,10 @@ that needs one separate public integration-test outcome.
 
 ## Suggested fix
 
-Add one SQL `NoChainSync` table to Task 431's existing address integration
-suite. Reuse its public allocation, lookup, concurrency, and reopen helpers
-without altering its original cases.
+Extend existing test functions or table cases in Task 431's address suite
+with the SQL key-allocation contract. Reuse its lookup, concurrency, and
+reopen helpers; preserve the original receiving assertions rather than
+copying them into another test.
 
 ## Verification
 
@@ -62,11 +68,11 @@ without altering its original cases.
 
 ## Definition of done
 
-- Numbered `NoChainSync` address results have focused public coverage without
+- Numbered `NoChainSync` key allocations have focused public coverage without
   changing Task 431's existing contract.
 - The modern-kvdb structural exclusion and SQL result metadata are truthful.
-- No new method, result type, component, arbitrary file, or duplicated Task
-  431 case is introduced.
+- Tests use Task 395's API without introducing another method, result type,
+  component, arbitrary file, or duplicated Task 431 case.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t395]: 395-key-only-locator-allocation.md

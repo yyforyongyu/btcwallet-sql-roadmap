@@ -81,8 +81,8 @@ the returned batch and cursor state.
   and PostgreSQL accounts, and prove through public lookup, list, and reopen
   results that they expose no address change. On modern kvdb only, use a
   follow-up count-one allocation to prove the rejected batch did not advance
-  its branch. Do not call `NewAddress` on the `NoChainSync` fixtures before
-  Task 395 activates that independent branch.
+  its branch. `NewAddress` remains unsupported on `NoChainSync` fixtures;
+  Task 395's separate `AllocateNextKey` operation is outside this batch task.
 - Run zero and 101 on modern kvdb and both `NoChainSync` SQL fixtures, require
   `ErrInvalidParam`, and prove the same publicly observable postcondition.
 
