@@ -88,12 +88,6 @@ by ascending phase, then ascending task number.
 | [Task 457][t457] | Fence process-local Managers | Gap fix | 4 | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 4 | Abdullahi | — |
 
-## Coordination
-
-The receiving/key-allocation split keeps Task 393's receiving guards and gives
-Task 395 the separate `AddressManager.AllocateNextKey` API. [#1367][pr1367]
-owns the receiving guards. Task 396 remains receiving-only.
-
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
