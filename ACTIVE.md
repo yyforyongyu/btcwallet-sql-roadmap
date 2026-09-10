@@ -17,6 +17,7 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
+| [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
@@ -37,7 +38,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
