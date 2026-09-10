@@ -43,7 +43,6 @@ Grouping here does not create dependency or scheduling authority.
   derivation work.
 - [Task 364](364-durable-watch-registration.md): persist ordered SQL live-watch
   obligations.
-- [Task 378](378-account-manager-error-boundary.md): translate AccountManager
   backend errors.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.

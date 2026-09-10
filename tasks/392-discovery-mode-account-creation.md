@@ -53,7 +53,7 @@ The generic account-creation request explicitly accepts and reports
 second import request.
 
 [t345]: 345-durable-watch-registration.md
-[t378]: 378-account-manager-error-boundary.md
+[t378]: ../archive/tasks/378-account-manager-error-boundary.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
 [t464]: 464-no-chain-sync-account-query-itests.md
 [t468]: 468-activate-no-chain-sync-account-creation.md

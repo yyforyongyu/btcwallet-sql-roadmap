@@ -64,7 +64,7 @@ adding a parallel public API.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t377]: ../archive/tasks/377-account-manager-wallet-dto.md
-[t378]: 378-account-manager-error-boundary.md
+[t378]: ../archive/tasks/378-account-manager-error-boundary.md
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t392]: 392-discovery-mode-account-creation.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

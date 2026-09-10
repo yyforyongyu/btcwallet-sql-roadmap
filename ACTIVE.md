@@ -18,7 +18,6 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
-| [Task 378][t378] | Translate AccountManager backend errors | Bug fix | Gustavo | [#1358][pr1358] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
@@ -115,7 +114,6 @@ owns the receiving guards. Task 396 remains receiving-only.
 [t367]: tasks/367-bound-sql-genesis-secrets.md
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
-[t378]: tasks/378-account-manager-error-boundary.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t390]: tasks/390-custom-scope-account-creation.md
@@ -160,7 +158,6 @@ owns the receiving guards. Task 396 remains receiving-only.
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1356]: https://github.com/btcsuite/btcwallet/pull/1356
-[pr1358]: https://github.com/btcsuite/btcwallet/pull/1358
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
 [pr1363]: https://github.com/btcsuite/btcwallet/pull/1363
 [pr1365]: https://github.com/btcsuite/btcwallet/pull/1365

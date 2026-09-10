@@ -15,6 +15,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 378](tasks/378-account-manager-error-boundary.md) completed on 2026-09-10.
 - [Task 458](tasks/458-manager-operation-admission.md) completed on 2026-09-08.
 - [Task 404](tasks/404-transaction-input-amounts.md) completed on 2026-09-08.
 - [Task 357](tasks/357-transaction-amount-validation.md) completed on 2026-09-05.
