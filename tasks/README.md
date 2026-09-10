@@ -26,7 +26,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
   terminal stop.
-- [Task 459](459-manager-startup-wallet-assembly.md): assemble durable Wallets
   for Manager startup.
 
 ## Accounts, addresses, and recovery

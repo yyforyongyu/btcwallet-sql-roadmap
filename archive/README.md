@@ -15,6 +15,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 459](tasks/459-manager-startup-wallet-assembly.md) completed on 2026-09-10.
 
 - [Task 364](tasks/364-durable-watch-registration.md) was superseded on
   2026-09-10: fail-stop and reconstruction eliminate watch-delivery persistence.
