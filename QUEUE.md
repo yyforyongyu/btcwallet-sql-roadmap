@@ -1,7 +1,7 @@
 # Task delivery phases
 
-The roadmap contains **141 tasks**, with **100 remaining open**, **34 done**,
-**6 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
+The roadmap contains **141 tasks**, with **99 remaining open**, **34 done**,
+**7 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
 completed tasks move to `Done`, while superseded tasks retain their identity
 and replacement in `Superseded`. Approved future-cycle work is in `Deferred`.
 
@@ -39,7 +39,7 @@ still requires separate authorization; these tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
-## Phase 1 — API stabilization and basic itests · 26 open
+## Phase 1 — API stabilization and basic itests · 25 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle and contextual creation, purpose-1017 key families, final address
@@ -48,25 +48,24 @@ Basic component tests prove these contracts and existing key/signing APIs.
 
 Keep the complete prerequisite closure. Task 395 reuses Task 344's durable
 child allocation for `AllocateNextKey`; it does not depend on Task 396's
-receiving-address semantics. Tasks 364 and 402 make returned receiving
-addresses durably watched. General hardening and composed scenarios remain
-later work.
+receiving-address semantics. Task 402 establishes btcd/bitcoind watches from
+Wallet facts, without a ledger or completion flags. Lost required readiness
+stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 331][t331] | open | Manager lifecycle, public API cutover, and Store ownership | Bug fix | Make Manager the sole lifecycle authority | 459 |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore | Gap fix | Create next-or-exact root-derived accounts | 392 |
-| [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 364, 392, 393, 402 |
+| [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 392, 393, 402 |
 | [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 331 |
-| [Task 364][t364] | open | SQL live-watch persistence | Gap fix | Persist ordered SQL live-watch obligations | 345 |
 | [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 468 |
 | [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345 |
 | [Task 393][t393] | open | AddressManager receiving APIs and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | 345, 392 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344, 390, 393, 399, 452 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 399][t399] | open | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | 345 |
-| [Task 402][t402] | open | Wallet live-watch delivery and replay | Gap fix | Replay Wallet live-watch obligations | 364 |
+| [Task 402][t402] | open | Wallet synchronization and live-watch readiness | Gap fix | Establish live watches from persisted Wallet data | 331, 345 |
 | [Task 412][t412] | open | TxWriter transaction invalidation | Gap fix | Expose transaction invalidation on TxWriter | — |
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
@@ -146,7 +145,7 @@ it explicitly; a component name alone does not make it an integration blocker.
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | 331 |
 | [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | 331 |
 | [Task 347][t347] | open | PsbtManager existing-signature validation | Bug fix | Authorize existing PSBT signatures | 346 |
-| [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 356, 406 |
+| [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 356, 402, 406 |
 | [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
 | [Task 351][t351] | open | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | 424 |
 | [Task 352][t352] | open | Controller and LegacyWalletVault | Bug fix | Contain uncertain kvdb passphrase rotation | 331 |
@@ -165,11 +164,11 @@ it explicitly; a component name alone does not make it an integration blocker.
 | [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 389, 390, 392, 395 |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 345, 397, 399, 452 |
-| [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Persist raw imports with live-watch obligations | 364, 402 |
+| [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | 402 |
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | 346, 356 |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
-| [Task 408][t408] | open | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | 344, 356 |
+| [Task 408][t408] | open | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | 344, 356, 402 |
 | [Task 409][t409] | open | SQL TxStore input-graph representation | Refactor | Simplify transaction input graph reads | 424 |
 | [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | 424 |
 | [Task 411][t411] | open | Wallet-owned SQL transaction ingestion | Bug fix | Reject children of terminal transactions | 410 |
@@ -226,7 +225,7 @@ done or superseded; reactivation preserves the original task number.
 | --- | --- | --- | --- |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 6
+## Superseded · 7
 
 Former phases record the historical map at supersession, not the current
 five-phase assignment. These tasks have no current delivery phase.
@@ -235,6 +234,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | --- | ---: | --- | --- | --- | --- |
 | [Task 336][t336] | 5 | Controller and Wallet passphrase test suite | Test | Remove redundant Wallet passphrase tests | Required test updates remain inside [Task 386][t386] |
 | [Task 349][t349] | 3 | TxStore internal invalidation workflow | Gap fix | Implement idempotent transaction invalidation | Existing SQL Store behavior; [Task 412][t412] owns maintained public exposure |
+| [Task 364][t364] | 1 | SQL live-watch persistence | Gap fix | Persist ordered SQL live-watch obligations | Accepted fail-stop/startup-reconstruction decision eliminates delivery persistence; [Task 402][t402] retains live registration |
 | [Task 381][t381] | 3 | RecoveryState public contract and internal Syncer adapter | Refactor | Hide recovery adapter identity | Accepted decision to retain the current shape until a concrete public need exists |
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 331][t331] and [459][t459] |
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
@@ -314,7 +314,7 @@ five-phase assignment. These tasks have no current delivery phase.
 [t361]: tasks/361-kvdb-imported-xpub-derivation.md
 [t362]: tasks/362-kvdb-definitive-passphrase-result.md
 [t363]: tasks/363-recovery-scan-work-bound.md
-[t364]: tasks/364-durable-watch-registration.md
+[t364]: archive/tasks/364-durable-watch-registration.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
 [t366]: tasks/366-reconcile-sql-genesis-commit.md
 [t367]: tasks/367-bound-sql-genesis-secrets.md

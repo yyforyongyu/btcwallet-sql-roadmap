@@ -4,7 +4,7 @@ Component: **AddressManager receiving batches and SQL AddressStore**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 341][t341], [Task 364][t364], [Task 392][t392],
+Dependencies: **[Task 341][t341], [Task 392][t392],
 [Task 393][t393], [Task 402][t402], and [Task 467][t467]**.
 
 ## Rationale
@@ -25,11 +25,10 @@ Lnd needs an explicit force-allocation operation for batches while
 - Allocate exactly the requested number of fresh addresses in committed order
   or return no addresses. Concurrent batches for one account and branch must
   not overlap.
-- Commit the consumed derivation progress, returned address facts, and one
-  durable Task 364 watch obligation atomically on SQLite and PostgreSQL.
-- Return a batch only after Task 402 makes its watch live. A failure after
-  commit returns no usable batch and leaves enough durable state for retry or
-  startup replay.
+- Atomically commit SQL derivation progress and addresses, not watch metadata.
+- Before return, complete Task 402 registration on btcd/bitcoind or existing
+  registration/history on Neutrino; no live-only guarantee, adapter fix, or
+  new task for Neutrino. Failure preserves committed facts, returning no batch.
 - Preserve consumed invalid children and raw-import ownership. Return a stable
   wallet-owned `ErrAddressDerivationExhausted` for terminal exhaustion, and
   preserve Task 467's indeterminate-commit identity without reusing a
@@ -44,10 +43,7 @@ Lnd needs an explicit force-allocation operation for batches while
 
 ## Suggested fix
 
-Reuse the existing account selection, derivation, AddressStore, and durable
-watch mechanisms in one Wallet-owned batch operation. A branch-local
-serialization boundary and expected-position Store mutation are likely, but
-their representation is not part of the contract.
+Reuse the existing allocation boundary and backend-specific registration.
 
 ## Verification
 
@@ -58,19 +54,18 @@ their representation is not part of the contract.
   ambiguous durable outcomes without index reuse. Terminal exhaustion matches
   `ErrAddressDerivationExhausted` on both SQL dialects.
 - Fail or cancel live watch delivery after commit and prove no usable partial
-  batch is returned and startup replay can complete the obligation.
+  batch is returned and a fresh startup watches the committed addresses.
 - Verify `NoChainSync` and modern-kvdb requests fail before mutation, while
   Task 461 covers the final public result contract.
 
 ## Definition of done
 
 One public force-allocation call returns an ordered all-or-nothing batch only
-after its exact durable addresses are live-watched. Concurrency, restart, and
+after backend-appropriate registration. Concurrency, restart, and
 failure cannot overlap batches, lose derivation progress, or expose private
 delivery bookkeeping.
 
 [t341]: ../archive/tasks/341-public-role-contract.md
-[t364]: 364-durable-watch-registration.md
 [t378]: ../archive/tasks/378-account-manager-error-boundary.md
 [t392]: 392-discovery-mode-account-creation.md
 [t393]: 393-key-only-receiving-rejection.md

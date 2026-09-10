@@ -12,7 +12,7 @@ Dependencies: **[Task 341][t341], [Task 344][t344], [Task 390][t390],
 
 Lnd `DeriveNextKey` needs a durable, unique account child. Reading a counter
 and deriving without a mutation can return the same locator concurrently,
-while the normal receiving path creates chain-watch obligations that a
+while the normal receiving path establishes live watches that a
 `NoChainSync` account explicitly disables.
 
 ## Details

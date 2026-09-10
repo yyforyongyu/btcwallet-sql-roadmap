@@ -42,14 +42,13 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
-| [Task 364][t364] | Persist live-watch obligations | Gap fix | YY | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | [#1366][pr1366] |
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
-| [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
+| [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | — |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
@@ -108,7 +107,6 @@ owns the receiving guards. Task 396 remains receiving-only.
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t358]: tasks/358-contextual-manager-operations.md
-[t364]: tasks/364-durable-watch-registration.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
 [t366]: tasks/366-reconcile-sql-genesis-commit.md
 [t367]: tasks/367-bound-sql-genesis-secrets.md

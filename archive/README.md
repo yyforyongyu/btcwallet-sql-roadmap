@@ -15,6 +15,11 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+
+- [Task 364](tasks/364-durable-watch-registration.md) was superseded on
+  2026-09-10: fail-stop and reconstruction eliminate watch-delivery persistence.
+  [Task 402](../tasks/402-replay-live-watch-obligations.md) retains registration
+  from existing Wallet facts.
 - [Task 378](tasks/378-account-manager-error-boundary.md) completed on 2026-09-10.
 - [Task 458](tasks/458-manager-operation-admission.md) completed on 2026-09-08.
 - [Task 404](tasks/404-transaction-input-amounts.md) completed on 2026-09-08.
