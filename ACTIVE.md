@@ -52,7 +52,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
-| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | — |
+| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | [#1369][pr1369] |
 
 ## Claimed Tasks
 
