@@ -18,6 +18,7 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
+| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -65,7 +66,6 @@ by ascending phase, then ascending task number.
 
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
-| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | 2 | Abdullahi | [#1359][pr1359] |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 4 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 4 | YY | — |
