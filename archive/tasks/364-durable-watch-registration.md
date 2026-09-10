@@ -1,5 +1,11 @@
 # Task 364 — persist ordered SQL live-watch obligations
 
+Superseded on 2026-09-10: the accepted fail-stop and startup-reconstruction
+decision eliminates separate durable watch obligations and completion flags.
+Existing address/script records identify required watches, not live readiness.
+No implementation PR was found. [Task 402][t402] retains its
+existing live-registration outcome without this persistence prerequisite.
+
 Component: **SQL live-watch persistence**.
 
 Type: **Gap fix**.
@@ -51,5 +57,6 @@ SQL producers can atomically retain an ordered live-watch obligation that
 survives restart and can be completed idempotently, without delivering it or
 exposing new public state.
 
-[t345]: 345-durable-watch-registration.md
-[t400]: ../archive/tasks/400-live-watch-semantics-adr.md
+[t345]: ../../tasks/345-durable-watch-registration.md
+[t400]: 400-live-watch-semantics-adr.md
+[t402]: ../../tasks/402-replay-live-watch-obligations.md

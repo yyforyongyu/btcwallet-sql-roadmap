@@ -41,9 +41,6 @@ Grouping here does not create dependency or scheduling authority.
   derivation.
 - [Task 363](363-recovery-scan-work-bound.md): bound aggregate recovery
   derivation work.
-- [Task 364](364-durable-watch-registration.md): persist ordered SQL live-watch
-  obligations.
-  backend errors.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): reconcile ambiguous
@@ -66,10 +63,10 @@ Grouping here does not create dependency or scheduling authority.
   recovery targets.
 - [Task 399](399-zero-lookahead-persisted-targets.md): isolate persisted targets
   in zero-lookahead recovery.
-- [Task 402](402-replay-live-watch-obligations.md): replay Wallet live-watch
-  obligations.
-- [Task 403](403-raw-import-watch-obligations.md): persist raw imports with
-  live-watch obligations.
+- [Task 402](402-replay-live-watch-obligations.md): establish live watches from
+  persisted Wallet data.
+- [Task 403](403-raw-import-watch-obligations.md): register raw imports before
+  public success.
 - [Task 452](452-key-only-recovery-derivation.md): exclude `NoChainSync`
   accounts from recovery.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential

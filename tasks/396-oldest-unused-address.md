@@ -20,7 +20,7 @@ oldest-unused behavior and `NewBulkAddresses` for deliberate force allocation.
 - On SQL, return the oldest unused address for the selected account and branch.
   If none exists, allocate one through Task 344's batch behavior.
 - Do not return an address until any required live-watch registration is
-  usable. A pending obligation must not cause replacement allocation.
+  usable. Incomplete registration must not cause replacement allocation.
 - Before changing the SQL semantics, migrate only the SQL branches of existing
   wallet-owned callers that require a fresh change address to
   `NewBulkAddresses(count=1)`.

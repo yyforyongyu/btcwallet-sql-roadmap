@@ -23,7 +23,7 @@ outcome; it does not require Task 395's separate `AllocateNextKey` API.
   account to return the oldest persisted unused address without advancing the
   branch. After funding that address, require the next call to rotate to the
   next oldest unused result or allocate one when none remains.
-- Keep failed live registration, internal retry, and startup replay in Tasks
+- Keep failed live registration and startup watch reconstruction in Tasks
   396 and 402's colocated tests. This public integration task observes only a
   completed `NewAddress` call and adds no delivery bookkeeping or fault seam.
 - In a separate modern-kvdb case, require each `NewAddress` call to preserve

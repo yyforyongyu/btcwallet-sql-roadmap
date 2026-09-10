@@ -34,8 +34,9 @@ stream and shutdown can join it before Store closure.
   reject live events until that no-gap boundary is established.
 - Register a newly created Wallet at a closed delivery boundary before its
   public Create result is returned.
-- Drive Task 402's existing live-watch replay through the same Wallet
-  processing boundary; do not add another replay mechanism.
+- Drive Task 402's watch reconstruction and registration through the same
+  Wallet processing boundary, preserving its Manager-wide failure policy
+  without adding a durable delivery mechanism.
 - On Stop, close source admission, settle accepted delivery, and join the
   source and dispatcher before Store closure.
 - Keep modern kvdb on its isolated single-Wallet source path. Preserve
@@ -56,8 +57,8 @@ private choices as long as the public no-gap and shutdown boundaries hold.
   off-chain tips on SQLite and PostgreSQL. Publish Running only after exact
   alignment or fail without partial activation.
 - Interleave connected, filtered-block, transaction, and disconnected events
-  with startup, Create, replay, and Stop. Every normalized effect is delivered
-  once in order and no Wallet misses a cutover boundary.
+  with startup, Create, registration, and Stop. Every normalized effect is
+  delivered once in order and no Wallet misses a cutover boundary.
 - Exercise connected-only, filtered-only, and equal mixed representations.
   Every block advances or confirms the frontier before Wallet delivery, with
   no duplicate block effect or lost filtered transaction. No processor sees a

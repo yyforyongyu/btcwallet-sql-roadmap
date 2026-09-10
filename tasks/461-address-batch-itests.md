@@ -31,22 +31,22 @@ separate from count-one allocation and lookup behavior in Task 431.
   `MaxBulkAddressCount+1` match `ErrInvalidParam` through `errors.Is` before
   mutation on ordinary SQL accounts, modern kvdb, and a `NoChainSync` SQL
   account, so request validation demonstrably precedes capability checks.
-- Keep commit-before-cancel, failed live registration, internal retry, and
-  startup replay in Tasks 344 and 402's colocated tests. Do not add a public
+- Keep commit-before-cancel, failed live registration, and startup watch
+  reconstruction in Tasks 344 and 402's colocated tests. Do not add a public
   delivery handle, result wrapper, recovery API, or real-backend fault seam in
   this integration task.
 - Add a modern-kvdb public contract proving batch allocation matches Task
   378's canonical `ErrAccountOperationUnsupported` through `errors.Is` before
   mutation. Kvdb cannot represent Task 344's SQL batch mutation, so keep it
-  outside the SQL success and pending cases rather than skipping it inside a
-  shared contract.
+  outside the SQL success and registration-failure cases rather than skipping
+  it inside a shared contract.
 - On SQLite and PostgreSQL, create a `NoChainSync=true` account through Task
   468's activation of the public account request. A valid batch request must
   match Task 378's
   canonical `ErrAccountOperationUnsupported`, with Task 392's precedence,
   before any publicly observable address result or branch progression on both
   dialects. Task 344's colocated injected-boundary tests own the unexposed
-  watch-obligation postcondition.
+  no-registration postcondition.
 - Keep ambiguous-commit and terminal-exhaustion fault injection in Task 344's
   colocated tests rather than adding a real-backend fixture seam here.
 - Exclude count-one allocation, oldest-unused selection, import/script APIs,
