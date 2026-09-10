@@ -19,6 +19,7 @@ recorded PR stack.
 | --- | --- | --- | --- | --- |
 | [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
+| [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
@@ -48,7 +49,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 402][t402] | Replay live-watch obligations | Gap fix | YY | — |
-| [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
