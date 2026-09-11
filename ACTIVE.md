@@ -18,7 +18,10 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
+| [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
+| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
+| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -26,6 +29,7 @@ recorded PR stack.
 | [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
 | [Task 442][t442] | Cover public signing contracts | Test | — | — |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
+| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
 
 ## Blocked Phase 1 Tasks
@@ -37,16 +41,12 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
-| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | — |
-| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
