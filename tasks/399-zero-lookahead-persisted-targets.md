@@ -47,4 +47,4 @@ Zero lookahead preserves every in-scope persisted target without deriving new
 ones, and targeted recovery cannot widen to unrelated wallet state.
 
 [t342]: ../archive/tasks/342-recovery-window-validation.md
-[t345]: 345-durable-watch-registration.md
+[t345]: ../archive/tasks/345-durable-watch-registration.md

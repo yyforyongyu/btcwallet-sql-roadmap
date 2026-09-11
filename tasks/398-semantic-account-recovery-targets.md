@@ -64,7 +64,7 @@ preserves Task 452's full-scan filtering, explicit-target rejection, and stable
 wallet-owned error identity.
 
 [t341]: ../archive/tasks/341-public-role-contract.md
-[t345]: 345-durable-watch-registration.md
+[t345]: ../archive/tasks/345-durable-watch-registration.md
 [t397]: 397-semantic-recovery-targets-adr.md
 [t399]: 399-zero-lookahead-persisted-targets.md
 [t452]: 452-key-only-recovery-derivation.md

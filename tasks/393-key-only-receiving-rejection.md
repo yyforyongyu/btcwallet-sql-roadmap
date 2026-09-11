@@ -47,4 +47,4 @@ side effects. Task 395 enables key allocation for those accounts through
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t345]: 345-durable-watch-registration.md
 [t378]: ../archive/tasks/378-account-manager-error-boundary.md
-[t392]: 392-discovery-mode-account-creation.md
+[t392]: ../archive/tasks/392-discovery-mode-account-creation.md

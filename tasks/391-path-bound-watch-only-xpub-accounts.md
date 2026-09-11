@@ -128,7 +128,7 @@ or kvdb path.
 [t388]: 388-runtime-account-xpub-collisions.md
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t390]: 390-custom-scope-account-creation.md
-[t392]: 392-discovery-mode-account-creation.md
+[t392]: ../archive/tasks/392-discovery-mode-account-creation.md
 [t395]: 395-key-only-locator-allocation.md
 [t463]: 463-path-bound-utxo-identity-itests.md
 [t464]: 464-no-chain-sync-account-query-itests.md

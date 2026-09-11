@@ -122,7 +122,7 @@ runtime assembly and cache publication after the transaction succeeds.
 [t340]: ../archive/tasks/340-durable-database-identity.md
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t343]: 343-exact-account-creation.md
-[t345]: 345-durable-watch-registration.md
+[t345]: ../archive/tasks/345-durable-watch-registration.md
 [t353]: ../archive/tasks/353-retire-modern-kvdb-backend.md
 [t358]: 358-contextual-manager-operations.md
 [t390]: 390-custom-scope-account-creation.md

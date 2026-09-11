@@ -61,5 +61,5 @@ without delivery persistence or a new API. Neutrino remains unchanged.
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t334]: ../archive/tasks/334-shared-chain-state.md
-[t345]: 345-durable-watch-registration.md
+[t345]: ../archive/tasks/345-durable-watch-registration.md
 [t401]: ../archive/tasks/401-live-tip-chain-watch.md

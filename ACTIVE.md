@@ -18,7 +18,6 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
-| [Task 345][t345] | Persist account NoChainSync state | Gap fix | YY | [#1365][pr1365] |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
@@ -42,7 +41,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
 | [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
-| [Task 392][t392] | Carry NoChainSync through account creation | Gap fix | YY | [#1366][pr1366] |
 | [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
@@ -92,7 +90,6 @@ by ascending phase, then ascending task number.
 [t331]: tasks/331-manager-wallet-lifecycle.md
 [t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
-[t345]: tasks/345-durable-watch-registration.md
 [t346]: tasks/346-psbt-funding-metadata.md
 [t347]: tasks/347-psbt-signing-authorization.md
 [t348]: tasks/348-watched-change-delivery.md
@@ -109,7 +106,6 @@ by ascending phase, then ascending task number.
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t390]: tasks/390-custom-scope-account-creation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
-[t392]: tasks/392-discovery-mode-account-creation.md
 [t393]: tasks/393-key-only-receiving-rejection.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
@@ -149,12 +145,10 @@ by ascending phase, then ascending task number.
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
 [pr1363]: https://github.com/btcsuite/btcwallet/pull/1363
-[pr1365]: https://github.com/btcsuite/btcwallet/pull/1365
 [pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
 [pr1368]: https://github.com/btcsuite/btcwallet/pull/1368
 [pr1367]: https://github.com/btcsuite/btcwallet/pull/1367
-[pr1366]: https://github.com/btcsuite/btcwallet/pull/1366
 [pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
 [pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374

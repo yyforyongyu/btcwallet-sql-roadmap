@@ -15,6 +15,8 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 392](tasks/392-discovery-mode-account-creation.md) completed on 2026-09-11.
+- [Task 345](tasks/345-durable-watch-registration.md) completed on 2026-09-11.
 - [Task 459](tasks/459-manager-startup-wallet-assembly.md) completed on 2026-09-10.
 
 - [Task 364](tasks/364-durable-watch-registration.md) was superseded on

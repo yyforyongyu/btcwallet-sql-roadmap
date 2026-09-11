@@ -1,6 +1,6 @@
 # Task delivery phases
 
-The roadmap contains **141 tasks**, with **98 remaining open**, **34 done**,
+The roadmap contains **141 tasks**, with **96 remaining open**, **34 done**,
 **7 superseded**, and **1 deferred**. Open tasks are grouped by delivery phase;
 completed tasks move to `Done`, while superseded tasks retain their identity
 and replacement in `Superseded`. Approved future-cycle work is in `Deferred`.
@@ -39,7 +39,7 @@ still requires separate authorization; these tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
-## Phase 1 — API stabilization and basic itests · 24 open
+## Phase 1 — API stabilization and basic itests · 22 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle and contextual creation, purpose-1017 key families, final address
@@ -57,10 +57,8 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 331][t331] | open | Manager lifecycle, public API cutover, and Store ownership | Bug fix | Make Manager the sole lifecycle authority | 459 |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore | Gap fix | Create next-or-exact root-derived accounts | 392 |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 392, 393, 402 |
-| [Task 345][t345] | open | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 331 |
 | [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 468 |
-| [Task 392][t392] | open | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | 345 |
 | [Task 393][t393] | open | AddressManager receiving APIs and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | 345, 392 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344, 390, 393, 399, 452 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
@@ -239,7 +237,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 35
+## Done · 37
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
@@ -251,6 +249,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 340][t340] | 1 | Manager and SQL Store | Bug fix | Bind SQL databases to schema and network identity | [#1345][pr1345] |
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
+| [Task 345][t345] | 1 | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | [#1365][pr1365] |
 | [Task 355][t355] | 2 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |
 | [Task 357][t357] | 2 | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | [#1348][pr1348] |
 | [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
@@ -260,6 +259,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 379][t379] | 1 | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | [#1331][pr1331] |
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
 | [Task 387][t387] | 1 | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | [#1342][pr1342] |
+| [Task 392][t392] | 1 | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | [#1366][pr1366] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 401][t401] | 1 | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | [#1344][pr1344] |
 | [Task 404][t404] | 2 | TxCreator and PsbtManager input-source adapters | Bug fix | Validate Wallet transaction input amounts | [#1357][pr1357] |

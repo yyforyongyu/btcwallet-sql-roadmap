@@ -34,7 +34,6 @@ Grouping here does not create dependency or scheduling authority.
   accounts.
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
   atomically.
-- [Task 345](345-durable-watch-registration.md): persist SQL account
   `NoChainSync` state.
 - [Task 361](361-kvdb-imported-xpub-derivation.md): support kvdb imported-XPub
   derivation.
@@ -48,7 +47,6 @@ Grouping here does not create dependency or scheduling authority.
   in custom scopes.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
-- [Task 392](392-discovery-mode-account-creation.md): carry `NoChainSync`
   through account creation.
 - [Task 393](393-key-only-receiving-rejection.md): guard receiving APIs for
   `NoChainSync` accounts.
