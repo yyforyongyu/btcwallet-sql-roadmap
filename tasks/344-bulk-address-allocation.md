@@ -68,7 +68,7 @@ delivery bookkeeping.
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t378]: ../archive/tasks/378-account-manager-error-boundary.md
 [t392]: ../archive/tasks/392-discovery-mode-account-creation.md
-[t393]: 393-key-only-receiving-rejection.md
+[t393]: ../archive/tasks/393-key-only-receiving-rejection.md
 [t395]: 395-key-only-locator-allocation.md
 [t402]: 402-replay-live-watch-obligations.md
 [t461]: 461-address-batch-itests.md

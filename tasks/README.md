@@ -48,7 +48,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
   through account creation.
-- [Task 393](393-key-only-receiving-rejection.md): guard receiving APIs for
   `NoChainSync` accounts.
 - [Task 395](395-key-only-locator-allocation.md): add `AllocateNextKey` for
   durable key allocation.

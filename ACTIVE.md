@@ -20,7 +20,6 @@ recorded PR stack.
 | [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
 | [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
 | [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
-| [Task 393][t393] | Guard NoChainSync receiving APIs | Gap fix | YY | [#1367][pr1367] |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
@@ -106,7 +105,6 @@ by ascending phase, then ascending task number.
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t390]: tasks/390-custom-scope-account-creation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
-[t393]: tasks/393-key-only-receiving-rejection.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
@@ -148,7 +146,6 @@ by ascending phase, then ascending task number.
 [pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
 [pr1368]: https://github.com/btcsuite/btcwallet/pull/1368
-[pr1367]: https://github.com/btcsuite/btcwallet/pull/1367
 [pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
 [pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374

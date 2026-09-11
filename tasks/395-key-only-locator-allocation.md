@@ -89,7 +89,7 @@ using the existing `DerivePubKey` contract.
 [t341]: ../archive/tasks/341-public-role-contract.md
 [t344]: 344-bulk-address-allocation.md
 [t390]: 390-custom-scope-account-creation.md
-[t393]: 393-key-only-receiving-rejection.md
+[t393]: ../archive/tasks/393-key-only-receiving-rejection.md
 [t396]: 396-oldest-unused-address.md
 [t399]: 399-zero-lookahead-persisted-targets.md
 [t452]: 452-key-only-recovery-derivation.md
