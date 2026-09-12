@@ -22,6 +22,8 @@ chain state.
   idempotent; stale, skipped, wrong-parent, and conflicting candidates fail
   without moving it.
 - Keep verified historical block insertion non-advancing.
+- Frontier acceptance does not prove Wallet application. Keep Wallet progress
+  distinct; [Task 423][t423] owns catch-up after interrupted delivery.
 - Return enough stable outcome information for the Manager to distinguish an
   applied or idempotent candidate from stale, conflicting, ordinary-failure,
   and indeterminate results.
@@ -55,3 +57,4 @@ non-advancing.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t340]: ../archive/tasks/340-durable-database-identity.md
+[t423]: 423-manager-chain-source-cutover.md
