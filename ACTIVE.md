@@ -39,7 +39,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | — |
+| [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | [#1379][pr1379] |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
@@ -142,3 +142,4 @@ by ascending phase, then ascending task number.
 [pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
 [pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
+[pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
