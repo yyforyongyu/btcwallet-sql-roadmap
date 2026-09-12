@@ -4,8 +4,8 @@ Component: **Manager.Create**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 331][t331], [Task 456][t456], and
-[Task 467][t467]**.
+Dependencies: **[Task 329][t329], [Task 331][t331], [Task 456][t456],
+and [Task 467][t467]**.
 
 ## Rationale
 
@@ -14,9 +14,10 @@ backend work. An lnd shutdown therefore cannot stop a Create that is still
 waiting, while returning cancellation after durable mutation could falsely
 tell the caller that no wallet was created.
 
-The public API needs one explicit cancellation boundary without making atomic
-genesis rollback from Task 329 a prerequisite for adopting the final call
-shape.
+Wait for Task 329's atomic wallet-and-account genesis before adding public
+cancellation, so cancellation does not introduce failures between separately
+committed genesis steps. The initial lnd port uses Task 331's existing Create
+signature and shutdown draining; contextual creation follows for migration.
 
 ## Details
 
@@ -52,7 +53,9 @@ single and race-safe.
 - Cancel while waiting for Manager and backend admission and prove no durable
   or cached state is created.
 - Race cancellation immediately around the mutation cutoff on kvdb, SQLite,
-  and PostgreSQL and verify the documented winner and result.
+  and PostgreSQL and verify the documented winner and result. On SQL, reopen
+  to prove cancellation leaves either no genesis or the complete promised
+  wallet-and-account state, never partial genesis.
 - Race accepted Create with Stop and prove Store remains open until Create
   settles and a successful result is fully started and published.
 - Inject an ambiguous SQL commit and verify no retry or Wallet publication and

@@ -40,7 +40,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | — | — |
-| [Task 358][t358] | Make Manager creation cancellable | Gap fix | — | — |
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
@@ -61,7 +60,7 @@ by ascending phase, then ascending task number.
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
-| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 4 | YY | — |
+| [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 4 | YY | — |
 | [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 4 | Abdullahi | — |
 | [Task 348][t348] | Watch PSBT change before return | Bug fix | 4 | Gustavo | — |
@@ -94,7 +93,6 @@ by ascending phase, then ascending task number.
 [t349]: archive/tasks/349-transaction-invalidation.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
-[t358]: tasks/358-contextual-manager-operations.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
 [t366]: tasks/366-reconcile-sql-genesis-commit.md
 [t367]: tasks/367-bound-sql-genesis-secrets.md

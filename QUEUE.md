@@ -46,12 +46,15 @@ still requires separate authorization; these tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
-## Phase 1 — API stabilization and basic itests · 19 open
+## Phase 1 — API stabilization and basic itests · 18 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
-lifecycle and contextual creation, purpose-1017 key families, final address
-allocation, transaction invalidation, and truthful synchronization status.
-Basic component tests prove these contracts and existing key/signing APIs.
+lifecycle, purpose-1017 key families, final address allocation, transaction
+invalidation, and truthful synchronization status. Basic component tests prove
+these contracts and existing key/signing APIs.
+
+The initial port keeps Task 331's non-contextual Create signature and safe
+shutdown draining. Contextual creation follows atomic genesis in Phase 3.
 
 Keep the complete prerequisite closure. Task 395 reuses Task 344's durable
 child allocation for `AllocateNextKey`; it does not depend on Task 396's
@@ -64,7 +67,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 331][t331] | open | Manager lifecycle, public API cutover, and Store ownership | Bug fix | Make Manager the sole lifecycle authority | — |
 | [Task 343][t343] | open | AccountManager root-derived creation and SQL AccountStore | Gap fix | Create next-or-exact root-derived accounts | — |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 402 |
-| [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 331 |
 | [Task 390][t390] | open | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | 343, 468 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344, 390, 399 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
@@ -118,22 +120,28 @@ defect still gates any adapter or migration path that would actually expose it.
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
 | [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391, 430 |
 
-## Phase 3 — kvdb-to-SQL migration · 5 open
+## Phase 3 — kvdb-to-SQL migration · 7 open
 
 Validate one immutable source, extract its account/address and transaction/sync
 state, import it into SQLite, and expose conversion through Manager.Create.
 Tasks 335 and 373–376 are one migration sequence, not a backend-retirement
 program. Keep modern kvdb usable for the current and next release.
 
+Task 329 first makes ordinary SQL genesis atomic; Task 358 then adds caller
+cancellation. Task 376 consumes that contextual creation boundary for
+conversion. These creation prerequisites do not gate starting the lnd port.
+
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
+| [Task 329][t329] | open | Manager SQL genesis and SQL Store | Bug fix | Commit SQL wallet genesis atomically | — |
 | [Task 335][t335] | open | Legacy migration source snapshot | Migration | Validate an immutable legacy wallet source | — |
+| [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 329, 331 |
 | [Task 373][t373] | open | Legacy migration account, address, and secret extraction | Migration | Extract legacy account and address state | 335 |
 | [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 373 |
 | [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 374 |
 | [Task 376][t376] | open | Manager.Create legacy conversion mode | Migration | Convert a legacy wallet through Manager.Create | 331, 358, 375 |
 
-## Phase 4 — remaining wallet gaps and bugs · 40 open
+## Phase 4 — remaining wallet gaps and bugs · 39 open
 
 Fix remaining gaps and bugs without treating them as blanket prerequisites for
 the initial lnd port or conversion. Claims and PRs remain owned. If concrete
@@ -142,7 +150,6 @@ it explicitly; a component name alone does not make it an integration blocker.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 329][t329] | open | Manager SQL genesis and SQL Store | Bug fix | Commit SQL wallet genesis atomically | — |
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | 331 |
 | [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | 331 |
 | [Task 347][t347] | open | PsbtManager existing-signature validation | Bug fix | Authorize existing PSBT signatures | 346 |
