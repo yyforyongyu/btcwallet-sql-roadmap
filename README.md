@@ -14,8 +14,8 @@ For numbered work:
 4. Select one dependency-complete active task.
 5. Claim it and any dependent tasks you plan to stack in
    [ACTIVE.md](ACTIVE.md) before implementation.
-6. Implement exactly one task per btcwallet branch and PR, stacking dependent
-   PRs when that advances the chain.
+6. Implement one task per branch and PR in its owning repository, stacking
+   dependent PRs when that advances the chain.
 7. After merge, archive the task and refresh the state map directly on `main`.
 
 Claiming a task does not claim its dependencies. A task may be claimed before
@@ -57,6 +57,8 @@ Finish Phase 1's public APIs, required runtime behavior, and basic itests before
 starting the main lnd port PR. Phase 2's critical fixes, scenarios, and simple
 benchmarks can then proceed alongside that port; relevant correctness evidence,
 not benchmark completion, gates enabling an affected path.
+[Task 470](tasks/470-lnd-wallet-port.md) delivers the lnd port. A prior roadmap
+update assigns remaining required gaps to existing or new tasks.
 
 Phase 3 converts kvdb wallets to SQL, Phase 4 handles remaining gaps and bugs,
 and Phase 5 handles Signer/Vault hardening. Modern kvdb stays supported for the
@@ -76,7 +78,8 @@ Do not expand an ordinary Wallet fix into `waddrmgr`, `wtxmgr`, `walletdb`, the
 Loader, lnd, daemon production, or deprecated Wallet methods and tests. Tasks
 357 and 401 are narrow historical exceptions, not precedent. If the required
 behavior cannot stay Wallet-owned, revise the task or obtain explicit approval
-before implementation.
+before implementation. [Task 470](tasks/470-lnd-wallet-port.md) owns the
+lnd port as an explicit exception.
 
 An integration-test task owns the tested public contract. Test and CI files may
 live elsewhere, but any production correction remains Wallet-owned. Fix bugs

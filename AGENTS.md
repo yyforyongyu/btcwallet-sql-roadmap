@@ -243,6 +243,9 @@ wrap the result in `require.True`.
 - Task 357's accepted authoring work and Task 401's accepted chain interface
   and adapter work are narrow historical exceptions. They are not precedent
   for another task or permission to preserve deprecated Wallet behavior.
+- [Task 470](tasks/470-lnd-wallet-port.md) is an explicit exception for the
+  lnd port and its focused tests. Its merged lnd implementation PR closes the
+  task; this does not expand ordinary Wallet fixes into lnd.
 - If the required public behavior cannot be implemented inside the allowed
   production boundary, narrow, defer, or supersede the task, or obtain an
   explicit task-specific exception before implementation. Do not silently

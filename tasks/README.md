@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **470**.
+The next free task number is **471**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -9,6 +9,10 @@ Grouping here does not create dependency or scheduling authority.
 
 Ad hoc PRs are recorded in [QUEUE.md](../QUEUE.md), not this numbered catalog.
 They do not consume task numbers or require task files.
+
+## Consumer adoption
+
+- [Task 470](470-lnd-wallet-port.md): port lnd to maintained Wallet APIs.
 
 ## Creation, Manager, and storage
 
