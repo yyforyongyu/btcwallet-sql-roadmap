@@ -36,6 +36,11 @@ per-Wallet restart or teardown authority.
   Manager is their sole caller, and stale Wallet pointers return
   `ErrWalletStopped` before Store access after Manager Stop.
 - Make Manager lifecycle terminal. A failed or stopped Manager cannot restart.
+- Manager owns runtime lifetime independently of successful NewManager and
+  Start calls. Each Wallet's runtime outlives its startup or Create work.
+  A Manager runtime may parent Wallet cancellation without granting access to
+  Manager state, admission, or Store closure. Align ADR 0015 on this boundary;
+  keep Wallet admission and private stop as the existing owners.
 - A `Start` concurrent with the first accepted `Start` joins that attempt. A
   `Start` after successful startup returns the same ordered Wallet pointers
   and `nil`.
@@ -76,6 +81,10 @@ per-Wallet restart or teardown authority.
 - Stop rejects new Manager work, lets accepted Manager and Wallet operations
   settle, privately stops every Wallet, joins shared chain work, and closes
   Store last.
+- Keep contexts and workers needed by accepted work usable until it settles.
+  Runtime cancellation cannot replace an admitted call's ordinary result or
+  its method-specific caller cancellation. Cleanup I/O must remain possible
+  after call or runtime cancellation; cancellation alone never proves a join.
 - Preserve the modern-kvdb single-Wallet constraint.
 - Keep duplicate-create policy in Task 330, exact genesis reconciliation in
   Task 366, chain-source cutover in Task 423, and process-local database
@@ -125,6 +134,10 @@ observable.
   reaches the backend or cache.
 - Block accepted Wallet and shared-chain work during Stop and prove Store
   remains open until every user joins.
+- Cancel NewManager and Start call contexts after success and finish temporary
+  startup work; the Wallet remains usable. During Stop, hold an admitted read
+  and secret mutation and prove runtime cancellation preserves their ordinary
+  results and Store stays open until they finish.
 - Construct a fresh Manager over the same database and prove Start supplies
   fresh pointers for every durable Wallet. Retained old pointers match
   `ErrWalletStopped` before Store access.

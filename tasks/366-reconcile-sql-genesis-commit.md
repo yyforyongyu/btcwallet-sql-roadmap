@@ -30,7 +30,9 @@ conflicting state as an ordinary retryable failure.
   returning. Never publish an indeterminate Wallet.
 - Use one bounded Manager-owned reconciliation context so later public caller
   cancellation cannot interrupt determination. [Task 358][t358] owns the
-  public cancellation cutoff and contextual API.
+  public cancellation cutoff and contextual API. Reconciliation must remain
+  usable after the commit operation's context expires; Stop still joins it
+  before Store closure.
 - Keep definite-failure rollback in [Task 329][t329] and duplicate-create
   policy in [Task 330][t330].
 - Do not retry genesis from the transport error or add a manifest, replay
