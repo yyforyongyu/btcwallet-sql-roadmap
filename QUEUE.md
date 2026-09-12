@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **141 tasks**: **93 open**, **40 done**,
-**7 superseded**, and **1 deferred**. There are **0 recorded ad hoc tasks**,
-for **141 tracked tasks** and **40 completed** overall.
+**7 superseded**, and **1 deferred**. There are **113 recorded ad hoc tasks**,
+for **254 tracked tasks** and **153 completed** overall.
 
 Open tasks are grouped by delivery phase; completed tasks move to `Done`.
 Superseded tasks retain their identity and replacement in `Superseded`.
@@ -243,7 +243,7 @@ five-phase assignment. These tasks have no current delivery phase.
 
 ## Done
 
-**40 completed: 40 numbered tasks and 0 ad hoc PRs.** Each closing PR counts
+**153 completed: 40 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -297,8 +297,126 @@ additional delivered work, not progress against a numbered phase gate.
 One PR per row, sorted by PR number. Author is recorded for attribution, not
 eligibility. Historical task notes remain evidence, not extra counted rows.
 
+Backfilled on 2026-09-12 from all 153 GitHub PRs marked merged with base
+`sql-wallet`, without a date or author filter. The other 40 PRs are already
+counted in the numbered table above. This includes work predating the current
+numbered roadmap; old archived task references add no separate completion.
+
 | PR | Outcome | Author | Merged (UTC) |
 | --- | --- | --- | --- |
+| [#1065](https://github.com/btcsuite/btcwallet/pull/1065) | multi: add sqlc support | GustavoStingelin | 2025-10-30 |
+| [#1101](https://github.com/btcsuite/btcwallet/pull/1101) | Add the SQL blocks schema | moawnallah | 2025-11-11 |
+| [#1111](https://github.com/btcsuite/btcwallet/pull/1111) | wallet: introduce db layer interfaces | yyforyongyu | 2025-11-24 |
+| [#1115](https://github.com/btcsuite/btcwallet/pull/1115) | wallet+Makefile: move sql db to wallet/internal | GustavoStingelin | 2025-11-12 |
+| [#1121](https://github.com/btcsuite/btcwallet/pull/1121) | wallet: integrate `sqlfluff` metadev helpers | moawnallah | 2025-12-15 |
+| [#1125](https://github.com/btcsuite/btcwallet/pull/1125) | wallet: implement WalletStore interface across PG and SQLite | GustavoStingelin | 2025-12-11 |
+| [#1131](https://github.com/btcsuite/btcwallet/pull/1131) | wallet: refactor WalletStore interface and add common errors | GustavoStingelin | 2025-11-28 |
+| [#1132](https://github.com/btcsuite/btcwallet/pull/1132) | wallet: add store db constructors and safe-casting | GustavoStingelin | 2025-11-28 |
+| [#1134](https://github.com/btcsuite/btcwallet/pull/1134) | Implement the SQL blocks store | moawnallah | 2025-12-22 |
+| [#1136](https://github.com/btcsuite/btcwallet/pull/1136) | wallet: add sqldb itest | GustavoStingelin | 2025-12-10 |
+| [#1138](https://github.com/btcsuite/btcwallet/pull/1138) | wallet: Implement address type store support | GustavoStingelin | 2025-12-17 |
+| [#1139](https://github.com/btcsuite/btcwallet/pull/1139) | wallet: rename wallet sync table birthday to birthday_timestamp | GustavoStingelin | 2025-12-16 |
+| [#1141](https://github.com/btcsuite/btcwallet/pull/1141) | wallet: fix pg itest "too many clients" | GustavoStingelin | 2025-12-17 |
+| [#1142](https://github.com/btcsuite/btcwallet/pull/1142) | wallet: add key scope SQL migrations and queries | GustavoStingelin | 2025-12-22 |
+| [#1143](https://github.com/btcsuite/btcwallet/pull/1143) | wallet: add P2A and P2PK address types | GustavoStingelin | 2025-12-18 |
+| [#1147](https://github.com/btcsuite/btcwallet/pull/1147) | wallet: add AccountStore implementation | GustavoStingelin | 2026-01-20 |
+| [#1158](https://github.com/btcsuite/btcwallet/pull/1158) | multi: add coveralls for database integration tests | GustavoStingelin | 2026-01-22 |
+| [#1162](https://github.com/btcsuite/btcwallet/pull/1162) | wallet: implement AddressStore | GustavoStingelin | 2026-02-11 |
+| [#1165](https://github.com/btcsuite/btcwallet/pull/1165) | Add design docs for transaction table schema | yyforyongyu | 2026-02-12 |
+| [#1166](https://github.com/btcsuite/btcwallet/pull/1166) | docs: add keyvault ADR | GustavoStingelin | 2026-03-06 |
+| [#1168](https://github.com/btcsuite/btcwallet/pull/1168) | kvdb: start implementing `Store` interface | yyforyongyu | 2026-02-24 |
+| [#1169](https://github.com/btcsuite/btcwallet/pull/1169) | multi: move tools config files back to root | GustavoStingelin | 2026-02-09 |
+| [#1170](https://github.com/btcsuite/btcwallet/pull/1170) | docs+README: add Single-Passphrase Encryption Model ADR | GustavoStingelin | 2026-03-03 |
+| [#1171](https://github.com/btcsuite/btcwallet/pull/1171) | docs: add XChaCha20-Poly1305 Encryption ADR | GustavoStingelin | 2026-03-02 |
+| [#1172](https://github.com/btcsuite/btcwallet/pull/1172) | itest: implement `lnd` style itest framework | yyforyongyu | 2026-02-12 |
+| [#1173](https://github.com/btcsuite/btcwallet/pull/1173) | Finish itest framework | yyforyongyu | 2026-02-13 |
+| [#1174](https://github.com/btcsuite/btcwallet/pull/1174) | chain: fix flaky `TestPrunedBlockDispatcherQuerySameBlock` | yyforyongyu | 2026-03-30 |
+| [#1182](https://github.com/btcsuite/btcwallet/pull/1182) | wallet: add real db constructors out of itest | GustavoStingelin | 2026-03-05 |
+| [#1185](https://github.com/btcsuite/btcwallet/pull/1185) | wallet: introduce SQL schema and queries for txs and UTXOs | yyforyongyu | 2026-03-23 |
+| [#1186](https://github.com/btcsuite/btcwallet/pull/1186) | wallet: add SQL tx stores | yyforyongyu | 2026-04-07 |
+| [#1187](https://github.com/btcsuite/btcwallet/pull/1187) | wallet: add SQL tx replacement and invalidation flows | yyforyongyu | 2026-04-08 |
+| [#1188](https://github.com/btcsuite/btcwallet/pull/1188) | Finalize wallet manager's `WalletID` | yyforyongyu | 2026-03-12 |
+| [#1189](https://github.com/btcsuite/btcwallet/pull/1189) | wallet: implement store pagination | GustavoStingelin | 2026-04-08 |
+| [#1190](https://github.com/btcsuite/btcwallet/pull/1190) | Fix `make tidy-module` | yyforyongyu | 2026-03-16 |
+| [#1192](https://github.com/btcsuite/btcwallet/pull/1192) | wallet: fix pg itest connection exhaustion under parallelism | GustavoStingelin | 2026-03-27 |
+| [#1193](https://github.com/btcsuite/btcwallet/pull/1193) | wallet: add SQL UTXO store | yyforyongyu | 2026-04-07 |
+| [#1195](https://github.com/btcsuite/btcwallet/pull/1195) | bwtest: wait for miner p2p readiness | yyforyongyu | 2026-03-27 |
+| [#1196](https://github.com/btcsuite/btcwallet/pull/1196) | wallet: add tx and utxo store coverage | yyforyongyu | 2026-04-10 |
+| [#1197](https://github.com/btcsuite/btcwallet/pull/1197) | Update `TxStore` interface and add missing queries | yyforyongyu | 2026-03-31 |
+| [#1198](https://github.com/btcsuite/btcwallet/pull/1198) | Clarify integration-test names | GustavoStingelin | 2026-03-30 |
+| [#1199](https://github.com/btcsuite/btcwallet/pull/1199) | wallet: simplify postgres itest headroom and add repo guide | yyforyongyu | 2026-03-30 |
+| [#1200](https://github.com/btcsuite/btcwallet/pull/1200) | wallet+db: handle SQL backend errors | yyforyongyu | 2026-04-15 |
+| [#1201](https://github.com/btcsuite/btcwallet/pull/1201) | wallet: migrate LabelTx to db.Store | yyforyongyu | 2026-04-30 |
+| [#1202](https://github.com/btcsuite/btcwallet/pull/1202) | wallet: migrate tx reader to db.Store | yyforyongyu | 2026-05-11 |
+| [#1204](https://github.com/btcsuite/btcwallet/pull/1204) | Prep address manager for store migration | yyforyongyu | 2026-04-23 |
+| [#1206](https://github.com/btcsuite/btcwallet/pull/1206) | wallet: improve concurrent itests | GustavoStingelin | 2026-04-07 |
+| [#1208](https://github.com/btcsuite/btcwallet/pull/1208) | wallet: simplify pagination api | yyforyongyu | 2026-04-14 |
+| [#1209](https://github.com/btcsuite/btcwallet/pull/1209) | db: split backend packages and SQL assets | yyforyongyu | 2026-04-13 |
+| [#1210](https://github.com/btcsuite/btcwallet/pull/1210) | wallet: fix missing drop statements | GustavoStingelin | 2026-04-14 |
+| [#1211](https://github.com/btcsuite/btcwallet/pull/1211) | wallet: move legacy helpers to deprecated | yyforyongyu | 2026-04-28 |
+| [#1212](https://github.com/btcsuite/btcwallet/pull/1212) | db: apply runtime read/write helpers | yyforyongyu | 2026-04-21 |
+| [#1214](https://github.com/btcsuite/btcwallet/pull/1214) | wallet: migrate address manager to db.Store | yyforyongyu | 2026-05-28 |
+| [#1216](https://github.com/btcsuite/btcwallet/pull/1216) | wallet: cleanup import aliases | GustavoStingelin | 2026-04-15 |
+| [#1217](https://github.com/btcsuite/btcwallet/pull/1217) | bwtest: pin bitcoind to v1 transport | yyforyongyu | 2026-04-16 |
+| [#1219](https://github.com/btcsuite/btcwallet/pull/1219) | wallet: make address scripts unique per wallet | GustavoStingelin | 2026-04-21 |
+| [#1220](https://github.com/btcsuite/btcwallet/pull/1220) | wallet: guard nil derived address callbacks | GustavoStingelin | 2026-04-22 |
+| [#1221](https://github.com/btcsuite/btcwallet/pull/1221) | wallet: disambiguates watch-only | GustavoStingelin | 2026-05-14 |
+| [#1222](https://github.com/btcsuite/btcwallet/pull/1222) | wallet: enforce watch-only invariants in sql | GustavoStingelin | 2026-05-15 |
+| [#1223](https://github.com/btcsuite/btcwallet/pull/1223) | db: add SQL tx detail reads | yyforyongyu | 2026-05-11 |
+| [#1224](https://github.com/btcsuite/btcwallet/pull/1224) | wallet: store public key in plaintext | GustavoStingelin | 2026-05-15 |
+| [#1225](https://github.com/btcsuite/btcwallet/pull/1225) | wallet: replace advisory lock with persisted account counter | GustavoStingelin | 2026-05-15 |
+| [#1227](https://github.com/btcsuite/btcwallet/pull/1227) | build: lint tagged itest variants | yyforyongyu | 2026-05-11 |
+| [#1228](https://github.com/btcsuite/btcwallet/pull/1228) | db: prepare kvdb store routing | yyforyongyu | 2026-05-14 |
+| [#1229](https://github.com/btcsuite/btcwallet/pull/1229) | wallet: migrate wallet metadata to db.Store | yyforyongyu | 2026-06-02 |
+| [#1230](https://github.com/btcsuite/btcwallet/pull/1230) | Route TxCreator and TxPublisher through Store | yyforyongyu | 2026-06-10 |
+| [#1231](https://github.com/btcsuite/btcwallet/pull/1231) | Prepare AccountManager Store routing | yyforyongyu | 2026-05-18 |
+| [#1232](https://github.com/btcsuite/btcwallet/pull/1232) | db: populate AccountInfo balance with SkipBalance opt-out | yyforyongyu | 2026-05-20 |
+| [#1233](https://github.com/btcsuite/btcwallet/pull/1233) | multi: use testify mock for derived account ops tests and docs | GustavoStingelin | 2026-05-18 |
+| [#1237](https://github.com/btcsuite/btcwallet/pull/1237) | Prepare AddressManager Store routing | yyforyongyu | 2026-05-27 |
+| [#1238](https://github.com/btcsuite/btcwallet/pull/1238) | wallet: migrate UTXO store + lease ops to db.Store | yyforyongyu | 2026-06-10 |
+| [#1239](https://github.com/btcsuite/btcwallet/pull/1239) | wallet: route account manager through Store + finish kvdb writes | yyforyongyu | 2026-05-25 |
+| [#1240](https://github.com/btcsuite/btcwallet/pull/1240) | Prepare AccountStore identity, cache, and filters | yyforyongyu | 2026-05-22 |
+| [#1242](https://github.com/btcsuite/btcwallet/pull/1242) | wallet: add wallet secrets read | GustavoStingelin | 2026-05-27 |
+| [#1243](https://github.com/btcsuite/btcwallet/pull/1243) | wallet: migrate address-store read path + signer derivation | yyforyongyu | 2026-05-28 |
+| [#1245](https://github.com/btcsuite/btcwallet/pull/1245) | wallet: consolidate testify mocks into bwtest/mock | yyforyongyu | 2026-05-28 |
+| [#1246](https://github.com/btcsuite/btcwallet/pull/1246) | wallet: enforce wallet-level watch-only invariant (ADR 0012) | yyforyongyu | 2026-06-10 |
+| [#1247](https://github.com/btcsuite/btcwallet/pull/1247) | Enrich UtxoInfo and scoped UTXO filtering | yyforyongyu | 2026-06-10 |
+| [#1248](https://github.com/btcsuite/btcwallet/pull/1248) | wallet: route tx publisher + tx-store writes through Store | yyforyongyu | 2026-06-15 |
+| [#1252](https://github.com/btcsuite/btcwallet/pull/1252) | wallet+AGENTS.md: add agent guidance for wallet subsystems | GustavoStingelin | 2026-06-15 |
+| [#1253](https://github.com/btcsuite/btcwallet/pull/1253) | wallet: add account ops workflow | GustavoStingelin | 2026-06-08 |
+| [#1256](https://github.com/btcsuite/btcwallet/pull/1256) | db: implement the ApplyScanBatch scan engine | yyforyongyu | 2026-07-09 |
+| [#1257](https://github.com/btcsuite/btcwallet/pull/1257) | db: cover ApplyScanBatch conformance and RollbackToBlock atomicity | yyforyongyu | 2026-07-10 |
+| [#1258](https://github.com/btcsuite/btcwallet/pull/1258) | Route startup, sync-tip, and rewind through Store | yyforyongyu | 2026-07-12 |
+| [#1260](https://github.com/btcsuite/btcwallet/pull/1260) | wallet: split account methods in multiple files | GustavoStingelin | 2026-06-04 |
+| [#1261](https://github.com/btcsuite/btcwallet/pull/1261) | wallet: readd create max account number itest | GustavoStingelin | 2026-06-05 |
+| [#1262](https://github.com/btcsuite/btcwallet/pull/1262) | db: add synced-block, watched-output, and tx-batch Store methods | yyforyongyu | 2026-07-02 |
+| [#1263](https://github.com/btcsuite/btcwallet/pull/1263) | Add scan-batch scaffolding and rollback support | yyforyongyu | 2026-07-02 |
+| [#1265](https://github.com/btcsuite/btcwallet/pull/1265) | multi: add keyvault lifecycle boundary | GustavoStingelin | 2026-06-16 |
+| [#1267](https://github.com/btcsuite/btcwallet/pull/1267) | wallet+db: fix SQL-wallet review issues | yyforyongyu | 2026-06-18 |
+| [#1268](https://github.com/btcsuite/btcwallet/pull/1268) | wallet+db: normalize account address identity | yyforyongyu | 2026-07-02 |
+| [#1269](https://github.com/btcsuite/btcwallet/pull/1269) | Add scan-horizon scaffolding and rollback eviction | yyforyongyu | 2026-07-06 |
+| [#1270](https://github.com/btcsuite/btcwallet/pull/1270) | Route chain-scan writes and reads through Store | yyforyongyu | 2026-07-12 |
+| [#1271](https://github.com/btcsuite/btcwallet/pull/1271) | Resolve rescan identity and require Store in Syncer | yyforyongyu | 2026-07-12 |
+| [#1272](https://github.com/btcsuite/btcwallet/pull/1272) | Route account secrets through Store and Vault | yyforyongyu | 2026-08-04 |
+| [#1273](https://github.com/btcsuite/btcwallet/pull/1273) | wallet: impl keyvault lifecycle | GustavoStingelin | 2026-07-06 |
+| [#1277](https://github.com/btcsuite/btcwallet/pull/1277) | db: align SQL address store with the db-ops interface style | Abdulkbk | 2026-07-07 |
+| [#1291](https://github.com/btcsuite/btcwallet/pull/1291) | Finalize SQL Implementation | yyforyongyu | 2026-08-04 |
+| [#1292](https://github.com/btcsuite/btcwallet/pull/1292) | Start SQL Integration Tests | yyforyongyu | 2026-08-05 |
+| [#1300](https://github.com/btcsuite/btcwallet/pull/1300) | wallet+itest+bwtest: add Manager and Controller itests | GustavoStingelin | 2026-08-06 |
+| [#1304](https://github.com/btcsuite/btcwallet/pull/1304) | multi: match nested CI base branches | yyforyongyu | 2026-08-06 |
+| [#1306](https://github.com/btcsuite/btcwallet/pull/1306) | Make WatchOnly authoritative during creation | GustavoStingelin | 2026-08-12 |
+| [#1309](https://github.com/btcsuite/btcwallet/pull/1309) | itest: fix case filtering | yyforyongyu | 2026-08-11 |
+| [#1310](https://github.com/btcsuite/btcwallet/pull/1310) | wallet: silence local goconst lint errors | GustavoStingelin | 2026-08-11 |
+| [#1315](https://github.com/btcsuite/btcwallet/pull/1315) | chain: synchronize bitcoind event tests | yyforyongyu | 2026-08-13 |
+| [#1325](https://github.com/btcsuite/btcwallet/pull/1325) | itest: document integration test standards | yyforyongyu | 2026-08-19 |
+| [#1333](https://github.com/btcsuite/btcwallet/pull/1333) | docs: add ADR authoring template | yyforyongyu | 2026-08-20 |
+| [#1361](https://github.com/btcsuite/btcwallet/pull/1361) | wallet: publish a transaction label limit | Abdulkbk | 2026-09-07 |
+| [#1362](https://github.com/btcsuite/btcwallet/pull/1362) | wallet+kvdb: clear a transaction label with an empty one | Abdulkbk | 2026-09-09 |
+| [#1364](https://github.com/btcsuite/btcwallet/pull/1364) | Reject empty SQL watch-only passphrases | GustavoStingelin | 2026-09-05 |
+| [#1373](https://github.com/btcsuite/btcwallet/pull/1373) | wallet: route component requests through admission | yyforyongyu | 2026-09-10 |
+| [#1375](https://github.com/btcsuite/btcwallet/pull/1375) | wallet+db: simplify account error boundary | yyforyongyu | 2026-09-12 |
+| [#1376](https://github.com/btcsuite/btcwallet/pull/1376) | wallet: reject nil Signer arguments before admission | Abdulkbk | 2026-09-12 |
+| [#1377](https://github.com/btcsuite/btcwallet/pull/1377) | bwtest: stop neutrino before closing database | yyforyongyu | 2026-09-11 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
