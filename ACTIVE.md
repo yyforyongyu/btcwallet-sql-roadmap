@@ -28,8 +28,6 @@ recorded PR stack.
 | [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
 | [Task 442][t442] | Cover public signing contracts | Test | — | — |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
-| [Task 452][t452] | Exclude NoChainSync accounts from recovery | Gap fix | YY | [#1368][pr1368] |
-| [Task 455][t455] | Report exact wallet sync status | Bug fix | Gustavo | [#1363][pr1363] |
 
 ## Blocked Phase 1 Tasks
 
@@ -128,9 +126,7 @@ by ascending phase, then ascending task number.
 [t441]: tasks/441-signer-derivation-ecdh-itests.md
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
-[t452]: tasks/452-key-only-recovery-derivation.md
 [t454]: tasks/454-postgres-transaction-isolation.md
-[t455]: tasks/455-exact-wallet-sync-status.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t460]: tasks/460-sequential-account-invalid-children.md
 [t461]: tasks/461-address-batch-itests.md
@@ -142,10 +138,8 @@ by ascending phase, then ascending task number.
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
-[pr1363]: https://github.com/btcsuite/btcwallet/pull/1363
 [pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
-[pr1368]: https://github.com/btcsuite/btcwallet/pull/1368
 [pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
 [pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374

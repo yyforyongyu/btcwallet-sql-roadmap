@@ -52,4 +52,4 @@ backends, with an obvious timing boundary and no production changes.
 
 [t331]: 331-manager-wallet-lifecycle.md
 [t416]: 416-database-benchmark-fixtures.md
-[t455]: 455-exact-wallet-sync-status.md
+[t455]: ../archive/tasks/455-exact-wallet-sync-status.md

@@ -70,5 +70,5 @@ requests, and observes completion only through maintained public APIs.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
 [t331]: 331-manager-wallet-lifecycle.md
-[t455]: 455-exact-wallet-sync-status.md
+[t455]: ../archive/tasks/455-exact-wallet-sync-status.md
 [t449]: 449-multi-wallet-sql-isolation-scenario.md

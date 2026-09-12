@@ -63,7 +63,6 @@ Grouping here does not create dependency or scheduling authority.
   persisted Wallet data.
 - [Task 403](403-raw-import-watch-obligations.md): register raw imports before
   public success.
-- [Task 452](452-key-only-recovery-derivation.md): exclude `NoChainSync`
   accounts from recovery.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
@@ -79,7 +78,6 @@ Grouping here does not create dependency or scheduling authority.
 - [Task 372](372-multi-wallet-rollback.md): coordinate multi-Wallet rollback.
 - [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
-- [Task 455](455-exact-wallet-sync-status.md): report exact wallet
   synchronization status.
 
 ## Transactions, UTXOs, and PSBTs

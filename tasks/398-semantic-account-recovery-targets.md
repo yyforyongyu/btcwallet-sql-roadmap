@@ -67,4 +67,4 @@ wallet-owned error identity.
 [t345]: ../archive/tasks/345-durable-watch-registration.md
 [t397]: 397-semantic-recovery-targets-adr.md
 [t399]: 399-zero-lookahead-persisted-targets.md
-[t452]: 452-key-only-recovery-derivation.md
+[t452]: ../archive/tasks/452-key-only-recovery-derivation.md
