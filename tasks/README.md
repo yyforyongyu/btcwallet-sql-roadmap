@@ -7,6 +7,9 @@ This is a link-only catalog. Each task file owns its scope and dependencies,
 [ACTIVE.md](../ACTIVE.md) owns active tasks, claims, and in-progress PRs.
 Grouping here does not create dependency or scheduling authority.
 
+Ad hoc PRs are recorded in [QUEUE.md](../QUEUE.md), not this numbered catalog.
+They do not consume task numbers or require task files.
+
 ## Creation, Manager, and storage
 
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis

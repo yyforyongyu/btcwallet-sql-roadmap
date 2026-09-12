@@ -1,7 +1,8 @@
 # Active Tasks
 
-Claim early, own the development, and ship. After a task merges, remove it
-here and archive its task file.
+Claim early, own the development, and ship. After a numbered task merges,
+remove it here and archive its task file. Merged ad hoc PRs go directly to
+[QUEUE.md](QUEUE.md), not these live-work lists.
 
 ## Active Tasks
 

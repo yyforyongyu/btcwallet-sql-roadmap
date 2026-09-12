@@ -11,13 +11,14 @@ This repository contains planning documents, not btcwallet source code.
   `Superseded`, and approved future-cycle work in `Deferred`.
 - [ACTIVE.md](ACTIVE.md) owns the active-task focus, claims, in-progress PRs,
   and coordination.
-- Individual files under [tasks/](tasks/) own type, scope, and dependencies.
+- Individual files under [tasks/](tasks/) own numbered-task type, scope, and
+  dependencies. Merged ad hoc PRs own their own scope and evidence.
 - [tasks/README.md](tasks/README.md) owns the open catalog and next number.
 - [TASK_TEMPLATE.md](TASK_TEMPLATE.md) owns the required task shape.
 - [archive/](archive/) is historical evidence, not current instruction.
 
 Do not copy the complete dependency graph into README or ACTIVE. QUEUE shows
-every roadmap task's delivery phase and open dependencies, but task files
+every numbered task's delivery phase and open dependencies, but task files
 remain the only authority for type and all dependency edges, while ACTIVE
 remains the only authority for live state.
 
@@ -73,8 +74,8 @@ number. No task appears in more than one list.
 
 ## Task types and priority
 
-Give every task exactly one primary type based on its main motivation, not
-incidental implementation details:
+Give every numbered task exactly one primary type based on its main motivation,
+not incidental implementation details:
 
 - **Bug fix:** existing supported behavior is incorrect or unsafe.
 - **Gap fix:** behavior required by an accepted public contract, backend
@@ -130,9 +131,38 @@ retain concrete dependencies and require proof for the paths actually enabled.
   directly. Do not open a roadmap PR unless explicitly requested.
 - Remove the worktree and its local branch after the push.
 
+## Ad hoc PR accounting
+
+One merged PR is one task. Work without a numbered entry in QUEUE needs no
+retrospective task file. Count PRs merged into `btcsuite/btcwallet`'s
+`sql-wallet` branch; there is no author filter. Verify the PR's merged state
+and base branch on GitHub. Open and closed-unmerged PRs, and PRs merged into
+other branches, do not qualify as completed ad hoc work.
+
+Check QUEUE and ACTIVE for an existing numbered-task PR mapping before adding
+an ad hoc entry. If it has one, complete that numbered task through the normal
+workflow instead. Otherwise record one ad hoc row, including for a separately
+merged follow-up to earlier work. A task or PR reference in historical notes
+is not an additional counted task. Never count one PR as multiple tasks or
+credit it in both the numbered and ad hoc lists.
+
+Add eligible PRs directly to the ad hoc table under QUEUE's existing `Done`
+section, with the PR link, short outcome, author, and UTC merge date. The PR
+number is its identity; allocate no roadmap number, task file, catalog entry,
+ACTIVE row, archive file, or retrospective phase. The numbered-task planning
+and archival steps do not apply to these entries. Scope and verification
+rules still apply to new implementation; historical accounting does not
+authorize another change outside the current scope.
+
+Derive counts from QUEUE rows. Report numbered and ad hoc totals separately,
+then combine them for overall tracked and completed work. Each ad hoc row adds
+one to total and done only; it does not reduce the numbered open backlog,
+change phase counts, or establish completion of a numbered phase gate.
+Superseded and deferred work remain separate from done.
+
 ## Task format
 
-Start from [TASK_TEMPLATE.md](TASK_TEMPLATE.md). Create every task as
+Start from [TASK_TEMPLATE.md](TASK_TEMPLATE.md). Create every numbered task as
 `NNN-kebab-case.md` using the next free number in
 [tasks/README.md](tasks/README.md).
 
@@ -288,7 +318,8 @@ met. Deferral reduces the open count, not the total, and adds no closing PR.
 
 ## Completing a task
 
-After the implementation PR merges, use the roadmap update workflow to:
+For a numbered task, after the implementation PR merges, use the roadmap
+update workflow to:
 
 1. remove its row from [ACTIVE.md](ACTIVE.md) and refresh the remaining active
    and parked claimed rows;

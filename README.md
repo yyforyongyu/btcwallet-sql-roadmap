@@ -5,6 +5,8 @@ maintained SQL-backed `wallet/` library.
 
 ## How to use this repository
 
+For numbered work:
+
 1. Read [AGENTS.md](AGENTS.md) for the workflow and task rules.
 2. Read [QUEUE.md](QUEUE.md) for the delivery phases and open
    dependencies.
@@ -20,11 +22,18 @@ Claiming a task does not claim its dependencies. A task may be claimed before
 it becomes active, and its PR may be stacked on an open prerequisite. Hard
 dependencies still control bottom-up merge order and completion.
 
+Unplanned PRs need no retrospective task file. After a PR merges into
+`btcsuite/btcwallet`'s `sql-wallet` branch, count it under QUEUE's `Done`
+section as one ad hoc task unless it is already a numbered task's implementation
+PR. See [ad hoc PR accounting](AGENTS.md#ad-hoc-pr-accounting) for deduplication
+and counts. Ad hoc completion does not reduce the numbered backlog.
+
 ## Sources of truth
 
 | Information | Source |
 | --- | --- |
-| Task type, scope, and complete dependency graph | Individual file under [tasks/](tasks/) |
+| Numbered-task type, scope, and complete dependency graph | Individual file under [tasks/](tasks/) |
+| Ad hoc scope and completion evidence | Merged PR linked from [QUEUE.md](QUEUE.md#done) |
 | Delivery phases, open dependencies, completed PRs, supersession, and deferral | [QUEUE.md](QUEUE.md) |
 | Active tasks, claims, and in-progress PRs | [ACTIVE.md](ACTIVE.md) |
 | Task catalog and next number | [tasks/README.md](tasks/README.md) |
@@ -38,9 +47,9 @@ records its source commit and includes direct edges, transitive closures,
 dependency components, and scheduling-impact counts.
 
 Do not duplicate task types, dependencies, or the complete backlog in this
-file. Each task owns its type, scope, and dependency contract, QUEUE groups the
-work into delivery phases, and `ACTIVE.md` separately owns live execution
-state.
+file. Each numbered task owns its type, scope, and dependency contract. QUEUE
+groups the work into delivery phases, and `ACTIVE.md` separately owns live
+execution state.
 
 ## Delivery milestones
 
@@ -78,7 +87,7 @@ separate implementation tasks.
 Run shared public contracts on kvdb, SQLite, and PostgreSQL. If a backend
 cannot represent a scenario, document that structural exclusion in its task.
 
-## Creating or changing a task
+## Creating or changing a numbered task
 
 Start from [TASK_TEMPLATE.md](TASK_TEMPLATE.md), use the next number in the
 [task catalog](tasks/README.md), and follow [AGENTS.md](AGENTS.md)'s signed
