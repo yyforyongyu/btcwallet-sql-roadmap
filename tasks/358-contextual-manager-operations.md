@@ -29,7 +29,8 @@ signature and shutdown draining; contextual creation follows for migration.
 - Define one documented mutation cutoff. Cancellation before it returns the
   caller's context error without durable or cached state. At or after it,
   Manager completes classification, assembly, private Wallet start, and
-  publication under Manager-owned lifetime.
+  publication under Manager-owned lifetime. The caller waits for that result;
+  finishing creation work cannot cancel the resulting Wallet runtime.
 - Compose with Task 331 so Stop cannot close Store underneath an accepted
   Create, while a Create rejected after shutdown performs no backend work.
 - Map an ambiguous SQL commit to Task 467's wallet-owned identity and do not

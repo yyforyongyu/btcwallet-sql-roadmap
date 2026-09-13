@@ -19,14 +19,22 @@ boundary before Manager closes the Store.
   filtered-block, and relevant-transaction events.
 - Deliver each accepted event to every affected Wallet processor in source
   order. Use bounded, shutdown-aware delivery and no goroutine per event.
+  Block progress reaches every registered Wallet, even with no matching
+  transaction. Wallet matching must not mutate another processor's payload.
 - Let Wallet processors retain wallet-scoped address, transaction, tip, and
   historical-rescan work. The dispatcher adds no wallet-specific ownership
   policy.
 - Register the complete startup Wallet set and Wallets created while Manager
   is running. One failed processor follows Task 334's aggregate failure policy
   rather than silently dropping events.
+- Fix registration against event admission: a new Wallet receives events
+  admitted after that boundary without disturbing existing deliveries.
+  Task 402 owns watch registration; Task 423 integrates it with catch-up
+  at this boundary before public Create success.
 - Closing admission must settle accepted delivery and join every processor
-  before Task 331 closes the Store.
+  before Task 331 closes the Store. Settle delivery as complete or failed;
+  partial fanout is not success. Full queues cannot block failure/Stop or
+  wait for an acknowledgment from a failed processor.
 - Keep the maintained live source path unchanged in this task.
   [Task 423][t423] owns the later source cutover, [Task 371][t371] owns durable
   canonical state, and [Task 372][t372] owns database-wide rollback.
@@ -47,8 +55,10 @@ contract.
 
 - Register two Wallet processors and submit mixed events directly. Both
   receive applicable events in identical order.
-- Exercise bounded backpressure and processor failure without dropping an
-  accepted event or leaking a worker.
+- Fill one delivery queue, fail that processor, and race Stop. Accepted work
+  settles as delivered or failed without deadlock or leaked workers.
+- Deliver a block with no matching transaction to one Wallet; its tip advances
+  and processing leaves another Wallet's payload unchanged.
 - Register a newly created Wallet at a documented event boundary.
 - Race admission, delivery, and stop; all accepted delivery finishes before
   Store closure and later delivery is rejected.

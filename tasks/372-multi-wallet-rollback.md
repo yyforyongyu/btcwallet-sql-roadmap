@@ -22,10 +22,14 @@ notification stream.
   or fan out the same disconnect.
 - Pause new delivery and finish accepted processor work before invoking the
   existing database-wide rollback once.
+- Include historical scan writes: a batch read from the old branch cannot
+  restore stale Wallet facts after rollback. Quiesce or revalidate those
+  writes using the existing Wallet processing boundary.
 - Atomically rewind the canonical frontier and every affected Wallet tip with
   the Store's existing block and transaction detach behavior.
 - Resume delivery only after the rollback result proves the requested durable
-  state. Preserve quiescence on an indeterminate result.
+  state. An unprovable result follows the existing terminal Manager failure
+  path; it cannot leave a Running Manager paused forever.
 - Keep manual Wallet recovery and targeted rescans wallet-scoped; they cannot
   move the shared frontier or another Wallet's tip.
 - Leave live source consumption unchanged until [Task 423][t423].
@@ -52,6 +56,8 @@ decision.
   state or deadlock.
 - Cover definite failure and ambiguous old, new, and indeterminate outcomes on
   SQLite and PostgreSQL; resume only from a proven applied state.
+- Pause a historical batch after reading the old branch, roll back, then
+  release it; stale Wallet facts must not reappear.
 - Prove manual recovery remains Wallet-scoped and the live source path remains
   unchanged.
 

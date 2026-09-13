@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **141 tasks**: **93 open**, **40 done**,
+The numbered roadmap contains **142 tasks**: **94 open**, **40 done**,
 **7 superseded**, and **1 deferred**. There are **113 recorded ad hoc tasks**,
-for **254 tracked tasks** and **153 completed** overall.
+for **255 tracked tasks** and **153 completed** overall.
 
 Open tasks are grouped by delivery phase; completed tasks move to `Done`.
 Superseded tasks retain their identity and replacement in `Superseded`.
@@ -38,11 +38,25 @@ lnd port PR. The port can then advance in parallel with Phase 2. Known critical
 defects and relevant scenarios gate merging or enabling the affected adapter
 paths; benchmarks are measurement, not an integration gate. Do not wait for
 every later feature, refactor, or hardening task to begin the port.
+[Task 470][t470] delivers the lnd port, including transaction notifications.
+Before claiming the port, check transaction-event delivery, standalone signing,
+online remote signing, and kvdb caller paths through the
+[roadmap-update workflow](AGENTS.md#roadmap-update-workflow).
+Before Phase 1 closes, establish from source evidence whether existing lnd
+interfaces and maintained Wallet APIs can preserve transaction notifications.
+Use existing owners, including [361][t361] and [391][t391] where applicable.
+Allocate another task only for a demonstrated enabled caller whose required
+outcome no existing owner covers. Account-level NoChainSync is not a chain-free
+runtime, and [395][t395] rejects kvdb; neither selects a new implementation.
+This roadmap maintenance may run during Phase 1. Keep Phase 1 incomplete until
+required initial API/runtime gaps have owners, hard edges, and their closure
+in Phase 1. The port task owns only the later lnd implementation.
+Tasks 346 and 447 gate port merge because its existing PSBT path stays enabled.
 
 Phase 3 owns verified conversion, not kvdb removal. It needs its explicit
 prerequisites and verification of the paths migration uses, not every optional
-scenario in Phase 2 or every bug in Phase 4. An lnd-repository implementation
-still requires separate authorization; these tasks remain btcwallet-owned.
+scenario in Phase 2 or every bug in Phase 4. Task 470 owns lnd implementation;
+ordinary Wallet tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
@@ -83,7 +97,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396, 431 |
 | [Task 468][t468] | open | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | 343 |
 
-## Phase 2 — critical correctness and verification · 23 open
+## Phase 2 — critical correctness and verification · 24 open
 
 Task 346 is the remaining open critical transaction/PSBT defect; preserve its
 owner and PR. Tasks 357 and 404 are completed history. Complete scenario
@@ -119,6 +133,7 @@ defect still gates any adapter or migration path that would actually expose it.
 | [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Cover public account mutation errors | 391 |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
 | [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391, 430 |
+| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Port lnd to maintained Wallet APIs | 346, 412, 430, 441, 442, 443, 447, 461, 465, 466 |
 
 ## Phase 3 — kvdb-to-SQL migration · 7 open
 
@@ -566,6 +581,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t467]: archive/tasks/467-indeterminate-commit-identity.md
 [t468]: tasks/468-activate-no-chain-sync-account-creation.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
+[t470]: tasks/470-lnd-wallet-port.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308
