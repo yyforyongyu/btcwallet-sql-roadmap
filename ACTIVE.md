@@ -43,7 +43,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | — |
+| [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
@@ -143,3 +143,4 @@ by ascending phase, then ascending task number.
 [pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
+[pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
