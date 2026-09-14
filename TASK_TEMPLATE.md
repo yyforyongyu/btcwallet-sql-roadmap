@@ -53,6 +53,11 @@ owned boundary. Implementation discoveries do not permit adjacent work.
   regression that prove the behavior.
 - For a Gap fix, name the narrowest public-contract verification. For other
   task types, name the narrowest type-appropriate evidence.
+- Include focused tests with a Bug fix or Gap fix. Update existing itests
+  where behavior changes; do not wait for a standalone coverage task. Later
+  itests exercise the implemented contract and avoid duplicate coverage.
+- Use hard dependencies for required capabilities or shared infrastructure,
+  not another test task's coverage matrix or planned file.
 - Name backend-specific or integration coverage only when the task requires it.
 - State any manual inspection needed for generated or migration output.
 - Do not use broad CI completion as the primary verification plan.

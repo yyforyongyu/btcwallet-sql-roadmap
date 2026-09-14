@@ -19,8 +19,9 @@ prerequisite.
 
 Phase 1 is the current focus. Do not deliberately start later-phase work while
 it remains current, except for already-started work in [ACTIVE.md](ACTIVE.md)
-or an explicit owner-approved exception. Rephasing preserves existing claims
-and PRs; it does not stop their implementation.
+or an explicit owner-approved exception. Task 470 may also start at the
+API/runtime gate below while Phase 1 itests continue. Rephasing preserves
+existing claims and PRs; it does not stop their implementation.
 
 `Open dependencies` lists only hard dependencies whose status is `open`.
 Completed edges remain in the owning task file and are omitted here.
@@ -33,11 +34,12 @@ The delivery stages are:
 4. remaining wallet gaps and bugs; and
 5. Signer and Vault hardening.
 
-Finish Phase 1's API implementation and basic tests before starting the main
-lnd port PR. The port can then advance in parallel with Phase 2. Known critical
-defects and relevant scenarios gate merging or enabling the affected adapter
-paths; benchmarks are measurement, not an integration gate. Do not wait for
-every later feature, refactor, or hardening task to begin the port.
+Finish Phase 1's API/runtime production prerequisites before starting the main
+lnd port PR. Phase 1 itests may proceed alongside it; other later-phase work
+follows the current-focus rule above. Critical defects and passing behavioral
+evidence gate merging or enabling affected paths, not named test-task
+completion. Benchmarks are measurement, not an integration gate. Do not wait
+for every later feature, refactor, or hardening task to begin the port.
 [Task 470][t470] delivers the lnd port, including transaction notifications.
 Before claiming the port, check transaction-event delivery, standalone signing,
 online remote signing, and kvdb caller paths through the
@@ -51,7 +53,9 @@ runtime, and [395][t395] rejects kvdb; neither selects a new implementation.
 This roadmap maintenance may run during Phase 1. Keep Phase 1 incomplete until
 required initial API/runtime gaps have owners, hard edges, and their closure
 in Phase 1. The port task owns only the later lnd implementation.
-Tasks 346 and 447 gate port merge because its existing PSBT path stays enabled.
+Tasks 346 and 348's production closure gate port merge because its existing
+PSBT path stays enabled. Task 470 requires passing end-to-end evidence from
+Task 447 or equivalent focused lnd tests, not completion of that test task.
 
 Phase 3 owns verified conversion, not kvdb removal. It needs its explicit
 prerequisites and verification of the paths migration uses, not every optional
@@ -93,8 +97,8 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
 | [Task 443][t443] | open | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | — |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 343, 344, 468 |
-| [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395, 431 |
-| [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396, 431 |
+| [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395 |
+| [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396 |
 | [Task 468][t468] | open | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | 343 |
 
 ## Phase 2 — critical correctness and verification · 24 open
@@ -122,18 +126,18 @@ defect still gates any adapter or migration path that would actually expose it.
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
 | [Task 439][t439] | open | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | 348 |
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
-| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 331, 430, 431 |
-| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 331, 431, 441, 442 |
+| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 331 |
+| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 331 |
 | [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | 331 |
-| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 331, 438, 439, 440 |
+| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 331, 348 |
 | [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | 331 |
-| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 331, 431 |
-| [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | 431 |
+| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 331 |
+| [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | — |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 | [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Cover public account mutation errors | 391 |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
-| [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391, 430 |
-| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Port lnd to maintained Wallet APIs | 346, 412, 430, 441, 442, 443, 447, 461, 465, 466 |
+| [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391 |
+| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Port lnd to maintained Wallet APIs | 331, 343, 344, 346, 348, 390, 395, 396, 412, 468 |
 
 ## Phase 3 — kvdb-to-SQL migration · 7 open
 

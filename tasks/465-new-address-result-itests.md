@@ -4,19 +4,19 @@ Component: **AddressManager AllocateNextKey integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 395][t395] and [Task 431][t431]**.
+Dependencies: **[Task 395][t395]**.
 
 ## Rationale
 
 [Issue #1250][issue1250] requires AddressManager integration coverage. Task 431
-owns the existing count-one allocation and lookup contract and must remain
-unchanged. Task 395 adds `AllocateNextKey` for durable `NoChainSync` key
+owns baseline count-one allocation and lookup coverage. Task 395 adds
+`AllocateNextKey` for durable `NoChainSync` key
 allocation, which needs focused public integration evidence.
 
 ## Details
 
-- Extend Task 431's imported-`wallet` address suite while preserving its
-  existing receiving assertions and definition of done.
+- Test Task 395's implemented API through imported `wallet`. Reuse any
+  existing address fixtures; Task 431 does not need to land first.
 - On SQLite and PostgreSQL, create a root-derived numbered account with
   `NoChainSync=true` and allocate through `AddressManager.AllocateNextKey`,
   including a purpose-1017 scope and numbered key-family account. Require the
@@ -40,10 +40,10 @@ allocation, which needs focused public integration evidence.
 - Do not repeat Task 431's ordinary address types, oldest-unused behavior,
   missing lookup, or general cursor-durability matrix. Add only the new
   account-shape and result-metadata assertions listed here.
-- Extend the repository-conventional address integration-test file introduced
-  by Task 431. Add no arbitrary helper, production file, or standalone test
-  file; justify any unavoidable new file against the repository's current
-  layout in the implementation PR.
+- Extend a suitable existing address integration-test file. If none exists,
+  add only the small conventional setup needed here, without implementing
+  Task 431's separate matrix. Reuse overlapping setup whichever task lands
+  second; do not wait for a particular file or helper to be introduced.
 - Document only non-obvious test contracts, rationales, invariants, and
   consequences. Keep Arrange, Act, and Assert structure clear without
   mandatory section comments that restate the test code.
@@ -54,10 +54,9 @@ allocation, which needs focused public integration evidence.
 
 ## Suggested fix
 
-Extend existing test functions or table cases in Task 431's address suite
-with the SQL key-allocation contract. Reuse its lookup, concurrency, and
-reopen helpers; preserve the original receiving assertions rather than
-copying them into another test.
+Add the SQL key-allocation contract to the available address suite. Reuse
+existing lookup, concurrency, and reopen helpers where present, preserving
+receiving assertions without depending on another test task's completion.
 
 ## Verification
 
@@ -69,7 +68,7 @@ copying them into another test.
 ## Definition of done
 
 - Numbered `NoChainSync` key allocations have focused public coverage without
-  changing Task 431's existing contract.
+  duplicating baseline receiving-address cases.
 - The modern-kvdb structural exclusion and SQL result metadata are truthful.
 - Tests use Task 395's API without introducing another method, result type,
   component, arbitrary file, or duplicated Task 431 case.

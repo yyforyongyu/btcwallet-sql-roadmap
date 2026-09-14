@@ -4,7 +4,7 @@ Component: **bitcoind compatibility integration scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 415][t415], [Task 431][t431], [Task 433][t433],
+Dependencies: **[Task 415][t415], [Task 433][t433],
 [Task 434][t434], [Task 435][t435], and [Task 436][t436]**.
 
 ## Rationale
@@ -34,7 +34,8 @@ facts. No current task owns that scenario.
 
 Add one bitcoind-backed scenario with a small comparison helper that normalizes
 outpoints, amounts, transaction IDs, confirmations, height, and hash from each
-system's public view. Keep expected ownership in the test fixture.
+system's public view. Keep expected ownership in the test fixture and reuse
+available address setup without waiting for Task 431's coverage.
 
 ## Verification
 

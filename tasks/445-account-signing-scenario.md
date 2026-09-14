@@ -4,8 +4,7 @@ Component: **public account signing scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 331][t331], [Task 429][t429], [Task 431][t431],
-[Task 441][t441], and [Task 442][t442]**.
+Dependencies: **[Task 331][t331] and [Task 429][t429]**.
 
 ## Rationale
 
@@ -34,8 +33,8 @@ database.
 ## Suggested fix
 
 Add one scenario using deterministic account, address, digest, peer-key, and
-previous-output fixtures. Compose the completed public API helpers without
-adding another signing abstraction.
+previous-output fixtures. Reuse available public API helpers without waiting
+for Tasks 431, 441, or 442's coverage or adding another signing abstraction.
 
 ## Verification
 
