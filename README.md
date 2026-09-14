@@ -53,10 +53,11 @@ execution state.
 
 ## Delivery milestones
 
-Finish Phase 1's public APIs, required runtime behavior, and basic itests before
-starting the main lnd port PR. Phase 2's critical fixes, scenarios, and simple
-benchmarks can then proceed alongside that port; relevant correctness evidence,
-not benchmark completion, gates enabling an affected path.
+Finish Phase 1's API/runtime production prerequisites and the pre-claim gap
+check before starting the main lnd port PR. Phase 1 itests may proceed alongside
+it; other later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule.
+Relevant fixes and passing behavioral evidence, not named test-task or
+benchmark completion, gate enabling an affected path.
 [Task 470](tasks/470-lnd-wallet-port.md) delivers the lnd port. A prior roadmap
 update assigns remaining required gaps to existing or new tasks.
 
@@ -85,6 +86,9 @@ An integration-test task owns the tested public contract. Test and CI files may
 live elsewhere, but any production correction remains Wallet-owned. Fix bugs
 revealed by required cases in the same task and implementation PR, keep the
 regression coverage, and leave unrelated production changes out.
+Production fixes include focused tests and update existing affected itests;
+they do not wait for separate coverage tasks. Later tests exercise implemented
+behavior. Reuse available fixtures without imposing test-file ordering.
 Keep benchmark tasks measurement-only and record defects they expose as
 separate implementation tasks.
 Run shared public contracts on kvdb, SQLite, and PostgreSQL. If a backend

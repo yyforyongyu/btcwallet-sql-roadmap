@@ -19,8 +19,9 @@ prerequisite.
 
 Phase 1 is the current focus. Do not deliberately start later-phase work while
 it remains current, except for already-started work in [ACTIVE.md](ACTIVE.md)
-or an explicit owner-approved exception. Rephasing preserves existing claims
-and PRs; it does not stop their implementation.
+or an explicit owner-approved exception. Task 470 may also start at the
+API/runtime gate below while Phase 1 itests continue. Rephasing preserves
+existing claims and PRs; it does not stop their implementation.
 
 `Open dependencies` lists only hard dependencies whose status is `open`.
 Completed edges remain in the owning task file and are omitted here.
@@ -33,11 +34,12 @@ The delivery stages are:
 4. remaining wallet gaps and bugs; and
 5. Signer and Vault hardening.
 
-Finish Phase 1's API implementation and basic tests before starting the main
-lnd port PR. The port can then advance in parallel with Phase 2. Known critical
-defects and relevant scenarios gate merging or enabling the affected adapter
-paths; benchmarks are measurement, not an integration gate. Do not wait for
-every later feature, refactor, or hardening task to begin the port.
+Finish Phase 1's API/runtime production prerequisites before starting the main
+lnd port PR. Phase 1 itests may proceed alongside it; other later-phase work
+follows the current-focus rule above. Critical defects and passing behavioral
+evidence gate merging or enabling affected paths, not named test-task
+completion. Benchmarks are measurement, not an integration gate. Do not wait
+for every later feature, refactor, or hardening task to begin the port.
 [Task 470][t470] delivers the lnd port, including transaction notifications.
 Before claiming the port, check transaction-event delivery, standalone signing,
 online remote signing, and kvdb caller paths through the
@@ -51,7 +53,9 @@ runtime, and [395][t395] rejects kvdb; neither selects a new implementation.
 This roadmap maintenance may run during Phase 1. Keep Phase 1 incomplete until
 required initial API/runtime gaps have owners, hard edges, and their closure
 in Phase 1. The port task owns only the later lnd implementation.
-Tasks 346 and 447 gate port merge because its existing PSBT path stays enabled.
+Tasks 346 and 348's production closure gate port merge because its existing
+PSBT path stays enabled. Task 470 requires passing end-to-end evidence from
+Task 447 or equivalent focused lnd tests, not completion of that test task.
 
 Phase 3 owns verified conversion, not kvdb removal. It needs its explicit
 prerequisites and verification of the paths migration uses, not every optional
@@ -133,7 +137,7 @@ defect still gates any adapter or migration path that would actually expose it.
 | [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Cover public account mutation errors | 391 |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
 | [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391 |
-| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Port lnd to maintained Wallet APIs | 346, 412, 430, 441, 442, 443, 447, 461, 465, 466 |
+| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Port lnd to maintained Wallet APIs | 331, 343, 344, 346, 348, 390, 395, 396, 412, 468 |
 
 ## Phase 3 — kvdb-to-SQL migration · 7 open
 

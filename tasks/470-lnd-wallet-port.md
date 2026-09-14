@@ -4,9 +4,9 @@ Component: **lnd Wallet integration**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 346][t346], [Task 412][t412], [Task 430][t430],
-[Task 441][t441], [Task 442][t442], [Task 443][t443], [Task 447][t447],
-[Task 461][t461], [Task 465][t465], and [Task 466][t466]**.
+Dependencies: **[Task 331][t331], [Task 343][t343], [Task 344][t344],
+[Task 346][t346], [Task 348][t348], [Task 390][t390], [Task 395][t395],
+[Task 396][t396], [Task 412][t412], and [Task 468][t468]**.
 
 ## Rationale
 
@@ -17,11 +17,11 @@ startup path.
 
 ## Details
 
-- Start implementation and open the main port PR once Phase 1 and the
-  pre-claim roadmap check in [QUEUE](../QUEUE.md) are complete. Later-phase
-  dependencies may proceed in parallel; they gate merge, not starting work.
-  The check follows the roadmap-update workflow outside this task's
-  implementation.
+- Start implementation and open the main port PR once Phase 1's API/runtime
+  production prerequisites and the pre-claim check in [QUEUE](../QUEUE.md)
+  are complete. Standalone itests need not finish first. Later-phase
+  production dependencies gate merge, not starting work. The check follows
+  the roadmap-update workflow outside this task's implementation.
 - Own transaction-event delivery through lnd's existing SubscribeTransactions
   interface. Reuse maintained Wallet APIs; require btcwallet work only for a
   demonstrated missing capability. Preserve existing lnd modes and backend
@@ -36,9 +36,11 @@ startup path.
   Manager lifecycle, resolve unlock versus chain startup order, and keep the
   runtime independent of unlock RPC deadlines. Stop Manager before closing
   its borrowed chain source.
-- Preserve existing PSBT support. [346][t346] and [447][t447] gate the port's
-  merge because lnd already exposes FundPsbt; do not disable it to avoid these
-  gates. Add other concrete defects exposed by the port as dependencies.
+- Preserve existing PSBT support. [346][t346] and [348][t348], including their
+  production prerequisites, gate merge because lnd already exposes FundPsbt;
+  do not disable it to avoid these gates. These are the production fixes
+  previously reached through Task 447's test chain, not added scope.
+  Add other concrete defects exposed by the port as dependencies.
   Keep later prerequisites in their phases; fanout, benchmarks, and Vault
   hardening are not blanket gates.
 - Keep migration adoption separate, after [376][t376], preserving the kvdb
@@ -61,14 +63,20 @@ results or disabled tests. Record gaps in their owning tasks.
   caller cutover, including maintained mocks and tests.
 - Prove startup and reopen, exact key derivation, signing, transaction events,
   and shutdown through the maintained Wallet APIs in focused lnd tests.
+- Reuse component itests where available, but own focused adapter tests in
+  this PR rather than wait for Tasks 430, 441–443, 461, 465, or 466. Their
+  broader coverage remains separate; update existing affected tests.
 - Reuse subscription tests and require subscription creation to succeed,
   rather than skip on failure. Use identical confirmed and unconfirmed
   assertions across enabled storage backends. For the Neutrino chain backend,
   check confirmed delivery only: it does not listen for unconfirmed
   transactions.
 - Exercise the existing node and signer profiles with their supported backends;
-  verify the required PSBT scenario and resolved gap regressions. Reuse existing
-  tests and fixtures instead of duplicating component matrices.
+  verify resolved gap regressions and the complete funded PSBT path: preserve
+  metadata, sign/finalize, publish, confirm, and recover owned change on reopen.
+  Reuse passing [Task 447][t447] evidence or provide equivalent focused lnd
+  coverage across supported backends; its task closure is not the gate.
+  Do not substitute compilation or a skipped path for this verification.
 
 ## Definition of done
 
@@ -77,10 +85,14 @@ gaps are resolved through linked owners, existing modes still work, and no
 required behavior is left behind merely as a new task. No ADR is required.
 
 [t331]: 331-manager-wallet-lifecycle.md
+[t343]: 343-exact-account-creation.md
+[t344]: 344-bulk-address-allocation.md
 [t346]: 346-psbt-funding-metadata.md
+[t348]: 348-watched-change-delivery.md
 [t376]: 376-orchestrate-legacy-conversion.md
 [t390]: 390-custom-scope-account-creation.md
 [t395]: 395-key-only-locator-allocation.md
+[t396]: 396-oldest-unused-address.md
 [t412]: 412-transaction-invalidation.md
 [t430]: 430-account-query-itests.md
 [t441]: 441-signer-derivation-ecdh-itests.md

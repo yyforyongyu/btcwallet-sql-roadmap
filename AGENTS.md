@@ -100,6 +100,20 @@ current boundary cannot implement the fix safely. Type guides which ready work
 to select first; it does not replace dependency readiness or the Active and
 Claimed rules above.
 
+A Bug fix or Gap fix owns focused regression or contract tests in its own
+PR, not a hard dependency on standalone test coverage. If relevant itests
+already exist, update their behavior-dependent assertions with the fix.
+Otherwise add focused evidence with the fix; later itests test the implemented
+contract without duplicating it. An itest that discovers a required-case bug
+still owns that fix and regression in the same PR.
+
+Test tasks depend on required production capabilities or genuinely necessary
+shared infrastructure, not another task's coverage matrix or planned file.
+Reuse available fixtures and keep coverage ownership as cross-links instead
+of hard edges. Consumer adoption owns its required verification; equivalent
+focused evidence may satisfy it without waiting for a named test task to
+merge. Preserve production prerequisites when removing a test-only edge.
+
 Phase 1 owns the final public APIs and minimum runtime capabilities needed by
 the initial lnd adapter, plus focused basic public itests proving them. Keep
 their transitive open prerequisite closure here, with honest primary types.
@@ -108,12 +122,14 @@ safely deliver that contract without it; otherwise remove the hard edge and
 defer the follow-up. Do not pull optional features forward to complete a test
 matrix, or prescribe private architecture merely to stabilize a public API.
 
-Finish Phase 1 before starting the main lnd port PR. Phase 2's critical fixes,
-scenario tests, and benchmarks can proceed in parallel with that port. Relevant
-defects and scenarios gate merge or enablement of affected paths; benchmarks
-do not. Phase 3 owns kvdb-to-SQL migration, Phase 4 remaining gaps and bugs, and
-Phase 5 Signer/Vault hardening. Later work is not a blanket earlier-phase gate;
-retain concrete dependencies and require proof for the paths actually enabled.
+Finish Phase 1's API/runtime production prerequisites and QUEUE's pre-claim
+gap check before starting Task 470's lnd port PR. Its start does not wait for
+standalone Phase 1 itests. Other later-phase work follows QUEUE's current-focus
+rule. Relevant defects and passing behavioral evidence gate merge or
+enablement; named test-task completion and benchmarks do not. Phase 3 owns
+kvdb-to-SQL migration, Phase 4 remaining gaps and bugs, and Phase 5
+Signer/Vault hardening. Later work is not a blanket earlier-phase gate;
+retain concrete production dependencies.
 
 ## Roadmap update workflow
 
