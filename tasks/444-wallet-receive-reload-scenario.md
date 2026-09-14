@@ -5,13 +5,12 @@ Component: **public wallet receive scenario**.
 Type: **Test**.
 
 Dependencies: **[Task 331][t331], [Task 415][t415], [Task 429][t429],
-[Task 430][t430], [Task 431][t431], [Task 433][t433], and
-[Task 436][t436]**.
+[Task 433][t433], and [Task 436][t436]**.
 
 ## Rationale
 
-[Issue #1250][issue1250] requires broader scenarios after the per-API contract
-layer. The first foundation scenario should prove that one Wallet on each
+[Issue #1250][issue1250] requires broader scenarios beyond isolated API
+coverage. The first foundation scenario should prove that one Wallet on each
 maintained database can create an account and address, receive confirmed funds,
 expose consistent account, UTXO, and transaction views, and preserve them
 through a fresh Manager startup over the same database.
@@ -33,9 +32,10 @@ through a fresh Manager startup over the same database.
 
 ## Suggested fix
 
-Add one scenario registration that composes the completed account, address,
-UTXO, and transaction fixtures. Use one-shot wallet assertions after
-`AssertWalletSynced` and no direct Store inspection.
+Add one scenario registration using available account, address, UTXO, and
+transaction fixtures, without waiting for Tasks 430 or 431's coverage. Use
+one-shot wallet assertions after `AssertWalletSynced` and no direct Store
+inspection.
 
 ## Verification
 

@@ -122,13 +122,13 @@ defect still gates any adapter or migration path that would actually expose it.
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
 | [Task 439][t439] | open | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | 348 |
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
-| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 331, 430, 431 |
-| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 331, 431, 441, 442 |
+| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | 331 |
+| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | 331 |
 | [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | 331 |
-| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 331, 438, 439, 440 |
+| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 331, 348 |
 | [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | 331 |
-| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 331, 431 |
-| [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | 431 |
+| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 331 |
+| [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | — |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 | [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Cover public account mutation errors | 391 |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |

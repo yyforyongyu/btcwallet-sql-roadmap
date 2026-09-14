@@ -5,7 +5,7 @@ Component: **multi-Wallet SQL integration scenario**.
 Type: **Test**.
 
 Dependencies: **[Task 331][t331], [Task 415][t415], [Task 429][t429],
-[Task 431][t431], [Task 433][t433], [Task 434][t434], [Task 435][t435],
+[Task 433][t433], [Task 434][t434], [Task 435][t435],
 [Task 436][t436], and [Task 455][t455]**.
 
 ## Rationale
@@ -47,7 +47,8 @@ without making that broader production work part of this focused task.
 
 Add one two-Wallet scenario with deterministic disjoint funding and expected
 sets keyed only by public wallet identities. Reuse the public Manager, Wallet,
-and synchronization harness without adding a scenario-specific coordinator.
+and synchronization harness without waiting for Task 431's coverage or adding
+a scenario-specific coordinator.
 
 ## Verification
 

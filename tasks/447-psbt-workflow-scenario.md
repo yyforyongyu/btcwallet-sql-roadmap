@@ -4,9 +4,8 @@ Component: **public PSBT workflow scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 331][t331], [Task 433][t433], [Task 435][t435],
-[Task 436][t436], [Task 438][t438], [Task 439][t439], and
-[Task 440][t440]**.
+Dependencies: **[Task 331][t331], [Task 348][t348], [Task 433][t433],
+[Task 435][t435], and [Task 436][t436]**.
 
 ## Rationale
 
@@ -17,10 +16,12 @@ publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Details
 
-- This verifies Task 439's final funding contract end to end. Keep its hard
-  dependencies and Phase 2 ownership, but do not make this optional PSBT path a
-  prerequisite for legacy conversion. An integration that enables this path
-  must wait for the required fixes and complete scenario.
+- Verify the final funding contract after Task 348 and its production
+  prerequisites, independently of Tasks 438–440's component coverage. Keep
+  Phase 2 ownership without making this PSBT path a blanket migration gate.
+- An integration enabling this path needs the fixes and passing end-to-end
+  evidence, from this scenario or equivalent focused consumer tests. It need
+  not wait for this particular test task to merge.
 - Register the same deterministic PSBT flow for kvdb, SQLite, and PostgreSQL.
   Do not skip kvdb inside the shared flow.
 - Decorate the funded inputs, sign the owned inputs, and finalize the packet
@@ -34,9 +35,9 @@ publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
 
 ## Suggested fix
 
-Add one PSBT workflow registration that reuses the completed packet, funding,
-signing, publication, and read fixtures without adding scenario-specific
-production hooks.
+Add one PSBT workflow registration using available packet, funding, signing,
+publication, and read fixtures. Do not wait for another test suite or add
+scenario-specific production hooks.
 
 ## Verification
 
@@ -53,6 +54,7 @@ production hooks.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t331]: 331-manager-wallet-lifecycle.md
+[t348]: 348-watched-change-delivery.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md
