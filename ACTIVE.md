@@ -27,8 +27,8 @@ recorded PR stack.
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
-| [Task 442][t442] | Cover public signing contracts | Test | — | — |
-| [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | — | — |
+| [Task 442][t442] | Cover public signing contracts | Test | YY | — |
+| [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | YY | — |
 
 ## Blocked Phase 1 Tasks
 
