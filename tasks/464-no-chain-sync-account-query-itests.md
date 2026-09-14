@@ -4,12 +4,12 @@ Component: **AccountManager NoChainSync query integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 391][t391] and [Task 430][t430]**.
+Dependencies: **[Task 391][t391]**.
 
 ## Rationale
 
 [Issue #1250][issue1250] requires AccountManager integration coverage. Task 430
-owns the existing account-query contract and must remain unchanged. The new
+owns baseline account-query coverage, not this task's fixtures. The new
 `AccountInfo.NoChainSync` value and SQL-only account shapes need a separate
 public integration-test outcome after their production contracts land.
 
@@ -21,8 +21,8 @@ public integration-test outcome after their production contracts land.
 - This final field/account-shape matrix remains Phase 2 verification, not a
   blanket prerequisite for legacy conversion, whose input has NoChainSync
   false. Do not skip a required case to declare this task complete.
-- Extend Task 430's imported-`wallet` query suite without changing that task's
-  original cases or definition of done.
+- Reuse existing imported-`wallet` query fixtures without waiting for Task
+  430. Preserve its baseline coverage if it has already landed.
 - On kvdb, SQLite, and PostgreSQL, prove ordinary accounts report
   `NoChainSync=false` through `ListAccounts`, `ListAccountsByScope`,
   `ListAccountsByName`, and `GetAccount` before and after reopen.
@@ -45,8 +45,8 @@ public integration-test outcome after their production contracts land.
 ## Suggested fix
 
 Add one focused table to the existing AccountManager integration suite. Reuse
-Task 430's public query helpers and add only ordinary-false, SQL-true, and
-kvdb-unsupported fixtures.
+available public query helpers and add only ordinary-false, SQL-true, and
+kvdb-unsupported fixtures; Task 430 need not land first.
 
 ## Verification
 
@@ -59,7 +59,7 @@ kvdb-unsupported fixtures.
 ## Definition of done
 
 - The new public account field has focused real-backend coverage without
-  changing Task 430's existing contract.
+  duplicating baseline account-query cases.
 - SQL-only true values remain durable on both dialects, and kvdb's structural
   exclusion is explicit.
 - No new query behavior, public API, Store assertion, arbitrary file, or

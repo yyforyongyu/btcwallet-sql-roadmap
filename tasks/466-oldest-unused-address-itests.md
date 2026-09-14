@@ -4,21 +4,21 @@ Component: **AddressManager final count-one integration tests**.
 
 Type: **Test**.
 
-Dependencies: **[Task 396][t396] and [Task 431][t431]**.
+Dependencies: **[Task 396][t396]**.
 
 ## Rationale
 
 [Issue #1250][issue1250] requires AddressManager integration coverage. Task 431
-owns the existing allocation and lookup contract and must remain unchanged.
+owns baseline allocation and lookup coverage, not this task's fixtures.
 Task 396 replaces the SQL count-one semantics and removes `GetUnusedAddress`.
 The final SQL and modern-kvdb divergence needs a separate public integration
 outcome; it does not require Task 395's separate `AllocateNextKey` API.
 
 ## Details
 
-- Extend Task 431's final-API suite after Tasks 396 and 431 land. Preserve
-  its backend-common assertions and do not duplicate either production task's
-  mechanical caller migration.
+- Test Task 396's final API without waiting for Task 431. Reuse any existing
+  address suite, preserve backend-common assertions, and do not duplicate
+  production-owned mechanical caller migration.
 - On SQLite and PostgreSQL, require `NewAddress` for a chain-synchronized
   account to return the oldest persisted unused address without advancing the
   branch. After funding that address, require the next call to rotate to the
@@ -35,10 +35,10 @@ outcome; it does not require Task 395's separate `AllocateNextKey` API.
 - Keep `AllocateNextKey` results in Task 465, batch allocation in Task 461,
   and production fault injection in Tasks 395 and 396. Do not restore
   `GetUnusedAddress` or add a compatibility alias.
-- Extend the repository-conventional address integration-test file introduced
-  by Task 431. Add no arbitrary helper, production file, or standalone test
-  file; justify any unavoidable new file against the repository's current
-  layout in the implementation PR.
+- Extend a suitable existing address integration-test file. If none exists,
+  add only the small conventional setup needed here, without implementing
+  Task 431's separate matrix. Reuse overlapping setup whichever task lands
+  second; do not wait for a particular file or helper to be introduced.
 - Document only non-obvious test contracts, rationales, invariants, and
   consequences. Keep Arrange, Act, and Assert structure clear without
   mandatory section comments that restate the test code.
@@ -50,9 +50,9 @@ outcome; it does not require Task 395's separate `AllocateNextKey` API.
 ## Suggested fix
 
 Add one two-dialect SQL oldest-unused table and one modern-kvdb force-next case
-to Task 431's final-API suite. Reuse its existing funding, point/list, and
+to the available address suite. Reuse existing funding, point/list, and
 reopen helpers without changing backend-common assertions or repeating the
-production tasks' mechanical migrations.
+production tasks' mechanical migrations. Task 431 need not land first.
 
 ## Verification
 

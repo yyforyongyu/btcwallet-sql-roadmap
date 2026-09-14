@@ -78,6 +78,9 @@ manager, result wrapper, worker, table, or reservation mechanism.
   chain call. Ordinary-account and modern-kvdb requests fail before mutation.
 - Extend existing relevant unit tests and cases for this contract; Task 465
   owns public integration coverage. Do not duplicate existing counter tests.
+- Include focused tests in this implementation PR without waiting for Tasks
+  431 or 465. If relevant itests already exist, update behavior-dependent
+  assertions in this PR; do not absorb their separate coverage matrices.
 
 ## Definition of done
 
