@@ -19,6 +19,7 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
+| [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -38,7 +39,6 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | [#1379][pr1379] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
