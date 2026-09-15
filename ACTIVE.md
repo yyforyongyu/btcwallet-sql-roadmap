@@ -19,7 +19,7 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
-| [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
+| [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | [#1388][pr1388] |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
@@ -127,3 +127,4 @@ by ascending phase, then ascending task number.
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
 [pr1383]: https://github.com/btcsuite/btcwallet/pull/1383
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
+[pr1388]: https://github.com/btcsuite/btcwallet/pull/1388
