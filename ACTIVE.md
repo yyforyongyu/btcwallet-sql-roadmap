@@ -18,7 +18,6 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
@@ -96,7 +95,6 @@ by ascending phase, then ascending task number.
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t399]: tasks/399-zero-lookahead-persisted-targets.md
 [t402]: tasks/402-replay-live-watch-obligations.md
 [t405]: tasks/405-psbt-funding-lease-admission.md
 [t406]: tasks/406-psbt-funding-lease-release.md
@@ -123,7 +121,6 @@ by ascending phase, then ascending task number.
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380

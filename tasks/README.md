@@ -61,7 +61,6 @@ They do not consume task numbers or require task files.
   recovery targets.
 - [Task 398](398-semantic-account-recovery-targets.md): accept semantic account
   recovery targets.
-- [Task 399](399-zero-lookahead-persisted-targets.md): isolate persisted targets
   in zero-lookahead recovery.
 - [Task 402](402-replay-live-watch-obligations.md): establish live watches from
   persisted Wallet data.
