@@ -27,8 +27,8 @@ recorded PR stack.
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
-| [Task 442][t442] | Cover public signing contracts | Test | YY | — |
-| [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | YY | — |
+| [Task 442][t442] | Cover public signing contracts | Test | YY | [#1384][pr1384] |
+| [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | YY | [#1383][pr1383] |
 
 ## Blocked Phase 1 Tasks
 
@@ -144,3 +144,5 @@ by ascending phase, then ascending task number.
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
+[pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
+[pr1383]: https://github.com/btcsuite/btcwallet/pull/1383
