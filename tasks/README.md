@@ -37,7 +37,6 @@ They do not consume task numbers or require task files.
 
 ## Accounts, addresses, and recovery
 
-- [Task 343](343-exact-account-creation.md): create next-or-exact root-derived
   accounts.
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
   atomically.
@@ -50,7 +49,6 @@ They do not consume task numbers or require task files.
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): reconcile ambiguous
   runtime account commits.
-- [Task 390](390-custom-scope-account-creation.md): create root-derived accounts
   in custom scopes.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
@@ -73,7 +71,6 @@ They do not consume task numbers or require task files.
   accounts from recovery.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
-- [Task 468](468-activate-no-chain-sync-account-creation.md): activate
   `NoChainSync` account creation.
 
 ## Chain and synchronization
@@ -89,7 +86,6 @@ They do not consume task numbers or require task files.
 
 ## Transactions, UTXOs, and PSBTs
 
-- [Task 346](346-psbt-funding-metadata.md): preserve PSBT metadata during
   funding.
 - [Task 347](347-psbt-signing-authorization.md): authorize existing PSBT
   signatures.

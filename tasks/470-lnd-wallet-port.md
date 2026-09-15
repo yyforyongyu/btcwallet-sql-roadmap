@@ -102,4 +102,4 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t461]: 461-address-batch-itests.md
 [t465]: 465-new-address-result-itests.md
 [t466]: 466-oldest-unused-address-itests.md
-[t468]: 468-activate-no-chain-sync-account-creation.md
+[t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md

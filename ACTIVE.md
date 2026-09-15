@@ -19,8 +19,6 @@ recorded PR stack.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
-| [Task 343][t343] | Create next-or-exact root-derived accounts | Gap fix | YY | [#1369][pr1369] |
-| [Task 346][t346] | Preserve PSBT funding metadata | Bug fix | Abdullahi | [#1359][pr1359] |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
@@ -40,14 +38,12 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | [#1379][pr1379] |
-| [Task 390][t390] | Create accounts in custom scopes | Gap fix | YY | [#1371][pr1371] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
-| [Task 468][t468] | Activate NoChainSync account creation | Gap fix | YY | [#1369][pr1369] |
 
 ## Claimed Tasks
 
@@ -85,9 +81,7 @@ by ascending phase, then ascending task number.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t331]: tasks/331-manager-wallet-lifecycle.md
-[t343]: tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
-[t346]: tasks/346-psbt-funding-metadata.md
 [t347]: tasks/347-psbt-signing-authorization.md
 [t348]: tasks/348-watched-change-delivery.md
 [t349]: archive/tasks/349-transaction-invalidation.md
@@ -100,7 +94,6 @@ by ascending phase, then ascending task number.
 [t372]: tasks/372-multi-wallet-rollback.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
-[t390]: tasks/390-custom-scope-account-creation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
@@ -131,16 +124,12 @@ by ascending phase, then ascending task number.
 [t461]: tasks/461-address-batch-itests.md
 [t465]: tasks/465-new-address-result-itests.md
 [t466]: tasks/466-oldest-unused-address-itests.md
-[t468]: tasks/468-activate-no-chain-sync-account-creation.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
 [pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
-[pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
-[pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380

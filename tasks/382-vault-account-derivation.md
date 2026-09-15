@@ -93,6 +93,6 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 [t352]: 352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
 [t343]: 343-exact-account-creation.md
-[t390]: 390-custom-scope-account-creation.md
+[t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t460]: 460-sequential-account-invalid-children.md

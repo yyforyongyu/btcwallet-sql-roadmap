@@ -82,5 +82,5 @@ genesis, allocation, cross-process fence, attempt identity, stored digest, or
 generic reconciliation mechanism is added.
 
 [t343]: 343-exact-account-creation.md
-[t390]: 390-custom-scope-account-creation.md
+[t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

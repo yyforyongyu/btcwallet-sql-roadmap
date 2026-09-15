@@ -15,6 +15,10 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 468](tasks/468-activate-no-chain-sync-account-creation.md) completed on 2026-09-15.
+- [Task 390](tasks/390-custom-scope-account-creation.md) completed on 2026-09-15.
+- [Task 346](tasks/346-psbt-funding-metadata.md) completed on 2026-09-15.
+- [Task 343](tasks/343-exact-account-creation.md) completed on 2026-09-15.
 - [Task 455](tasks/455-exact-wallet-sync-status.md) completed on 2026-09-12.
 - [Task 452](tasks/452-key-only-recovery-derivation.md) completed on 2026-09-12.
 - [Task 393](tasks/393-key-only-receiving-rejection.md) completed on 2026-09-11.

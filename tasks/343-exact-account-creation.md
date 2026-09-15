@@ -68,4 +68,4 @@ adding a parallel public API.
 [t389]: 389-runtime-account-commit-reconciliation.md
 [t392]: ../archive/tasks/392-discovery-mode-account-creation.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
-[t468]: 468-activate-no-chain-sync-account-creation.md
+[t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md

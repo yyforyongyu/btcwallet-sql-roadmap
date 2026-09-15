@@ -85,5 +85,5 @@ AddressManager public calls rather than Store inspection.
 - Shared cases contain no backend skip branch and add no new funding behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t346]: 346-psbt-funding-metadata.md
+[t346]: ../archive/tasks/346-psbt-funding-metadata.md
 [t348]: 348-watched-change-delivery.md
