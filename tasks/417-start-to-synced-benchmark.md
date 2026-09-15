@@ -50,6 +50,6 @@ a second benchmark lifecycle or a generic timing framework.
 One start-to-synced measurement compares equivalent histories on all three
 backends, with an obvious timing boundary and no production changes.
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t416]: 416-database-benchmark-fixtures.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md

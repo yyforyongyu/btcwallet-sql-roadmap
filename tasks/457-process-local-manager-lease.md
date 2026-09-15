@@ -80,4 +80,4 @@ errors and logging.
 - The PR makes no cross-process, distributed-leadership, advisory-lock, or
   filesystem-fencing claim.
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md

@@ -52,7 +52,7 @@ inspection.
 - The shared scenario contains no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t430]: 430-account-query-itests.md

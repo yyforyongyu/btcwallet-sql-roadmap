@@ -100,6 +100,6 @@ terminal cleanup before returning the fixed error.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t330]: 330-duplicate-wallet-create.md
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t358]: 358-contextual-manager-operations.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

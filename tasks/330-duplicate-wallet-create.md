@@ -61,5 +61,5 @@ remain their original Store errors and never become `ErrWalletExists`.
 - The PR does not add kvdb alias metadata or absorb atomic genesis work from
   [Task 329](329-atomic-wallet-account-creation.md).
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t333]: ../archive/tasks/333-postgres-manager-harness.md

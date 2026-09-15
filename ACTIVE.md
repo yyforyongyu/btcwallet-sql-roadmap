@@ -18,13 +18,11 @@ recorded PR stack.
 
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
-| [Task 331][t331] | Make Manager the sole lifecycle authority | Bug fix | YY | [#1328][pr1328] |
 | [Task 399][t399] | Isolate persisted recovery targets | Bug fix | YY | [#1372][pr1372] |
 | [Task 412][t412] | Expose transaction invalidation | Gap fix | Abdullahi | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | — |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
-| [Task 441][t441] | Cover public derivation and ECDH contracts | Test | Abdullahi | [#1374][pr1374] |
 | [Task 442][t442] | Cover public signing contracts | Test | YY | [#1384][pr1384] |
 | [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | YY | [#1383][pr1383] |
 
@@ -38,7 +36,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | Task | Description | Type | Claimant | PR |
 | --- | --- | --- | --- | --- |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | [#1379][pr1379] |
-| [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | — |
+| [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
 | [Task 461][t461] | Cover public address batch contracts | Test | — | — |
@@ -80,7 +78,6 @@ by ascending phase, then ascending task number.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
-[t331]: tasks/331-manager-wallet-lifecycle.md
 [t344]: tasks/344-bulk-address-allocation.md
 [t347]: tasks/347-psbt-signing-authorization.md
 [t348]: tasks/348-watched-change-delivery.md
@@ -115,7 +112,6 @@ by ascending phase, then ascending task number.
 [t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
-[t441]: tasks/441-signer-derivation-ecdh-itests.md
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
 [t454]: tasks/454-postgres-transaction-isolation.md
@@ -126,12 +122,11 @@ by ascending phase, then ascending task number.
 [t466]: tasks/466-oldest-unused-address-itests.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
-[pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
-[pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
 [pr1383]: https://github.com/btcsuite/btcwallet/pull/1383
+[pr1386]: https://github.com/btcsuite/btcwallet/pull/1386

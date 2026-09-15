@@ -53,5 +53,5 @@ for Tasks 431, 441, or 442's coverage or adding another signing abstraction.
 [t331]: 331-manager-wallet-lifecycle.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
-[t441]: 441-signer-derivation-ecdh-itests.md
+[t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: 442-signer-signing-itests.md

@@ -64,7 +64,7 @@ ordinary Wallet tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
-## Phase 1 — API stabilization and basic itests · 15 open
+## Phase 1 — API stabilization and basic itests · 13 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle, purpose-1017 key families, final address allocation, transaction
@@ -82,7 +82,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 331][t331] | open | Manager lifecycle, public API cutover, and Store ownership | Bug fix | Make Manager the sole lifecycle authority | — |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 402 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344, 390, 399 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
@@ -91,7 +90,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 412][t412] | open | TxWriter transaction invalidation | Gap fix | Expose transaction invalidation on TxWriter | — |
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
-| [Task 441][t441] | open | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | — |
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
 | [Task 443][t443] | open | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | — |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 343, 344, 468 |
@@ -263,7 +261,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 44
+## Done · 46
 
 **153 completed: 40 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -273,6 +271,7 @@ additional delivered work, not progress against a numbered phase gate.
 
 | Task | Phase | Component | Type | Outcome | Closing PR |
 | --- | ---: | --- | --- | --- | --- |
+| [Task 331][t331] | 1 | Manager lifecycle, public API cutover, and Store ownership | Bug fix | Make Manager the sole lifecycle authority | [#1328][pr1328] |
 | [Task 332][t332] | 1 | Manager, AccountManager, and AddressManager | Gap fix | Define watch-only and script-import policy | [#1320][pr1320] |
 | [Task 333][t333] | 1 | Manager and integration-test harness | Gap fix | Add PostgreSQL Manager and harness support | [#1303][pr1303] |
 | [Task 334][t334] | 1 | SQL wallet architecture documentation | Design | Define aggregate Manager and shared-chain ownership | [#1323][pr1323] |
@@ -309,6 +308,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 435][t435] | 1 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |
 | [Task 436][t436] | 1 | TxReader integration tests | Test | Cover transaction read contracts | [#1346][pr1346] |
 | [Task 437][t437] | 1 | TxWriter integration tests | Test | Cover transaction label contracts | [#1347][pr1347] |
+| [Task 441][t441] | 1 | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | [#1374][pr1374] |
 | [Task 452][t452] | 1 | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | [#1368][pr1368] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
 | [Task 455][t455] | 1 | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | [#1363][pr1363] |

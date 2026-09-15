@@ -53,7 +53,7 @@ scenario-specific production hooks.
 - The shared scenario contains no backend skip branch.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t348]: 348-watched-change-delivery.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md

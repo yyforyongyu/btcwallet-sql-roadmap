@@ -72,7 +72,7 @@ It does not absorb atomic genesis, reconciliation, secret-hardening, or generic
 operation machinery.
 
 [t329]: 329-atomic-wallet-account-creation.md
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t366]: 366-reconcile-sql-genesis-commit.md
 [t367]: 367-bound-sql-genesis-secrets.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md

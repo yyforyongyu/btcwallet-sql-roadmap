@@ -70,7 +70,7 @@ The existing `Manager.Create` boundary can convert one supported legacy wallet
 to SQLite and return its normal active Wallet only after exact durable
 equivalence, without a second public lifecycle or converter.
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t358]: 358-contextual-manager-operations.md
 [t335]: 335-kvdb-to-sql-migration.md
 [t373]: 373-extract-legacy-account-address-state.md

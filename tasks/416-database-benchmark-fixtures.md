@@ -52,4 +52,4 @@ loop, not a new configuration model or knowledge of a benchmark framework.
 Tasks 417–420 can use simple deterministic three-backend setup and cleanup
 without owning backend provisioning or introducing production behavior.
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md

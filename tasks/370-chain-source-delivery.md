@@ -73,7 +73,7 @@ filtered-block, and relevant-transaction events to the complete SQL Wallet set
 and shut down safely. Task 372 remains the sole owner of disconnect admission
 and rollback.
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t371]: 371-canonical-chain-frontier.md
 [t372]: 372-multi-wallet-rollback.md

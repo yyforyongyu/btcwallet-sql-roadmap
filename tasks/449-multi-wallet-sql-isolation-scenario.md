@@ -72,7 +72,7 @@ a scenario-specific coordinator.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t428]: 428-controller-sync-info-itests.md
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
 [t431]: 431-address-allocation-lookup-itests.md

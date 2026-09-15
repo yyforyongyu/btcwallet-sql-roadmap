@@ -15,6 +15,8 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 441](tasks/441-signer-derivation-ecdh-itests.md) completed on 2026-09-15.
+- [Task 331](tasks/331-manager-wallet-lifecycle.md) completed on 2026-09-15.
 - [Task 468](tasks/468-activate-no-chain-sync-account-creation.md) completed on 2026-09-15.
 - [Task 390](tasks/390-custom-scope-account-creation.md) completed on 2026-09-15.
 - [Task 346](tasks/346-psbt-funding-metadata.md) completed on 2026-09-15.

@@ -19,7 +19,6 @@ They do not consume task numbers or require task files.
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
   atomically.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
-- [Task 331](331-manager-wallet-lifecycle.md): make Manager the sole lifecycle
   authority.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
@@ -140,7 +139,6 @@ that structural exclusion explicitly.
 - [Task 439](439-psbt-funding-itests.md): cover PSBT funding contracts.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
-- [Task 441](441-signer-derivation-ecdh-itests.md): cover public derivation and
   ECDH contracts.
 - [Task 442](442-signer-signing-itests.md): cover public signing contracts.
 - [Task 443](443-unsafe-signer-itests.md): cover UnsafeSigner extraction

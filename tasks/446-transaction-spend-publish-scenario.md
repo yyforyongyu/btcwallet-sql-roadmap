@@ -50,7 +50,7 @@ only for named external mempool and mining events.
   component error matrices.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: ../archive/tasks/434-transaction-creation-itests.md

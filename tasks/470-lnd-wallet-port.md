@@ -95,7 +95,7 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t396]: 396-oldest-unused-address.md
 [t412]: 412-transaction-invalidation.md
 [t430]: 430-account-query-itests.md
-[t441]: 441-signer-derivation-ecdh-itests.md
+[t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: 442-signer-signing-itests.md
 [t443]: 443-unsafe-signer-itests.md
 [t447]: 447-psbt-workflow-scenario.md

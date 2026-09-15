@@ -74,4 +74,4 @@ boundary.
 - The acceptance fix and its focused public regression land together; no
   later test task is implicitly responsible for adding the missing kvdb case.
 
-[t441]: 441-signer-derivation-ecdh-itests.md
+[t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md

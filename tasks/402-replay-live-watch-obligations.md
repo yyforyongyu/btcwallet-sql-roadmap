@@ -59,7 +59,7 @@ Reuse Store reads, Syncer catch-up, and Task 331's terminal lifecycle.
 For btcd/bitcoind, Wallet reconstructs watches and stops on lost readiness
 without delivery persistence or a new API. Neutrino remains unchanged.
 
-[t331]: 331-manager-wallet-lifecycle.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t345]: ../archive/tasks/345-durable-watch-registration.md
 [t401]: ../archive/tasks/401-live-tip-chain-watch.md
