@@ -64,7 +64,7 @@ ordinary Wallet tasks remain btcwallet-owned.
 
 [ACTIVE.md](ACTIVE.md) owns current focus, claims, and in-progress PRs.
 
-## Phase 1 — API stabilization and basic itests · 12 open
+## Phase 1 — API stabilization and basic itests · 11 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle, purpose-1017 key families, final address allocation, transaction
@@ -86,7 +86,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344, 390, 399 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 402][t402] | open | Wallet synchronization and live-watch readiness | Gap fix | Establish live watches from persisted Wallet data | 331 |
-| [Task 412][t412] | open | TxWriter transaction invalidation | Gap fix | Expose transaction invalidation on TxWriter | — |
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
@@ -260,7 +259,7 @@ five-phase assignment. These tasks have no current delivery phase.
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
 
-## Done · 47
+## Done · 48
 
 **153 completed: 40 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -298,6 +297,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 401][t401] | 1 | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | [#1344][pr1344] |
 | [Task 404][t404] | 2 | TxCreator and PsbtManager input-source adapters | Bug fix | Validate Wallet transaction input amounts | [#1357][pr1357] |
+| [Task 412][t412] | 1 | TxWriter transaction invalidation | Gap fix | Expose transaction invalidation on TxWriter | [#1388][pr1388] |
 | [Task 415][t415] | 1 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |
 | [Task 421][t421] | 2 | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | [#1341][pr1341] |
 | [Task 425][t425] | 2 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |

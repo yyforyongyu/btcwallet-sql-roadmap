@@ -15,6 +15,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 412](tasks/412-transaction-invalidation.md) completed on 2026-09-17.
 - [Task 399](tasks/399-zero-lookahead-persisted-targets.md) completed on 2026-09-15.
 - [Task 441](tasks/441-signer-derivation-ecdh-itests.md) completed on 2026-09-15.
 - [Task 331](tasks/331-manager-wallet-lifecycle.md) completed on 2026-09-15.

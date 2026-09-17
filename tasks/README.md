@@ -108,7 +108,6 @@ They do not consume task numbers or require task files.
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
   transactions.
-- [Task 412](412-transaction-invalidation.md): expose transaction
   invalidation on TxWriter.
 - [Task 413](413-utxo-spend-identity.md): validate exact UTXO spending
   inputs.
