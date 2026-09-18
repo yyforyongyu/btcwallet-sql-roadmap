@@ -118,6 +118,7 @@ by ascending phase, then ascending task number.
 [t465]: tasks/465-new-address-result-itests.md
 [t466]: tasks/466-oldest-unused-address-itests.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
+[t470]: tasks/470-lnd-wallet-port.md
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1370]: https://github.com/btcsuite/btcwallet/pull/1370
