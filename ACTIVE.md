@@ -37,7 +37,7 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | [#1379][pr1379] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 461][t461] | Cover public address batch contracts | Test | — | — |
+| [Task 461][t461] | Cover public address batch contracts | Test | YY | — |
 | [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
 
@@ -52,6 +52,7 @@ by ascending phase, then ascending task number.
 | Task | Description | Type | Phase | Claimant | PR |
 | --- | --- | --- | ---: | --- | --- |
 | [Task 428][t428] | Test resync and rescan | Test | 2 | Gustavo | — |
+| [Task 470][t470] | Port lnd to maintained Wallet APIs | Gap fix | 2 | YY | — |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 4 | YY | — |
 | [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 4 | Abdullahi | — |
