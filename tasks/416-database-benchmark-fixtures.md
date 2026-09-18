@@ -25,8 +25,9 @@ real-backend setup before they can measure one maintained public operation.
 - Establish one ordinary Go benchmark pattern: prepare and validate the data,
   measure the public operation repeatedly, then clean up. Keep fixture work
   and full result validation outside the timer; fail on unexpected call errors.
-- Include one small setup example and smoke test across all three backends.
-  Consumers own their actual API measurements and workload sizes.
+- Include one small setup example and cleanup smoke test across all three
+  backends. Consumers validate the dataset facts their measurement needs;
+  do not add a separate public-state conformance matrix.
 - Keep helpers private to benchmark tests. Do not add cold/warm modes, cache
   control, snapshot/reset machinery, a generic benchmark runner, a fixture
   calibration benchmark, or deprecated-API comparisons.
@@ -41,8 +42,9 @@ loop, not a new configuration model or knowledge of a benchmark framework.
 
 ## Verification
 
-- Build the same small dataset twice on each backend and compare representative
-  public account, address, transaction, UTXO, and synchronization facts.
+- Construct one deterministic small dataset on each backend and verify the
+  example's required inputs outside the timer. Reuse existing public-contract
+  coverage instead of repeating account/address/transaction/UTXO/sync matrices.
 - Run the example and confirm only its stated operation is timed.
 - Exercise normal and failed setup cleanup; leave no Manager, Wallet worker,
   connection, database handle, or temporary database behind.

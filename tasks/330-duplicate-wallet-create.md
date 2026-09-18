@@ -8,13 +8,15 @@ Dependencies: **[Task 331][t331] and [Task 333][t333]**.
 
 ## Rationale
 
-A second create must never mutate an existing wallet under new credentials or
-depend on backend-specific constraint errors.
+At `sql-wallet` revision `2ae306dea8c5`, `Manager.Create` has no public
+`ErrWalletExists` classification; `testManagerCreateDuplicate` checks only
+that an error occurs. A second create must preserve the existing wallet and
+return one stable duplicate identity across maintained backends.
 
 ## Details
 
-- Define one public `ErrWalletExists` contract for kvdb and SQLite Managers and
-  one matching duplicate sentinel from both SQL Stores.
+- Define one public `ErrWalletExists` contract for every maintained Manager
+  backend; classify durable name duplicates in each SQL wallet-create operation.
 - Use [Task 333][t333] only for the PostgreSQL harness; this task owns
   duplicate-create behavior on that harness.
 - Classify a SQLite wallet-name duplicate from the wallet-create operation
@@ -46,8 +48,8 @@ authentication out of this task.
 
 Every later kvdb create and the same-name SQLite create return
 `ErrWalletExists` without mutation. PostgreSQL Store conformance proves the
-same durable name duplicate, and this task proves the public PostgreSQL Manager
-translation using [Task 333][t333]'s harness. A barrier-controlled simultaneous create
+same durable name duplicate and public Manager translation using
+[Task 333][t333]'s harness. A barrier-controlled simultaneous create
 yields exactly one success and one `ErrWalletExists`; the loser changes none of
 the winner's credentials or rows. Injected non-wallet uniqueness failures
 remain their original Store errors and never become `ErrWalletExists`.

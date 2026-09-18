@@ -11,7 +11,10 @@ Dependencies: **[Task 343][t343], [Task 390][t390], and [Task 467][t467]**.
 The SQL runtime exposes indeterminate commit responses for every
 write, not only Manager genesis. Retrying an ordinary import or an exact or
 sequential root-derived account from the transport error can duplicate an
-account or advance a cursor twice.
+account or advance a cursor twice. At `sql-wallet` revision `2ae306dea8c5`,
+`newAccountErr` reports uncertainty without reconciliation and
+`importAccountErr` has no equivalent exact-result path. Generic Controller
+handlers run concurrently; mainLoop does not already serialize these calls.
 
 ## Details
 
@@ -38,17 +41,6 @@ account or advance a cursor twice.
   cross-process guarantee, attempt identity, storage column, or table.
 - Never retry, add a manifest, or generalize this into a Store-wide framework.
 - Keep Task 366 exclusively responsible for Manager SQL genesis reconciliation.
-- Keep implementation local to existing AccountManager and AccountStore source
-  and colocated test files. Add no arbitrary helper, production file, or
-  standalone test file; justify any unavoidable new file against the
-  repository's current layout in the implementation PR.
-- Document non-obvious code blocks with the contract, rationale, invariant, or
-  consequence they preserve; do not restate the code.
-- Keep unit tests clearly structured as Arrange, Act, and Assert.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 
@@ -81,6 +73,6 @@ mutation, or same-AccountManager misattribution, and no path-bound account,
 genesis, allocation, cross-process fence, attempt identity, stored digest, or
 generic reconciliation mechanism is added.
 
-[t343]: 343-exact-account-creation.md
+[t343]: ../archive/tasks/343-exact-account-creation.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

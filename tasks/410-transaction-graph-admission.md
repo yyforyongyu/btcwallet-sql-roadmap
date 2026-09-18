@@ -13,8 +13,12 @@ spend links. If maintained Wallet ingestion can insert a child after that
 snapshot without joining the same ordering boundary, TxReader can retain an
 active child of an invalidated parent and UtxoManager can retain its spend.
 A transaction around each writer does not alone prove that this interleaving
-is excluded. Task 424 must identify the reachable path and current protection
-before this task selects a correction.
+is excluded. At `sql-wallet` revision `2ae306dea8c5`, PostgreSQL
+`runtime.Write` uses `BeginTx(ctx, nil)`: under read committed, invalidation
+can read the active graph before concurrent ingestion adds a child and then
+update only its earlier IDs. Controller handlers and syncer batch writes are
+concurrent entry points. Task 424 validates this path and existing protection
+before selecting the correction.
 
 ## Details
 
@@ -31,8 +35,9 @@ before this task selects a correction.
 - Reuse existing transactions, conditional writes, or local synchronization
   where sufficient. No graph coordinator, admission-handle type, or per-Wallet
   serialization service is required by this task.
-- Keep terminal-parent admission in Task 411 and exact spend-pointer validation
-  in Task 413. Task 409's representation refactor is not a prerequisite.
+- Keep terminal-parent admission in Task 411. Existing exact-outpoint spend
+  predicates and raw graph reads remain; Tasks 409 and 413 are superseded
+  representation/duplicate work, not prerequisites.
 - Exclude generic write locks, network calls inside database transactions,
   publication policy, new public APIs, and cross-process fencing.
 

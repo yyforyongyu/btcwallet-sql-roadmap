@@ -6,6 +6,13 @@ Type: **Bug fix**.
 
 Dependencies: **[Task 351][t351] and [Task 410][t410]**.
 
+> **Superseded 2026-09-18:** At sql-wallet 2ae306dea8c5, markInputsSpent
+> derives outpoints and input indices from the same decoded transaction;
+> addChildInputSpends matches exact parent hash/index and refreshes active
+> status. TestCreateTxReplayedCreditSkipsReplacedChildSnapshot covers stale
+> replay. Eliminate duplicate identity machinery; the separate concurrent
+> graph-ordering concern remains in Task 410.
+
 ## Rationale
 
 The stored spender transaction and input index do not themselves prove that
@@ -55,4 +62,4 @@ Each persisted spend assignment names the exact active spending input under
 the existing Wallet mutation contract, without mandating a graph redesign.
 
 [t351]: 351-sql-utxo-integrity.md
-[t410]: 410-transaction-graph-admission.md
+[t410]: ../../tasks/410-transaction-graph-admission.md

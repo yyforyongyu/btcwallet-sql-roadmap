@@ -10,7 +10,7 @@ Dependencies: **[Task 341][t341], [Task 343][t343], [Task 378][t378], and
 ## Rationale
 
 Task 365 validates only one Manager genesis request. Runtime
-`ImportAccount` and later root/custom/path operations can still insert equal
+`ImportAccount` and root/custom account operations can still insert equal
 normalized XPub payloads whose effective branch schemas derive the same
 scripts.
 
@@ -35,19 +35,8 @@ scripts.
 - After lifecycle and request validation, a duplicate name wins with
   `ErrAccountAlreadyExists`; check normalized-XPub overlap only for an
   otherwise-vacant name. Database constraint or lookup order must not change
-  that precedence. After Task 343 adds the optional exact-number field, this
-  task owns the corresponding occupied-number-before-collision precedence.
-- Keep implementation local to existing AccountManager, AccountStore, source
-  files, and colocated tests. Add no arbitrary helper, production file, or
-  standalone test file; justify any unavoidable new file against the current
-  repository layout in the implementation PR.
-- Document non-obvious code blocks with the contract, rationale, invariant, or
-  consequence they preserve; do not restate the code.
-- Keep unit tests clearly structured as Arrange, Act, and Assert.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
+  that precedence. Task 343's exact-number field is already implemented;
+  preserve occupied-number-before-collision precedence on supported requests.
 
 ## Suggested fix
 
@@ -62,8 +51,8 @@ payloads, BIP49Plus/BIP84 overlap, non-overlap, and barrier-controlled
 concurrent creation. Repeated requests that also occupy a name deterministically
 match `ErrAccountAlreadyExists`; an otherwise-vacant loser creates no account,
 cursor change, secret, or watch fact and matches
-`ErrAccountIdentityCollision`. After Task 343 lands, exact-number requests
-also prove an occupied number wins before collision classification.
+`ErrAccountIdentityCollision`. Existing exact-number requests also prove an
+occupied number wins before collision classification.
 
 ## Definition of done
 

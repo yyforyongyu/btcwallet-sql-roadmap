@@ -1,65 +1,72 @@
 # Task 426 — validate persisted transaction output aggregates
 
-Component: **SQL TxStore ingestion amount validation**.
+Component: **Manager Wallet publication and SQL TxStore amount validation**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 424][t424]**.
+Dependencies: **None**.
 
 ## Rationale
 
-Transaction creation validates its own output set, but SQL TxStore also admits
-transactions learned from scans, publication, migration, and batch paths. A
-serialized transaction whose individual or aggregate outputs exceed the
-monetary maximum must not become durable merely because it bypassed authoring.
+At `sql-wallet` revision `2ae306dea8c5`, `validateCreateTxParams` checks
+transaction shape and duplicate inputs but not output amounts. Maintained
+publication records transactions before publishing them, so authoring checks
+alone cannot prevent invalid individual or aggregate outputs from becoming
+durable through SQL ingestion. `checkMempool` permits publication when the
+backend lacks a mempool precheck, and `recordTxAndCredits` commits published
+credits before sending the transaction. Process termination or failed
+invalidation can leave that live state durable; `BuildUtxoInfo` trusts its
+amounts on reopen, so new-write validation alone does not cover existing
+Wallets.
 
 ## Details
 
-- Add one SQL-ingestion validator for every decoded transaction output and its
-  checked aggregate. Require each value and the aggregate to remain in
-  `0..MaxSatoshi`.
-- Invoke it before mutation in every maintained direct, batch, scan,
-  publication, and migration ingestion route. Centralize it below those entry
-  points so a later caller cannot bypass the check.
-- Preflight every populated SQL transaction row before installing the new
-  admission contract. Decode the stored bytes, recompute the txid, and refuse
-  an invalid value, arithmetic overflow, or aggregate-over-maximum set with the
-  exact transaction and output position.
-- Keep amount validation independent of Task 409's optional input
-  representation. Validate raw transactions before related writes, whether
-  the existing representation remains or an accepted refactor changes it.
-- Apply identical validation and refusal semantics on SQLite and PostgreSQL.
-  Do not repair monetary values or retain a partial batch.
-- Exclude authoring, input-source totals, fees, UTXO-row amount constraints,
-  transaction-input normalization, policy, script execution, and consensus
-  redesign.
+- Require every decoded output and its checked aggregate to remain in
+  `0..MaxSatoshi` before transaction effects are written.
+- Reuse the shared direct/batch admission boundary reached by maintained
+  publication and scan writes. Future migration must consume that same
+  boundary; its implementation is not part of this task.
+- Apply identical validation on SQLite and PostgreSQL, preserving atomic
+  batch failure and useful transaction/output diagnostics.
+- Before exposing a populated SQL Wallet, check its live transaction and
+  credit amounts against the same individual and aggregate bounds. Refuse
+  invalid live state atomically, reporting the transaction and output position
+  without publishing a Wallet or making partial durable changes.
+- Preserve legitimately retained terminal failed/replaced history; do not
+  treat that history as live credit or silently delete it.
+- Reuse existing reads and activation boundaries for this targeted check. Add
+  no amount CHECK, schema migration, general audit framework, input
+  normalization, amount repair, or Task 424 dependency.
+- Exclude authoring arithmetic, input-source totals, fees, UTXO-row amount
+  constraints, script execution, and consensus redesign.
 
 ## Suggested fix
 
-Add one TxStore raw-transaction admission helper that decodes and checks all
-output values with bounded addition before either dialect executes its first
-write. Reuse it from single and batch insertion and from a populated-data
-preflight, preserving exact diagnostic identity and transaction atomicity.
+Extend the existing shared `NewCreateTxRequest`/`validateCreateTxParams`
+admission with checked output bounds before either dialect mutates state.
+Reuse it for direct and batch writes rather than adding another validator
+per public entry point. Reuse that predicate when checking populated live
+state before Wallet publication; keep failure a read-only refusal.
 
 ## Verification
 
-- SQLite and PostgreSQL direct, batch, scan, publication, and migration cases
-  accept zero, exact-maximum, and ordinary output sets.
-- Negative, individual-over-maximum, checked-overflow, and aggregate-over-
-  maximum fixtures fail before any raw transaction or related row is written.
-- Populated upgrades refuse each invalid class with the exact txid and output
-  position and leave the prior schema and data unchanged.
-- Prove amount admission works with the current input representation. If Task
-  409 has landed, run against its accepted representation too; neither path
-  may bypass admission or leave partial transaction effects.
+- On both dialects, direct and batch ingestion accept ordinary, zero, and
+  exact-maximum output sets.
+- Negative, individual-over-maximum, overflow, and aggregate-over-maximum
+  values leave no raw transaction or related row; an invalid batch member
+  leaves no partial batch.
+- Exercise the maintained publication path to prove invalid external input
+  is rejected before durable transaction effects, without a new fault seam.
+- Reopen populated SQL fixtures representing interrupted publication with an
+  invalid live output or aggregate. Refusal identifies the transaction/output,
+  publishes no Wallet, and leaves data unchanged on both dialects. Valid live
+  state and legitimately retained terminal history still open successfully.
 
 ## Definition of done
 
-- Every maintained SQL transaction-ingestion route rejects invalid individual
-  and aggregate output amounts before durable mutation on both dialects.
-- Populated SQL data is verified before cutover, and an invalid transaction is
-  refused rather than repaired, partially imported, or hidden.
-- The PR changes no creation arithmetic, input graph, UTXO constraint, fee,
-  policy, script, or consensus behavior.
-
-[t424]: 424-transaction-utxo-integrity-adr.md
+Maintained SQL ingestion rejects invalid individual and aggregate output
+amounts through the shared admission boundary, with identical backend
+behavior and focused rollback evidence. Populated Wallets cannot expose the
+demonstrated invalid live state; targeted activation checks preserve data and
+terminal history. No schema, general audit framework, graph, policy, or
+authoring redesign is included.

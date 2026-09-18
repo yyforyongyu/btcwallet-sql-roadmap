@@ -6,6 +6,12 @@ Type: **Refactor**.
 
 Dependencies: **[Task 424][t424]**.
 
+> **Superseded 2026-09-18:** Eliminate the optional persistence backstop:
+> direct SQL corruption alone does not justify another migration. This is a
+> scope decision, not a claim that an upper MaxSatoshi CHECK exists at sql-
+> wallet 2ae306dea8c5. Task 426 retains necessary individual and aggregate
+> raw-output admission through the existing shared transaction writer.
+
 ## Rationale
 
 The current UTXO schema rejects negative amounts but has no MaxSatoshi upper
@@ -46,4 +52,4 @@ an amount-validation framework.
 The justified UTXO amount backstop is complete on both dialects without
 duplicating transaction arithmetic or becoming a prerequisite for conversion.
 
-[t424]: 424-transaction-utxo-integrity-adr.md
+[t424]: ../../tasks/424-transaction-utxo-integrity-adr.md

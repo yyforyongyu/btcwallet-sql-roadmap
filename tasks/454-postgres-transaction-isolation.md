@@ -4,7 +4,7 @@ Component: **PostgreSQL Store transaction runtime**.
 
 Type: **Bug fix**.
 
-Dependencies: **None**.
+Dependencies: **[Task 410][t410]**.
 
 ## Rationale
 
@@ -18,13 +18,21 @@ need only read-committed execution.
 
 ## Details
 
-- Define a private, driver-neutral isolation policy for normal PostgreSQL Store
-  transactions and require every transactional entry point to select it
-  explicitly.
+- Set explicit driver transaction options in the existing PostgreSQL write
+  runtime. One documented default suffices where it preserves current
+  invariants; require an operation-specific override only for a demonstrated
+  need, not a new policy abstraction or per-entry-point selector.
 - Use read committed only where constraints, exact compare-and-set predicates,
   or acquired row locks preserve the operation's complete invariant. Permit
   serializable isolation only for an operation that documents a predicate or
   multi-row invariant that cannot be protected more narrowly.
+- Preserve the graph requirements owned by [Task 410][t410] under
+  [Task 424][t424]'s contract when making isolation explicit. Task 410 alone
+  owns the graph correction, any graph-specific isolation choice and its
+  justification, and the corresponding regression. This task must neither
+  weaken nor foreclose that choice; it does not select or prove the graph fix.
+  Task 410 must merge first so this policy preserves its graph correction
+  and any required isolation level.
 - Do not add repeatable-read or another profile without a current operation
   that proves it needs that exact snapshot contract.
 - Keep isolation selection in btcwallet code. Do not change PostgreSQL server,
@@ -44,23 +52,24 @@ need only read-committed execution.
 
 ## Suggested fix
 
-Add the smallest internal transaction-policy value accepted by the PostgreSQL
-write runtime, map it to explicit driver transaction options, and update each
-normal PostgreSQL write entry point to name its policy. Keep the policy
-driver-neutral so Task 350 can map the same choice to pgx without changing
-callers or Store behavior.
+Replace the unspecified options in `runtime.Write`'s `BeginTx` call with
+the justified explicit isolation level. Add a stronger operation option only
+where a current invariant requires it. Task 350 carries the same semantics
+to native pgx; a new driver-neutral policy type is not required.
 
 ## Verification
 
-- Run focused PostgreSQL runtime tests that capture every begin option and fail
-  when an entry point leaves isolation unspecified.
+- Prove the shared PostgreSQL write boundary supplies explicit isolation;
+  cover a separate entry point only if it bypasses that boundary.
 - Override the session or role default in a real PostgreSQL fixture and prove
   representative ordinary writes still execute at their explicit
   read-committed level. If the audit admits a stronger level, prove its owning
   operation executes at that exact level too.
 - Use two Store instances to exercise one representative conflicting operation
   per admitted policy and prove no lost update, write skew, partial effect, or
-  silently retried callback.
+  silently retried callback. Task 410 owns the graph interleaving regression;
+  reuse it to verify that the explicit policy preserves the correction,
+  without adding duplicate cases.
 - Inject serialization and deadlock failures and verify stable classification,
   context cancellation, and that no callback is silently retried.
 
@@ -70,10 +79,12 @@ callers or Store behavior.
   isolation policy independent of database defaults and lnd co-tenants.
 - Each admitted level has a concrete correctness reason and concurrent
   PostgreSQL coverage; no stronger level is used as a generic safety blanket.
-- SQLite and public Wallet behavior remain unchanged. The driver-neutral
-  policy contract is complete without the later native pgx cutover.
+- SQLite and public Wallet behavior remain unchanged. Explicit isolation is
+  complete without the later native pgx cutover.
 - The PR adds no public isolation setting, global write retry, lnd change,
   connection tuning, or benchmark suite.
 
 [t350]: 350-native-pgx-postgres.md
 [t416]: 416-database-benchmark-fixtures.md
+[t410]: 410-transaction-graph-admission.md
+[t424]: 424-transaction-utxo-integrity-adr.md

@@ -43,10 +43,8 @@ rely on the observed behavior.
 Keep the existing serialized handler order explicit: call Vault Unlock, return
 its already-unlocked failure unchanged, and mutate the timer only after a first
 successful unlock. Update the caller-facing Unlock documentation and add
-Controller tests around the existing Vault contract. Add only the narrowest
-controller-local controllable timer seam if deterministic deadline observation
-cannot be expressed with the existing timer; do not add a generic clock or
-reauthentication API.
+Controller tests around the existing Vault contract and timer. Reuse current
+test controls; the public deadline behavior does not require a new timer API.
 
 ## Verification
 
@@ -55,12 +53,11 @@ reauthentication API.
   no second persisted-secret/authentication read, and leave the Wallet
   unlocked until the original deadline.
 - Repeat with a shorter positive timeout, a longer positive timeout, zero
-  (default), and a negative timeout. A deterministic timer barrier must prove
-  none changes the first deadline; the original expiry must still lock the
+  (default), and a negative timeout. Observe that none changes the first
+  deadline; the original expiry must still lock the
   Vault exactly once.
-- Run the focused Controller and Vault cases with
-  `make unit pkg=wallet case=TestControllerUnlockRepeated` and the package race
-  variant, followed by `make unit pkg=wallet`.
+- Run the focused Controller repeated-Unlock cases; reuse existing Vault
+  rejection coverage rather than reproducing it.
 
 ## Definition of done
 

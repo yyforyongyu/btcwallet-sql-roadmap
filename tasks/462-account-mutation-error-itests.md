@@ -11,14 +11,17 @@ Dependencies: **[Task 391][t391]**.
 [Issue #1250][issue1250] requires AccountManager integration coverage.
 Completed Task 429 deliberately excluded the exact, custom-scope, path-bound,
 and final request behaviors, so the final public mutation error contract still
-lacks focused real-backend evidence.
+lacks focused real-backend evidence. At `sql-wallet` revision `2ae306dea8c5`,
+`testAccountManagerRejectAccountCreation` already asserts stable errors for
+several ordinary creation rejections; rename rejection cases use only
+`require.Error`, and self-rename is absent.
 
 ## Details
 
-- Separate baseline cases for ordinary/root-derived requests from deferred
-  supplied-XPub and collision cases in the test table. Keep the former
-  fixtures independent of optional account shapes. The complete task retains
-  its Task 391 dependency; do not declare it done after only baseline cases.
+- Extend existing rejection cases for missing identities and precedence; do
+  not duplicate ordinary creation cases already using `errors.Is`. Add only
+  missing rename, supplied-XPub, and collision evidence. Retain Task 391 as
+  the prerequisite for the complete supported-shape contract.
 - This later-feature verification remains in Phase 2, but is not a prerequisite
   for converting legacy account shapes. Task 373 owns migration identity
   validation. An enabled runtime path must still satisfy its required errors.
@@ -77,10 +80,11 @@ lacks focused real-backend evidence.
 
 ## Suggested fix
 
-Extend the existing AccountManager integration table with a focused rejection
-matrix. Build collision fixtures through public account creation, snapshot the
-public account view, run the rejected mutation, and compare the same view
-before and after a fresh reopen.
+Upgrade existing rename assertions and extend the AccountManager integration
+table only where the final rejection contract lacks evidence. Build collision
+fixtures through public account creation, snapshot the public account view,
+run the rejected mutation, and compare the same view before and after a fresh
+reopen.
 
 ## Verification
 

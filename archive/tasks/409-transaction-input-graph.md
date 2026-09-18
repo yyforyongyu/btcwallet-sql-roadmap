@@ -6,6 +6,13 @@ Type: **Refactor**.
 
 Dependencies: **[Task 340][t340] and [Task 424][t424]**.
 
+> **Superseded 2026-09-18:** BuildUnminedTxRecords, CollectDescendantTxIDs,
+> collectConflictDescendants, and late-parent raw decoding already represent
+> the required transaction edges at sql-wallet 2ae306dea8c5. No current
+> consumer justifies another persisted graph representation. Eliminate this
+> optional representation task; Task 410 retains the distinct concurrent
+> graph-ordering concern.
+
 ## Rationale
 
 Current SQL invalidation decodes raw transactions to discover descendants,
@@ -55,5 +62,5 @@ The justified input-read change preserves the complete existing graph and
 public results with the smallest local implementation. If no change is needed,
 use supersession instead of recording implementation completion.
 
-[t340]: ../archive/tasks/340-durable-database-identity.md
-[t424]: 424-transaction-utxo-integrity-adr.md
+[t340]: 340-durable-database-identity.md
+[t424]: ../../tasks/424-transaction-utxo-integrity-adr.md
