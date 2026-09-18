@@ -61,10 +61,11 @@ benchmark completion, gate enabling an affected path.
 [Task 470](tasks/470-lnd-wallet-port.md) delivers the lnd port. A prior roadmap
 update assigns remaining required gaps to existing or new tasks.
 
-Phase 3 converts kvdb wallets to SQL, Phase 4 handles remaining gaps and bugs,
-and Phase 5 handles Signer/Vault hardening. Modern kvdb stays supported for the
-current and next release. Task 353's retirement is deferred, not a conversion
-requirement. [QUEUE.md](QUEUE.md) owns task placement and the precise gates.
+After Phase 1, Phase 2A's bugs/gaps and 2B's verification run in parallel.
+Phase 3 migration and Phase 4 optional improvements may overlap them as
+dependencies allow. Signer/Vault Hardening starts only after both 2A and 2B
+finish. Modern kvdb stays supported for the current and next release; Task
+353's retirement is deferred. [QUEUE.md](QUEUE.md) owns placement and gates.
 
 ## Scope
 
