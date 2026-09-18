@@ -29,7 +29,8 @@ Use these terms precisely:
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
   Every active task must have no open hard dependencies. Include every such
   Phase 1 task and dependency-ready later-phase work assigned to developers
-  other than YY. Put every Phase 1 task with open hard dependencies under
+  other than YY. Hardening stays parked until QUEUE's start gate opens.
+  Put every Phase 1 task with open hard dependencies under
   `Blocked Phase 1 Tasks`, preserving its claimant and PR when present. Park
   claimed later-phase work under `Claimed Tasks` unless the active rule above
   places it under `Active Tasks`.
@@ -69,8 +70,8 @@ require the prerequisite contract to be frozen.
 Refresh ACTIVE's three task lists whenever a claim, task dependency, task
 phase, or task status changes. `Active Tasks` and `Blocked Phase 1 Tasks` must
 partition every open Phase 1 task exactly once. `Claimed Tasks` contains parked
-claims outside the current phase, sorted by ascending phase and then task
-number. No task appears in more than one list.
+claims outside the current phase, sorted in QUEUE order (2A, 2B, 3, 4, then
+Hardening), then by task number. No task appears in more than one list.
 
 ## Task types and priority
 
@@ -124,12 +125,12 @@ matrix, or prescribe private architecture merely to stabilize a public API.
 
 Finish Phase 1's API/runtime production prerequisites and QUEUE's pre-claim
 gap check before starting Task 470's lnd port PR. Its start does not wait for
-standalone Phase 1 itests. Other later-phase work follows QUEUE's current-focus
-rule. Relevant defects and passing behavioral evidence gate merge or
-enablement; named test-task completion and benchmarks do not. Phase 3 owns
-kvdb-to-SQL migration, Phase 4 remaining gaps and bugs, and Phase 5
-Signer/Vault hardening. Later work is not a blanket earlier-phase gate;
-retain concrete production dependencies.
+standalone Phase 1 itests. After Phase 1, bugs/gaps in 2A and verification in
+2B run in parallel. Phase 3 migration and Phase 4 optional improvements may
+overlap them as dependencies permit. Signer/Vault Hardening starts only after
+both 2A and 2B finish. Integration and migration retain their concrete fixes
+and behavioral gates, not blanket test-task or benchmark completion. Regrouping
+does not change task scope, dependencies, or requirements.
 
 ## Roadmap update workflow
 
