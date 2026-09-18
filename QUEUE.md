@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **142 tasks**: **94 open**, **40 done**,
+The numbered roadmap contains **142 tasks**: **86 open**, **48 done**,
 **7 superseded**, and **1 deferred**. There are **113 recorded ad hoc tasks**,
-for **255 tracked tasks** and **153 completed** overall.
+for **255 tracked tasks** and **161 completed** overall.
 
 Open tasks are grouped by delivery phase; completed tasks move to `Done`.
 Superseded tasks retain their identity and replacement in `Superseded`.
@@ -261,7 +261,7 @@ five-phase assignment. These tasks have no current delivery phase.
 
 ## Done · 48
 
-**153 completed: 40 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
+**161 completed: 48 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -446,7 +446,7 @@ numbered roadmap; old archived task references add no separate completion.
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
-[t331]: tasks/331-manager-wallet-lifecycle.md
+[t331]: archive/tasks/331-manager-wallet-lifecycle.md
 [t332]: archive/tasks/332-watch-only-script-policy.md
 [t333]: archive/tasks/333-postgres-manager-harness.md
 [t334]: archive/tasks/334-shared-chain-state.md
@@ -458,10 +458,10 @@ numbered roadmap; old archived task references add no separate completion.
 [t340]: archive/tasks/340-durable-database-identity.md
 [t341]: archive/tasks/341-public-role-contract.md
 [t342]: archive/tasks/342-recovery-window-validation.md
-[t343]: tasks/343-exact-account-creation.md
+[t343]: archive/tasks/343-exact-account-creation.md
 [t344]: tasks/344-bulk-address-allocation.md
 [t345]: archive/tasks/345-durable-watch-registration.md
-[t346]: tasks/346-psbt-funding-metadata.md
+[t346]: archive/tasks/346-psbt-funding-metadata.md
 [t347]: tasks/347-psbt-signing-authorization.md
 [t348]: tasks/348-watched-change-delivery.md
 [t349]: archive/tasks/349-transaction-invalidation.md
@@ -505,7 +505,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t387]: archive/tasks/387-account-creation-identity-adr.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
-[t390]: tasks/390-custom-scope-account-creation.md
+[t390]: archive/tasks/390-custom-scope-account-creation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t392]: archive/tasks/392-discovery-mode-account-creation.md
 [t393]: archive/tasks/393-key-only-receiving-rejection.md
@@ -514,7 +514,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t399]: tasks/399-zero-lookahead-persisted-targets.md
+[t399]: archive/tasks/399-zero-lookahead-persisted-targets.md
 [t400]: archive/tasks/400-live-watch-semantics-adr.md
 [t401]: archive/tasks/401-live-tip-chain-watch.md
 [t402]: tasks/402-replay-live-watch-obligations.md
@@ -527,7 +527,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t409]: tasks/409-transaction-input-graph.md
 [t410]: tasks/410-transaction-graph-admission.md
 [t411]: tasks/411-terminal-parent-rejection.md
-[t412]: tasks/412-transaction-invalidation.md
+[t412]: archive/tasks/412-transaction-invalidation.md
 [t413]: tasks/413-utxo-spend-identity.md
 [t414]: tasks/414-utxo-amount-bounds.md
 [t415]: archive/tasks/415-utxo-public-integration-tests.md
@@ -556,7 +556,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t438]: tasks/438-psbt-decoration-combination-itests.md
 [t439]: tasks/439-psbt-funding-itests.md
 [t440]: tasks/440-psbt-signing-finalization-itests.md
-[t441]: tasks/441-signer-derivation-ecdh-itests.md
+[t441]: archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: tasks/442-signer-signing-itests.md
 [t443]: tasks/443-unsafe-signer-itests.md
 [t444]: tasks/444-wallet-receive-reload-scenario.md
@@ -583,7 +583,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t465]: tasks/465-new-address-result-itests.md
 [t466]: tasks/466-oldest-unused-address-itests.md
 [t467]: archive/tasks/467-indeterminate-commit-identity.md
-[t468]: tasks/468-activate-no-chain-sync-account-creation.md
+[t468]: archive/tasks/468-activate-no-chain-sync-account-creation.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [t470]: tasks/470-lnd-wallet-port.md
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
@@ -626,3 +626,10 @@ numbered roadmap; old archived task references add no separate completion.
 [pr1366]: https://github.com/btcsuite/btcwallet/pull/1366
 [pr1367]: https://github.com/btcsuite/btcwallet/pull/1367
 [pr1368]: https://github.com/btcsuite/btcwallet/pull/1368
+[pr1328]: https://github.com/btcsuite/btcwallet/pull/1328
+[pr1369]: https://github.com/btcsuite/btcwallet/pull/1369
+[pr1359]: https://github.com/btcsuite/btcwallet/pull/1359
+[pr1371]: https://github.com/btcsuite/btcwallet/pull/1371
+[pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
+[pr1388]: https://github.com/btcsuite/btcwallet/pull/1388
+[pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
