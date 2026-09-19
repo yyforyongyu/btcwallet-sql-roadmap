@@ -15,6 +15,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 443](tasks/443-unsafe-signer-itests.md) completed on 2026-09-19.
 
 - [Task 351](tasks/351-sql-utxo-integrity.md) was superseded on
   2026-09-18; its archived decision records the evidence and retained owner.

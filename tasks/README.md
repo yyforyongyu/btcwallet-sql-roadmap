@@ -114,7 +114,6 @@ that structural exclusion explicitly.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
 - [Task 442](442-signer-signing-itests.md): cover public signing contracts.
-- [Task 443](443-unsafe-signer-itests.md): cover UnsafeSigner extraction
   contracts.
 - [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.

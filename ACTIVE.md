@@ -27,7 +27,6 @@ recorded PR stack. QUEUE's scheduling gates still apply; after Phase 1, tracks
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | Gustavo | — |
 | [Task 442][t442] | Cover public signing contracts | Test | YY | [#1384][pr1384] |
-| [Task 443][t443] | Cover UnsafeSigner extraction contracts | Test | YY | [#1383][pr1383] |
 
 ## Blocked Phase 1 Tasks
 
@@ -111,7 +110,6 @@ in QUEUE order (2A, 2B, 3, 4, then Hardening), then by task number.
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
 [t442]: tasks/442-signer-signing-itests.md
-[t443]: tasks/443-unsafe-signer-itests.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t460]: tasks/460-sequential-account-invalid-children.md
@@ -126,6 +124,5 @@ in QUEUE order (2A, 2B, 3, 4, then Hardening), then by task number.
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
-[pr1383]: https://github.com/btcsuite/btcwallet/pull/1383
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
 [pr1389]: https://github.com/btcsuite/btcwallet/pull/1389

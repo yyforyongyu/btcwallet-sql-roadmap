@@ -22,7 +22,7 @@ kvdb caller paths against source. Before Phase 1 closes, assign any required
 initial API/runtime gaps and their dependency closure there, using existing
 owners where available. Task 470 retains its own merge and enablement gates.
 
-## Phase 1 — API stabilization and basic itests · 11 open
+## Phase 1 — API stabilization and basic itests · 10 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle, purpose-1017 key families, final address allocation, transaction
@@ -47,7 +47,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
-| [Task 443][t443] | open | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | — |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 343, 344, 468 |
 | [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395 |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396 |
@@ -208,7 +207,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 413][t413] | 4 | Wallet-owned SQL UTXO spend assignment | Bug fix | Validate exact UTXO spending inputs | Existing exact-outpoint checks and replay regression eliminate duplicate identity work; concurrent ordering stays in [Task 410][t410] |
 | [Task 414][t414] | 4 | SQL UTXO amount integrity backstop | Refactor | Bound persisted SQL UTXO amounts | Accepted decision eliminates an optional SQL amount backstop; raw-output admission stays in [Task 426][t426] |
 
-## Done
+## Done · 49
 
 **161 completed: 48 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -258,6 +257,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 436][t436] | 1 | TxReader integration tests | Test | Cover transaction read contracts | [#1346][pr1346] |
 | [Task 437][t437] | 1 | TxWriter integration tests | Test | Cover transaction label contracts | [#1347][pr1347] |
 | [Task 441][t441] | 1 | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | [#1374][pr1374] |
+| [Task 443][t443] | 1 | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | [#1383][pr1383] |
 | [Task 452][t452] | 1 | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | [#1368][pr1368] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
 | [Task 455][t455] | 1 | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | [#1363][pr1363] |
