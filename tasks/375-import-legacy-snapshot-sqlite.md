@@ -14,10 +14,11 @@ needs one migration-specific SQLite transaction.
 
 ## Details
 
-- Consume [Task 373][t373]'s account/address/ciphertext output together with
-  Task 374's transaction/sync output from the same validated source snapshot.
-  Neither stage alone contains the complete import. Accept no source handle
-  or plaintext in this boundary.
+- Consume [Task 373][t373]'s wallet/account/ciphertext output,
+  [Task 473][t473]'s address/script/ciphertext output, and Task 374's
+  transaction/sync output from the same validated source snapshot. No stage
+  alone contains the complete import. Accept no source handle or plaintext
+  in this boundary.
 - Import into a wallet-empty SQLite database with the validated network
   identity. Schema and empty-Manager bootstrap metadata may exist, but no
   prior wallet, account, transaction, or UTXO state may exist. Initial
@@ -59,3 +60,4 @@ speculative transaction-graph tasks.
 [t340]: ../archive/tasks/340-durable-database-identity.md
 [t373]: 373-extract-legacy-account-address-state.md
 [t374]: 374-extract-legacy-transaction-sync-state.md
+[t473]: 473-extract-legacy-address-script-state.md

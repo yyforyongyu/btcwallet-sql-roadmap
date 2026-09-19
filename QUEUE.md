@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **142 tasks**: **80 open**, **48 done**,
-**13 superseded**, and **1 deferred**. With **113 ad hoc tasks**, that is
-**255 tracked tasks** and **161 completed** overall.
+The numbered roadmap contains **145 tasks**: **80 open**, **49 done**,
+**15 superseded**, and **1 deferred**. With **113 ad hoc tasks**, that is
+**258 tracked tasks** and **162 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -94,29 +94,29 @@ Each task retains its existing prerequisites, including later-phase features.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 369][t369] | open | Controller | Test | Reject repeated Wallet unlocks without resetting timeout | — |
-| [Task 416][t416] | open | wallet benchmark infrastructure | Benchmark | Provide minimal three-backend benchmark setup | — |
-| [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 416 |
-| [Task 418][t418] | open | wallet UtxoManager benchmarks | Benchmark | Measure ListUnspent performance | 416 |
-| [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 416 |
-| [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 416 |
+| [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 471 |
+| [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 471 |
+| [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 471 |
 | [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
 | [Task 439][t439] | open | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | 348 |
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
-| [Task 444][t444] | open | public wallet receive scenario | Test | Cover the wallet receive and reload scenario | — |
-| [Task 445][t445] | open | public account signing scenario | Test | Cover account derivation and signing | — |
-| [Task 446][t446] | open | public transaction spend scenario | Test | Cover transaction creation and publication | — |
+| [Task 444][t444] | open | public wallet receive scenario | Test | Cover new-account receipt and reload | — |
+| [Task 445][t445] | open | public account signing scenario | Test | Cover new-account signing identity | — |
+| [Task 446][t446] | open | public transaction spend scenario | Test | Cover authored-spend publication and reload | — |
 | [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 348 |
 | [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | — |
 | [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | — |
 | [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | — |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
-| [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Cover public account mutation errors | 391 |
+| [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Complete missing account mutation error evidence | 391 |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
-| [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify NoChainSync account queries | 391 |
+| [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify true-value lists and path-bound account queries | 391 |
+| [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure ListUnspent on three real backends | — |
+| [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | — |
 
-## Phase 3 — kvdb-to-SQL migration · 7 open
+## Phase 3 — kvdb-to-SQL migration · 8 open
 
 Validate and extract the immutable source, import into SQLite, then expose
 verified conversion. Atomic genesis and contextual Create remain prerequisites.
@@ -127,10 +127,11 @@ Modern kvdb remains supported for the current and next release.
 | [Task 329][t329] | open | Manager SQL genesis and SQL Store | Bug fix | Commit SQL wallet genesis atomically | — |
 | [Task 335][t335] | open | Legacy migration source snapshot | Migration | Validate an immutable legacy wallet source | — |
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 329 |
-| [Task 373][t373] | open | Legacy migration account, address, and secret extraction | Migration | Extract legacy account and address state | 335 |
-| [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 373 |
+| [Task 373][t373] | open | Legacy migration wallet, account, and secret extraction | Migration | Extract legacy wallet, account, and secret state | 335 |
+| [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 473 |
 | [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 374 |
 | [Task 376][t376] | open | Manager.Create legacy conversion mode | Migration | Convert a legacy wallet through Manager.Create | 358, 375 |
+| [Task 473][t473] | open | Legacy migration address and script extraction | Migration | Extract legacy address and script state | 373 |
 
 ## Phase 4 — optional improvements · 8 open
 
@@ -186,7 +187,7 @@ done or superseded; reactivation preserves the original task number.
 | --- | --- | --- | --- |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 13
+## Superseded · 15
 
 Former phases record the historical map at supersession, not the current
 delivery grouping. These tasks have no current delivery phase.
@@ -206,10 +207,12 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 409][t409] | 4 | SQL TxStore input-graph representation | Refactor | Simplify transaction input graph reads | Existing raw graph reads satisfy current consumers; accepted decision eliminates another representation |
 | [Task 413][t413] | 4 | Wallet-owned SQL UTXO spend assignment | Bug fix | Validate exact UTXO spending inputs | Existing exact-outpoint checks and replay regression eliminate duplicate identity work; concurrent ordering stays in [Task 410][t410] |
 | [Task 414][t414] | 4 | SQL UTXO amount integrity backstop | Refactor | Bound persisted SQL UTXO amounts | Accepted decision eliminates an optional SQL amount backstop; raw-output admission stays in [Task 426][t426] |
+| [Task 416][t416] | 2B | wallet benchmark infrastructure | Benchmark | Provide minimal three-backend benchmark setup | Combined into [Task 471][t471]; shared setup is exercised by the first real measurement |
+| [Task 418][t418] | 2B | wallet UtxoManager benchmarks | Benchmark | Measure ListUnspent performance | Combined into [Task 471][t471]; shared setup is exercised by the first real measurement |
 
 ## Done · 49
 
-**161 completed: 48 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
+**162 completed: 49 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -480,9 +483,9 @@ numbered roadmap; old archived task references add no separate completion.
 [t413]: archive/tasks/413-utxo-spend-identity.md
 [t414]: archive/tasks/414-utxo-amount-bounds.md
 [t415]: archive/tasks/415-utxo-public-integration-tests.md
-[t416]: tasks/416-database-benchmark-fixtures.md
+[t416]: archive/tasks/416-database-benchmark-fixtures.md
 [t417]: tasks/417-start-to-synced-benchmark.md
-[t418]: tasks/418-list-unspent-benchmark.md
+[t418]: archive/tasks/418-list-unspent-benchmark.md
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md
 [t421]: archive/tasks/421-sql-passphrase-commit-reconciliation.md
@@ -535,6 +538,10 @@ numbered roadmap; old archived task references add no separate completion.
 [t468]: archive/tasks/468-activate-no-chain-sync-account-creation.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [t470]: tasks/470-lnd-wallet-port.md
+[t471]: tasks/471-three-backend-list-unspent-benchmark.md
+[t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
+[t473]: tasks/473-extract-legacy-address-script-state.md
+
 [pr1303]: https://github.com/btcsuite/btcwallet/pull/1303
 [pr1307]: https://github.com/btcsuite/btcwallet/pull/1307
 [pr1308]: https://github.com/btcsuite/btcwallet/pull/1308

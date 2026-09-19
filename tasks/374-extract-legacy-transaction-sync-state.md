@@ -4,7 +4,7 @@ Component: **Legacy migration transaction and sync extraction**.
 
 Type: **Migration**.
 
-Dependencies: **[Task 373][t373]**.
+Dependencies: **[Task 473][t473]**.
 
 ## Rationale
 
@@ -16,7 +16,7 @@ internally consistent.
 ## Details
 
 - Read only [Task 335][t335]'s immutable source and join ownership through Task
-  373's normalized address identities.
+  473's normalized address identities.
 - Extract raw transactions, block membership, status, labels, credits, debits,
   UTXOs, spends, supported conflict facts, active leases, birthday, sync tip,
   and the block history required to interpret them.
@@ -54,4 +54,4 @@ transaction, UTXO, lease, block, and synchronization snapshot without source
 or destination mutation.
 
 [t335]: 335-kvdb-to-sql-migration.md
-[t373]: 373-extract-legacy-account-address-state.md
+[t473]: 473-extract-legacy-address-script-state.md

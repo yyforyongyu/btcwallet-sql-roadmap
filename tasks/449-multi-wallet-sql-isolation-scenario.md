@@ -26,22 +26,16 @@ without making that broader production work part of this focused task.
 - Spend from one Wallet, confirm it, and prove the other Wallet's owned state is
   unchanged. Stop the Manager, start a fresh Manager, and repeat the isolation
   assertions with both Wallets from its returned active set.
-- Start an explicit historical rescan for Wallet A while Manager live chain
-  processing continues. Prove Wallet B remains ready and receives ordered live
-  state, and Wallet A's rescan activity never appears in Wallet B.
-- [Task 428][t428] owns the shared one-Wallet rescan contract. This SQL-only
-  scenario owns the distinct cross-Wallet isolation assertion without making
-  either test task an ordering prerequisite for the other.
-- Observe canonical height and hash only through maintained public behavior.
-  They may move for real live-chain events but cannot move merely because
-  Wallet A scans historical data.
+- [Task 472][t472] owns the concurrent historical-rescan/live-delivery
+  scenario split out on 2026-09-19. This task retains baseline receipt,
+  spend, and reopen isolation; neither test task depends on the other.
 - Run the same source on SQLite and PostgreSQL through the shared Manager
   harness.
 - Do not register kvdb: its Manager intentionally supports one Wallet per
   database, so this SQL-only multi-Wallet contract has no kvdb equivalent. The
   common single-Wallet scenarios own kvdb coverage.
 - Exclude separate Managers, cross-process fencing, network-identity mismatch,
-  stress or benchmark claims, and direct Store reads.
+  historical rescans, stress or benchmark claims, and direct Store reads.
 
 ## Suggested fix
 
@@ -56,22 +50,19 @@ a scenario-specific coordinator.
 - Verify the test registration documents the intentional kvdb exclusion
   instead of reaching it through a runtime skip branch.
 - Verify both Wallets start from the same Manager database after fresh Manager
-  construction; all coordinator, Wallet, Manager, miner, and backend resources
-  join.
-- Hold Wallet A's rescan across a live block and prove Wallet B remains ready,
-  receives that block in order, and exposes no Wallet A historical state.
+  construction; all Wallet, Manager, miner, and backend resources join.
 
 ## Definition of done
 
 - Two Wallets share canonical chain facts while every wallet-owned public view
-  remains isolated before and after one spend, one Wallet-scoped rescan, live
-  chain movement, and durable reopen.
+  remains isolated through receipt, one spend, live chain movement, and
+  durable reopen.
 - The scenario validates one Manager only and claims no cross-process fencing.
 - The scenario is SQL-backend-neutral; kvdb remains explicitly out of scope
   because it cannot represent the scenario.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t428]: 428-controller-sync-info-itests.md
+[t472]: 472-multi-wallet-rescan-isolation-scenario.md
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md

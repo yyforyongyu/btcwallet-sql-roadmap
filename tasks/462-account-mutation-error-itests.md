@@ -9,12 +9,14 @@ Dependencies: **[Task 391][t391]**.
 ## Rationale
 
 [Issue #1250][issue1250] requires AccountManager integration coverage.
-Completed Task 429 deliberately excluded the exact, custom-scope, path-bound,
-and final request behaviors, so the final public mutation error contract still
-lacks focused real-backend evidence. At `sql-wallet` revision `2ae306dea8c5`,
-`testAccountManagerRejectAccountCreation` already asserts stable errors for
-several ordinary creation rejections; rename rejection cases use only
-`require.Error`, and self-rename is absent.
+At `sql-wallet` revision `48e7f4b`, [existing account cases][source] already
+cover ordinary, exact, and custom creation, including several stable rejection
+identities. `testAccountManagerRejectInvalidImportKey` also checks nil/private
+keys with `ErrorIs`, and stopped mutation calls already check their identity.
+Rename, locked-create, and some ordinary-import cases still use generic
+`require.Error`; self-rename, collision precedence, and supplied path-bound
+XPub shapes remain missing. This task owns only those assertion upgrades and
+uncovered final-contract cases.
 
 ## Details
 
@@ -22,6 +24,11 @@ several ordinary creation rejections; rename rejection cases use only
   not duplicate ordinary creation cases already using `errors.Is`. Add only
   missing rename, supplied-XPub, and collision evidence. Retain Task 391 as
   the prerequisite for the complete supported-shape contract.
+- Upgrade `testAccountManagerRejectAccountRename`, the locked-create case in
+  `testAccountManagerEnforceAccountCreationLifecycle`, and generic assertions
+  in `testAccountManagerRejectAccountImport` in place. Preserve existing
+  nil/private-key, stopped, and basic-create assertions without another case
+  registration. Add a case only for a shape or precedence not yet exercised.
 - This later-feature verification remains in Phase 2, but is not a prerequisite
   for converting legacy account shapes. Task 373 owns migration identity
   validation. An enabled runtime path must still satisfy its required errors.
@@ -40,8 +47,8 @@ several ordinary creation rejections; rename rejection cases use only
   before Vault or Store work.
 - Cover the final representable mutation identities and precedence:
   invalid request or field combinations match `ErrInvalidParam`; malformed,
-  private,
-  wrong-network, or wrong-depth account keys match `ErrInvalidAccountKey`;
+  private, wrong-network, or wrong-depth account keys match
+  `ErrInvalidAccountKey` (reuse existing nil/private-key cases);
   duplicate names and occupied exact numbers beat overlapping XPub
   identities; otherwise-equal overlapping XPub identities match
   `ErrAccountIdentityCollision`; and valid unsupported backend or custody
@@ -110,3 +117,4 @@ reopen.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/account_manager_test.go

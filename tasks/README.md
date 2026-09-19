@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **471**.
+The next free task number is **474**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -114,17 +114,16 @@ that structural exclusion explicitly.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
 - [Task 442](442-signer-signing-itests.md): cover public signing contracts.
-  contracts.
 - [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.
 - [Task 461](461-address-batch-itests.md): cover public address batch
   contracts.
-- [Task 462](462-account-mutation-error-itests.md): cover public account
-  mutation errors.
+- [Task 462](462-account-mutation-error-itests.md): complete missing account
+  mutation-error evidence.
 - [Task 463](463-path-bound-utxo-identity-itests.md): verify path-bound UTXO
   account identity.
-- [Task 464](464-no-chain-sync-account-query-itests.md): verify `NoChainSync`
-  account queries.
+- [Task 464](464-no-chain-sync-account-query-itests.md): verify true-value
+  list and path-bound account queries.
 - [Task 465](465-new-address-result-itests.md): verify durable key allocation
   results.
 - [Task 466](466-oldest-unused-address-itests.md): verify final oldest-unused
@@ -132,18 +131,20 @@ that structural exclusion explicitly.
 
 ## Integration-test scenarios
 
-- [Task 444](444-wallet-receive-reload-scenario.md): cover wallet receipt and
-  durable reload.
-- [Task 445](445-account-signing-scenario.md): cover account derivation and
-  signing.
-- [Task 446](446-transaction-spend-publish-scenario.md): cover transaction
-  creation and publication.
+- [Task 444](444-wallet-receive-reload-scenario.md): cover new-account receipt
+  and durable reload.
+- [Task 445](445-account-signing-scenario.md): cover new-account signing
+  identity.
+- [Task 446](446-transaction-spend-publish-scenario.md): cover authored-spend
+  publication and reload.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
 - [Task 448](448-sync-rollback-scenario.md): cover synchronization and rollback.
 - [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
   isolation.
 - [Task 450](450-bitcoind-compatibility-scenario.md): compare public wallet
   state with bitcoind.
+- [Task 472](472-multi-wallet-rescan-isolation-scenario.md): isolate historical
+  rescans from live Wallets.
 
 ## Secrets and credentials
 
@@ -170,28 +171,29 @@ that structural exclusion explicitly.
 
 - [Task 335](335-kvdb-to-sql-migration.md): validate an immutable legacy wallet
   source.
-- [Task 373](373-extract-legacy-account-address-state.md): extract legacy account
-  and address state.
+- [Task 373](373-extract-legacy-account-address-state.md): extract legacy
+  wallet, account, and secret state.
 - [Task 374](374-extract-legacy-transaction-sync-state.md): extract legacy
   transaction and sync state.
 - [Task 375](375-import-legacy-snapshot-sqlite.md): import one legacy snapshot
   into SQLite.
 - [Task 376](376-orchestrate-legacy-conversion.md): convert a legacy wallet
   through Manager.Create.
+- [Task 473](473-extract-legacy-address-script-state.md): extract legacy address
+  and script state.
 
 ## Benchmarks
 
-Task 416 provides minimal deterministic setup and cleanup on kvdb, SQLite,
-and PostgreSQL. Each consumer uses a few explicit dataset sizes and a simple
-measurement loop; no cold/warm matrix or workload framework is required.
+Task 471 exercises minimal shared kvdb, SQLite, and PostgreSQL setup with the
+first real ListUnspent measurement. Other consumers reuse that setup and own
+their operation-specific data. Each uses a few explicit sizes and a simple
+loop, without a cold/warm matrix or workload framework.
 
-- [Task 416](416-database-benchmark-fixtures.md): provide minimal three-backend
-  benchmark setup.
 - [Task 417](417-start-to-synced-benchmark.md): measure start-to-synced
-  performance.
-- [Task 418](418-list-unspent-benchmark.md): measure ListUnspent
   performance.
 - [Task 419](419-address-read-benchmark.md): measure address-read
   performance.
 - [Task 420](420-transaction-read-benchmark.md): measure transaction-read
   performance.
+- [Task 471](471-three-backend-list-unspent-benchmark.md): measure ListUnspent
+  on three real backends with reusable setup.

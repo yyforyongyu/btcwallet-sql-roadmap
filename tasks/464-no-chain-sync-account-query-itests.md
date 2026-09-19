@@ -8,33 +8,38 @@ Dependencies: **[Task 391][t391]**.
 
 ## Rationale
 
-[Issue #1250][issue1250] requires AccountManager integration coverage. Task 430
-owns baseline account-query coverage, not this task's fixtures. The new
-`AccountInfo.NoChainSync` value and SQL-only account shapes need a separate
-public integration-test outcome after their production contracts land.
+[Issue #1250][issue1250] requires AccountManager integration coverage. At
+`sql-wallet` revision `48e7f4b`, [existing account itests][source] already
+verify root-derived `NoChainSync=true` through `GetAccount` and reopen, and
+reject unsupported kvdb creation. [Task 430][t430] owns ordinary accounts'
+complete query results, including `NoChainSync=false`; its [PR #1389][pr1389]
+is still open at this audit. Neither coverage set needs another matrix here.
+
+The remaining evidence is true values through SQL list queries and Task 391's
+future path-bound account identity through all public account views.
 
 ## Details
 
-- Keep ordinary-false and root-derived-true fixtures independent of Task
-  391's path-bound shape. Add the path-bound case separately after its
-  production contract lands; completion of this full task still requires 391.
+- Extend existing root-derived true-value fixtures independently of Task 391's
+  path-bound shape. Add that shape after its production contract lands;
+  completion of the full task still requires 391.
 - This final field/account-shape matrix remains Phase 2 verification, not a
   blanket prerequisite for legacy conversion, whose input has NoChainSync
   false. Do not skip a required case to declare this task complete.
-- Reuse existing imported-`wallet` query fixtures without waiting for Task
-  430. Preserve its baseline coverage if it has already landed.
-- On kvdb, SQLite, and PostgreSQL, prove ordinary accounts report
-  `NoChainSync=false` through `ListAccounts`, `ListAccountsByScope`,
-  `ListAccountsByName`, and `GetAccount` before and after reopen.
-- On SQLite and PostgreSQL, create root-derived and path-bound accounts with
-  `NoChainSync=true`, query them through every public account view, and require
-  the complete exported `AccountInfo` result to retain the value after reopen.
-- Modern kvdb cannot represent the persisted property. Keep it outside the
-  SQL-only true-value cases and require a true creation request to match
-  `ErrAccountOperationUnsupported` through `errors.Is` before mutation.
-- Do not repeat Task 430's general filter, ordering, exported-field, or reopen
-  matrix. Add only the new field, SQL account-shape, backend-rejection, and
-  durability assertions listed here.
+- Reuse existing imported-`wallet` query fixtures without a hard dependency on
+  Task 430's test completion. Preserve its ordinary three-backend assertions.
+- On SQLite and PostgreSQL, extend root-derived true-value fixtures with
+  `ListAccounts`, `ListAccountsByScope`, and `ListAccountsByName` before and
+  after reopen. Compare the complete exported results against the same
+  expected account; retain existing `GetAccount` assertions without duplication.
+- For Task 391's path-bound accounts with `NoChainSync=true`, verify all three
+  list methods and `GetAccount` preserve the complete exported identity and
+  policy before and after reopen. This new shape has no existing query proof.
+- Modern kvdb cannot represent these persisted SQL-only shapes. Document the
+  structural exclusion at registration, without a skip in a shared case or
+  another unsupported-creation test; existing mutation tests own that error.
+- Do not repeat ordinary-false queries, creation rejections, or the general
+  filter, ordering, exported-field, and reopen matrices owned by Tasks 429/430.
 - Extend the existing `itest/account_manager_test.go` suite. Add no arbitrary
   helper, production file, or standalone test file; justify any unavoidable
   new file against the repository's current layout in the implementation PR.
@@ -44,22 +49,21 @@ public integration-test outcome after their production contracts land.
 
 ## Suggested fix
 
-Add one focused table to the existing AccountManager integration suite. Reuse
-available public query helpers and add only ordinary-false, SQL-true, and
-kvdb-unsupported fixtures; Task 430 need not land first.
+Extend the existing exact/custom account cases with the missing list-view
+assertions, then reuse the query helpers for path-bound identities. Do not
+create another ordinary-account or kvdb-rejection suite.
 
 ## Verification
 
-- Run the ordinary-false case unchanged on kvdb, SQLite, and PostgreSQL.
-- Run root-derived and path-bound true-value cases on SQLite and PostgreSQL,
-  including a durable reopen.
-- Prove the kvdb true-value request fails before mutation with the canonical
-  unsupported identity.
+- Run the root-derived true-value list assertions and path-bound all-view
+  assertions on SQLite and PostgreSQL, including a durable reopen.
+- Preserve existing ordinary three-backend query and kvdb-rejection evidence;
+  add no duplicate test registration for either contract.
 
 ## Definition of done
 
-- The new public account field has focused real-backend coverage without
-  duplicating baseline account-query cases.
+- Missing true-value list and path-bound identity assertions have focused
+  real-backend coverage without duplicating baseline account-query cases.
 - SQL-only true values remain durable on both dialects, and kvdb's structural
   exclusion is explicit.
 - No new query behavior, public API, Store assertion, arbitrary file, or
@@ -68,3 +72,5 @@ kvdb-unsupported fixtures; Task 430 need not land first.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t430]: 430-account-query-itests.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/account_manager_test.go
+[pr1389]: https://github.com/btcsuite/btcwallet/pull/1389

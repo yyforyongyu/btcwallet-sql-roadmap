@@ -1,4 +1,4 @@
-# Task 444 — cover the wallet receive and reload scenario
+# Task 444 — cover new-account receipt and reload
 
 Component: **public wallet receive scenario**.
 
@@ -9,11 +9,12 @@ Dependencies: **[Task 331][t331], [Task 415][t415], [Task 429][t429],
 
 ## Rationale
 
-[Issue #1250][issue1250] requires broader scenarios beyond isolated API
-coverage. The first foundation scenario should prove that one Wallet on each
-maintained database can create an account and address, receive confirmed funds,
-expose consistent account, UTXO, and transaction views, and preserve them
-through a fresh Manager startup over the same database.
+[Issue #1250][issue1250] requires broader public scenarios. At `sql-wallet`
+revision `48e7f4b`, [TxReader cases][source] already cover received transaction
+fields and complete history across reopen; account mutation and UTXO cases
+also exist. The remaining outcome joins those public views for one newly
+created account and receiving address through receipt and fresh Manager
+startup. It does not need another component field or error matrix.
 
 ## Details
 
@@ -32,10 +33,11 @@ through a fresh Manager startup over the same database.
 
 ## Suggested fix
 
-Add one scenario registration using available account, address, UTXO, and
-transaction fixtures, without waiting for Tasks 430 or 431's coverage. Use
-one-shot wallet assertions after `AssertWalletSynced` and no direct Store
-inspection.
+Extend a suitable existing receive/reopen case with the new-account fixture
+and the missing account/address/UTXO/transaction identity joins. Reuse existing
+checks instead of adding a parallel receive suite. Do not wait for Tasks 430
+or 431's test completion; use one-shot assertions after `AssertWalletSynced`
+and no direct Store inspection.
 
 ## Verification
 
@@ -59,3 +61,4 @@ inspection.
 [t431]: 431-address-allocation-lookup-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/tx_reader_test.go

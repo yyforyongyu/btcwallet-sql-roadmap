@@ -14,6 +14,11 @@ it while other Wallet processors continue handling the same chain. The
 Manager-owned path needs one disconnect owner before it can consume the live
 notification stream.
 
+At `sql-wallet` revision `48e7f4b`, the existing
+[Store rollback tests][rollback-tests] already prove atomic tip/history rewind
+and rollback on failure. The missing evidence is Manager coordination around
+that operation, not a second Store rollback implementation or test matrix.
+
 ## Details
 
 - Make Task 370's dispatcher the only rollback caller in the prepared SQL
@@ -71,3 +76,5 @@ without importing the separate transaction-invalidation roadmap.
 [t370]: 370-chain-source-delivery.md
 [t371]: 371-canonical-chain-frontier.md
 [t423]: 423-manager-chain-source-cutover.md
+
+[rollback-tests]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/internal/db/itest/tx_store_rollback_test.go

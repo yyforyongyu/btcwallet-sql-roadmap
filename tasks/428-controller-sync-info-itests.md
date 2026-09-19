@@ -26,7 +26,7 @@ and durable results after reopen.
 - Prove explicit historical rescan remains Wallet-scoped while live
   synchronization continues independently. Rescan activity cannot overwrite
   that Wallet's live readiness fields.
-- [Task 449][t449] owns the SQL two-Wallet isolation assertion. This shared
+- [Task 472][t472] owns the SQL two-Wallet isolation assertion. This shared
   three-backend contract does not add multi-Wallet setup or duplicate that
   scenario.
 - Mine deterministic history, wait with bounded deadlines, and compare public
@@ -44,9 +44,10 @@ and durable results after reopen.
 
 ## Suggested fix
 
-Add one synchronization-focused Controller itest source that builds a short
-deterministic chain, records public checkpoints, issues bounded resync/rescan
-requests, and observes completion only through maintained public APIs.
+Extend the existing `itest/controller_test.go` with a short deterministic
+chain, public checkpoints, and bounded resync/rescan requests. Observe
+completion only through maintained public APIs; do not add a separate source
+file or repeat the baseline Info cases.
 
 ## Verification
 
@@ -71,4 +72,4 @@ requests, and observes completion only through maintained public APIs.
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
-[t449]: 449-multi-wallet-sql-isolation-scenario.md
+[t472]: 472-multi-wallet-rescan-isolation-scenario.md

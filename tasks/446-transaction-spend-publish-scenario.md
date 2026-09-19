@@ -1,4 +1,4 @@
-# Task 446 — cover transaction creation and publication
+# Task 446 — cover authored-spend publication and reload
 
 Component: **public transaction spend scenario**.
 
@@ -9,11 +9,12 @@ Dependencies: **[Task 331][t331], [Task 415][t415], [Task 433][t433],
 
 ## Rationale
 
-[Issue #1250][issue1250] requires a realistic transaction creation, signing,
-and publication scenario after component contracts exist. No task currently
-proves that a funded Wallet on every maintained database can author a valid
-spend, pass mempool policy, broadcast it, confirm it, and expose one consistent
-public transaction view.
+[Issue #1250][issue1250] requires a public spend scenario. At `sql-wallet`
+revision `48e7f4b`, [publisher cases][source] already prove acceptance without
+publication and unmined/mined UTXO changes. TxReader also proves durable
+history. Their `SignSpend` fixtures bypass `CreateTransaction`, leaving the
+authored transaction and change handoff into signing, publication, and reopen
+unproved. This task connects that path without another publisher/read matrix.
 
 ## Details
 
@@ -32,9 +33,11 @@ public transaction view.
 
 ## Suggested fix
 
-Add one deterministic spend scenario that composes the completed funding,
-creation, publication, read, and synchronization helpers. Use bounded waits
-only for named external mempool and mining events.
+Extend suitable existing spend coverage to consume `CreateTransaction` with
+automatic selection and change, then verify the signing and durable change
+handoff. Reuse acceptance/no-publication, transaction, and UTXO assertions
+instead of repeating component matrices. Use bounded waits only for named
+external mempool and mining events.
 
 ## Verification
 
@@ -56,3 +59,4 @@ only for named external mempool and mining events.
 [t434]: ../archive/tasks/434-transaction-creation-itests.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/tx_publisher_test.go
