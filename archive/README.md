@@ -15,6 +15,20 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+
+- [Task 351](tasks/351-sql-utxo-integrity.md) was superseded on
+  2026-09-18; its archived decision records the evidence and retained owner.
+- [Task 361](tasks/361-kvdb-imported-xpub-derivation.md) was superseded on
+  2026-09-18; its archived decision records the evidence and retained owner.
+- [Task 362](tasks/362-kvdb-definitive-passphrase-result.md) was superseded on
+  2026-09-18; its archived decision records the evidence and retained owner.
+- [Task 409](tasks/409-transaction-input-graph.md) was superseded on
+  2026-09-18; its archived decision records the evidence and retained owner.
+- [Task 413](tasks/413-utxo-spend-identity.md) was superseded on
+  2026-09-18; its archived decision records the evidence and retained owner.
+- [Task 414](tasks/414-utxo-amount-bounds.md) was superseded on
+  2026-09-18; its archived decision records the evidence and retained owner.
+
 - [Task 412](tasks/412-transaction-invalidation.md) completed on 2026-09-17.
 - [Task 399](tasks/399-zero-lookahead-persisted-targets.md) completed on 2026-09-15.
 - [Task 441](tasks/441-signer-derivation-ecdh-itests.md) completed on 2026-09-15.

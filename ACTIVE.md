@@ -21,6 +21,7 @@ recorded PR stack. QUEUE's scheduling gates still apply; after Phase 1, tracks
 | --- | --- | --- | --- | --- |
 | [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | Abdullahi | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | YY | [#1380][pr1380] |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | Gustavo | — |
 | [Task 428][t428] | Test resync and rescan | Test | Gustavo | — |
 | [Task 430][t430] | Test account queries | Test | Gustavo | [#1389][pr1389] |
 | [Task 431][t431] | Test address allocation | Test | Gustavo | — |
@@ -61,7 +62,6 @@ in QUEUE order (2A, 2B, 3, 4, then Hardening), then by task number.
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | — |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 408][t408] | Watch direct transaction change | Bug fix | 2A | Gustavo | — |
@@ -101,7 +101,7 @@ in QUEUE order (2A, 2B, 3, 4, then Hardening), then by task number.
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
 [t408]: tasks/408-direct-transaction-change-watch.md
-[t409]: tasks/409-transaction-input-graph.md
+[t409]: archive/tasks/409-transaction-input-graph.md
 [t410]: tasks/410-transaction-graph-admission.md
 [t411]: tasks/411-terminal-parent-rejection.md
 [t423]: tasks/423-manager-chain-source-cutover.md

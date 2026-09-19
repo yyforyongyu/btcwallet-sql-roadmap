@@ -46,8 +46,11 @@ this task proves those effects together after the production contracts land.
   byte-for-byte unchanged, and leaves no selected input leased under the
   supplied ID. Task 406's focused tests own cleanup-indeterminacy
   classification; do not accept `ErrIndeterminateCommit` as an alternative
-  result for this watch-error case. Verify every other rejection leaves the
-  caller packet, leases, and address-allocation state unchanged.
+  result for this watch-error case. Preserve committed change-address facts
+  after a post-commit watch failure so Task 402 can reconstruct readiness.
+  Pre-admission rejection leaves packet, leases, and address allocation
+  unchanged; later failure preserves the caller packet and follows Task 406
+  cleanup without pretending committed address allocation rolled back.
 - Assert only the final public contract and demonstrated funding regressions.
   Keep private exact-set states, Store inspection, production fault seams, and
   cases already covered by the owning focused tests out of scope.
@@ -73,8 +76,9 @@ AddressManager public calls rather than Store inspection.
   Wallet state, and the test-only post-admission watched-change gate returns the
   wrapped injected error with an unchanged caller packet and no lease after
   definitive cleanup.
-- Verify rejected calls cause no partial mutation and every case releases all
-  Wallet, Manager, miner, chain, and backend resources.
+- Verify pre-admission rejection has no mutation, post-commit watch failure
+  retains its committed address facts, and every case releases all Wallet,
+  Manager, miner, chain, and backend resources.
 
 ## Definition of done
 

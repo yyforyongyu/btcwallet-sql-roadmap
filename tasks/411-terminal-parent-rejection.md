@@ -12,20 +12,23 @@ A transaction learned through maintained Wallet ingestion must not remain
 active when one of its retained parents is terminal. Otherwise TxReader can
 report an active branch and UtxoManager can retain effects from a parent that
 the Wallet has invalidated. Existing and newly arriving children need the
-same admission rule, independent of how input relationships are represented.
+same admission rule. At `sql-wallet` revision `2ae306dea8c5`,
+`ensureWalletParentValid` uses `HasInvalidWalletUtxoByOutpoint`, so it checks
+only wallet-owned outputs. The missing case is a child referencing a
+non-owned output of a retained terminal parent.
 
 ## Details
 
 - Under Task 410's mutation-ordering contract, reject a new child whose input
-  references a retained terminal parent before any Wallet effect is committed.
+  references a retained terminal parent, including a non-owned output, before
+  any Wallet effect is committed. Preserve the existing owned-output guard.
 - Validate existing active transactions before enabling the rule. Refuse an
   inconsistent state with exact Wallet, child, input, and parent diagnostics;
   do not silently delete history or select a replacement status.
 - Cover maintained direct and batch ingestion and preserve deterministic
   replay without legitimizing a terminal-parent branch.
-- Read parent hashes from existing raw transaction/input data. Task 409's
-  optional representation is not a prerequisite; do not require normalized
-  rows, a graph-admission handle, or a new coordinator.
+- Read parent hashes from existing raw transaction/input data; do not require
+  normalized rows, a graph-admission handle, or a new coordinator.
 - Exclude public invalidation, descendant traversal, publication policy,
   replacement policy, and an independent input-graph migration.
 
@@ -40,8 +43,9 @@ validation and future ingestion without prescribing private helper shapes.
 - On SQLite and PostgreSQL, refuse an existing active child of a terminal
   parent before partial activation and admit a clean state.
 - Through maintained ingestion, reject terminal-parent children with no
-  partial public transaction or UTXO effect. Accept active-parent and unrelated
-  inputs and preserve idempotent replay.
+  partial public transaction or UTXO effect, including a non-owned parent
+  output. Accept active-parent and unrelated inputs and preserve idempotent
+  replay.
 - Race the parent transition with child admission under Task 410 and prove
   neither ordering leaves an active terminal-parent branch.
 

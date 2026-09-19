@@ -19,7 +19,6 @@ They do not consume task numbers or require task files.
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
   atomically.
 - [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
-  authority.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
@@ -31,28 +30,19 @@ They do not consume task numbers or require task files.
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
-  terminal stop.
-  for Manager startup.
 
 ## Accounts, addresses, and recovery
 
-  accounts.
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
   atomically.
-  `NoChainSync` state.
-- [Task 361](361-kvdb-imported-xpub-derivation.md): support kvdb imported-XPub
-  derivation.
 - [Task 363](363-recovery-scan-work-bound.md): bound aggregate recovery
   derivation work.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): reconcile ambiguous
   runtime account commits.
-  in custom scopes.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
-  through account creation.
-  `NoChainSync` accounts.
 - [Task 395](395-key-only-locator-allocation.md): add `AllocateNextKey` for
   durable key allocation.
 - [Task 396](396-oldest-unused-address.md): make NewAddress return the oldest
@@ -61,15 +51,12 @@ They do not consume task numbers or require task files.
   recovery targets.
 - [Task 398](398-semantic-account-recovery-targets.md): accept semantic account
   recovery targets.
-  in zero-lookahead recovery.
 - [Task 402](402-replay-live-watch-obligations.md): establish live watches from
   persisted Wallet data.
 - [Task 403](403-raw-import-watch-obligations.md): register raw imports before
   public success.
-  accounts from recovery.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
-  `NoChainSync` account creation.
 
 ## Chain and synchronization
 
@@ -80,20 +67,15 @@ They do not consume task numbers or require task files.
 - [Task 372](372-multi-wallet-rollback.md): coordinate multi-Wallet rollback.
 - [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
-  synchronization status.
 
 ## Transactions, UTXOs, and PSBTs
 
-  funding.
 - [Task 347](347-psbt-signing-authorization.md): authorize existing PSBT
   signatures.
 - [Task 348](348-watched-change-delivery.md): watch PSBT change before returning
   funding.
-- [Task 351](351-sql-utxo-integrity.md): bind SQL UTXOs to wallet tenancy.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
-  and fee arithmetic.
-  input amounts.
 - [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
   atomically.
 - [Task 406](406-psbt-funding-lease-release.md): clean up failed PSBT funding
@@ -102,16 +84,10 @@ They do not consume task numbers or require task files.
   auto-finalization.
 - [Task 408](408-direct-transaction-change-watch.md): watch direct transaction
   change before return.
-- [Task 409](409-transaction-input-graph.md): simplify transaction input graph
-  reads.
 - [Task 410](410-transaction-graph-admission.md): coordinate transaction graph
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
   transactions.
-  invalidation on TxWriter.
-- [Task 413](413-utxo-spend-identity.md): validate exact UTXO spending
-  inputs.
-- [Task 414](414-utxo-amount-bounds.md): bound persisted SQL UTXO amounts.
 - [Task 424](424-transaction-utxo-integrity-adr.md): define transaction and UTXO
   integrity ownership.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
@@ -137,7 +113,6 @@ that structural exclusion explicitly.
 - [Task 439](439-psbt-funding-itests.md): cover PSBT funding contracts.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
-  ECDH contracts.
 - [Task 442](442-signer-signing-itests.md): cover public signing contracts.
 - [Task 443](443-unsafe-signer-itests.md): cover UnsafeSigner extraction
   contracts.
@@ -173,13 +148,11 @@ that structural exclusion explicitly.
 
 ## Secrets and credentials
 
-- [Task 338](338-passphrase-result.md): latch accepted SQL passphrase results.
+- [Task 338](338-passphrase-result.md): latch accepted passphrase results.
 - [Task 352](352-kvdb-combined-passphrase-rotation.md): contain uncertain kvdb
   passphrase rotation.
 - [Task 354](354-vault-owned-secret-resolution.md): define Vault secret-operation
   ownership.
-- [Task 362](362-kvdb-definitive-passphrase-result.md): return a definitive kvdb
-  passphrase result.
 - [Task 367](367-bound-sql-genesis-secrets.md): bound SQL genesis secret
   lifetime.
 - [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks

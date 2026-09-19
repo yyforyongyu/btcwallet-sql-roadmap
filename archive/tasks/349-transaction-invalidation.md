@@ -53,6 +53,6 @@ graph with retained history and exact ambiguous-result reconciliation; no
 public exposure, publisher behavior, or generic journal is included.
 
 [t339]: 339-transaction-visibility.md
-[t409]: ../../tasks/409-transaction-input-graph.md
+[t409]: 409-transaction-input-graph.md
 [t410]: ../../tasks/410-transaction-graph-admission.md
 [t411]: ../../tasks/411-terminal-parent-rejection.md

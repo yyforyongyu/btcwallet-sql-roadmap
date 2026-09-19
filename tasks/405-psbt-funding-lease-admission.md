@@ -4,14 +4,16 @@ Component: **PsbtManager and UTXO Store funding admission**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 346][t346], [Task 356][t356], [Task 404][t404], and
-[Task 467][t467]**.
+Dependencies: **[Task 346][t346], [Task 404][t404], and [Task 467][t467]**.
 
 ## Rationale
 
-After monetary and change viability are known,
-reserve the complete automatic or caller-selected input set in one Store
-transaction.
+`FundIntent` and `handleFundPsbt` at `sql-wallet` revision `2ae306dea8c5`
+have no funding lease identity or selected-set admission. Reserve the final
+automatic or caller-selected inputs atomically after successful authoring.
+Task 356's separate change-allocation correction does not block reservation
+of the existing authoring result; Task 348 retains that prerequisite for the
+final watched-change contract.
 
 ## Details
 
@@ -63,7 +65,6 @@ atomically owns every selected input. Ambiguous admission never guesses, and
 the PR adds no public result, cleanup method, duration, or token.
 
 [t346]: ../archive/tasks/346-psbt-funding-metadata.md
-[t356]: 356-defer-change-script-allocation.md
 [t404]: ../archive/tasks/404-transaction-input-amounts.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
 [t439]: 439-psbt-funding-itests.md

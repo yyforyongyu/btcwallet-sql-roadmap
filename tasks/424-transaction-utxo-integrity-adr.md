@@ -29,14 +29,17 @@ behavior or a prerequisite for legacy conversion.
 - Compare existing raw-transaction reads, transaction boundaries, predicates,
   and constraints with the smallest proposed correction. Require a concrete
   consumer need before accepting normalized inputs or extra coordination.
-- Keep Task 351's tenancy, Task 409's optional input representation, Task 410's
-  concurrent mutation behavior, Task 411's terminal-parent admission, Task
-  413's exact spend relation, Task 414's amount backstop, and Task 426's output
-  validation independently scoped. Remove architectural-only hard edges.
+- Record the 2026-09-18 pruning decision: preserve existing tenancy triggers,
+  raw-transaction graph reads, and exact-spend predicates. Tasks 351, 409,
+  413, and 414 are superseded; no new representation or optional amount CHECK
+  is required. Keep Task 410's demonstrated concurrency concern, Task 411's
+  non-owned terminal-parent gap, and Task 426's raw-output admission distinct.
+  Task 426 can use the existing admission boundary without waiting for this
+  ADR; Task 410 still requires its evidence and ordering decision.
 - If current code already satisfies a proposed outcome and no necessary
   change remains, identify that task for supersession rather than creating
   implementation work to adopt a preferred structure.
-- Keep this work deferred. Tasks 373–376 validate and import supported legacy
+- Keep this work in Phase 4. Tasks 373–376 validate and import supported legacy
   facts directly; they do not require a transaction-graph redesign.
 - Exclude implementation, new public APIs, replacement-policy redesign,
   generic locks, and cross-process fencing.

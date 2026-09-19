@@ -22,9 +22,9 @@ return.
   general-purpose decrypt method.
 - Return an isolated private-key value and document that the caller owns and
   must destroy it. Do not claim post-return lifetime or zeroing by Vault.
-- Remove the legacy context-free `PrivKeyForAddress` wrapper and update any
-  maintained caller directly. Do not retain a raw-key wrapper solely for
-  old callers or otherwise expand deprecated wallet APIs.
+- Limit caller changes to the two maintained UnsafeSigner methods. The
+  context-free `PrivKeyForAddress` wrapper serves deprecated callers and is
+  outside this task; its removal is not required.
 - Preserve watch-only, locked, not-mine, and imported-XPub failure behavior.
 - Do not use this extraction operation from safe Signer or PSBT code.
 
@@ -32,7 +32,7 @@ return.
 
 Expose one narrowly named internal extraction capability, implement it in the
 maintained Vault backends, and make only UnsafeSigner call it. Keep safe callers
-on the non-exporting operations and delete the obsolete wrapper.
+on the non-exporting operations without expanding into deprecated callers.
 
 ## Verification
 
@@ -42,7 +42,6 @@ on the non-exporting operations and delete the obsolete wrapper.
   Vault state.
 - Static call-site inspection proves no safe Signer, PSBT, AccountManager, or
   AddressManager path calls the extraction operation.
-- Static API inspection proves the context-free legacy wrapper is gone.
 - Locked, watch-only, not-mine, and imported-XPub vectors preserve existing
   public errors.
 

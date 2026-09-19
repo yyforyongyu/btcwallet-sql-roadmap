@@ -6,6 +6,13 @@ Type: **Bug fix**.
 
 Dependencies: **[Task 340][t340] and [Task 424][t424]**.
 
+> **Superseded 2026-09-18:** Keep the existing wallet-consistency triggers in
+> migrations 000008 and 000010 and wallet-scoped writers. At sql-wallet
+> 2ae306dea8c5, no reachable public tenancy failure justifies replacing them
+> with duplicate wallet IDs/composite foreign keys or expanding wire-index
+> storage. This optional representation change is eliminated; Task 424 records
+> the retained integrity contract.
+
 ## Rationale
 
 Add `wallet_id` to UTXOs; add concrete referenceable
@@ -43,5 +50,5 @@ UTXO and lease tenancy plus UTXO-carried wire-index ranges are enforced by
 composite constraints rather than backend triggers, with no normalized-input,
 exact-spend, or amount work bundled in.
 
-[t340]: ../archive/tasks/340-durable-database-identity.md
-[t424]: 424-transaction-utxo-integrity-adr.md
+[t340]: 340-durable-database-identity.md
+[t424]: ../../tasks/424-transaction-utxo-integrity-adr.md

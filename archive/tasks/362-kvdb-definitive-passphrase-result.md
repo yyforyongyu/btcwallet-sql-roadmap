@@ -4,8 +4,14 @@ Component: **Controller and LegacyWalletVault**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 338](338-passphrase-result.md) and
-[Task 352](352-kvdb-combined-passphrase-rotation.md)**.
+Dependencies: **[Task 338](../../tasks/338-passphrase-result.md) and
+[Task 352](../../tasks/352-kvdb-combined-passphrase-rotation.md)**.
+
+> **Superseded 2026-09-18:** SQL and kvdb share Controller.ChangePassphrase,
+> sendReq, mainLoop, and the Vault call at sql-wallet 2ae306dea8c5. Eliminate
+> the separate backend adaptation layer: Task 338 owns the single shared
+> accepted-response fix, while Task 352 retains kvdb uncertain-rotation
+> containment. No second delivery implementation is needed.
 
 ## Rationale
 
@@ -17,7 +23,7 @@ instead of Task 352's exact success, determinate failure, or
 
 ## Details
 
-- Reuse [Task 338](338-passphrase-result.md)'s pre-handoff cancellation,
+- Reuse [Task 338](../../tasks/338-passphrase-result.md)'s pre-handoff cancellation,
   buffered accepted-request result, bounded handler context, and
   operation-specific completion for modern kvdb `ChangePassphrase`.
 - Once accepted, run the existing `LegacyWalletVault.ChangePassphrase` under

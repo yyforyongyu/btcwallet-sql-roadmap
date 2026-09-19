@@ -8,10 +8,11 @@ Dependencies: **[Task 332][t332] and [Task 341][t341]**.
 
 ## Rationale
 
-Manager currently accepts imported roots and initial accounts before proving
-that their key identity, network, path, and declared schema are truthful. Some
-invalid requests reach Vault or Store work, and equal extended-public-key
-payloads can describe overlapping child scripts under different metadata.
+At `sql-wallet` revision `2ae306dea8c5`, `Manager.createWallet` already
+checks initial XPub network/depth and address type before persistence and
+wraps failures with `ErrWalletParams`. Imported private roots still lack full
+root-metadata validation, declared scopes can be replaced by inference, and
+equal XPub payloads can describe overlapping scripts under different metadata.
 
 ## Details
 
@@ -19,9 +20,9 @@ payloads can describe overlapping child scripts under different metadata.
   access. Keep this task mutation-free.
 - Accept an imported private root only when its depth, parent fingerprint, and
   child index are all zero and its version belongs to the selected network.
-- Require each initial XPub version and resulting address encoding to match the
-  selected network. Validate its depth, address type, declared scope, and
-  effective branch schema as one identity.
+- Reuse existing XPub network, depth, and address-type checks. Add the missing
+  declared-scope and effective branch-schema consistency checks without
+  duplicating that validation or its existing error classification.
 - Treat declared purpose and coin type as scope identity. Do not silently
   replace a conflicting declared scope with an inferred scope.
 - Use [Task 341][t341]'s wallet-owned optional fingerprint type so absent and
@@ -39,20 +40,19 @@ payloads can describe overlapping child scripts under different metadata.
 
 ## Suggested fix
 
-Add a pure Manager preflight that converts the request into normalized
-wallet-owned key identities and either returns those public facts or a stable
-validation error. Run it before any Vault preparation or Store call, and pass
-its normalized result to the later genesis preparation path.
+Extend the existing Manager preflight with the missing root, scope/schema,
+and normalized-XPub overlap checks before Vault preparation or Store access.
+Reuse `validateExtendedPubKey`, `keyScopeFromPubKey`, and `ErrWalletParams`
+where applicable; no separate validation framework is required.
 
 ## Verification
 
 - Dependency spies prove every invalid request fails before Vault or Store
   access and leaves no backend state.
-- Positive fixtures cover supported generated, imported-root, and shell
-  requests on mainnet, testnet, simnet, and signet.
-- Negative fixtures cover non-root and wrong-network private keys, wrong-
-  network XPub/address pairs, invalid depth, declared-scope mismatch,
-  incompatible address schemas, and absent versus present-zero fingerprints.
+- Extend existing Manager cases for non-root and wrong-network private keys,
+  declared-scope mismatch, incompatible schemas, and overlapping XPub inputs.
+  Preserve valid root/shell requests and absent versus present-zero metadata;
+  do not duplicate existing XPub network/depth and address-type cases.
 - Wallet-wide fixtures reject overlapping equal-XPub branch identities across
   and within scopes while permitting non-overlapping identities.
 - The PR performs no mutation and adds no backend-specific parity behavior.

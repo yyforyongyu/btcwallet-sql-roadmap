@@ -11,14 +11,15 @@ Dependencies: **[Task 332][t332], [Task 337][t337], and
 
 SQL wallet rows, encrypted secrets, and sync state are created in one
 transaction, but default or requested initial accounts are added afterward.
+At `sql-wallet` revision `2ae306dea8c5`, `Manager.Create` calls
+`importInitialAccounts` after `createWallet` returns, after SQL
+`CreateWalletWithOps` has committed.
 A definite account-creation failure can therefore leave a wallet that does not
 contain the accounts its supported create request promised.
 
 ## Details
 
 - Cover the shared SQLite and PostgreSQL create path only.
-- Treat [Task 341][t341] and [Task 340][t340] as transitive prerequisites
-  through the direct dependencies; do not add duplicate direct edges.
 - Prepare the supported request's ciphertext and public genesis facts before
   opening the SQL write transaction. Consume the accepted watch-only policy,
   wallet-owned selector, and persisted `NoChainSync` state from dependencies;
@@ -29,15 +30,11 @@ contain the accounts its supported create request promised.
   and checked `next_account_number` cursors.
 - Create the canonical default accounts promised by a supported private-root
   request. The public Manager create request exposes no `NoChainSync` input;
-  its private genesis planner assigns false to every default account. A scope
-  containing canonical account zero starts its next-account cursor at one.
+  every default account has `NoChainSync=false`. A scope containing canonical
+  account zero starts its next-account cursor at one.
 - Create exactly the numberless initial accounts promised by a supported shell
-  request. The same private planner assigns false to every shell account, and
-  those accounts do not advance a numbered account cursor.
-- Treat the method-specific private genesis-account payload passed into the
-  SQL transaction as the invariant boundary. Reject a malformed internal
-  payload containing `NoChainSync=true` before any SQL mutation; do not invent
-  a public override or a public rejection case for a field callers cannot set.
+  request. Every shell account has `NoChainSync=false` and does not advance a
+  numbered account cursor.
 - Keep derivation and encryption outside the SQL transaction. The transaction
   receives only prepared ciphertext and public persistence facts.
 - Treat every definite insertion or commit failure as failure of the complete
@@ -58,45 +55,29 @@ contain the accounts its supported create request promised.
   [Task 343][t343], custom-scope creation in [Task 390][t390], and path-bound
   watch-only XPub creation in [Task 391][t391].
 - Leave configurable `NoChainSync` creation to
-  [Task 468](468-activate-no-chain-sync-account-creation.md)'s guarded runtime
-  account path; genesis does not expose that property.
+  [Task 468][t468]'s guarded runtime account path; genesis does not expose
+  that property.
 - Do not add a create manifest, replay state, generic write lock, Store
   callback, or cross-process coordination.
-- Keep implementation local to existing Manager genesis, SQL Store, source
-  files, and colocated tests. Add no parallel interface, arbitrary helper,
-  unrelated production file, or standalone test file; justify any unavoidable
-  new file against the repository's current layout in the implementation PR.
-- Document non-obvious code blocks with the contract, rationale, invariant, or
-  consequence they preserve; do not restate the code.
-- Keep unit tests clearly structured as Arrange, Act, and Assert.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 
-Give the SQL wallet-create operation a method-specific genesis payload and
-extend its existing dialect-neutral transaction stages to persist the complete
-wallet and promised-account state. Keep only dialect-specific query wiring in
-the SQLite and PostgreSQL wrappers. Return the committed facts to Manager for
-runtime assembly and cache publication after the transaction succeeds.
+Extend the existing SQL wallet-create transaction to persist the complete
+wallet and promised-account state using prepared ciphertext and public facts.
+Reuse `CreateWalletWithOps` and the current backend query wiring. Return
+committed facts to Manager for runtime assembly and cache publication after
+the transaction succeeds.
 
 ## Verification
 
-- Shared transaction-stage tests inject a definite failure at each wallet,
-  secret, sync, scope, account, account-secret, chain-sync-state, and cursor
-  boundary and prove complete rollback.
+- Inject a definite account-insertion failure after wallet insertion and prove
+  the complete genesis rolls back on both SQL dialects.
 - The same Store conformance runs on SQLite and PostgreSQL and reopens the
   wallet to prove the promised account set, `NoChainSync` values, and cursors.
 - Private-root fixtures prove each canonical scope contains account zero and
   advances its cursor to one; shell fixtures prove numberless initial accounts
   leave each numbered cursor unchanged. Reopen proves every default and shell
   genesis account has `NoChainSync=false` on both dialects.
-- Planner tests prove public private-root and shell requests materialize only
-  false account facts. Store-boundary tests inject a malformed private
-  genesis-account payload with true and prove rejection before SQL mutation
-  or cache publication; no public request fixture fabricates that field.
 - Manager fault injection proves no Wallet is cached after a definite backend
   failure and publication occurs only after committed genesis and successful
   runtime assembly.
@@ -119,11 +100,10 @@ runtime assembly and cache publication after the transaction succeeds.
 [t330]: 330-duplicate-wallet-create.md
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
-[t340]: ../archive/tasks/340-durable-database-identity.md
-[t341]: ../archive/tasks/341-public-role-contract.md
-[t343]: 343-exact-account-creation.md
+[t343]: ../archive/tasks/343-exact-account-creation.md
 [t345]: ../archive/tasks/345-durable-watch-registration.md
 [t353]: ../archive/tasks/353-retire-modern-kvdb-backend.md
 [t358]: 358-contextual-manager-operations.md
-[t390]: 390-custom-scope-account-creation.md
+[t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md

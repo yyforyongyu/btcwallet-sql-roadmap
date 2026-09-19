@@ -4,11 +4,18 @@ Component: **modern kvdb public derivation adapter**.
 
 Type: **Gap fix**.
 
-Dependencies: **[Task 337](../archive/tasks/337-imported-xpub-derivation.md)**.
+Dependencies: **[Task 337](337-imported-xpub-derivation.md)**.
+
+> **Superseded 2026-09-18:** The separate kvdb derivation outcome is redundant
+> at sql-wallet 2ae306dea8c5: resolveDerivedPubKeyFromStore selects accounts
+> by name, kvdb loadAccountInfo exposes AccountPubKey, and
+> testSignerDeriveImportedXPub runs in allTestCases. Merged PRs 1324 and 1374
+> already own this behavior as Tasks 337 and 441. Eliminate the duplicate task
+> without counting either PR again.
 
 ## Rationale
 
-[Task 337](../archive/tasks/337-imported-xpub-derivation.md) restores the
+[Task 337](337-imported-xpub-derivation.md) restores the
 wallet-owned selector and SQL numberless-account path, but the maintained
 modern kvdb adapter still needs to resolve imported-XPub accounts without
 presenting its internal
@@ -16,9 +23,9 @@ account identity as a public number.
 
 ## Details
 
-- Reuse [Task 341](../archive/tasks/341-public-role-contract.md)'s wallet-owned
+- Reuse [Task 341](341-public-role-contract.md)'s wallet-owned
   scope-plus-exactly-one-name-or-number selector and
-  [Task 337](../archive/tasks/337-imported-xpub-derivation.md)'s final `Signer`
+  [Task 337](337-imported-xpub-derivation.md)'s final `Signer`
   derivation request directly. Do not restore the removed numeric-path
   signature or add a backend-specific public interface.
 - Map the selector to kvdb's stable scope-local adapter identity internally;
@@ -47,7 +54,7 @@ account identity as a public number.
 
 Add a narrow adapter resolution from the wallet-owned selector to the existing
 scope-local kvdb identity, then reuse
-[Task 337](../archive/tasks/337-imported-xpub-derivation.md)'s in-memory branch
+[Task 337](337-imported-xpub-derivation.md)'s in-memory branch
 and child derivation. Keep all backend identity conversion behind the adapter
 boundary.
 
@@ -74,4 +81,4 @@ boundary.
 - The acceptance fix and its focused public regression land together; no
   later test task is implicitly responsible for adding the missing kvdb case.
 
-[t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
+[t441]: 441-signer-derivation-ecdh-itests.md

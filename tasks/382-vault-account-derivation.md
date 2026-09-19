@@ -8,10 +8,10 @@ Dependencies: **[Task 352][t352], [Task 354][t354], and [Task 390][t390]**.
 
 ## Rationale
 
-AccountManager currently loads and decrypts the master HD private key, retains
-it in a Store derivation closure, and may execute derivation under a Store
-write. This gives Wallet and Store transaction code secret ownership that ADR
-0010 assigns to Vault.
+At `sql-wallet` revision `2ae306dea8c5`, `buildAccountDeriveFn` captures
+encrypted root material, not plaintext, but decrypts and derives when the
+Store callback runs. That secret work still executes under a Store write and
+leaves AccountManager owning operations that ADR 0010 assigns to Vault.
 
 ## Details
 
@@ -45,18 +45,6 @@ write. This gives Wallet and Store transaction code secret ownership that ADR
   supplied XPub/path-bound creation from [Task 391][t391], initial SQL genesis
   from Tasks 329 and 367, creation validation from Task 365, and ambiguous
   genesis reconciliation from Task 366.
-- Keep implementation local to existing AccountManager, WalletVault,
-  LegacyWalletVault, source files, and colocated tests. Add no parallel
-  interface, arbitrary helper, unrelated production file, or standalone test
-  file; justify any unavoidable new file against the repository's current
-  layout in the implementation PR.
-- Document non-obvious code blocks with the contract, rationale, invariant, or
-  consequence they preserve; do not restate the code.
-- Keep unit tests clearly structured as Arrange, Act, and Assert.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 
@@ -92,7 +80,7 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 
 [t352]: 352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
-[t343]: 343-exact-account-creation.md
+[t343]: ../archive/tasks/343-exact-account-creation.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t460]: 460-sequential-account-invalid-children.md

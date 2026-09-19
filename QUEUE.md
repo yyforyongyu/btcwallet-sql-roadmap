@@ -1,7 +1,7 @@
 # Task delivery phases
 
-The numbered roadmap contains **142 tasks**: **86 open**, **48 done**,
-**7 superseded**, and **1 deferred**. With **113 ad hoc tasks**, that is
+The numbered roadmap contains **142 tasks**: **80 open**, **48 done**,
+**13 superseded**, and **1 deferred**. With **113 ad hoc tasks**, that is
 **255 tracked tasks** and **161 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
@@ -52,7 +52,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395 |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396 |
 
-## Phase 2A — bugs and gaps · 28 open
+## Phase 2A — bugs and gaps · 26 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
@@ -61,29 +61,27 @@ This is a prioritized backlog, not a blanket gate for starting the lnd port.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | — |
-| [Task 338][t338] | open | Controller | Bug fix | Latch accepted SQL passphrase results | — |
+| [Task 338][t338] | open | Controller | Bug fix | Latch accepted passphrase results | — |
 | [Task 347][t347] | open | PsbtManager existing-signature validation | Bug fix | Authorize existing PSBT signatures | — |
 | [Task 348][t348] | open | PsbtManager and AddressManager | Bug fix | Watch PSBT change before returning funding | 344, 356, 402, 406 |
 | [Task 352][t352] | open | Controller and LegacyWalletVault | Bug fix | Contain uncertain kvdb passphrase rotation | — |
 | [Task 356][t356] | open | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | 344 |
-| [Task 361][t361] | open | modern kvdb public derivation adapter | Gap fix | Support kvdb imported-XPub derivation | — |
-| [Task 362][t362] | open | Controller and LegacyWalletVault | Bug fix | Return a definitive kvdb passphrase result | 338, 352 |
 | [Task 363][t363] | open | recovery horizon derivation | Bug fix | Bound aggregate recovery derivation work | — |
 | [Task 365][t365] | open | Manager creation preflight | Bug fix | Validate wallet genesis key identities | — |
-| [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329, 358 |
-| [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | 329 |
+| [Task 366][t366] | open | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | 329 |
+| [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | — |
 | [Task 370][t370] | open | Manager chain-event fanout and Wallet processors | Refactor | Fan out ordered Manager chain events | — |
 | [Task 371][t371] | open | SQL Store canonical chain state | Bug fix | Serialize canonical chain-frontier mutation | — |
 | [Task 372][t372] | open | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | 370, 371 |
 | [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | — |
 | [Task 389][t389] | open | AccountManager and SQL AccountStore account result reader | Bug fix | Reconcile ambiguous runtime account commits | — |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | 402 |
-| [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | 356 |
+| [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | — |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
 | [Task 408][t408] | open | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | 344, 356, 402 |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 371, 372, 402, 457 |
-| [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | — |
+| [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | 410 |
 | [Task 457][t457] | open | Manager Start and process-local database ownership | Gap fix | Enforce one process-local Manager per database | — |
 | [Task 460][t460] | open | AccountManager sequential creation and SQL AccountStore cursor CAS | Bug fix | Make sequential account allocation invalid-child safe | 389 |
 | [Task 469][t469] | open | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | 347 |
@@ -135,7 +133,7 @@ Modern kvdb remains supported for the current and next release.
 | [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 374 |
 | [Task 376][t376] | open | Manager.Create legacy conversion mode | Migration | Convert a legacy wallet through Manager.Create | 358, 375 |
 
-## Phase 4 — optional improvements · 12 open
+## Phase 4 — optional improvements · 8 open
 
 Additional capabilities, performance refactors, and defensive integrity work.
 Task 424 still distinguishes demonstrated fixes from proposed hardening;
@@ -144,17 +142,13 @@ these task types, scopes, and evidence requirements are unchanged.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
-| [Task 351][t351] | open | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | 424 |
 | [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 389, 395 |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 397 |
-| [Task 409][t409] | open | SQL TxStore input-graph representation | Refactor | Simplify transaction input graph reads | 424 |
 | [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | 424 |
 | [Task 411][t411] | open | Wallet-owned SQL transaction ingestion | Bug fix | Reject children of terminal transactions | 410 |
-| [Task 413][t413] | open | Wallet-owned SQL UTXO spend assignment | Bug fix | Validate exact UTXO spending inputs | 351, 410 |
-| [Task 414][t414] | open | SQL UTXO amount integrity backstop | Refactor | Bound persisted SQL UTXO amounts | 424 |
 | [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
-| [Task 426][t426] | open | SQL TxStore ingestion amount validation | Bug fix | Validate persisted transaction output aggregates | 424 |
+| [Task 426][t426] | open | Manager Wallet publication and SQL TxStore amount validation | Bug fix | Validate persisted transaction output aggregates | — |
 
 ## Hardening — Signer and Vault · 6 open
 
@@ -193,7 +187,7 @@ done or superseded; reactivation preserves the original task number.
 | --- | --- | --- | --- |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 7
+## Superseded · 13
 
 Former phases record the historical map at supersession, not the current
 delivery grouping. These tasks have no current delivery phase.
@@ -207,6 +201,12 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 422][t422] | 1 | Manager.Load | Gap fix | Make Manager loading cancellable | [Tasks 331][t331] and [459][t459] |
 | [Task 368][t368] | 1 | Maintained Wallet lifecycle public API cutover | Bug fix | Make Wallet lifecycle Manager-internal | [Task 331][t331] |
 | [Task 394][t394] | 1 | AddressStore ownership resolution and transaction ingestion | Gap fix | Exclude key-only locators from wallet ownership | Accepted `NoChainSync` ownership decision; [Task 395][t395] owns separate allocation only |
+| [Task 351][t351] | 4 | SQL UTXO and lease schema | Bug fix | Bind SQL UTXOs to wallet tenancy | Accepted decision to preserve existing tenancy triggers and scoped writers; no new tenancy representation |
+| [Task 361][t361] | 2A | modern kvdb public derivation adapter | Gap fix | Support kvdb imported-XPub derivation | Existing Tasks 337/441 behavior and shared itest eliminate duplicate kvdb work; no new completion credit |
+| [Task 362][t362] | 2A | Controller and LegacyWalletVault | Bug fix | Return a definitive kvdb passphrase result | Accepted decision to remove the separate backend delivery layer; shared result handling stays in [Task 338][t338] and kvdb containment in [Task 352][t352] |
+| [Task 409][t409] | 4 | SQL TxStore input-graph representation | Refactor | Simplify transaction input graph reads | Existing raw graph reads satisfy current consumers; accepted decision eliminates another representation |
+| [Task 413][t413] | 4 | Wallet-owned SQL UTXO spend assignment | Bug fix | Validate exact UTXO spending inputs | Existing exact-outpoint checks and replay regression eliminate duplicate identity work; concurrent ordering stays in [Task 410][t410] |
+| [Task 414][t414] | 4 | SQL UTXO amount integrity backstop | Refactor | Bound persisted SQL UTXO amounts | Accepted decision eliminates an optional SQL amount backstop; raw-output admission stays in [Task 426][t426] |
 
 ## Done
 
@@ -415,7 +415,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t348]: tasks/348-watched-change-delivery.md
 [t349]: archive/tasks/349-transaction-invalidation.md
 [t350]: tasks/350-native-pgx-postgres.md
-[t351]: tasks/351-sql-utxo-integrity.md
+[t351]: archive/tasks/351-sql-utxo-integrity.md
 [t352]: tasks/352-kvdb-combined-passphrase-rotation.md
 [t353]: archive/tasks/353-retire-modern-kvdb-backend.md
 [t354]: tasks/354-vault-owned-secret-resolution.md
@@ -425,8 +425,8 @@ numbered roadmap; old archived task references add no separate completion.
 [t358]: tasks/358-contextual-manager-operations.md
 [t359]: archive/tasks/359-revalidate-database-identity-design.md
 [t360]: archive/tasks/360-document-kvdb-adapter-identity.md
-[t361]: tasks/361-kvdb-imported-xpub-derivation.md
-[t362]: tasks/362-kvdb-definitive-passphrase-result.md
+[t361]: archive/tasks/361-kvdb-imported-xpub-derivation.md
+[t362]: archive/tasks/362-kvdb-definitive-passphrase-result.md
 [t363]: tasks/363-recovery-scan-work-bound.md
 [t364]: archive/tasks/364-durable-watch-registration.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
@@ -473,12 +473,12 @@ numbered roadmap; old archived task references add no separate completion.
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
 [t408]: tasks/408-direct-transaction-change-watch.md
-[t409]: tasks/409-transaction-input-graph.md
+[t409]: archive/tasks/409-transaction-input-graph.md
 [t410]: tasks/410-transaction-graph-admission.md
 [t411]: tasks/411-terminal-parent-rejection.md
 [t412]: archive/tasks/412-transaction-invalidation.md
-[t413]: tasks/413-utxo-spend-identity.md
-[t414]: tasks/414-utxo-amount-bounds.md
+[t413]: archive/tasks/413-utxo-spend-identity.md
+[t414]: archive/tasks/414-utxo-amount-bounds.md
 [t415]: archive/tasks/415-utxo-public-integration-tests.md
 [t416]: tasks/416-database-benchmark-fixtures.md
 [t417]: tasks/417-start-to-synced-benchmark.md

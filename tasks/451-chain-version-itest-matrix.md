@@ -22,9 +22,9 @@ and PostgreSQL so a compatibility lane cannot hide a database-specific gap.
 - Support the latest patch of Bitcoin Core's three maintained major release
   lines and the latest patch of btcd's current and immediately previous stable
   minor release lines.
-- Start with Bitcoin Core `31.1`, `30.3`, and `29.4`, plus btcd `v0.26.2` and
-  `v0.25.0`. Resolve future entries from the same policy when the matrix is
-  updated.
+- Resolve the exact available patch releases from this policy when
+  implementing or updating the matrix; verify releases before pinning them
+  rather than prescribing future version literals in this task.
 - Run every selected Bitcoin Core and btcd release against kvdb, SQLite, and
   PostgreSQL. Do not reduce older-release lanes to SQLite or skip kvdb inside
   the suite.
@@ -65,8 +65,8 @@ replaces an expired entry instead of growing the matrix indefinitely.
   suite runs, and fail on a mismatch.
 - Run `make itest` for every selected daemon release on kvdb, SQLite, and
   PostgreSQL.
-- Confirm Neutrino still runs only with the latest btcd miner and that Bitcoin
-  Core `28.x` is no longer selected.
+- Confirm Neutrino still runs only with the latest btcd miner and no release
+  outside the rolling support window remains selected.
 - Validate the workflow syntax and inspect the expanded job names and failure
   artifact names for an unambiguous daemon-and-database identity.
 

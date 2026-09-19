@@ -51,5 +51,5 @@ per surviving backend.
   behavior change.
 
 [t338]: ../../tasks/338-passphrase-result.md
-[t362]: ../../tasks/362-kvdb-definitive-passphrase-result.md
+[t362]: 362-kvdb-definitive-passphrase-result.md
 [t386]: ../../tasks/386-remove-raw-wallet-secret-seams.md

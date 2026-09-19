@@ -37,18 +37,6 @@ Public success must establish its live watch, not just persist the import.
   full-wallet recovery request; add no mempool sweep or delivery persistence.
 - Keep modern-kvdb import behavior outside this SQL mutation without adding a
   durable kvdb format.
-- Keep implementation local to existing AddressManager, AddressStore, source
-  files, and colocated tests. Add no recovery API, parallel interface,
-  arbitrary helper, production file, or standalone test file; justify any
-  unavoidable new file against the repository's current layout in the
-  implementation PR.
-- Document non-obvious code blocks with the contract, rationale, invariant, or
-  consequence they preserve; do not restate the code.
-- Keep unit tests clearly structured as Arrange, Act, and Assert.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 
