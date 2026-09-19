@@ -4,7 +4,7 @@ Component: **wallet AddressManager benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 416][t416]**.
+Dependencies: **[Task 471][t471]**.
 
 ## Rationale
 
@@ -15,7 +15,7 @@ not provide an understandable three-backend baseline for these public APIs.
 ## Details
 
 - Measure each method in its own benchmark on real kvdb, SQLite, and
-  PostgreSQL Wallets using Task 416's setup.
+  PostgreSQL Wallets using Task 471's setup.
 - Vary only address count across a few explicit sizes. Fix account count,
   address type, request filters, and the rule selecting the point lookup.
 - Seed and validate once per case, then repeatedly call the selected method
@@ -28,8 +28,10 @@ not provide an understandable three-backend baseline for these public APIs.
 
 ## Suggested fix
 
-Use one small explicit size table and separate simple loops for list and
-point reads. Reuse the same deterministic data without a workload framework.
+Modernize the existing `BenchmarkListAddressesAPI` and
+`BenchmarkGetAddressInfoAPI` loops rather than adding a second benchmark
+family. Use one small size table and the same deterministic data for separate
+list and point measurements, without a workload framework.
 
 ## Verification
 
@@ -43,4 +45,4 @@ point reads. Reuse the same deterministic data without a workload framework.
 Both public address reads have simple, repeatable three-backend measurements
 with address count as the only scaling dimension and no production changes.
 
-[t416]: 416-database-benchmark-fixtures.md
+[t471]: 471-three-backend-list-unspent-benchmark.md

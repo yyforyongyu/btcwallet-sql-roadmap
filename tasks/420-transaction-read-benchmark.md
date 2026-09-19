@@ -4,7 +4,7 @@ Component: **wallet TxReader benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 416][t416]**.
+Dependencies: **[Task 471][t471]**.
 
 ## Rationale
 
@@ -15,7 +15,7 @@ explicit history sizes are enough for an initial three-backend comparison.
 ## Details
 
 - Measure each method separately on real kvdb, SQLite, and PostgreSQL Wallets
-  using Task 416's setup.
+  using Task 471's setup.
 - Vary only transaction count across a few explicit sizes. Fix account count,
   transaction shape, confirmed/unmined mix, the point-selection rule, and
   ListTxns filters. Include the whole seeded history in the list request.
@@ -29,8 +29,10 @@ explicit history sizes are enough for an initial three-backend comparison.
 
 ## Suggested fix
 
-Use a short explicit size table and a small loop for each method. Keep the
-data and request visible without growth functions or profile abstractions.
+Modernize the existing serial `BenchmarkGetTxAPI` and `BenchmarkListTxnsAPI`
+loops rather than adding another benchmark family. Keep their data and requests
+visible through a short size table, without growth functions or profiles.
+Concurrent variants and other operations remain outside this task.
 
 ## Verification
 
@@ -44,4 +46,4 @@ data and request visible without growth functions or profile abstractions.
 Both public transaction reads have simple, repeatable three-backend baselines
 with transaction count as the scaling dimension and no production changes.
 
-[t416]: 416-database-benchmark-fixtures.md
+[t471]: 471-three-backend-list-unspent-benchmark.md

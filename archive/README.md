@@ -15,6 +15,14 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+
+- [Task 416](tasks/416-database-benchmark-fixtures.md) and
+  [Task 418](tasks/418-list-unspent-benchmark.md) were superseded on 2026-09-19
+  by [Task 471](../tasks/471-three-backend-list-unspent-benchmark.md), combining
+  minimal shared setup with its first real measurement. Neither is complete.
+  Tasks 449 and 373 retain their numbers after their rescan and address/script
+  outcomes were split into [Task 472][split-rescan] and [Task 473][split-address],
+  respectively.
 - [Task 443](tasks/443-unsafe-signer-itests.md) completed on 2026-09-19.
 
 - [Task 351](tasks/351-sql-utxo-integrity.md) was superseded on
@@ -118,3 +126,6 @@ specifications.
 - [Task 10002](tasks/10002-controller-request-completion.md) was archived on
   2026-08-07. Its finding was absorbed into
   [Task 338](../tasks/338-passphrase-result.md).
+
+[split-rescan]: ../tasks/472-multi-wallet-rescan-isolation-scenario.md
+[split-address]: ../tasks/473-extract-legacy-address-script-state.md

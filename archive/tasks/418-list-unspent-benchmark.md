@@ -46,3 +46,9 @@ ListUnspent has a simple, repeatable three-backend scaling baseline without
 changing production behavior.
 
 [t416]: 416-database-benchmark-fixtures.md
+
+Superseded on 2026-09-19: combined with Task 416 into
+[Task 471](../../tasks/471-three-backend-list-unspent-benchmark.md).
+The first real ListUnspent measurement now exercises its minimal shared
+setup; a separate setup-only example is unnecessary. No implementation PR
+for this outcome is open or merged; this is not completion.

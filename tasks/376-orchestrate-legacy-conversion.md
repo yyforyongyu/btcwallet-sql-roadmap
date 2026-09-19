@@ -27,8 +27,9 @@ boundaries already owned by `Manager.Create`.
   generic lock or conversion lifecycle.
 - Reuse Task 331's Create admission, duplicate-name handling, Wallet start,
   publication, and Stop interaction.
-- Compose [Task 335][t335], [Task 373][t373], [Task 374][t374], and Task 375
-  without exposing intermediate representations or backend row identities.
+- Compose [Task 335][t335], [Task 373][t373], [Task 473][t473],
+  [Task 374][t374], and Task 375 without exposing intermediate representations
+  or backend row identities.
 - Use Task 358's contextual Create signature and its single last-safely-
   abortable mutation cutoff. Apply it to the import transaction rather than
   inventing a second cancellation rule. Before the cutoff, cancellation
@@ -76,3 +77,4 @@ equivalence, without a second public lifecycle or converter.
 [t373]: 373-extract-legacy-account-address-state.md
 [t374]: 374-extract-legacy-transaction-sync-state.md
 [t375]: 375-import-legacy-snapshot-sqlite.md
+[t473]: 473-extract-legacy-address-script-state.md

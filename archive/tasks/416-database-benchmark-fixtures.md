@@ -54,4 +54,10 @@ loop, not a new configuration model or knowledge of a benchmark framework.
 Tasks 417–420 can use simple deterministic three-backend setup and cleanup
 without owning backend provisioning or introducing production behavior.
 
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
+
+Superseded on 2026-09-19: combined with Task 418 into
+[Task 471](../../tasks/471-three-backend-list-unspent-benchmark.md).
+The first real ListUnspent measurement now exercises its minimal shared
+setup; a separate setup-only example is unnecessary. No implementation PR
+for this outcome is open or merged; this is not completion.

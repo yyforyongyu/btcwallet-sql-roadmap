@@ -46,7 +46,7 @@ need only read-committed execution.
   cutover in [Task 350][t350] must retain the selected policy rather than fall
   back to pgx defaults or globally strengthen isolation.
 - Exclude connection-pool sizing, query optimization, schema placement, lnd
-  production changes, and persistent benchmark code. [Task 416][t416] excludes
+  production changes, and persistent benchmark code. [Task 471][t471] excludes
   concurrent writers; a separately accepted benchmark task owns PostgreSQL
   contention, abort-rate, retry, and co-tenant load measurements.
 
@@ -85,6 +85,6 @@ to native pgx; a new driver-neutral policy type is not required.
   connection tuning, or benchmark suite.
 
 [t350]: 350-native-pgx-postgres.md
-[t416]: 416-database-benchmark-fixtures.md
+[t471]: 471-three-backend-list-unspent-benchmark.md
 [t410]: 410-transaction-graph-admission.md
 [t424]: 424-transaction-utxo-integrity-adr.md
