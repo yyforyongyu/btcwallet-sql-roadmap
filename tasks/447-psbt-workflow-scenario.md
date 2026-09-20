@@ -13,6 +13,9 @@ Dependencies: **[Task 331][t331], [Task 348][t348], [Task 433][t433],
 fund/decorate/sign/finalize scenario. The component contracts remain useful in
 isolation, but no task proves their packet handoffs compose into a valid,
 publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
+At `sql-wallet` revision `48e7f4b`, [SignSpend][source] decorates and
+finalizes, but bypasses funding and explicit signing; that handoff remains
+unproved. Task 435 already owns acceptance without publication.
 
 ## Details
 
@@ -26,8 +29,9 @@ publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
   Do not skip kvdb inside the shared flow.
 - Decorate the funded inputs, sign the owned inputs, and finalize the packet
   through the maintained public methods, checking each returned handoff.
-- Extract and independently execute the final transaction, check mempool
-  acceptance, broadcast it, mine it, and verify it through TxReader.
+- Extract and independently execute the final transaction, broadcast it, mine
+  it, and verify it through TxReader. Reuse Task 435's acceptance-only proof
+  without another mempool-verdict step here.
 - Stop the Manager, start a fresh Manager over the same database, and prove the
   final transaction and change remain visible through the returned Wallet.
 - Keep this to one fully owned successful workflow. Exclude collaborative
@@ -61,3 +65,4 @@ scenario-specific production hooks.
 [t438]: 438-psbt-decoration-combination-itests.md
 [t439]: 439-psbt-funding-itests.md
 [t440]: 440-psbt-signing-finalization-itests.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/bwtest/harness_wallet.go#L465

@@ -4,15 +4,16 @@ Component: **PsbtManager signing integration tests**.
 
 Type: **Test**.
 
-Dependencies: **None**.
+Dependencies: **[Task 407][t407]**.
 
 ## Rationale
 
-[Issue #1250][issue1250] specifically requires representative `SignPsbt` and
-`FinalizePsbt` coverage. The two methods share one ownership, script, and
-signature fixture, but no real-backend public test proves partial signing,
-auto-signing, final script construction, or their failure boundaries across
-kvdb, SQLite, and PostgreSQL.
+[Issue #1250][issue1250] requires public `SignPsbt` and `FinalizePsbt` coverage.
+At `sql-wallet` revision `48e7f4b`, [the handlers][source] still mutate caller
+packets during work. Task 407 and its Tasks 469/347 prerequisites own final
+authorization and unchanged-on-error behavior. This suite proves that contract
+with real kvdb, SQLite, and PostgreSQL Wallets without repeating their focused
+authorization matrices.
 
 ## Details
 
@@ -29,13 +30,16 @@ kvdb, SQLite, and PostgreSQL.
   maintained script engine; do not establish success by reading Store rows.
 - Verify errors leave the caller packet unchanged and successful signing does
   not finalize unless `FinalizePsbt` is invoked.
-- Tasks 347 and 407 continue to own future authorization changes.
+- Consume Task 407's final contract, including Tasks 469 and 347. Those
+  production tasks retain their fixes and focused authorization regressions;
+  use representative public cases here without another exhaustive matrix.
 
 ## Suggested fix
 
-Add one signing-focused itest source that derives deterministic spend fixtures,
-clones each packet before invocation, and independently executes successful
-final scripts against their previous outputs.
+Reuse existing Signer spend fixtures, snapshot caller packets, and execute
+successful final scripts independently against their previous outputs. Keep
+file organization local to the existing suites rather than requiring a new
+source file.
 
 ## Verification
 
@@ -50,3 +54,5 @@ final scripts against their previous outputs.
 - Shared cases contain no backend skip branch and add no new signing behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
+[t407]: 407-psbt-finalization-authorization.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/psbt_manager.go#L1049

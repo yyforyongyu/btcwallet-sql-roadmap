@@ -21,8 +21,9 @@ unproved. This task connects that path without another publisher/read matrix.
 - Register the same funded-Wallet scenario for kvdb, SQLite, and PostgreSQL and
   create one deterministic spend through `TxCreator.CreateTransaction` with
   automatic selection and change. Do not skip kvdb inside the shared flow.
-- Independently validate the authored transaction and its input scripts, then
-  call `CheckMempoolAcceptance` and prove it has not yet published.
+- Independently validate the authored transaction and its input scripts.
+  [Task 435][t435] already proves acceptance without publication; do not repeat
+  that independent contract in this authored-spend scenario.
 - Broadcast through `TxPublisher`, observe the unmined transaction and changed
   UTXO view, mine it, cross the exact sync boundary, and verify confirmation and
   change through TxReader and UtxoManager.
@@ -35,18 +36,19 @@ unproved. This task connects that path without another publisher/read matrix.
 
 Extend suitable existing spend coverage to consume `CreateTransaction` with
 automatic selection and change, then verify the signing and durable change
-handoff. Reuse acceptance/no-publication, transaction, and UTXO assertions
-instead of repeating component matrices. Use bounded waits only for named
+handoff. Reuse transaction and UTXO assertions without another acceptance
+or component-error matrix. Use bounded waits only for named
 external mempool and mining events.
 
 ## Verification
 
 - Run the focused transaction spend scenario on kvdb, SQLite, and PostgreSQL.
-- Verify acceptance alone does not publish and every resource is joined.
+- Verify the authored inputs and durable change agree with public transaction
+  and UTXO views, and every resource is joined.
 
 ## Definition of done
 
-- One authored transaction is valid, accepted, broadcast, observed unmined,
+- One authored transaction is valid, broadcast, observed unmined,
   confirmed, and durable after reload through maintained public APIs.
 - Wallet UTXO and transaction views agree at every stage.
 - The shared scenario contains no backend skip branch and does not duplicate

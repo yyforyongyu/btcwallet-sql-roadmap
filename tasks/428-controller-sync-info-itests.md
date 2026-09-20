@@ -11,7 +11,9 @@ Dependencies: **[Task 331][t331] and [Task 455][t455]**.
 [Issue #1250][issue1250] assigns Gustavo the Controller integration-test lane.
 Merged [PR #1300][pr1300] covers the baseline `Info` contract. `Resync` and
 `Rescan` remain without real-wallet coverage for bounded requests, completion,
-and durable results after reopen.
+and durable results after reopen. At `sql-wallet` revision `48e7f4b`, the
+[Controller][controller] acknowledges asynchronous scan transfer; method return
+and live synchronization information do not prove historical completion.
 
 ## Details
 
@@ -20,9 +22,13 @@ and durable results after reopen.
 - Register one shared public contract for all three database backends. Do not
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
-- Cover calls through a Running Manager, current and earlier valid boundaries,
-  malformed or out-of-range requests, cancellation, and the public completion
-  or progress contract actually exposed by each method.
+- Cover calls through a Running Manager at current and earlier valid heights,
+  invalid or out-of-range heights, missing rescan targets, and cancellation
+  before admission. An accepted request finishes transfer independently of
+  later caller cancellation; do not require that cancellation abort its scan.
+- Observe recovered Wallet state with a bounded wait for the asynchronous scan.
+  Method return or an already-true live `Info.Synced` is not scan completion;
+  add no public progress API or removed recovery fields.
 - Prove explicit historical rescan remains Wallet-scoped while live
   synchronization continues independently. Rescan activity cannot overwrite
   that Wallet's live readiness fields.
@@ -34,11 +40,9 @@ and durable results after reopen.
   a fresh Manager and selecting the Wallet from its Start result.
 - Do not define future recovery or live-watch semantics owned by Tasks 342,
   363, and 397–402.
-- Use `Info` to observe synchronization preconditions and postconditions.
-  After [Task 455][t455], compare every exported synchronization field through
-  the imported `wallet` package on all three backends. Task 455 owns the
-  production result; this task owns its public integration assertions. Do not
-  duplicate unrelated standalone `Info` cases from PR #1300.
+- Observe Task 455's exact live `Synced` and `SyncedTo` before, during, and
+  after the scan through imported `wallet` APIs. Keep the public integration
+  proof here without repeating PR #1300's standalone `Info` cases.
 - Exclude lifecycle credentials, account/address APIs, RPC, direct Store reads,
   bitcoind parity scenarios, and unrelated production changes.
 
@@ -53,16 +57,15 @@ file or repeat the baseline Info cases.
 
 - Run the focused Controller synchronization cases on kvdb, SQLite, and
   PostgreSQL without backend branches.
-- Compare every exported synchronization field through the imported `wallet`
-  package before, during, and after resync or rescan. Live readiness changes
-  only for live-chain work, while historical activity remains Wallet-scoped.
-- Verify cancellation and failure paths terminate polling and release the
+- Verify exact live readiness remains independent of targeted historical
+  work, and completed recovered state survives fresh Manager startup.
+- Verify admission cancellation and failure paths terminate waits and release
   Wallet, Manager, chain backend, miner, and database resources.
 
 ## Definition of done
 
 - `Resync` and `Rescan` have representative public success, invalid-boundary,
-  and cancellation coverage.
+  missing-target, and admission-cancellation coverage.
 - Completed synchronization results remain observable after durable reopen.
 - Rescan state never overwrites the Wallet's live readiness.
 - Assertions use real kvdb, SQLite, and PostgreSQL Wallets.
@@ -73,3 +76,4 @@ file or repeat the baseline Info cases.
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
 [t472]: 472-multi-wallet-rescan-isolation-scenario.md
+[controller]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/controller.go#L614
