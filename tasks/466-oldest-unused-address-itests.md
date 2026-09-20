@@ -39,13 +39,6 @@ outcome; it does not require Task 395's separate `AllocateNextKey` API.
   add only the small conventional setup needed here, without implementing
   Task 431's separate matrix. Reuse overlapping setup whichever task lands
   second; do not wait for a particular file or helper to be introduced.
-- Document only non-obvious test contracts, rationales, invariants, and
-  consequences. Keep Arrange, Act, and Assert structure clear without
-  mandatory section comments that restate the test code.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 

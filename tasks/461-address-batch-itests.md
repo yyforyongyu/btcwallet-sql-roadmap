@@ -56,13 +56,6 @@ separate from count-one allocation and lookup behavior in Task 431.
   cases. Add no arbitrary helper or standalone test file; if the repository
   has no suitable file, justify one repository-conventional itest file in the
   implementation PR.
-- Document only non-obvious test contracts, rationales, invariants, and
-  consequences. Keep Arrange, Act, and Assert structure clear without
-  mandatory section comments that restate the test code.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 

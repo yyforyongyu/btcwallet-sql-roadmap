@@ -74,13 +74,6 @@ collapsing a known account number into arbitrary numberless import identity.
   without requiring wallet-root provenance or creating a watch obligation.
   Extend existing focused allocation tests for this shape on both SQL
   dialects; do not duplicate Task 395's general allocation matrix.
-- Document non-obvious code blocks with the contract, rationale, invariant, or
-  consequence they preserve; do not restate the code.
-- Keep unit tests clearly structured as Arrange, Act, and Assert.
-- Interface mocks, when needed, embed `mock.Mock`. Set `On(...).Return(...)`
-  expectations during Arrange with the narrowest correct cardinality (`Once()`
-  for one required call). During Assert, call `AssertExpectations(t)` directly;
-  do not duplicate call assertions or wrap the result in `require.True`.
 
 ## Suggested fix
 
