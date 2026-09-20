@@ -57,9 +57,6 @@ this task proves those effects together after the production contracts land.
 - Keep the funding cases in this task's planned itest source and place the
   narrow failure gate in the existing integration harness setup rather than a
   standalone helper file.
-- Document only non-obvious test contracts, rationales, invariants, and
-  consequences. Keep Arrange, Act, and Assert structure clear without
-  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

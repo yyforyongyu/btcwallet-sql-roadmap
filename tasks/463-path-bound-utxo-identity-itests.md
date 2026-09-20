@@ -44,9 +44,6 @@ account identity through SQL UTXO conversion.
   RPC, deprecated APIs, and unrelated production changes out of scope. Fix
   only a production defect required by this public attribution contract and
   keep its regression in this task's implementation PR.
-- Document only non-obvious test contracts, rationales, invariants, and
-  consequences. Keep Arrange, Act, and Assert structure clear without
-  mandatory section comments that restate the test code.
 
 ## Suggested fix
 

@@ -224,11 +224,9 @@ acceptance constraint is stated in its task file. Otherwise require comments
 only where they preserve a non-obvious contract, rationale, invariant,
 constraint, or consequence.
 
-For implementation unit tests, use `mock.Mock` for interface mocks. Set
-`On(...).Return(...)` expectations during Arrange with the narrowest correct
-cardinality, including `Once()` for one required call. During Assert, call
-`AssertExpectations(t)` directly; do not duplicate the same call assertion or
-wrap the result in `require.True`.
+Keep generic test-style and mocking instructions in the implementation
+repository's guidance, not task scopes. Reuse existing mock setup; when it
+registers `AssertExpectations` in `t.Cleanup`, do not call it again.
 
 ## Scope rules
 

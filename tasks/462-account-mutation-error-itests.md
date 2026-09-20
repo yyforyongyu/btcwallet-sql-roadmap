@@ -81,9 +81,6 @@ uncovered final-contract cases.
 - Extend the existing `itest/account_manager_test.go` suite. Add no arbitrary
   helper, production file, or standalone test file; justify any unavoidable
   new file against the repository's current layout in the implementation PR.
-- Document only non-obvious test contracts, rationales, invariants, and
-  consequences. Keep Arrange, Act, and Assert structure clear without
-  mandatory section comments that restate the test code.
 
 ## Suggested fix
 
