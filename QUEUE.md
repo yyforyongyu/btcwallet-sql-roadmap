@@ -22,12 +22,15 @@ kvdb caller paths against source. Before Phase 1 closes, assign any required
 initial API/runtime gaps and their dependency closure there, using existing
 owners where available. Task 470 retains its own merge and enablement gates.
 
-## Phase 1 — API stabilization and basic itests · 8 open
+## Phase 1 — API stabilization and basic itests · 10 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
-lifecycle, purpose-1017 key families, final address allocation, transaction
-invalidation, and truthful synchronization status. Basic component tests prove
-these contracts and existing key/signing APIs.
+lifecycle, purpose-1017 key families, path-bound XPub accounts, final address
+allocation, transaction invalidation, and truthful synchronization status.
+Basic component tests prove these contracts and existing key/signing APIs.
+
+Finish Phase 1 before merging `sql-wallet` into `master`, including Task 391's
+account-shape schema change and its prerequisites.
 
 The initial port keeps Task 331's non-contextual Create signature and safe
 shutdown draining. Contextual creation follows atomic genesis in Phase 3.
@@ -41,6 +44,8 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 402 |
+| [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | — |
+| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 402][t402] | open | Wallet synchronization and live-watch readiness | Gap fix | Establish live watches from persisted Wallet data | — |
@@ -49,7 +54,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395 |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396 |
 
-## Phase 2A — bugs and gaps · 19 open
+## Phase 2A — bugs and gaps · 18 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
@@ -65,7 +70,6 @@ This is a prioritized backlog, not a blanket gate for starting the lnd port.
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | — |
 | [Task 370][t370] | open | Manager chain-event fanout and Wallet processors | Refactor | Fan out ordered Manager chain events | — |
 | [Task 372][t372] | open | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | 370 |
-| [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | — |
 | [Task 389][t389] | open | AccountManager SQL account-creation results | Bug fix | Report uncertain account commits truthfully | — |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | 402 |
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | — |
@@ -126,7 +130,7 @@ Modern kvdb remains supported for the current and next release.
 | [Task 376][t376] | open | Manager.Create legacy conversion mode | Migration | Convert a legacy wallet through Manager.Create | 358, 375 |
 | [Task 473][t473] | open | Legacy migration address and script extraction | Migration | Extract legacy address and script state | 373 |
 
-## Phase 4 — optional improvements · 8 open
+## Phase 4 — optional improvements · 7 open
 
 Additional capabilities, performance refactors, and defensive integrity work.
 Task 424 still distinguishes demonstrated fixes from proposed hardening;
@@ -135,7 +139,6 @@ these task types, scopes, and evidence requirements are unchanged.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | — |
-| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 397 |
 | [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | 424 |

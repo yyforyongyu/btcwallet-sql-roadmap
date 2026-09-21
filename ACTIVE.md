@@ -10,6 +10,8 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | 1 | YY | [#1379][pr1379] |
+| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | — | — |
+| [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | — | — |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | 1 | YY | [#1380][pr1380] |
@@ -35,7 +37,6 @@ Remaining 2A/2B work; move tasks above when development starts.
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | — |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
-| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 2A | — | — |
 | [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | — | — |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 2A | — | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
@@ -100,6 +101,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t372]: tasks/372-multi-wallet-rollback.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
+[t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
