@@ -4,7 +4,7 @@ Component: **PostgreSQL Store**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 454][t454]**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -22,9 +22,10 @@ runtime must not force SQLite's transaction types onto PostgreSQL.
   the shared `wallet/internal/db` contract.
 - Preserve health state, retry classification and accounting, fatal-error
   poisoning, and ambiguous-commit reporting.
-- Preserve the explicit operation-level transaction isolation selected by
-  [Task 454][t454]. Do not fall back to pgx defaults or globally strengthen
-  isolation during the driver cutover.
+- Preserve transaction isolation in effect at cutover. If [Task 454][t454]
+  has landed, translate its explicit options exactly; otherwise preserve
+  current default-selection behavior and leave explicit policy to Task 454.
+  The driver refactor must neither strengthen nor weaken isolation policy.
 - Keep the existing migration library and test-administration connection on
   `database/sql` when that external tool boundary requires it. They are not
   normal Store query/transaction paths.
@@ -33,11 +34,9 @@ runtime must not force SQLite's transaction types onto PostgreSQL.
 
 ## Suggested fix
 
-Make the shared runtime transaction primitive backend-parametric or add the
-smallest pgx-native counterpart with the same hook contract, switch the
-PostgreSQL sqlc package and Store to it, and centralize pgx nullable conversion
-at the PostgreSQL adapter boundary. Leave SQLite and the migration tool
-unchanged.
+Switch PostgreSQL sqlc and Store calls to native pgx, adapting existing runtime
+hooks and nullable conversions only where needed. A backend-parametric runtime
+is an option, not a required framework. Leave SQLite and migration tools alone.
 
 ## Verification
 
@@ -45,9 +44,9 @@ unchanged.
   writes through `pgxpool` and `pgx.Tx` with no `database/sql` Store handle.
 - Retry, health, fatal-error, and ambiguous-commit vectors remain equivalent
   to the existing runtime contract.
-- pgx transaction-option tests map every driver-neutral policy selected by
-  Task 454 to its exact pgx isolation level and fail if any transaction begins
-  with default isolation options.
+- Transaction-option tests prove isolation is unchanged by the cutover,
+  including any explicit levels already selected by Task 454. If policy still
+  inherits session defaults, verify equivalent selection under changed defaults.
 - Shared DB interfaces and domain values expose no pgx or `database/sql`
   types; SQLite conformance remains green.
 - A source audit permits `database/sql` only in SQLite and the documented
@@ -57,8 +56,8 @@ unchanged.
 
 - Normal PostgreSQL Store queries and transactions use native pgx while
   SQLite retains `database/sql`.
-- Every pgx transaction preserves Task 454's policy through explicit pgx
-  isolation options; no cutover path relies on driver defaults.
+- Every pgx transaction preserves the isolation semantics present at cutover;
+  Task 454 independently owns making unspecified policy explicit.
 - Shared runtime and domain contracts are driver-neutral and preserve all
   current failure semantics.
 - The PR contains no migration-framework replacement or unrelated storage

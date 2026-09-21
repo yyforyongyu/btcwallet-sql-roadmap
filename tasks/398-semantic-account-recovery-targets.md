@@ -38,6 +38,9 @@ independent of derivation budgeting and zero-lookahead Store queries.
   derivation API and adds no new kvdb storage format. If kvdb retires first,
   remove only this backend-resolution clause.
 - Do not add a second persisted-target loader or widen Task 399's exact sets.
+- Change the existing rescan request, not the number of public recovery APIs.
+  Full-wallet recovery remains available; add no recovery service or durable
+  job machinery.
 
 ## Suggested fix
 

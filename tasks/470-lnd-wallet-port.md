@@ -23,6 +23,10 @@ startup path.
   are complete. Standalone itests need not finish first. Later-phase
   production dependencies gate merge, not starting work. The check follows
   the roadmap-update workflow outside this task's implementation.
+- In that check, map online remote-signer account installation to
+  [Task 391][t391]'s exact path-bound XPub support. Record any required edge
+  before implementing the affected path; do not replace known account numbers
+  with numberless imports or drop an existing remote-signer mode.
 - Own transaction-event delivery through lnd's existing SubscribeTransactions
   interface. Reuse maintained Wallet APIs; require btcwallet work only for a
   demonstrated missing capability. Preserve existing lnd modes and backend
@@ -95,6 +99,7 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t474]: 474-authored-change-watch.md
 [t376]: 376-orchestrate-legacy-conversion.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
+[t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t395]: 395-key-only-locator-allocation.md
 [t396]: 396-oldest-unused-address.md
 [t412]: ../archive/tasks/412-transaction-invalidation.md

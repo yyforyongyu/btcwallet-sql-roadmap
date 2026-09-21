@@ -14,6 +14,9 @@ Dependencies: **[Task 332][t332], [Task 337][t337], [Task 378][t378],
 A uniformly watch-only wallet needs exact depth-three account XPub
 installation without pretending the XPub came from its wallet root or
 collapsing a known account number into arbitrary numberless import identity.
+Lnd's online remote-signer setup imports accounts with explicit scope/number
+identity. [Task 470][t470]'s pre-claim check must account for this profile; its
+port cannot substitute numberless imports or silently disable remote signing.
 
 ## Details
 
@@ -58,9 +61,8 @@ collapsing a known account number into arbitrary numberless import identity.
   specific sentinel.
 - Keep implementation local to existing AccountManager, account/address/UTXO
   Store queries and conversions, the required two-dialect migration, generated
-  outputs, and colocated tests. Add no parallel interface, arbitrary helper,
-  unrelated production file, or standalone test file; justify any unavoidable
-  new file against the repository's current layout in the implementation PR.
+  outputs, and focused tests. Private helper and file layout are implementation
+  choices, not additional API or storage outcomes.
 - Cross-link [Task 464][t464] as the imported-`wallet` account-query owner and
   [Task 463][t463] as the public UTXO-attribution owner for this newly
   representable account shape. Keep focused colocated coverage for path-bound
@@ -125,3 +127,4 @@ or kvdb path.
 [t395]: 395-key-only-locator-allocation.md
 [t463]: 463-path-bound-utxo-identity-itests.md
 [t464]: 464-no-chain-sync-account-query-itests.md
+[t470]: 470-lnd-wallet-port.md

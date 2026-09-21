@@ -42,9 +42,10 @@ need only read-committed execution.
   write retry: an operation using serializable isolation must separately prove
   that its complete callback is replay-safe or return its existing classified
   conflict or operation-specific reconciliation result.
-- Preserve SQLite behavior and backend-neutral Store results. The native pgx
-  cutover in [Task 350][t350] must retain the selected policy rather than fall
-  back to pgx defaults or globally strengthen isolation.
+- Preserve SQLite behavior and backend-neutral Store results. Use the driver
+  already in place: if [Task 350][t350] lands first, set native pgx options;
+  otherwise its later cutover must preserve this explicit policy. Neither
+  task depends on the other's completion.
 - Exclude connection-pool sizing, query optimization, schema placement, lnd
   production changes, and persistent benchmark code. [Task 471][t471] excludes
   concurrent writers; a separately accepted benchmark task owns PostgreSQL
@@ -52,10 +53,10 @@ need only read-committed execution.
 
 ## Suggested fix
 
-Replace the unspecified options in `runtime.Write`'s `BeginTx` call with
-the justified explicit isolation level. Add a stronger operation option only
-where a current invariant requires it. Task 350 carries the same semantics
-to native pgx; a new driver-neutral policy type is not required.
+Set the justified explicit isolation level at the existing PostgreSQL write
+boundary, using database/sql or native pgx as present. Add a stronger operation
+option only where a current invariant requires it; no new driver-neutral
+policy type is required.
 
 ## Verification
 
@@ -79,8 +80,8 @@ to native pgx; a new driver-neutral policy type is not required.
   isolation policy independent of database defaults and lnd co-tenants.
 - Each admitted level has a concrete correctness reason and concurrent
   PostgreSQL coverage; no stronger level is used as a generic safety blanket.
-- SQLite and public Wallet behavior remain unchanged. Explicit isolation is
-  complete without the later native pgx cutover.
+- SQLite and public Wallet behavior remain unchanged. Explicit isolation does
+  not require the native pgx cutover to land first.
 - The PR adds no public isolation setting, global write retry, lnd change,
   connection tuning, or benchmark suite.
 
