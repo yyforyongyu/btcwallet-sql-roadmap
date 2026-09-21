@@ -16,8 +16,6 @@ backend AccountID.
 
 ## Details
 
-- Require a durable disposition of draft btcwallet PR #1279 before accepting
-  the ADR amendment.
 - Amend ADR 0010 before implementation to define operation-scoped secret
   ownership, synchronization against `Lock`, reentrancy, and zeroing on
   success, error, and panic.
@@ -36,21 +34,22 @@ backend AccountID.
 - Define the bounded immutable-string parsing exception: retain no reference
   and zero every wipeable source and working copy, without claiming immutable
   string memory is wipeable.
-- State that account derivation/encryption occurs outside Store write
-  transactions and only prepared ciphertext/public facts enter an
-  operation-specific CAS.
-- Record PR #1279's exact disposition. Reject its proposed public AccountID
-  locator. If an accepted revision is consumed, record the exact merge commit
-  and delete duplicate roadmap surface.
+- Define safe Store/Vault lock ordering and credential consistency during
+  account creation and passphrase rotation. Do not prescribe a new CAS or
+  preparation protocol; Task 382 must preserve atomic account allocation.
+- Compare the contract with PR #1279 and identify overlap for its author.
+  Reject backend-ID locators and duplicate public signing APIs. An open PR
+  need not close before this design decision; do not count it as implemented
+  or silently replace its work.
 - Keep SQL genesis secret lifetime in Task 367, PSBT authorization in Tasks
   347 and 469, and required test cleanup in each production task.
 
 ## Suggested fix
 
 Add one focused ADR section describing typed operation ownership, lock/use
-serialization, raw-return exceptions, semantic selectors, and consumer
-responsibilities. Include a short PR #1279 overlap table and an explicit
-accepted/superseded/non-overlap outcome.
+serialization, raw-return exceptions, existing semantic selectors, and consumer
+responsibilities. Keep public-only derivation and ordinary script construction
+outside Vault; focus on operations that actually consume secrets.
 
 ## Verification
 
@@ -60,13 +59,14 @@ accepted/superseded/non-overlap outcome.
 - Confirm no accepted type contains a backend ID and no safe operation returns
   a private key.
 - Confirm every planned plaintext value has an owner and an exit-path rule.
-- Confirm PR #1279 is referenced by exact accepted commit only if merged.
+- Check the proposed consumer boundaries against PR #1279 without treating an
+  unmerged proposal as an accepted implementation.
 
 ## Definition of done
 
 - ADR 0010 specifies the complete secret-use ownership contract needed by the
   four consumer tasks.
-- PR #1279 overlap is removed, accepted by exact commit, or explicitly frozen
-  as non-overlapping.
+- PR #1279 overlap is identified without requiring a separate PR disposition
+  or duplicating its implementation.
 - The PR changes no Go code and does not absorb genesis, PSBT authorization,
   or production-task test cleanup.

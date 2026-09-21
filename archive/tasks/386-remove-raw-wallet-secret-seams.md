@@ -1,5 +1,10 @@
 # Task 386 — remove raw Wallet secret seams
 
+> Superseded on 2026-09-21: the accepted decision removes a standalone cleanup
+> phase. Tasks 382–385 remove seams when their last applicable caller moves,
+> including required test/mock updates, while retaining unchanged kvdb and
+> deprecated callers. No replacement task or completion credit is added.
+
 Component: **Wallet-facing Vault and runtimeCache secret interfaces**.
 
 Type: **Refactor**.
@@ -56,7 +61,7 @@ operations. Leave backend-private crypto implementation below keyvault.
 - Obsolete cache-era tests are changed only when this task removes the
   production seam they exercise.
 
-[t382]: 382-vault-account-derivation.md
-[t383]: 383-vault-output-script-resolution.md
-[t384]: 384-vault-safe-signing.md
-[t385]: 385-unsafe-signer-key-extraction.md
+[t382]: ../../tasks/382-vault-account-derivation.md
+[t383]: ../../tasks/383-vault-output-script-resolution.md
+[t384]: ../../tasks/384-vault-safe-signing.md
+[t385]: ../../tasks/385-unsafe-signer-key-extraction.md

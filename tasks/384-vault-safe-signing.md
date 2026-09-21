@@ -18,14 +18,11 @@ to own transaction and digest policy.
 
 - Scope the ownership move to SQL. Keep kvdb's existing signing/credential
   path unchanged; its containment work remains deferred in [Task 352][t352].
-- Migrate maintained safe `Signer` methods: `DerivePubKey`, `ECDH`,
-  `SignDigest`, `ComputeUnlockingScript`, and `ComputeRawSig`.
-- Consume Task 337's final selector-bearing `Signer.DerivePubKey` request.
-  Task 337 owns that public shape; this task owns only moving its key resolution
-  and derivation body into the Vault and must not add a second derivation
-  interface or adapter.
-- Add only the semantic key locators and typed Vault operations exercised by
-  those concrete methods. Select account keys by semantic scope and optional
+- Migrate secret use in `ECDH`, `SignDigest`, `ComputeUnlockingScript`, and
+  `ComputeRawSig`. `DerivePubKey` already uses public account XPub data and
+  stays outside Vault, including Task 337's imported-XPub behavior.
+- Reuse existing request identity; add only internal Vault operations needed
+  by these consumers. Select account keys by semantic scope and optional
   BIP44 number/name plus branch/index, and raw imports by script pubkey. Never
   use a public or internal cross-backend AccountID abstraction.
 - Keep private keys inside Vault for derivation, ECDH, tweak, and signing.
@@ -45,10 +42,12 @@ to own transaction and digest policy.
   serialization behavior.
 - Do not add or redefine PSBT authorization from Task 347 or UnsafeSigner raw
   extraction.
-- Do not add the proposed public `wallet/signing` package or digest request
-  types from PR #1279 unless Task 354 records an exact accepted merge commit.
-  If no artifact is accepted, keep primitive request types internal to
-  keyvault and introduce them with this concrete consumer.
+- Add no public signing package or parallel request API. Reuse suitable merged
+  work from PR #1279 where available, with Task 354 identifying overlap; keep
+  any new primitive operation shapes internal to keyvault.
+- Remove helpers and secret-access seams made unused by this move, with
+  required test/mock updates. Retain shared seams still needed by UnsafeSigner
+  or unchanged kvdb behavior; add no replacement legacy adapter.
 
 ## Suggested fix
 
@@ -60,20 +59,22 @@ operation guard. Keep Wallet assembly unchanged.
 ## Verification
 
 - Public Signer vectors retain results on all maintained backends. On SQL,
-  derivation, ECDH, ECDSA, Schnorr, tweaked Schnorr, unlocking scripts, and raw
-  signatures expose no private key or encrypted DTO across the Wallet boundary.
+  ECDH, ECDSA, Schnorr, tweaked Schnorr, unlocking scripts, and raw signatures
+  expose no private key or encrypted DTO across the Wallet boundary.
 - Dependency spies prove invalid requests fail before Vault secret lookup.
 - Lock/concurrency and zeroing tests cover success, signer error, tweak error,
   and panic.
 - Numberless imported XPub requests remain public-only and cannot fall back to
-  account zero.
+  account zero. Public derivation continues to work while locked without
+  requiring Vault secret access.
 - API inspection finds no public backend AccountID locator or duplicate
   unaccepted PR #1279 request package.
 
 ## Definition of done
 
-- Every maintained SQL safe Signer operation uses typed Vault key operations
-  and receives no private key or encrypted Store secret; kvdb is unchanged.
+- Every secret-dependent SQL safe Signer operation uses typed Vault operations
+  and receives no private key or encrypted Store secret. Public-only
+  derivation and kvdb remain unchanged.
 - Wallet retains transaction, sighash, witness, and policy ownership.
 - No PSBT authorization, UnsafeSigner extraction, or unrelated script/address
   mutation is included.

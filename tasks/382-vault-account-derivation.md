@@ -8,10 +8,15 @@ Dependencies: **[Task 354][t354] and [Task 390][t390]**.
 
 ## Rationale
 
-At `sql-wallet` revision `2ae306dea8c5`, `buildAccountDeriveFn` captures
-encrypted root material, not plaintext, but decrypts and derives when the
-Store callback runs. That secret work still executes under a Store write and
-leaves AccountManager owning operations that ADR 0010 assigns to Vault.
+At local `sql-wallet` revision `48e7f4b7e`, `buildAccountDeriveFn` captures
+encrypted root material but decrypts and derives inside the account-creation
+Store transaction. This is not an existing prepare-then-short-CAS flow.
+AccountManager still owns secret work that ADR 0010 assigns to Vault.
+
+That path takes Store resources before Vault's lock, while passphrase rotation
+takes the Vault lock before Store access. Validate this source-level concern
+with a constrained connection pool; it is not yet a reproduced deadlock. A
+minimal demonstrated bug fix need not wait for this ownership refactor.
 
 ## Details
 
@@ -24,11 +29,12 @@ leaves AccountManager owning operations that ADR 0010 assigns to Vault.
 - Let WalletVault resolve its encrypted root/account material and cipher
   provenance without changing LegacyWalletVault.
 - Replace the raw maintained decrypt, derivation, and encryption preparation
-  used by the sequential, exact, and custom-scope callers. Preserve their
-  existing cursor reads and pass only the typed Vault result's ciphertext and
-  public facts to their existing short operation-specific Store CAS.
-- Run no Vault operation, derivation, encryption, or caller callback under a
-  Store write transaction.
+  used by sequential, exact, and custom-scope callers with Vault-owned secret
+  use. Return only ciphertext and public facts to SQL AccountManager.
+- Preserve atomic allocation and account creation under concurrent callers.
+  Do not assume an existing short CAS or require a new allocation protocol.
+  Keep Store/Vault ordering deadlock-free and prevent passphrase rotation from
+  allowing an account encrypted with obsolete credentials to commit.
 - Zero master, account, branch, serialization, and other task-owned temporary
   material on success, error, and panic. Apply the ADR's immutable-string rule.
 - Preserve lock, watch-only, invalid-child, fingerprint, and legacy behavior.
@@ -37,6 +43,9 @@ leaves AccountManager owning operations that ADR 0010 assigns to Vault.
   preparation workflow.
 - Preserve kvdb's existing sequential creation and unsupported exact/custom
   request results without migrating that backend's secret handling.
+- Remove helpers and secret-access seams made unused by this consumer move,
+  with their required test/mock updates. Retain any shared seam still needed
+  by other consumers or unchanged kvdb behavior; add no legacy adapter.
 - Exclude account-number allocation and exact-account CAS policy from Task 343,
   sequential invalid-child allocation from [Task 460][t460], custom-scope
   schema admission from Task 390,
@@ -45,10 +54,9 @@ leaves AccountManager owning operations that ADR 0010 assigns to Vault.
 
 ## Suggested fix
 
-Replace the callers' raw preparation helper with a Vault-owned account
-preparation request and a prepared ciphertext/public result. Keep their
-existing cursor read and checked Store CAS phases unchanged. Leave the legacy
-path unchanged.
+Move the existing secret-use helper behind a narrow Vault operation. Preparation
+outside a write is an option only if credential and allocation atomicity remain
+intact. Choose the smallest safe boundary under Task 354; leave kvdb unchanged.
 
 ## Verification
 
@@ -58,19 +66,20 @@ path unchanged.
   requests match `ErrAccountOperationUnsupported` after the permitted read-only
   occupied-name lookup and before Vault preparation or Store mutation.
 - Spies prove SQL AccountManager never calls Store secret reads or raw `Decrypt`
-  and no Vault call executes while a Store write is open.
+  and receives no plaintext key material.
 - Concurrency tests cover Lock and combined passphrase rotation against account
-  preparation without deadlock or obsolete-credential commits.
-- Zeroing probes cover success, derivation/encryption error, CAS failure, and
-  panic.
+  creation with a one-connection SQL pool, without deadlock or obsolete-
+  credential commits. Concurrent creation preserves allocation and identity.
+- Zeroing probes cover success, derivation/encryption error, commit failure,
+  and panic. Remove only tests/mocks made obsolete by this consumer move.
 
 ## Definition of done
 
 - SQL root-derived account creation obtains prepared secret material through
   one wallet-scoped Vault operation. Sequential, exact, and custom-scope
   callers use it; kvdb's existing implementation and behavior are unchanged.
-- Store writes receive ciphertext and public facts only and contain no secret
-  work.
+- SQL AccountManager receives ciphertext and public facts only; creation and
+  passphrase rotation retain their atomicity without a Store/Vault deadlock.
 - No exact/custom, genesis, validation, reconciliation, or PSBT behavior is
   included.
 

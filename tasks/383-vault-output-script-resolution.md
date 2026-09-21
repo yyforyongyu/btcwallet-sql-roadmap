@@ -17,7 +17,8 @@ and decodes plaintext scripts outside Vault.
 - Scope this refactor to SQL. Preserve kvdb's existing script/credential path;
   its containment work remains deferred in [Task 352][t352].
 - Add one typed, script-pubkey-selected Vault operation for redeem, witness,
-  and Taproot revealed scripts. Do not select by a Store row ID.
+  and Taproot revealed scripts that require encrypted stored material. Do not
+  select by a Store row ID or move ordinary public script construction.
 - Let WalletVault load the encrypted address record, apply its
   own cipher provenance, decrypt, and decode any Taproot wrapper internally.
 - Return the final script as an isolated caller-owned copy so no caller can
@@ -27,6 +28,9 @@ and decodes plaintext scripts outside Vault.
   error, and panic before the operation returns.
 - Preserve locked, not-mine, watch-only, no-associated-script, and supported
   script-family behavior.
+- Reuse the existing script result. Remove helpers and secret-access seams
+  made unused by this move, with required test/mock updates; retain shared
+  seams needed by other consumers or unchanged kvdb behavior.
 - Exclude address import/creation, script policy, safe signing authorization,
   UnsafeSigner private keys, and PSBT behavior.
 
