@@ -29,6 +29,9 @@ return.
   outside this task; its removal is not required.
 - Preserve watch-only, locked, not-mine, and imported-XPub failure behavior.
 - Do not use this extraction operation from safe Signer or PSBT code.
+- Remove helpers, raw decryption, and runtimeCache secret seams made unused
+  by this move, with their required test/mock updates. Retain shared seams
+  still used by unchanged kvdb or deprecated callers without modifying them.
 
 ## Suggested fix
 

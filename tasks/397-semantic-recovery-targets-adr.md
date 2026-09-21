@@ -23,6 +23,8 @@ address/script import targets rather than explicit semantic accounts.
   wallet scan.
 - Keep live-watch semantics delegated to the prerequisite ADR and leave
   durable rescan jobs out of scope.
+- Reuse Task 341's selector and the existing rescan request. This decision
+  adds no recovery service; full-wallet recovery remains the existing fallback.
 
 ## Suggested fix
 

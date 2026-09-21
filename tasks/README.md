@@ -154,8 +154,6 @@ that structural exclusion explicitly.
 - [Task 384](384-vault-safe-signing.md): route safe signing through the Vault.
 - [Task 385](385-unsafe-signer-key-extraction.md): isolate UnsafeSigner key
   extraction.
-- [Task 386](386-remove-raw-wallet-secret-seams.md): remove raw Wallet secret
-  seams.
 
 ## Migration
 

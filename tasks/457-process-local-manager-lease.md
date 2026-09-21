@@ -17,67 +17,62 @@ gate fan-out or lnd integration. Cross-process leadership remains separate.
 
 ## Details
 
-- Define a non-secret canonical database-target key from validated
-  `ManagerConfig`. Canonicalize filesystem paths for kvdb and SQLite. Parse and
-  normalize PostgreSQL server, database, and schema identity while excluding
-  passwords and pool or tuning options from registry state, logs, and errors.
-- Acquire one process-local lease during the winning Manager Start before any
-  Wallet, chain worker, or Running state is published. A competing Manager for
-  the same canonical target returns one stable wallet-owned
-  `ErrManagerAlreadyRunning` and starts no work.
-- Treat lease rejection as a terminal Start failure under Task 331. Close the
-  losing Manager's unpublished runtime and Store before returning the error; it
-  cannot later retry Start on the same instance.
-- Key ownership by the Manager instance, not only by a boolean. Repeated Start
-  on the winning Manager follows Task 331's idempotent result and cannot reject
-  itself or acquire a second lease.
-- Release the lease only after failed-start unwind or Manager Stop has joined
+- Identify the same configured database across supported equivalent path and
+  PostgreSQL DSN forms. Passwords and pool options must not distinguish owners
+  or appear in diagnostics. Document unsupported external aliases; do not build
+  a general database-identity resolver.
+- Reject a competing SQL Manager during Start, before publishing Wallets or
+  chain workers, with wallet-owned `ErrManagerAlreadyRunning`. Keep kvdb's
+  existing exclusive-open protection; do not add another ownership layer or
+  change its legacy open errors.
+- Treat ownership rejection as a terminal Start failure under Task 331. Close
+  the losing Manager's unpublished runtime and Store before returning the error;
+  it cannot later retry Start on the same instance.
+- Repeated Start/Stop on the same Manager preserves its lifecycle contract;
+  it cannot reject itself as a competing owner or release another owner.
+- Allow replacement only after failed-start unwind or Manager Stop has joined
   every Wallet and shared worker and closed the Store. A replacement Manager
   cannot Start while the old terminal stop can still access the database.
 - Permit Managers for different canonical database targets to run concurrently
   in one process, including different temporary databases on the same network.
-- Keep the registry synchronized and release test owners only through the same
-  owner-checked Manager stop path. Expose no public registry or mutable global
-  configuration.
-- State the exact guarantee: syntactically equivalent supported configuration
-  forms normalize to one key, but alternate host aliases or external routing
-  that cannot be proven equivalent remain caller responsibility.
+- Keep bookkeeping private and race-safe, including test cleanup. Add no
+  public registry or mutable global configuration.
 - Exclude database rows, TTLs, heartbeats, PostgreSQL advisory locks, file-lock
   protocols, multi-process detection, distributed leadership, and fencing
   tokens.
 
 ## Suggested fix
 
-Add a package-private synchronized registry from canonical target key to one
-opaque Manager owner token. Acquire through one compare-and-insert called by
-Task 331's Start owner and release with an owner-checked delete after terminal
-Manager Stop. Keep the canonical key and raw DataSource out of public
-errors and logging.
+Reuse existing database identity and lifecycle boundaries. A small process-
+local ownership guard is sufficient where backend exclusion is absent; its
+private representation and synchronization are implementation choices.
 
 ## Verification
 
-- Race Start on two Managers for the same kvdb, SQLite, and PostgreSQL target.
+- Race Start on two Managers for the same SQLite and PostgreSQL target.
   Exactly one reaches Running; the loser returns
   `ErrManagerAlreadyRunning` and publishes no Wallet or goroutine.
+- For kvdb, verify its existing exclusive-open protection prevents a second
+  live owner without requiring two successfully constructed Managers.
 - Prove supported equivalent path and PostgreSQL DSN forms collide without
   retaining or logging credentials.
 - Start Managers for distinct targets concurrently and prove neither blocks
   the other.
-- Pause old Manager Stop before worker join, Store close, and lease release.
+- Pause old Manager Stop before worker join and Store close.
   A replacement cannot Start until every old resource is gone.
-- Inject startup failure before and after partial private Wallet start. The
-  lease remains held through unwind and is released exactly once afterward.
+- Inject startup failure before and after partial private Wallet start.
+  Replacement remains excluded until unwind finishes.
 - Race repeated Start and Stop on the owning Manager and prove no stale or
-  foreign owner can release its lease.
+  foreign owner can clear another Manager's ownership.
 
 ## Definition of done
 
 - At most one Manager per canonical configured database target can be Running
   or starting in one process.
-- Lease acquisition precedes all runtime publication and owner-checked release
-  follows complete Manager Stop and Store closure.
+- Ownership exclusion precedes runtime publication and lasts through complete
+  Manager Stop and Store closure, reusing kvdb's exclusive-open behavior.
 - Same-owner repeated calls and distinct databases behave independently.
-- Errors and registry state expose no database credentials.
+- Errors and ownership bookkeeping expose no database credentials.
 - The PR makes no cross-process, distributed-leadership, advisory-lock, or
   filesystem-fencing claim.
 

@@ -1,7 +1,7 @@
 # Task delivery phases
 
-The numbered roadmap contains **146 tasks**: **75 open**, **49 done**,
-**20 superseded**, and **2 deferred**. With **113 ad hoc tasks**, that is
+The numbered roadmap contains **146 tasks**: **74 open**, **49 done**,
+**21 superseded**, and **2 deferred**. With **113 ad hoc tasks**, that is
 **259 tracked tasks** and **162 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
@@ -136,7 +136,7 @@ these task types, scopes, and evidence requirements are unchanged.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | 454 |
+| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | — |
 | [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 397 |
@@ -145,7 +145,7 @@ these task types, scopes, and evidence requirements are unchanged.
 | [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 426][t426] | open | Manager Wallet publication and SQL TxStore amount validation | Bug fix | Validate persisted transaction output aggregates | — |
 
-## Hardening — Signer, Vault, and defensive edges · 8 open
+## Hardening — Signer, Vault, and defensive edges · 7 open
 
 Start only after both 2A and 2B are complete. Existing signing bugs remain in
 the core backlog. This category holds later Signer/Vault restructuring and
@@ -158,7 +158,6 @@ optional duplicate-Manager and rare derivation-edge protection.
 | [Task 383][t383] | open | AddressManager ScriptForOutput and script Vault operation | Refactor | Resolve output scripts through the Vault | 354 |
 | [Task 384][t384] | open | Signer and primitive key-use Vault operations | Refactor | Route safe signing through the Vault | 354, 383, 469 |
 | [Task 385][t385] | open | UnsafeSigner raw private-key boundary | Refactor | Isolate UnsafeSigner key extraction | 384 |
-| [Task 386][t386] | open | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | 382, 383, 384, 385 |
 | [Task 457][t457] | open | Manager Start and process-local database ownership | Feature | Enforce one process-local Manager per database | — |
 | [Task 460][t460] | open | AccountManager sequential creation and SQL AccountStore cursor | Bug fix | Make sequential account allocation invalid-child safe | — |
 
@@ -186,14 +185,14 @@ done or superseded; reactivation preserves the original task number.
 | [Task 352][t352] | Bug fix | Contain uncertain kvdb passphrase rotation | Explicit approval for a future-cycle kvdb passphrase-containment effort |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 20
+## Superseded · 21
 
 Former phases record the historical map at supersession, not the current
 delivery grouping. These tasks have no current delivery phase.
 
 | Task | Former phase | Component | Type | Outcome | Replacement |
 | --- | ---: | --- | --- | --- | --- |
-| [Task 336][t336] | 5 | Controller and Wallet passphrase test suite | Test | Remove redundant Wallet passphrase tests | Required test updates remain inside [Task 386][t386] |
+| [Task 336][t336] | 5 | Controller and Wallet passphrase test suite | Test | Remove redundant Wallet passphrase tests | Required test updates stay with their production changes in Tasks 382–385 |
 | [Task 349][t349] | 3 | TxStore internal invalidation workflow | Gap fix | Implement idempotent transaction invalidation | Existing SQL Store behavior; [Task 412][t412] owns maintained public exposure |
 | [Task 364][t364] | 1 | SQL live-watch persistence | Gap fix | Persist ordered SQL live-watch obligations | Accepted fail-stop/startup-reconstruction decision eliminates delivery persistence; [Task 402][t402] retains live registration |
 | [Task 381][t381] | 3 | RecoveryState public contract and internal Syncer adapter | Refactor | Hide recovery adapter identity | Accepted decision to retain the current shape until a concrete public need exists |
@@ -213,6 +212,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 366][t366] | 2A | Manager and SQL Store genesis result | Bug fix | Reconcile ambiguous SQL genesis commits | Accepted decision uses atomic genesis and conservative commit errors, not automatic readback; Tasks 329/358 retain their outcomes |
 | [Task 371][t371] | 2A | SQL Store canonical chain state | Bug fix | Serialize canonical chain-frontier mutation | Accepted decision uses existing Wallet checkpoints, not a persisted Manager frontier; Tasks 370/372/423 retain coordination |
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
+| [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
 ## Done · 49
 
@@ -457,7 +457,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t383]: tasks/383-vault-output-script-resolution.md
 [t384]: tasks/384-vault-safe-signing.md
 [t385]: tasks/385-unsafe-signer-key-extraction.md
-[t386]: tasks/386-remove-raw-wallet-secret-seams.md
+[t386]: archive/tasks/386-remove-raw-wallet-secret-seams.md
 [t387]: archive/tasks/387-account-creation-identity-adr.md
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md

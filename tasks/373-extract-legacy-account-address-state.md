@@ -25,6 +25,10 @@ reviewable extraction stage.
   imported XPub identity, and custody facts.
 - Map true imported XPub accounts to numberless SQL accounts. Do not persist
   synthetic legacy identifiers; Task 473 owns address paths and raw imports.
+- Preserve explicit scope/account-number identity for path-bound watch-only
+  accounts. Until [Task 391][t391]'s runtime support is available, refuse that
+  source profile rather than silently flattening it into a numberless import.
+  Ordinary supported profiles do not wait for Task 391.
 - Set `NoChainSync=false`; legacy kvdb cannot represent that independent
   policy.
 - Reject identity collisions, unsupported custody, or another legacy shape
@@ -55,6 +59,8 @@ or prebuilding a generic extraction framework.
   destination credential.
 - Unsupported custody, identity collisions, and malformed state fail before
   destination access.
+- Path-bound watch-only fixtures retain their real account number when
+  supported, or are explicitly refused without destination mutation.
 - Cleanup probes demonstrate bounded plaintext ownership on every exit.
 
 ## Definition of done
@@ -66,4 +72,5 @@ semantics. Address/script extraction remains independently owned by Task 473.
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
+[t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t473]: 473-extract-legacy-address-script-state.md

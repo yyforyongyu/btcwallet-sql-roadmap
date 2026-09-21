@@ -20,6 +20,11 @@ specifications.
 
 ## History
 
+- [Task 386](tasks/386-remove-raw-wallet-secret-seams.md) was superseded on
+  2026-09-21 without a replacement task. Each of Tasks 382–385 removes its
+  newly unused secret seams and required tests/mocks during the consumer move;
+  unchanged kvdb and deprecated callers remain supported. This is not done.
+
 - [Task 348](tasks/348-watched-change-delivery.md) and
   [Task 408](tasks/408-direct-transaction-change-watch.md) were superseded on
   2026-09-21 by [Task 474](../tasks/474-authored-change-watch.md), which owns
@@ -87,8 +92,9 @@ specifications.
   2026-09-05 because no maintained public consumer needs the identity-only
   refactor; the current shape remains until a concrete need is demonstrated.
 - [Task 336](tasks/336-test-cleanup.md) was superseded on 2026-09-05 because
-  deleting duplicate tests has no independent outcome; Task 386 owns only the
-  test updates required by its production cleanup.
+  deleting duplicate tests has no independent outcome. Required test updates
+  stay with their production changes, now in Tasks 382–385 rather than the
+  superseded standalone cleanup Task 386.
 - [Task 368](tasks/368-wallet-startup-shutdown.md) was superseded on
   2026-09-05 when its public lifecycle cutover was absorbed into
   [Task 331](../tasks/331-manager-wallet-lifecycle.md) as part of one atomic
