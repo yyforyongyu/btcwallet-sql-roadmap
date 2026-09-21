@@ -8,12 +8,11 @@ Dependencies: **None**.
 
 ## Rationale
 
-Both maintained Vault implementations already reject Unlock while unlocked
-without validating the supplied passphrase, and the Controller currently
-changes its auto-lock timer only after Vault Unlock succeeds. The public Wallet
-contract and Controller-level tests do not settle whether a repeated Unlock
-reauthenticates or changes the existing deadline, leaving callers unable to
-rely on the observed behavior.
+At `sql-wallet` revision `48e7f4b`, [Vault rejection tests][vault-tests] already
+prove no reauthentication, and the [Controller][controller] changes its timer
+only after Vault Unlock succeeds. Controller tests cover first unlock and
+auto-lock separately; the missing proof is that repeated Unlock preserves the
+original schedule, with a documented public rejection contract.
 
 ## Details
 
@@ -40,24 +39,18 @@ rely on the observed behavior.
 
 ## Suggested fix
 
-Keep the existing serialized handler order explicit: call Vault Unlock, return
-its already-unlocked failure unchanged, and mutate the timer only after a first
-successful unlock. Update the caller-facing Unlock documentation and add
-Controller tests around the existing Vault contract and timer. Reuse current
-test controls; the public deadline behavior does not require a new timer API.
+Document the caller-facing rejection contract and exercise the existing
+Controller handler and timer. Reuse Vault rejection coverage for the absence
+of reauthentication and secret reads; no new clock or timer API is needed.
 
 ## Verification
 
-- Unlock once with a controlled deadline, then repeat with both the correct and
-  wrong passphrases. Both repeats must return the already-unlocked error, make
-  no second persisted-secret/authentication read, and leave the Wallet
-  unlocked until the original deadline.
-- Repeat with a shorter positive timeout, a longer positive timeout, zero
-  (default), and a negative timeout. Observe that none changes the first
-  deadline; the original expiry must still lock the
-  Vault exactly once.
-- Run the focused Controller repeated-Unlock cases; reuse existing Vault
-  rejection coverage rather than reproducing it.
+- Repeat Unlock with correct and wrong passphrases and shorter/longer positive,
+  zero/defaulted, and negative timeouts. Every repeat returns the same
+  already-unlocked result and preserves the original deadline or disabled
+  schedule. Observe the public locked state at the original expiry.
+- Run focused Controller cases and reuse the existing SQL and kvdb Vault
+  rejection tests; add no duplicate secret-read or timer-call-count matrix.
 
 ## Definition of done
 
@@ -67,3 +60,6 @@ test controls; the public deadline behavior does not require a new timer API.
   schedule unchanged for every timeout form.
 - Focused Controller tests prove authentication and deadline behavior without
   redesigning ChangePassphrase, Vault APIs, lifecycle, or Manager publication.
+
+[controller]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/controller.go#L993
+[vault-tests]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/internal/keyvault/vault_lifecycle_test.go#L148

@@ -89,7 +89,9 @@ This is a prioritized backlog, not a blanket gate for starting the lnd port.
 ## Phase 2B — verification · 22 open
 
 Integration tests, scenarios, compatibility, and benchmarks run alongside 2A.
-Each task retains its existing prerequisites, including later-phase features.
+Reuse existing component proofs; scenarios own distinct public handoffs.
+Final-contract suites retain their required production prerequisites,
+including later-phase features.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
@@ -101,20 +103,20 @@ Each task retains its existing prerequisites, including later-phase features.
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
 | [Task 439][t439] | open | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | 348 |
-| [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
+| [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | 407 |
 | [Task 444][t444] | open | public wallet receive scenario | Test | Cover new-account receipt and reload | — |
 | [Task 445][t445] | open | public account signing scenario | Test | Cover new-account signing identity | — |
 | [Task 446][t446] | open | public transaction spend scenario | Test | Cover authored-spend publication and reload | — |
 | [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 348 |
 | [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | — |
-| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | — |
+| [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 423 |
 | [Task 450][t450] | open | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | — |
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 | [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Complete missing account mutation error evidence | 391 |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | 391 |
 | [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify true-value lists and path-bound account queries | 391 |
 | [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure ListUnspent on three real backends | — |
-| [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | — |
+| [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
 
 ## Phase 3 — kvdb-to-SQL migration · 8 open
 

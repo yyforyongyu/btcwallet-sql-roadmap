@@ -20,67 +20,43 @@ uncovered final-contract cases.
 
 ## Details
 
-- Extend existing rejection cases for missing identities and precedence; do
-  not duplicate ordinary creation cases already using `errors.Is`. Add only
-  missing rename, supplied-XPub, and collision evidence. Retain Task 391 as
-  the prerequisite for the complete supported-shape contract.
-- Upgrade `testAccountManagerRejectAccountRename`, the locked-create case in
-  `testAccountManagerEnforceAccountCreationLifecycle`, and generic assertions
-  in `testAccountManagerRejectAccountImport` in place. Preserve existing
-  nil/private-key, stopped, and basic-create assertions without another case
-  registration. Add a case only for a shape or precedence not yet exercised.
-- This later-feature verification remains in Phase 2, but is not a prerequisite
-  for converting legacy account shapes. Task 373 owns migration identity
-  validation. An enabled runtime path must still satisfy its required errors.
-- Exercise only public AccountManager mutation APIs through the imported
-  `wallet` package on real kvdb, SQLite, and PostgreSQL Wallets.
-- Register shared cases on all three backends whenever they can represent the
-  same request. Keep exact, custom-scope, path-bound, and `NoChainSync`
-  SQL-only cases separate, and document modern kvdb's structural exclusion
-  instead of skipping it inside a shared contract.
-- Cover absent `RenameAccount` targets matching `ErrAccountNotFound`, rename
-  targets colliding with an existing name matching `ErrAccountAlreadyExists`,
-  self-renames matching `ErrAccountAlreadyExists`, and an already-locked
-  `NewAccount` matching `ErrStateForbidden` on kvdb, SQLite, and PostgreSQL.
-  Use public queries to prove each rejected call leaves the account namespace
-  unchanged; Task 378's injected tests alone prove that locked creation stops
-  before Vault or Store work.
-- Cover the final representable mutation identities and precedence:
-  invalid request or field combinations match `ErrInvalidParam`; malformed,
-  private, wrong-network, or wrong-depth account keys match
-  `ErrInvalidAccountKey` (reuse existing nil/private-key cases);
-  duplicate names and occupied exact numbers beat overlapping XPub
-  identities; otherwise-equal overlapping XPub identities match
-  `ErrAccountIdentityCollision`; and valid unsupported backend or custody
-  shapes match `ErrAccountOperationUnsupported`.
-- Combine invalid request or key material with an otherwise unsupported shape
-  to prove validation runs first. After valid shape and key validation, require
-  an occupied name to match `ErrAccountAlreadyExists` before unsupported
-  backend or custody classification. Require occupied exact-number precedence
-  only on SQLite and PostgreSQL paths where Task 343 supports exact creation.
-  Cover an occupied-name collision on all three backends, Task 343's occupied
-  exact-number collision on SQLite and PostgreSQL, an occupied-name exact
-  request on modern kvdb, and an occupied-name supplied-XPub request on
-  unsupported wallet custody. Task 392 owns occupied-name-before-unsupported
-  ordering, Task 343 owns supported exact-number occupancy, Task 388 owns XPub
-  collision ordering, and Task 391 preserves the shared rule for its custody
-  checks.
-- Use public account queries before rejection and after durable reopen to prove
-  each error leaves the account namespace unchanged. Assert identities only
-  with `errors.Is`; never expose or compare Store, legacy-manager, Vault, or
-  SQL sentinels.
-- Leave ambiguous-commit, concurrent lock-during-preparation races, derivation
-  work limits, and terminal range exhaustion in their owning colocated fault
-  tests when a real public fixture cannot represent them deterministically. Do
-  not add a production fault seam merely to force those cases into an
-  integration test.
-- Do not repeat Task 429's general success, result-field, or reload matrix or
-  Task 430's query contract. Fix only a production defect required by the
-  listed public cases, and include that regression in this task's
-  implementation PR.
-- Extend the existing `itest/account_manager_test.go` suite. Add no arbitrary
-  helper, production file, or standalone test file; justify any unavoidable
-  new file against the repository's current layout in the implementation PR.
+- Upgrade the existing rename, locked-create, and ordinary-import rejection
+  assertions in place. Reuse the nil/private-key, stopped-call, and ordinary
+  creation cases already checking stable identities; add only missing shapes
+  or precedence, not another success or query matrix.
+- Use imported `wallet` mutation APIs and public account views on real kvdb,
+  SQLite, and PostgreSQL. Share representable cases unchanged; register
+  SQL-only exact, custom-scope, path-bound, and `NoChainSync` cases separately,
+  documenting kvdb's structural exclusion.
+- Retain these public errors: absent rename targets match `ErrAccountNotFound`;
+  duplicate names, duplicate rename targets, and self-renames match
+  `ErrAccountAlreadyExists`; already-locked creation matches
+  `ErrStateForbidden`. Invalid request/field combinations match
+  `ErrInvalidParam`; malformed, private, wrong-network, or wrong-depth account
+  keys match `ErrInvalidAccountKey`; otherwise-valid unsupported backend or
+  custody shapes match `ErrAccountOperationUnsupported`.
+- Prove invalid request/key validation precedes unsupported-shape rejection.
+  After validation, occupied names precede unsupported backend/custody errors,
+  including exact-on-kvdb and supplied-XPub-on-unsupported-custody requests.
+  Cover occupied names on all three backends and exact-number occupancy on
+  SQLite and PostgreSQL. Duplicate names and occupied supported exact numbers
+  precede overlapping XPub identities; otherwise overlapping XPub identities
+  match `ErrAccountIdentityCollision`.
+- Task 392 owns occupied-name precedence, Task 343 owns supported exact-number
+  occupancy, Task 388 owns XPub collision admission, and Task 391 preserves
+  their rules for supplied XPub custody. Retain 391's dependency for this final
+  shape coverage; those production tasks keep their focused regressions.
+- Match only documented Wallet error identities and compare the public account
+  namespace before rejection, afterward, and after fresh Manager startup.
+  Do not compare Store, legacy-manager, Vault, or SQL sentinels.
+- Leave injected ambiguous-commit, concurrent lock/preparation, derivation-work,
+  and terminal-exhaustion cases with their focused owners; Task 378 already
+  proves locked creation rejects before Vault/Store work. Add no production
+  fault seam, Store assertion, or new API. Fix only defects revealed by the
+  required public cases and retain their regressions in this task.
+- Task 429 retains general mutation success/reload and Task 430 the query
+  contract. This runtime-shape evidence is not a legacy-conversion gate;
+  Task 373 owns migration identity validation.
 
 ## Suggested fix
 
@@ -109,8 +85,8 @@ reopen.
   imported-`wallet` coverage across every applicable maintained backend.
 - Modern kvdb's SQL-only exclusions are explicit, while shared cases contain
   no backend skip branch or backend-specific assertion.
-- The existing integration-test suite owns the cases without a new API,
-  direct Store assertion, arbitrary file, or duplicated Task 429 coverage.
+- Existing integration cases own assertion upgrades, with no new API, Store
+  assertion, or duplicated Task 429 coverage.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t391]: 391-path-bound-watch-only-xpub-accounts.md

@@ -4,17 +4,18 @@ Component: **multi-Wallet SQL integration scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 331][t331], [Task 415][t415], [Task 429][t429],
-[Task 433][t433], [Task 434][t434], [Task 435][t435],
+Dependencies: **[Task 331][t331], [Task 415][t415], [Task 423][t423],
+[Task 429][t429], [Task 433][t433], [Task 434][t434], [Task 435][t435],
 [Task 436][t436], and [Task 455][t455]**.
 
 ## Rationale
 
-[Issue #1250][issue1250] names multi-wallet SQL isolation as a required
-follow-up scenario. The maintained public Manager and Wallet contracts can be
-tested before their internal chain-notification ownership changes. Running the
-scenario early gives later coordination work a stable regression boundary
-without making that broader production work part of this focused task.
+[Issue #1250][issue1250] requires multi-wallet SQL isolation. At `sql-wallet`
+revision `48e7f4b`, Manager shares one chain source and each Wallet
+[consumes its notifications][source] independently, so one Wallet can miss a
+live wakeup. [Task 423][t423] supplies the required live fanout; this scenario
+then proves public receipt, spend, and reload isolation without duplicating
+that production work.
 
 ## Details
 
@@ -72,3 +73,5 @@ a scenario-specific coordinator.
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
+[t423]: 423-manager-chain-source-cutover.md
+[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/syncer.go#L1846
