@@ -104,7 +104,6 @@ that structural exclusion explicitly.
 - [Task 439](439-psbt-funding-itests.md): cover PSBT funding contracts.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
-- [Task 442](442-signer-signing-itests.md): cover public signing contracts.
 - [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.
 - [Task 461](461-address-batch-itests.md): cover public address batch

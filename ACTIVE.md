@@ -14,7 +14,6 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | 1 | YY | [#1380][pr1380] |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
-| [Task 442][t442] | Cover public signing contracts | Test | 1 | YY | [#1384][pr1384] |
 | [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
 | [Task 465][t465] | Verify durable key allocation results | Test | 1 | YY | [#1392][pr1392] |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | 1 | — | — |
@@ -84,7 +83,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
-[pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
 [pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
 [pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
@@ -122,7 +120,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t438]: tasks/438-psbt-decoration-combination-itests.md
 [t439]: tasks/439-psbt-funding-itests.md
 [t440]: tasks/440-psbt-signing-finalization-itests.md
-[t442]: tasks/442-signer-signing-itests.md
 [t444]: tasks/444-wallet-receive-reload-scenario.md
 [t445]: tasks/445-account-signing-scenario.md
 [t446]: tasks/446-transaction-spend-publish-scenario.md

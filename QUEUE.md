@@ -22,7 +22,7 @@ kvdb caller paths against source. Before Phase 1 closes, assign any required
 initial API/runtime gaps and their dependency closure there, using existing
 owners where available. Task 470 retains its own merge and enablement gates.
 
-## Phase 1 — API stabilization and basic itests · 9 open
+## Phase 1 — API stabilization and basic itests · 8 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle, purpose-1017 key families, final address allocation, transaction
@@ -45,7 +45,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 402][t402] | open | Wallet synchronization and live-watch readiness | Gap fix | Establish live watches from persisted Wallet data | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
-| [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 344 |
 | [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395 |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | 396 |
@@ -213,7 +212,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
-## Done · 50
+## Done · 51
 
 **162 completed: 49 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -264,6 +263,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 436][t436] | 1 | TxReader integration tests | Test | Cover transaction read contracts | [#1346][pr1346] |
 | [Task 437][t437] | 1 | TxWriter integration tests | Test | Cover transaction label contracts | [#1347][pr1347] |
 | [Task 441][t441] | 1 | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | [#1374][pr1374] |
+| [Task 442][t442] | 1 | Signer signature integration tests | Test | Cover public signing contracts | [#1384][pr1384] |
 | [Task 443][t443] | 1 | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | [#1383][pr1383] |
 | [Task 452][t452] | 1 | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | [#1368][pr1368] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |

@@ -105,7 +105,7 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t412]: ../archive/tasks/412-transaction-invalidation.md
 [t430]: ../archive/tasks/430-account-query-itests.md
 [t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
-[t442]: 442-signer-signing-itests.md
+[t442]: ../archive/tasks/442-signer-signing-itests.md
 [t443]: ../archive/tasks/443-unsafe-signer-itests.md
 [t447]: 447-psbt-workflow-scenario.md
 [t461]: 461-address-batch-itests.md
