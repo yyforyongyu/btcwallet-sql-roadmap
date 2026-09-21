@@ -8,6 +8,10 @@ specifications.
 
 ## Deferred
 
+- [Task 352](tasks/352-kvdb-combined-passphrase-rotation.md) was deferred on
+  2026-09-21 as kvdb-only work, not completed or obsolete. Reactivation needs
+  explicit approval for a future-cycle passphrase-containment effort.
+
 - [Task 353](tasks/353-retire-modern-kvdb-backend.md) was deferred on
   2026-09-05, not completed or superseded. Modern kvdb remains supported for
   the current and next release; retirement is no earlier than two releases
@@ -15,6 +19,17 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+
+- [Task 348](tasks/348-watched-change-delivery.md) and
+  [Task 408](tasks/408-direct-transaction-change-watch.md) were superseded on
+  2026-09-21 by [Task 474](../tasks/474-authored-change-watch.md), which owns
+  the missing authored-change watch calls. Neither is complete.
+- [Task 363](tasks/363-recovery-scan-work-bound.md),
+  [Task 366](tasks/366-reconcile-sql-genesis-commit.md), and
+  [Task 371](tasks/371-canonical-chain-frontier.md) were superseded on
+  2026-09-21 without replacements. Their archived decisions remove the fixed
+  aggregate recovery cap, automatic genesis reconciliation, and extra
+  persisted Manager frontier; they are not completion credit.
 
 - [Task 416](tasks/416-database-benchmark-fixtures.md) and
   [Task 418](tasks/418-list-unspent-benchmark.md) were superseded on 2026-09-19

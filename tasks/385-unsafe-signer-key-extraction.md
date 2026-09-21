@@ -15,6 +15,8 @@ return.
 
 ## Details
 
+- Follow Task 384's SQL-only ownership move; leave kvdb key extraction
+  unchanged rather than importing deferred credential work.
 - Add the smallest explicitly unsafe Vault extraction operation needed by the
   two maintained UnsafeSigner methods.
 - Reuse the semantic locators and backend-local resolution established by
@@ -31,7 +33,7 @@ return.
 ## Suggested fix
 
 Expose one narrowly named internal extraction capability, implement it in the
-maintained Vault backends, and make only UnsafeSigner call it. Keep safe callers
+SQL Vault backend, and make only SQL UnsafeSigner call it. Keep safe callers
 on the non-exporting operations without expanding into deprecated callers.
 
 ## Verification
@@ -49,7 +51,7 @@ on the non-exporting operations without expanding into deprecated callers.
 
 - Raw private-key return is confined to UnsafeSigner as a documented caller-
   owned exception.
-- Safe signing remains entirely non-exporting and no general raw decrypt API is
-  introduced.
+- SQL safe signing remains entirely non-exporting, kvdb stays unchanged, and
+  no general raw decrypt API is introduced.
 
 [t384]: 384-vault-safe-signing.md

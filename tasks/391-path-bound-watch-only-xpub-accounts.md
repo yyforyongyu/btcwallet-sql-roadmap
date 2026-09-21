@@ -6,7 +6,7 @@ shape**.
 Type: **Gap fix**.
 
 Dependencies: **[Task 332][t332], [Task 337][t337], [Task 378][t378],
-[Task 387][t387], [Task 388][t388], [Task 389][t389], [Task 390][t390],
+[Task 387][t387], [Task 388][t388], [Task 390][t390],
 [Task 392][t392], and [Task 395][t395]**.
 
 ## Rationale
@@ -43,8 +43,8 @@ collapsing a known account number into arbitrary numberless import identity.
   commits. Do not edit generated files manually or add a table, column, or
   second persisted discriminator.
 - Reuse custom-scope validation, wallet-wide XPub collision admission, cursor
-  handling, and account-specific reconciliation. Extend the result reader only
-  with the supplied facts introduced here.
+  handling, and NewAccount's conservative `ErrIndeterminateCommit` mapping.
+  Return no account on uncertainty; add no readback or automatic retry.
 - Preserve ordinary `ImportAccount` as the arbitrary numberless imported-XPub
   operation. Do not reinterpret its rows or fabricate account zero.
 - Reuse the existing Signer and AddressManager behavior. Do not add a
@@ -88,8 +88,9 @@ Canonical and purpose-1017 watch-only XPub fixtures with both `NoChainSync`
 values reopen with exact account identity on SQLite and PostgreSQL. Wrong
 network, depth, account child, wallet custody, collision, and numberless misuse
 fail before mutation, while purpose and coin remain caller-declared metadata.
-Ambiguous results compare every supplied fact, and ordinary numberless imports
-remain unchanged. Migration fixtures preserve all existing account shapes,
+Ambiguous results match `ErrIndeterminateCommit` without an account or retry;
+ordinary numberless imports remain unchanged. Migration fixtures preserve all
+existing account shapes,
 while AccountStore lookup, derived-address point and list conversion, and UTXO
 ownership results accept the new shape and retain its real account number on
 both dialects; the previous mismatched shapes still fail as corruption. Public
@@ -119,7 +120,6 @@ or kvdb path.
 [t378]: ../archive/tasks/378-account-manager-error-boundary.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
 [t388]: 388-runtime-account-xpub-collisions.md
-[t389]: 389-runtime-account-commit-reconciliation.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t392]: ../archive/tasks/392-discovery-mode-account-creation.md
 [t395]: 395-key-only-locator-allocation.md

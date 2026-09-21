@@ -38,8 +38,8 @@ and live synchronization information do not prove historical completion.
 - Mine deterministic history, wait with bounded deadlines, and compare public
   information and recovered wallet-visible state before and after constructing
   a fresh Manager and selecting the Wallet from its Start result.
-- Do not define future recovery or live-watch semantics owned by Tasks 342,
-  363, and 397–402.
+- Do not redefine Task 342's caller-selected recovery window or future
+  recovery/live-watch semantics owned by Tasks 397–402.
 - Observe Task 455's exact live `Synced` and `SyncedTo` before, during, and
   after the scan through imported `wallet` APIs. Keep the public integration
   proof here without repeating PR #1300's standalone `Info` cases.

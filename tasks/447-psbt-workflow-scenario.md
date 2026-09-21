@@ -4,8 +4,8 @@ Component: **public PSBT workflow scenario**.
 
 Type: **Test**.
 
-Dependencies: **[Task 331][t331], [Task 348][t348], [Task 433][t433],
-[Task 435][t435], and [Task 436][t436]**.
+Dependencies: **[Task 331][t331], [Task 356][t356], [Task 406][t406],
+[Task 433][t433], [Task 435][t435], [Task 436][t436], and [Task 474][t474]**.
 
 ## Rationale
 
@@ -19,7 +19,7 @@ unproved. Task 435 already owns acceptance without publication.
 
 ## Details
 
-- Verify the final funding contract after Task 348 and its production
+- Verify the final funding contract after Tasks 356, 405/406, and 474 and their
   prerequisites, independently of Tasks 438–440's component coverage. Keep
   Phase 2 ownership without making this PSBT path a blanket migration gate.
 - An integration enabling this path needs the fixes and passing end-to-end
@@ -58,7 +58,9 @@ scenario-specific production hooks.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t348]: 348-watched-change-delivery.md
+[t356]: 356-defer-change-script-allocation.md
+[t406]: 406-psbt-funding-lease-release.md
+[t474]: 474-authored-change-watch.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md

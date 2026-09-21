@@ -127,7 +127,7 @@ Finish Phase 1's API/runtime production prerequisites and QUEUE's pre-claim
 gap check before starting Task 470's lnd port PR. Its start does not wait for
 standalone Phase 1 itests. After Phase 1, bugs/gaps in 2A and verification in
 2B run in parallel. Phase 3 migration and Phase 4 optional improvements may
-overlap them as dependencies permit. Signer/Vault Hardening starts only after
+overlap them as dependencies permit. Hardening starts only after
 both 2A and 2B finish. Integration and migration retain their concrete fixes
 and behavioral gates, not blanket test-task or benchmark completion. Regrouping
 does not change task scope, dependencies, or requirements.

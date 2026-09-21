@@ -4,7 +4,7 @@ Component: **AccountManager and account-derivation Vault operation**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 352][t352], [Task 354][t354], and [Task 390][t390]**.
+Dependencies: **[Task 354][t354] and [Task 390][t390]**.
 
 ## Rationale
 
@@ -15,13 +15,14 @@ leaves AccountManager owning operations that ADR 0010 assigns to Vault.
 
 ## Details
 
+- Scope this refactor to SQL. Keep the existing kvdb derivation and credential
+  path unchanged; its containment work remains deferred in [Task 352][t352].
 - Add only the typed Vault preparation operation needed by the existing
   root-derived AccountManager paths from Tasks 343 and 390. It receives an
   already validated scope and account number without deciding whether
   allocation was sequential, exact, or in a custom scope.
-- Let WalletVault and, while maintained, LegacyWalletVault resolve their own
-  encrypted root/account material and cipher provenance. Keep their backend
-  implementations isolated behind the same semantic request.
+- Let WalletVault resolve its encrypted root/account material and cipher
+  provenance without changing LegacyWalletVault.
 - Replace the raw maintained decrypt, derivation, and encryption preparation
   used by the sequential, exact, and custom-scope callers. Preserve their
   existing cursor reads and pass only the typed Vault result's ciphertext and
@@ -34,24 +35,20 @@ leaves AccountManager owning operations that ADR 0010 assigns to Vault.
   Migrate the sequential and exact callers from [Task 343][t343] and the
   validated custom-scope caller from [Task 390][t390] without adding a second
   preparation workflow.
-- On maintained modern kvdb, route only its existing sequential root-derived
-  subset through LegacyWalletVault. Preserve Task 378's canonical
-  `ErrAccountOperationUnsupported` for Task 343 exact requests and Task 390
-  custom scopes after Task 392's required read-only occupied-name lookup but
-  before Vault preparation or Store mutation.
+- Preserve kvdb's existing sequential creation and unsupported exact/custom
+  request results without migrating that backend's secret handling.
 - Exclude account-number allocation and exact-account CAS policy from Task 343,
   sequential invalid-child allocation from [Task 460][t460], custom-scope
   schema admission from Task 390,
   supplied XPub/path-bound creation from [Task 391][t391], initial SQL genesis
-  from Tasks 329 and 367, creation validation from Task 365, and ambiguous
-  genesis reconciliation from Task 366.
+  from Tasks 329 and 367, and creation validation from Task 365.
 
 ## Suggested fix
 
 Replace the callers' raw preparation helper with a Vault-owned account
 preparation request and a prepared ciphertext/public result. Keep their
-existing cursor read and checked Store CAS phases unchanged. Implement the
-legacy path inside LegacyWalletVault without importing SQL row identity.
+existing cursor read and checked Store CAS phases unchanged. Leave the legacy
+path unchanged.
 
 ## Verification
 
@@ -60,7 +57,7 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
   kvdb covers sequential creation only and proves exact and custom-scope
   requests match `ErrAccountOperationUnsupported` after the permitted read-only
   occupied-name lookup and before Vault preparation or Store mutation.
-- Spies prove AccountManager never calls Store secret reads or raw `Decrypt`
+- Spies prove SQL AccountManager never calls Store secret reads or raw `Decrypt`
   and no Vault call executes while a Store write is open.
 - Concurrency tests cover Lock and combined passphrase rotation against account
   preparation without deadlock or obsolete-credential commits.
@@ -69,16 +66,15 @@ legacy path inside LegacyWalletVault without importing SQL row identity.
 
 ## Definition of done
 
-- Root-derived account creation obtains prepared secret material only through
-  one wallet-scoped Vault operation. SQL sequential, exact, and custom-scope
-  callers use it, while maintained modern kvdb uses it only for its supported
-  sequential subset without changing public behavior.
+- SQL root-derived account creation obtains prepared secret material through
+  one wallet-scoped Vault operation. Sequential, exact, and custom-scope
+  callers use it; kvdb's existing implementation and behavior are unchanged.
 - Store writes receive ciphertext and public facts only and contain no secret
   work.
 - No exact/custom, genesis, validation, reconciliation, or PSBT behavior is
   included.
 
-[t352]: 352-kvdb-combined-passphrase-rotation.md
+[t352]: ../archive/tasks/352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
 [t343]: ../archive/tasks/343-exact-account-creation.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md

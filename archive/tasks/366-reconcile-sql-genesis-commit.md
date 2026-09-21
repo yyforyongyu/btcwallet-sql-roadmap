@@ -6,6 +6,13 @@ Type: **Bug fix**.
 
 Dependencies: **[Task 329][t329] and [Task 467][t467]**.
 
+## Archive decision
+
+Superseded on 2026-09-21 without replacement. The accepted decision uses
+Task 329's single genesis transaction and Task 358's conservative
+ErrIndeterminateCommit mapping, without automatic readback or retry.
+This unimplemented reconciliation task is not complete.
+
 ## Rationale
 
 The SQL runtime reports an indeterminate result when a commit response cannot
@@ -81,8 +88,8 @@ terminal cleanup before returning the fixed error.
 - The PR contains no definite-failure transaction rewrite, duplicate policy,
   or public contextual API.
 
-[t329]: 329-atomic-wallet-account-creation.md
-[t330]: 330-duplicate-wallet-create.md
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t358]: 358-contextual-manager-operations.md
-[t467]: ../archive/tasks/467-indeterminate-commit-identity.md
+[t329]: ../../tasks/329-atomic-wallet-account-creation.md
+[t330]: ../../tasks/330-duplicate-wallet-create.md
+[t331]: 331-manager-wallet-lifecycle.md
+[t358]: ../../tasks/358-contextual-manager-operations.md
+[t467]: 467-indeterminate-commit-identity.md

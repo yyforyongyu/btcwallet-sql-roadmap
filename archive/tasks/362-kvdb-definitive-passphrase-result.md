@@ -5,7 +5,7 @@ Component: **Controller and LegacyWalletVault**.
 Type: **Bug fix**.
 
 Dependencies: **[Task 338](../../tasks/338-passphrase-result.md) and
-[Task 352](../../tasks/352-kvdb-combined-passphrase-rotation.md)**.
+[Task 352](352-kvdb-combined-passphrase-rotation.md)**.
 
 > **Superseded 2026-09-18:** SQL and kvdb share Controller.ChangePassphrase,
 > sendReq, mainLoop, and the Vault call at sql-wallet 2ae306dea8c5. Eliminate

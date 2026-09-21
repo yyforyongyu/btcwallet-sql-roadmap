@@ -2,7 +2,7 @@
 
 Component: **Manager Start and process-local database ownership**.
 
-Type: **Gap fix**.
+Type: **Feature**.
 
 Dependencies: **[Task 331][t331]**.
 
@@ -11,8 +11,9 @@ Dependencies: **[Task 331][t331]**.
 The aggregate lifecycle assumes that one Manager owns the Store and chain work
 for a database. Two Manager instances in one process can otherwise both Start,
 publish Wallets, consume chain work, and close shared durable state without a
-common owner. The supported contract needs a narrow process-local guarantee;
-cross-process leadership remains a separate problem.
+common owner. Callers are currently responsible for running one Manager per
+database. This optional Hardening task adds misuse protection; it does not
+gate fan-out or lnd integration. Cross-process leadership remains separate.
 
 ## Details
 

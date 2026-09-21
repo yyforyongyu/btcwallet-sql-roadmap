@@ -9,57 +9,46 @@ Dependencies: **[Task 332][t332], [Task 402][t402], and
 
 ## Rationale
 
-A committed SQL import can remain unmonitored after registration fails.
-Public success must establish its live watch, not just persist the import.
+A committed SQL public-key or Taproot-script import can remain unmonitored
+after registration fails. Public success must establish its live watch, not
+just persist the import.
 
 ## Details
 
-- On btcd/bitcoind, including polling, preserve exact SQL accountless imports
-  in their method-specific transactions without watch metadata. Leave
-  Neutrino's existing registration/history behavior unchanged.
-- Keep secret encryption outside the Store transaction and consume Task 332's
-  accepted import policy without reopening it.
-- Replace direct `NotifyReceived` calls with Task 402's `WatchAddrsFromTip`
-  path after commit and before public success. On registration failure return
-  an error, preserve committed data, and follow Task 402's failure policy.
-  Expose no delivery handle and never trigger historical recovery.
-- Reconcile an ambiguous import commit from exact script, secret provenance,
-  and method-specific ownership facts. Proven exact commit proceeds to live
-  registration, clean absence returns the ordinary failure, and partial or
-  conflicting state matches Task 467's `ErrIndeterminateCommit` without
-  retrying the mutation.
-- Hold the existing private AddressManager boundary from before a same-Wallet
-  raw-import attempt reaches Store through ambiguous-result classification. A
-  byte-identical caller cannot prepare or commit matching facts until the
-  first caller finishes classification. Keep this process-local; do not add a
-  persisted attempt identity or cross-Manager fencing.
-- Successful duplicates register idempotently. History requires an explicit
-  full-wallet recovery request; add no mempool sweep or delivery persistence.
-- Keep modern-kvdb import behavior outside this SQL mutation without adding a
-  durable kvdb format.
+- Wire SQL `ImportPublicKey` and `ImportTaprootScript` into Task 402's
+  `WatchAddrsFromTip` path on btcd/bitcoind, including polling, after commit
+  and before public success. Leave kvdb and Neutrino behavior unchanged.
+- Preserve Task 332's import policy and keep secret encryption outside the
+  Store transaction. Successful duplicate imports register idempotently.
+- On registration failure, return an error, preserve committed imports, and
+  follow Task 402's Manager-wide failure policy. Startup reconstructs watches
+  from those facts; add no watch metadata, completion flag, or retry backlog.
+- Map an ambiguous SQL commit to `ErrIndeterminateCommit`, with no returned
+  success or automatic retry. Add no exact-state readback, secret-provenance
+  comparison, or classification-only serialization.
+- Start no historical scan or mempool sweep; historical recovery remains an
+  explicit caller request.
 
 ## Suggested fix
 
-Reuse exact SQL import commit checks, then register through Task 402.
+Replace direct `NotifyReceived` calls with Task 402's existing registration
+path and use the shared conservative commit-error mapping.
 
 ## Verification
 
-On btcd/bitcoind, SQLite and PostgreSQL cover commit-before-chain ordering,
-ambiguous exact/absent/conflicting outcomes, failure, startup reconstruction,
-and duplicate import. Barrier-controlled committed-first and rolled-back-first
-byte-identical imports prove that the waiting caller cannot reach Store before
-classification and that neither caller attributes the other's outcome to
-itself. Public-key and Taproot imports succeed only after live registration;
-failure preserves committed facts without exposing delivery state. A payment
-after success is observed before mining on btcd/bitcoind, and registration
-never starts a historical scan.
-Partial and conflicting durable outcomes match `ErrIndeterminateCommit`
-through `errors.Is` without retry. kvdb and Neutrino behavior is unchanged.
+- SQLite and PostgreSQL cover commit-before-registration ordering for both
+  imports, successful duplicates, and registration failure.
+- Failure returns an error, retains committed facts, and follows Task 402's
+  shutdown policy. Reuse its startup-reconstruction coverage.
+- Ambiguous commit matches `ErrIndeterminateCommit` without success or retry.
+- A payment after successful import is observed before mining on
+  btcd/bitcoind. Registration starts no history scan; kvdb and Neutrino remain
+  unchanged.
 
 ## Definition of done
 
-SQL imports on btcd/bitcoind establish live monitoring without watch metadata
-or automatic history. Failure preserves the import without reporting success.
+SQL raw imports establish live monitoring before success on btcd/bitcoind,
+without delivery persistence, automatic reconciliation, or history recovery.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t402]: 402-replay-live-watch-obligations.md

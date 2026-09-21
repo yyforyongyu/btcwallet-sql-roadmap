@@ -4,7 +4,7 @@ Component: **AddressManager ScriptForOutput and script Vault operation**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 352][t352] and [Task 354][t354]**.
+Dependencies: **[Task 354][t354]**.
 
 ## Rationale
 
@@ -14,9 +14,11 @@ and decodes plaintext scripts outside Vault.
 
 ## Details
 
+- Scope this refactor to SQL. Preserve kvdb's existing script/credential path;
+  its containment work remains deferred in [Task 352][t352].
 - Add one typed, script-pubkey-selected Vault operation for redeem, witness,
   and Taproot revealed scripts. Do not select by a Store row ID.
-- Let each Vault implementation load the encrypted address record, apply its
+- Let WalletVault load the encrypted address record, apply its
   own cipher provenance, decrypt, and decode any Taproot wrapper internally.
 - Return the final script as an isolated caller-owned copy so no caller can
   alias Vault or Store memory. This ownership rule is independent of the final
@@ -31,24 +33,24 @@ and decodes plaintext scripts outside Vault.
 ## Suggested fix
 
 Move `GetAddressSecret`, cipher-key selection, decryption, and Taproot script
-decoding into one WalletVault/LegacyWalletVault operation addressed by script
-pubkey. Make `ScriptForOutput` consume only the copied domain result.
+decoding into one WalletVault operation addressed by script pubkey. Make SQL
+`ScriptForOutput` consume only the copied domain result; leave kvdb unchanged.
 
 ## Verification
 
 - Public AddressManager itest vectors return the same exported P2SH, P2WSH, and
   Taproot scripts on supported maintained backends.
 - Caller mutation of the returned script cannot alter Vault or Store data.
-- Dependency spies prove Wallet does not receive an encrypted address secret
+- Dependency spies prove SQL Wallet does not receive an encrypted address secret
   DTO or call raw `Decrypt`.
 - Error and panic probes prove plaintext working buffers are cleared.
 
 ## Definition of done
 
-- `ScriptForOutput` resolves plaintext only through the typed Vault operation
-  and returns a documented caller-owned copy.
+- SQL `ScriptForOutput` resolves plaintext through the typed Vault operation
+  and returns a documented caller-owned copy; kvdb behavior is unchanged.
 - No address mutation, signing authorization, PSBT, or raw private-key work is
   included.
 
-[t352]: 352-kvdb-combined-passphrase-rotation.md
+[t352]: ../archive/tasks/352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md

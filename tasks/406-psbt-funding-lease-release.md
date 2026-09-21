@@ -18,15 +18,17 @@ owner.
   receives the selected outpoints and expected `FundIntent.LeaseID` from the
   funding attempt; do not add a public PsbtManager cleanup method or result.
 - Use a bounded wallet-owned context after caller cancellation and release
-  only leases still owned by the expected ID.
+  only leases still owned by the expected ID. Finish accepted cleanup before
+  Store closure.
 - Attempt cleanup for the whole selected set, including after a release
-  fails. Preserve replacement owners and report partial failure honestly.
-  Reconcile ambiguous outcomes only where required to determine whether the
-  attempt still owns leases; unresolved state matches Task 467's shared
-  `ErrIndeterminateCommit`. Do not claim successful cleanup while ownership
-  remains unknown.
+  fails or reservation returned an ambiguous commit. Preserve replacement
+  owners, the original funding error, and cleanup failures. Unknown cleanup
+  matches Task 467's `ErrIndeterminateCommit`; do not claim success.
+  Add no ambiguous-outcome readback or recovery loop.
 - After successful `FundPsbt`, callers use the packet outpoints, their lease
   ID, and existing idempotent `ReleaseOutput` rather than this private path.
+- Lease expiry is the fallback for unreleased outputs, not a substitute for
+  immediate cleanup.
 
 Exclusions: input selection, lease-ID generation, watched-change delivery,
 public batch cleanup, new per-outpoint lease semantics, durable cleanup
@@ -42,12 +44,14 @@ atomic batch-delete API or cleanup state machine is required.
 ## Verification
 
 A post-admission failure releases the attempted set even after caller
-cancellation. A release failure does not skip remaining outpoints, partial or
-unknown cleanup is reported honestly, and a replacement owner survives.
+cancellation. Ambiguous reservation still attempts every selected outpoint.
+A release failure does not skip remaining outpoints, the original error and
+unknown cleanup remain observable, and a replacement owner survives.
+Cleanup finishes before Store closure without readback or recovery loops.
 Reuse existing `ReleaseOutput` ownership tests rather than duplicating them.
 [Task 439][t439] owns shared public integration coverage for definitive
 pre-return cleanup and the final caller-visible funding contract; this task
-retains focused private classification coverage.
+retains focused private cleanup-error coverage.
 
 ## Definition of done
 
