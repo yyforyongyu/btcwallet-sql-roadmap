@@ -4,8 +4,7 @@ Component: **Manager chain dispatcher and SQL Store rollback**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 334][t334], [Task 370][t370], and
-[Task 371][t371]**.
+Dependencies: **[Task 334][t334] and [Task 370][t370]**.
 
 ## Rationale
 
@@ -25,22 +24,23 @@ that operation, not a second Store rollback implementation or test matrix.
   path and admit disconnected events only through this operation. Wallet
   processors and Task 370's connected-event path must not independently apply
   or fan out the same disconnect.
-- Pause new delivery and finish accepted processor work before invoking the
-  existing database-wide rollback once.
+- Coordinate live delivery and accepted processor work around one invocation
+  of the existing database-wide rollback; leave private mechanics open.
 - Include historical scan writes: a batch read from the old branch cannot
   restore stale Wallet facts after rollback. Quiesce or revalidate those
   writes using the existing Wallet processing boundary.
-- Atomically rewind the canonical frontier and every affected Wallet tip with
-  the Store's existing block and transaction detach behavior.
-- Resume delivery only after the rollback result proves the requested durable
-  state. An unprovable result follows the existing terminal Manager failure
-  path; it cannot leave a Running Manager paused forever.
+- Rewind affected Wallet height/hash and effects atomically through the
+  existing Store operation. Wallets already below the fork stay at their own
+  checkpoints and may continue background catch-up.
+- Resume delivery after successful rollback. Failure, including an ambiguous
+  commit, follows the terminal Manager failure policy without automatic
+  reconciliation; it cannot leave a Running Manager paused forever.
 - Keep manual Wallet recovery and targeted rescans wallet-scoped; they cannot
-  move the shared frontier or another Wallet's tip.
+  move another Wallet's tip.
 - Leave live source consumption unchanged until [Task 423][t423].
 - Exclude transaction-invalidation redesign, a generic write lock, replay
-  markers, schema changes without a reproduced constraint bug, and
-  cross-process fencing.
+  markers, a persisted Manager checkpoint, a new schema or rollback
+  implementation, and cross-process fencing.
 
 ## Suggested fix
 
@@ -52,15 +52,16 @@ decision.
 ## Verification
 
 - With two Wallet processors, prove rollback waits for accepted delivery,
-  invokes the Store once, rewinds all affected tips and the frontier, and then
-  resumes in order.
+  invokes the Store once, rewinds affected tips, preserves a tip below the
+  fork, and then resumes in order.
 - Submit a disconnected event through the prepared Manager path and prove it
   reaches only this rollback operation, never Task 370's connected-event
   fanout.
 - Race rollback with delivery, Wallet registration, and stop without partial
   state or deadlock.
-- Cover definite failure and ambiguous old, new, and indeterminate outcomes on
-  SQLite and PostgreSQL; resume only from a proven applied state.
+- Cover successful, definite-failure, and ambiguous results on SQLite and
+  PostgreSQL. Errors terminate Manager without automatic readback or retry.
+  Reuse the existing Store atomicity proofs.
 - Pause a historical batch after reading the old branch, roll back, then
   release it; stale Wallet facts must not reappear.
 - Prove manual recovery remains Wallet-scoped and the live source path remains
@@ -74,7 +75,6 @@ without importing the separate transaction-invalidation roadmap.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t370]: 370-chain-source-delivery.md
-[t371]: 371-canonical-chain-frontier.md
 [t423]: 423-manager-chain-source-cutover.md
 
 [rollback-tests]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/internal/db/itest/tx_store_rollback_test.go

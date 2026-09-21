@@ -6,6 +6,13 @@ Type: **Bug fix**.
 
 Dependencies: **[Task 342][t342]**.
 
+## Archive decision
+
+Superseded on 2026-09-21 without replacement. The accepted decision keeps
+Task 342's caller-selected lookahead and rejects a fixed aggregate scan cap
+that could prevent legitimate recovery. No demonstrated index-boundary bug
+requires a replacement task. This unimplemented task is not complete.
+
 ## Rationale
 
 Accepting a bounded per-configuration recovery window does not
@@ -47,4 +54,4 @@ Every recovery scan has one deterministic aggregate
 attempt cap and checked child arithmetic, independent of target and persisted
 watch loading.
 
-[t342]: ../archive/tasks/342-recovery-window-validation.md
+[t342]: 342-recovery-window-validation.md

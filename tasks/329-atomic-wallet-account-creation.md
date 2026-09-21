@@ -46,10 +46,11 @@ contain the accounts its supported create request promised.
 - Keep modern-kvdb creation parity outside this SQL genesis task. Preserve its
   maintained behavior; deferred [Task 353][t353] does not authorize its removal.
 - Keep enhanced key-identity validation in
-  [Task 365](365-validate-wallet-genesis-keys.md), ambiguous SQL commit
-  reconciliation in [Task 366](366-reconcile-sql-genesis-commit.md), and
-  secret-lifetime hardening in
-  [Task 367](367-bound-sql-genesis-secrets.md).
+  [Task 365](365-validate-wallet-genesis-keys.md) and secret-lifetime hardening
+  in [Task 367](367-bound-sql-genesis-secrets.md).
+- Lost commit confirmation must not publish a Wallet, trigger an automatic
+  retry, or imply rollback. Task 358 owns the shared indeterminate-error
+  mapping; add no genesis-plan readback or reconciliation.
 - Keep duplicate-create policy in [Task 330][t330], public cancellation in
   [Task 358][t358], numbered root-derived account creation in
   [Task 343][t343], custom-scope creation in [Task 390][t390], and path-bound

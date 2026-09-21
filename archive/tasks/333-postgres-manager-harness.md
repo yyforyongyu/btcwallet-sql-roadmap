@@ -75,6 +75,6 @@ scheme, or default CI matrix expansion lands in this task.
 [t334]: ../../tasks/334-shared-chain-state.md
 [t340]: ../../tasks/340-durable-database-identity.md
 [t370]: ../../tasks/370-chain-source-delivery.md
-[t371]: ../../tasks/371-canonical-chain-frontier.md
+[t371]: 371-canonical-chain-frontier.md
 [t372]: ../../tasks/372-multi-wallet-rollback.md
 [t423]: ../../tasks/423-manager-chain-source-cutover.md

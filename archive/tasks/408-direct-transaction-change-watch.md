@@ -7,6 +7,13 @@ Type: **Bug fix**.
 Dependencies: **[Task 344][t344], [Task 356][t356], [Task 402][t402], and
 [Task 425][t425]**.
 
+## Archive decision
+
+Superseded on 2026-09-21 by
+[Task 474](../../tasks/474-authored-change-watch.md).
+The accepted change-watch consolidation replaces this unimplemented scope;
+this task is not complete.
+
 ## Rationale
 
 After Task 425 isolates shared authoring from wrapper effects, route direct
@@ -47,7 +54,7 @@ Every returned direct AuthoredTx with change has that
 change registered. SQL btcd/bitcoind uses Task 402; modern kvdb and Neutrino
 retain their existing watch paths. No lease semantics or duplicate allocation.
 
-[t344]: 344-bulk-address-allocation.md
-[t356]: 356-defer-change-script-allocation.md
-[t402]: 402-replay-live-watch-obligations.md
-[t425]: ../archive/tasks/425-separate-transaction-authoring-wrappers.md
+[t344]: ../../tasks/344-bulk-address-allocation.md
+[t356]: ../../tasks/356-defer-change-script-allocation.md
+[t402]: ../../tasks/402-replay-live-watch-obligations.md
+[t425]: 425-separate-transaction-authoring-wrappers.md

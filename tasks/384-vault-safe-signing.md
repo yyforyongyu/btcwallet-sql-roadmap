@@ -4,7 +4,7 @@ Component: **Signer and primitive key-use Vault operations**.
 
 Type: **Refactor**.
 
-Dependencies: **[Task 337][t337], [Task 352][t352], [Task 354][t354],
+Dependencies: **[Task 337][t337], [Task 354][t354],
 [Task 383][t383], and [Task 469][t469]**.
 
 ## Rationale
@@ -16,6 +16,8 @@ to own transaction and digest policy.
 
 ## Details
 
+- Scope the ownership move to SQL. Keep kvdb's existing signing/credential
+  path unchanged; its containment work remains deferred in [Task 352][t352].
 - Migrate maintained safe `Signer` methods: `DerivePubKey`, `ECDH`,
   `SignDigest`, `ComputeUnlockingScript`, and `ComputeRawSig`.
 - Consume Task 337's final selector-bearing `Signer.DerivePubKey` request.
@@ -57,9 +59,9 @@ operation guard. Keep Wallet assembly unchanged.
 
 ## Verification
 
-- Public Signer itest vectors cover derivation, ECDH, ECDSA, Schnorr, tweaked
-  Schnorr, unlocking scripts, and raw signatures without a private key or
-  encrypted DTO crossing the Wallet boundary.
+- Public Signer vectors retain results on all maintained backends. On SQL,
+  derivation, ECDH, ECDSA, Schnorr, tweaked Schnorr, unlocking scripts, and raw
+  signatures expose no private key or encrypted DTO across the Wallet boundary.
 - Dependency spies prove invalid requests fail before Vault secret lookup.
 - Lock/concurrency and zeroing tests cover success, signer error, tweak error,
   and panic.
@@ -70,14 +72,14 @@ operation guard. Keep Wallet assembly unchanged.
 
 ## Definition of done
 
-- Every maintained safe Signer operation uses typed Vault key operations and
-  receives no private key or encrypted Store secret.
+- Every maintained SQL safe Signer operation uses typed Vault key operations
+  and receives no private key or encrypted Store secret; kvdb is unchanged.
 - Wallet retains transaction, sighash, witness, and policy ownership.
 - No PSBT authorization, UnsafeSigner extraction, or unrelated script/address
   mutation is included.
 
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
-[t352]: 352-kvdb-combined-passphrase-rotation.md
+[t352]: ../archive/tasks/352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
 [t383]: 383-vault-output-script-resolution.md
 [t469]: 469-sign-psbt-with-effective-keys.md

@@ -63,7 +63,7 @@ update assigns remaining required gaps to existing or new tasks.
 
 After Phase 1, Phase 2A's bugs/gaps and 2B's verification run in parallel.
 Phase 3 migration and Phase 4 optional improvements may overlap them as
-dependencies allow. Signer/Vault Hardening starts only after both 2A and 2B
+dependencies allow. Hardening starts only after both 2A and 2B
 finish. Modern kvdb stays supported for the current and next release; Task
 353's retirement is deferred. [QUEUE.md](QUEUE.md) owns placement and gates.
 

@@ -6,6 +6,13 @@ Type: **Bug fix**.
 
 Dependencies: **[Task 334][t334] and [Task 340][t340]**.
 
+## Archive decision
+
+Superseded on 2026-09-21 without replacement. The accepted decision uses
+existing Wallet height/hash checkpoints and the chain backend for recovery,
+not a separate persisted Manager frontier. Tasks 370, 372, and 423 retain
+fan-out, shared rollback, and live cutover. This task is not complete.
+
 ## Rationale
 
 The SQL Store shares block rows across Wallets but does not durably identify
@@ -55,6 +62,6 @@ SQLite and PostgreSQL expose one serializable canonical frontier that only
 verified live extension or rollback can move, while historical writes remain
 non-advancing.
 
-[t334]: ../archive/tasks/334-shared-chain-state.md
-[t340]: ../archive/tasks/340-durable-database-identity.md
-[t423]: 423-manager-chain-source-cutover.md
+[t334]: 334-shared-chain-state.md
+[t340]: 340-durable-database-identity.md
+[t423]: ../../tasks/423-manager-chain-source-cutover.md

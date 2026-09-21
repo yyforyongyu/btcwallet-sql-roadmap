@@ -4,8 +4,15 @@ Component: **Controller and LegacyWalletVault**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 331](../archive/tasks/331-manager-wallet-lifecycle.md) and
-[Task 467](../archive/tasks/467-indeterminate-commit-identity.md)**.
+Dependencies: **[Task 331](331-manager-wallet-lifecycle.md) and
+[Task 467](467-indeterminate-commit-identity.md)**.
+
+## Archive decision
+
+Deferred on 2026-09-21 as kvdb-only work, not completed or obsolete.
+Reactivate this number only for an explicitly approved future-cycle kvdb
+passphrase-containment effort. SQL Vault work proceeds without this gate;
+its dependent kvdb refactoring stays deferred.
 
 ## Rationale
 
@@ -59,7 +66,7 @@ rotation or leaving later credential operations free to use the stale manager.
   reopened Wallet from `Manager.Start`. Do not claim the Wallet can initiate
   its own stop or remains safe for credential-dependent work.
 - Leave response latching and cancellation after Controller acceptance to
-  [Task 338](338-passphrase-result.md).
+  [Task 338](../../tasks/338-passphrase-result.md).
 - Do not modify `waddrmgr`, `walletdb`, Loader, deprecated Wallet methods, or
   their tests. Do not add a rotation plan, compatibility adapter, generic
   lifecycle state, cross-Manager fencing, or multi-process guarantee.

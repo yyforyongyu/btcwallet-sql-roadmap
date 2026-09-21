@@ -5,8 +5,9 @@ Component: **lnd Wallet integration**.
 Type: **Gap fix**.
 
 Dependencies: **[Task 331][t331], [Task 343][t343], [Task 344][t344],
-[Task 346][t346], [Task 348][t348], [Task 390][t390], [Task 395][t395],
-[Task 396][t396], [Task 412][t412], and [Task 468][t468]**.
+[Task 346][t346], [Task 356][t356], [Task 390][t390], [Task 395][t395],
+[Task 396][t396], [Task 406][t406], [Task 412][t412], [Task 468][t468],
+and [Task 474][t474]**.
 
 ## Rationale
 
@@ -36,9 +37,10 @@ startup path.
   Manager lifecycle, resolve unlock versus chain startup order, and keep the
   runtime independent of unlock RPC deadlines. Stop Manager before closing
   its borrowed chain source.
-- Preserve existing PSBT support. [346][t346] and [348][t348], including their
-  production prerequisites, gate merge because lnd already exposes FundPsbt;
-  do not disable it to avoid these gates. These are the production fixes
+- Preserve existing PSBT support. [346][t346], [356][t356], [406][t406],
+  and [474][t474], including their production prerequisites, gate merge
+  because lnd already exposes FundPsbt; do not disable it to avoid these gates.
+  These are the production fixes
   previously reached through Task 447's test chain, not added scope.
   Add other concrete defects exposed by the port as dependencies.
   Keep later prerequisites in their phases; fanout, benchmarks, and Vault
@@ -84,13 +86,15 @@ The lnd port implementation PR is merged and its focused checks pass. Required
 gaps are resolved through linked owners, existing modes still work, and no
 required behavior is left behind merely as a new task. No ADR is required.
 
-[t331]: 331-manager-wallet-lifecycle.md
-[t343]: 343-exact-account-creation.md
+[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
+[t343]: ../archive/tasks/343-exact-account-creation.md
 [t344]: 344-bulk-address-allocation.md
-[t346]: 346-psbt-funding-metadata.md
-[t348]: 348-watched-change-delivery.md
+[t346]: ../archive/tasks/346-psbt-funding-metadata.md
+[t356]: 356-defer-change-script-allocation.md
+[t406]: 406-psbt-funding-lease-release.md
+[t474]: 474-authored-change-watch.md
 [t376]: 376-orchestrate-legacy-conversion.md
-[t390]: 390-custom-scope-account-creation.md
+[t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t395]: 395-key-only-locator-allocation.md
 [t396]: 396-oldest-unused-address.md
 [t412]: ../archive/tasks/412-transaction-invalidation.md

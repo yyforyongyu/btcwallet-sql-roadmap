@@ -24,7 +24,7 @@ both.
 - Give the accepted handler a bounded context independent of Wallet lifetime.
   Reuse mainLoop's existing serialization and Wallet stop's `w.wg` drain:
   accepted work must finish before Vault lock and Store close.
-- Preserve Task 421's SQL result classification. Task 352 separately owns
+- Preserve Task 421's SQL result classification. Deferred Task 352 owns
   kvdb uncertain-rotation containment; this task forwards the Vault result
   without adding backend reconciliation or duplicating that fix.
 - Keep cross-Manager and cross-process credential fencing unsupported. Add

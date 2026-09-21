@@ -34,7 +34,8 @@ signature and shutdown draining; contextual creation follows for migration.
 - Compose with Task 331 so Stop cannot close Store underneath an accepted
   Create, while a Create rejected after shutdown performs no backend work.
 - Map an ambiguous SQL commit to Task 467's wallet-owned identity and do not
-  retry or publish an uncertain Wallet. Exact reconciliation remains Task 366.
+  retry, publish an uncertain Wallet, or assume rollback. Add no automatic
+  genesis readback or reconciliation.
 - Preserve the honest kvdb limitation where waiting inside its legacy write or
   key-derivation path cannot be cooperatively interrupted.
 - Clean ordinary prepared secret material on cancellation and definite local
@@ -73,7 +74,6 @@ operation machinery.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t366]: 366-reconcile-sql-genesis-commit.md
 [t367]: 367-bound-sql-genesis-secrets.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

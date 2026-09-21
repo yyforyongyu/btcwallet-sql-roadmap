@@ -29,18 +29,18 @@ boundary before Manager closes the Store.
   rather than silently dropping events.
 - Fix registration against event admission: a new Wallet receives events
   admitted after that boundary without disturbing existing deliveries.
-  Task 402 owns watch registration; Task 423 integrates it with catch-up
-  at this boundary before public Create success.
+  Task 402 owns watch readiness; Task 423 joins this boundary with live and
+  historical delivery. Watch-ready Wallets may catch up in the background.
 - Closing admission must settle accepted delivery and join every processor
   before Task 331 closes the Store. Settle delivery as complete or failed;
   partial fanout is not success. Full queues cannot block failure/Stop or
   wait for an acknowledgment from a failed processor.
 - Keep the maintained live source path unchanged in this task.
-  [Task 423][t423] owns the later source cutover, [Task 371][t371] owns durable
-  canonical state, and [Task 372][t372] owns database-wide rollback.
-- Task 423 gates all connected and filtered-block candidates on Task 371 and
-  normalizes equal block representations before this prepared fanout path.
-  This task does not add a second canonical gate or deduplication mechanism.
+  [Task 423][t423] owns the later source cutover and equal-block notification
+  normalization; [Task 372][t372] owns database-wide rollback.
+- Keep each Wallet's processed height/hash atomic with its own block effects.
+  Recovery uses those existing checkpoints and the chain backend, not a
+  separately persisted Manager frontier.
 - Exclude disconnected-event admission, a generic event bus, durable replay
   system, canonical Store mutation, rollback, targeted-rescan redesign, and
   cross-process coordination. Task 372 owns the complete disconnect path.
@@ -75,6 +75,5 @@ and rollback.
 
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t334]: ../archive/tasks/334-shared-chain-state.md
-[t371]: 371-canonical-chain-frontier.md
 [t372]: 372-multi-wallet-rollback.md
 [t423]: 423-manager-chain-source-cutover.md

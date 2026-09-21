@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **474**.
+The next free task number is **475**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -24,8 +24,6 @@ They do not consume task numbers or require task files.
   cancellable.
 - [Task 365](365-validate-wallet-genesis-keys.md): validate wallet genesis key
   identities.
-- [Task 366](366-reconcile-sql-genesis-commit.md): reconcile ambiguous SQL
-  genesis commits.
 - [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
@@ -35,12 +33,10 @@ They do not consume task numbers or require task files.
 
 - [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
   atomically.
-- [Task 363](363-recovery-scan-work-bound.md): bound aggregate recovery
-  derivation work.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
-- [Task 389](389-runtime-account-commit-reconciliation.md): reconcile ambiguous
-  runtime account commits.
+- [Task 389](389-runtime-account-commit-reconciliation.md): report uncertain
+  account commits truthfully.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
 - [Task 395](395-key-only-locator-allocation.md): add `AllocateNextKey` for
@@ -62,8 +58,6 @@ They do not consume task numbers or require task files.
 
 - [Task 370](370-chain-source-delivery.md): fan out ordered Manager chain
   events.
-- [Task 371](371-canonical-chain-frontier.md): serialize canonical chain-frontier
-  mutation.
 - [Task 372](372-multi-wallet-rollback.md): coordinate multi-Wallet rollback.
 - [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
@@ -72,8 +66,6 @@ They do not consume task numbers or require task files.
 
 - [Task 347](347-psbt-signing-authorization.md): authorize existing PSBT
   signatures.
-- [Task 348](348-watched-change-delivery.md): watch PSBT change before returning
-  funding.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
 - [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
@@ -82,8 +74,6 @@ They do not consume task numbers or require task files.
   leases.
 - [Task 407](407-psbt-finalization-authorization.md): authorize PSBT
   auto-finalization.
-- [Task 408](408-direct-transaction-change-watch.md): watch direct transaction
-  change before return.
 - [Task 410](410-transaction-graph-admission.md): coordinate transaction graph
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
@@ -94,6 +84,8 @@ They do not consume task numbers or require task files.
   transaction output aggregates.
 - [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
   effective keys.
+
+- [Task 474](474-authored-change-watch.md): watch authored change before return.
 
 ## Integration tests
 
@@ -149,8 +141,6 @@ that structural exclusion explicitly.
 ## Secrets and credentials
 
 - [Task 338](338-passphrase-result.md): latch accepted passphrase results.
-- [Task 352](352-kvdb-combined-passphrase-rotation.md): contain uncertain kvdb
-  passphrase rotation.
 - [Task 354](354-vault-owned-secret-resolution.md): define Vault secret-operation
   ownership.
 - [Task 367](367-bound-sql-genesis-secrets.md): bound SQL genesis secret

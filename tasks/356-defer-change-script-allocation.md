@@ -4,62 +4,55 @@ Component: **TxCreator, PsbtManager, and Wallet-owned address storage**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 344][t344], [Task 355][t355], [Task 357][t357],
-[Task 404][t404], and [Task 467][t467]**.
+Dependencies: **[Task 355][t355], [Task 357][t357], [Task 404][t404],
+and [Task 467][t467]**.
 
 ## Rationale
 
-`TxCreator.CreateTransaction` and `PsbtManager.FundPsbt` can derive and commit
-a change address before authoring proves that positive, non-dust change will
-appear in the returned transaction. Failed, no-change, and retried requests can
-therefore consume an address that the caller never receives.
+`TxCreator.CreateTransaction` and `PsbtManager.FundPsbt` can commit a change
+address before authoring proves that positive, non-dust change is needed.
+Failed, zero-change, and dust-change attempts can consume unused addresses.
 
 ## Details
 
-- Prepare the exact candidate needed by the existing authoring call without
-  durably advancing its address branch.
-- Discard the candidate when authoring fails or produces no viable change.
-- Before publication or lease effects, atomically commit the exact viable
-  candidate using Task 344's SQL allocation boundary or modern kvdb's existing
-  count-one transaction.
-- If another allocation moved the expected cursor, discard the authored result
-  and retry with the caller's context. No other failure is retryable.
-- Reconcile an ambiguous commit from exact backend facts. Continue only when
-  the candidate is fully committed, return the original error for clean
-  absence, and return Task 467's indeterminate identity for every other state.
-- Validate only the descriptor facts mechanically required to prepare and
-  commit the exact candidate. Do not add a broader descriptor-policy matrix
-  without a separate reproduced public bug.
-- Exclude changes to `wallet/txauthor`, `waddrmgr`, or `walletdb`; copied
-  viability arithmetic; watched-change delivery; PSBT metadata; and leasing
-  policy.
+- Determine viable change using the required script properties before durable
+  allocation. Do not require previewing or reserving an actual address.
+- Once change is viable, allocate once and use that committed script in the
+  returned transaction. Preserve fee, dust, and concurrent-allocation
+  correctness through the existing Wallet-owned authoring boundary.
+- Reuse existing backend allocation; do not require Task 344's SQL batch API
+  solely for implementation reuse or route kvdb through it.
+- An ambiguous allocation commit returns `ErrIndeterminateCommit` and no
+  result, without automatic retry or claiming rollback.
+- Keep watch delivery in [Task 474][t474] and lease policy in Tasks 405/406.
+  A later wrapper failure does not undo an already committed address.
+- Exclude changes to `wallet/txauthor`, `waddrmgr`, or `walletdb`, copied
+  fee/dust arithmetic, cursor reservation/retry protocols, and reconciliation
+  machinery.
 
 ## Suggested fix
 
-Use a private candidate passed through the existing change-source boundary,
-then commit it only after authoring selects it. The preview, cache, and retry
-mechanics may differ by backend as long as they preserve the public invariants.
+Separate the script properties needed for authoring from durable allocation
+at the existing Wallet-owned change-source boundary. Choose the smallest
+private implementation that allocates only after viable change is known.
 
 ## Verification
 
-- Exercise both public callers on kvdb, SQLite, and PostgreSQL for authoring
-  failure, no change, dust change, viable change, cursor conflict, and
-  ambiguous commit.
-- Prove only viable change advances the cursor and that the committed script
-  exactly matches the returned transaction.
-- Prove a cursor conflict retries before publication or leases, while an
-  ambiguous result is never retried and is classified as exact, absent, or
-  indeterminate.
-- Cover only descriptor validation required by the tested candidates.
+- Exercise both callers on kvdb, SQLite, and PostgreSQL for authoring failure,
+  zero change, dust change, and viable change.
+- Only viable change advances the address cursor, and the returned script
+  matches the committed address without altering fee or dust decisions.
+- Concurrent calls do not reuse a change address. Ambiguous allocation returns
+  the shared error identity without a result or retry.
 
 ## Definition of done
 
-Maintained transaction creation and PSBT funding consume no change address
-unless viable change uses that exact address, with no unrelated descriptor
-policy or excluded-package change.
+Both public callers avoid durable allocation for zero/dust change and use
+one committed address for viable change, without redesigning allocation,
+watching, or leasing.
 
-[t344]: 344-bulk-address-allocation.md
 [t355]: ../archive/tasks/355-transaction-size-accounting.md
 [t357]: ../archive/tasks/357-transaction-amount-validation.md
 [t404]: ../archive/tasks/404-transaction-input-amounts.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
+[t474]: 474-authored-change-watch.md
