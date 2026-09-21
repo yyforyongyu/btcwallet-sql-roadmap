@@ -66,14 +66,13 @@ task per PR and merge the stack bottom-up; a dependent PR must not merge before
 all of its hard dependencies. Stacking needs no special approval and does not
 require the prerequisite contract to be frozen.
 
-Refresh ACTIVE's three task lists whenever a claim, task dependency, task
-phase, or task status changes. List every open Phase 1 task in `Active Tasks`
+Refresh ACTIVE's three task lists whenever a claim, task phase, or task status
+changes. List every open Phase 1 task in `Active Tasks`
 and every open Phase 2 task exactly once in Active or Upcoming. `Claimed Tasks`
 contains parked claims from Phase 3, Phase 4, and Hardening. Preserve claimants
-and PRs, sort each list by QUEUE phase/track then task number, and show direct
-open hard dependencies as merge ordering, not an implementation block. No
-task appears in more than one list. Keep section descriptions to one sentence;
-task files remain the dependency authority.
+and PRs, and sort each list by QUEUE phase/track then task number. No task
+appears in more than one list. Keep section descriptions to one sentence;
+dependency details stay in QUEUE and task files, not ACTIVE.
 
 ## Task types and priority
 
