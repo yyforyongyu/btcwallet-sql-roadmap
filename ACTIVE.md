@@ -10,8 +10,8 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | 1 | YY | [#1379][pr1379] |
-| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | — | — |
-| [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | — | — |
+| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | — |
+| [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | 1 | YY | [#1380][pr1380] |
