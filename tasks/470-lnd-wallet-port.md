@@ -103,7 +103,7 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t395]: 395-key-only-locator-allocation.md
 [t396]: 396-oldest-unused-address.md
 [t412]: ../archive/tasks/412-transaction-invalidation.md
-[t430]: 430-account-query-itests.md
+[t430]: ../archive/tasks/430-account-query-itests.md
 [t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: 442-signer-signing-itests.md
 [t443]: ../archive/tasks/443-unsafe-signer-itests.md

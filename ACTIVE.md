@@ -13,7 +13,6 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | 1 | YY | [#1380][pr1380] |
-| [Task 430][t430] | Test account queries | Test | 1 | Gustavo | [#1389][pr1389] |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
 | [Task 442][t442] | Cover public signing contracts | Test | 1 | YY | [#1384][pr1384] |
 | [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
@@ -87,7 +86,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
-[pr1389]: https://github.com/btcsuite/btcwallet/pull/1389
 [pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
 [pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
 [t329]: tasks/329-atomic-wallet-account-creation.md
@@ -119,7 +117,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t428]: tasks/428-controller-sync-info-itests.md
-[t430]: tasks/430-account-query-itests.md
 [t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
 [t438]: tasks/438-psbt-decoration-combination-itests.md

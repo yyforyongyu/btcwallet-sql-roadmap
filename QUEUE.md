@@ -22,7 +22,7 @@ kvdb caller paths against source. Before Phase 1 closes, assign any required
 initial API/runtime gaps and their dependency closure there, using existing
 owners where available. Task 470 retains its own merge and enablement gates.
 
-## Phase 1 — API stabilization and basic itests · 10 open
+## Phase 1 — API stabilization and basic itests · 9 open
 
 Close the initial lnd adapter's contract and runtime gaps: aggregate Manager
 lifecycle, purpose-1017 key families, final address allocation, transaction
@@ -44,7 +44,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 402][t402] | open | Wallet synchronization and live-watch readiness | Gap fix | Establish live watches from persisted Wallet data | — |
-| [Task 430][t430] | open | AccountManager query integration tests | Test | Cover public account query contracts | — |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
 | [Task 442][t442] | open | Signer signature integration tests | Test | Cover public signing contracts | — |
 | [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 344 |
@@ -214,7 +213,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
-## Done · 49
+## Done · 50
 
 **162 completed: 49 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -258,6 +257,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 425][t425] | 2 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |
 | [Task 427][t427] | 1 | Controller credential integration tests | Test | Cover remaining Controller credential contracts | [#1349][pr1349] |
 | [Task 429][t429] | 1 | AccountManager mutation integration tests | Test | Cover public account mutation contracts | [#1326][pr1326] |
+| [Task 430][t430] | 1 | AccountManager query integration tests | Test | Cover public account query contracts | [#1389][pr1389] |
 | [Task 433][t433] | 1 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |
 | [Task 434][t434] | 1 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |
 | [Task 435][t435] | 1 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |

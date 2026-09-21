@@ -68,6 +68,6 @@ create another ordinary-account or kvdb-rejection suite.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
-[t430]: 430-account-query-itests.md
+[t430]: ../archive/tasks/430-account-query-itests.md
 [source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/account_manager_test.go
 [pr1389]: https://github.com/btcsuite/btcwallet/pull/1389

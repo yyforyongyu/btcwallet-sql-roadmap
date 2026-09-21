@@ -57,7 +57,7 @@ and no direct Store inspection.
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
-[t430]: 430-account-query-itests.md
+[t430]: ../archive/tasks/430-account-query-itests.md
 [t431]: 431-address-allocation-lookup-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md

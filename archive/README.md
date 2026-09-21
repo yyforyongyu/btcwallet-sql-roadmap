@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 430](tasks/430-account-query-itests.md) completed on 2026-09-22.
 
 - [Task 386](tasks/386-remove-raw-wallet-secret-seams.md) was superseded on
   2026-09-21 without a replacement task. Each of Tasks 382–385 removes its
