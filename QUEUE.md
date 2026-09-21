@@ -512,7 +512,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t440]: tasks/440-psbt-signing-finalization-itests.md
 [t441]: archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: tasks/442-signer-signing-itests.md
-[t443]: tasks/443-unsafe-signer-itests.md
+[t443]: archive/tasks/443-unsafe-signer-itests.md
 [t444]: tasks/444-wallet-receive-reload-scenario.md
 [t445]: tasks/445-account-signing-scenario.md
 [t446]: tasks/446-transaction-spend-publish-scenario.md
@@ -591,3 +591,4 @@ numbered roadmap; old archived task references add no separate completion.
 [pr1372]: https://github.com/btcsuite/btcwallet/pull/1372
 [pr1388]: https://github.com/btcsuite/btcwallet/pull/1388
 [pr1374]: https://github.com/btcsuite/btcwallet/pull/1374
+[pr1383]: https://github.com/btcsuite/btcwallet/pull/1383
