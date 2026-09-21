@@ -27,19 +27,18 @@ remains the only authority for live state.
 Use these terms precisely:
 
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
-  Every active task must have no open hard dependencies. Include every such
-  Phase 1 task and dependency-ready later-phase work assigned to developers
-  other than YY. Hardening stays parked until QUEUE's start gate opens.
-  Put every Phase 1 task with open hard dependencies under
-  `Blocked Phase 1 Tasks`, preserving its claimant and PR when present. Park
-  claimed later-phase work under `Claimed Tasks` unless the active rule above
-  places it under `Active Tasks`.
+  Include every open Phase 1 task and Phase 2 work selected for current
+  development, including stacked work with open hard dependencies. Active does
+  not mean merge-ready. Put remaining Phase 2A/2B work under
+  `Upcoming Phase 2 Tasks`, claimed or unclaimed; a claim alone does not promote
+  it. Park later-phase claims under `Claimed Tasks`. QUEUE's start gates still
+  apply, including Hardening's gate.
 - **Claimed** records the intended owner. A task may be claimed before its
   dependencies finish and therefore may be claimed without being active.
 - **In progress** means implementation has started. Represent it with both a
-  claimant and linked PR. A stacked dependent remains in progress even while
-  an open dependency keeps it under `Blocked Phase 1 Tasks` or `Claimed
-  Tasks`. Open draft PRs early so ACTIVE records every layer of the stack.
+  claimant and linked PR. Move Phase 2 work into `Active Tasks` when it starts;
+  open dependencies do not remove a stacked task from current focus. Later-
+  phase PRs may remain parked. Open draft PRs early to record every stack layer.
 - **Complete** means the implementation PR is merged, or a required design or
   ADR task is accepted and merged.
 
@@ -68,10 +67,13 @@ all of its hard dependencies. Stacking needs no special approval and does not
 require the prerequisite contract to be frozen.
 
 Refresh ACTIVE's three task lists whenever a claim, task dependency, task
-phase, or task status changes. `Active Tasks` and `Blocked Phase 1 Tasks` must
-partition every open Phase 1 task exactly once. `Claimed Tasks` contains parked
-claims outside the current phase, sorted in QUEUE order (2A, 2B, 3, 4, then
-Hardening), then by task number. No task appears in more than one list.
+phase, or task status changes. List every open Phase 1 task in `Active Tasks`
+and every open Phase 2 task exactly once in Active or Upcoming. `Claimed Tasks`
+contains parked claims from Phase 3, Phase 4, and Hardening. Preserve claimants
+and PRs, sort each list by QUEUE phase/track then task number, and show direct
+open hard dependencies as merge ordering, not an implementation block. No
+task appears in more than one list. Keep section descriptions to one sentence;
+task files remain the dependency authority.
 
 ## Task types and priority
 

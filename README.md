@@ -11,7 +11,7 @@ For numbered work:
 2. Read [QUEUE.md](QUEUE.md) for the delivery phases and open
    dependencies.
 3. Check [ACTIVE.md](ACTIVE.md) for active tasks, claims, and conflicts.
-4. Select one dependency-complete active task.
+4. Select one active task or a coherent dependency stack.
 5. Claim it and any dependent tasks you plan to stack in
    [ACTIVE.md](ACTIVE.md) before implementation.
 6. Implement one task per branch and PR in its owning repository, stacking
