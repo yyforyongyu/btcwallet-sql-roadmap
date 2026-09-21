@@ -31,7 +31,8 @@ needs one migration-specific SQLite transaction.
 - Resolve SQL row IDs from normalized identities; never persist legacy bucket,
   synthetic-account, or adapter identifiers.
 - A definite failure leaves no imported wallet state. Return an ambiguous
-  commit unchanged for Task 376 to reconcile; do not retry or delete it.
+  commit for Task 376 to expose as `ErrIndeterminateCommit`; do not retry,
+  reconcile by readback, or delete potentially committed state.
 - Exclude PostgreSQL, ordinary Store API expansion, public orchestration,
   source access, and automatic cutover.
 
@@ -49,7 +50,8 @@ genesis or future transaction-graph implementation.
   remains after a definite result.
 - Accept normal empty-Manager bootstrap metadata. Reject an occupied,
   wrong-network, dirty, or conflicting destination before partial import.
-- Preserve an injected ambiguous commit for Task 376 without retry or cleanup.
+- Preserve an injected ambiguous commit for Task 376 without retry, readback
+  reconciliation, or cleanup of potentially committed state.
 
 ## Definition of done
 

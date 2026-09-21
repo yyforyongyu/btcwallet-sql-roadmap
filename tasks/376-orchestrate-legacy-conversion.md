@@ -34,10 +34,13 @@ boundaries already owned by `Manager.Create`.
   abortable mutation cutoff. Apply it to the import transaction rather than
   inventing a second cancellation rule. Before the cutoff, cancellation
   leaves no imported state; at or after it, Manager-owned work finishes
-  classification, equivalence checking, and publication.
-- Reconcile an ambiguous import by exact durable reread. Never retry it.
-- Return the ordinary active Wallet only after reopened public state matches
-  the normalized source and the source digest is unchanged.
+  result handling and, after definite success, normal Wallet publication.
+- Map an uncertain import commit to `ErrIndeterminateCommit` and return no
+  Wallet. Do not retry, reconcile by readback, or delete potentially committed
+  state; uncertainty is not evidence of rollback.
+- After a definite import commit, use normal Wallet assembly, startup checks,
+  and publication. Prove full source/destination equivalence in migration
+  tests, not a second production comparison engine after live sync starts.
 - Retain the original bbolt source on success and failure. Do not switch,
   rename, or delete it automatically.
 - Exclude PostgreSQL conversion, Loader or lnd changes, a generic manifest,
@@ -53,10 +56,12 @@ and helper shapes remain flexible and should not create a parallel lifecycle.
 
 - Convert representative spendable and watch-only bbolt fixtures through
   `Manager.Create` and compare their public account, address, balance,
-  transaction, lease, birthday, and sync state after reopen.
+  transaction, lease, birthday, and sync state after reopen. Hold chain input
+  and time-dependent fixture facts stable for the comparison.
 - Cover cancellation before import and during the post-cutoff wait.
-- Classify exact, absent, and indeterminate ambiguous outcomes without retry or
-  partial Wallet publication.
+- Inject commit errors both with and without durable import state. Both return
+  `ErrIndeterminateCommit` without a Wallet, retry, readback reconciliation,
+  or deletion; definite failures leave no partial import.
 - Prove success returns a normally active Wallet, duplicate creation follows
   Manager's existing error, and Stop waits for accepted conversion work.
 - Start a fresh empty Manager and convert successfully. Reject an occupied
@@ -68,8 +73,9 @@ and helper shapes remain flexible and should not create a parallel lifecycle.
 ## Definition of done
 
 The existing `Manager.Create` boundary can convert one supported legacy wallet
-to SQLite and return its normal active Wallet only after exact durable
-equivalence, without a second public lifecycle or converter.
+to SQLite and return its normal active Wallet after a definite atomic import
+and normal startup. Migration tests prove fidelity; uncertain commits expose
+no Wallet. No second public lifecycle, converter, or reconciliation is added.
 
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t358]: 358-contextual-manager-operations.md

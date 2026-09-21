@@ -21,10 +21,11 @@ internally consistent.
   UTXOs, spends, supported conflict facts, active leases, birthday, sync tip,
   and the block history required to interpret them.
 - Decode each transaction, verify its identity, use checked monetary
-  arithmetic, and reconstruct graph and balance facts from primary records.
-- Compare independently stored indexes and pointers with that reconstruction.
+  arithmetic, and derive the graph and balance facts required by the import.
+- Validate indexes and pointers that supply or contradict imported facts.
   Refuse contradictory or unrepresentable history instead of selecting one
-  version, dropping it, or substituting a rescan.
+  version, dropping it, or substituting a rescan. Do not audit unrelated
+  legacy indexes or build a replacement transaction-graph subsystem.
 - Bound allocations and publish no partial snapshot on error or cancellation.
 - Keep implementation in Wallet-owned migration code and legacy packages
   unchanged.
@@ -33,16 +34,16 @@ internally consistent.
 
 ## Suggested fix
 
-Build one private normalized graph from primary legacy records, derive its
-expected indexes and aggregates, then compare the stored secondary facts. The
-internal graph representation is not part of the contract.
+Decode the required legacy records and cross-check their ownership, spending,
+and balance relationships using existing readers. Private intermediate shapes
+remain flexible; no standalone graph or general database auditor is required.
 
 ## Verification
 
 - Representative mined, unmined, spent, conflicted, labeled, leased, and
   reorg-retained histories preserve exact transaction and sync facts.
-- Corrupt identities, indexes, pointers, amounts, statuses, and usedness fail
-  before destination access.
+- Corrupt imported identities, indexes, pointers, amounts, statuses, and
+  usedness fail before destination access.
 - Unsupported multiple-spender or lease shapes are refused without source
   mutation.
 - Cancellation and resource limits retain no partial published snapshot.
