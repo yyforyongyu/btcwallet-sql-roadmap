@@ -40,8 +40,8 @@ dependency edges, and `QUEUE.md` owns their delivery phase.
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | YY | [#1379][pr1379] |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | Gustavo | — |
-| [Task 461][t461] | Cover public address batch contracts | Test | YY | — |
-| [Task 465][t465] | Verify durable key allocation results | Test | YY | — |
+| [Task 461][t461] | Cover public address batch contracts | Test | YY | [#1393][pr1393] |
+| [Task 465][t465] | Verify durable key allocation results | Test | YY | [#1392][pr1392] |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | — | — |
 
 ## Claimed Tasks
@@ -126,3 +126,5 @@ in QUEUE order (2A, 2B, 3, 4, then Hardening), then by task number.
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
 [pr1389]: https://github.com/btcsuite/btcwallet/pull/1389
+[pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
+[pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
