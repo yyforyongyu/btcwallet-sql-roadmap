@@ -10,7 +10,7 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | 1 | YY | [#1379][pr1379] |
-| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | — |
+| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
@@ -143,3 +143,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
 [t474]: tasks/474-authored-change-watch.md
+[pr1394]: https://github.com/btcsuite/btcwallet/pull/1394
