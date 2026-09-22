@@ -19,6 +19,8 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
 | [Task 465][t465] | Verify durable key allocation results | Test | 1 | YY | [#1392][pr1392] |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | 1 | — | — |
+| [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | — | — |
+| [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | — | — |
 | [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
@@ -46,6 +48,12 @@ Remaining 2A/2B work; move tasks above when development starts.
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | — |
 | [Task 470][t470] | Port lnd to maintained Wallet APIs | Gap fix | 2A | YY | — |
 | [Task 474][t474] | Watch authored change before return | Bug fix | 2A | Gustavo | — |
+| [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 2A | — | — |
+| [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 2A | — | — |
+| [Task 481][t481] | Preserve imported account address schema | Bug fix | 2A | — | — |
+| [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
+| [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | — | — |
+| [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | — | — |
 | [Task 369][t369] | Test repeated unlocks | Test | 2B | — | — |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | — | — |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | — | — |
@@ -144,3 +152,15 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
 [t474]: tasks/474-authored-change-watch.md
 [pr1394]: https://github.com/btcsuite/btcwallet/pull/1394
+
+[t475]: tasks/475-wallet-transaction-subscription.md
+[t476]: tasks/476-read-legacy-sql-walletdb-source.md
+[t477]: tasks/477-import-legacy-snapshot-postgres.md
+[t478]: tasks/478-retain-spend-confirmation-leases.md
+[t479]: tasks/479-mix-imported-xpub-accounts.md
+[t480]: tasks/480-own-raw-imports-in-one-wallet.md
+[t481]: tasks/481-persist-imported-account-address-schema.md
+[t482]: tasks/482-fund-imported-inputs-without-origin.md
+[t483]: tasks/483-preserve-labels-on-chain-replay.md
+[t484]: tasks/484-align-authoring-confirmation-height.md
+[t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md

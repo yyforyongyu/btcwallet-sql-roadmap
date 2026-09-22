@@ -1,6 +1,6 @@
-# Task 335 — validate an immutable legacy wallet source
+# Task 335 — validate an immutable bbolt wallet source
 
-Component: **Legacy migration source snapshot**.
+Component: **Bbolt migration source snapshot**.
 
 Type: **Migration**.
 

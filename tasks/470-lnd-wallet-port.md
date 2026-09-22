@@ -5,9 +5,12 @@ Component: **lnd Wallet integration**.
 Type: **Gap fix**.
 
 Dependencies: **[Task 331][t331], [Task 343][t343], [Task 344][t344],
-[Task 346][t346], [Task 356][t356], [Task 390][t390], [Task 395][t395],
+[Task 346][t346], [Task 356][t356], [Task 390][t390], [Task 391][t391],
+[Task 395][t395],
 [Task 396][t396], [Task 406][t406], [Task 412][t412], [Task 468][t468],
-and [Task 474][t474]**.
+and [Task 474][t474], plus [Tasks 475][t475], [478][t478],
+[479][t479], [480][t480], [481][t481], [482][t482], [483][t483],
+and [484][t484]**.
 
 ## Rationale
 
@@ -27,10 +30,11 @@ startup path.
   [Task 391][t391]'s exact path-bound XPub support. Record any required edge
   before implementing the affected path; do not replace known account numbers
   with numberless imports or drop an existing remote-signer mode.
-- Own transaction-event delivery through lnd's existing SubscribeTransactions
-  interface. Reuse maintained Wallet APIs; require btcwallet work only for a
-  demonstrated missing capability. Preserve existing lnd modes and backend
-  limits; do not assume SQL-only behavior works on kvdb.
+- Consume [Task 475][t475]'s Wallet transaction stream through lnd's
+  existing SubscribeTransactions interface. Reuse maintained Wallet APIs;
+  require btcwallet work only for a demonstrated missing capability. Preserve
+  existing lnd modes and backend limits; do not assume SQL-only behavior works
+  on kvdb.
 - Finish the lnd adapter and its compile-coupled keychain, walletunlocker,
   config_builder, rpcwallet, RPC callers, mocks, and build variants. Consume
   accepted Wallet APIs and existing lnd interfaces; introduce no new public
@@ -41,6 +45,9 @@ startup path.
   Manager lifecycle, resolve unlock versus chain startup order, and keep the
   runtime independent of unlock RPC deadlines. Stop Manager before closing
   its borrowed chain source.
+- Keep one Wallet per lnd instance, including mixed signing and imported
+  watch-only accounts. Tasks 479–482 own the required account, import, schema,
+  and PSBT behavior; Task 391 still owns exact remote-signer account paths.
 - Preserve existing PSBT support. [346][t346], [356][t356], [406][t406],
   and [474][t474], including their production prerequisites, gate merge
   because lnd already exposes FundPsbt; do not disable it to avoid these gates.
@@ -49,8 +56,11 @@ startup path.
   Add other concrete defects exposed by the port as dependencies.
   Keep later prerequisites in their phases; fanout, benchmarks, and Vault
   hardening are not blanket gates.
-- Keep migration adoption separate, after [376][t376], preserving the kvdb
-  source. Do not promise PostgreSQL conversion or retire kvdb here.
+- Create all new lnd wallets on native SQL. Keep migration adoption separate
+  after [376][t376] and [485][t485]; preserve the bbolt source. Legacy SQL
+  walletdb is a migration source, not a maintained runtime. Deprecated etcd
+  walletdb is outside this port. The existing-wallet startup cutoff remains a
+  release decision, not an implicit result of this draft.
 - Record further gaps found during implementation in their existing tasks;
   create new tasks only when no owner covers the missing outcome. Update this
   task's dependencies before proceeding on an affected path. Filing a required
@@ -112,3 +122,13 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t465]: 465-new-address-result-itests.md
 [t466]: 466-oldest-unused-address-itests.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md
+
+[t475]: 475-wallet-transaction-subscription.md
+[t478]: 478-retain-spend-confirmation-leases.md
+[t479]: 479-mix-imported-xpub-accounts.md
+[t480]: 480-own-raw-imports-in-one-wallet.md
+[t481]: 481-persist-imported-account-address-schema.md
+[t482]: 482-fund-imported-inputs-without-origin.md
+[t483]: 483-preserve-labels-on-chain-replay.md
+[t484]: 484-align-authoring-confirmation-height.md
+[t485]: 485-convert-legacy-sql-wallets-through-manager.md
