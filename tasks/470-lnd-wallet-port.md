@@ -95,9 +95,10 @@ diagnostic references, not production dependencies.
 
 ## Definition of done
 
-The lnd port implementation PR is merged and its focused checks pass. Required
-gaps are resolved through linked owners, existing modes still work, and no
-required behavior is left behind merely as a new task. No ADR is required.
+The lnd port implementation PR is merged into lnd main and its focused
+checks pass. Required gaps are resolved through linked owners, existing
+modes still work, and no required behavior is left behind merely as a new
+task. No ADR is required.
 
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t343]: ../archive/tasks/343-exact-account-creation.md

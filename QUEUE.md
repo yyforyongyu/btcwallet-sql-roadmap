@@ -16,9 +16,11 @@ no task scope, dependency, claim, or PR.
 
 Task 487 owns lnd's Phase 1 compile cutover after the completed pre-claim gap
 check, which mapped transaction notifications, standalone signing, online
-remote signing, and kvdb caller paths against source. Task 486 freezes the
-final SQL schema before sql-wallet merges into master. Task 470 retains full
-runtime and itest parity as its later merge gate; those tests do not gate the
+remote signing, and kvdb caller paths against source. Its compile-only PR
+merges into `yyforyongyu/lnd:btcwallet-sql-integration` at a pinned,
+build-verified revision. Task 486 freezes the final SQL schema before
+sql-wallet merges into master. Task 470 retains full runtime and itest
+parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
 ## Phase 1 — final SQL schema and lnd compilation · 17 open

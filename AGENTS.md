@@ -264,9 +264,11 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   for another task or permission to preserve deprecated Wallet behavior.
 - [Tasks 470](tasks/470-lnd-wallet-port.md) and
   [487](tasks/487-compile-lnd-with-managed-wallet.md) are explicit exceptions
-  for lnd runtime integration and compilation, respectively. Each merged lnd
-  implementation PR closes its own task; ordinary Wallet fixes do not expand
-  into lnd.
+  for lnd runtime integration and compilation, respectively. Task 487's
+  compile-only PR merges into the non-main
+  `yyforyongyu/lnd:btcwallet-sql-integration` branch; Task 470's
+  runtime PR merges into lnd main. Each merged PR closes its own task;
+  ordinary Wallet fixes do not expand into lnd.
 - If the required public behavior cannot be implemented inside the allowed
   production boundary, narrow, defer, or supersede the task, or obtain an
   explicit task-specific exception before implementation. Do not silently

@@ -18,6 +18,9 @@ Task 470's full startup, signing, RPC, and itest behavior is a later gate.
   wallet adapter, startup, keychain, remote-signer, PSBT, RPC caller, and mock
   changes needed by supported build variants.
 - Keep one Wallet per lnd instance and use the final address API from Task 396.
+- Merge this compile-only implementation PR into the non-main
+  `yyforyongyu/lnd:btcwallet-sql-integration` branch. Task 470
+  completes runtime parity before the cutover merges into lnd main.
 - Preserve visible failures for paths awaiting Task 470's runtime fixes.
   Do not fake successful results, disable RPCs, or skip existing tests.
 - Exclude runtime parity and passing lnd itests; Task 470 owns those outcomes.
@@ -36,8 +39,10 @@ runtime assertions to pass.
 
 ## Definition of done
 
-Lnd compiles against the maintained Wallet across supported build variants,
-with incomplete runtime paths still visible for Task 470.
+The implementation PR is merged into the named integration branch at a
+pinned lnd revision. That revision builds against the pinned maintained
+btcwallet revision across supported variants; incomplete runtime paths
+remain visible for Task 470.
 
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t395]: 395-key-only-locator-allocation.md
