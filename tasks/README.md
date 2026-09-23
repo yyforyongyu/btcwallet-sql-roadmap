@@ -53,7 +53,6 @@ They do not consume task numbers or require task files.
   recovery targets.
 - [Task 398](398-semantic-account-recovery-targets.md): accept semantic account
   recovery targets.
-- [Task 402](402-replay-live-watch-obligations.md): establish live watches from
   persisted Wallet data.
 - [Task 403](403-raw-import-watch-obligations.md): register raw imports before
   public success.

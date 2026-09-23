@@ -51,5 +51,5 @@ SQL raw imports establish live monitoring before success on btcd/bitcoind,
 without delivery persistence, automatic reconciliation, or history recovery.
 
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
-[t402]: 402-replay-live-watch-obligations.md
+[t402]: ../archive/tasks/402-replay-live-watch-obligations.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

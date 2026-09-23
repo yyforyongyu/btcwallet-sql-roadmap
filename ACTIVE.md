@@ -14,7 +14,6 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
-| [Task 402][t402] | Establish and reconstruct live watches | Gap fix | 1 | YY | [#1380][pr1380] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | — | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
 | [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
@@ -93,7 +92,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
-[pr1380]: https://github.com/btcsuite/btcwallet/pull/1380
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
 [pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
 [pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
@@ -116,7 +114,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t402]: tasks/402-replay-live-watch-obligations.md
 [t403]: tasks/403-raw-import-watch-obligations.md
 [t405]: tasks/405-psbt-funding-lease-admission.md
 [t406]: tasks/406-psbt-funding-lease-release.md

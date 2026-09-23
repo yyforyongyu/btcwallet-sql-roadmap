@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 402](tasks/402-replay-live-watch-obligations.md) completed on 2026-09-24.
 - [Task 442](tasks/442-signer-signing-itests.md) completed on 2026-09-22.
 - [Task 430](tasks/430-account-query-itests.md) completed on 2026-09-22.
 

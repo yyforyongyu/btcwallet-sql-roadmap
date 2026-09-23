@@ -89,5 +89,5 @@ stopping the borrowed chain client.
 
 [t370]: 370-chain-source-delivery.md
 [t372]: 372-multi-wallet-rollback.md
-[t402]: 402-replay-live-watch-obligations.md
+[t402]: ../archive/tasks/402-replay-live-watch-obligations.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md

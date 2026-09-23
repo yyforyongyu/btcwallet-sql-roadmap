@@ -70,6 +70,6 @@ delivery bookkeeping.
 [t392]: ../archive/tasks/392-discovery-mode-account-creation.md
 [t393]: ../archive/tasks/393-key-only-receiving-rejection.md
 [t395]: 395-key-only-locator-allocation.md
-[t402]: 402-replay-live-watch-obligations.md
+[t402]: ../archive/tasks/402-replay-live-watch-obligations.md
 [t461]: 461-address-batch-itests.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
