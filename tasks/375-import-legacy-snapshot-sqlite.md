@@ -4,7 +4,8 @@ Component: **SQLite migration importer**.
 
 Type: **Migration**.
 
-Dependencies: **[Task 340][t340] and [Task 374][t374]**.
+Dependencies: **[Task 340][t340], [Task 374][t374], [Task 478][t478],
+[Task 480][t480], and [Task 481][t481]**.
 
 ## Rationale
 
@@ -63,3 +64,7 @@ speculative transaction-graph tasks.
 [t373]: 373-extract-legacy-account-address-state.md
 [t374]: 374-extract-legacy-transaction-sync-state.md
 [t473]: 473-extract-legacy-address-script-state.md
+
+[t478]: 478-retain-spend-confirmation-leases.md
+[t480]: 480-own-raw-imports-in-one-wallet.md
+[t481]: 481-persist-imported-account-address-schema.md

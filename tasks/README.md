@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **475**.
+The next free task number is **488**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -12,7 +12,11 @@ They do not consume task numbers or require task files.
 
 ## Consumer adoption
 
-- [Task 470](470-lnd-wallet-port.md): port lnd to maintained Wallet APIs.
+- [Task 470](470-lnd-wallet-port.md): complete lnd Wallet runtime parity.
+- [Task 487](487-compile-lnd-with-managed-wallet.md): compile lnd with the
+  maintained Wallet.
+- [Task 475](475-wallet-transaction-subscription.md): deliver live Wallet
+  transaction subscriptions.
 
 ## Creation, Manager, and storage
 
@@ -28,6 +32,8 @@ They do not consume task numbers or require task files.
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
+- [Task 486](486-freeze-native-sql-schema.md): freeze native SQL schema for
+  fresh Wallets.
 
 ## Accounts, addresses, and recovery
 
@@ -53,6 +59,12 @@ They do not consume task numbers or require task files.
   public success.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
+- [Task 479](479-mix-imported-xpub-accounts.md): mix imported XPub and signing
+  accounts.
+- [Task 480](480-own-raw-imports-in-one-wallet.md): own raw imports in one
+  signing wallet.
+- [Task 481](481-persist-imported-account-address-schema.md): preserve
+  imported account address schema.
 
 ## Chain and synchronization
 
@@ -84,6 +96,14 @@ They do not consume task numbers or require task files.
   transaction output aggregates.
 - [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
   effective keys.
+- [Task 478](478-retain-spend-confirmation-leases.md): retain spend-confirmation
+  leases.
+- [Task 482](482-fund-imported-inputs-without-origin.md): fund imported inputs
+  without known origin.
+- [Task 483](483-preserve-labels-on-chain-replay.md): preserve transaction labels
+  on chain replay.
+- [Task 484](484-align-authoring-confirmation-height.md): align authoring
+  confirmation height.
 
 - [Task 474](474-authored-change-watch.md): watch authored change before return.
 
@@ -155,7 +175,7 @@ that structural exclusion explicitly.
 
 ## Migration
 
-- [Task 335](335-kvdb-to-sql-migration.md): validate an immutable legacy wallet
+- [Task 335](335-kvdb-to-sql-migration.md): validate an immutable bbolt wallet
   source.
 - [Task 373](373-extract-legacy-account-address-state.md): extract legacy
   wallet, account, and secret state.
@@ -167,6 +187,12 @@ that structural exclusion explicitly.
   through Manager.Create.
 - [Task 473](473-extract-legacy-address-script-state.md): extract legacy address
   and script state.
+- [Task 476](476-read-legacy-sql-walletdb-source.md): read legacy SQLite and
+  PostgreSQL walletdb sources.
+- [Task 477](477-import-legacy-snapshot-postgres.md): import a legacy snapshot
+  into native PostgreSQL.
+- [Task 485](485-convert-legacy-sql-wallets-through-manager.md): convert legacy
+  SQL wallets through Manager.
 
 ## Benchmarks
 

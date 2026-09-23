@@ -15,10 +15,17 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
 | [Task 402][t402] | Establish and reconstruct live watches | Gap fix | 1 | YY | [#1380][pr1380] |
+| [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | — | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
 | [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
 | [Task 465][t465] | Verify durable key allocation results | Test | 1 | YY | [#1392][pr1392] |
-| [Task 466][t466] | Verify final oldest-unused allocation | Test | 1 | — | — |
+| [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | — | — |
+| [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | — | — |
+| [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | — | — |
+| [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | — | — |
+| [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | — | — |
+| [Task 486][t486] | Freeze native SQL schema | Migration | 1 | — | — |
+| [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | — | — |
 | [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
@@ -38,14 +45,16 @@ Remaining 2A/2B work; move tasks above when development starts.
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
 | [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | — | — |
-| [Task 403][t403] | Watch raw imports before success | Bug fix | 2A | — | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | — |
-| [Task 470][t470] | Port lnd to maintained Wallet APIs | Gap fix | 2A | YY | — |
+| [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
 | [Task 474][t474] | Watch authored change before return | Bug fix | 2A | Gustavo | — |
+| [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
+| [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | — | — |
+| [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | — | — |
 | [Task 369][t369] | Test repeated unlocks | Test | 2B | — | — |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | — | — |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | — | — |
@@ -64,6 +73,7 @@ Remaining 2A/2B work; move tasks above when development starts.
 | [Task 462][t462] | Test account mutation errors | Test | 2B | — | — |
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
 | [Task 464][t464] | Test NoChainSync account queries | Test | 2B | — | — |
+| [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | — | — |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | — | — |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 
@@ -144,3 +154,18 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
 [t474]: tasks/474-authored-change-watch.md
 [pr1394]: https://github.com/btcsuite/btcwallet/pull/1394
+
+[t475]: tasks/475-wallet-transaction-subscription.md
+[t476]: tasks/476-read-legacy-sql-walletdb-source.md
+[t477]: tasks/477-import-legacy-snapshot-postgres.md
+[t478]: tasks/478-retain-spend-confirmation-leases.md
+[t479]: tasks/479-mix-imported-xpub-accounts.md
+[t480]: tasks/480-own-raw-imports-in-one-wallet.md
+[t481]: tasks/481-persist-imported-account-address-schema.md
+[t482]: tasks/482-fund-imported-inputs-without-origin.md
+[t483]: tasks/483-preserve-labels-on-chain-replay.md
+[t484]: tasks/484-align-authoring-confirmation-height.md
+[t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
+
+[t486]: tasks/486-freeze-native-sql-schema.md
+[t487]: tasks/487-compile-lnd-with-managed-wallet.md
