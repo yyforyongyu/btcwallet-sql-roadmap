@@ -29,10 +29,12 @@ for automatic selection but leaves explicit-input policy unproven.
 
 Focused public authoring tests accept a coin confirmed at the processed tip
 and reject under-confirmed or immature coins. Task 470 reruns the unchanged
-Neutrino `create_simple_tx` case. Local PoC:
-`a5984443e2d62c64196207c9c307cc4925415609`.
+Neutrino `create_simple_tx` case. The
+[published diagnostic PoC][wallet-poc] leaves explicit-input policy open.
 
 ## Definition of done
 
 Public listing and authoring agree on eligible coins at the same processed
 Wallet state.
+
+[wallet-poc]: https://github.com/yyforyongyu/btcwallet/commit/a5984443e2d62c64196207c9c307cc4925415609

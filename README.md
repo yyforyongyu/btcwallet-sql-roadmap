@@ -53,13 +53,13 @@ execution state.
 
 ## Delivery milestones
 
-Finish Phase 1's API/runtime production prerequisites and the pre-claim gap
-check before starting the main lnd port PR. Phase 1 itests may proceed alongside
-it; other later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule.
-Relevant fixes and passing behavioral evidence, not named test-task or
-benchmark completion, gate enabling an affected path.
-[Task 470](tasks/470-lnd-wallet-port.md) delivers the lnd port. A prior roadmap
-update assigns remaining required gaps to existing or new tasks.
+Finish Phase 1 before merging `sql-wallet` into `master`: finalize the SQL
+schema, initialize fresh databases without upgrade/downgrade files, and compile
+lnd against the maintained Wallet. The pre-claim gap check is complete.
+[Task 487](tasks/487-compile-lnd-with-managed-wallet.md) owns compilation;
+[Task 470](tasks/470-lnd-wallet-port.md) retains runtime and itest parity.
+Later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule. Relevant fixes
+and passing behavioral evidence gate enabling each affected runtime path.
 
 After Phase 1, Phase 2A's bugs/gaps and 2B's verification run in parallel.
 Phase 3 migration and Phase 4 optional improvements may overlap them as
@@ -80,8 +80,9 @@ Do not expand an ordinary Wallet fix into `waddrmgr`, `wtxmgr`, `walletdb`, the
 Loader, lnd, daemon production, or deprecated Wallet methods and tests. Tasks
 357 and 401 are narrow historical exceptions, not precedent. If the required
 behavior cannot stay Wallet-owned, revise the task or obtain explicit approval
-before implementation. [Task 470](tasks/470-lnd-wallet-port.md) owns the
-lnd port as an explicit exception.
+before implementation. [Tasks 470](tasks/470-lnd-wallet-port.md) and
+[487](tasks/487-compile-lnd-with-managed-wallet.md) own the lnd runtime and
+compile cutovers as explicit exceptions.
 
 An integration-test task owns the tested public contract. Test and CI files may
 live elsewhere, but any production correction remains Wallet-owned. Fix bugs

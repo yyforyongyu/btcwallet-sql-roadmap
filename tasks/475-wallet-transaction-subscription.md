@@ -35,6 +35,7 @@ reorg ordering, cancellation, and shutdown. Task 470 runs lnd's unchanged
 ## Definition of done
 
 Both lnd consumers can use one maintained subscription without polling or
-dropped successful events. The diagnostic PoC is local btcwallet commit
-`78c5a6f77e1e4689c04f0b8b7262ac762e0c66b4`; its fixed buffer is not a
-production delivery policy.
+dropped successful events. The [published diagnostic PoC][wallet-poc] uses a
+fixed buffer; that is not a production delivery policy.
+
+[wallet-poc]: https://github.com/yyforyongyu/btcwallet/commit/78c5a6f77e1e4689c04f0b8b7262ac762e0c66b4

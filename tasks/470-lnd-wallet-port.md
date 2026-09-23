@@ -1,4 +1,4 @@
-# Task 470 — port lnd to maintained Wallet APIs
+# Task 470 — complete lnd Wallet runtime parity
 
 Component: **lnd Wallet integration**.
 
@@ -10,22 +10,21 @@ Dependencies: **[Task 331][t331], [Task 343][t343], [Task 344][t344],
 [Task 396][t396], [Task 406][t406], [Task 412][t412], [Task 468][t468],
 and [Task 474][t474], plus [Tasks 475][t475], [478][t478],
 [479][t479], [480][t480], [481][t481], [482][t482], [483][t483],
-and [484][t484]**.
+and [484][t484], plus [Task 487][t487]**.
 
 ## Rationale
 
-Lnd still uses Loader, wallet.Interface, scoped key managers, and the legacy
-NotificationServer. Moving to the maintained Wallet components requires a
-buildable dependency and caller cutover in lnd, including its keychain and
-startup path.
+Task 487 establishes a buildable lnd dependency and caller cutover. The
+remaining port must make startup, signing, transaction events, imports, PSBT
+funding, and shutdown work through the maintained Wallet. Compilation alone
+does not prove those existing lnd behaviors.
 
 ## Details
 
-- Start implementation and open the main port PR once Phase 1's API/runtime
-  production prerequisites and the pre-claim check in [QUEUE](../QUEUE.md)
-  are complete. Standalone itests need not finish first. Later-phase
-  production dependencies gate merge, not starting work. The check follows
-  the roadmap-update workflow outside this task's implementation.
+- Complete runtime integration after [Task 487][t487]'s buildable cutover.
+  Phase 1 requires compilation; this task's linked production gaps and lnd
+  behavior tests gate its own merge. The pre-claim gap check is recorded in
+  [QUEUE](../QUEUE.md).
 - In that check, map online remote-signer account installation to
   [Task 391][t391]'s exact path-bound XPub support. Record any required edge
   before implementing the affected path; do not replace known account numbers
@@ -35,11 +34,11 @@ startup path.
   require btcwallet work only for a demonstrated missing capability. Preserve
   existing lnd modes and backend limits; do not assume SQL-only behavior works
   on kvdb.
-- Finish the lnd adapter and its compile-coupled keychain, walletunlocker,
-  config_builder, rpcwallet, RPC callers, mocks, and build variants. Consume
-  accepted Wallet APIs and existing lnd interfaces; introduce no new public
-  API or compatibility layer. Independently useful fixes belong in their own
-  prerequisite tasks, not the port PR.
+- Complete the lnd adapter's startup, unlock, keychain, remote-signer, RPC,
+  transaction, and PSBT behavior across maintained modes. Update Task 487's
+  caller code and mocks where runtime behavior requires it. Consume accepted
+  Wallet APIs and existing lnd interfaces; add no new public API or
+  compatibility layer. Independent fixes stay with their owning tasks.
 - Preserve purpose-1017 paths and durable key allocation through [390][t390],
   [395][t395], [468][t468], and existing Signer operations. Use [331][t331]'s
   Manager lifecycle, resolve unlock versus chain startup order, and keep the
@@ -68,10 +67,10 @@ startup path.
 
 ## Suggested fix
 
-Reuse the existing Wallet components and lnd boundaries. Make any useful,
-independent preparation build with the old dependency, then land the smallest
-inseparable dependency/caller cutover. Keep every stage buildable without fake
-results or disabled tests. Record gaps in their owning tasks.
+Reuse Task 487's buildable adapter and existing Wallet components. Keep
+runtime gaps visible until their owners land; do not fake results or disable
+tests. The published [btcwallet PoC][wallet-poc] and [lnd PoC][lnd-poc] are
+diagnostic references, not production dependencies.
 
 ## Verification
 
@@ -132,3 +131,7 @@ required behavior is left behind merely as a new task. No ADR is required.
 [t483]: 483-preserve-labels-on-chain-replay.md
 [t484]: 484-align-authoring-confirmation-height.md
 [t485]: 485-convert-legacy-sql-wallets-through-manager.md
+
+[t487]: 487-compile-lnd-with-managed-wallet.md
+[wallet-poc]: https://github.com/yyforyongyu/btcwallet/tree/poc-470-combined
+[lnd-poc]: https://github.com/yyforyongyu/lnd/tree/poc-470-lnd-gaps

@@ -29,9 +29,11 @@ within the same transactional boundary.
 
 Replay a labeled confirmed transaction and check label, credits/spends, and
 advanced tip; retain direct conflicting-label tests. Task 470 reruns lnd's
-unchanged btcd `last_unused_addr` case. Local PoC:
-`a5984443e2d62c64196207c9c307cc4925415609`.
+unchanged btcd `last_unused_addr` case. The
+[published diagnostic PoC][wallet-poc] is not the final transactional design.
 
 ## Definition of done
 
 A repeated chain observation cannot stall sync or erase a stored user label.
+
+[wallet-poc]: https://github.com/yyforyongyu/btcwallet/commit/a5984443e2d62c64196207c9c307cc4925415609

@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **486**.
+The next free task number is **488**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -12,7 +12,9 @@ They do not consume task numbers or require task files.
 
 ## Consumer adoption
 
-- [Task 470](470-lnd-wallet-port.md): port lnd to maintained Wallet APIs.
+- [Task 470](470-lnd-wallet-port.md): complete lnd Wallet runtime parity.
+- [Task 487](487-compile-lnd-with-managed-wallet.md): compile lnd with the
+  maintained Wallet.
 - [Task 475](475-wallet-transaction-subscription.md): deliver live Wallet
   transaction subscriptions.
 
@@ -30,6 +32,8 @@ They do not consume task numbers or require task files.
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
+- [Task 486](486-freeze-native-sql-schema.md): freeze native SQL schema for
+  fresh Wallets.
 
 ## Accounts, addresses, and recovery
 

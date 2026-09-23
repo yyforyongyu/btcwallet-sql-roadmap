@@ -29,9 +29,12 @@ classification; no new public API or SQL migration is indicated by the PoC.
 
 Check import, address allocation, ownership, spendability, reopen, and local
 signing on SQLite and PostgreSQL. Task 470 verifies the unchanged imported
-account lnd scenario. Local PoC: `2e2c6aa42f0a78fddd74f09fb3f0fed493b6526f`.
+account lnd scenario. The [published combined PoC][wallet-poc] demonstrates
+this account boundary; raw imports remain outside it.
 
 ## Definition of done
 
 One signing Wallet can retain both account custodians without treating an
 external key as locally signable.
+
+[wallet-poc]: https://github.com/yyforyongyu/btcwallet/commit/d367e96ee36d6de10b5e5d8c9d5c8b3d59dcf5ee

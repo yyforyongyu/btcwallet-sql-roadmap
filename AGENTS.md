@@ -116,22 +116,25 @@ of hard edges. Consumer adoption owns its required verification; equivalent
 focused evidence may satisfy it without waiting for a named test task to
 merge. Preserve production prerequisites when removing a test-only edge.
 
-Phase 1 owns the final public APIs and minimum runtime capabilities needed by
-the initial lnd adapter, plus focused basic public itests proving them. Keep
-their transitive open prerequisite closure here, with honest primary types.
+Phase 1 owns the final SQL schema, public APIs needed by the initial lnd
+adapter, and a buildable lnd cutover. Keep their transitive open prerequisite
+closure here, with honest primary types. Retain already claimed Phase 1 tasks
+when regrouping; unclaimed standalone verification may follow in Phase 2B.
 Keep a Design or Refactor prerequisite only when the current boundary cannot
 safely deliver that contract without it; otherwise remove the hard edge and
 defer the follow-up. Do not pull optional features forward to complete a test
 matrix, or prescribe private architecture merely to stabilize a public API.
 
-Finish Phase 1's API/runtime production prerequisites and QUEUE's pre-claim
-gap check before starting Task 470's lnd port PR. Its start does not wait for
-standalone Phase 1 itests. After Phase 1, bugs/gaps in 2A and verification in
-2B run in parallel. Phase 3 migration and Phase 4 optional improvements may
-overlap them as dependencies permit. Hardening starts only after
-both 2A and 2B finish. Integration and migration retain their concrete fixes
-and behavioral gates, not blanket test-task or benchmark completion. Regrouping
-does not change task scope, dependencies, or requirements.
+Before merging sql-wallet into master, Phase 1 must finish its planned schema
+changes, initialize fresh SQL databases without versioned upgrade/downgrade
+files, and prove that lnd compiles against the maintained Wallet. The pre-claim
+gap check precedes lnd's compile cutover. Full lnd runtime and itest parity
+remain Task 470's separate merge gate. After Phase 1, bugs/gaps in 2A and
+verification in 2B run in parallel. Phase 3 migration and Phase 4 optional
+improvements may overlap them as dependencies permit. Hardening starts only
+after both 2A and 2B finish. Integration and migration retain their concrete
+fixes and behavioral gates, not blanket test-task or benchmark completion.
+Regrouping does not change task scope, dependencies, or requirements.
 
 ## Roadmap update workflow
 
@@ -259,9 +262,11 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
 - Task 357's accepted authoring work and Task 401's accepted chain interface
   and adapter work are narrow historical exceptions. They are not precedent
   for another task or permission to preserve deprecated Wallet behavior.
-- [Task 470](tasks/470-lnd-wallet-port.md) is an explicit exception for the
-  lnd port and its focused tests. Its merged lnd implementation PR closes the
-  task; this does not expand ordinary Wallet fixes into lnd.
+- [Tasks 470](tasks/470-lnd-wallet-port.md) and
+  [487](tasks/487-compile-lnd-with-managed-wallet.md) are explicit exceptions
+  for lnd runtime integration and compilation, respectively. Each merged lnd
+  implementation PR closes its own task; ordinary Wallet fixes do not expand
+  into lnd.
 - If the required public behavior cannot be implemented inside the allowed
   production boundary, narrow, defer, or supersede the task, or obtain an
   explicit task-specific exception before implementation. Do not silently
