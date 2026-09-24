@@ -63,7 +63,7 @@ allocation uses `NewBulkAddresses`, and modern kvdb retains its legacy
 count-one behavior. `NoChainSync` receiving remains unsupported, without
 expanding this task into key allocation or adjacent transaction bugs.
 
-[t344]: 344-bulk-address-allocation.md
+[t344]: ../archive/tasks/344-bulk-address-allocation.md
 [t356]: 356-defer-change-script-allocation.md
 [t395]: 395-key-only-locator-allocation.md
 [t466]: 466-oldest-unused-address-itests.md

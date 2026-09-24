@@ -102,7 +102,7 @@ task. No ADR is required.
 
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t343]: ../archive/tasks/343-exact-account-creation.md
-[t344]: 344-bulk-address-allocation.md
+[t344]: ../archive/tasks/344-bulk-address-allocation.md
 [t346]: ../archive/tasks/346-psbt-funding-metadata.md
 [t356]: 356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md

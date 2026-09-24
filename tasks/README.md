@@ -37,7 +37,6 @@ They do not consume task numbers or require task files.
 
 ## Accounts, addresses, and recovery
 
-- [Task 344](344-bulk-address-allocation.md): allocate receiving-address batches
   atomically.
 - [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.

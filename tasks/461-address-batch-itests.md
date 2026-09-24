@@ -91,5 +91,5 @@ the returned batch and cursor state.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t343]: 343-exact-account-creation.md
-[t344]: 344-bulk-address-allocation.md
+[t344]: ../archive/tasks/344-bulk-address-allocation.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md

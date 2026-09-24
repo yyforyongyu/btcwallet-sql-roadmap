@@ -9,7 +9,6 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 344][t344] | Allocate receiving-address batches atomically | Gap fix | 1 | YY | [#1379][pr1379] |
 | [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
 | [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
@@ -91,14 +90,12 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1379]: https://github.com/btcsuite/btcwallet/pull/1379
 [pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
 [pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
 [pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t338]: tasks/338-passphrase-result.md
-[t344]: tasks/344-bulk-address-allocation.md
 [t347]: tasks/347-psbt-signing-authorization.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md

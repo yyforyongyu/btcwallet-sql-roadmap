@@ -23,7 +23,7 @@ sql-wallet merges into master. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 16 open
+## Phase 1 — final SQL schema and lnd compilation · 15 open
 
 Finish the planned SQL account, import, and lease schema changes, then
 initialize fresh SQLite and PostgreSQL databases without versioned
@@ -45,7 +45,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 344][t344] | open | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | 402 |
 | [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | — |
 | [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
 | [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344 |
@@ -230,7 +229,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
-## Done · 52
+## Done · 53
 
 **164 completed: 51 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -250,6 +249,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 341][t341] | 1 | wallet-owned account identity types | Gap fix | Define semantic account identity | [#1313][pr1313] |
 | [Task 342][t342] | 1 | wallet configuration | Bug fix | Accept bounded recovery windows | [#1335][pr1335] |
 | [Task 343][t343] | 1 | AccountManager root-derived creation and SQL AccountStore | Gap fix | Create next-or-exact root-derived accounts | [#1369][pr1369] |
+| [Task 344][t344] | 1 | AddressManager receiving batches and SQL AddressStore | Gap fix | Allocate receiving-address batches atomically | [#1379][pr1379] |
 | [Task 345][t345] | 1 | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | [#1365][pr1365] |
 | [Task 346][t346] | 2 | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | [#1359][pr1359] |
 | [Task 355][t355] | 2 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |
