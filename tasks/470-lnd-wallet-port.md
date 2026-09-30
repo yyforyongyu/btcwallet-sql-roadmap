@@ -110,7 +110,7 @@ task. No ADR is required.
 [t376]: 376-orchestrate-legacy-conversion.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
-[t395]: 395-key-only-locator-allocation.md
+[t395]: ../archive/tasks/395-key-only-locator-allocation.md
 [t396]: 396-oldest-unused-address.md
 [t412]: ../archive/tasks/412-transaction-invalidation.md
 [t430]: ../archive/tasks/430-account-query-itests.md

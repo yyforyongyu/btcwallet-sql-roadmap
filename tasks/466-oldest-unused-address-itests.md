@@ -66,6 +66,6 @@ production tasks' mechanical migrations. Task 431 need not land first.
   Task 431 case is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t395]: 395-key-only-locator-allocation.md
+[t395]: ../archive/tasks/395-key-only-locator-allocation.md
 [t396]: 396-oldest-unused-address.md
 [t431]: 431-address-allocation-lookup-itests.md

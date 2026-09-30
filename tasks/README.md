@@ -44,7 +44,6 @@ They do not consume task numbers or require task files.
   account commits truthfully.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
-- [Task 395](395-key-only-locator-allocation.md): add `AllocateNextKey` for
   durable key allocation.
 - [Task 396](396-oldest-unused-address.md): make NewAddress return the oldest
   unused address.

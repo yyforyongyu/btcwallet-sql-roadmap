@@ -11,8 +11,7 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | --- | --- | --- | --- | --- | --- |
 | [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
-| [Task 395][t395] | Add AllocateNextKey for durable key allocation | Gap fix | 1 | YY | [#1386][pr1386] |
-| [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | — |
+| [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | [#1399][pr1399] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | — | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
 | [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
@@ -24,7 +23,7 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | — | — |
 | [Task 486][t486] | Freeze native SQL schema | Migration | 1 | — | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | — | — |
-| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | — |
+| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | [#1400][pr1400] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
 | [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | — |
@@ -90,7 +89,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1386]: https://github.com/btcsuite/btcwallet/pull/1386
 [pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
 [pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
 [t329]: tasks/329-atomic-wallet-account-creation.md
@@ -107,7 +105,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
-[t395]: tasks/395-key-only-locator-allocation.md
 [t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
@@ -163,3 +160,5 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t486]: tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
+[pr1400]: https://github.com/btcsuite/btcwallet/pull/1400
+[pr1399]: https://github.com/btcsuite/btcwallet/pull/1399

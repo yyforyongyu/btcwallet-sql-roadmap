@@ -23,7 +23,7 @@ sql-wallet merges into master. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 15 open
+## Phase 1 — final SQL schema and lnd compilation · 14 open
 
 Finish the planned SQL account, import, and lease schema changes, then
 initialize fresh SQLite and PostgreSQL databases without versioned
@@ -47,7 +47,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | --- | --- | --- | --- | --- | --- |
 | [Task 388][t388] | open | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | — |
 | [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
-| [Task 395][t395] | open | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | 344 |
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | 402 |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
@@ -229,7 +228,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
-## Done · 53
+## Done · 54
 
 **164 completed: 51 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -264,6 +263,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 390][t390] | 1 | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | [#1371][pr1371] |
 | [Task 392][t392] | 1 | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | [#1366][pr1366] |
 | [Task 393][t393] | 1 | AddressManager receiving APIs and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | [#1367][pr1367] |
+| [Task 395][t395] | 1 | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | [#1386][pr1386] |
 | [Task 399][t399] | 1 | Syncer recovery initialization and account-scoped Store reads | Bug fix | Isolate persisted targets in zero-lookahead recovery | [#1372][pr1372] |
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 401][t401] | 1 | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | [#1344][pr1344] |
