@@ -23,7 +23,7 @@ sql-wallet merges into master. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 14 open
+## Phase 1 — final SQL schema and lnd compilation · 12 open
 
 Finish the planned SQL account, import, and lease schema changes, then
 initialize fresh SQLite and PostgreSQL databases without versioned
@@ -50,8 +50,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 396][t396] | open | AddressManager count-one semantics | Bug fix | Make NewAddress return the oldest unused address | 344 |
 | [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | 402 |
 | [Task 431][t431] | open | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | — |
-| [Task 461][t461] | open | AddressManager batch integration tests | Test | Cover public address batch contracts | 344 |
-| [Task 465][t465] | open | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | 395 |
 | [Task 475][t475] | open | Wallet transaction notifications | Gap fix | Deliver wallet transaction subscriptions | — |
 | [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
 | [Task 479][t479] | open | AccountManager custody and Wallet results | Gap fix | Mix imported XPub and signing accounts | — |
@@ -228,7 +226,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
-## Done · 54
+## Done · 56
 
 **164 completed: 51 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
@@ -290,6 +288,8 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 456][t456] | 1 | ManagerConfig and managed Wallet construction | Refactor | Centralize managed Wallet runtime configuration | [#1353][pr1353] |
 | [Task 458][t458] | 1 | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | [#1354][pr1354] |
 | [Task 459][t459] | 1 | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | [#1356][pr1356] |
+| [Task 461][t461] | 1 | AddressManager batch integration tests | Test | Cover public address batch contracts | [#1393][pr1393] |
+| [Task 465][t465] | 1 | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | [#1392][pr1392] |
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 | [Task 468][t468] | 1 | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | [#1369][pr1369] |
 

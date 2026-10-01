@@ -123,7 +123,6 @@ that structural exclusion explicitly.
   finalization contracts.
 - [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.
-- [Task 461](461-address-batch-itests.md): cover public address batch
   contracts.
 - [Task 462](462-account-mutation-error-itests.md): complete missing account
   mutation-error evidence.
@@ -131,7 +130,6 @@ that structural exclusion explicitly.
   account identity.
 - [Task 464](464-no-chain-sync-account-query-itests.md): verify true-value
   list and path-bound account queries.
-- [Task 465](465-new-address-result-itests.md): verify durable key allocation
   results.
 - [Task 466](466-oldest-unused-address-itests.md): verify final oldest-unused
   allocation.

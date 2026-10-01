@@ -14,8 +14,6 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | [#1399][pr1399] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | — | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
-| [Task 461][t461] | Cover public address batch contracts | Test | 1 | YY | [#1393][pr1393] |
-| [Task 465][t465] | Verify durable key allocation results | Test | 1 | YY | [#1392][pr1392] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | — | — |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | — | — |
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | — | — |
@@ -89,8 +87,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
-[pr1392]: https://github.com/btcsuite/btcwallet/pull/1392
-[pr1393]: https://github.com/btcsuite/btcwallet/pull/1393
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t338]: tasks/338-passphrase-result.md
@@ -133,11 +129,9 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t451]: tasks/451-chain-version-itest-matrix.md
 [t454]: tasks/454-postgres-transaction-isolation.md
 [t457]: tasks/457-process-local-manager-lease.md
-[t461]: tasks/461-address-batch-itests.md
 [t462]: tasks/462-account-mutation-error-itests.md
 [t463]: tasks/463-path-bound-utxo-identity-itests.md
 [t464]: tasks/464-no-chain-sync-account-query-itests.md
-[t465]: tasks/465-new-address-result-itests.md
 [t466]: tasks/466-oldest-unused-address-itests.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [t470]: tasks/470-lnd-wallet-port.md
