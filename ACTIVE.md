@@ -13,7 +13,7 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
 | [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | [#1399][pr1399] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | — | — |
-| [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | — |
+| [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | — | — |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | — | — |
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | — | — |
@@ -156,3 +156,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
 [pr1400]: https://github.com/btcsuite/btcwallet/pull/1400
 [pr1399]: https://github.com/btcsuite/btcwallet/pull/1399
+[pr1407]: https://github.com/btcsuite/btcwallet/pull/1407
