@@ -11,7 +11,6 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | --- | --- | --- | --- | --- | --- |
 | [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
-| [Task 396][t396] | Return the oldest unused address | Bug fix | 1 | Gustavo | [#1399][pr1399] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | — | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | — | — |
@@ -101,7 +100,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
-[t396]: tasks/396-oldest-unused-address.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t403]: tasks/403-raw-import-watch-obligations.md
@@ -155,5 +153,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t486]: tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
 [pr1400]: https://github.com/btcsuite/btcwallet/pull/1400
-[pr1399]: https://github.com/btcsuite/btcwallet/pull/1399
 [pr1407]: https://github.com/btcsuite/btcwallet/pull/1407

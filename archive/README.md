@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 396](tasks/396-oldest-unused-address.md) completed on 2026-10-06.
 - [Task 465](tasks/465-new-address-result-itests.md) completed on 2026-10-01.
 - [Task 461](tasks/461-address-batch-itests.md) completed on 2026-10-01.
 - [Task 395](tasks/395-key-only-locator-allocation.md) completed on 2026-09-30.

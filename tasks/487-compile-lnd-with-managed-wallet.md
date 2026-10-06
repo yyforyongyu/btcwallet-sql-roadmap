@@ -46,7 +46,7 @@ remain visible for Task 470.
 
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t395]: ../archive/tasks/395-key-only-locator-allocation.md
-[t396]: 396-oldest-unused-address.md
+[t396]: ../archive/tasks/396-oldest-unused-address.md
 [t475]: 475-wallet-transaction-subscription.md
 [t478]: 478-retain-spend-confirmation-leases.md
 [wallet-poc]: https://github.com/yyforyongyu/btcwallet/commit/2c8d6196f731860925ce48f8f9bc68d1599e7b11

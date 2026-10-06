@@ -45,7 +45,6 @@ They do not consume task numbers or require task files.
 - [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
   durable key allocation.
-- [Task 396](396-oldest-unused-address.md): make NewAddress return the oldest
   unused address.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
   recovery targets.
