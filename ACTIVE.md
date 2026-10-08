@@ -14,7 +14,7 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
-| [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | YY | — |
+| [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | — |
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | — |
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | — | — |
 | [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | — |
