@@ -10,7 +10,7 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
-| [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | — |
+| [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | [#1408][pr1408] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | — |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
@@ -157,3 +157,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1400]: https://github.com/btcsuite/btcwallet/pull/1400
 [pr1407]: https://github.com/btcsuite/btcwallet/pull/1407
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
+[pr1408]: https://github.com/btcsuite/btcwallet/pull/1408
