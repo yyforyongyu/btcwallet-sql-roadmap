@@ -1,18 +1,19 @@
 # Task delivery phases
 
-The numbered roadmap contains **159 tasks**: **85 open**, **51 done**,
+The numbered roadmap contains **159 tasks**: **79 open**, **57 done**,
 **21 superseded**, and **2 deferred**. With **113 ad hoc tasks**, that is
-**272 tracked tasks** and **164 completed** overall.
+**272 tracked tasks** and **170 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
 completion and ad hoc accounting.
 
-Phase 1 remains the current focus. Later work starts only if already underway
-or owner-approved. After Phase 1, 2A fixes and 2B verification run in parallel.
-Phases 3 and 4 may overlap them as dependencies allow; neither waits for all
-of Phase 2. Hardening starts only after 2A and 2B finish. Placement changes
-no task scope, dependency, claim, or PR.
+Phase 1 is the active focus; all open 2A fixes and 2B verification are tracked
+as upcoming work. The completion goal includes both Phase 2 tracks, which
+may advance in parallel as dependencies allow. Phase 3 and 4 work starts only
+if already underway or owner-approved; neither waits for all of Phase 2.
+Hardening starts only after 2A and 2B finish. Placement changes no task scope,
+dependency, claim, or PR.
 
 Task 487 owns lnd's Phase 1 compile cutover after the completed pre-claim gap
 check, which mapped transaction notifications, standalone signing, online
@@ -57,11 +58,13 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 486][t486] | open | SQLite and PostgreSQL schema initialization | Migration | Freeze native SQL schema for fresh Wallets | 391, 478, 480, 481 |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 391, 395, 396, 475, 478 |
 
-## Phase 2A — bugs and gaps · 20 open
+## Phase 2A — bugs and gaps · 22 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
 This is a prioritized backlog, not a blanket gate for starting the lnd port.
+Tasks 424 and 410 supply the integrity decision and graph correction needed
+by Task 454's isolation policy.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
@@ -77,7 +80,9 @@ This is a prioritized backlog, not a blanket gate for starting the lnd port.
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | — |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
+| [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | 424 |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372, 402 |
+| [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | 410 |
 | [Task 469][t469] | open | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | 347 |
 | [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 344, 356, 391, 395, 396, 406, 474, 475, 478–484, 487 |
@@ -140,20 +145,17 @@ Modern kvdb remains supported for the current and next release.
 | [Task 477][t477] | open | PostgreSQL migration importer | Migration | Import a legacy snapshot into PostgreSQL | 374, 478, 480, 481 |
 | [Task 485][t485] | open | Manager.Create legacy conversion selection | Migration | Convert legacy SQL wallets through Manager | 376, 476, 477 |
 
-## Phase 4 — optional improvements · 7 open
+## Phase 4 — optional improvements · 5 open
 
 Additional capabilities, performance refactors, and defensive integrity work.
-Task 424 still distinguishes demonstrated fixes from proposed hardening;
-these task types, scopes, and evidence requirements are unchanged.
+Task types, scopes, and evidence requirements are unchanged.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | — |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 397 |
-| [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | 424 |
 | [Task 411][t411] | open | Wallet-owned SQL transaction ingestion | Bug fix | Reject children of terminal transactions | 410 |
-| [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 426][t426] | open | Manager Wallet publication and SQL TxStore amount validation | Bug fix | Validate persisted transaction output aggregates | — |
 
 ## Hardening — Signer, Vault, and defensive edges · 7 open
@@ -227,7 +229,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 57
 
-**164 completed: 51 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
+**170 completed: 57 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
