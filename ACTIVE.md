@@ -19,7 +19,7 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | — | — |
 | [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | — |
 | [Task 486][t486] | Freeze native SQL schema | Migration | 1 | — | — |
-| [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | — | — |
+| [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | [#1400][pr1400] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
