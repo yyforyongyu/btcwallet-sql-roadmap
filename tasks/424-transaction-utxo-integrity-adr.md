@@ -39,8 +39,9 @@ behavior or a prerequisite for legacy conversion.
 - If current code already satisfies a proposed outcome and no necessary
   change remains, identify that task for supersession rather than creating
   implementation work to adopt a preferred structure.
-- Keep this work in Phase 4. Tasks 373–376 validate and import supported legacy
-  facts directly; they do not require a transaction-graph redesign.
+- Prioritize Task 410's ordering decision required by Task 454. Tasks 373–376
+  validate and import supported legacy facts directly; they do not require a
+  transaction-graph redesign.
 - Exclude implementation, new public APIs, replacement-policy redesign,
   generic locks, and cross-process fencing.
 

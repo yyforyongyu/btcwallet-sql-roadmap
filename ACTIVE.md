@@ -5,7 +5,7 @@ them here. Dependencies set merge order; stacked PRs are encouraged.
 
 ## Active Tasks
 
-All Phase 1 work and the current Phase 2 focus, including stacked tasks.
+All open Phase 1 work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
@@ -20,28 +20,28 @@ All Phase 1 work and the current Phase 2 focus, including stacked tasks.
 | [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | — |
 | [Task 486][t486] | Freeze native SQL schema | Migration | 1 | YY | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
-| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | [#1400][pr1400] |
-| [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
-| [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | — |
-| [Task 432][t432] | Test address imports | Test | 2B | Gustavo | — |
 
 ## Upcoming Phase 2 Tasks
 
-Remaining 2A/2B work; move tasks above when development starts.
+All open Phase 2A and 2B work, including claimed and in-progress tasks.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | — |
 | [Task 338][t338] | Latch passphrase results | Bug fix | 2A | — | — |
+| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | [#1400][pr1400] |
+| [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | — |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
 | [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | — | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
+| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | — | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
+| [Task 424][t424] | Define transaction integrity ownership | Design | 2A | YY | [#1343][pr1343] |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | — |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
@@ -53,6 +53,8 @@ Remaining 2A/2B work; move tasks above when development starts.
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | — | — |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | — | — |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | — | — |
+| [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | — |
+| [Task 432][t432] | Test address imports | Test | 2B | Gustavo | — |
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | — | — |
 | [Task 439][t439] | Test PSBT funding | Test | 2B | — | — |
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
@@ -81,7 +83,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 | [Task 350][t350] | Use native PostgreSQL driver | Refactor | 4 | YY | [#1321][pr1321] |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 4 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 4 | YY | — |
-| [Task 424][t424] | Define transaction integrity ownership | Design | 4 | YY | [#1343][pr1343] |
 | [Task 457][t457] | Fence process-local Managers | Feature | Hardening | YY | — |
 
 [pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
@@ -106,6 +107,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t405]: tasks/405-psbt-funding-lease-admission.md
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
+[t410]: tasks/410-transaction-graph-admission.md
 [t417]: tasks/417-start-to-synced-benchmark.md
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md

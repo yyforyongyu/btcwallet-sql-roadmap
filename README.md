@@ -61,7 +61,9 @@ lnd against the maintained Wallet. The pre-claim gap check is complete.
 Later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule. Relevant fixes
 and passing behavioral evidence gate enabling each affected runtime path.
 
-After Phase 1, Phase 2A's bugs/gaps and 2B's verification run in parallel.
+Phase 1 remains the active focus. The completion goal also includes Phase
+2A's bugs/gaps and 2B's verification, tracked under `Upcoming Phase 2 Tasks`.
+Those tracks may advance in parallel as dependencies allow.
 Phase 3 migration and Phase 4 optional improvements may overlap them as
 dependencies allow. Hardening starts only after both 2A and 2B
 finish. Modern kvdb stays supported for the current and next release; Task
