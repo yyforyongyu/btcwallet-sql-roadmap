@@ -11,13 +11,13 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | --- | --- | --- | --- | --- | --- |
 | [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | [#1408][pr1408] |
-| [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | — |
+| [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | [#1410][pr1410] |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | — |
-| [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | — |
+| [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | [#1411][pr1411] |
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | — |
-| [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | — |
+| [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | [#1409][pr1409] |
 | [Task 486][t486] | Freeze native SQL schema | Migration | 1 | YY | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 
@@ -158,3 +158,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1407]: https://github.com/btcsuite/btcwallet/pull/1407
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
 [pr1408]: https://github.com/btcsuite/btcwallet/pull/1408
+[pr1411]: https://github.com/btcsuite/btcwallet/pull/1411
+[pr1410]: https://github.com/btcsuite/btcwallet/pull/1410
+[pr1409]: https://github.com/btcsuite/btcwallet/pull/1409
