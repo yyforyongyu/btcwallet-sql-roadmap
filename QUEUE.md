@@ -19,7 +19,7 @@ Task 487 owns lnd's Phase 1 compile cutover after the completed pre-claim gap
 check, which mapped transaction notifications, standalone signing, online
 remote signing, and kvdb caller paths against source. Its compile-only PR
 merges into `yyforyongyu/lnd:btcwallet-sql-integration` at a pinned,
-build-verified revision. Task 486 freezes the final SQL schema before
+build-verified revision. Task 486 consolidates the initial SQL schema before
 sql-wallet merges into master. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
@@ -27,13 +27,15 @@ sql-wallet-to-master merge.
 ## Phase 1 — final SQL schema and lnd compilation · 11 open
 
 Finish the planned SQL account, import, and lease schema changes, then
-initialize fresh SQLite and PostgreSQL databases without versioned
-upgrade/downgrade files. Build lnd against the maintained Wallet without
-requiring its runtime itests to pass. Keep already assigned Phase 1 work,
-including its focused public tests.
+consolidate them into a clean initial migration for SQLite and PostgreSQL.
+Retain the existing migration loader and verify fresh creation and unchanged
+reopen. Build lnd against the maintained Wallet without requiring its runtime
+itests to pass. Keep already assigned Phase 1 work, including its focused
+public tests.
 
 Finish Phase 1 before merging `sql-wallet` into `master`. Later data conversion
-targets this frozen schema; it does not require a post-merge schema upgrade.
+targets this consolidated initial schema; it does not require a post-merge
+schema upgrade.
 
 The initial port keeps Task 331's non-contextual Create signature and safe
 shutdown draining. Contextual creation follows atomic genesis in Phase 3.
@@ -55,7 +57,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 479][t479] | open | AccountManager custody and Wallet results | Gap fix | Mix imported XPub and signing accounts | — |
 | [Task 480][t480] | open | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | 403, 479 |
 | [Task 481][t481] | open | AccountManager and SQL account address schema | Bug fix | Preserve imported account address schema | — |
-| [Task 486][t486] | open | SQLite and PostgreSQL schema initialization | Migration | Freeze native SQL schema for fresh Wallets | 391, 478, 480, 481 |
+| [Task 486][t486] | open | SQLite and PostgreSQL schema initialization | Migration | Consolidate initial SQL schema before master merge | 391, 478, 480, 481 |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 391, 395, 396, 475, 478 |
 
 ## Phase 2A — bugs and gaps · 22 open

@@ -53,9 +53,10 @@ execution state.
 
 ## Delivery milestones
 
-Finish Phase 1 before merging `sql-wallet` into `master`: finalize the SQL
-schema, initialize fresh databases without upgrade/downgrade files, and compile
-lnd against the maintained Wallet. The pre-claim gap check is complete.
+Finish Phase 1 before merging `sql-wallet` into `master`: consolidate the final
+SQL schema into a clean initial migration per backend using the existing
+loader, verify fresh creation and unchanged reopen, and compile lnd against
+the maintained Wallet. The pre-claim gap check is complete.
 [Task 487](tasks/487-compile-lnd-with-managed-wallet.md) owns compilation;
 [Task 470](tasks/470-lnd-wallet-port.md) retains runtime and itest parity.
 Later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule. Relevant fixes

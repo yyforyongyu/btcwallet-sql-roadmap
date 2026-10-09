@@ -18,7 +18,7 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | [#1411][pr1411] |
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | — |
 | [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | [#1409][pr1409] |
-| [Task 486][t486] | Freeze native SQL schema | Migration | 1 | YY | — |
+| [Task 486][t486] | Consolidate initial SQL schema | Migration | 1 | YY | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 
 ## Upcoming Phase 2 Tasks

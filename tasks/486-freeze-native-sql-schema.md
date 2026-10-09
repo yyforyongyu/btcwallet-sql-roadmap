@@ -1,4 +1,4 @@
-# Task 486 — freeze native SQL schema for fresh Wallets
+# Task 486 — Consolidate initial SQL schema before master merge
 
 Component: **SQLite and PostgreSQL schema initialization**.
 
@@ -10,36 +10,48 @@ Dependencies: **[Task 391][t391], [Task 478][t478],
 ## Rationale
 
 Before `sql-wallet` merges into `master`, the planned account, import, and
-lease storage shapes must be final. The current runtime embeds versioned
-upgrade/downgrade migrations, which would violate the release's fresh-schema
-boundary.
+lease storage shapes must be final. Consolidate their development-era schema
+changes into a clean initial baseline for SQLite and PostgreSQL for the initial
+release.
+The existing migration loader can initialize this baseline.
 
 ## Details
 
-- Initialize a new SQLite or PostgreSQL database with the final Wallet schema,
-  preserving current identity, constraints, indexes, and triggers.
-- Remove versioned `.up.sql` and `.down.sql` files and the runtime rollback
-  path from the merged tree. Update SQL subsystem guidance accordingly.
-- Reopen a current database without changing its schema. Reject incompatible
-  pre-merge native-SQL databases explicitly instead of silently upgrading.
-- Exclude legacy walletdb data conversion, which has separate Phase 3 owners.
+- Consolidate development-era schema changes after Tasks 391, 478, 480, and
+  481 into a clean initial migration for each SQL dialect.
+- Retain the existing migration loader. Fresh SQLite and PostgreSQL databases
+  must receive the final Wallet schema, preserving its identity, tables,
+  columns, constraints, indexes, and triggers.
+- Update affected SQL-generation references, generated output, tests, and SQL
+  subsystem guidance to use the consolidated initial baseline.
+- Reopen a database created from that baseline without changing its schema.
+- Exclude migration-framework removal, experimental-schema compatibility
+  detection or rejection, and legacy walletdb conversion; legacy conversion
+  has separate Phase 3 owners.
 
 ## Suggested fix
 
-Reuse the accepted dialect-specific DDL as fresh-database initialization and
-retire the versioned migration runner after dependent schema work lands.
+Fold the accepted dialect-specific schema changes into the initial migration
+sources and reuse the existing loader. Refresh SQL-generation references and
+tests where consolidation invalidates them.
 
 ## Verification
 
-Create and reopen fresh Wallets on both SQL dialects; verify the final schema
-and refusal of an incompatible earlier schema. Check that no upgrade/downgrade
-files or rollback runner remain. Replace obsolete rollback tests with the
-fresh-initialization contract.
+- Create fresh Wallets on SQLite and PostgreSQL using the clean initial
+  migration and existing loader.
+- Reuse and update existing focused schema tests to verify the final tables,
+  columns, constraints, indexes, and triggers, including the dependent schema
+  changes. Reopen those databases and verify their schemas remain unchanged.
+- Run affected SQL generation and tests against the consolidated sources;
+  remove or update assertions tied to obsolete development migration steps.
 
 ## Definition of done
 
-Both SQL backends initialize the final schema directly, and the merged tree
-contains no versioned upgrade/downgrade files or implicit upgrade path.
+Both SQL backends use a clean initial migration through the existing loader.
+Focused tests verify the final schema's identity, tables, columns, constraints,
+indexes, and triggers, fresh creation, and unchanged reopen. Affected
+SQL-generation references, generated output, tests, and guidance match the
+consolidated baseline.
 
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t478]: 478-retain-spend-confirmation-leases.md
