@@ -16,7 +16,7 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | — |
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | [#1411][pr1411] |
-| [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | — |
+| [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | [#1412][pr1412] |
 | [Task 481][t481] | Preserve imported account address schema | Bug fix | 1 | YY | [#1409][pr1409] |
 | [Task 486][t486] | Consolidate initial SQL schema | Migration | 1 | YY | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
@@ -161,3 +161,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1411]: https://github.com/btcsuite/btcwallet/pull/1411
 [pr1410]: https://github.com/btcsuite/btcwallet/pull/1410
 [pr1409]: https://github.com/btcsuite/btcwallet/pull/1409
+[pr1412]: https://github.com/btcsuite/btcwallet/pull/1412
