@@ -29,7 +29,6 @@ All open Phase 2A and 2B work, including claimed and in-progress tasks.
 | --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | — |
 | [Task 338][t338] | Latch passphrase results | Bug fix | 2A | — | — |
-| [Task 347][t347] | Authorize existing PSBT signatures | Bug fix | 2A | Abdullahi | [#1400][pr1400] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | — |
@@ -90,7 +89,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
 [t338]: tasks/338-passphrase-result.md
-[t347]: tasks/347-psbt-signing-authorization.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
@@ -154,7 +152,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t486]: tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
-[pr1400]: https://github.com/btcsuite/btcwallet/pull/1400
 [pr1407]: https://github.com/btcsuite/btcwallet/pull/1407
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
 [pr1408]: https://github.com/btcsuite/btcwallet/pull/1408

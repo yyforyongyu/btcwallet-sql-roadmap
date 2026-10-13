@@ -51,5 +51,5 @@ effective key.
 input, and maintained signing retains no mutable tweak callback or
 compatibility wrapper.
 
-[t347]: 347-psbt-signing-authorization.md
+[t347]: ../archive/tasks/347-psbt-signing-authorization.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md

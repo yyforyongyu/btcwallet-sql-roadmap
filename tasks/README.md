@@ -72,7 +72,6 @@ They do not consume task numbers or require task files.
 
 ## Transactions, UTXOs, and PSBTs
 
-- [Task 347](347-psbt-signing-authorization.md): authorize existing PSBT
   signatures.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
