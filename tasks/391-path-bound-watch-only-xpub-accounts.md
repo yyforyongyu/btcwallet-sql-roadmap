@@ -121,7 +121,7 @@ or kvdb path.
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
 [t378]: ../archive/tasks/378-account-manager-error-boundary.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
-[t388]: 388-runtime-account-xpub-collisions.md
+[t388]: ../archive/tasks/388-runtime-account-xpub-collisions.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t392]: ../archive/tasks/392-discovery-mode-account-creation.md
 [t395]: ../archive/tasks/395-key-only-locator-allocation.md

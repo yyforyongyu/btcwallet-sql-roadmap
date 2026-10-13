@@ -9,7 +9,6 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 388][t388] | Reject duplicate account XPubs | Bug fix | 1 | YY | [#1394][pr1394] |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | [#1408][pr1408] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | [#1410][pr1410] |
 | [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
@@ -96,7 +95,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t369]: tasks/369-repeated-wallet-unlock.md
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
-[t388]: tasks/388-runtime-account-xpub-collisions.md
 [t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
@@ -136,7 +134,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
 [t474]: tasks/474-authored-change-watch.md
-[pr1394]: https://github.com/btcsuite/btcwallet/pull/1394
 
 [t475]: tasks/475-wallet-transaction-subscription.md
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md

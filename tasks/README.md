@@ -38,7 +38,6 @@ They do not consume task numbers or require task files.
 ## Accounts, addresses, and recovery
 
   atomically.
-- [Task 388](388-runtime-account-xpub-collisions.md): reject colliding runtime
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): report uncertain
   account commits truthfully.

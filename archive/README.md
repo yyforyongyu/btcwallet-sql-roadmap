@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 388](tasks/388-runtime-account-xpub-collisions.md) completed on 2026-10-14.
 - [Task 347](tasks/347-psbt-signing-authorization.md) completed on 2026-10-13.
 - [Task 396](tasks/396-oldest-unused-address.md) completed on 2026-10-06.
 - [Task 465](tasks/465-new-address-result-itests.md) completed on 2026-10-01.
