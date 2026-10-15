@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **159 tasks**: **79 open**, **57 done**,
-**21 superseded**, and **2 deferred**. With **113 ad hoc tasks**, that is
-**272 tracked tasks** and **170 completed** overall.
+The numbered roadmap contains **159 tasks**: **76 open**, **60 done**,
+**21 superseded**, and **2 deferred**. With **118 ad hoc tasks**, that is
+**277 tracked tasks** and **178 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -228,7 +228,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 60
 
-**170 completed: 57 numbered tasks and 113 ad hoc PRs.** Each closing PR counts
+**178 completed: 60 numbered tasks and 118 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -422,6 +422,11 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1375](https://github.com/btcsuite/btcwallet/pull/1375) | wallet+db: simplify account error boundary | yyforyongyu | 2026-09-12 |
 | [#1376](https://github.com/btcsuite/btcwallet/pull/1376) | wallet: reject nil Signer arguments before admission | Abdulkbk | 2026-09-12 |
 | [#1377](https://github.com/btcsuite/btcwallet/pull/1377) | bwtest: stop neutrino before closing database | yyforyongyu | 2026-09-11 |
+| [#1385](https://github.com/btcsuite/btcwallet/pull/1385) | wallet: classify initial account input errors | yyforyongyu | 2026-09-18 |
+| [#1387](https://github.com/btcsuite/btcwallet/pull/1387) | wallet: fix sync readiness and isolate targeted rescan failures | GustavoStingelin | 2026-09-18 |
+| [#1395](https://github.com/btcsuite/btcwallet/pull/1395) | wallet: harden psbt funding admission | Abdulkbk | 2026-09-24 |
+| [#1396](https://github.com/btcsuite/btcwallet/pull/1396) | multi: delete unmined tx branches instead of retaining them | Abdulkbk | 2026-09-24 |
+| [#1402](https://github.com/btcsuite/btcwallet/pull/1402) | wallet+db: make oldest-unused address atomic sql native | GustavoStingelin | 2026-10-15 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
