@@ -26,7 +26,7 @@ All open Phase 2A and 2B work, including claimed and in-progress tasks.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | [#1415][pr1415] |
-| [Task 338][t338] | Latch passphrase results | Bug fix | 2A | — | — |
+| [Task 338][t338] | Latch passphrase results | Bug fix | 2A | YY | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | — |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | [#1414][pr1414] |
