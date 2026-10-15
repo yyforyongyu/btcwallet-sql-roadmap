@@ -11,7 +11,6 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | --- | --- | --- | --- | --- | --- |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | [#1408][pr1408] |
 | [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | [#1410][pr1410] |
-| [Task 431][t431] | Test address allocation | Test | 1 | Gustavo | [#1407][pr1407] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413] |
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | [#1411][pr1411] |
@@ -109,7 +108,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t424]: tasks/424-transaction-utxo-integrity-adr.md
 [t428]: tasks/428-controller-sync-info-itests.md
-[t431]: tasks/431-address-allocation-lookup-itests.md
 [t432]: tasks/432-address-import-script-itests.md
 [t438]: tasks/438-psbt-decoration-combination-itests.md
 [t439]: tasks/439-psbt-funding-itests.md
@@ -147,7 +145,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t486]: tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
-[pr1407]: https://github.com/btcsuite/btcwallet/pull/1407
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
 [pr1408]: https://github.com/btcsuite/btcwallet/pull/1408
 [pr1411]: https://github.com/btcsuite/btcwallet/pull/1411

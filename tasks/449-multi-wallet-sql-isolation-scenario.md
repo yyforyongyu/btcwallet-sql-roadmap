@@ -67,7 +67,7 @@ a scenario-specific coordinator.
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
-[t431]: 431-address-allocation-lookup-itests.md
+[t431]: ../archive/tasks/431-address-allocation-lookup-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: ../archive/tasks/434-transaction-creation-itests.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md

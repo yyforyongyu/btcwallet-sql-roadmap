@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 431](tasks/431-address-allocation-lookup-itests.md) completed on 2026-10-16.
 - [Task 481](tasks/481-persist-imported-account-address-schema.md) completed on 2026-10-15.
 - [Task 388](tasks/388-runtime-account-xpub-collisions.md) completed on 2026-10-14.
 - [Task 347](tasks/347-psbt-signing-authorization.md) completed on 2026-10-13.

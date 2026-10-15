@@ -57,7 +57,7 @@ retain the full public proof without another signing abstraction or matrix.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t429]: ../archive/tasks/429-account-mutation-itests.md
-[t431]: 431-address-allocation-lookup-itests.md
+[t431]: ../archive/tasks/431-address-allocation-lookup-itests.md
 [t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: ../archive/tasks/442-signer-signing-itests.md
 [source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/signer_test.go

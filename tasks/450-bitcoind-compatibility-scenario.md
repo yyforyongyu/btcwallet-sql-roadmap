@@ -54,7 +54,7 @@ available address setup without waiting for Task 431's coverage.
 
 [compat]: https://github.com/btcsuite/btcwallet/issues/1250#issuecomment-4563982303
 [t415]: ../archive/tasks/415-utxo-public-integration-tests.md
-[t431]: 431-address-allocation-lookup-itests.md
+[t431]: ../archive/tasks/431-address-allocation-lookup-itests.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t434]: ../archive/tasks/434-transaction-creation-itests.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md

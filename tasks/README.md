@@ -108,7 +108,6 @@ that structural exclusion explicitly.
 
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
-- [Task 431](431-address-allocation-lookup-itests.md): cover address allocation
   and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
