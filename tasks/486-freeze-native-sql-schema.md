@@ -56,4 +56,4 @@ consolidated baseline.
 [t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t478]: 478-retain-spend-confirmation-leases.md
 [t480]: 480-own-raw-imports-in-one-wallet.md
-[t481]: 481-persist-imported-account-address-schema.md
+[t481]: ../archive/tasks/481-persist-imported-account-address-schema.md

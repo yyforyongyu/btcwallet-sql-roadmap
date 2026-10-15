@@ -58,7 +58,6 @@ They do not consume task numbers or require task files.
   accounts.
 - [Task 480](480-own-raw-imports-in-one-wallet.md): own raw imports in one
   signing wallet.
-- [Task 481](481-persist-imported-account-address-schema.md): preserve
   imported account address schema.
 
 ## Chain and synchronization

@@ -127,7 +127,7 @@ task. No ADR is required.
 [t478]: 478-retain-spend-confirmation-leases.md
 [t479]: 479-mix-imported-xpub-accounts.md
 [t480]: 480-own-raw-imports-in-one-wallet.md
-[t481]: 481-persist-imported-account-address-schema.md
+[t481]: ../archive/tasks/481-persist-imported-account-address-schema.md
 [t482]: 482-fund-imported-inputs-without-origin.md
 [t483]: 483-preserve-labels-on-chain-replay.md
 [t484]: 484-align-authoring-confirmation-height.md
