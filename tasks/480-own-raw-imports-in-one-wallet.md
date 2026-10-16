@@ -40,4 +40,4 @@ Raw public-only imports remain visible under `imported` in a signing Wallet
 without a fabricated derivation path, and ADR 0012 states this policy.
 
 [t479]: 479-mix-imported-xpub-accounts.md
-[t403]: 403-raw-import-watch-obligations.md
+[t403]: ../archive/tasks/403-raw-import-watch-obligations.md

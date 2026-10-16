@@ -50,7 +50,6 @@ They do not consume task numbers or require task files.
 - [Task 398](398-semantic-account-recovery-targets.md): accept semantic account
   recovery targets.
   persisted Wallet data.
-- [Task 403](403-raw-import-watch-obligations.md): register raw imports before
   public success.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.

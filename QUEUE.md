@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **159 tasks**: **75 open**, **61 done**,
+The numbered roadmap contains **159 tasks**: **74 open**, **62 done**,
 **21 superseded**, and **2 deferred**. With **118 ad hoc tasks**, that is
-**277 tracked tasks** and **179 completed** overall.
+**277 tracked tasks** and **180 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -24,7 +24,7 @@ sql-wallet merges into master. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 8 open
+## Phase 1 — final SQL schema and lnd compilation · 7 open
 
 Finish the planned SQL account, import, and lease schema changes, then
 consolidate them into a clean initial migration for SQLite and PostgreSQL.
@@ -49,7 +49,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
-| [Task 403][t403] | open | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | 402 |
 | [Task 475][t475] | open | Wallet transaction notifications | Gap fix | Deliver wallet transaction subscriptions | — |
 | [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
 | [Task 479][t479] | open | AccountManager custody and Wallet results | Gap fix | Mix imported XPub and signing accounts | — |
@@ -225,9 +224,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 
-## Done · 61
+## Done · 62
 
-**179 completed: 61 numbered tasks and 118 ad hoc PRs.** Each closing PR counts
+**180 completed: 62 numbered tasks and 118 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -268,6 +267,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 400][t400] | 1 | ADR 0004 and ADR 0005 synchronization contract | Design | Separate live watches from historical recovery | [#1322][pr1322] |
 | [Task 401][t401] | 1 | chain interface and Neutrino/btcd/bitcoind adapters | Gap fix | Add an idempotent live-tip-only chain watch | [#1344][pr1344] |
 | [Task 402][t402] | 1 | Wallet synchronization and live-watch readiness | Gap fix | Establish live watches from persisted Wallet data | [#1380][pr1380] |
+| [Task 403][t403] | 1 | AddressManager SQL raw-import mutation | Bug fix | Register raw imports before public success | [#1410][pr1410] |
 | [Task 404][t404] | 2 | TxCreator and PsbtManager input-source adapters | Bug fix | Validate Wallet transaction input amounts | [#1357][pr1357] |
 | [Task 412][t412] | 1 | TxWriter transaction invalidation | Gap fix | Expose transaction invalidation on TxWriter | [#1388][pr1388] |
 | [Task 415][t415] | 1 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |

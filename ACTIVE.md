@@ -10,7 +10,6 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | [#1408][pr1408] |
-| [Task 403][t403] | Watch raw imports before success | Bug fix | 1 | YY | [#1410][pr1410] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413] |
 | [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | [#1411][pr1411] |
@@ -97,7 +96,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t391]: tasks/391-path-bound-watch-only-xpub-accounts.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t403]: tasks/403-raw-import-watch-obligations.md
 [t405]: tasks/405-psbt-funding-lease-admission.md
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
@@ -148,7 +146,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
 [pr1408]: https://github.com/btcsuite/btcwallet/pull/1408
 [pr1411]: https://github.com/btcsuite/btcwallet/pull/1411
-[pr1410]: https://github.com/btcsuite/btcwallet/pull/1410
 [pr1412]: https://github.com/btcsuite/btcwallet/pull/1412
 [pr1413]: https://github.com/btcsuite/btcwallet/pull/1413
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415
