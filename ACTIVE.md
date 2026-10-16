@@ -31,7 +31,7 @@ All open Phase 2A and 2B work, including claimed and in-progress tasks.
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | [#1414][pr1414] |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
-| [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | — | — |
+| [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | YY | — |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
