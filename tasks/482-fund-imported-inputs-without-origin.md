@@ -38,6 +38,6 @@ Tasks 480/481 where those imports or scripts are needed. The
 Owned imported inputs fund without invented origin while contradictory facts
 still fail.
 
-[t479]: 479-mix-imported-xpub-accounts.md
+[t479]: ../archive/tasks/479-mix-imported-xpub-accounts.md
 
 [wallet-poc]: https://github.com/yyforyongyu/btcwallet/commit/2c8d6196f731860925ce48f8f9bc68d1599e7b11

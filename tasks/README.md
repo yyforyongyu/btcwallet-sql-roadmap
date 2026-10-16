@@ -53,7 +53,6 @@ They do not consume task numbers or require task files.
   public success.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
-- [Task 479](479-mix-imported-xpub-accounts.md): mix imported XPub and signing
   accounts.
 - [Task 480](480-own-raw-imports-in-one-wallet.md): own raw imports in one
   signing wallet.

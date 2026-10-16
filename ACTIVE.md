@@ -12,7 +12,6 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | [Task 391][t391] | Create exact path-bound XPub accounts | Gap fix | 1 | YY | [#1408][pr1408] |
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413] |
-| [Task 479][t479] | Mix imported XPub and signing accounts | Gap fix | 1 | YY | [#1411][pr1411] |
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | [#1412][pr1412] |
 | [Task 486][t486] | Consolidate initial SQL schema | Migration | 1 | YY | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
@@ -134,7 +133,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md
 [t477]: tasks/477-import-legacy-snapshot-postgres.md
 [t478]: tasks/478-retain-spend-confirmation-leases.md
-[t479]: tasks/479-mix-imported-xpub-accounts.md
 [t480]: tasks/480-own-raw-imports-in-one-wallet.md
 [t482]: tasks/482-fund-imported-inputs-without-origin.md
 [t483]: tasks/483-preserve-labels-on-chain-replay.md
@@ -145,7 +143,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
 [pr1408]: https://github.com/btcsuite/btcwallet/pull/1408
-[pr1411]: https://github.com/btcsuite/btcwallet/pull/1411
 [pr1412]: https://github.com/btcsuite/btcwallet/pull/1412
 [pr1413]: https://github.com/btcsuite/btcwallet/pull/1413
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415

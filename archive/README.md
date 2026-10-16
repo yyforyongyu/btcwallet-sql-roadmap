@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 479](tasks/479-mix-imported-xpub-accounts.md) completed on 2026-10-16.
 - [Task 403](tasks/403-raw-import-watch-obligations.md) completed on 2026-10-16.
 - [Task 431](tasks/431-address-allocation-lookup-itests.md) completed on 2026-10-16.
 - [Task 481](tasks/481-persist-imported-account-address-schema.md) completed on 2026-10-15.
