@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **159 tasks**: **73 open**, **63 done**,
-**21 superseded**, and **2 deferred**. With **118 ad hoc tasks**, that is
-**277 tracked tasks** and **181 completed** overall.
+**21 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
+**278 tracked tasks** and **182 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -225,7 +225,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 63
 
-**181 completed: 63 numbered tasks and 118 ad hoc PRs.** Each closing PR counts
+**182 completed: 63 numbered tasks and 119 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -427,6 +427,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1395](https://github.com/btcsuite/btcwallet/pull/1395) | wallet: harden psbt funding admission | Abdulkbk | 2026-09-24 |
 | [#1396](https://github.com/btcsuite/btcwallet/pull/1396) | multi: delete unmined tx branches instead of retaining them | Abdulkbk | 2026-09-24 |
 | [#1402](https://github.com/btcsuite/btcwallet/pull/1402) | wallet+db: make oldest-unused address atomic sql native | GustavoStingelin | 2026-10-15 |
+| [#1420](https://github.com/btcsuite/btcwallet/pull/1420) | ci: speed up the lint job | GustavoStingelin | 2026-10-18 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md

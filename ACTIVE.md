@@ -23,13 +23,13 @@ All open Phase 2A and 2B work, including claimed and in-progress tasks.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | [#1415][pr1415] |
-| [Task 338][t338] | Latch passphrase results | Bug fix | 2A | YY | — |
+| [Task 338][t338] | Latch passphrase results | Bug fix | 2A | YY | [#1421][pr1421] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
-| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | — |
+| [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | [#1423][pr1423] |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | [#1414][pr1414] |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
-| [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | YY | — |
+| [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | YY | [#1422][pr1422] |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
@@ -150,3 +150,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1419]: https://github.com/btcsuite/btcwallet/pull/1419
 [pr1417]: https://github.com/btcsuite/btcwallet/pull/1417
 [pr1416]: https://github.com/btcsuite/btcwallet/pull/1416
+[pr1423]: https://github.com/btcsuite/btcwallet/pull/1423
+[pr1422]: https://github.com/btcsuite/btcwallet/pull/1422
+[pr1421]: https://github.com/btcsuite/btcwallet/pull/1421
