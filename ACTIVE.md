@@ -41,8 +41,8 @@ All open Phase 2A and 2B work, including claimed and in-progress tasks.
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
 | [Task 474][t474] | Watch authored change before return | Bug fix | 2A | Gustavo | [#1419][pr1419] |
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
-| [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | — | — |
-| [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | — | — |
+| [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | YY | [#1417][pr1417] |
+| [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | YY | [#1416][pr1416] |
 | [Task 369][t369] | Test repeated unlocks | Test | 2B | — | — |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | — | — |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | — | — |
@@ -148,3 +148,5 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415
 [pr1414]: https://github.com/btcsuite/btcwallet/pull/1414
 [pr1419]: https://github.com/btcsuite/btcwallet/pull/1419
+[pr1417]: https://github.com/btcsuite/btcwallet/pull/1417
+[pr1416]: https://github.com/btcsuite/btcwallet/pull/1416
