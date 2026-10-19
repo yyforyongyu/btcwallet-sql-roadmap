@@ -49,5 +49,5 @@ Every SQL account has one immutable `NoChainSync` value that survives migration
 and reopen, without changing custody, public selection, recovery, or chain
 behavior.
 
-[t340]: ../archive/tasks/340-durable-database-identity.md
-[t387]: ../archive/tasks/387-account-creation-identity-adr.md
+[t340]: 340-durable-database-identity.md
+[t387]: 387-account-creation-identity-adr.md

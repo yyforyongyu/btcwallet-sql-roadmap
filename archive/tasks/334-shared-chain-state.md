@@ -191,11 +191,11 @@ prescribing a mutex, channel, SQL lock, or generic event framework.
 [t331]: 331-manager-wallet-lifecycle.md
 [t353]: 353-retire-modern-kvdb-backend.md
 [t368]: 368-wallet-startup-shutdown.md
-[t370]: 370-chain-source-delivery.md
+[t370]: ../../tasks/370-chain-source-delivery.md
 [t371]: 371-canonical-chain-frontier.md
-[t372]: 372-multi-wallet-rollback.md
-[t423]: 423-manager-chain-source-cutover.md
+[t372]: ../../tasks/372-multi-wallet-rollback.md
+[t423]: ../../tasks/423-manager-chain-source-cutover.md
 [t456]: 456-manager-runtime-configuration.md
-[t457]: 457-process-local-manager-lease.md
+[t457]: ../../tasks/457-process-local-manager-lease.md
 [t458]: 458-manager-operation-admission.md
 [t459]: 459-manager-startup-wallet-assembly.md

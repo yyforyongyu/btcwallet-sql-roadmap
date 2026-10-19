@@ -58,9 +58,9 @@ indexes, and triggers, fresh creation, and unchanged reopen. Affected
 SQL-generation references, generated output, tests, and guidance match the
 consolidated baseline.
 
-[t391]: ../../tasks/391-path-bound-watch-only-xpub-accounts.md
+[t391]: 391-path-bound-watch-only-xpub-accounts.md
 [t478]: ../../tasks/478-retain-spend-confirmation-leases.md
-[t480]: ../../tasks/480-own-raw-imports-in-one-wallet.md
+[t480]: 480-own-raw-imports-in-one-wallet.md
 [t481]: 481-persist-imported-account-address-schema.md
 
 [issue56]: https://github.com/yyforyongyu/btcwallet-sql-roadmap/issues/56

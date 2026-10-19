@@ -46,4 +46,4 @@ watch idempotently, and Neutrino preserves active historical scan identity.
 The PR changes no daemon, RPC contract or frontend, CLI, or deprecated-wallet
 code.
 
-[t400]: ../archive/tasks/400-live-watch-semantics-adr.md
+[t400]: 400-live-watch-semantics-adr.md

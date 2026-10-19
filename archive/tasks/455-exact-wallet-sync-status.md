@@ -52,6 +52,6 @@ is not prescribed.
 `SyncedTo`, removes unsupported recovery projections, and remains independent
 of targeted rescans and backend ownership changes.
 
-[t334]: ../archive/tasks/334-shared-chain-state.md
-[t428]: 428-controller-sync-info-itests.md
-[t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
+[t334]: 334-shared-chain-state.md
+[t428]: ../../tasks/428-controller-sync-info-itests.md
+[t433]: 433-wallet-sync-test-boundary.md

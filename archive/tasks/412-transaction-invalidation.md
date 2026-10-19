@@ -66,4 +66,4 @@ backed by existing SQL branch invalidation. Callers decide when to request it;
 Wallet owns the atomic accounting cleanup without consumer-specific logic,
 new chain watches, or a new publication protocol.
 
-[t339]: ../archive/tasks/339-transaction-visibility.md
+[t339]: 339-transaction-visibility.md

@@ -54,7 +54,7 @@ Every returned direct AuthoredTx with change has that
 change registered. SQL btcd/bitcoind uses Task 402; modern kvdb and Neutrino
 retain their existing watch paths. No lease semantics or duplicate allocation.
 
-[t344]: ../../tasks/344-bulk-address-allocation.md
+[t344]: 344-bulk-address-allocation.md
 [t356]: ../../tasks/356-defer-change-script-allocation.md
-[t402]: ../../tasks/402-replay-live-watch-obligations.md
+[t402]: 402-replay-live-watch-obligations.md
 [t425]: 425-separate-transaction-authoring-wrappers.md

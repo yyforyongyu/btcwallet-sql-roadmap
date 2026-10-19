@@ -27,7 +27,7 @@ can safely depend on them.
 - Confirm that populated unmarked, foreign, dirty, newer, and mismatched
   databases remain non-mutating rejection cases.
 - Keep archived
-  [Task 1000](../archive/tasks/1000-complete-btcwallet-sql-role-readiness.md)
+  [Task 1000](1000-complete-btcwallet-sql-role-readiness.md)
   lock, manifest, and generic recovery machinery out of scope.
 - Produce only the accepted design record. Store implementation, schema
   changes, generated output, and migration tests belong to

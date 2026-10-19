@@ -3,7 +3,7 @@
 Status: Planning (2026-07-10). Concrete execution plan for the top-3 upper
 branches, reflecting the current reconcile state and the decision to make the
 SQLite backend truly SQL-native. Refines the planning in
-[294](archive/294-reorganize-runtime-store-prep-sqlite-last.md) (branch reorg)
+[294](294-reorganize-runtime-store-prep-sqlite-last.md) (branch reorg)
 and [295](295-finalize-walletdb-removal-then-sqlite-config.md) (finalize
 walletdb removal + SQL config).
 

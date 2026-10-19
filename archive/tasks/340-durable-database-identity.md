@@ -74,5 +74,5 @@ fail before database access on both dialects.
 - The PR follows [Task 359](359-revalidate-database-identity-design.md) and
   adds no generic lock, create manifest, or recovery framework.
 
-[t359]: ../archive/tasks/359-revalidate-database-identity-design.md
-[t1000]: ../archive/tasks/1000-complete-btcwallet-sql-role-readiness.md
+[t359]: 359-revalidate-database-identity-design.md
+[t1000]: 1000-complete-btcwallet-sql-role-readiness.md

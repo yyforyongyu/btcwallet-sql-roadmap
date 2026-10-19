@@ -66,5 +66,5 @@ Vault error identity and no adjacent account behavior added.
 [t388]: 388-runtime-account-xpub-collisions.md
 [t390]: 390-custom-scope-account-creation.md
 [t430]: 430-account-query-itests.md
-[t460]: 460-sequential-account-invalid-children.md
-[t462]: 462-account-mutation-error-itests.md
+[t460]: ../../tasks/460-sequential-account-invalid-children.md
+[t462]: ../../tasks/462-account-mutation-error-itests.md

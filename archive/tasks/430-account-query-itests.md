@@ -70,6 +70,6 @@ adding a `package wallet_test` file.
 - No new query contract is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t341]: ../archive/tasks/341-public-role-contract.md
-[t377]: ../archive/tasks/377-account-manager-wallet-dto.md
-[t378]: ../archive/tasks/378-account-manager-error-boundary.md
+[t341]: 341-public-role-contract.md
+[t377]: 377-account-manager-wallet-dto.md
+[t378]: 378-account-manager-error-boundary.md

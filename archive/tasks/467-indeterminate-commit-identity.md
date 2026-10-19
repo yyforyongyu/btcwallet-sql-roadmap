@@ -76,12 +76,12 @@ reconciliation result at its existing public boundary.
 
 [t344]: 344-bulk-address-allocation.md
 [t343]: 343-exact-account-creation.md
-[t358]: 358-contextual-manager-operations.md
+[t358]: ../../tasks/358-contextual-manager-operations.md
 [t366]: 366-reconcile-sql-genesis-commit.md
-[t389]: 389-runtime-account-commit-reconciliation.md
+[t389]: ../../tasks/389-runtime-account-commit-reconciliation.md
 [t390]: 390-custom-scope-account-creation.md
 [t395]: 395-key-only-locator-allocation.md
 [t403]: 403-raw-import-watch-obligations.md
-[t405]: 405-psbt-funding-lease-admission.md
-[t406]: 406-psbt-funding-lease-release.md
-[t460]: 460-sequential-account-invalid-children.md
+[t405]: ../../tasks/405-psbt-funding-lease-admission.md
+[t406]: ../../tasks/406-psbt-funding-lease-release.md
+[t460]: ../../tasks/460-sequential-account-invalid-children.md

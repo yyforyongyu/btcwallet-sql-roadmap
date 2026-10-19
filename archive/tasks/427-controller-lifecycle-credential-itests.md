@@ -65,5 +65,5 @@ objects for the durable credential check.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [pr1300]: https://github.com/btcsuite/btcwallet/pull/1300
-[t331]: ../../tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t369]: ../../tasks/369-repeated-wallet-unlock.md

@@ -56,7 +56,7 @@ The generic account-creation request can create an exact root-derived account
 in a validated custom scope without a purpose-specific API or new component.
 
 [t343]: 343-exact-account-creation.md
-[t378]: ../archive/tasks/378-account-manager-error-boundary.md
-[t387]: ../archive/tasks/387-account-creation-identity-adr.md
-[t392]: ../archive/tasks/392-discovery-mode-account-creation.md
+[t378]: 378-account-manager-error-boundary.md
+[t387]: 387-account-creation-identity-adr.md
+[t392]: 392-discovery-mode-account-creation.md
 [t468]: 468-activate-no-chain-sync-account-creation.md

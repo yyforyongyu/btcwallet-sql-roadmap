@@ -60,5 +60,5 @@ shared secrets, and never log or persist private material.
   remaining kvdb behavior and public regression.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t337]: ../archive/tasks/337-imported-xpub-derivation.md
+[t337]: 337-imported-xpub-derivation.md
 [t361]: 361-kvdb-imported-xpub-derivation.md
