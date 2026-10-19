@@ -106,10 +106,10 @@ task. No ADR is required.
 [t346]: ../archive/tasks/346-psbt-funding-metadata.md
 [t356]: 356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
-[t474]: 474-authored-change-watch.md
+[t474]: ../archive/tasks/474-authored-change-watch.md
 [t376]: 376-orchestrate-legacy-conversion.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t395]: ../archive/tasks/395-key-only-locator-allocation.md
 [t396]: ../archive/tasks/396-oldest-unused-address.md
 [t412]: ../archive/tasks/412-transaction-invalidation.md
@@ -118,7 +118,7 @@ task. No ADR is required.
 [t442]: ../archive/tasks/442-signer-signing-itests.md
 [t443]: ../archive/tasks/443-unsafe-signer-itests.md
 [t447]: 447-psbt-workflow-scenario.md
-[t461]: 461-address-batch-itests.md
+[t461]: ../archive/tasks/461-address-batch-itests.md
 [t465]: ../archive/tasks/465-new-address-result-itests.md
 [t466]: 466-oldest-unused-address-itests.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md

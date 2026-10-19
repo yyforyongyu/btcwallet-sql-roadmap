@@ -27,7 +27,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | — |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
-| [Task 474][t474] | Watch authored change before return | Bug fix | 2A | Gustavo | [#1419][pr1419] |
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
 | [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | YY | [#1417][pr1417] |
 | [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | YY | [#1416][pr1416] |
@@ -120,7 +119,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t470]: tasks/470-lnd-wallet-port.md
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
-[t474]: tasks/474-authored-change-watch.md
 
 [t475]: tasks/475-wallet-transaction-subscription.md
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md
@@ -136,7 +134,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1413]: https://github.com/btcsuite/btcwallet/pull/1413
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415
 [pr1414]: https://github.com/btcsuite/btcwallet/pull/1414
-[pr1419]: https://github.com/btcsuite/btcwallet/pull/1419
 [pr1417]: https://github.com/btcsuite/btcwallet/pull/1417
 [pr1416]: https://github.com/btcsuite/btcwallet/pull/1416
 [pr1423]: https://github.com/btcsuite/btcwallet/pull/1423

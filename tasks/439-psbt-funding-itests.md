@@ -84,5 +84,5 @@ setup and teardown without prescribing a new file or production hook.
 [t346]: ../archive/tasks/346-psbt-funding-metadata.md
 [t356]: 356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
-[t474]: 474-authored-change-watch.md
+[t474]: ../archive/tasks/474-authored-change-watch.md
 [source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/psbt_manager_test.go#L5061

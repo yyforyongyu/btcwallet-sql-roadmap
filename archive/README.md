@@ -20,6 +20,10 @@ specifications.
 
 ## History
 
+- [Task 474](tasks/474-authored-change-watch.md) completed through
+  [PR #1419](https://github.com/btcsuite/btcwallet/pull/1419), merged into
+  `sql-wallet` on 2026-10-19 (UTC).
+
 - [Task 424](tasks/424-transaction-utxo-integrity-adr.md) was superseded on
   2026-10-20. A separate integrity ADR is no longer required; [Task 410][t410]
   owns ordering evidence and correction, while [Task 454][t454] retains its
@@ -62,7 +66,7 @@ specifications.
 
 - [Task 348](tasks/348-watched-change-delivery.md) and
   [Task 408](tasks/408-direct-transaction-change-watch.md) were superseded on
-  2026-09-21 by [Task 474](../tasks/474-authored-change-watch.md), which owns
+  2026-09-21 by [Task 474](tasks/474-authored-change-watch.md), which owns
   the missing authored-change watch calls. Neither is complete.
 - [Task 363](tasks/363-recovery-scan-work-bound.md),
   [Task 366](tasks/366-reconcile-sql-genesis-commit.md), and
@@ -110,7 +114,7 @@ specifications.
 
 - [Task 364](tasks/364-durable-watch-registration.md) was superseded on
   2026-09-10: fail-stop and reconstruction eliminate watch-delivery persistence.
-  [Task 402](../tasks/402-replay-live-watch-obligations.md) retains registration
+  [Task 402](tasks/402-replay-live-watch-obligations.md) retains registration
   from existing Wallet facts.
 - [Task 378](tasks/378-account-manager-error-boundary.md) completed on 2026-09-10.
 - [Task 458](tasks/458-manager-operation-admission.md) completed on 2026-09-08.
@@ -132,7 +136,7 @@ specifications.
   superseded standalone cleanup Task 386.
 - [Task 368](tasks/368-wallet-startup-shutdown.md) was superseded on
   2026-09-05 when its public lifecycle cutover was absorbed into
-  [Task 331](../tasks/331-manager-wallet-lifecycle.md) as part of one atomic
+  [Task 331](tasks/331-manager-wallet-lifecycle.md) as part of one atomic
   Manager lifecycle outcome; PR #1328 was retargeted to Task 331.
 - [Task 340](tasks/340-durable-database-identity.md) completed on 2026-09-05.
 - [Task 456](tasks/456-manager-runtime-configuration.md) completed on 2026-09-04.

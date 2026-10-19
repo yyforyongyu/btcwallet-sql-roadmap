@@ -55,4 +55,4 @@ watching, or leasing.
 [t357]: ../archive/tasks/357-transaction-amount-validation.md
 [t404]: ../archive/tasks/404-transaction-input-amounts.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
-[t474]: 474-authored-change-watch.md
+[t474]: ../archive/tasks/474-authored-change-watch.md

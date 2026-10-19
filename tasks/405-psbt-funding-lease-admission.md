@@ -64,4 +64,4 @@ cleanup method, reservation result, or reconciliation system is added.
 [t406]: 406-psbt-funding-lease-release.md
 [t439]: 439-psbt-funding-itests.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
-[t474]: 474-authored-change-watch.md
+[t474]: ../archive/tasks/474-authored-change-watch.md

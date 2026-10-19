@@ -10,7 +10,7 @@ Dependencies: **[Task 344][t344], [Task 356][t356], [Task 402][t402], and
 ## Archive decision
 
 Superseded on 2026-09-21 by
-[Task 474](../../tasks/474-authored-change-watch.md).
+[Task 474](474-authored-change-watch.md).
 The accepted change-watch consolidation replaces this unimplemented scope;
 this task is not complete.
 
