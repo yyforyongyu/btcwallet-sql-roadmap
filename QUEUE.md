@@ -8,8 +8,8 @@ Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
 completion and ad hoc accounting.
 
-Phase 1 is the active focus; all open 2A fixes and 2B verification are tracked
-as upcoming work. The completion goal includes both Phase 2 tracks, which
+Phases 1 and 2A are the active focus; Phase 2B verification is tracked as
+upcoming work. The completion goal includes both Phase 2 tracks, which
 may advance in parallel as dependencies allow. Phase 3 and 4 work starts only
 if already underway or owner-approved; neither waits for all of Phase 2.
 Hardening starts only after 2A and 2B finish. Placement changes no task scope,

@@ -27,9 +27,9 @@ remains the only authority for live state.
 Use these terms precisely:
 
 - **Active** means current-focus work listed under ACTIVE's `Active Tasks`.
-  Include every open Phase 1 task, including stacked work with open hard
-  dependencies. Active does not mean merge-ready. Put every open Phase 2A/2B
-  task under `Upcoming Phase 2 Tasks`, including claimed and in-progress work;
+  Include every open Phase 1 and 2A task, including stacked work with open hard
+  dependencies. Active does not mean merge-ready. Put every open Phase 2B task
+  under `Upcoming Phase 2 Tasks`, including claimed and in-progress work;
   a claim or implementation start does not promote it. Park later-phase claims
   under `Claimed Tasks`. QUEUE's start gates still apply, including Hardening's
   gate.
@@ -67,8 +67,8 @@ all of its hard dependencies. Stacking needs no special approval and does not
 require the prerequisite contract to be frozen.
 
 Refresh ACTIVE's three task lists whenever a claim, task phase, or task status
-changes. List every open Phase 1 task in `Active Tasks` and every open Phase
-2A/2B task exactly once in `Upcoming Phase 2 Tasks`. `Claimed Tasks` contains
+changes. List every open Phase 1 and 2A task in `Active Tasks` and every open
+Phase 2B task exactly once in `Upcoming Phase 2 Tasks`. `Claimed Tasks` contains
 parked claims from Phase 3, Phase 4, and Hardening. Preserve claimants
 and PRs, and sort each list by QUEUE phase/track then task number. No task
 appears in more than one list. Keep section descriptions to one sentence;
@@ -130,10 +130,9 @@ changes, verify fresh creation and unchanged reopen on both SQL backends using
 the existing loader, and prove that lnd compiles against the maintained Wallet.
 Keep the existing SQL file organization; consolidation is not a merge gate.
 The pre-claim gap check precedes lnd's compile cutover. Full lnd runtime and
-itest parity
-remain Task 470's separate merge gate. Phase 1 is the active focus; Phase 2A
-bugs/gaps and 2B verification are tracked as upcoming work and may advance
-in parallel as dependencies permit. Phase 3 migration and Phase 4 optional
+itest parity remain Task 470's separate merge gate. Phases 1 and 2A are the
+active focus; Phase 2B verification remains upcoming work and may advance in
+parallel as dependencies permit. Phase 3 migration and Phase 4 optional
 improvements may overlap them.
 Hardening starts only after both 2A and 2B finish. Integration and migration
 retain their concrete fixes and behavioral gates, not blanket test-task or

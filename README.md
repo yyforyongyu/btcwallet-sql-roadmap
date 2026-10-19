@@ -63,8 +63,8 @@ gate. The pre-claim gap check is complete.
 Later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule. Relevant fixes
 and passing behavioral evidence gate enabling each affected runtime path.
 
-Phase 1 remains the active focus. The completion goal also includes Phase
-2A's bugs/gaps and 2B's verification, tracked under `Upcoming Phase 2 Tasks`.
+Phases 1 and 2A are the active focus. Phase 2B verification remains under
+`Upcoming Phase 2 Tasks`; the completion goal includes both Phase 2 tracks.
 Those tracks may advance in parallel as dependencies allow.
 Phase 3 migration and Phase 4 optional improvements may overlap them as
 dependencies allow. Hardening starts only after both 2A and 2B

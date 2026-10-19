@@ -5,7 +5,7 @@ them here. Dependencies set merge order; stacked PRs are encouraged.
 
 ## Active Tasks
 
-All open Phase 1 work, including stacked tasks with open dependencies.
+All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
@@ -14,13 +14,6 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413] |
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | [#1412][pr1412] |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
-
-## Upcoming Phase 2 Tasks
-
-All open Phase 2A and 2B work, including claimed and in-progress tasks.
-
-| Task | Description | Type | Phase / track | Claimant | PR |
-| --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | [#1415][pr1415] |
 | [Task 338][t338] | Latch passphrase results | Bug fix | 2A | YY | [#1421][pr1421] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
@@ -42,6 +35,13 @@ All open Phase 2A and 2B work, including claimed and in-progress tasks.
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
 | [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | YY | [#1417][pr1417] |
 | [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | YY | [#1416][pr1416] |
+
+## Upcoming Phase 2 Tasks
+
+All open Phase 2B verification work, including claimed and in-progress tasks.
+
+| Task | Description | Type | Phase / track | Claimant | PR |
+| --- | --- | --- | --- | --- | --- |
 | [Task 369][t369] | Test repeated unlocks | Test | 2B | — | — |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | — | — |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | — | — |
