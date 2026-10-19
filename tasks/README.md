@@ -39,7 +39,6 @@ They do not consume task numbers or require task files.
   account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): report uncertain
   account commits truthfully.
-- [Task 391](391-path-bound-watch-only-xpub-accounts.md): create exact path-bound
   XPub accounts.
   durable key allocation.
   unused address.
@@ -52,7 +51,6 @@ They do not consume task numbers or require task files.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
   accounts.
-- [Task 480](480-own-raw-imports-in-one-wallet.md): own raw imports in one
   signing wallet.
   imported account address schema.
 

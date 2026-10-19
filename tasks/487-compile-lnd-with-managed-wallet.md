@@ -44,7 +44,7 @@ pinned lnd revision. That revision builds against the pinned maintained
 btcwallet revision across supported variants; incomplete runtime paths
 remain visible for Task 470.
 
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t395]: ../archive/tasks/395-key-only-locator-allocation.md
 [t396]: ../archive/tasks/396-oldest-unused-address.md
 [t475]: 475-wallet-transaction-subscription.md

@@ -72,5 +72,5 @@ semantics. Address/script extraction remains independently owned by Task 473.
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t335]: 335-kvdb-to-sql-migration.md
 [t387]: ../archive/tasks/387-account-creation-identity-adr.md
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t473]: 473-extract-legacy-address-script-state.md

@@ -87,5 +87,5 @@ intact. Choose the smallest safe boundary under Task 354; leave kvdb unchanged.
 [t354]: 354-vault-owned-secret-resolution.md
 [t343]: ../archive/tasks/343-exact-account-creation.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t460]: 460-sequential-account-invalid-children.md

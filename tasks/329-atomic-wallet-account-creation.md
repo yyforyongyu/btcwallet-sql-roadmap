@@ -106,5 +106,5 @@ the transaction succeeds.
 [t353]: ../archive/tasks/353-retire-modern-kvdb-backend.md
 [t358]: 358-contextual-manager-operations.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md

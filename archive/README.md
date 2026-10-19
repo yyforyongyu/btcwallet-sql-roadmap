@@ -19,6 +19,8 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 480](tasks/480-own-raw-imports-in-one-wallet.md) completed on 2026-10-20.
+- [Task 391](tasks/391-path-bound-watch-only-xpub-accounts.md) completed on 2026-10-20.
 
 - [Task 338](tasks/338-passphrase-result.md) was superseded on 2026-10-20.
   Caller cancellation may end observation after acceptance with an unknown

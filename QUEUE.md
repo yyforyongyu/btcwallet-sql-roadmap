@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **161 tasks**: **73 open**, **63 done**,
+The numbered roadmap contains **161 tasks**: **71 open**, **65 done**,
 **23 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
-**280 tracked tasks** and **182 completed** overall.
+**280 tracked tasks** and **184 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -23,7 +23,7 @@ build-verified revision. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 5 open
+## Phase 1 — final SQL schema and lnd compilation · 3 open
 
 Finish the planned SQL account, import, and lease schema changes. Retain the
 existing SQL file organization and migration loader, and verify fresh creation
@@ -46,10 +46,8 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 391][t391] | open | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | 388, 395 |
 | [Task 475][t475] | open | Wallet transaction notifications | Gap fix | Deliver wallet transaction subscriptions | — |
 | [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
-| [Task 480][t480] | open | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | 403, 479 |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 391, 395, 396, 475, 478 |
 
 ## Phase 2A — bugs and gaps · 22 open
@@ -223,9 +221,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 486][t486] | 1 | SQLite and PostgreSQL schema initialization | Migration | Consolidate initial SQL schema before master merge | Accepted decision preserves separate SQL files and the existing loader; schema changes stay with Tasks 391, 478, 480, and 481; fresh creation and unchanged reopen remain pre-merge checks |
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 
-## Done · 63
+## Done · 65
 
-**182 completed: 63 numbered tasks and 119 ad hoc PRs.** Each closing PR counts
+**184 completed: 65 numbered tasks and 119 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -258,6 +256,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 387][t387] | 1 | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | [#1342][pr1342] |
 | [Task 388][t388] | 1 | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | [#1394][pr1394] |
 | [Task 390][t390] | 1 | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | [#1371][pr1371] |
+| [Task 391][t391] | 1 | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | [#1408][pr1408] |
 | [Task 392][t392] | 1 | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | [#1366][pr1366] |
 | [Task 393][t393] | 1 | AddressManager receiving APIs and AddressStore account lookup | Gap fix | Guard receiving APIs for NoChainSync accounts | [#1367][pr1367] |
 | [Task 395][t395] | 1 | AddressManager key allocation and SQL branch-counter mutation | Gap fix | Add AllocateNextKey for durable key allocation | [#1386][pr1386] |
@@ -295,6 +294,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 | [Task 468][t468] | 1 | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | [#1369][pr1369] |
 | [Task 479][t479] | 1 | AccountManager custody and Wallet results | Gap fix | Mix imported XPub and signing accounts | [#1411][pr1411] |
+| [Task 480][t480] | 1 | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | [#1412][pr1412] |
 | [Task 481][t481] | 1 | AccountManager and SQL account address schema | Bug fix | Preserve imported account address schema | [#1409][pr1409] |
 
 ### Ad hoc PRs

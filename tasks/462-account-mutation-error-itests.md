@@ -89,5 +89,5 @@ reopen.
   assertion, or duplicated Task 429 coverage.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t391]: 391-path-bound-watch-only-xpub-accounts.md
+[t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/account_manager_test.go
