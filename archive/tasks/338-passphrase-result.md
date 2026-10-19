@@ -1,5 +1,12 @@
 # Task 338 — latch accepted passphrase results
 
+> Superseded on 2026-10-20: retain caller-cancelable waiting after acceptance;
+> cancellation can leave the mutation outcome unknown and does not prove
+> rollback. Unconditional final-result delivery is no longer required.
+> [Task 488][t488] owns request buffers and [Task 489][t489] owns the accepted
+> operation's shutdown context. [PR #1421][pr1421] closed unmerged on
+> 2026-10-20. This is not completion credit.
+
 Component: **Controller**.
 
 Type: **Bug fix**.
@@ -52,5 +59,9 @@ Every accepted passphrase request returns its authoritative operation result.
 Shutdown drains that work through the existing lifecycle, and pre-handoff
 cancellation remains supported without another backend delivery layer.
 
-[t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t421]: ../archive/tasks/421-sql-passphrase-commit-reconciliation.md
+[t331]: 331-manager-wallet-lifecycle.md
+[t421]: 421-sql-passphrase-commit-reconciliation.md
+
+[t488]: ../../tasks/488-passphrase-request-ownership.md
+[t489]: ../../tasks/489-passphrase-shutdown-context.md
+[pr1421]: https://github.com/btcsuite/btcwallet/pull/1421

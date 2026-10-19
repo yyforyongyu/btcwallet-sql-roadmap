@@ -15,7 +15,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | [#1412][pr1412] |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | [#1415][pr1415] |
-| [Task 338][t338] | Latch passphrase results | Bug fix | 2A | YY | [#1421][pr1421] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | [#1423][pr1423] |
 | [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | [#1414][pr1414] |
@@ -35,6 +34,8 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
 | [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | YY | [#1417][pr1417] |
 | [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | YY | [#1416][pr1416] |
+| [Task 488][t488] | Own passphrase request buffers | Bug fix | 2A | YY | — |
+| [Task 489][t489] | Drain accepted passphrase rotation | Bug fix | 2A | YY | — |
 
 ## Upcoming Phase 2 Tasks
 
@@ -82,7 +83,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1343]: https://github.com/btcsuite/btcwallet/pull/1343
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
-[t338]: tasks/338-passphrase-result.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
@@ -150,4 +150,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1416]: https://github.com/btcsuite/btcwallet/pull/1416
 [pr1423]: https://github.com/btcsuite/btcwallet/pull/1423
 [pr1422]: https://github.com/btcsuite/btcwallet/pull/1422
-[pr1421]: https://github.com/btcsuite/btcwallet/pull/1421
+
+[t488]: tasks/488-passphrase-request-ownership.md
+[t489]: tasks/489-passphrase-shutdown-context.md

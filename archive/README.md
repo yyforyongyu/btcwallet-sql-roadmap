@@ -20,6 +20,13 @@ specifications.
 
 ## History
 
+- [Task 338](tasks/338-passphrase-result.md) was superseded on 2026-10-20.
+  Caller cancellation may end observation after acceptance with an unknown
+  mutation outcome; unconditional waiting is no longer required.
+  [Task 488](../tasks/488-passphrase-request-ownership.md) owns request buffers
+  and [Task 489](../tasks/489-passphrase-shutdown-context.md) owns shutdown
+  context. PR #1421 closed unmerged; this adds no completion.
+
 - [Task 486](tasks/486-freeze-native-sql-schema.md) was superseded on
   2026-10-19 without a replacement. Separate SQL sources and the existing
   migration loader remain; schema changes stay with Tasks 391, 478, 480, and
@@ -166,7 +173,8 @@ specifications.
   replacement.
 - [Task 10002](tasks/10002-controller-request-completion.md) was archived on
   2026-08-07. Its finding was absorbed into
-  [Task 338](../tasks/338-passphrase-result.md).
+  [Task 338](tasks/338-passphrase-result.md), later superseded on 2026-10-20.
+  The accepted decision does not restore a result registry.
 
 [split-rescan]: ../tasks/472-multi-wallet-rescan-isolation-scenario.md
 [split-address]: ../tasks/473-extract-legacy-address-script-state.md

@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **159 tasks**: **72 open**, **63 done**,
-**22 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
-**278 tracked tasks** and **182 completed** overall.
+The numbered roadmap contains **161 tasks**: **73 open**, **63 done**,
+**23 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
+**280 tracked tasks** and **182 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -52,7 +52,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 480][t480] | open | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | 403, 479 |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 391, 395, 396, 475, 478 |
 
-## Phase 2A — bugs and gaps · 21 open
+## Phase 2A — bugs and gaps · 22 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
@@ -63,7 +63,6 @@ by Task 454's isolation policy.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | — |
-| [Task 338][t338] | open | Controller | Bug fix | Latch accepted passphrase results | — |
 | [Task 356][t356] | open | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | — |
 | [Task 365][t365] | open | Manager creation preflight | Bug fix | Validate wallet genesis key identities | — |
 | [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | — |
@@ -83,6 +82,8 @@ by Task 454's isolation policy.
 | [Task 482][t482] | open | PsbtManager imported-input decoration | Gap fix | Fund imported inputs without known origin | 479 |
 | [Task 483][t483] | open | Wallet scan ingestion and TxStore batch | Bug fix | Preserve labels on chain replay | — |
 | [Task 484][t484] | open | TxCreator coin eligibility | Bug fix | Align authoring confirmation height | — |
+| [Task 488][t488] | open | Controller.ChangePassphrase request ownership | Bug fix | Own passphrase request buffers through completion | — |
+| [Task 489][t489] | open | Controller.ChangePassphrase accepted-operation context | Bug fix | Drain accepted passphrase rotation during shutdown | — |
 
 ## Phase 2B — verification · 23 open
 
@@ -191,7 +192,7 @@ done or superseded; reactivation preserves the original task number.
 | [Task 352][t352] | Bug fix | Contain uncertain kvdb passphrase rotation | Explicit approval for a future-cycle kvdb passphrase-containment effort |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 22
+## Superseded · 23
 
 Former phases record the historical map at supersession, not the current
 delivery grouping. These tasks have no current delivery phase.
@@ -220,6 +221,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 | [Task 486][t486] | 1 | SQLite and PostgreSQL schema initialization | Migration | Consolidate initial SQL schema before master merge | Accepted decision preserves separate SQL files and the existing loader; schema changes stay with Tasks 391, 478, 480, and 481; fresh creation and unchanged reopen remain pre-merge checks |
+| [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 
 ## Done · 63
 
@@ -436,7 +438,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t335]: tasks/335-kvdb-to-sql-migration.md
 [t336]: archive/tasks/336-test-cleanup.md
 [t337]: archive/tasks/337-imported-xpub-derivation.md
-[t338]: tasks/338-passphrase-result.md
+[t338]: archive/tasks/338-passphrase-result.md
 [t339]: archive/tasks/339-transaction-visibility.md
 [t340]: archive/tasks/340-durable-database-identity.md
 [t341]: archive/tasks/341-public-role-contract.md
@@ -641,3 +643,8 @@ numbered roadmap; old archived task references add no separate completion.
 
 [t486]: archive/tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
+
+[t488]: tasks/488-passphrase-request-ownership.md
+[t489]: tasks/489-passphrase-shutdown-context.md
+
+[pr1421]: https://github.com/btcsuite/btcwallet/pull/1421

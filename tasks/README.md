@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **488**.
+The next free task number is **490**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -144,7 +144,6 @@ that structural exclusion explicitly.
 
 ## Secrets and credentials
 
-- [Task 338](338-passphrase-result.md): latch accepted passphrase results.
 - [Task 354](354-vault-owned-secret-resolution.md): define Vault secret-operation
   ownership.
 - [Task 367](367-bound-sql-genesis-secrets.md): bound SQL genesis secret
@@ -158,6 +157,11 @@ that structural exclusion explicitly.
 - [Task 384](384-vault-safe-signing.md): route safe signing through the Vault.
 - [Task 385](385-unsafe-signer-key-extraction.md): isolate UnsafeSigner key
   extraction.
+
+- [Task 488](488-passphrase-request-ownership.md): own passphrase request
+  buffers through completion.
+- [Task 489](489-passphrase-shutdown-context.md): drain accepted passphrase
+  rotation during shutdown.
 
 ## Migration
 

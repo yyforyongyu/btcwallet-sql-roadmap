@@ -30,9 +30,10 @@ original schedule, with a documented public rejection contract.
   the Vault-level `ErrVaultUnlocked` behavior; do not invent a Vault
   reauthentication operation.
 - Limit this task to repeated Unlock authentication and timer behavior. Exclude
-  a new public error taxonomy, Task 338's ChangePassphrase result delivery,
-  passphrase rotation, Unlock request cancellation redesign, Manager
-  publication, lifecycle Start/Stop, and timer-framework cleanup.
+  a new public error taxonomy, passphrase rotation and its request ownership
+  or shutdown context ([Tasks 488][t488] and [489][t489]), Unlock request
+  cancellation redesign, Manager publication, lifecycle Start/Stop, and
+  timer-framework cleanup.
 - This remains a narrow Controller contract/documentation and regression task:
   existing production behavior does not make its missing coverage obsolete.
   Task 427 keeps its original passphrase-change and first-unlock timeout scope.
@@ -63,3 +64,6 @@ of reauthentication and secret reads; no new clock or timer API is needed.
 
 [controller]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/controller.go#L993
 [vault-tests]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/internal/keyvault/vault_lifecycle_test.go#L148
+
+[t488]: 488-passphrase-request-ownership.md
+[t489]: 489-passphrase-shutdown-context.md

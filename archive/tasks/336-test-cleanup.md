@@ -50,6 +50,6 @@ per surviving backend.
 - The PR is test-only and contains no runtime-cache, signer, Vault, or daemon
   behavior change.
 
-[t338]: ../../tasks/338-passphrase-result.md
+[t338]: 338-passphrase-result.md
 [t362]: 362-kvdb-definitive-passphrase-result.md
 [t386]: 386-remove-raw-wallet-secret-seams.md
