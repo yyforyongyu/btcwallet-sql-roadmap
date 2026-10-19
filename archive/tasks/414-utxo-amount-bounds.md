@@ -52,4 +52,4 @@ an amount-validation framework.
 The justified UTXO amount backstop is complete on both dialects without
 duplicating transaction arithmetic or becoming a prerequisite for conversion.
 
-[t424]: ../../tasks/424-transaction-utxo-integrity-adr.md
+[t424]: 424-transaction-utxo-integrity-adr.md

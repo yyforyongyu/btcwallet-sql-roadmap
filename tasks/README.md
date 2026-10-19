@@ -77,8 +77,6 @@ They do not consume task numbers or require task files.
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
   transactions.
-- [Task 424](424-transaction-utxo-integrity-adr.md): define transaction and UTXO
-  integrity ownership.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
   transaction output aggregates.
 - [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with

@@ -1,7 +1,7 @@
 # Task delivery phases
 
-The numbered roadmap contains **161 tasks**: **71 open**, **65 done**,
-**23 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
+The numbered roadmap contains **161 tasks**: **70 open**, **65 done**,
+**24 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
 **280 tracked tasks** and **184 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
@@ -50,13 +50,13 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 391, 395, 396, 475, 478 |
 
-## Phase 2A — bugs and gaps · 22 open
+## Phase 2A — bugs and gaps · 21 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
 This is a prioritized backlog, not a blanket gate for starting the lnd port.
-Tasks 424 and 410 supply the integrity decision and graph correction needed
-by Task 454's isolation policy.
+Task 410 owns the ordering investigation and graph correction required by
+Task 454's isolation policy; a separate integrity ADR is not a gate.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
@@ -70,9 +70,8 @@ by Task 454's isolation policy.
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | — |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
-| [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | 424 |
+| [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | — |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372, 402 |
-| [Task 424][t424] | open | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | — |
 | [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | 410 |
 | [Task 469][t469] | open | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | 347 |
 | [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 344, 356, 391, 395, 396, 406, 474, 475, 478–484, 487 |
@@ -190,7 +189,7 @@ done or superseded; reactivation preserves the original task number.
 | [Task 352][t352] | Bug fix | Contain uncertain kvdb passphrase rotation | Explicit approval for a future-cycle kvdb passphrase-containment effort |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 23
+## Superseded · 24
 
 Former phases record the historical map at supersession, not the current
 delivery grouping. These tasks have no current delivery phase.
@@ -220,6 +219,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
 | [Task 486][t486] | 1 | SQLite and PostgreSQL schema initialization | Migration | Consolidate initial SQL schema before master merge | Accepted decision preserves separate SQL files and the existing loader; schema changes stay with Tasks 391, 478, 480, and 481; fresh creation and unchanged reopen remain pre-merge checks |
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
+| [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
 ## Done · 65
 
@@ -524,7 +524,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t421]: archive/tasks/421-sql-passphrase-commit-reconciliation.md
 [t422]: archive/tasks/422-manager-load-cancellation.md
 [t423]: tasks/423-manager-chain-source-cutover.md
-[t424]: tasks/424-transaction-utxo-integrity-adr.md
+[t424]: archive/tasks/424-transaction-utxo-integrity-adr.md
 [t425]: archive/tasks/425-separate-transaction-authoring-wrappers.md
 [t426]: tasks/426-sql-transaction-output-aggregates.md
 [t427]: archive/tasks/427-controller-lifecycle-credential-itests.md

@@ -6,6 +6,15 @@ Type: **Design**.
 
 Dependencies: **None**.
 
+## Supersession decision
+
+Superseded on 2026-10-20: the accepted decision eliminates the standalone
+ADR deliverable. Existing ADR 0006 already records the retained representation
+and tenancy mechanisms. Task 410 owns the remaining ordering investigation,
+proof, correction, and regression; Task 454 preserves its result. Tasks 411
+and 426 retain their separate admission outcomes. PR #1343 is closed
+unmerged; this is not completion.
+
 ## Rationale
 
 Draft ADR 0006 mixes public correctness requirements with proposed normalized

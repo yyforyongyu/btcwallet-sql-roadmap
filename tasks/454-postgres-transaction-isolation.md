@@ -26,8 +26,8 @@ need only read-committed execution.
   or acquired row locks preserve the operation's complete invariant. Permit
   serializable isolation only for an operation that documents a predicate or
   multi-row invariant that cannot be protected more narrowly.
-- Preserve the graph requirements owned by [Task 410][t410] under
-  [Task 424][t424]'s contract when making isolation explicit. Task 410 alone
+- Preserve [Task 410][t410]'s proved graph-ordering contract when making
+  isolation explicit. Task 410 alone
   owns the graph correction, any graph-specific isolation choice and its
   justification, and the corresponding regression. This task must neither
   weaken nor foreclose that choice; it does not select or prove the graph fix.
@@ -88,4 +88,3 @@ policy type is required.
 [t350]: 350-native-pgx-postgres.md
 [t471]: 471-three-backend-list-unspent-benchmark.md
 [t410]: 410-transaction-graph-admission.md
-[t424]: 424-transaction-utxo-integrity-adr.md

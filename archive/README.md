@@ -19,6 +19,12 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+
+- [Task 424](tasks/424-transaction-utxo-integrity-adr.md) was superseded on
+  2026-10-20. A separate integrity ADR is no longer required; [Task 410][t410]
+  owns ordering evidence and correction, while [Task 454][t454] retains its
+  dependency on 410. PR #1343 closed unmerged; this adds no completion.
+
 - [Task 480](tasks/480-own-raw-imports-in-one-wallet.md) completed on 2026-10-20.
 - [Task 391](tasks/391-path-bound-watch-only-xpub-accounts.md) completed on 2026-10-20.
 
@@ -180,3 +186,6 @@ specifications.
 
 [split-rescan]: ../tasks/472-multi-wallet-rescan-isolation-scenario.md
 [split-address]: ../tasks/473-extract-legacy-address-script-state.md
+
+[t410]: ../tasks/410-transaction-graph-admission.md
+[t454]: ../tasks/454-postgres-transaction-isolation.md
