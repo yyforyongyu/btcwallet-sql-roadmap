@@ -4,14 +4,15 @@ Component: **Manager SQL genesis and SQL Store**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 332][t332], [Task 337][t337], and
-[Task 345][t345]**.
+Dependencies: **[Task 332][t332], [Task 337][t337], [Task 345][t345],
+[Task 391][t391], and [Task 481][t481]**.
 
 ## Rationale
 
 SQL wallet rows, encrypted secrets, and sync state are created in one
 transaction, but default or requested initial accounts are added afterward.
-At `sql-wallet` revision `2ae306dea8c5`, `Manager.Create` calls
+At `sql-wallet` revision
+`4236325cbb609881272f488e413b90ab4aa07fc6`, `Manager.Create` still calls
 `importInitialAccounts` after `createWallet` returns, after SQL
 `CreateWalletWithOps` has committed.
 A definite account-creation failure can therefore leave a wallet that does not
@@ -25,16 +26,18 @@ contain the accounts its supported create request promised.
   wallet-owned selector, and persisted `NoChainSync` state from dependencies;
   do not redesign them here.
 - Extend one backend-local SQL wallet-create transaction to insert the wallet,
-  encrypted wallet secrets, sync state, key scopes, default or numberless
+  encrypted wallet secrets, sync state, key scopes, default or requested
   shell accounts, encrypted account secrets, immutable `NoChainSync` values,
   and checked `next_account_number` cursors.
 - Create the canonical default accounts promised by a supported private-root
-  request. The public Manager create request exposes no `NoChainSync` input;
-  every default account has `NoChainSync=false`. A scope containing canonical
-  account zero starts its next-account cursor at one.
-- Create exactly the numberless initial accounts promised by a supported shell
-  request. Every shell account has `NoChainSync=false` and does not advance a
-  numbered account cursor.
+  request with `NoChainSync=false`. A scope containing canonical account zero
+  starts its next-account cursor at one.
+- Preserve the current shared `ImportAccountParams` semantics for shell
+  initial accounts, including declared path-bound numbers, fingerprints,
+  per-account schemas, and SQL `NoChainSync`. Numberless imports do not advance
+  a numbered cursor; declared numbers advance it under the existing rule.
+  PRs #1408 and #1409 already provide these shapes; atomic genesis must not
+  narrow them or add another public import input.
 - Keep derivation and encryption outside the SQL transaction. The transaction
   receives only prepared ciphertext and public persistence facts.
 - Treat every definite insertion or commit failure as failure of the complete
@@ -55,9 +58,8 @@ contain the accounts its supported create request promised.
   [Task 358][t358], numbered root-derived account creation in
   [Task 343][t343], custom-scope creation in [Task 390][t390], and path-bound
   watch-only XPub creation in [Task 391][t391].
-- Leave configurable `NoChainSync` creation to
-  [Task 468][t468]'s guarded runtime account path; genesis does not expose
-  that property.
+- Preserve [Task 468][t468]'s separate root-derived runtime account behavior;
+  this task only makes the existing genesis request atomic.
 - Do not add a create manifest, replay state, generic write lock, Store
   callback, or cross-process coordination.
 
@@ -76,9 +78,10 @@ the transaction succeeds.
 - The same Store conformance runs on SQLite and PostgreSQL and reopens the
   wallet to prove the promised account set, `NoChainSync` values, and cursors.
 - Private-root fixtures prove each canonical scope contains account zero and
-  advances its cursor to one; shell fixtures prove numberless initial accounts
-  leave each numbered cursor unchanged. Reopen proves every default and shell
-  genesis account has `NoChainSync=false` on both dialects.
+  advances its cursor to one with `NoChainSync=false`. Shell fixtures cover
+  both inferred numberless and declared numbered imports, per-account schema
+  overrides, and both SQL `NoChainSync` values. Reopen preserves every accepted
+  identity and policy; cursors follow the existing numbered/numberless rules.
 - Manager fault injection proves no Wallet is cached after a definite backend
   failure and publication occurs only after committed genesis and successful
   runtime assembly.
@@ -90,11 +93,9 @@ the transaction succeeds.
 - One SQLite or PostgreSQL transaction commits every wallet and promised-
   account genesis fact for a supported request.
 - A definite failure leaves no SQL artifact and publishes no Wallet.
-- Reopened wallets expose the exact promised account set and checked scope
-  cursors on both SQL dialects, with every genesis account fixed to
-  `NoChainSync=false`.
-- `NoChainSync=true` is unavailable during genesis and remains confined to
-  the guarded runtime account-creation path.
+- Reopened wallets expose the exact promised account set, schemas, policies,
+  and checked scope cursors on both SQL dialects. Atomic genesis preserves the
+  current accepted initial-import request shapes.
 - The PR contains no modern-kvdb, manifest, replay, generic-lock, or unrelated
   public API work.
 
@@ -108,3 +109,4 @@ the transaction succeeds.
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md
+[t481]: ../archive/tasks/481-persist-imported-account-address-schema.md
