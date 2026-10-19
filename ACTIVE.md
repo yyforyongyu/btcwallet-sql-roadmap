@@ -9,7 +9,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
+| [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1426][pr1426] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413] |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | [#1415][pr1415] |
@@ -135,7 +135,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
-[pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
+[pr1426]: https://github.com/btcsuite/btcwallet/pull/1426
 [pr1413]: https://github.com/btcsuite/btcwallet/pull/1413
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415
 [pr1414]: https://github.com/btcsuite/btcwallet/pull/1414
