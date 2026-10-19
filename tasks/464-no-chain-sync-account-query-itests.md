@@ -8,21 +8,24 @@ Dependencies: **[Task 391][t391]**.
 
 ## Rationale
 
-[Issue #1250][issue1250] requires AccountManager integration coverage. At
-`sql-wallet` revision `48e7f4b`, [existing account itests][source] already
-verify root-derived `NoChainSync=true` through `GetAccount` and reopen, and
-reject unsupported kvdb creation. [Task 430][t430] owns ordinary accounts'
-complete query results, including `NoChainSync=false`; its [PR #1389][pr1389]
-is still open at this audit. Neither coverage set needs another matrix here.
+[Issue #1250][issue1250] requires AccountManager integration coverage.
+At `sql-wallet` revision `4236325cbb609881272f488e413b90ab4aa07fc6`,
+[existing account itests][source] already verify root-derived
+`NoChainSync=true` through `GetAccount` and reopen, and reject
+unsupported kvdb creation. [Task 430][t430] owns ordinary accounts'
+complete query results, including `NoChainSync=false`, through merged
+[PR #1389][pr1389]. PR #1408 already proves declared imported account
+identity and `GetAccount` across reopen. Neither coverage set needs
+another matrix here.
 
-The remaining evidence is true values through SQL list queries and Task 391's
-future path-bound account identity through all public account views.
+The remaining evidence is true values through SQL list queries and Task
+391's path-bound true values through the remaining public list views.
 
 ## Details
 
-- Extend existing root-derived true-value fixtures independently of Task 391's
-  path-bound shape. Add that shape after its production contract lands;
-  completion of the full task still requires 391.
+- Extend existing root-derived and declared-import true-value fixtures. Task
+  391's production contract has landed; reuse `ImportAccountParams` with a
+  declared scope and SQL `NoChainSync=true`, without a new creation shape.
 - This final field/account-shape matrix remains Phase 2 verification, not a
   blanket prerequisite for legacy conversion, whose input has NoChainSync
   false. Do not skip a required case to declare this task complete.
@@ -34,8 +37,10 @@ future path-bound account identity through all public account views.
   expected account; retain existing `GetAccount` assertions without duplication.
 - For Task 391's path-bound accounts with `NoChainSync=true`, verify all three
   list methods and `GetAccount` preserve the complete exported identity and
-  policy before and after reopen. This new shape has no existing query proof.
-- Modern kvdb cannot represent these persisted SQL-only shapes. Document the
+  policy before and after reopen. Reuse PR #1408's `GetAccount`/reopen proof;
+  add only missing true-value assertions and the three list views.
+- Declared imports themselves work on kvdb, but persisted `NoChainSync=true`
+  remains SQL-only; kvdb ignores that flag. Document this narrower
   structural exclusion at registration, without a skip in a shared case or
   another unsupported-creation test; existing mutation tests own that error.
 - Do not repeat ordinary-false queries, creation rejections, or the general
@@ -69,5 +74,5 @@ create another ordinary-account or kvdb-rejection suite.
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t430]: ../archive/tasks/430-account-query-itests.md
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/account_manager_test.go
+[source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/itest/account_manager_test.go
 [pr1389]: https://github.com/btcsuite/btcwallet/pull/1389

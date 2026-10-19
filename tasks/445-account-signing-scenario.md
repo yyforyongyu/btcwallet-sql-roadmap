@@ -9,12 +9,13 @@ Dependencies: **[Task 331][t331] and [Task 429][t429]**.
 ## Rationale
 
 [Issue #1250][issue1250] names account derivation and signing as a follow-up
-scenario. At `sql-wallet` revision `48e7f4b`,
+scenario. At `sql-wallet` revision
+`4236325cbb609881272f488e413b90ab4aa07fc6`,
 [testSignerDerivationDurableReopen][source] already proves derivation and ECDH
-across reopen. Task 442's [open PR #1384][pr1384], inspected at `edd7a43`,
-adds digest/unlocking verification and signing after reload for a default
-account; that work remains pending. The missing connection is one newly
-created non-default account's address identity through these public signing
+across reopen. Task 442's merged [PR #1384][pr1384] also proves digest and
+unlocking verification and signing after reload for a default account. The
+missing connection is one newly created non-default account's address
+identity through these public signing
 operations and durable reopen, not a second Signer method matrix.
 
 ## Details
@@ -37,8 +38,8 @@ operations and durable reopen, not a second Signer method matrix.
 
 Extend existing derivation/reopen and signing cases with the new-account
 identity connection, reusing deterministic address, digest, peer-key, and
-previous-output fixtures. Coordinate with Task 442's pending cases instead of
-adding competing coverage. Their test completion is not a hard dependency;
+previous-output fixtures from Task 442's merged cases instead of adding
+competing coverage. Their test completion is not a hard dependency;
 retain the full public proof without another signing abstraction or matrix.
 
 ## Verification
@@ -60,5 +61,5 @@ retain the full public proof without another signing abstraction or matrix.
 [t431]: ../archive/tasks/431-address-allocation-lookup-itests.md
 [t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: ../archive/tasks/442-signer-signing-itests.md
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/itest/signer_test.go
+[source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/itest/signer_test.go
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384

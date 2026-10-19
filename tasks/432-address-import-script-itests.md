@@ -9,12 +9,13 @@ Dependencies: **None**.
 ## Rationale
 
 [Issue #1250][issue1250] assigns Gustavo the AddressManager integration-test
-lane. `ImportPublicKey`, `ImportTaprootScript`, `ScriptForOutput`, and
-`GetDerivationInfo` share imported ownership and script-resolution state, but
-their public errors and durable reload behavior lack focused real-backend
-coverage across kvdb, SQLite, and PostgreSQL. At `sql-wallet` revision
-`48e7f4b`, [derivationForAddressInfo][source] explicitly rejects a raw import's
-missing derivation path; script ownership does not create a BIP32 identity.
+lane. At `sql-wallet` revision
+`4236325cbb609881272f488e413b90ab4aa07fc6`, PRs #1410 and #1412 already cover
+successful and repeated raw imports, Taproot script resolution, custody, and
+reopen. The remaining evidence is public derivation results and missing
+malformed, foreign-output, and locked-script rejection cases.
+[derivationForAddressInfo][source] rejects a raw import's missing derivation
+path; script ownership does not create a BIP32 identity.
 
 ## Details
 
@@ -26,11 +27,13 @@ missing derivation path; script ownership does not create a BIP32 identity.
 - Register one shared public contract for kvdb, SQLite, and PostgreSQL. Do not
   skip kvdb inside shared cases. Restrict backend-specific code to setup and
   teardown; require identical public assertions and stable error identities.
-- Cover valid and repeated imports, malformed or unsupported inputs, foreign
-  outputs, and applicable locked-state behavior. Apply each case only to the
-  ownership form that can represent it; retain the accepted custody policy.
-- Reopen after successful imports and prove public script resolution and
-  derivation information remain identical without reimport.
+- Reuse the existing successful/repeated import, script-resolution, and
+  reopen cases; extend only missing malformed or unsupported inputs, foreign
+  outputs, derivation results, and applicable locked-state behavior. Apply each
+  case only to a representable ownership form; retain the accepted custody
+  policy.
+- Extend the existing reopen fixture with missing public derivation
+  assertions. Retain its script-resolution proof without another reload flow.
 - Keep watch-only policy, Vault ownership, raw-import persistence, and live-watch
   delivery in their accepted production tasks.
 - Exclude allocation/list APIs, private-key extraction, direct Store reads,
@@ -59,4 +62,4 @@ across a fresh Manager startup without prescribing a new test file.
 - No new policy, Vault, or watch-delivery behavior is introduced.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/address_manager.go#L1495
+[source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/wallet/address_manager.go

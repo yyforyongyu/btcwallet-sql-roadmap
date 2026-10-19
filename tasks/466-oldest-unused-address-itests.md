@@ -11,14 +11,18 @@ Dependencies: **[Task 396][t396]**.
 [Issue #1250][issue1250] requires AddressManager integration coverage. Task 431
 owns baseline allocation and lookup coverage, not this task's fixtures.
 Task 396 replaces the SQL count-one semantics and removes `GetUnusedAddress`.
-The final SQL and modern-kvdb divergence needs a separate public integration
-outcome; it does not require Task 395's separate `AllocateNextKey` API.
+PR #1407 now proves first allocation and funded-child rotation after reopen;
+PR #1402 adds SQL Store ordering/concurrency coverage. The remaining public
+proof is repeated unused-address reuse, oldest selection among several
+persisted unused children, and kvdb force-next behavior. It does not require
+Task 395's separate `AllocateNextKey` API.
 
 ## Details
 
-- Test Task 396's final API without waiting for Task 431. Reuse any existing
-  address suite, preserve backend-common assertions, and do not duplicate
-  production-owned mechanical caller migration.
+- Extend Task 431's merged address suite. Reuse its first-allocation and
+  used-to-next/reopen cases rather than duplicating them; add the missing
+  repeated-unused and oldest-of-several assertions. Preserve backend-common
+  assertions and do not repeat production-owned mechanical caller migration.
 - On SQLite and PostgreSQL, require `NewAddress` for a chain-synchronized
   account to return the oldest persisted unused address without advancing the
   branch. After funding that address, require the next call to rotate to the
@@ -35,17 +39,15 @@ outcome; it does not require Task 395's separate `AllocateNextKey` API.
 - Keep `AllocateNextKey` results in Task 465, batch allocation in Task 461,
   and production fault injection in Tasks 395 and 396. Do not restore
   `GetUnusedAddress` or add a compatibility alias.
-- Extend a suitable existing address integration-test file. If none exists,
-  add only the small conventional setup needed here, without implementing
-  Task 431's separate matrix. Reuse overlapping setup whichever task lands
-  second; do not wait for a particular file or helper to be introduced.
+- Extend existing `itest/address_manager_test.go` and its funding, point/list,
+  and reload fixtures. Add no separate baseline address matrix or helper file.
 
 ## Suggested fix
 
-Add one two-dialect SQL oldest-unused table and one modern-kvdb force-next case
-to the available address suite. Reuse existing funding, point/list, and
-reopen helpers without changing backend-common assertions or repeating the
-production tasks' mechanical migrations. Task 431 need not land first.
+Extend the existing address cases with two-dialect repeated-unused and
+oldest-of-several assertions and one modern-kvdb force-next case. Reuse the
+existing funded-child rotation and reopen proof without changing common
+assertions or repeating production caller migrations.
 
 ## Verification
 
