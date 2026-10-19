@@ -32,8 +32,6 @@ They do not consume task numbers or require task files.
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
-- [Task 486](486-freeze-native-sql-schema.md): consolidate initial SQL schema
-  before master merge.
 
 ## Accounts, addresses, and recovery
 

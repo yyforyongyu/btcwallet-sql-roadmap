@@ -13,7 +13,6 @@ All open Phase 1 work, including stacked tasks with open dependencies.
 | [Task 475][t475] | Deliver wallet transaction subscriptions | Gap fix | 1 | Abdullahi | [#1401][pr1401] |
 | [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413] |
 | [Task 480][t480] | Own raw imports in one signing wallet | Gap fix | 1 | YY | [#1412][pr1412] |
-| [Task 486][t486] | Consolidate initial SQL schema | Migration | 1 | YY | — |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 
 ## Upcoming Phase 2 Tasks
@@ -139,7 +138,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t484]: tasks/484-align-authoring-confirmation-height.md
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
-[t486]: tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
 [pr1401]: https://github.com/btcsuite/btcwallet/pull/1401
 [pr1408]: https://github.com/btcsuite/btcwallet/pull/1408

@@ -1,7 +1,7 @@
 # Task delivery phases
 
-The numbered roadmap contains **159 tasks**: **73 open**, **63 done**,
-**21 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
+The numbered roadmap contains **159 tasks**: **72 open**, **63 done**,
+**22 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
 **278 tracked tasks** and **182 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
@@ -19,22 +19,20 @@ Task 487 owns lnd's Phase 1 compile cutover after the completed pre-claim gap
 check, which mapped transaction notifications, standalone signing, online
 remote signing, and kvdb caller paths against source. Its compile-only PR
 merges into `yyforyongyu/lnd:btcwallet-sql-integration` at a pinned,
-build-verified revision. Task 486 consolidates the initial SQL schema before
-sql-wallet merges into master. Task 470 retains full runtime and itest
+build-verified revision. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 6 open
+## Phase 1 — final SQL schema and lnd compilation · 5 open
 
-Finish the planned SQL account, import, and lease schema changes, then
-consolidate them into a clean initial migration for SQLite and PostgreSQL.
-Retain the existing migration loader and verify fresh creation and unchanged
-reopen. Build lnd against the maintained Wallet without requiring its runtime
-itests to pass. Keep already assigned Phase 1 work, including its focused
-public tests.
+Finish the planned SQL account, import, and lease schema changes. Retain the
+existing SQL file organization and migration loader, and verify fresh creation
+and unchanged reopen on SQLite and PostgreSQL. Build lnd against the maintained
+Wallet without requiring its runtime itests to pass. Keep already assigned
+Phase 1 work, including its focused public tests.
 
 Finish Phase 1 before merging `sql-wallet` into `master`. Later data conversion
-targets this consolidated initial schema; it does not require a post-merge
+targets this final schema; it does not require a post-merge
 schema upgrade.
 
 The initial port keeps Task 331's non-contextual Create signature and safe
@@ -52,10 +50,9 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 475][t475] | open | Wallet transaction notifications | Gap fix | Deliver wallet transaction subscriptions | — |
 | [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
 | [Task 480][t480] | open | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | 403, 479 |
-| [Task 486][t486] | open | SQLite and PostgreSQL schema initialization | Migration | Consolidate initial SQL schema before master merge | 391, 478, 480, 481 |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 391, 395, 396, 475, 478 |
 
-## Phase 2A — bugs and gaps · 22 open
+## Phase 2A — bugs and gaps · 21 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
@@ -194,7 +191,7 @@ done or superseded; reactivation preserves the original task number.
 | [Task 352][t352] | Bug fix | Contain uncertain kvdb passphrase rotation | Explicit approval for a future-cycle kvdb passphrase-containment effort |
 | [Task 353][t353] | Migration | Retire kvdb from the modern wallet API | No earlier than N+2; verified migration, consumer cutover, and explicit retirement approval |
 
-## Superseded · 21
+## Superseded · 22
 
 Former phases record the historical map at supersession, not the current
 delivery grouping. These tasks have no current delivery phase.
@@ -222,6 +219,7 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 371][t371] | 2A | SQL Store canonical chain state | Bug fix | Serialize canonical chain-frontier mutation | Accepted decision uses existing Wallet checkpoints, not a persisted Manager frontier; Tasks 370/372/423 retain coordination |
 | [Task 408][t408] | 2A | TxCreator and AddressManager | Bug fix | Watch direct transaction change before return | [Task 474][t474] consolidates the missing authored-change watch calls |
 | [Task 386][t386] | Hardening | Wallet-facing Vault and runtimeCache secret interfaces | Refactor | Remove raw Wallet secret seams | Accepted decision eliminates standalone cleanup; Tasks 382–385 remove their newly unused seams |
+| [Task 486][t486] | 1 | SQLite and PostgreSQL schema initialization | Migration | Consolidate initial SQL schema before master merge | Accepted decision preserves separate SQL files and the existing loader; schema changes stay with Tasks 391, 478, 480, and 481; fresh creation and unchanged reopen remain pre-merge checks |
 
 ## Done · 63
 
@@ -632,7 +630,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t478]: tasks/478-retain-spend-confirmation-leases.md
 [t479]: tasks/479-mix-imported-xpub-accounts.md
 [t480]: tasks/480-own-raw-imports-in-one-wallet.md
-[t481]: tasks/481-persist-imported-account-address-schema.md
+[t481]: archive/tasks/481-persist-imported-account-address-schema.md
 [t482]: tasks/482-fund-imported-inputs-without-origin.md
 [t483]: tasks/483-preserve-labels-on-chain-replay.md
 [t484]: tasks/484-align-authoring-confirmation-height.md
@@ -641,5 +639,5 @@ numbered roadmap; old archived task references add no separate completion.
 [pr1384]: https://github.com/btcsuite/btcwallet/pull/1384
 [pr1389]: https://github.com/btcsuite/btcwallet/pull/1389
 
-[t486]: tasks/486-freeze-native-sql-schema.md
+[t486]: archive/tasks/486-freeze-native-sql-schema.md
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md

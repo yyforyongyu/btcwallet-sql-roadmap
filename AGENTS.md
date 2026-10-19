@@ -126,10 +126,11 @@ defer the follow-up. Do not pull optional features forward to complete a test
 matrix, or prescribe private architecture merely to stabilize a public API.
 
 Before merging sql-wallet into master, Phase 1 must finish its planned schema
-changes, consolidate them into a clean initial migration for each SQL backend
-using the existing loader, verify fresh creation and unchanged reopen, and
-prove that lnd compiles against the maintained Wallet. The pre-claim
-gap check precedes lnd's compile cutover. Full lnd runtime and itest parity
+changes, verify fresh creation and unchanged reopen on both SQL backends using
+the existing loader, and prove that lnd compiles against the maintained Wallet.
+Keep the existing SQL file organization; consolidation is not a merge gate.
+The pre-claim gap check precedes lnd's compile cutover. Full lnd runtime and
+itest parity
 remain Task 470's separate merge gate. Phase 1 is the active focus; Phase 2A
 bugs/gaps and 2B verification are tracked as upcoming work and may advance
 in parallel as dependencies permit. Phase 3 migration and Phase 4 optional

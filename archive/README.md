@@ -19,6 +19,12 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+
+- [Task 486](tasks/486-freeze-native-sql-schema.md) was superseded on
+  2026-10-19 without a replacement. Separate SQL sources and the existing
+  migration loader remain; schema changes stay with Tasks 391, 478, 480, and
+  481, and fresh creation and unchanged reopen remain pre-merge checks.
+
 - [Task 479](tasks/479-mix-imported-xpub-accounts.md) completed on 2026-10-16.
 - [Task 403](tasks/403-raw-import-watch-obligations.md) completed on 2026-10-16.
 - [Task 431](tasks/431-address-allocation-lookup-itests.md) completed on 2026-10-16.
