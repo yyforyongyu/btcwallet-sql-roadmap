@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 367](tasks/367-bound-sql-genesis-secrets.md) completed on 2026-10-21.
 
 - [Task 474](tasks/474-authored-change-watch.md) completed through
   [PR #1419](https://github.com/btcsuite/btcwallet/pull/1419), merged into

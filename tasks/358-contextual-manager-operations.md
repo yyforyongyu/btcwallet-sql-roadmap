@@ -74,6 +74,6 @@ operation machinery.
 
 [t329]: 329-atomic-wallet-account-creation.md
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t367]: 367-bound-sql-genesis-secrets.md
+[t367]: ../archive/tasks/367-bound-sql-genesis-secrets.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md

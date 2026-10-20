@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **161 tasks**: **69 open**, **66 done**,
-**24 superseded**, and **2 deferred**. With **119 ad hoc tasks**, that is
-**280 tracked tasks** and **185 completed** overall.
+The numbered roadmap contains **161 tasks**: **68 open**, **67 done**,
+**24 superseded**, and **2 deferred**. With **120 ad hoc tasks**, that is
+**281 tracked tasks** and **187 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -63,7 +63,6 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | [Task 330][t330] | open | Manager | Bug fix | Reject duplicate wallet creation | — |
 | [Task 356][t356] | open | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | — |
 | [Task 365][t365] | open | Manager creation preflight | Bug fix | Validate wallet genesis key identities | — |
-| [Task 367][t367] | open | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | — |
 | [Task 370][t370] | open | Manager chain-event fanout and Wallet processors | Refactor | Fan out ordered Manager chain events | — |
 | [Task 372][t372] | open | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | 370 |
 | [Task 389][t389] | open | AccountManager SQL account-creation results | Bug fix | Report uncertain account commits truthfully | — |
@@ -223,9 +222,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 66
+## Done · 67
 
-**185 completed: 66 numbered tasks and 119 ad hoc PRs.** Each closing PR counts
+**187 completed: 67 numbered tasks and 120 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -251,6 +250,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 357][t357] | 2 | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | [#1348][pr1348] |
 | [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
+| [Task 367][t367] | 2A | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | [#1414][pr1414] |
 | [Task 377][t377] | 1 | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | [#1329][pr1329] |
 | [Task 378][t378] | 1 | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | [#1358][pr1358] |
 | [Task 379][t379] | 1 | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | [#1331][pr1331] |
@@ -431,6 +431,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1396](https://github.com/btcsuite/btcwallet/pull/1396) | multi: delete unmined tx branches instead of retaining them | Abdulkbk | 2026-09-24 |
 | [#1402](https://github.com/btcsuite/btcwallet/pull/1402) | wallet+db: make oldest-unused address atomic sql native | GustavoStingelin | 2026-10-15 |
 | [#1420](https://github.com/btcsuite/btcwallet/pull/1420) | ci: speed up the lint job | GustavoStingelin | 2026-10-18 |
+| [#1424](https://github.com/btcsuite/btcwallet/pull/1424) | multi: fix reorg ancestry and miner isolation | yyforyongyu | 2026-10-20 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md

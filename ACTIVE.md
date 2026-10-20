@@ -15,11 +15,10 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 330][t330] | Reject duplicate wallet creation | Bug fix | 2A | YY | [#1415][pr1415] |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | [#1423][pr1423] |
-| [Task 367][t367] | Bound SQL genesis secrets | Bug fix | 2A | YY | [#1414][pr1414] |
-| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | — |
-| [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | — |
+| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1434][pr1434] |
+| [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | [#1435][pr1435] |
 | [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | YY | [#1422][pr1422] |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | — |
+| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | [#1431][pr1431] |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | — | — |
@@ -60,7 +59,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
 | [Task 464][t464] | Test NoChainSync account queries | Test | 2B | — | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | — | — |
-| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | — |
+| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 
 ## Claimed Tasks
@@ -81,7 +80,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t350]: tasks/350-native-pgx-postgres.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t365]: tasks/365-validate-wallet-genesis-keys.md
-[t367]: tasks/367-bound-sql-genesis-secrets.md
 [t369]: tasks/369-repeated-wallet-unlock.md
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
@@ -135,7 +133,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1427]: https://github.com/btcsuite/btcwallet/pull/1427
 [pr1428]: https://github.com/btcsuite/btcwallet/pull/1428
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415
-[pr1414]: https://github.com/btcsuite/btcwallet/pull/1414
 [pr1417]: https://github.com/btcsuite/btcwallet/pull/1417
 [pr1416]: https://github.com/btcsuite/btcwallet/pull/1416
 [pr1423]: https://github.com/btcsuite/btcwallet/pull/1423
@@ -145,3 +142,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t489]: tasks/489-passphrase-shutdown-context.md
 [pr1430]: https://github.com/btcsuite/btcwallet/pull/1430
 [pr1429]: https://github.com/btcsuite/btcwallet/pull/1429
+[pr1435]: https://github.com/btcsuite/btcwallet/pull/1435
+[pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
+[pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
+[pr1431]: https://github.com/btcsuite/btcwallet/pull/1431
