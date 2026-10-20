@@ -27,8 +27,9 @@ unproved. Task 435 already owns acceptance without publication.
   not wait for this particular test task to merge.
 - Register the same deterministic PSBT flow for kvdb, SQLite, and PostgreSQL.
   Do not skip kvdb inside the shared flow.
-- Decorate the funded inputs, sign the owned inputs, and finalize the packet
-  through the maintained public methods, checking each returned handoff.
+- Call `FundPsbt`, `DecorateInputs`, `SignPsbt`, and `FinalizePsbt` in that
+  order through the maintained public methods, passing returned packets
+  between calls and checking each handoff.
 - Extract and independently execute the final transaction, broadcast it, mine
   it, and verify it through TxReader. Reuse Task 435's acceptance-only proof
   without another mempool-verdict step here.

@@ -23,6 +23,9 @@ Task 395's separate `AllocateNextKey` API.
   used-to-next/reopen cases rather than duplicating them; add the missing
   repeated-unused and oldest-of-several assertions. Preserve backend-common
   assertions and do not repeat production-owned mechanical caller migration.
+- Reuse the existing SQL Store ordering, exhaustion, and concurrency evidence
+  without reproducing its matrix at the public boundary. Keep this task's
+  missing public allocation proof distinct from those storage-level tests.
 - On SQLite and PostgreSQL, require `NewAddress` for a chain-synchronized
   account to return the oldest persisted unused address without advancing the
   branch. After funding that address, require the next call to rotate to the
@@ -51,8 +54,9 @@ assertions or repeating production caller migrations.
 
 ## Verification
 
-- Run identical oldest-unused, used-to-next, empty-branch, and reopen cases on
-  SQLite and PostgreSQL.
+- Run identical public repeated-unused and oldest-of-several assertions on
+  SQLite and PostgreSQL. Reuse the existing first-allocation, funded rotation,
+  and reopen cases instead of creating another matrix.
 - Run the modern-kvdb force-next case separately and prove each successful
   call returns a fresh result with durable branch progress.
 - Verify `GetUnusedAddress` is absent and the change adds no compatibility API,

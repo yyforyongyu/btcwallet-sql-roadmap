@@ -87,6 +87,9 @@ Integration tests, scenarios, compatibility, and benchmarks run alongside 2A.
 Reuse existing component proofs; scenarios own distinct public handoffs.
 Final-contract suites retain their required production prerequisites,
 including later-phase features.
+Benchmarks remain required validation under the
+[scoped execution exception](AGENTS.md#scope-rules), with shared matching and
+reporting owned by [Task 471][t471].
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
@@ -111,7 +114,7 @@ including later-phase features.
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | — |
 | [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify true-value lists and path-bound account queries | — |
 | [Task 466][t466] | open | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | — |
-| [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure ListUnspent on three real backends | — |
+| [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
 
 ## Phase 3 — legacy-to-native SQL migration · 11 open

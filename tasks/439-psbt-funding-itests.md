@@ -52,9 +52,10 @@ effects, reusing current metadata and watch regressions.
   Task 402 can reconstruct readiness. Pre-mutation rejection leaves packet,
   leases, and address allocation unchanged; later failures do not imply that
   committed address allocation rolled back.
-- Reuse Task 346's metadata matrix and Task 406's private cleanup tests. Keep
-  representative public assertions here, with no Store inspection, production
-  fault seam, generic failure framework, or duplicate private-state matrix.
+- Reuse existing fee/dust unit matrices, Task 346's metadata matrix, and Task
+  406's private cleanup tests. Retain representative real-backend fee and
+  funding assertions here, with no repeated unit matrix, Store inspection,
+  production fault seam, generic failure framework, or private-state matrix.
 
 ## Suggested fix
 
