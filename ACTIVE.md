@@ -30,8 +30,8 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
 | [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | YY | [#1417][pr1417] |
 | [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | YY | [#1416][pr1416] |
-| [Task 488][t488] | Own passphrase request buffers | Bug fix | 2A | YY | — |
-| [Task 489][t489] | Drain accepted passphrase rotation | Bug fix | 2A | YY | — |
+| [Task 488][t488] | Own passphrase request buffers | Bug fix | 2A | YY | [#1429][pr1429] |
+| [Task 489][t489] | Drain accepted passphrase rotation | Bug fix | 2A | YY | [#1430][pr1430] |
 
 ## Upcoming Phase 2 Tasks
 
@@ -143,3 +143,5 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t488]: tasks/488-passphrase-request-ownership.md
 [t489]: tasks/489-passphrase-shutdown-context.md
+[pr1430]: https://github.com/btcsuite/btcwallet/pull/1430
+[pr1429]: https://github.com/btcsuite/btcwallet/pull/1429
