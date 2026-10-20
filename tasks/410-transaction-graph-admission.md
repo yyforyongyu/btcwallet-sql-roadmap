@@ -4,7 +4,7 @@ Component: **Wallet-owned SQL transaction mutation ordering**.
 
 Type: **Bug fix**.
 
-Dependencies: **[Task 334][t334] and [Task 424][t424]**.
+Dependencies: **[Task 334][t334]**.
 
 ## Rationale
 
@@ -13,19 +13,35 @@ spend links. If maintained Wallet ingestion can insert a child after that
 snapshot without joining the same ordering boundary, TxReader can retain an
 active child of an invalidated parent and UtxoManager can retain its spend.
 A transaction around each writer does not alone prove that this interleaving
-is excluded. At `sql-wallet` revision `2ae306dea8c5`, PostgreSQL
-`runtime.Write` uses `BeginTx(ctx, nil)`: under read committed, invalidation
-can read the active graph before concurrent ingestion adds a child and then
-update only its earlier IDs. Controller handlers and syncer batch writes are
-concurrent entry points. Task 424 validates this path and existing protection
-before selecting the correction.
+is excluded. At `sql-wallet` revision
+`4236325cbb609881272f488e413b90ab4aa07fc6`, PostgreSQL `runtime.Write` still
+uses `BeginTx(ctx, nil)`. Controller handlers and syncer batch writes can run
+concurrently. This is source-level evidence, not a reproduced race; this task
+owns validation of existing locks, predicates, triggers, and driver behavior
+before selecting a correction. No separate ADR is required.
+
+Candidate schedule under PostgreSQL read committed: active unmined A spends
+wallet coin F and creates A:0; a confirmed winner W spends F. W's ingestion
+snapshots A's descendants before child B exists. Concurrent ingestion commits
+B spending A:0 and independent wallet coin Q while A is still active. W then
+marks A replaced and processes only its earlier descendant IDs. Check whether
+B remains active, its credit visible, and Q spent after both operations settle.
+Use maintained confirmed-conflict ingestion or public `DeleteUnconfirmedTx`,
+not a new public invalidation API, to establish reachability.
+
+SQLite already uses `_txlock=immediate`, acquiring writer ownership before
+these reads and excluding this particular two-writer schedule. Preserve that
+protection; PostgreSQL does not justify matching application machinery on
+SQLite.
 
 ## Details
 
-- Reproduce the accepted ingestion-versus-invalidation interleaving through
+- Validate the candidate ingestion-versus-invalidation interleaving through
   maintained Wallet behavior and preserve one consistent public result in
   either ordering. If current protections already exclude it, record that
-  evidence and supersede the unnecessary fix.
+  evidence and supersede the unnecessary fix. If child admission wins first,
+  invalidation must include it; if the terminal transition wins first,
+  admission must respect the retained terminal parent.
 - Coordinate only graph mutations participating in the demonstrated race:
   direct/batch ingestion, state changes, invalidation, deletion, rewind, or
   rollback where reachable. Do not route unrelated writes through a new gate.
@@ -49,8 +65,9 @@ final coordinator architecture.
 
 ## Verification
 
-- Use barriers to reproduce the public failure before the fix and exercise
-  both orderings afterward on SQLite and PostgreSQL.
+- Use barriers to reproduce the public failure on PostgreSQL before the fix.
+  Exercise both orderings afterward on both SQL backends, preserving SQLite
+  writer exclusion rather than requiring a pre-fix SQLite failure.
 - Check TxReader status and UtxoManager spendability after the operations
   settle; no mixed graph result may remain.
 - Verify unrelated Wallet operations still proceed and rollback cannot
@@ -65,4 +82,3 @@ boundary with focused regressions and no unnecessary coordination layer.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
 [t372]: 372-multi-wallet-rollback.md
-[t424]: 424-transaction-utxo-integrity-adr.md

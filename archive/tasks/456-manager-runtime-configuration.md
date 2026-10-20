@@ -91,6 +91,6 @@ constructors on their existing isolated configuration path.
 - The PR changes no lifecycle, persistence, runtime manifest, CLI, RPC, lnd,
   or external-daemon behavior.
 
-[t330]: 330-duplicate-wallet-create.md
-[t334]: ../archive/tasks/334-shared-chain-state.md
-[t358]: 358-contextual-manager-operations.md
+[t330]: ../../tasks/330-duplicate-wallet-create.md
+[t334]: 334-shared-chain-state.md
+[t358]: ../../tasks/358-contextual-manager-operations.md

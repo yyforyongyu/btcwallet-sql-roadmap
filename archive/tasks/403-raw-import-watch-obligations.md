@@ -59,6 +59,6 @@ SQL raw imports establish live monitoring before success on btcd/bitcoind.
 Failed registration is safely retried through the same import API without
 changing existing data or stopping the Manager.
 
-[t332]: ../archive/tasks/332-watch-only-script-policy.md
-[t402]: ../archive/tasks/402-replay-live-watch-obligations.md
-[t467]: ../archive/tasks/467-indeterminate-commit-identity.md
+[t332]: 332-watch-only-script-policy.md
+[t402]: 402-replay-live-watch-obligations.md
+[t467]: 467-indeterminate-commit-identity.md

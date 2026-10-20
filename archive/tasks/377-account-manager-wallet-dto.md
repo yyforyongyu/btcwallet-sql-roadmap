@@ -57,7 +57,7 @@ types with the wallet-owned result. Keep internal Store queries unchanged.
 - The PR changes no account creation policy, public selector behavior, error
   policy, or recovery implementation.
 
-[t341]: ../archive/tasks/341-public-role-contract.md
+[t341]: 341-public-role-contract.md
 [t343]: 343-exact-account-creation.md
 [t429]: 429-account-mutation-itests.md
 [t430]: 430-account-query-itests.md

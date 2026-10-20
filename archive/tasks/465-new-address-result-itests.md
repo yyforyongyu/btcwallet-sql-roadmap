@@ -67,5 +67,5 @@ receiving assertions without depending on another test task's completion.
   component, arbitrary file, or duplicated Task 431 case.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t395]: ../archive/tasks/395-key-only-locator-allocation.md
+[t395]: 395-key-only-locator-allocation.md
 [t431]: 431-address-allocation-lookup-itests.md

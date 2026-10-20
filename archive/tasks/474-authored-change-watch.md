@@ -50,6 +50,6 @@ boundaries, consuming each operation's actual change result.
 Both authored-change return paths establish their supported watch before
 success, without changing allocation, chain adapters, or lease policy.
 
-[t401]: ../archive/tasks/401-live-tip-chain-watch.md
-[t402]: ../archive/tasks/402-replay-live-watch-obligations.md
-[t425]: ../archive/tasks/425-separate-transaction-authoring-wrappers.md
+[t401]: 401-live-tip-chain-watch.md
+[t402]: 402-replay-live-watch-obligations.md
+[t425]: 425-separate-transaction-authoring-wrappers.md

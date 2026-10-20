@@ -117,14 +117,14 @@ non-root-derived numbered identity, including `AllocateNextKey` results for
 `NoChainSync=true`, without a new provenance field, component, table, column,
 or kvdb path.
 
-[t332]: ../archive/tasks/332-watch-only-script-policy.md
-[t337]: ../archive/tasks/337-imported-xpub-derivation.md
-[t378]: ../archive/tasks/378-account-manager-error-boundary.md
-[t387]: ../archive/tasks/387-account-creation-identity-adr.md
-[t388]: ../archive/tasks/388-runtime-account-xpub-collisions.md
-[t390]: ../archive/tasks/390-custom-scope-account-creation.md
-[t392]: ../archive/tasks/392-discovery-mode-account-creation.md
-[t395]: ../archive/tasks/395-key-only-locator-allocation.md
-[t463]: 463-path-bound-utxo-identity-itests.md
-[t464]: 464-no-chain-sync-account-query-itests.md
-[t470]: 470-lnd-wallet-port.md
+[t332]: 332-watch-only-script-policy.md
+[t337]: 337-imported-xpub-derivation.md
+[t378]: 378-account-manager-error-boundary.md
+[t387]: 387-account-creation-identity-adr.md
+[t388]: 388-runtime-account-xpub-collisions.md
+[t390]: 390-custom-scope-account-creation.md
+[t392]: 392-discovery-mode-account-creation.md
+[t395]: 395-key-only-locator-allocation.md
+[t463]: ../../tasks/463-path-bound-utxo-identity-itests.md
+[t464]: ../../tasks/464-no-chain-sync-account-query-itests.md
+[t470]: ../../tasks/470-lnd-wallet-port.md

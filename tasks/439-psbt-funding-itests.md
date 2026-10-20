@@ -9,10 +9,11 @@ Dependencies: **[Task 356][t356], [Task 406][t406], and [Task 474][t474]**.
 ## Rationale
 
 [Issue #1250][issue1250] requires real-backend `FundPsbt` coverage. At
-`sql-wallet` revision `48e7f4b`, [funding tests][source] prove Task 346's packet
-metadata contract. Tasks 405, 406, and 474 still own the final lease,
-cleanup, and watched-change guarantees; this suite proves their public effects
-together after those production contracts land.
+`sql-wallet` revision `4236325cbb609881272f488e413b90ab4aa07fc6`,
+[funding tests][source] prove Task 346's packet metadata contract. Task
+474's watch wrapper is delivered by PR #1419; Tasks 405/406 still own
+reservation and cleanup. This suite proves their composed public
+effects, reusing current metadata and watch regressions.
 
 ## Details
 
@@ -37,7 +38,10 @@ together after those production contracts land.
 - After success, release every packet outpoint with its caller-owned ID through
   existing `ReleaseOutput` and prove the inputs become available without a new
   batch cleanup API.
-- Exercise one watched-change failure after caller-selected funding.
+- Exercise one SQL watched-change failure after caller-selected funding.
+  Kvdb keeps its legacy change path and does not call the SQL watch wrapper;
+  register this failure case separately while sharing the ordinary funding
+  contract across all three backends, without a runtime kvdb skip.
   Require the wrapped injected watch error, no returned packet, an
   unchanged caller packet, and no attempt lease under the supplied ID after
   any required definitive cleanup. Do not prescribe watch/reservation order:
@@ -84,5 +88,5 @@ setup and teardown without prescribing a new file or production hook.
 [t346]: ../archive/tasks/346-psbt-funding-metadata.md
 [t356]: 356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
-[t474]: 474-authored-change-watch.md
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/psbt_manager_test.go#L5061
+[t474]: ../archive/tasks/474-authored-change-watch.md
+[source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/wallet/psbt_manager_test.go

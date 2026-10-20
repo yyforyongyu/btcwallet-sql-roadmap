@@ -51,4 +51,4 @@ composite constraints rather than backend triggers, with no normalized-input,
 exact-spend, or amount work bundled in.
 
 [t340]: 340-durable-database-identity.md
-[t424]: ../../tasks/424-transaction-utxo-integrity-adr.md
+[t424]: 424-transaction-utxo-integrity-adr.md

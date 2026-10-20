@@ -60,7 +60,7 @@ scenario-specific production hooks.
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t356]: 356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
-[t474]: 474-authored-change-watch.md
+[t474]: ../archive/tasks/474-authored-change-watch.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md

@@ -50,5 +50,5 @@ the observable cutoff before key access and packet mutation is the contract.
 wallet-owned authorization against the input context, without adding signing,
 tweak, or finalization scope.
 
-[t346]: ../archive/tasks/346-psbt-funding-metadata.md
-[t469]: 469-sign-psbt-with-effective-keys.md
+[t346]: 346-psbt-funding-metadata.md
+[t469]: ../../tasks/469-sign-psbt-with-effective-keys.md

@@ -41,4 +41,4 @@ and modern kvdb remain unchanged.
 Positive-lookahead SQL recovery never derives or watches a `NoChainSync`
 account and explicit rejection has one stable wallet-owned error identity.
 
-[t345]: ../archive/tasks/345-durable-watch-registration.md
+[t345]: 345-durable-watch-registration.md

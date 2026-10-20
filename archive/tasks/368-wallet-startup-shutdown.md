@@ -90,5 +90,5 @@ is not independently safe after Manager becomes the terminal Store owner, so
 [Task 331][t331] absorbs this cutover as part of one atomic lifecycle outcome.
 The open implementation PR was retargeted to Task 331.
 
-[t331]: ../../tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t358]: ../../tasks/358-contextual-manager-operations.md

@@ -63,4 +63,4 @@ public results with the smallest local implementation. If no change is needed,
 use supersession instead of recording implementation completion.
 
 [t340]: 340-durable-database-identity.md
-[t424]: ../../tasks/424-transaction-utxo-integrity-adr.md
+[t424]: 424-transaction-utxo-integrity-adr.md

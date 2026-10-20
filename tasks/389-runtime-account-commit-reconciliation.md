@@ -13,6 +13,12 @@ SQL `NewAccount` already maps an ambiguous commit to
 needs the same result handling: an ordinary failure or caller cancellation
 must not imply rollback when an account may have committed.
 
+PR #1422 proposes mapping delivered ambiguous errors while retaining
+`waitForReq`. That alone does not satisfy this task's admitted-result rule.
+Keep the remaining requirement visible unless an explicit contract decision
+accepts caller-cancelable observation instead; an open proposal is not that
+decision.
+
 ## Details
 
 - Map an ambiguous SQL `ImportAccount` commit to the existing wallet-owned

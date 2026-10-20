@@ -254,11 +254,11 @@ becomes a straight deletion once it lands.
 
 ## References
 
-- [ADR 0011](../../docs/developer/adr/0011-no-addresses-used-column.md):
+- [ADR 0011](https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/docs/developer/adr/0011-no-addresses-used-column.md):
   compute, don't persist — the pattern candidates 4 and 5 already follow.
-- [ADR 0012](../../docs/developer/adr/0012-wallet-level-watch-only-uniformity.md):
+- [ADR 0012](https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/docs/developer/adr/0012-wallet-level-watch-only-uniformity.md):
   wallet-level watch-only; explicitly permits candidate 1. Its kvdb
   grandfathering is narrowed by [[Task 311]] to pre-existing wallets only.
-- [ADR 0013](../../docs/developer/adr/0013-normalized-account-address-identity.md):
+- [ADR 0013](https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/docs/developer/adr/0013-normalized-account-address-identity.md):
   normalized identity; "imported account code must not collapse SQL NULL to Go
   zero" is candidate 2.

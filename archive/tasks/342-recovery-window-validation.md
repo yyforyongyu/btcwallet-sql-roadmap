@@ -48,6 +48,6 @@ configuration.
 - No scan-work, target, derivation, or RPC policy changes in this PR.
 
 [t363]: 363-recovery-scan-work-bound.md
-[t397]: 397-semantic-recovery-targets-adr.md
-[t398]: 398-semantic-account-recovery-targets.md
+[t397]: ../../tasks/397-semantic-recovery-targets-adr.md
+[t398]: ../../tasks/398-semantic-account-recovery-targets.md
 [t399]: 399-zero-lookahead-persisted-targets.md

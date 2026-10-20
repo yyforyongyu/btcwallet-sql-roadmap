@@ -72,8 +72,8 @@ scheme, or default CI matrix expansion lands in this task.
   [Task 334][t334], Tasks 370–372, and [Task 423][t423].
 
 [t330]: ../../tasks/330-duplicate-wallet-create.md
-[t334]: ../../tasks/334-shared-chain-state.md
-[t340]: ../../tasks/340-durable-database-identity.md
+[t334]: 334-shared-chain-state.md
+[t340]: 340-durable-database-identity.md
 [t370]: ../../tasks/370-chain-source-delivery.md
 [t371]: 371-canonical-chain-frontier.md
 [t372]: ../../tasks/372-multi-wallet-rollback.md

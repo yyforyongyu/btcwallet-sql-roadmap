@@ -46,6 +46,6 @@ The existing account-creation request can activate one exact root-derived SQL
 account with `NoChainSync=true` only after every required safety guard exists.
 
 [t343]: 343-exact-account-creation.md
-[t378]: ../archive/tasks/378-account-manager-error-boundary.md
-[t393]: ../archive/tasks/393-key-only-receiving-rejection.md
-[t452]: ../archive/tasks/452-key-only-recovery-derivation.md
+[t378]: 378-account-manager-error-boundary.md
+[t393]: 393-key-only-receiving-rejection.md
+[t452]: 452-key-only-recovery-derivation.md

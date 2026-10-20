@@ -9,11 +9,13 @@ Dependencies: **[Task 407][t407]**.
 ## Rationale
 
 [Issue #1250][issue1250] requires public `SignPsbt` and `FinalizePsbt` coverage.
-At `sql-wallet` revision `48e7f4b`, [the handlers][source] still mutate caller
-packets during work. Task 407 and its Tasks 469/347 prerequisites own final
-authorization and unchanged-on-error behavior. This suite proves that contract
-with real kvdb, SQLite, and PostgreSQL Wallets without repeating their focused
-authorization matrices.
+At `sql-wallet` revision
+`4236325cbb609881272f488e413b90ab4aa07fc6`, `SignPsbt` already authorizes
+existing records and works on a clone through Task 347. [FinalizePsbt][source]
+still mutates its caller packet and uses a separate auto-signing path. Tasks
+407/469 own finalization and effective-key authorization. This suite proves
+the composed contract with real kvdb, SQLite, and PostgreSQL Wallets without
+repeating their focused authorization matrices.
 
 ## Details
 
@@ -55,4 +57,4 @@ source file.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t407]: 407-psbt-finalization-authorization.md
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/psbt_manager.go#L1049
+[source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/wallet/psbt_manager.go

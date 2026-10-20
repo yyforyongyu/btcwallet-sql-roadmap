@@ -159,10 +159,10 @@ observable.
 - The task adds no Create cancellation, chain-source redesign, process fence,
   runtime manifest, lookup replacement, eviction policy, or unrelated API.
 
-[t330]: 330-duplicate-wallet-create.md
-[t334]: ../archive/tasks/334-shared-chain-state.md
-[t358]: 358-contextual-manager-operations.md
-[t423]: 423-manager-chain-source-cutover.md
-[t457]: 457-process-local-manager-lease.md
-[t458]: ../archive/tasks/458-manager-operation-admission.md
-[t459]: ../archive/tasks/459-manager-startup-wallet-assembly.md
+[t330]: ../../tasks/330-duplicate-wallet-create.md
+[t334]: 334-shared-chain-state.md
+[t358]: ../../tasks/358-contextual-manager-operations.md
+[t423]: ../../tasks/423-manager-chain-source-cutover.md
+[t457]: ../../tasks/457-process-local-manager-lease.md
+[t458]: 458-manager-operation-admission.md
+[t459]: 459-manager-startup-wallet-assembly.md

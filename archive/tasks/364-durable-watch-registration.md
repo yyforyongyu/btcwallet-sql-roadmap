@@ -57,6 +57,6 @@ SQL producers can atomically retain an ordered live-watch obligation that
 survives restart and can be completed idempotently, without delivering it or
 exposing new public state.
 
-[t345]: ../../tasks/345-durable-watch-registration.md
+[t345]: 345-durable-watch-registration.md
 [t400]: 400-live-watch-semantics-adr.md
-[t402]: ../../tasks/402-replay-live-watch-obligations.md
+[t402]: 402-replay-live-watch-obligations.md

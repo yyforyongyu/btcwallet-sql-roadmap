@@ -80,6 +80,6 @@ tasks need no product decision, while changing no Go or SQL source and adding
 no new ADR file.
 
 [issue22]: https://github.com/yyforyongyu/btcwallet-sql-roadmap/issues/22
-[t332]: ../archive/tasks/332-watch-only-script-policy.md
-[t360]: ../archive/tasks/360-document-kvdb-adapter-identity.md
+[t332]: 332-watch-only-script-policy.md
+[t360]: 360-document-kvdb-adapter-identity.md
 [t392]: 392-discovery-mode-account-creation.md

@@ -62,5 +62,5 @@ Every maintained Wallet operation is either accepted and drained or rejected
 before Store access, and private Wallet lifecycle is terminal, concurrent, and
 independent of Manager lifecycle state.
 
-[t334]: ../archive/tasks/334-shared-chain-state.md
+[t334]: 334-shared-chain-state.md
 [t331]: 331-manager-wallet-lifecycle.md

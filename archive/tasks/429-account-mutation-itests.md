@@ -65,5 +65,5 @@ package rather than adding a `package wallet_test` file.
 - The task introduces no new account behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t341]: ../archive/tasks/341-public-role-contract.md
-[t377]: ../archive/tasks/377-account-manager-wallet-dto.md
+[t341]: 341-public-role-contract.md
+[t377]: 377-account-manager-wallet-dto.md

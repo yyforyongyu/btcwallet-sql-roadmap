@@ -57,4 +57,4 @@ compare the two public readers before and after a full durable reopen.
   production implementation or SQL-only conversion cases.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t339]: ../archive/tasks/339-transaction-visibility.md
+[t339]: 339-transaction-visibility.md

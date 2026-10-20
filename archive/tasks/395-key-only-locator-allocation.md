@@ -89,12 +89,12 @@ manager, result wrapper, worker, table, or reservation mechanism.
 side effects. Receiving APIs remain guarded, and known-index derivation keeps
 using the existing `DerivePubKey` contract.
 
-[t341]: ../archive/tasks/341-public-role-contract.md
-[t344]: ../archive/tasks/344-bulk-address-allocation.md
-[t390]: ../archive/tasks/390-custom-scope-account-creation.md
-[t393]: ../archive/tasks/393-key-only-receiving-rejection.md
+[t341]: 341-public-role-contract.md
+[t344]: 344-bulk-address-allocation.md
+[t390]: 390-custom-scope-account-creation.md
+[t393]: 393-key-only-receiving-rejection.md
 [t396]: 396-oldest-unused-address.md
-[t399]: ../archive/tasks/399-zero-lookahead-persisted-targets.md
-[t452]: ../archive/tasks/452-key-only-recovery-derivation.md
+[t399]: 399-zero-lookahead-persisted-targets.md
+[t452]: 452-key-only-recovery-derivation.md
 [t465]: 465-new-address-result-itests.md
-[t467]: ../archive/tasks/467-indeterminate-commit-identity.md
+[t467]: 467-indeterminate-commit-identity.md

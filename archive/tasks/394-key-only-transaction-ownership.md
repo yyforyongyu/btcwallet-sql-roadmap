@@ -48,5 +48,5 @@ Key-only child scripts are uniformly non-owned for
 maintained SQL ingestion without rejecting their containing transaction or
 duplicating ownership policy in callers.
 
-[t345]: ../../tasks/345-durable-watch-registration.md
-[t395]: ../../tasks/395-key-only-locator-allocation.md
+[t345]: 345-durable-watch-registration.md
+[t395]: 395-key-only-locator-allocation.md

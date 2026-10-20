@@ -35,24 +35,14 @@ They do not consume task numbers or require task files.
 
 ## Accounts, addresses, and recovery
 
-  atomically.
-  account XPub identities.
 - [Task 389](389-runtime-account-commit-reconciliation.md): report uncertain
   account commits truthfully.
-  XPub accounts.
-  durable key allocation.
-  unused address.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
   recovery targets.
 - [Task 398](398-semantic-account-recovery-targets.md): accept semantic account
   recovery targets.
-  persisted Wallet data.
-  public success.
 - [Task 460](460-sequential-account-invalid-children.md): make sequential
   account allocation invalid-child safe.
-  accounts.
-  signing wallet.
-  imported account address schema.
 
 ## Chain and synchronization
 
@@ -64,11 +54,9 @@ They do not consume task numbers or require task files.
 
 ## Transactions, UTXOs, and PSBTs
 
-  signatures.
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
 - [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
-  atomically.
 - [Task 406](406-psbt-funding-lease-release.md): clean up failed PSBT funding
   leases.
 - [Task 407](407-psbt-finalization-authorization.md): authorize PSBT
@@ -77,8 +65,6 @@ They do not consume task numbers or require task files.
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
   transactions.
-- [Task 424](424-transaction-utxo-integrity-adr.md): define transaction and UTXO
-  integrity ownership.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
   transaction output aggregates.
 - [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
@@ -92,7 +78,6 @@ They do not consume task numbers or require task files.
 - [Task 484](484-align-authoring-confirmation-height.md): align authoring
   confirmation height.
 
-- [Task 474](474-authored-change-watch.md): watch authored change before return.
 
 ## Integration tests
 
@@ -102,7 +87,6 @@ that structural exclusion explicitly.
 
 - [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
-  and lookup contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
 - [Task 438](438-psbt-decoration-combination-itests.md): cover PSBT decoration
@@ -119,7 +103,6 @@ that structural exclusion explicitly.
   account identity.
 - [Task 464](464-no-chain-sync-account-query-itests.md): verify true-value
   list and path-bound account queries.
-  results.
 - [Task 466](466-oldest-unused-address-itests.md): verify final oldest-unused
   allocation.
 

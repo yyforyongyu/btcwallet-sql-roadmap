@@ -83,6 +83,6 @@ return the published pointer on every post-publication path.
 - The PR contains no Create/genesis behavior, legacy wrapper, generic
   registry, or publication state machine.
 
-[t331]: ../../tasks/331-manager-wallet-lifecycle.md
+[t331]: 331-manager-wallet-lifecycle.md
 [t368]: 368-wallet-startup-shutdown.md
 [t453]: 453-serialize-manager-wallet-publication.md

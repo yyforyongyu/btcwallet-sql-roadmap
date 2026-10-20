@@ -10,7 +10,7 @@ Dependencies: **[Task 344][t344], [Task 356][t356], [Task 402][t402],
 ## Archive decision
 
 Superseded on 2026-09-21 by
-[Task 474](../../tasks/474-authored-change-watch.md).
+[Task 474](474-authored-change-watch.md).
 The accepted change-watch consolidation replaces this unimplemented scope;
 this task is not complete.
 
@@ -61,9 +61,9 @@ last-moment exact lease ownership; pre-return cleanup stays private and
 successful callers retain existing `ReleaseOutput`. SQL btcd/bitcoind uses
 Task 402; modern kvdb and Neutrino retain their existing watch paths.
 
-[t344]: ../../tasks/344-bulk-address-allocation.md
+[t344]: 344-bulk-address-allocation.md
 [t356]: ../../tasks/356-defer-change-script-allocation.md
-[t402]: ../../tasks/402-replay-live-watch-obligations.md
+[t402]: 402-replay-live-watch-obligations.md
 [t406]: ../../tasks/406-psbt-funding-lease-release.md
 [t425]: 425-separate-transaction-authoring-wrappers.md
 [t439]: ../../tasks/439-psbt-funding-itests.md

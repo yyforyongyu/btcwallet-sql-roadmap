@@ -10,8 +10,11 @@ Dependencies: **[Task 391][t391]**.
 
 [Issue #1250][issue1250] requires UtxoManager integration coverage. Completed
 Task 415 predates Task 391's representable numbered path-bound XPub account
-shape, so no public test proves that its funded outputs retain the correct
-account identity through SQL UTXO conversion.
+shape. At `sql-wallet` revision
+`4236325cbb609881272f488e413b90ab4aa07fc6`, PR #1408 already covers path-bound
+address allocation, balance, and reopen on all three backends. The remaining
+proof is `ListUnspent`/`GetUtxo` attribution and account-filter agreement;
+reuse that funded fixture rather than repeat its address matrix.
 
 ## Details
 
@@ -19,9 +22,10 @@ account identity through SQL UTXO conversion.
   conversion. Keep it in Phase 2 with that real dependency; it is not a
   migration gate. Tasks 373–376 own converted legacy account/UTXO equivalence.
 - Exercise `ListUnspent` and `GetUtxo` only through the imported `wallet`
-  package on real SQLite and PostgreSQL Wallets.
-- Create a uniformly watch-only, path-bound XPub account with
-  `NoChainSync=false`, allocate a managed public address through the maintained
+  package on real kvdb, SQLite, and PostgreSQL Wallets.
+- Use the existing declared `ImportAccountParams` fixture with
+  `NoChainSync=false` in a watch-only Wallet; add no supplied-XPub field to
+  `NewAccountParams`. Allocate a managed public address through the maintained
   AddressManager API, fund it through the existing harness, and wait for the
   public Wallet view to recognize the output.
 - Require both methods to report the path-bound account's public name and the
@@ -33,9 +37,9 @@ account identity through SQL UTXO conversion.
   account number internally to produce the truthful public account identity;
   do not add an account-number field, Store query, or parallel public API for
   this test.
-- Modern kvdb cannot represent Task 391's numbered path-bound XPub account, so
-  exclude it structurally from this SQL-only fixture rather than adding a skip
-  branch or synthetic backend behavior.
+- PR #1408 retains declared imported account numbers on kvdb too. Register
+  this shared public contract on all three backends, with no kvdb skip or
+  backend-specific assertion; differences stay in fixture setup and teardown.
 - Extend the existing `itest/utxo_manager_test.go` suite and reuse its funding
   and reopen infrastructure. Add no arbitrary helper, production file, or
   standalone test file; justify any unavoidable new file against the current
@@ -47,14 +51,14 @@ account identity through SQL UTXO conversion.
 
 ## Suggested fix
 
-Extend the existing UtxoManager integration suite with one shared SQL case.
+Extend the existing UtxoManager integration suite with one shared case.
 Build the expected account name and outpoint from public account, address, and
 funding results, then compare `ListUnspent`, its account filter, and `GetUtxo`
 before and after reopening the same durable wallet.
 
 ## Verification
 
-- Run the focused path-bound UTXO case unchanged on SQLite and PostgreSQL.
+- Run the focused path-bound UTXO case unchanged on all three backends.
 - Prove list, account-filter, and point results agree on the funded outpoint and
   path-bound account name before and after reopen.
 - Verify the change extends the existing suite and adds no public field, Store
@@ -63,9 +67,9 @@ before and after reopening the same durable wallet.
 ## Definition of done
 
 - A funded path-bound XPub output has truthful and durable public account
-  attribution through `ListUnspent` and `GetUtxo` on both SQL dialects.
+  attribution through `ListUnspent` and `GetUtxo` on all three backends.
 - The test uses imported `wallet` APIs and real backends without direct Store
-  inspection or a synthetic kvdb representation.
+  inspection, a kvdb skip, or a synthetic backend representation.
 - No new component, public UTXO field, API, helper file, or standalone test
   file is introduced.
 

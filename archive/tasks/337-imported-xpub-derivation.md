@@ -68,7 +68,7 @@ request for an imported-XPub child with no derivation metadata fails before
 - Modern-kvdb acceptance is owned separately by
   [Task 361](361-kvdb-imported-xpub-derivation.md).
 
-[t329]: 329-atomic-wallet-account-creation.md
-[t341]: ../archive/tasks/341-public-role-contract.md
-[t376]: 376-orchestrate-legacy-conversion.md
+[t329]: ../../tasks/329-atomic-wallet-account-creation.md
+[t341]: 341-public-role-contract.md
+[t376]: ../../tasks/376-orchestrate-legacy-conversion.md
 [t441]: 441-signer-derivation-ecdh-itests.md
