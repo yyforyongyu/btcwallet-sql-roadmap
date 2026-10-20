@@ -40,10 +40,12 @@ reuse that funded fixture rather than repeat its address matrix.
 - PR #1408 retains declared imported account numbers on kvdb too. Register
   this shared public contract on all three backends, with no kvdb skip or
   backend-specific assertion; differences stay in fixture setup and teardown.
-- Extend the existing `itest/utxo_manager_test.go` suite and reuse its funding
-  and reopen infrastructure. Add no arbitrary helper, production file, or
-  standalone test file; justify any unavoidable new file against the current
-  repository layout in the implementation PR.
+- Reuse the existing funded declared-import fixture and its reopen, with
+  suitable UtxoManager assertions. Add only the missing point/list/filter
+  checks around that reopen, without another funding or address/account
+  identity matrix. Extend existing suites; add no arbitrary helper,
+  production file, or standalone test file. Justify any unavoidable new file
+  against the current repository layout in the implementation PR.
 - Keep direct Store access, raw SQL assertions, leases, unrelated UTXO cases,
   RPC, deprecated APIs, and unrelated production changes out of scope. Fix
   only a production defect required by this public attribution contract and
@@ -51,10 +53,12 @@ reuse that funded fixture rather than repeat its address matrix.
 
 ## Suggested fix
 
-Extend the existing UtxoManager integration suite with one shared case.
-Build the expected account name and outpoint from public account, address, and
-funding results, then compare `ListUnspent`, its account filter, and `GetUtxo`
-before and after reopening the same durable wallet.
+Extend the existing funded declared-import case in
+`itest/account_manager_test.go`, reusing available UtxoManager assertions.
+Build the expected account name and outpoint from its public results, then
+compare `ListUnspent`, its account filter, and `GetUtxo` before and after the
+existing reopen. Another suitable existing location is valid if it reuses
+that fixture without duplicating funding and reload setup.
 
 ## Verification
 

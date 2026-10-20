@@ -167,10 +167,12 @@ that structural exclusion explicitly.
 
 ## Benchmarks
 
-Task 471 exercises minimal shared kvdb, SQLite, and PostgreSQL setup with the
-first real ListUnspent measurement. Other consumers reuse that setup and own
-their operation-specific data. Each uses a few explicit sizes and a simple
-loop, without a cold/warm matrix or workload framework.
+Task 471 exercises minimal SQL setup and owns the shared matching and reporting
+contract with the first ListUnspent measurement. Follow the
+[scoped execution exception](../AGENTS.md#scope-rules) to preserve existing
+kvdb comparisons. Other consumers reuse that setup and reporting and own
+their operation-specific data and baseline alignment, without a cold/warm
+matrix or workload framework.
 
 - [Task 417](417-start-to-synced-benchmark.md): measure start-to-synced
   performance.
@@ -179,4 +181,4 @@ loop, without a cold/warm matrix or workload framework.
 - [Task 420](420-transaction-read-benchmark.md): measure transaction-read
   performance.
 - [Task 471](471-three-backend-list-unspent-benchmark.md): measure ListUnspent
-  on three real backends with reusable setup.
+  on SQL with existing kvdb baselines and reusable setup/reporting.

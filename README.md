@@ -99,6 +99,9 @@ Keep benchmark tasks measurement-only and record defects they expose as
 separate implementation tasks.
 Run shared public contracts on kvdb, SQLite, and PostgreSQL. If a backend
 cannot represent a scenario, document that structural exclusion in its task.
+The selected benchmarks follow the
+[scoped execution exception](AGENTS.md#scope-rules); shared public
+integration-test requirements remain unchanged.
 
 ## Creating or changing a numbered task
 
