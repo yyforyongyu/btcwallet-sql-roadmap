@@ -40,9 +40,9 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 369][t369] | Test repeated unlocks | Test | 2B | — | — |
-| [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | — | — |
-| [Task 419][t419] | Benchmark address reads | Benchmark | 2B | — | — |
-| [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | — | — |
+| [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | — |
+| [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | — |
+| [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | — |
 | [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | 2B | Gustavo | — |
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | — | — |
@@ -60,7 +60,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
 | [Task 464][t464] | Test NoChainSync account queries | Test | 2B | — | — |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | — | — |
-| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | — | — |
+| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | — |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 
 ## Claimed Tasks
