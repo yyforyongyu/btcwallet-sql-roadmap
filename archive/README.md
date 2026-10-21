@@ -19,6 +19,8 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 484](tasks/484-align-authoring-confirmation-height.md) completed on 2026-10-22.
+- [Task 389](tasks/389-runtime-account-commit-reconciliation.md) completed on 2026-10-22.
 - [Task 367](tasks/367-bound-sql-genesis-secrets.md) completed on 2026-10-21.
 
 - [Task 474](tasks/474-authored-change-watch.md) completed through

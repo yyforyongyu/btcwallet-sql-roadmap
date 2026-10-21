@@ -35,7 +35,6 @@ They do not consume task numbers or require task files.
 
 ## Accounts, addresses, and recovery
 
-- [Task 389](389-runtime-account-commit-reconciliation.md): report uncertain
   account commits truthfully.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
   recovery targets.
@@ -75,7 +74,6 @@ They do not consume task numbers or require task files.
   without known origin.
 - [Task 483](483-preserve-labels-on-chain-replay.md): preserve transaction labels
   on chain replay.
-- [Task 484](484-align-authoring-confirmation-height.md): align authoring
   confirmation height.
 
 

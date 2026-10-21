@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **161 tasks**: **68 open**, **67 done**,
-**24 superseded**, and **2 deferred**. With **120 ad hoc tasks**, that is
-**281 tracked tasks** and **187 completed** overall.
+The numbered roadmap contains **161 tasks**: **66 open**, **69 done**,
+**24 superseded**, and **2 deferred**. With **121 ad hoc tasks**, that is
+**282 tracked tasks** and **190 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -65,7 +65,6 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | [Task 365][t365] | open | Manager creation preflight | Bug fix | Validate wallet genesis key identities | — |
 | [Task 370][t370] | open | Manager chain-event fanout and Wallet processors | Refactor | Fan out ordered Manager chain events | — |
 | [Task 372][t372] | open | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | 370 |
-| [Task 389][t389] | open | AccountManager SQL account-creation results | Bug fix | Report uncertain account commits truthfully | — |
 | [Task 405][t405] | open | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | — |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
@@ -76,7 +75,6 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484, 487 |
 | [Task 482][t482] | open | PsbtManager imported-input decoration | Gap fix | Fund imported inputs without known origin | — |
 | [Task 483][t483] | open | Wallet scan ingestion and TxStore batch | Bug fix | Preserve labels on chain replay | — |
-| [Task 484][t484] | open | TxCreator coin eligibility | Bug fix | Align authoring confirmation height | — |
 | [Task 488][t488] | open | Controller.ChangePassphrase request ownership | Bug fix | Own passphrase request buffers through completion | — |
 | [Task 489][t489] | open | Controller.ChangePassphrase accepted-operation context | Bug fix | Drain accepted passphrase rotation during shutdown | — |
 
@@ -222,9 +220,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 67
+## Done · 69
 
-**187 completed: 67 numbered tasks and 120 ad hoc PRs.** Each closing PR counts
+**190 completed: 69 numbered tasks and 121 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -257,6 +255,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
 | [Task 387][t387] | 1 | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | [#1342][pr1342] |
 | [Task 388][t388] | 1 | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | [#1394][pr1394] |
+| [Task 389][t389] | 2A | AccountManager SQL account-creation results | Bug fix | Report uncertain account commits truthfully | [#1422][pr1422] |
 | [Task 390][t390] | 1 | AccountManager custom scope and SQL key-scope/account mutation | Gap fix | Create root-derived accounts in custom scopes | [#1371][pr1371] |
 | [Task 391][t391] | 1 | AccountManager and SQL account, address, and UTXO identity shape | Gap fix | Create exact path-bound XPub accounts | [#1408][pr1408] |
 | [Task 392][t392] | 1 | AccountManager and SQL AccountStore create inputs | Gap fix | Carry NoChainSync through account creation | [#1366][pr1366] |
@@ -299,6 +298,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 480][t480] | 1 | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | [#1412][pr1412] |
 | [Task 481][t481] | 1 | AccountManager and SQL account address schema | Bug fix | Preserve imported account address schema | [#1409][pr1409] |
 | [Task 474][t474] | 2A | PsbtManager and TxCreator change registration | Bug fix | Watch authored change before returning | [#1419][pr1419] |
+| [Task 484][t484] | 2A | TxCreator coin eligibility | Bug fix | Align authoring confirmation height | [#1416][pr1416] |
 
 ### Ad hoc PRs
 
@@ -432,6 +432,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1402](https://github.com/btcsuite/btcwallet/pull/1402) | wallet+db: make oldest-unused address atomic sql native | GustavoStingelin | 2026-10-15 |
 | [#1420](https://github.com/btcsuite/btcwallet/pull/1420) | ci: speed up the lint job | GustavoStingelin | 2026-10-18 |
 | [#1424](https://github.com/btcsuite/btcwallet/pull/1424) | multi: fix reorg ancestry and miner isolation | yyforyongyu | 2026-10-20 |
+| [#1425](https://github.com/btcsuite/btcwallet/pull/1425) | wallet: make authored change flow explicit | GustavoStingelin | 2026-10-21 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md

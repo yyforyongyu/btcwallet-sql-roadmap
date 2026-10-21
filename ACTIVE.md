@@ -17,18 +17,16 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 365][t365] | Validate wallet genesis key identities | Bug fix | 2A | YY | [#1423][pr1423] |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1434][pr1434] |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | [#1435][pr1435] |
-| [Task 389][t389] | Report uncertain account commits | Bug fix | 2A | YY | [#1422][pr1422] |
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | [#1431][pr1431] |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | — | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | — |
-| [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | — |
+| [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
 | [Task 483][t483] | Preserve labels on chain replay | Bug fix | 2A | YY | [#1417][pr1417] |
-| [Task 484][t484] | Align authoring confirmation height | Bug fix | 2A | YY | [#1416][pr1416] |
 | [Task 488][t488] | Own passphrase request buffers | Bug fix | 2A | YY | [#1429][pr1429] |
 | [Task 489][t489] | Drain accepted passphrase rotation | Bug fix | 2A | YY | [#1430][pr1430] |
 
@@ -83,7 +81,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t369]: tasks/369-repeated-wallet-unlock.md
 [t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
-[t389]: tasks/389-runtime-account-commit-reconciliation.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t405]: tasks/405-psbt-funding-lease-admission.md
@@ -124,7 +121,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t478]: tasks/478-retain-spend-confirmation-leases.md
 [t482]: tasks/482-fund-imported-inputs-without-origin.md
 [t483]: tasks/483-preserve-labels-on-chain-replay.md
-[t484]: tasks/484-align-authoring-confirmation-height.md
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
@@ -134,9 +130,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1428]: https://github.com/btcsuite/btcwallet/pull/1428
 [pr1415]: https://github.com/btcsuite/btcwallet/pull/1415
 [pr1417]: https://github.com/btcsuite/btcwallet/pull/1417
-[pr1416]: https://github.com/btcsuite/btcwallet/pull/1416
 [pr1423]: https://github.com/btcsuite/btcwallet/pull/1423
-[pr1422]: https://github.com/btcsuite/btcwallet/pull/1422
 
 [t488]: tasks/488-passphrase-request-ownership.md
 [t489]: tasks/489-passphrase-shutdown-context.md
@@ -146,3 +140,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
 [pr1431]: https://github.com/btcsuite/btcwallet/pull/1431
+[pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
