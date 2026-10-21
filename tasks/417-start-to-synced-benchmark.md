@@ -15,8 +15,8 @@ equal block counts alone do not make the two measurements comparable.
 
 ## Details
 
-- Follow the [scoped benchmark exception][backend-rule] and [Task 471][t471]'s
-  matching and reporting contract, reusing its minimal SQL setup.
+- Follow the [scoped benchmark exception][backend-rule], reusing
+  [Task 471][t471]'s minimal SQL setup.
 - Select a representative existing empty- or populated-chain startup case.
   Match Wallet/account counts, initial durable state, chain source and daemon
   behavior, block history and match pattern, and completion observation with
@@ -33,9 +33,17 @@ equal block counts alone do not make the two measurements comparable.
 - Prepare deterministic chain data before timing. Normal database and matched
   chain-source I/O remain measured; mining, random data generation, profiling,
   and artificial completion sleeps do not.
-- Validate actual initial and final public state outside timing. Own only the
-  selected startup case's necessary baseline alignment and export; use 471's
-  contract for workload identity, provenance, comparison, and missing results.
+- For a fair comparison in both suites, exclude Docker/environment setup,
+  database startup/readiness, initial connections, schema/data creation, and
+  teardown. Database server startup is separate from the measured Manager
+  startup-to-synced workflow.
+- Validate actual initial and final public state outside timing and keep any
+  selected baseline alignment local.
+- Add a short file for this method under btcwallet's `docs/benchmark/`: method
+  and wallet commit SHA(s), methodology/timing boundary, a data/parameters
+  table, and a time/allocation results table for legacy kvdb, modern kvdb,
+  PostgreSQL, and SQLite. Reuse existing kvdb results; no reporting framework
+  is required.
 - Add no cold/warm variants, cache controls, concurrency matrix, profiling,
   tuning, or production diagnostics.
 
@@ -53,13 +61,14 @@ without a second lifecycle framework or cleanup of every startup benchmark.
   against the separately obtained existing kvdb results.
 - Confirm each sample starts from equivalent state, measures the same public
   workflow, and leaves no live Manager, Wallet, or backend resources.
-- Export operation-specific results under Task 471's reporting contract.
+- Verify environment and database setup are untimed in both suites and the
+  concise method record includes both the data and four-result tables.
 
 ## Definition of done
 
 One SQL start-to-synced measurement matches a selected existing startup
-workload and its timing/completion boundary, with results reported under
-471's contract and no production changes or replacement of kvdb comparisons.
+workload and its timing/completion boundary, with a short `docs/benchmark/`
+record and no production changes or replacement of kvdb comparisons.
 
 [backend-rule]: ../AGENTS.md#scope-rules
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md

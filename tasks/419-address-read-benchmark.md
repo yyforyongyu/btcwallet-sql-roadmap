@@ -14,8 +14,8 @@ than replacing those baselines or reproducing coupled growth variables.
 
 ## Details
 
-- Follow the [scoped benchmark exception][backend-rule] and [Task 471][t471]'s
-  matching and reporting contract, reusing its minimal SQL setup.
+- Follow the [scoped benchmark exception][backend-rule], reusing
+  [Task 471][t471]'s minimal SQL setup.
 - Measure each method separately with one representative existing workload.
   Match account identity/count, actual total addresses, script types, funded
   state, request filters, expected results, and the point-selection rule with
@@ -25,8 +25,15 @@ than replacing those baselines or reproducing coupled growth variables.
 - Validate actual seeded state, complete list semantics, and the point result
   outside timing. Keep setup and cleanup outside timing and fail on unexpected
   operation errors.
-- Own the selected address cases' necessary baseline alignment and export;
-  use 471's contract for identity, provenance, comparisons, and missing results.
+- Use the same timing boundaries for a fair comparison in both suites.
+  Exclude Docker/environment setup, database startup/readiness, initial
+  connections, schema/data creation, and teardown; normal API database I/O
+  remains measured. Keep any selected baseline alignment local.
+- Add one short file per method under btcwallet's `docs/benchmark/`: method
+  and wallet commit SHA(s), methodology/timing boundary, a data/parameters
+  table, and a time/allocation results table for legacy kvdb, modern kvdb,
+  PostgreSQL, and SQLite. Reuse existing kvdb results; no reporting framework
+  is required.
 - Exclude cold/warm modes, broad legacy cleanup, imports, mutations, independent
   balance measurements, concurrency, tuning, and production changes.
 
@@ -43,12 +50,13 @@ data, without a workload framework or migration of unrelated benchmarks.
   and timed work against separately obtained existing kvdb measurements.
 - Confirm only the selected operation is timed, each result names its workload,
   and every fixture is cleaned up.
-- Export operation-specific results under Task 471's reporting contract.
+- Verify environment and database setup are untimed in both suites and the
+  concise method records include both the data and four-result tables.
 
 ## Definition of done
 
 Both public address reads have focused SQL measurements matched to selected
-existing workloads, with results under 471's reporting contract, preserved
+existing workloads, with short method records under `docs/benchmark/`, preserved
 kvdb comparisons, and no production changes.
 
 [backend-rule]: ../AGENTS.md#scope-rules

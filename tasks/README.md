@@ -164,12 +164,13 @@ that structural exclusion explicitly.
 
 ## Benchmarks
 
-Task 471 exercises minimal SQL setup and owns the shared matching and reporting
-contract with the first ListUnspent measurement. Follow the
-[scoped execution exception](../AGENTS.md#scope-rules) to preserve existing
-kvdb comparisons. Other consumers reuse that setup and reporting and own
-their operation-specific data and baseline alignment, without a cold/warm
-matrix or workload framework.
+Task 471 exercises minimal SQL setup with the first ListUnspent measurement.
+Preserve existing kvdb comparisons under the
+[scoped execution exception](../AGENTS.md#scope-rules).
+Other consumers reuse that setup and own their data and baseline alignment.
+Keep one short file per method under btcwallet's `docs/benchmark/`, with the
+method/commit SHAs, methodology, data table, and four-implementation results
+table. No reporting framework is required.
 
 - [Task 417](417-start-to-synced-benchmark.md): measure start-to-synced
   performance.
@@ -178,4 +179,4 @@ matrix or workload framework.
 - [Task 420](420-transaction-read-benchmark.md): measure transaction-read
   performance.
 - [Task 471](471-three-backend-list-unspent-benchmark.md): measure ListUnspent
-  on SQL with existing kvdb baselines and reusable setup/reporting.
+  on SQL with existing kvdb baselines and reusable setup.

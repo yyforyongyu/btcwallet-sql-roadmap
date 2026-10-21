@@ -85,8 +85,8 @@ Reuse existing component proofs; scenarios own distinct public handoffs.
 Final-contract suites retain their required production prerequisites,
 including later-phase features.
 Benchmarks remain required validation under the
-[scoped execution exception](AGENTS.md#scope-rules), with shared matching and
-reporting owned by [Task 471][t471].
+[scoped execution exception](AGENTS.md#scope-rules). Reuse Task 471's SQL setup
+and keep concise results in btcwallet's `docs/benchmark/`.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |

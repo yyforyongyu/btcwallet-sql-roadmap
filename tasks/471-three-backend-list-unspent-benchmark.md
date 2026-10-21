@@ -21,10 +21,9 @@ separate setup-only example and smoke matrix.
 ## Details
 
 - Follow the [scoped benchmark exception][backend-rule]. Preserve the existing
-  comparison suite; own only selected-case alignment, selection, validation,
-  and baseline export alongside the first useful SQL ListUnspent measurement.
+  comparison suite and reuse selected workloads and kvdb measurements.
 - Construct focused SQL Wallets normally through Manager, reusing real-backend
-  setup and teardown. Add only the minimal setup and reporting needed here;
+  setup and teardown. Add only the minimal SQL setup needed here;
   [417][t417], [419][t419], and [420][t420] reuse it and own their data and
   baseline alignment. Their dependency is on shared infrastructure, not this
   task's performance result. Task 417 owns per-sample startup work.
@@ -35,8 +34,7 @@ separate setup-only example and smoke matrix.
   A few explicit sizes may vary live UTXO count alone; record supporting
   history without another scaling dimension. Do not recreate the old matrix.
 - Use a small data-only definition or an equally simple explicit description
-  shared by both suites. Give each case a stable identity and distinguish
-  changes to its definition; matching names or configuration counts do not
+  shared by both suites; matching names or configuration counts alone do not
   establish equivalent work.
 - Match account identity and selection, total addresses and script types,
   owned/foreign inputs, persisted history count and transaction shape,
@@ -52,60 +50,83 @@ separate setup-only example and smoke matrix.
   different semantics, such as force-next allocation versus unused reuse;
   mark a genuinely unmatched baseline unavailable.
 - Seed and validate once, then repeatedly call ListUnspent on the same active
-  Wallet. Keep setup, correctness checks, and teardown outside timing, validate
-  count, order, outpoints, and values, and fail on operation errors.
-
-### Reporting contract
-
-- This task owns the shared reporting contract used by 417/419/420. Each suite
-  exports its own measurements; the reporting step executes no Wallet calls.
-  Join by method and workload identity, showing legacy kvdb, maintained kvdb,
-  SQLite, and PostgreSQL columns where available.
-- Report time, allocated bytes, allocations, exact dimensions, and direct
-  differences against comparable legacy results. Never multiply ratios from
-  different workloads to estimate old-to-SQL performance.
-- Record result source revision, workload definition, toolchain, machine, and
-  relevant database/environment settings. Label historical results as recorded
-  evidence. Never silently join changed workloads or incompatible environments.
-- SQL execution requires no baseline artifact. SQL-only absolute reporting is
-  valid; a requested comparison must identify missing or unusable baselines
-  instead of claiming four implementations were compared. Rerun or locally
-  align unusable selected baselines in the existing suite when needed.
-- Use ordinary Go benchmark output and established tools such as benchstat
-  with explicit implementation labels and minimal export/normalization glue.
-  Existing benchmark code does not prove usable result files already exist.
-- Require explicit review of unexplained comparable regressions as Phase 2B
-  validation, without an arbitrary universal percentage limit. These selected
-  methods establish no performance conclusion for every Wallet operation.
+  Wallet. Validate count, order, outpoints, and values outside timing and fail
+  on operation errors.
+- Use equivalent workloads and timing boundaries for a fair comparison across
+  all four implementations. Exclude Docker/environment provisioning, database
+  startup and readiness, initial connections, schema/data creation, correctness
+  checks, and teardown. Measure only ListUnspent, including its normal DB I/O.
 - Exclude production fixes, tuning, harness retirement, broad cleanup, leases,
   mutation, concurrency, daemon matrices, cold/warm modes, cache controls,
   snapshot/reset machinery, generic runners, and custom statistics services.
+
+### Benchmark record
+
+Keep one short file per method under btcwallet's `docs/benchmark/`, for example
+`docs/benchmark/list_unspent.md`:
+
+- The method and wallet commit SHA(s) used for the measurements.
+- A brief methodology and timing boundary, plus a table of the data and
+  parameters used. Use the same workload for all four implementations.
+- A small results table for legacy kvdb, modern kvdb, PostgreSQL, and SQLite,
+  using standard Go benchmark time and allocation metrics. Reuse both kvdb
+  results from the existing suite; note any retired implementation.
+
+No shared export format, automated result joining, or reporting framework is
+required. SQL execution remains independent of stored baseline results.
+
+Suggested record:
+
+```markdown
+# ListUnspent
+
+Wallet commit: <full SHA>
+
+Methodology: <measured operation and timing boundary; setup is untimed>
+
+| Data / parameter | Value |
+| --- | --- |
+| Accounts | ... |
+| Total addresses | ... |
+| Transaction count and shape | ... |
+| Live UTXOs | ... |
+| Confirmed/unconfirmed mix | ... |
+| Query filters | ... |
+
+| Implementation | ns/op | B/op | allocs/op |
+| --- | ---: | ---: | ---: |
+| Legacy kvdb | ... | ... | ... |
+| Modern kvdb | ... | ... | ... |
+| PostgreSQL | ... | ... | ... |
+| SQLite | ... | ... | ... |
+```
+
+If results use different commits, add a commit SHA column to the results table.
 
 ## Suggested fix
 
 Select an existing case, describe and validate its actual workload, and reuse
 its kvdb measurements with an independent Manager-based SQL loop. Exercise
-minimal shared setup and reporting through ListUnspent itself, rather than
-prebuilding later consumers or adding a setup-only demonstration project.
+minimal shared setup through ListUnspent itself, rather than prebuilding later
+consumers or adding a setup-only demonstration project.
 
 ## Verification
 
 - Run the selected SQL cases and validate matching public results outside
   timing. Obtain both kvdb measurements separately from the existing suite;
-  check actual baseline state, requests, and measurement boundaries before
-  joining. Reuse contract tests rather than repeat their assertion matrices.
-- Verify operation-only timing, complete setup/failure cleanup, and the
-  execution separation and independent removability in the scoped exception.
-- Produce the first report with provenance and direct matched comparisons
-  where available. Verify baseline-absent SQL execution/reporting, explicit
-  missing columns, and rejection of incompatible result combinations.
+  check equivalent state, requests, and timing boundaries. Reuse contract
+  tests rather than repeat their assertion matrices.
+- Verify Docker and DB setup are untimed in both suites, with complete
+  setup/failure cleanup and independent SQL execution after kvdb retirement.
+- Check the concise `docs/benchmark/` record contains the method, commit
+  SHA(s), methodology, a data table, and a four-implementation results table.
 
 ## Definition of done
 
 One focused SQL ListUnspent measurement exercises minimal reusable setup and
-the first matched comparison report, preserving existing kvdb comparisons.
-Evidence identifies missing baselines and unexplained regressions without
-inventing measurements, production changes, or a replacement framework.
+provides a short `docs/benchmark/` record with fair four-implementation
+comparisons, preserving existing kvdb benchmarks without production changes
+or a reporting framework.
 
 [source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/wallet/utxo_manager_benchmark_test.go
 [backend-rule]: ../AGENTS.md#scope-rules

@@ -15,8 +15,8 @@ transaction complexity.
 
 ## Details
 
-- Follow the [scoped benchmark exception][backend-rule] and [Task 471][t471]'s
-  matching and reporting contract, reusing its minimal SQL setup.
+- Follow the [scoped benchmark exception][backend-rule], reusing
+  [Task 471][t471]'s minimal SQL setup.
 - Measure each method separately with one representative existing workload.
   Match actual persisted history count, account/address state, input/output
   shape, confirmed/unmined mix, point selection, and ListTxns filters and
@@ -26,8 +26,15 @@ transaction complexity.
   on the same active Wallet. Do not reopen or reset between reads.
 - Validate actual state, the point result, and complete list outside timing.
   Keep setup and cleanup outside timing and fail on unexpected operation errors.
-- Own the selected history cases' necessary baseline alignment and export;
-  use 471's contract for identity, provenance, comparisons, and missing results.
+- Use the same timing boundaries for a fair comparison in both suites.
+  Exclude Docker/environment setup, database startup/readiness, initial
+  connections, schema/data creation, and teardown; normal API database I/O
+  remains measured. Keep any selected baseline alignment local.
+- Add one short file per method under btcwallet's `docs/benchmark/`: method
+  and wallet commit SHA(s), methodology/timing boundary, a data/parameters
+  table, and a time/allocation results table for legacy kvdb, modern kvdb,
+  PostgreSQL, and SQLite. Reuse existing kvdb results; no reporting framework
+  is required.
 - Exclude cold/warm modes, broad legacy cleanup, labels, writes,
   invalidation, concurrency, tuning, and production changes.
 
@@ -44,12 +51,13 @@ concurrent variants, profiles, and unrelated benchmarks remain out of scope.
   and timed work against separately obtained existing kvdb measurements.
 - Confirm only the selected operation is timed, each result names its workload,
   and every fixture is cleaned up.
-- Export operation-specific results under Task 471's reporting contract.
+- Verify environment and database setup are untimed in both suites and the
+  concise method records include both the data and four-result tables.
 
 ## Definition of done
 
 Both public transaction reads have focused SQL measurements matched to
-selected existing workloads, with results under 471's reporting contract,
+selected existing workloads, with short method records under `docs/benchmark/`,
 preserved kvdb comparisons, and no production changes.
 
 [backend-rule]: ../AGENTS.md#scope-rules
