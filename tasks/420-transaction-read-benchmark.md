@@ -35,11 +35,15 @@ transaction complexity.
 - Capture separate CPU and memory `pprof` profiles under Task 471's profile
   rules; exclude preparation and teardown and keep profiling out of timing runs.
 - Add one short file per method under btcwallet's `docs/developer/benchmark/`:
-  method/commit SHA(s), methodology/Docker environment, a data table, and one
+  start with the method title and succinct description of how it is run, then
+  `### Benchmark Results`, `### Data`, and `### Commands`, in that order, as in
+  [Task 471's example][t471]. Include method/commit SHA(s),
+  methodology/Docker environment, a data table, and one
   unprofiled ns/op, B/op, allocs/op results table. Include
   legacy kvdb, modern kvdb, PostgreSQL, and SQLite, with percentage changes
   against legacy kvdb. Reuse the existing suite's kvdb measurements;
-  record profile locations and capture/analysis commands. No CPU time/RSS
+  record profile locations and exact benchmark/capture/analysis commands,
+  including Docker invocation and working directories. No CPU time/RSS
   reporting or new profiling/reporting framework is required.
 - Exclude cold/warm modes, broad legacy cleanup, labels, writes,
   invalidation, concurrency, tuning, and production changes.
@@ -60,6 +64,7 @@ concurrent variants and unrelated benchmarks remain out of scope.
 - Verify environment and database setup are untimed in both suites and the
   method records include the data table, one results table with percentage
   changes, and usable CPU/memory profiles captured separately in Docker.
+- Reproduce the recorded benchmark and profile runs using `Commands`.
 
 ## Definition of done
 

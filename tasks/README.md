@@ -169,8 +169,13 @@ Preserve existing kvdb comparisons under the
 [scoped execution exception](../AGENTS.md#scope-rules).
 Other consumers reuse that setup and own their data and baseline alignment.
 Keep one short file per method under btcwallet's `docs/developer/benchmark/`:
-method/commit SHAs, methodology/Docker environment, a data table, and one
-ns/op, B/op, allocs/op results table with percentage changes against legacy.
+start with the method title and a succinct description of how it is run, then
+`### Benchmark Results`, `### Data`, and `### Commands`, as in
+[Task 471's example](471-three-backend-list-unspent-benchmark.md#benchmark-record).
+Include exact benchmark and profile commands with Docker invocation and working
+directories, method/commit SHAs, methodology/Docker environment, a data table,
+and one ns/op, B/op, allocs/op results table with percentage changes against
+legacy.
 New SQL benchmarks live in `wallet/bench`; all four cases run in a common
 Docker environment with separate CPU/memory pprof captures. No CPU time/RSS
 reporting or new reporting framework is required.

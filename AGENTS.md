@@ -311,9 +311,13 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   removed independently while SQL execution continues. Keep one short file
   per method under btcwallet's `docs/developer/benchmark/`: method/commit SHAs,
   methodology/Docker environment, a data table, and one ns/op, B/op, allocs/op
-  results table with percentage changes against legacy kvdb. New SQL benchmarks
-  belong in `wallet/bench`. Run all four cases in a common Docker environment;
-  require separate CPU/memory pprof captures without profiling timing runs.
+  results table with percentage changes against legacy kvdb. Start each record
+  with the method title and a succinct description of how it is run, then
+  `### Benchmark Results`, `### Data`, and `### Commands`, in that order.
+  Include exact benchmark and profile commands with Docker invocation and
+  working directories. New SQL benchmarks belong in `wallet/bench`.
+  Run all four cases in a common Docker environment; require separate
+  CPU/memory pprof captures without profiling timing runs.
   CPU time/RSS reporting is not required. Fair comparisons exclude environment
   provisioning and database startup from timing; no shared export format or
   reporting framework is required.

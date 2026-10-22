@@ -90,28 +90,44 @@ separate setup-only example and smoke matrix.
 Keep one short file per method under btcwallet's `docs/developer/benchmark/`,
 for example `docs/developer/benchmark/list_unspent.md`:
 
-- The method and wallet commit SHA(s) used for the measurements.
-- Brief methodology, timing boundary, Docker environment, and a data table.
-  Use the same workload for all four implementations.
-- One results table for legacy kvdb, modern kvdb, PostgreSQL, and SQLite:
-  ns/op, B/op, and allocs/op, with percentage changes against legacy kvdb.
-  Reuse existing kvdb measurements; note any retired implementation.
-- CPU/memory profile commands and artifact locations. Keep these diagnostic
-  captures separate from the unprofiled results table.
+- Start with `# <Method name>` and a succinct description of the method and
+  how it is run, including wallet commit SHA(s), methodology, and timing
+  boundary.
+- `### Benchmark Results`: one results table for legacy kvdb, modern kvdb,
+  PostgreSQL, and SQLite, with ns/op, B/op, allocs/op, and percentage changes
+  against legacy kvdb. Add a short explanation of the results. Reuse existing
+  kvdb measurements; note any retired implementation.
+- `### Data`: a data table and brief description of the shared workload and
+  Docker environment. Use the same workload for all four implementations.
+- `### Commands`: exact commands to reproduce the unprofiled benchmarks and
+  separate CPU/memory captures and analysis, with profile artifact locations.
+  Include Docker invocation and required working directories.
 
 No shared export format, automated result joining, or reporting framework is
 required. SQL execution remains independent of stored baseline results.
 
 Suggested record:
 
-```markdown
+````markdown
 # ListUnspent
 
-Wallet commit: <full SHA>
+Measure ListUnspent on a seeded Wallet; setup and checks are untimed.
+Wallet commit: <full SHA>.
 
-Methodology: <measured operation and timing boundary; setup is untimed>
+### Benchmark Results
 
-Environment: <Docker images, Go/build settings, resources, database settings>
+| Implementation | ns/op | Δ | B/op | Δ | allocs/op | Δ |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Legacy kvdb | ... | Baseline | ... | Baseline | ... | Baseline |
+| Modern kvdb | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
+| PostgreSQL | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
+| SQLite | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
+
+<Brief result interpretation; Δ is relative to legacy kvdb, lower is better.>
+
+### Data
+
+All four cases use this workload. <Brief data-generation description.>
 
 | Data / parameter | Value |
 | --- | --- |
@@ -121,17 +137,23 @@ Environment: <Docker images, Go/build settings, resources, database settings>
 | Live UTXOs | ... |
 | Confirmed/unconfirmed mix | ... |
 | Query filters | ... |
+| Docker images and database placement/storage | ... |
+| Go/build settings, CPU/memory limits, GOMAXPROCS | ... |
 
-| Implementation | ns/op | Δ | B/op | Δ | allocs/op | Δ |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Legacy kvdb | ... | Baseline | ... | Baseline | ... | Baseline |
-| Modern kvdb | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
-| PostgreSQL | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
-| SQLite | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
+### Commands
 
-Profiles: <CPU/memory artifact locations and capture/pprof analysis commands>
+Run from <working directory>. Profiles are saved at <artifact locations>.
+
+```sh
+<exact Docker command for legacy and modern kvdb benchmarks>
+<exact Docker command for SQLite and PostgreSQL wallet/bench benchmarks>
+<separate CPU capture commands>
+<separate memory baseline and workload capture commands>
+<exact go tool pprof analysis commands>
 ```
+````
 
+Replace command placeholders with executed, reproducible commands.
 If results use different commits, add a commit SHA column to the results table.
 Δ is the signed percentage change from legacy kvdb, not a confidence interval.
 
@@ -155,7 +177,9 @@ consumers or adding a setup-only demonstration project.
   boundaries; benchmark timer resets alone do not exclude setup from profiles.
 - Check the record contains commit SHA(s), methodology/environment, a data
   table, one unprofiled results table with percentage changes, and profile
-  locations/commands. New SQL benchmarks and setup live in `wallet/bench`.
+  locations/commands in the specified section order. Check that the exact
+  benchmark and profile commands reproduce the recorded runs.
+  New SQL benchmarks and setup live in `wallet/bench`.
 
 ## Definition of done
 
