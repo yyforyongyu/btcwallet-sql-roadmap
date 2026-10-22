@@ -47,7 +47,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
 | [Task 444][t444] | Test receive and reopen | Test | 2B | — | — |
 | [Task 445][t445] | Test account signing identity | Test | 2B | — | — |
-| [Task 446][t446] | Test spend and publish | Test | 2B | — | — |
+| [Task 446][t446] | Test spend and publish | Test | 2B | YY | — |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | — | — |
 | [Task 448][t448] | Test sync and rollback | Test | 2B | — | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
@@ -55,8 +55,8 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
 | [Task 462][t462] | Test account mutation errors | Test | 2B | — | — |
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
-| [Task 464][t464] | Test NoChainSync account queries | Test | 2B | — | — |
-| [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | — | — |
+| [Task 464][t464] | Test NoChainSync account queries | Test | 2B | YY | — |
+| [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | YY | — |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 
