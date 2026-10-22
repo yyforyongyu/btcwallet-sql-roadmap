@@ -20,7 +20,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | [#1438][pr1438], [#1431][pr1431] |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
-| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | — | — |
+| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | YY | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
