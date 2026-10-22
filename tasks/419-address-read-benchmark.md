@@ -29,11 +29,14 @@ than replacing those baselines or reproducing coupled growth variables.
   Exclude Docker/environment setup, database startup/readiness, initial
   connections, schema/data creation, and teardown; normal API database I/O
   remains measured. Keep any selected baseline alignment local.
-- Add one short file per method under btcwallet's `docs/benchmark/`: method
-  and wallet commit SHA(s), methodology/timing boundary, a data/parameters
-  table, and a time/allocation results table for legacy kvdb, modern kvdb,
-  PostgreSQL, and SQLite. Reuse existing kvdb results; no reporting framework
-  is required.
+- Measure Wallet CPU time/op and workload RSS using Task 471's measurement
+  scope and setup exclusions; keep PostgreSQL server resources separate.
+- Add one short file per method under btcwallet's `docs/developer/benchmark/`:
+  method/commit SHA(s), methodology/data, and two results tables. First show
+  elapsed time/op, CPU time/op, and Wallet RSS; then B/op and allocs/op. Include
+  legacy kvdb, modern kvdb, PostgreSQL, and SQLite, with percentage changes
+  against legacy kvdb. Reuse the existing suite's kvdb measurements;
+  no reporting framework is required.
 - Exclude cold/warm modes, broad legacy cleanup, imports, mutations, independent
   balance measurements, concurrency, tuning, and production changes.
 
@@ -51,13 +54,13 @@ data, without a workload framework or migration of unrelated benchmarks.
 - Confirm only the selected operation is timed, each result names its workload,
   and every fixture is cleaned up.
 - Verify environment and database setup are untimed in both suites and the
-  concise method records include both the data and four-result tables.
+  concise method records include both results tables and percentage changes.
 
 ## Definition of done
 
 Both public address reads have focused SQL measurements matched to selected
-existing workloads, with short method records under `docs/benchmark/`, preserved
-kvdb comparisons, and no production changes.
+existing workloads, with short records under `docs/developer/benchmark/`,
+preserved kvdb comparisons, and no production changes.
 
 [backend-rule]: ../AGENTS.md#scope-rules
 [t471]: 471-three-backend-list-unspent-benchmark.md

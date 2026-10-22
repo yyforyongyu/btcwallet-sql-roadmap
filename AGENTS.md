@@ -309,11 +309,12 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   code and shared workload definitions must have no legacy-only APIs or
   compile-time dependency on either kvdb implementation, so each can be
   removed independently while SQL execution continues. Keep one short file
-  per method under btcwallet's `docs/benchmark/`: method/commit SHAs,
-  methodology, a data table, and a results table for legacy kvdb, modern kvdb,
-  PostgreSQL, and SQLite. Fair comparisons exclude environment provisioning
-  and database startup from timing; no shared export format or reporting
-  framework is required.
+  per method under btcwallet's `docs/developer/benchmark/`: method/commit SHAs,
+  methodology/data, a speed/CPU/RSS table, and a B/op/allocs table for all four
+  implementations, with percentage changes against legacy kvdb. Scope CPU/RSS
+  to the workload and keep PostgreSQL server resources separate. Fair
+  comparisons exclude environment provisioning and database startup from
+  timing; no shared export format or reporting framework is required.
   Kvdb is measured separately, not structurally unsupported. This exception
   does not weaken three-backend public integration-test requirements.
 - Keep findings in the owning task instead of storing raw review reports.

@@ -39,11 +39,14 @@ equal block counts alone do not make the two measurements comparable.
   startup-to-synced workflow.
 - Validate actual initial and final public state outside timing and keep any
   selected baseline alignment local.
-- Add a short file for this method under btcwallet's `docs/benchmark/`: method
-  and wallet commit SHA(s), methodology/timing boundary, a data/parameters
-  table, and a time/allocation results table for legacy kvdb, modern kvdb,
-  PostgreSQL, and SQLite. Reuse existing kvdb results; no reporting framework
-  is required.
+- Measure Wallet CPU time/op and workload RSS using Task 471's measurement
+  scope and setup exclusions; keep PostgreSQL server resources separate.
+- Add a short method file under btcwallet's `docs/developer/benchmark/`:
+  method/commit SHA(s), methodology/data, and two results tables. First show
+  elapsed time/op, CPU time/op, and Wallet RSS; then B/op and allocs/op. Include
+  legacy kvdb, modern kvdb, PostgreSQL, and SQLite, with percentage changes
+  against legacy kvdb. Reuse the existing suite's kvdb measurements;
+  no reporting framework is required.
 - Add no cold/warm variants, cache controls, concurrency matrix, profiling,
   tuning, or production diagnostics.
 
@@ -62,13 +65,13 @@ without a second lifecycle framework or cleanup of every startup benchmark.
 - Confirm each sample starts from equivalent state, measures the same public
   workflow, and leaves no live Manager, Wallet, or backend resources.
 - Verify environment and database setup are untimed in both suites and the
-  concise method record includes both the data and four-result tables.
+  concise method record includes both results tables and percentage changes.
 
 ## Definition of done
 
 One SQL start-to-synced measurement matches a selected existing startup
-workload and its timing/completion boundary, with a short `docs/benchmark/`
-record and no production changes or replacement of kvdb comparisons.
+workload and its timing/completion boundary, with a short method record under
+`docs/developer/benchmark/` and no production changes or kvdb replacement.
 
 [backend-rule]: ../AGENTS.md#scope-rules
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md

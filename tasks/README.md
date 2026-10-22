@@ -168,9 +168,10 @@ Task 471 exercises minimal SQL setup with the first ListUnspent measurement.
 Preserve existing kvdb comparisons under the
 [scoped execution exception](../AGENTS.md#scope-rules).
 Other consumers reuse that setup and own their data and baseline alignment.
-Keep one short file per method under btcwallet's `docs/benchmark/`, with the
-method/commit SHAs, methodology, data table, and four-implementation results
-table. No reporting framework is required.
+Keep one short file per method under btcwallet's `docs/developer/benchmark/`:
+method/commit SHAs, methodology/data, a speed/CPU/RSS table, and a B/op/allocs
+table, with percentage changes against legacy kvdb. No reporting framework
+is required.
 
 - [Task 417](417-start-to-synced-benchmark.md): measure start-to-synced
   performance.
