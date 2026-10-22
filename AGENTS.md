@@ -310,11 +310,13 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   compile-time dependency on either kvdb implementation, so each can be
   removed independently while SQL execution continues. Keep one short file
   per method under btcwallet's `docs/developer/benchmark/`: method/commit SHAs,
-  methodology/data, a speed/CPU/RSS table, and a B/op/allocs table for all four
-  implementations, with percentage changes against legacy kvdb. Scope CPU/RSS
-  to the workload and keep PostgreSQL server resources separate. Fair
-  comparisons exclude environment provisioning and database startup from
-  timing; no shared export format or reporting framework is required.
+  methodology/Docker environment, a data table, and one ns/op, B/op, allocs/op
+  results table with percentage changes against legacy kvdb. New SQL benchmarks
+  belong in `wallet/bench`. Run all four cases in a common Docker environment;
+  require separate CPU/memory pprof captures without profiling timing runs.
+  CPU time/RSS reporting is not required. Fair comparisons exclude environment
+  provisioning and database startup from timing; no shared export format or
+  reporting framework is required.
   Kvdb is measured separately, not structurally unsupported. This exception
   does not weaken three-backend public integration-test requirements.
 - Keep findings in the owning task instead of storing raw review reports.

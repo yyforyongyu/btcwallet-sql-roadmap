@@ -22,6 +22,8 @@ separate setup-only example and smoke matrix.
 
 - Follow the [scoped benchmark exception][backend-rule]. Preserve the existing
   comparison suite and reuse selected workloads and kvdb measurements.
+- Put new SQL benchmarks and minimal shared setup in `wallet/bench`, using
+  imported public `wallet` APIs. Keep existing kvdb comparisons in their suite.
 - Construct focused SQL Wallets normally through Manager, reusing real-backend
   setup and teardown. Add only the minimal SQL setup needed here;
   [417][t417], [419][t419], and [420][t420] reuse it and own their data and
@@ -56,17 +58,32 @@ separate setup-only example and smoke matrix.
   all four implementations. Exclude Docker/environment provisioning, database
   startup and readiness, initial connections, schema/data creation, correctness
   checks, and teardown. Measure only ListUnspent, including its normal DB I/O.
-- Measure elapsed time/op, Wallet-process CPU time/op (user plus system), and
-  steady-state RSS in MiB during the workload. Record prepared-Wallet idle RSS
-  and the sampling method; exclude setup and other cases' retained state.
-  Process-lifetime peak RSS does not establish workload-only memory usage.
-- Collect CPU/RSS separately if sampling would distort timing. Label
-  PostgreSQL server CPU/RAM separately from Wallet-process measurements.
-  Obtain missing kvdb resource measurements in the existing suite, never by
-  adding kvdb execution to the focused SQL group.
+- Run all four cases in a common Docker environment on the same host and
+  architecture, with version-pinned images, the same Go/build settings,
+  CPU/memory limits, and GOMAXPROCS. Keep database placement/storage settings
+  fixed and documented. Run one case at a time without competing build jobs.
+- Report unprofiled Go benchmark ns/op, B/op, and allocs/op. CPU time/op and
+  RSS measurements are not required; collect CPU and memory profiles instead.
 - Exclude production fixes, tuning, harness retirement, broad cleanup, leases,
   mutation, concurrency, daemon matrices, cold/warm modes, cache controls,
   snapshot/reset machinery, generic runners, and custom statistics services.
+
+### Profiles
+
+- Capture CPU and memory `pprof` profiles for each selected method/workload
+  and implementation. Kvdb captures stay in the existing comparison suite;
+  SQLite/PostgreSQL captures use `wallet/bench`.
+- Use separate CPU-profile, memory-profile, and unprofiled measurement runs
+  with the same workload and Docker environment, avoiding profiler interference.
+  Profile only the selected workload after setup and before teardown.
+- For memory, retain a post-setup baseline and a post-workload snapshot before
+  Wallet cleanup, using consistent GC/sampling settings. Use baseline/delta
+  analysis to separate fixture allocations from the method's allocations;
+  distinguish retained heap from cumulative allocations. Heap profiles cover
+  the Go Wallet process, not RSS or PostgreSQL server memory.
+- Save the profiles and record their locations and capture/analysis commands
+  in the method record. Use existing Go profiling tools; no production
+  profiling endpoint or new profiling/reporting framework is required.
 
 ### Benchmark record
 
@@ -74,14 +91,13 @@ Keep one short file per method under btcwallet's `docs/developer/benchmark/`,
 for example `docs/developer/benchmark/list_unspent.md`:
 
 - The method and wallet commit SHA(s) used for the measurements.
-- Brief methodology, timing boundary, data, and resource-measurement scope.
+- Brief methodology, timing boundary, Docker environment, and a data table.
   Use the same workload for all four implementations.
-- Two results tables for legacy kvdb, modern kvdb, PostgreSQL, and SQLite:
-  elapsed time/op, CPU time/op, and Wallet RSS first; B/op and allocs/op second.
-  Show percentage changes against legacy kvdb for each metric. Reuse existing
-  kvdb measurements; note retired implementations or unmeasured values.
-- B/op and allocs/op describe allocation traffic, not resident memory. Never
-  infer CPU consumption from elapsed time or RSS from allocation metrics.
+- One results table for legacy kvdb, modern kvdb, PostgreSQL, and SQLite:
+  ns/op, B/op, and allocs/op, with percentage changes against legacy kvdb.
+  Reuse existing kvdb measurements; note any retired implementation.
+- CPU/memory profile commands and artifact locations. Keep these diagnostic
+  captures separate from the unprofiled results table.
 
 No shared export format, automated result joining, or reporting framework is
 required. SQL execution remains independent of stored baseline results.
@@ -95,28 +111,29 @@ Wallet commit: <full SHA>
 
 Methodology: <measured operation and timing boundary; setup is untimed>
 
-Data: <accounts, addresses, history, live UTXOs, confirmation mix, filters>
+Environment: <Docker images, Go/build settings, resources, database settings>
 
-Resources: <CPU/RSS sampling method and interval; prepared-Wallet idle RSS>
+| Data / parameter | Value |
+| --- | --- |
+| Accounts | ... |
+| Total addresses | ... |
+| Transaction count and shape | ... |
+| Live UTXOs | ... |
+| Confirmed/unconfirmed mix | ... |
+| Query filters | ... |
 
-| Implementation | Time/op (µs; Δ) | CPU/op (µs; Δ) | Wallet RSS (MiB; Δ) |
-| --- | ---: | ---: | ---: |
-| Legacy kvdb | ... (baseline) | ... (baseline) | ... (baseline) |
-| Modern kvdb | ... (↑/↓...%) | ... (↑/↓...%) | ... (↑/↓...%) |
-| PostgreSQL | ... (↑/↓...%) | ... (↑/↓...%) | ... (↑/↓...%) |
-| SQLite | ... (↑/↓...%) | ... (↑/↓...%) | ... (↑/↓...%) |
+| Implementation | ns/op | Δ | B/op | Δ | allocs/op | Δ |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Legacy kvdb | ... | Baseline | ... | Baseline | ... | Baseline |
+| Modern kvdb | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
+| PostgreSQL | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
+| SQLite | ... | ↑/↓...% | ... | ↑/↓...% | ... | ↑/↓...% |
 
-| Implementation | B/op | Δ | allocs/op | Δ |
-| --- | ---: | ---: | ---: | ---: |
-| Legacy kvdb | ... | Baseline | ... | Baseline |
-| Modern kvdb | ... | ↑/↓...% | ... | ↑/↓...% |
-| PostgreSQL | ... | ↑/↓...% | ... | ↑/↓...% |
-| SQLite | ... | ↑/↓...% | ... | ↑/↓...% |
+Profiles: <CPU/memory artifact locations and capture/pprof analysis commands>
 ```
 
 If results use different commits, add a commit SHA column to the results table.
 Δ is the signed percentage change from legacy kvdb, not a confidence interval.
-Label any PostgreSQL server resource measurements separately.
 
 ## Suggested fix
 
@@ -133,17 +150,20 @@ consumers or adding a setup-only demonstration project.
   tests rather than repeat their assertion matrices.
 - Verify Docker and DB setup are untimed in both suites, with complete
   setup/failure cleanup and independent SQL execution after kvdb retirement.
-- Verify CPU/RSS measurements cover the workload window and identify the
-  prepared-Wallet baseline; do not substitute allocation data or lifetime peaks.
-- Check the method record contains commit SHA(s), methodology/data, and both
-  results tables with measurements and changes against legacy kvdb.
+- Verify all four cases use the documented Docker environment and retain
+  usable CPU and memory profiles, inspected with `go tool pprof`. Check capture
+  boundaries; benchmark timer resets alone do not exclude setup from profiles.
+- Check the record contains commit SHA(s), methodology/environment, a data
+  table, one unprofiled results table with percentage changes, and profile
+  locations/commands. New SQL benchmarks and setup live in `wallet/bench`.
 
 ## Definition of done
 
 One focused SQL ListUnspent measurement exercises minimal reusable setup and
 provides a short method record under `docs/developer/benchmark/` with fair
-speed, CPU, RSS, and allocation comparisons. Existing kvdb benchmarks remain,
-without production changes or a reporting framework.
+standard metric comparisons and separate CPU/memory profiles in Docker.
+Existing kvdb benchmarks remain, without production changes or a reporting
+framework.
 
 [source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/wallet/utxo_manager_benchmark_test.go
 [backend-rule]: ../AGENTS.md#scope-rules

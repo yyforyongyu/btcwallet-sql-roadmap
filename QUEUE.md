@@ -86,7 +86,8 @@ Final-contract suites retain their required production prerequisites,
 including later-phase features.
 Benchmarks remain required validation under the
 [scoped execution exception](AGENTS.md#scope-rules). Reuse Task 471's SQL setup
-and keep concise results in btcwallet's `docs/developer/benchmark/`.
+in `wallet/bench`, run matched cases in Docker, and keep concise records with
+profile references in btcwallet's `docs/developer/benchmark/`.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |

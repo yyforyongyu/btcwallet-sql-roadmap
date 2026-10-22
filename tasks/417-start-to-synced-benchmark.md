@@ -17,6 +17,8 @@ equal block counts alone do not make the two measurements comparable.
 
 - Follow the [scoped benchmark exception][backend-rule], reusing
   [Task 471][t471]'s minimal SQL setup.
+- Put new SQL benchmarks in `wallet/bench`, using public `wallet` APIs and
+  Task 471's common Docker environment for all four implementations.
 - Select a representative existing empty- or populated-chain startup case.
   Match Wallet/account counts, initial durable state, chain source and daemon
   behavior, block history and match pattern, and completion observation with
@@ -39,15 +41,16 @@ equal block counts alone do not make the two measurements comparable.
   startup-to-synced workflow.
 - Validate actual initial and final public state outside timing and keep any
   selected baseline alignment local.
-- Measure Wallet CPU time/op and workload RSS using Task 471's measurement
-  scope and setup exclusions; keep PostgreSQL server resources separate.
+- Capture separate CPU and memory `pprof` profiles under Task 471's profile
+  rules; exclude preparation and teardown and keep profiling out of timing runs.
 - Add a short method file under btcwallet's `docs/developer/benchmark/`:
-  method/commit SHA(s), methodology/data, and two results tables. First show
-  elapsed time/op, CPU time/op, and Wallet RSS; then B/op and allocs/op. Include
+  method/commit SHA(s), methodology/Docker environment, a data table, and one
+  unprofiled ns/op, B/op, allocs/op results table. Include
   legacy kvdb, modern kvdb, PostgreSQL, and SQLite, with percentage changes
   against legacy kvdb. Reuse the existing suite's kvdb measurements;
-  no reporting framework is required.
-- Add no cold/warm variants, cache controls, concurrency matrix, profiling,
+  record profile locations and capture/analysis commands. No CPU time/RSS
+  reporting or new profiling/reporting framework is required.
+- Add no cold/warm variants, cache controls, concurrency matrix,
   tuning, or production diagnostics.
 
 ## Suggested fix
@@ -65,13 +68,15 @@ without a second lifecycle framework or cleanup of every startup benchmark.
 - Confirm each sample starts from equivalent state, measures the same public
   workflow, and leaves no live Manager, Wallet, or backend resources.
 - Verify environment and database setup are untimed in both suites and the
-  concise method record includes both results tables and percentage changes.
+  method record includes the data table, one results table with percentage
+  changes, and usable CPU/memory profiles captured separately in Docker.
 
 ## Definition of done
 
 One SQL start-to-synced measurement matches a selected existing startup
 workload and its timing/completion boundary, with a short method record under
-`docs/developer/benchmark/` and no production changes or kvdb replacement.
+`docs/developer/benchmark/`, CPU/memory profiles, and no production changes or
+kvdb replacement.
 
 [backend-rule]: ../AGENTS.md#scope-rules
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
