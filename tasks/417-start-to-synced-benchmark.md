@@ -28,10 +28,10 @@ equal block counts alone do not make the two measurements comparable.
 - Before each sample, prepare the same starting Wallet state and construct a
   fresh Manager. Never restart a terminal Manager or Wallet. Keep this local
   setup in the startup benchmark rather than adding reset modes to Task 471.
-- Time Manager.Start through observation of the exact expected synchronized
-  tip using public Wallet information; align the selected legacy startup
+- Time Manager.Start through observation of the configured synchronized tip
+  using public Wallet information; align the selected legacy startup
   boundary and completion condition to equivalent work. Include completion
-  observation; exclude construction, seeding, validation, and Stop.
+  observation only to end the sample; exclude construction, seeding, and Stop.
 - Prepare deterministic chain data before timing. Normal database and matched
   chain-source I/O remain measured; mining, random data generation, profiling,
   and artificial completion sleeps do not.
@@ -39,8 +39,8 @@ equal block counts alone do not make the two measurements comparable.
   database startup/readiness, initial connections, schema/data creation, and
   teardown. Database server startup is separate from the measured Manager
   startup-to-synced workflow.
-- Validate actual initial and final public state outside timing and keep any
-  selected baseline alignment local.
+- Leave fixture-state and result-content validation to unit/integration
+  tests. Fail on setup or operation errors; keep baseline alignment local.
 - Capture separate CPU and memory `pprof` profiles under Task 471's profile
   rules; exclude preparation and teardown and keep profiling out of timing runs.
 - Add a short method file under btcwallet's `docs/developer/benchmark/`:
@@ -66,11 +66,10 @@ without a second lifecycle framework or cleanup of every startup benchmark.
 
 ## Verification
 
-- Run selected SQL cases and require the exact final tip and Wallet-visible
-  state. Validate equivalent initial state and startup/completion boundaries
-  against the separately obtained existing kvdb results.
-- Confirm each sample starts from equivalent state, measures the same public
-  workflow, and leaves no live Manager, Wallet, or backend resources.
+- Run selected SQL cases and record performance against separately obtained
+  existing kvdb measurements using the documented workload.
+- Confirm each sample measures the documented startup/completion boundary
+  and leaves no live Manager, Wallet, or backend resources.
 - Verify environment and database setup are untimed in both suites and the
   method record includes the data table, one results table with percentage
   changes, and usable CPU/memory profiles captured separately in Docker.

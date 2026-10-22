@@ -41,23 +41,23 @@ separate setup-only example and smoke matrix.
 - Match account identity and selection, total addresses and script types,
   owned/foreign inputs, persisted history count and transaction shape,
   confirmed/unconfirmed mix, live UTXOs and values, chain tip, lock/sync state,
-  request filters, expected results, and timed operation/completion boundary.
+  request filters, and timed operation/completion boundary.
   Fix seeds, keys, scripts, times, hashes, and values where they affect work.
-- Validate actual logical state outside timing; backend seeding and internal
-  IDs may differ. Existing builders count addresses per account, make four
-  transaction passes, cap batches by available addresses, and jitter values
-  with wall-clock time. Align only the selected case where needed, rather
-  than rewriting helpers or migrating unrelated benchmarks.
-- Check observable equivalence of selected legacy adapters. Do not compare
+- Align the seeded workload through deterministic inputs; backend seeding and
+  internal IDs may differ. Existing builders count addresses per account, make
+  four transaction passes, cap batches by available addresses, and jitter
+  values with wall-clock time. Align only the selected case where needed,
+  rather than rewriting helpers or migrating unrelated benchmarks.
+- Select legacy adapters with matching operation semantics. Do not compare
   different semantics, such as force-next allocation versus unused reuse;
   mark a genuinely unmatched baseline unavailable.
-- Seed and validate once, then repeatedly call ListUnspent on the same active
-  Wallet. Validate count, order, outpoints, and values outside timing and fail
-  on operation errors.
+- Seed once, then repeatedly call ListUnspent on the same active Wallet.
+- Leave fixture-state and result-content validation to unit/integration
+  tests. Fail on setup or operation errors.
 - Use equivalent workloads and timing boundaries for a fair comparison across
   all four implementations. Exclude Docker/environment provisioning, database
-  startup and readiness, initial connections, schema/data creation, correctness
-  checks, and teardown. Measure only ListUnspent, including its normal DB I/O.
+  startup and readiness, initial connections, schema/data creation, and
+  teardown. Measure only ListUnspent, including its normal DB I/O.
 - Run all four cases in a common Docker environment on the same host and
   architecture, with version-pinned images, the same Go/build settings,
   CPU/memory limits, and GOMAXPROCS. Keep database placement/storage settings
@@ -111,7 +111,7 @@ Suggested record:
 ````markdown
 # ListUnspent
 
-Measure ListUnspent on a seeded Wallet; setup and checks are untimed.
+Measure ListUnspent on a seeded Wallet; setup and teardown are untimed.
 Wallet commit: <full SHA>.
 
 ### Benchmark Results
@@ -159,17 +159,16 @@ If results use different commits, add a commit SHA column to the results table.
 
 ## Suggested fix
 
-Select an existing case, describe and validate its actual workload, and reuse
-its kvdb measurements with an independent Manager-based SQL loop. Exercise
-minimal shared setup through ListUnspent itself, rather than prebuilding later
-consumers or adding a setup-only demonstration project.
+Select an existing case, describe its workload, and reuse its kvdb measurements
+with an independent Manager-based SQL loop. Exercise minimal shared setup
+through ListUnspent itself, rather than prebuilding later consumers or adding
+a setup-only demonstration project.
 
 ## Verification
 
-- Run the selected SQL cases and validate matching public results outside
-  timing. Obtain both kvdb measurements separately from the existing suite;
-  check equivalent state, requests, and timing boundaries. Reuse contract
-  tests rather than repeat their assertion matrices.
+- Run the selected SQL cases and record performance against both kvdb
+  measurements obtained separately from the existing suite, using the
+  documented workload and timing boundaries.
 - Verify Docker and DB setup are untimed in both suites, with complete
   setup/failure cleanup and independent SQL execution after kvdb retirement.
 - Verify all four cases use the documented Docker environment and retain

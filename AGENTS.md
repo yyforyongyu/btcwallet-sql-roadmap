@@ -291,12 +291,15 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   imported `wallet` package and real maintained backends. Cross-link the tasks
   to record that coverage ownership without importing itest scope into the
   production task.
-- Keep benchmark tasks measurement-only. Record a defect exposed only by a
-  benchmark as its own implementation task.
+- Keep benchmark tasks measurement-only. Fixture-state and result-content
+  validation belong to unit/integration tests, not benchmarks. Fail on setup
+  or operation errors so failed work is not reported as performance data.
+  Record a defect exposed only by a benchmark as its own implementation task.
 - Register shared public integration-test and benchmark contracts for kvdb,
   SQLite, and PostgreSQL. Do not skip kvdb inside a shared contract. Restrict
-  backend-specific code to setup and teardown; require identical public
-  assertions and stable error identities. If a backend cannot represent the
+  backend-specific code to setup and teardown. Integration tests require
+  identical public assertions and stable error identities; benchmarks require
+  matching workloads and timing boundaries. If a backend cannot represent the
   scenario, keep the task backend-specific and document the structural
   exclusion explicitly.
 - [Tasks 417](tasks/417-start-to-synced-benchmark.md),

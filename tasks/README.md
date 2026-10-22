@@ -168,6 +168,8 @@ Task 471 exercises minimal SQL setup with the first ListUnspent measurement.
 Preserve existing kvdb comparisons under the
 [scoped execution exception](../AGENTS.md#scope-rules).
 Other consumers reuse that setup and own their data and baseline alignment.
+Correctness validation belongs to unit/integration tests. Benchmarks retain
+setup/operation error checks and matching workloads and timing boundaries.
 Keep one short file per method under btcwallet's `docs/developer/benchmark/`:
 start with the method title and a succinct description of how it is run, then
 `### Benchmark Results`, `### Data`, and `### Commands`, as in

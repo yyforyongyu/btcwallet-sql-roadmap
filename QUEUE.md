@@ -84,7 +84,7 @@ Integration tests, scenarios, compatibility, and benchmarks run alongside 2A.
 Reuse existing component proofs; scenarios own distinct public handoffs.
 Final-contract suites retain their required production prerequisites,
 including later-phase features.
-Benchmarks remain required validation under the
+Benchmarks remain required performance measurements under the
 [scoped execution exception](AGENTS.md#scope-rules). Reuse Task 471's SQL setup
 in `wallet/bench`, run matched cases in Docker, and keep concise records with
 profile references in btcwallet's `docs/developer/benchmark/`.

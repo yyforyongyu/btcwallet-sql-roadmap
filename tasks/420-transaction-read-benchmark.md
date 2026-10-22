@@ -21,13 +21,13 @@ transaction complexity.
   Task 471's common Docker environment for all four implementations.
 - Measure each method separately with one representative existing workload.
   Match actual persisted history count, account/address state, input/output
-  shape, confirmed/unmined mix, point selection, and ListTxns filters and
-  expected content. Include the whole seeded history in the list request.
+  shape, confirmed/unmined mix, point selection, and ListTxns filters.
+  Include the whole seeded history in the list request.
   A few explicit sizes may vary history count alone, keeping complexity fixed.
-- Seed and validate once per case, then repeatedly call the selected method
+- Seed once per case, then repeatedly call the selected method
   on the same active Wallet. Do not reopen or reset between reads.
-- Validate actual state, the point result, and complete list outside timing.
-  Keep setup and cleanup outside timing and fail on unexpected operation errors.
+- Leave fixture-state and result-content validation to unit/integration
+  tests. Fail on setup or operation errors.
 - Use the same timing boundaries for a fair comparison in both suites.
   Exclude Docker/environment setup, database startup/readiness, initial
   connections, schema/data creation, and teardown; normal API database I/O
@@ -57,8 +57,8 @@ concurrent variants and unrelated benchmarks remain out of scope.
 
 ## Verification
 
-- Run each selected SQL method/case and validate equivalent public results
-  and timed work against separately obtained existing kvdb measurements.
+- Run each selected SQL method/case and record performance against separately
+  obtained existing kvdb measurements using the documented workload.
 - Confirm only the selected operation is timed, each result names its workload,
   and every fixture is cleaned up.
 - Verify environment and database setup are untimed in both suites and the

@@ -20,13 +20,12 @@ than replacing those baselines or reproducing coupled growth variables.
   Task 471's common Docker environment for all four implementations.
 - Measure each method separately with one representative existing workload.
   Match account identity/count, actual total addresses, script types, funded
-  state, request filters, expected results, and the point-selection rule with
+  state, request filters, and the point-selection rule with
   its selected baseline. A few explicit sizes may vary address count alone.
-- Seed and validate once per case, then repeatedly call the selected method
+- Seed once per case, then repeatedly call the selected method
   on the same active Wallet. Do not reopen or reset between reads.
-- Validate actual seeded state, complete list semantics, and the point result
-  outside timing. Keep setup and cleanup outside timing and fail on unexpected
-  operation errors.
+- Leave fixture-state and result-content validation to unit/integration
+  tests. Fail on setup or operation errors.
 - Use the same timing boundaries for a fair comparison in both suites.
   Exclude Docker/environment setup, database startup/readiness, initial
   connections, schema/data creation, and teardown; normal API database I/O
@@ -56,8 +55,8 @@ data, without a workload framework or migration of unrelated benchmarks.
 
 ## Verification
 
-- Run each selected SQL method/case and validate equivalent public results
-  and timed work against separately obtained existing kvdb measurements.
+- Run each selected SQL method/case and record performance against separately
+  obtained existing kvdb measurements using the documented workload.
 - Confirm only the selected operation is timed, each result names its workload,
   and every fixture is cleaned up.
 - Verify environment and database setup are untimed in both suites and the
