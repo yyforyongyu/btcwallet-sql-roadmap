@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **162 tasks**: **63 open**, **73 done**,
+The numbered roadmap contains **163 tasks**: **64 open**, **73 done**,
 **24 superseded**, and **2 deferred**. With **122 ad hoc tasks**, that is
-**284 tracked tasks** and **195 completed** overall.
+**285 tracked tasks** and **195 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -74,7 +74,7 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | [Task 488][t488] | open | Controller.ChangePassphrase request ownership | Bug fix | Own passphrase request buffers through completion | — |
 | [Task 489][t489] | open | Controller.ChangePassphrase accepted-operation context | Bug fix | Drain accepted passphrase rotation during shutdown | — |
 
-## Phase 2B — verification · 24 open
+## Phase 2B — verification · 25 open
 
 Integration tests, scenarios, compatibility, and benchmarks run alongside 2A.
 Reuse existing component proofs; scenarios own distinct public handoffs.
@@ -111,6 +111,7 @@ profile references in btcwallet's `docs/developer/benchmark/`.
 | [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
 | [Task 490][t490] | open | wallet UtxoManager benchmarks | Benchmark | Measure GetUtxo performance | 471 |
+| [Task 491][t491] | open | wallet AccountManager benchmarks | Benchmark | Measure GetAccount performance including balances | 471 |
 
 ## Phase 3 — legacy-to-native SQL migration · 11 open
 
@@ -581,6 +582,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t470]: tasks/470-lnd-wallet-port.md
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
 [t490]: tasks/490-get-utxo-benchmark.md
+[t491]: tasks/491-get-account-benchmark.md
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
 [t473]: tasks/473-extract-legacy-address-script-state.md
 

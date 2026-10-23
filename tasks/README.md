@@ -1,6 +1,6 @@
 # Open task catalog
 
-The next free task number is **491**.
+The next free task number is **492**.
 
 This is a link-only catalog. Each task file owns its scope and dependencies,
 [QUEUE.md](../QUEUE.md) owns delivery phases, and
@@ -191,3 +191,5 @@ reporting or new reporting framework is required.
 - [Task 471](471-three-backend-list-unspent-benchmark.md): measure ListUnspent
   on SQL with existing kvdb baselines and reusable setup.
 - [Task 490](490-get-utxo-benchmark.md): measure GetUtxo performance.
+- [Task 491](491-get-account-benchmark.md): measure GetAccount performance,
+  including balance retrieval.
