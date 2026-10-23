@@ -49,7 +49,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 475, 478 |
 
-## Phase 2A — bugs and gaps · 20 open
+## Phase 2A — bugs and gaps · 14 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
