@@ -57,6 +57,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 | [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | — | — |
 | [Task 491][t491] | Benchmark GetAccount with balances | Benchmark | 2B | — | — |
+| [Task 492][t492] | Benchmark ListAccounts with balances | Benchmark | 2B | — | — |
 
 ## Claimed Tasks
 
@@ -112,6 +113,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
 [t490]: tasks/490-get-utxo-benchmark.md
 [t491]: tasks/491-get-account-benchmark.md
+[t492]: tasks/492-list-accounts-benchmark.md
 
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md
 [t477]: tasks/477-import-legacy-snapshot-postgres.md
