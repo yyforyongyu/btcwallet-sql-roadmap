@@ -295,6 +295,10 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   validation belong to unit/integration tests, not benchmarks. Fail on setup
   or operation errors so failed work is not reported as performance data.
   Record a defect exposed only by a benchmark as its own implementation task.
+- Develop benchmarks with the smallest dataset and one selected case first.
+  Build the code, run relevant tests, and smoke-run that case. Present the code
+  and results for user approval before running full datasets, all cases, or
+  full profile captures. Proceed only after explicit approval.
 - Register shared public integration-test and benchmark contracts for kvdb,
   SQLite, and PostgreSQL. Do not skip kvdb inside a shared contract. Restrict
   backend-specific code to setup and teardown. Integration tests require

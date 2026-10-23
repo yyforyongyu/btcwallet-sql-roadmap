@@ -18,6 +18,10 @@ than replacing those baselines or reproducing coupled growth variables.
   [Task 471][t471]'s minimal SQL setup.
 - Put new SQL benchmarks in `wallet/bench`, using public `wallet` APIs and
   Task 471's common Docker environment for all four implementations.
+- Start with the smallest dataset and one selected case. Build the code, run
+  relevant tests, and smoke-run that case. Present the code and results for
+  user approval; run full datasets, all cases, and full profile captures only
+  after explicit approval.
 - Measure each method separately with one representative existing workload.
   Match account identity/count, actual total addresses, script types, funded
   state, request filters, and the point-selection rule with
@@ -55,8 +59,9 @@ data, without a workload framework or migration of unrelated benchmarks.
 
 ## Verification
 
-- Run each selected SQL method/case and record performance against separately
-  obtained existing kvdb measurements using the documented workload.
+- After user approval, run each selected SQL method/case and record performance
+  against separately obtained existing kvdb measurements using the documented
+  workload.
 - Confirm only the selected operation is timed, each result names its workload,
   and every fixture is cleaned up.
 - Verify environment and database setup are untimed in both suites and the

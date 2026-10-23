@@ -19,6 +19,10 @@ equal block counts alone do not make the two measurements comparable.
   [Task 471][t471]'s minimal SQL setup.
 - Put new SQL benchmarks in `wallet/bench`, using public `wallet` APIs and
   Task 471's common Docker environment for all four implementations.
+- Start with the smallest dataset and one selected case. Build the code, run
+  relevant tests, and smoke-run that case. Present the code and results for
+  user approval; run full datasets, all cases, and full profile captures only
+  after explicit approval.
 - Select a representative existing empty- or populated-chain startup case.
   Match Wallet/account counts, initial durable state, chain source and daemon
   behavior, block history and match pattern, and completion observation with
@@ -66,8 +70,8 @@ without a second lifecycle framework or cleanup of every startup benchmark.
 
 ## Verification
 
-- Run selected SQL cases and record performance against separately obtained
-  existing kvdb measurements using the documented workload.
+- After user approval, run selected SQL cases and record performance against
+  separately obtained existing kvdb measurements using the documented workload.
 - Confirm each sample measures the documented startup/completion boundary
   and leaves no live Manager, Wallet, or backend resources.
 - Verify environment and database setup are untimed in both suites and the

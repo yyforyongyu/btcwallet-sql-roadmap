@@ -24,6 +24,10 @@ separate setup-only example and smoke matrix.
   comparison suite and reuse selected workloads and kvdb measurements.
 - Put new SQL benchmarks and minimal shared setup in `wallet/bench`, using
   imported public `wallet` APIs. Keep existing kvdb comparisons in their suite.
+- Start with the smallest dataset and one selected case. Build the code, run
+  relevant tests, and smoke-run that case. Present the code and results for
+  user approval; run full datasets, all cases, and full profile captures only
+  after explicit approval.
 - Construct focused SQL Wallets normally through Manager, reusing real-backend
   setup and teardown. Add only the minimal SQL setup needed here;
   [417][t417], [419][t419], and [420][t420] reuse it and own their data and
@@ -166,9 +170,9 @@ a setup-only demonstration project.
 
 ## Verification
 
-- Run the selected SQL cases and record performance against both kvdb
-  measurements obtained separately from the existing suite, using the
-  documented workload and timing boundaries.
+- After user approval, run the selected SQL cases and record performance
+  against both kvdb measurements obtained separately from the existing suite,
+  using the documented workload and timing boundaries.
 - Verify Docker and DB setup are untimed in both suites, with complete
   setup/failure cleanup and independent SQL execution after kvdb retirement.
 - Verify all four cases use the documented Docker environment and retain

@@ -166,6 +166,10 @@ Preserve existing kvdb comparisons under the
 Other consumers reuse that setup and own their data and baseline alignment.
 Correctness validation belongs to unit/integration tests. Benchmarks retain
 setup/operation error checks and matching workloads and timing boundaries.
+Start with the smallest dataset and one selected case: build the code, run
+relevant tests, and smoke-run that case. Present the code and results for user
+approval before running full datasets, all cases, or full profile captures;
+proceed only after explicit approval.
 Keep one short file per method under btcwallet's `docs/developer/benchmark/`:
 start with the method title and a succinct description of how it is run, then
 `### Benchmark Results`, `### Data`, and `### Commands`, as in
