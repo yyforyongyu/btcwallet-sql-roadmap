@@ -15,18 +15,15 @@ They do not consume task numbers or require task files.
 - [Task 470](470-lnd-wallet-port.md): complete lnd Wallet runtime parity.
 - [Task 487](487-compile-lnd-with-managed-wallet.md): compile lnd with the
   maintained Wallet.
-- [Task 475](475-wallet-transaction-subscription.md): deliver live Wallet
   transaction subscriptions.
 
 ## Creation, Manager, and storage
 
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
   atomically.
-- [Task 330](330-duplicate-wallet-create.md): reject duplicate wallet creation.
 - [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
-- [Task 365](365-validate-wallet-genesis-keys.md): validate wallet genesis key
   identities.
 - [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.
@@ -72,7 +69,6 @@ They do not consume task numbers or require task files.
   leases.
 - [Task 482](482-fund-imported-inputs-without-origin.md): fund imported inputs
   without known origin.
-- [Task 483](483-preserve-labels-on-chain-replay.md): preserve transaction labels
   on chain replay.
   confirmation height.
 

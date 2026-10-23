@@ -19,6 +19,10 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 483](tasks/483-preserve-labels-on-chain-replay.md) completed on 2026-10-23.
+- [Task 365](tasks/365-validate-wallet-genesis-keys.md) completed on 2026-10-23.
+- [Task 330](tasks/330-duplicate-wallet-create.md) completed on 2026-10-23.
+- [Task 475](tasks/475-wallet-transaction-subscription.md) completed on 2026-10-23.
 - [Task 484](tasks/484-align-authoring-confirmation-height.md) completed on 2026-10-22.
 - [Task 389](tasks/389-runtime-account-commit-reconciliation.md) completed on 2026-10-22.
 - [Task 367](tasks/367-bound-sql-genesis-secrets.md) completed on 2026-10-21.
