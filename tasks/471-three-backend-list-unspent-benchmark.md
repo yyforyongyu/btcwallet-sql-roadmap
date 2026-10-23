@@ -30,9 +30,9 @@ separate setup-only example and smoke matrix.
   after explicit approval.
 - Construct focused SQL Wallets normally through Manager, reusing real-backend
   setup and teardown. Add only the minimal SQL setup needed here;
-  [417][t417], [419][t419], and [420][t420] reuse it and own their data and
-  baseline alignment. Their dependency is on shared infrastructure, not this
-  task's performance result. Task 417 owns per-sample startup work.
+  [417][t417], [419][t419], [420][t420], and [490][t490] reuse it and own their
+  data and baseline alignment. Their dependency is on shared infrastructure,
+  not this task's performance result. Task 417 owns per-sample startup work.
 
 ### Matching workloads
 
@@ -200,3 +200,4 @@ framework.
 [t417]: 417-start-to-synced-benchmark.md
 [t419]: 419-address-read-benchmark.md
 [t420]: 420-transaction-read-benchmark.md
+[t490]: 490-get-utxo-benchmark.md

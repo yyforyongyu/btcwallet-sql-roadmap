@@ -55,6 +55,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | YY | [#1446][pr1446] |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
+| [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | — | — |
 
 ## Claimed Tasks
 
@@ -108,6 +109,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t470]: tasks/470-lnd-wallet-port.md
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
+[t490]: tasks/490-get-utxo-benchmark.md
 
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md
 [t477]: tasks/477-import-legacy-snapshot-postgres.md
