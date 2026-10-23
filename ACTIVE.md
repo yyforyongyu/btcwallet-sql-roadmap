@@ -19,7 +19,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | YY | [#1442][pr1442] |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
-| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | — |
+| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | [#1447][pr1447] |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
@@ -43,7 +43,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
 | [Task 444][t444] | Test receive and reopen | Test | 2B | — | — |
 | [Task 445][t445] | Test account signing identity | Test | 2B | — | — |
-| [Task 446][t446] | Test spend and publish | Test | 2B | YY | — |
+| [Task 446][t446] | Test spend and publish | Test | 2B | YY | [#1444][pr1444] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | — | — |
 | [Task 448][t448] | Test sync and rollback | Test | 2B | — | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
@@ -51,8 +51,8 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
 | [Task 462][t462] | Test account mutation errors | Test | 2B | — | — |
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
-| [Task 464][t464] | Test NoChainSync account queries | Test | 2B | YY | — |
-| [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | YY | — |
+| [Task 464][t464] | Test NoChainSync account queries | Test | 2B | YY | [#1445][pr1445] |
+| [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | YY | [#1446][pr1446] |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 
@@ -131,3 +131,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1438]: https://github.com/btcsuite/btcwallet/pull/1438
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1442]: https://github.com/btcsuite/btcwallet/pull/1442
+[pr1447]: https://github.com/btcsuite/btcwallet/pull/1447
+[pr1446]: https://github.com/btcsuite/btcwallet/pull/1446
+[pr1445]: https://github.com/btcsuite/btcwallet/pull/1445
+[pr1444]: https://github.com/btcsuite/btcwallet/pull/1444
