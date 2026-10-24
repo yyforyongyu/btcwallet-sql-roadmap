@@ -308,8 +308,11 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   exclusion explicitly.
 - [Tasks 417](tasks/417-start-to-synced-benchmark.md),
   [419](tasks/419-address-read-benchmark.md),
-  [420](tasks/420-transaction-read-benchmark.md), and
-  [471](tasks/471-three-backend-list-unspent-benchmark.md) use a scoped
+  [420](tasks/420-transaction-read-benchmark.md),
+  [471](tasks/471-three-backend-list-unspent-benchmark.md),
+  [490](tasks/490-get-utxo-benchmark.md),
+  [491](tasks/491-get-account-benchmark.md), and
+  [492](tasks/492-list-accounts-benchmark.md) use a scoped
   benchmark exception: preserve legacy Wallet kvdb and maintained-Wallet kvdb
   execution in the existing comparison suite; the focused suite runs only
   SQLite and PostgreSQL and never invokes the comparison suite. Focused SQL
