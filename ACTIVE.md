@@ -34,8 +34,8 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | --- | --- | --- | --- | --- | --- |
 | [Task 369][t369] | Test repeated unlocks | Test | 2B | — | — |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | — |
-| [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | — |
-| [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | — |
+| [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
+| [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | — |
 | [Task 432][t432] | Test address imports | Test | 2B | Gustavo | — |
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | — | — |
@@ -53,11 +53,11 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
 | [Task 464][t464] | Test NoChainSync account queries | Test | 2B | YY | [#1445][pr1445] |
 | [Task 466][t466] | Verify final oldest-unused allocation | Test | 2B | YY | [#1446][pr1446] |
-| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1433][pr1433] |
+| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
-| [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | — | — |
-| [Task 491][t491] | Benchmark GetAccount with balances | Benchmark | 2B | — | — |
-| [Task 492][t492] | Benchmark ListAccounts with balances | Benchmark | 2B | — | — |
+| [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | YY | [#1433][pr1433] |
+| [Task 491][t491] | Benchmark GetAccount with balances | Benchmark | 2B | YY | [#1433][pr1433] |
+| [Task 492][t492] | Benchmark ListAccounts with balances | Benchmark | 2B | YY | [#1433][pr1433] |
 
 ## Claimed Tasks
 
@@ -141,3 +141,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1446]: https://github.com/btcsuite/btcwallet/pull/1446
 [pr1445]: https://github.com/btcsuite/btcwallet/pull/1445
 [pr1444]: https://github.com/btcsuite/btcwallet/pull/1444
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
