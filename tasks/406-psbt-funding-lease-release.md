@@ -61,6 +61,6 @@ failure honestly, using shared indeterminacy when the outcome is unknown.
 Replacement owners remain untouched. No new public result, cleanup method,
 or PSBT-specific error is added.
 
-[t405]: 405-psbt-funding-lease-admission.md
+[t405]: ../archive/tasks/405-psbt-funding-lease-admission.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
 [t439]: 439-psbt-funding-itests.md

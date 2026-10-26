@@ -14,7 +14,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1434][pr1434] |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | [#1435][pr1435] |
-| [Task 405][t405] | Reserve PSBT funding inputs | Gap fix | 2A | Gustavo | [#1438][pr1438], [#1431][pr1431] |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | YY | [#1442][pr1442] |
@@ -80,7 +79,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t372]: tasks/372-multi-wallet-rollback.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t405]: tasks/405-psbt-funding-lease-admission.md
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
 [t410]: tasks/410-transaction-graph-admission.md
@@ -133,8 +131,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1435]: https://github.com/btcsuite/btcwallet/pull/1435
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
-[pr1431]: https://github.com/btcsuite/btcwallet/pull/1431
-[pr1438]: https://github.com/btcsuite/btcwallet/pull/1438
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1442]: https://github.com/btcsuite/btcwallet/pull/1442
 [pr1447]: https://github.com/btcsuite/btcwallet/pull/1447

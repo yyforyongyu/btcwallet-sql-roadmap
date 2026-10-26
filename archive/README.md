@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 405](tasks/405-psbt-funding-lease-admission.md) completed on 2026-10-26.
 - [Task 483](tasks/483-preserve-labels-on-chain-replay.md) completed on 2026-10-23.
 - [Task 365](tasks/365-validate-wallet-genesis-keys.md) completed on 2026-10-23.
 - [Task 330](tasks/330-duplicate-wallet-create.md) completed on 2026-10-23.

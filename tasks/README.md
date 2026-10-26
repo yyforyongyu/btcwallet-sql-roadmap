@@ -52,7 +52,6 @@ They do not consume task numbers or require task files.
 
 - [Task 356](356-defer-change-script-allocation.md): defer change-script
   allocation until viable.
-- [Task 405](405-psbt-funding-lease-admission.md): reserve PSBT funding inputs
 - [Task 406](406-psbt-funding-lease-release.md): clean up failed PSBT funding
   leases.
 - [Task 407](407-psbt-finalization-authorization.md): authorize PSBT
