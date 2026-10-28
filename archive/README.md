@@ -19,6 +19,11 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 446](tasks/446-transaction-spend-publish-scenario.md) completed on 2026-10-28.
+- [Task 489](tasks/489-passphrase-shutdown-context.md) completed on 2026-10-28.
+- [Task 488](tasks/488-passphrase-request-ownership.md) completed on 2026-10-28.
+- [Task 454](tasks/454-postgres-transaction-isolation.md) completed on 2026-10-28.
+- [Task 478](tasks/478-retain-spend-confirmation-leases.md) completed on 2026-10-28.
 - [Task 405](tasks/405-psbt-funding-lease-admission.md) completed on 2026-10-26.
 - [Task 483](tasks/483-preserve-labels-on-chain-replay.md) completed on 2026-10-23.
 - [Task 365](tasks/365-validate-wallet-genesis-keys.md) completed on 2026-10-23.

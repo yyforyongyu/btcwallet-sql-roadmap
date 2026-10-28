@@ -66,4 +66,4 @@ of reauthentication and secret reads; no new clock or timer API is needed.
 [vault-tests]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/internal/keyvault/vault_lifecycle_test.go#L148
 
 [t488]: 488-passphrase-request-ownership.md
-[t489]: 489-passphrase-shutdown-context.md
+[t489]: ../archive/tasks/489-passphrase-shutdown-context.md

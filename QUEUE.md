@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **64 open**, **74 done**,
+The numbered roadmap contains **164 tasks**: **59 open**, **79 done**,
 **24 superseded**, and **2 deferred**. With **122 ad hoc tasks**, that is
-**286 tracked tasks** and **196 completed** overall.
+**286 tracked tasks** and **201 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -23,7 +23,7 @@ build-verified revision. Task 470 retains full runtime and itest
 parity as its later lnd-main merge gate; those tests do not gate the
 sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 2 open
+## Phase 1 — final SQL schema and lnd compilation · 1 open
 
 Finish the planned SQL account, import, and lease schema changes. Retain the
 existing SQL file organization and migration loader, and verify fresh creation
@@ -46,7 +46,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 478][t478] | open | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | — |
 | [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 475, 478 |
 
 ## Phase 2A — bugs and gaps · 14 open
@@ -66,12 +65,9 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
 | [Task 410][t410] | open | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | — |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372 |
-| [Task 454][t454] | open | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | 410 |
 | [Task 469][t469] | open | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | — |
 | [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484, 487 |
 | [Task 482][t482] | open | PsbtManager imported-input decoration | Gap fix | Fund imported inputs without known origin | — |
-| [Task 488][t488] | open | Controller.ChangePassphrase request ownership | Bug fix | Own passphrase request buffers through completion | — |
-| [Task 489][t489] | open | Controller.ChangePassphrase accepted-operation context | Bug fix | Drain accepted passphrase rotation during shutdown | — |
 
 ## Phase 2B — verification · 26 open
 
@@ -97,7 +93,6 @@ profile references in btcwallet's `docs/developer/benchmark/`.
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | 407 |
 | [Task 444][t444] | open | public wallet receive scenario | Test | Cover new-account receipt and reload | — |
 | [Task 445][t445] | open | public account signing scenario | Test | Cover new-account signing identity | — |
-| [Task 446][t446] | open | public transaction spend scenario | Test | Cover authored-spend publication and reload | — |
 | [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 356, 406 |
 | [Task 448][t448] | open | public Wallet reorganization scenario | Test | Cover synchronization and rollback | — |
 | [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 423 |
@@ -219,9 +214,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 74
+## Done · 79
 
-**196 completed: 74 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
+**201 completed: 79 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -286,8 +281,10 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 441][t441] | 1 | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | [#1374][pr1374] |
 | [Task 442][t442] | 1 | Signer signature integration tests | Test | Cover public signing contracts | [#1384][pr1384] |
 | [Task 443][t443] | 1 | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | [#1383][pr1383] |
+| [Task 446][t446] | 2B | public transaction spend scenario | Test | Cover authored-spend publication and reload | [#1444][pr1444] |
 | [Task 452][t452] | 1 | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | [#1368][pr1368] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
+| [Task 454][t454] | 2A | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | [#1447][pr1447] |
 | [Task 455][t455] | 1 | Wallet Controller synchronization information | Bug fix | Report exact wallet synchronization status | [#1363][pr1363] |
 | [Task 456][t456] | 1 | ManagerConfig and managed Wallet construction | Refactor | Centralize managed Wallet runtime configuration | [#1353][pr1353] |
 | [Task 458][t458] | 1 | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | [#1354][pr1354] |
@@ -297,12 +294,15 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 | [Task 468][t468] | 1 | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | [#1369][pr1369] |
 | [Task 475][t475] | 1 | Wallet transaction notifications | Gap fix | Deliver wallet transaction subscriptions | [#1426][pr1426] |
+| [Task 478][t478] | 1 | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | [#1413][pr1413], [#1427][pr1427], [#1428][pr1428] |
 | [Task 479][t479] | 1 | AccountManager custody and Wallet results | Gap fix | Mix imported XPub and signing accounts | [#1411][pr1411] |
 | [Task 480][t480] | 1 | AddressManager raw imports and SQL address ownership | Gap fix | Own raw imports in one signing wallet | [#1412][pr1412] |
 | [Task 481][t481] | 1 | AccountManager and SQL account address schema | Bug fix | Preserve imported account address schema | [#1409][pr1409] |
 | [Task 474][t474] | 2A | PsbtManager and TxCreator change registration | Bug fix | Watch authored change before returning | [#1419][pr1419] |
 | [Task 483][t483] | 2A | Wallet scan ingestion and TxStore batch | Bug fix | Preserve labels on chain replay | [#1417][pr1417] |
 | [Task 484][t484] | 2A | TxCreator coin eligibility | Bug fix | Align authoring confirmation height | [#1416][pr1416] |
+| [Task 488][t488] | 2A | Controller.ChangePassphrase request ownership | Bug fix | Own passphrase request buffers through completion | [#1429][pr1429] |
+| [Task 489][t489] | 2A | Controller.ChangePassphrase accepted-operation context | Bug fix | Drain accepted passphrase rotation during shutdown | [#1430][pr1430] |
 
 ### Ad hoc PRs
 

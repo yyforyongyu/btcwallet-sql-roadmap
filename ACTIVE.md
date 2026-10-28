@@ -9,7 +9,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 478][t478] | Retain spend-confirmation leases | Gap fix | 1 | Abdullahi | [#1413][pr1413], [#1427][pr1427], [#1428][pr1428] |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | — |
 | [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1434][pr1434], [#1449][pr1449] |
@@ -18,12 +17,9 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | YY | [#1442][pr1442] |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
-| [Task 454][t454] | Make PostgreSQL isolation explicit | Bug fix | 2A | YY | [#1447][pr1447] |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | — | — |
-| [Task 488][t488] | Own passphrase request buffers | Bug fix | 2A | YY | [#1429][pr1429] |
-| [Task 489][t489] | Drain accepted passphrase rotation | Bug fix | 2A | YY | [#1430][pr1430] |
 
 ## Upcoming Phase 2 Tasks
 
@@ -42,7 +38,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
 | [Task 444][t444] | Test receive and reopen | Test | 2B | — | — |
 | [Task 445][t445] | Test account signing identity | Test | 2B | — | — |
-| [Task 446][t446] | Test spend and publish | Test | 2B | YY | [#1444][pr1444] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | — | — |
 | [Task 448][t448] | Test sync and rollback | Test | 2B | — | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
@@ -93,13 +88,11 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t440]: tasks/440-psbt-signing-finalization-itests.md
 [t444]: tasks/444-wallet-receive-reload-scenario.md
 [t445]: tasks/445-account-signing-scenario.md
-[t446]: tasks/446-transaction-spend-publish-scenario.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t448]: tasks/448-sync-rollback-scenario.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
 [t450]: tasks/450-bitcoind-compatibility-scenario.md
 [t451]: tasks/451-chain-version-itest-matrix.md
-[t454]: tasks/454-postgres-transaction-isolation.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t462]: tasks/462-account-mutation-error-itests.md
 [t463]: tasks/463-path-bound-utxo-identity-itests.md
@@ -115,27 +108,17 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md
 [t477]: tasks/477-import-legacy-snapshot-postgres.md
-[t478]: tasks/478-retain-spend-confirmation-leases.md
 [t482]: tasks/482-fund-imported-inputs-without-origin.md
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
-[pr1413]: https://github.com/btcsuite/btcwallet/pull/1413
-[pr1427]: https://github.com/btcsuite/btcwallet/pull/1427
-[pr1428]: https://github.com/btcsuite/btcwallet/pull/1428
 
-[t488]: tasks/488-passphrase-request-ownership.md
-[t489]: tasks/489-passphrase-shutdown-context.md
-[pr1430]: https://github.com/btcsuite/btcwallet/pull/1430
-[pr1429]: https://github.com/btcsuite/btcwallet/pull/1429
 [pr1435]: https://github.com/btcsuite/btcwallet/pull/1435
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1442]: https://github.com/btcsuite/btcwallet/pull/1442
-[pr1447]: https://github.com/btcsuite/btcwallet/pull/1447
 [pr1446]: https://github.com/btcsuite/btcwallet/pull/1446
 [pr1445]: https://github.com/btcsuite/btcwallet/pull/1445
-[pr1444]: https://github.com/btcsuite/btcwallet/pull/1444
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1449]: https://github.com/btcsuite/btcwallet/pull/1449

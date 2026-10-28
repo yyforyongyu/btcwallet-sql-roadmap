@@ -124,7 +124,7 @@ task. No ADR is required.
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md
 
 [t475]: 475-wallet-transaction-subscription.md
-[t478]: 478-retain-spend-confirmation-leases.md
+[t478]: ../archive/tasks/478-retain-spend-confirmation-leases.md
 [t479]: ../archive/tasks/479-mix-imported-xpub-accounts.md
 [t480]: ../archive/tasks/480-own-raw-imports-in-one-wallet.md
 [t481]: ../archive/tasks/481-persist-imported-account-address-schema.md

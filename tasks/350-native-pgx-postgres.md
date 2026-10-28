@@ -67,4 +67,4 @@ The shared runtime seam stays in Task 350: by itself it changes no externally
 useful behavior and exists only to enable this cutover, so splitting it would
 create a preparatory task that is not independently useful.
 
-[t454]: 454-postgres-transaction-isolation.md
+[t454]: ../archive/tasks/454-postgres-transaction-isolation.md

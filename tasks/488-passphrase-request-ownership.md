@@ -44,4 +44,4 @@ obligation while accepted work retains stable inputs and clears its copies.
 Caller cancellation remains supported with documented outcome uncertainty.
 
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t489]: 489-passphrase-shutdown-context.md
+[t489]: ../archive/tasks/489-passphrase-shutdown-context.md

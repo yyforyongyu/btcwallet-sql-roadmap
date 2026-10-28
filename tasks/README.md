@@ -25,7 +25,6 @@ They do not consume task numbers or require task files.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
   identities.
-- [Task 454](454-postgres-transaction-isolation.md): make PostgreSQL
   transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
@@ -64,7 +63,6 @@ They do not consume task numbers or require task files.
   transaction output aggregates.
 - [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
   effective keys.
-- [Task 478](478-retain-spend-confirmation-leases.md): retain spend-confirmation
   leases.
 - [Task 482](482-fund-imported-inputs-without-origin.md): fund imported inputs
   without known origin.
@@ -105,7 +103,6 @@ that structural exclusion explicitly.
   and durable reload.
 - [Task 445](445-account-signing-scenario.md): cover new-account signing
   identity.
-- [Task 446](446-transaction-spend-publish-scenario.md): cover authored-spend
   publication and reload.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
 - [Task 448](448-sync-rollback-scenario.md): cover synchronization and rollback.
@@ -131,9 +128,7 @@ that structural exclusion explicitly.
 - [Task 385](385-unsafe-signer-key-extraction.md): isolate UnsafeSigner key
   extraction.
 
-- [Task 488](488-passphrase-request-ownership.md): own passphrase request
   buffers through completion.
-- [Task 489](489-passphrase-shutdown-context.md): drain accepted passphrase
   rotation during shutdown.
 
 ## Migration
