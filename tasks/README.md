@@ -94,7 +94,6 @@ that structural exclusion explicitly.
   account identity.
 - [Task 464](464-no-chain-sync-account-query-itests.md): verify true-value
   list and path-bound account queries.
-- [Task 466](466-oldest-unused-address-itests.md): verify final oldest-unused
   allocation.
 
 ## Integration-test scenarios

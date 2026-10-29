@@ -120,7 +120,7 @@ task. No ADR is required.
 [t447]: 447-psbt-workflow-scenario.md
 [t461]: ../archive/tasks/461-address-batch-itests.md
 [t465]: ../archive/tasks/465-new-address-result-itests.md
-[t466]: 466-oldest-unused-address-itests.md
+[t466]: ../archive/tasks/466-oldest-unused-address-itests.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md
 
 [t475]: 475-wallet-transaction-subscription.md
