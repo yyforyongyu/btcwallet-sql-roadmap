@@ -11,7 +11,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | --- | --- | --- | --- | --- | --- |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 356][t356] | Defer change-script allocation | Bug fix | 2A | Gustavo | [#1453][pr1453] |
-| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1434][pr1434], [#1449][pr1449] |
+| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1449][pr1449] |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | [#1435][pr1435] |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
