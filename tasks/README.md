@@ -92,7 +92,6 @@ that structural exclusion explicitly.
   mutation-error evidence.
 - [Task 463](463-path-bound-utxo-identity-itests.md): verify path-bound UTXO
   account identity.
-- [Task 464](464-no-chain-sync-account-query-itests.md): verify true-value
   list and path-bound account queries.
   allocation.
 

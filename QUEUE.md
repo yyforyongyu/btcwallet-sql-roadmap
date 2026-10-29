@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **58 open**, **80 done**,
+The numbered roadmap contains **164 tasks**: **57 open**, **81 done**,
 **24 superseded**, and **2 deferred**. With **122 ad hoc tasks**, that is
-**286 tracked tasks** and **202 completed** overall.
+**286 tracked tasks** and **203 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -100,7 +100,6 @@ profile references in btcwallet's `docs/developer/benchmark/`.
 | [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 | [Task 462][t462] | open | AccountManager mutation-error integration tests | Test | Complete missing account mutation error evidence | — |
 | [Task 463][t463] | open | UtxoManager path-bound account integration tests | Test | Verify path-bound UTXO account identity | — |
-| [Task 464][t464] | open | AccountManager NoChainSync query integration tests | Test | Verify true-value lists and path-bound account queries | — |
 | [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
 | [Task 490][t490] | open | wallet UtxoManager benchmarks | Benchmark | Measure GetUtxo performance | 471 |
@@ -213,9 +212,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 80
+## Done · 81
 
-**202 completed: 80 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
+**203 completed: 81 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -289,6 +288,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 458][t458] | 1 | Wallet lifecycle state and maintained public Wallet components | Bug fix | Drain Wallet calls during terminal stop | [#1354][pr1354] |
 | [Task 459][t459] | 1 | Manager startup Wallet discovery and assembly | Gap fix | Assemble durable Wallets for Manager startup | [#1356][pr1356] |
 | [Task 461][t461] | 1 | AddressManager batch integration tests | Test | Cover public address batch contracts | [#1393][pr1393] |
+| [Task 464][t464] | 2B | AccountManager NoChainSync query integration tests | Test | Verify true-value lists and path-bound account queries | [#1445][pr1445] |
 | [Task 465][t465] | 1 | AddressManager AllocateNextKey integration tests | Test | Verify durable key allocation results | [#1392][pr1392] |
 | [Task 466][t466] | 2B | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | [#1446][pr1446] |
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |

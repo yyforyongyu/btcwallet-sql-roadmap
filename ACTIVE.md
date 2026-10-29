@@ -45,7 +45,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
 | [Task 462][t462] | Test account mutation errors | Test | 2B | Abdullahi | — |
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | — | — |
-| [Task 464][t464] | Test NoChainSync account queries | Test | 2B | YY | [#1445][pr1445] |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 | [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | YY | [#1433][pr1433] |
@@ -95,7 +94,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t457]: tasks/457-process-local-manager-lease.md
 [t462]: tasks/462-account-mutation-error-itests.md
 [t463]: tasks/463-path-bound-utxo-identity-itests.md
-[t464]: tasks/464-no-chain-sync-account-query-itests.md
 [t469]: tasks/469-sign-psbt-with-effective-keys.md
 [t470]: tasks/470-lnd-wallet-port.md
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
@@ -116,7 +114,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1442]: https://github.com/btcsuite/btcwallet/pull/1442
-[pr1445]: https://github.com/btcsuite/btcwallet/pull/1445
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1449]: https://github.com/btcsuite/btcwallet/pull/1449
 [pr1453]: https://github.com/btcsuite/btcwallet/pull/1453

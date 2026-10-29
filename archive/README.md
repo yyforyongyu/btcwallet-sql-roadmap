@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 464](tasks/464-no-chain-sync-account-query-itests.md) completed on 2026-10-29.
 - [Task 466](tasks/466-oldest-unused-address-itests.md) completed on 2026-10-29.
 - [Task 446](tasks/446-transaction-spend-publish-scenario.md) completed on 2026-10-28.
 - [Task 489](tasks/489-passphrase-shutdown-context.md) completed on 2026-10-28.
