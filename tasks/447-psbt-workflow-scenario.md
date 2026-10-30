@@ -59,7 +59,7 @@ scenario-specific production hooks.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
-[t356]: 356-defer-change-script-allocation.md
+[t356]: ../archive/tasks/356-defer-change-script-allocation.md
 [t406]: 406-psbt-funding-lease-release.md
 [t474]: ../archive/tasks/474-authored-change-watch.md
 [t433]: ../archive/tasks/433-wallet-sync-test-boundary.md

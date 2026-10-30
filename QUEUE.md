@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **57 open**, **81 done**,
+The numbered roadmap contains **164 tasks**: **56 open**, **82 done**,
 **24 superseded**, and **2 deferred**. With **122 ad hoc tasks**, that is
-**286 tracked tasks** and **203 completed** overall.
+**286 tracked tasks** and **204 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -58,7 +58,6 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 356][t356] | open | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | — |
 | [Task 370][t370] | open | Manager chain-event fanout and Wallet processors | Refactor | Fan out ordered Manager chain events | — |
 | [Task 372][t372] | open | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | 370 |
 | [Task 406][t406] | open | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | 405 |
@@ -212,9 +211,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 81
+## Done · 82
 
-**203 completed: 81 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
+**204 completed: 82 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -238,6 +237,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 346][t346] | 2 | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | [#1359][pr1359] |
 | [Task 347][t347] | 2A | PsbtManager existing-signature validation | Bug fix | Authorize existing PSBT signatures | [#1400][pr1400] |
 | [Task 355][t355] | 2 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |
+| [Task 356][t356] | 2A | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | [#1453][pr1453] |
 | [Task 357][t357] | 2 | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | [#1348][pr1348] |
 | [Task 359][t359] | 1 | Manager and SQL Store design | Design | Revalidate database identity design | [#1319][pr1319] |
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
