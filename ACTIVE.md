@@ -17,7 +17,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
-| [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | YY | — |
+| [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | YY | [#1461][pr1461] |
 
 ## Upcoming Phase 2 Tasks
 
@@ -25,7 +25,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 369][t369] | Test repeated unlocks | Test | 2B | YY | — |
+| [Task 369][t369] | Test repeated unlocks | Test | 2B | YY | [#1460][pr1460] |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
@@ -42,7 +42,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 450][t450] | Compare wallet state with bitcoind | Test | 2B | — | — |
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
 | [Task 462][t462] | Test account mutation errors | Test | 2B | Abdullahi | — |
-| [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | YY | — |
+| [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | YY | [#1459][pr1459] |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
 | [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | YY | [#1433][pr1433] |
@@ -114,3 +114,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1458]: https://github.com/btcsuite/btcwallet/pull/1458
 [pr1457]: https://github.com/btcsuite/btcwallet/pull/1457
+[pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
+[pr1460]: https://github.com/btcsuite/btcwallet/pull/1460
+[pr1459]: https://github.com/btcsuite/btcwallet/pull/1459
