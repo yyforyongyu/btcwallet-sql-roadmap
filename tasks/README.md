@@ -41,7 +41,6 @@ They do not consume task numbers or require task files.
 
 ## Chain and synchronization
 
-- [Task 370](370-chain-source-delivery.md): fan out ordered Manager chain
   events.
 - [Task 372](372-multi-wallet-rollback.md): coordinate multi-Wallet rollback.
 - [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain

@@ -74,7 +74,7 @@ through the existing database-wide rollback after Wallet processors quiesce,
 without importing the separate transaction-invalidation roadmap.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
-[t370]: 370-chain-source-delivery.md
+[t370]: ../archive/tasks/370-chain-source-delivery.md
 [t423]: 423-manager-chain-source-cutover.md
 
 [rollback-tests]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/internal/db/itest/tx_store_rollback_test.go

@@ -10,7 +10,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
-| [Task 370][t370] | Fan out ordered Manager chain events | Refactor | 2A | YY | [#1449][pr1449] |
 | [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | [#1435][pr1435] |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
@@ -66,7 +65,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t369]: tasks/369-repeated-wallet-unlock.md
-[t370]: tasks/370-chain-source-delivery.md
 [t372]: tasks/372-multi-wallet-rollback.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
@@ -113,7 +111,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1442]: https://github.com/btcsuite/btcwallet/pull/1442
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
-[pr1449]: https://github.com/btcsuite/btcwallet/pull/1449
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1458]: https://github.com/btcsuite/btcwallet/pull/1458
 [pr1457]: https://github.com/btcsuite/btcwallet/pull/1457

@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 370](tasks/370-chain-source-delivery.md) completed on 2026-10-31.
 - [Task 356](tasks/356-defer-change-script-allocation.md) completed on 2026-10-30.
 - [Task 464](tasks/464-no-chain-sync-account-query-itests.md) completed on 2026-10-29.
 - [Task 466](tasks/466-oldest-unused-address-itests.md) completed on 2026-10-29.
