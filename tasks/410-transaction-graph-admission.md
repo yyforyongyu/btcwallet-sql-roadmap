@@ -81,4 +81,4 @@ The demonstrated concurrent mutation defect is closed at the Wallet-owned
 boundary with focused regressions and no unnecessary coordination layer.
 
 [t334]: ../archive/tasks/334-shared-chain-state.md
-[t372]: 372-multi-wallet-rollback.md
+[t372]: ../archive/tasks/372-multi-wallet-rollback.md

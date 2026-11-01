@@ -88,6 +88,6 @@ delivery to its complete Wallet set without competing per-Wallet readers or
 stopping the borrowed chain client.
 
 [t370]: ../archive/tasks/370-chain-source-delivery.md
-[t372]: 372-multi-wallet-rollback.md
+[t372]: ../archive/tasks/372-multi-wallet-rollback.md
 [t402]: ../archive/tasks/402-replay-live-watch-obligations.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md

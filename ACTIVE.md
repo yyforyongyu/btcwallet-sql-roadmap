@@ -10,8 +10,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
-| [Task 372][t372] | Coordinate multi-Wallet rollback | Bug fix | 2A | YY | [#1435][pr1435] |
-| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | — |
+| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | [#1462][pr1462] |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | YY | [#1442][pr1442] |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
@@ -65,7 +64,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t350]: tasks/350-native-pgx-postgres.md
 [t369]: tasks/369-repeated-wallet-unlock.md
-[t372]: tasks/372-multi-wallet-rollback.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t406]: tasks/406-psbt-funding-lease-release.md
@@ -105,7 +103,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t487]: tasks/487-compile-lnd-with-managed-wallet.md
 
-[pr1435]: https://github.com/btcsuite/btcwallet/pull/1435
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
@@ -117,3 +114,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
 [pr1460]: https://github.com/btcsuite/btcwallet/pull/1460
 [pr1459]: https://github.com/btcsuite/btcwallet/pull/1459
+[pr1462]: https://github.com/btcsuite/btcwallet/pull/1462

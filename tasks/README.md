@@ -42,7 +42,6 @@ They do not consume task numbers or require task files.
 ## Chain and synchronization
 
   events.
-- [Task 372](372-multi-wallet-rollback.md): coordinate multi-Wallet rollback.
 - [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
 
