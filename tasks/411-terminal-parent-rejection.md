@@ -55,4 +55,4 @@ No active child of a retained terminal transaction survives activation or
 maintained ingestion, without depending on a new input representation.
 
 [t339]: ../archive/tasks/339-transaction-visibility.md
-[t410]: 410-transaction-graph-admission.md
+[t410]: ../archive/tasks/410-transaction-graph-admission.md

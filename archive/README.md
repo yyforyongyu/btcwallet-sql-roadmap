@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 410](tasks/410-transaction-graph-admission.md) completed on 2026-11-02.
 - [Task 372](tasks/372-multi-wallet-rollback.md) completed on 2026-11-02.
 - [Task 370](tasks/370-chain-source-delivery.md) completed on 2026-10-31.
 - [Task 356](tasks/356-defer-change-script-allocation.md) completed on 2026-10-30.

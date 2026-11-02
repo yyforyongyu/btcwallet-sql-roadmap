@@ -12,7 +12,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | [#1462][pr1462] |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
-| [Task 410][t410] | Coordinate transaction graph mutations | Bug fix | 2A | YY | [#1442][pr1442] |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
@@ -68,7 +67,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
-[t410]: tasks/410-transaction-graph-admission.md
 [t417]: tasks/417-start-to-synced-benchmark.md
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md
@@ -106,7 +104,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
-[pr1442]: https://github.com/btcsuite/btcwallet/pull/1442
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1458]: https://github.com/btcsuite/btcwallet/pull/1458
