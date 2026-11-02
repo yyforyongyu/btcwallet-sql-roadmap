@@ -37,7 +37,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
 | [Task 450][t450] | Compare wallet state with bitcoind | Test | 2B | — | — |
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
-| [Task 462][t462] | Test account mutation errors | Test | 2B | Abdullahi | — |
+| [Task 462][t462] | Test account mutation errors | Test | 2B | Abdullahi | [#1466][pr1466] |
 | [Task 463][t463] | Test path-bound UTXO identity | Test | 2B | YY | [#1459][pr1459] |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
@@ -109,3 +109,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1459]: https://github.com/btcsuite/btcwallet/pull/1459
 [pr1462]: https://github.com/btcsuite/btcwallet/pull/1462
 [pr1463]: https://github.com/btcsuite/btcwallet/pull/1463
+[pr1466]: https://github.com/btcsuite/btcwallet/pull/1466
