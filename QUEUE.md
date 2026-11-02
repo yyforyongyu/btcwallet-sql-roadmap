@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **52 open**, **86 done**,
-**24 superseded**, and **2 deferred**. With **122 ad hoc tasks**, that is
-**286 tracked tasks** and **208 completed** overall.
+**24 superseded**, and **2 deferred**. With **123 ad hoc tasks**, that is
+**287 tracked tasks** and **209 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -208,7 +208,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 86
 
-**208 completed: 86 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
+**209 completed: 86 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -437,6 +437,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1395](https://github.com/btcsuite/btcwallet/pull/1395) | wallet: harden psbt funding admission | Abdulkbk | 2026-09-24 |
 | [#1396](https://github.com/btcsuite/btcwallet/pull/1396) | multi: delete unmined tx branches instead of retaining them | Abdulkbk | 2026-09-24 |
 | [#1397](https://github.com/btcsuite/btcwallet/pull/1397) | wallet: validate psbt funding packets against the canonical encoding | Abdulkbk | 2026-10-22 |
+| [#1398](https://github.com/btcsuite/btcwallet/pull/1398) | wallet: reconcile psbt caller metadata against the spend | Abdulkbk | 2026-11-02 |
 | [#1402](https://github.com/btcsuite/btcwallet/pull/1402) | wallet+db: make oldest-unused address atomic sql native | GustavoStingelin | 2026-10-15 |
 | [#1420](https://github.com/btcsuite/btcwallet/pull/1420) | ci: speed up the lint job | GustavoStingelin | 2026-10-18 |
 | [#1424](https://github.com/btcsuite/btcwallet/pull/1424) | multi: fix reorg ancestry and miner isolation | yyforyongyu | 2026-10-20 |
