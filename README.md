@@ -58,7 +58,8 @@ SQL schema changes, verify fresh creation and unchanged reopen on both SQL
 backends using the existing loader, and compile lnd against the maintained
 Wallet. Keep the existing SQL file organization; consolidation is not a merge
 gate. The pre-claim gap check is complete.
-[Task 487](tasks/487-compile-lnd-with-managed-wallet.md) owns compilation;
+[Task 487](archive/tasks/487-compile-lnd-with-managed-wallet.md) completed its
+compile-proof milestone by explicit acceptance on 2026-11-02;
 [Task 470](tasks/470-lnd-wallet-port.md) retains runtime and itest parity.
 Later-phase work follows [QUEUE](QUEUE.md)'s current-focus rule. Relevant fixes
 and passing behavioral evidence gate enabling each affected runtime path.
@@ -85,7 +86,7 @@ Loader, lnd, daemon production, or deprecated Wallet methods and tests. Tasks
 357 and 401 are narrow historical exceptions, not precedent. If the required
 behavior cannot stay Wallet-owned, revise the task or obtain explicit approval
 before implementation. [Tasks 470](tasks/470-lnd-wallet-port.md) and
-[487](tasks/487-compile-lnd-with-managed-wallet.md) own the lnd runtime and
+[487](archive/tasks/487-compile-lnd-with-managed-wallet.md) own the lnd runtime and
 compile cutovers as explicit exceptions.
 
 An integration-test task owns the tested public contract. Test and CI files may

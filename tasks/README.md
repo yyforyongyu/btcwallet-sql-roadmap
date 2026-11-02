@@ -13,8 +13,6 @@ They do not consume task numbers or require task files.
 ## Consumer adoption
 
 - [Task 470](470-lnd-wallet-port.md): complete lnd Wallet runtime parity.
-- [Task 487](487-compile-lnd-with-managed-wallet.md): compile lnd with the
-  maintained Wallet.
   transaction subscriptions.
 
 ## Creation, Manager, and storage

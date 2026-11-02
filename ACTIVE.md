@@ -9,12 +9,11 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 487][t487] | Compile lnd with the maintained Wallet | Gap fix | 1 | YY | — |
 | [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | [#1462][pr1462] |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
-| [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | — |
+| [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | [lnd #77][lnd77] |
 | [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | YY | [#1461][pr1461] |
 
 ## Upcoming Phase 2 Tasks
@@ -99,7 +98,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t482]: tasks/482-fund-imported-inputs-without-origin.md
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
-[t487]: tasks/487-compile-lnd-with-managed-wallet.md
+[lnd77]: https://github.com/yyforyongyu/lnd/pull/77
 
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433

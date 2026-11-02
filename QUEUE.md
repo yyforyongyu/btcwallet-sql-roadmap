@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **53 open**, **85 done**,
+The numbered roadmap contains **164 tasks**: **52 open**, **86 done**,
 **24 superseded**, and **2 deferred**. With **122 ad hoc tasks**, that is
-**286 tracked tasks** and **207 completed** overall.
+**286 tracked tasks** and **208 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -15,15 +15,14 @@ if already underway or owner-approved; neither waits for all of Phase 2.
 Hardening starts only after 2A and 2B finish. Placement changes no task scope,
 dependency, claim, or PR.
 
-Task 487 owns lnd's Phase 1 compile cutover after the completed pre-claim gap
-check, which mapped transaction notifications, standalone signing, online
-remote signing, and kvdb caller paths against source. Its compile-only PR
-merges into `yyforyongyu/lnd:btcwallet-sql-integration` at a pinned,
-build-verified revision. Task 470 retains full runtime and itest
-parity as its later lnd-main merge gate; those tests do not gate the
-sql-wallet-to-master merge.
+Task 487's compile proof was accepted on 2026-11-02 at pinned lnd revision
+`568016a2bc51d3d43ba3e584522282fc7ded40db`. This task-specific completion
+decision does not claim that its Wallet PoC dependencies or lnd PR #77 have
+merged. Task 470 now owns the continuing adapter work in [lnd PR #77][lnd77],
+including accepted Wallet dependencies, runtime parity and its lnd-main merge
+gate. Runtime tests do not gate the sql-wallet-to-master merge.
 
-## Phase 1 — final SQL schema and lnd compilation · 1 open
+## Phase 1 — final SQL schema and lnd compilation · 0 open
 
 Finish the planned SQL account, import, and lease schema changes. Retain the
 existing SQL file organization and migration loader, and verify fresh creation
@@ -46,7 +45,6 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 487][t487] | open | lnd Wallet dependency and adapter build | Gap fix | Compile lnd with the maintained Wallet | 475, 478 |
 
 ## Phase 2A — bugs and gaps · 14 open
 
@@ -62,7 +60,7 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372 |
 | [Task 469][t469] | open | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | — |
-| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484, 487 |
+| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484 |
 | [Task 482][t482] | open | PsbtManager imported-input decoration | Gap fix | Fund imported inputs without known origin | — |
 
 ## Phase 2B — verification · 26 open
@@ -208,11 +206,15 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 85
+## Done · 86
 
-**207 completed: 85 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
+**208 completed: 86 numbered tasks and 122 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
+
+Task 487 is the explicit compile-proof exception: accepted build evidence,
+not a merged PR, closes that milestone. Its archived task records the pins,
+passing compile checks and remaining runtime/merge limitations.
 
 ### Numbered tasks
 
@@ -301,6 +303,7 @@ additional delivered work, not progress against a numbered phase gate.
 | [Task 474][t474] | 2A | PsbtManager and TxCreator change registration | Bug fix | Watch authored change before returning | [#1419][pr1419] |
 | [Task 483][t483] | 2A | Wallet scan ingestion and TxStore batch | Bug fix | Preserve labels on chain replay | [#1417][pr1417] |
 | [Task 484][t484] | 2A | TxCreator coin eligibility | Bug fix | Align authoring confirmation height | [#1416][pr1416] |
+| [Task 487][t487] | 1 | lnd Wallet dependency and adapter build | Gap fix | Prove lnd compiles with the maintained Wallet APIs | Compile proof accepted 2026-11-02; [lnd #77][lnd77] remains open under Task 470 |
 | [Task 488][t488] | 2A | Controller.ChangePassphrase request ownership | Bug fix | Own passphrase request buffers through completion | [#1429][pr1429] |
 | [Task 489][t489] | 2A | Controller.ChangePassphrase accepted-operation context | Bug fix | Drain accepted passphrase rotation during shutdown | [#1430][pr1430] |
 
@@ -655,7 +658,8 @@ numbered roadmap; old archived task references add no separate completion.
 [pr1389]: https://github.com/btcsuite/btcwallet/pull/1389
 
 [t486]: archive/tasks/486-freeze-native-sql-schema.md
-[t487]: tasks/487-compile-lnd-with-managed-wallet.md
+[t487]: archive/tasks/487-compile-lnd-with-managed-wallet.md
+[lnd77]: https://github.com/yyforyongyu/lnd/pull/77
 
 [t488]: tasks/488-passphrase-request-ownership.md
 [t489]: tasks/489-passphrase-shutdown-context.md

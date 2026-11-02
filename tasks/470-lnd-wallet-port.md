@@ -25,6 +25,12 @@ does not prove those existing lnd behaviors.
   Phase 1 requires compilation; this task's linked production gaps and lnd
   behavior tests gate its own merge. The pre-claim gap check is recorded in
   [QUEUE](../QUEUE.md).
+- Task 487's pinned compile evidence was accepted on 2026-11-02 without
+  requiring its PR to merge. Continue the existing adapter in
+  [lnd PR #77][lnd77], preserving its commits and verification evidence.
+  Track [lnd PR #78][lnd78] as CI preparation, not the Wallet adapter or proof
+  of runtime parity. Resolve outstanding Wallet dependencies and runtime
+  failures here; compile acceptance does not certify them or merge readiness.
 - In that check, map online remote-signer account installation to
   [Task 391][t391]'s exact path-bound XPub support. Record any required edge
   before implementing the affected path; do not replace known account numbers
@@ -133,6 +139,8 @@ task. No ADR is required.
 [t484]: ../archive/tasks/484-align-authoring-confirmation-height.md
 [t485]: 485-convert-legacy-sql-wallets-through-manager.md
 
-[t487]: 487-compile-lnd-with-managed-wallet.md
+[t487]: ../archive/tasks/487-compile-lnd-with-managed-wallet.md
+[lnd77]: https://github.com/yyforyongyu/lnd/pull/77
+[lnd78]: https://github.com/yyforyongyu/lnd/pull/78
 [wallet-poc]: https://github.com/yyforyongyu/btcwallet/tree/poc-470-combined
 [lnd-poc]: https://github.com/yyforyongyu/lnd/tree/poc-470-lnd-gaps

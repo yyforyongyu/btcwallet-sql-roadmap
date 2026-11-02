@@ -40,7 +40,8 @@ Use these terms precisely:
   current focus. Later-phase PRs may remain parked. Open draft PRs early to
   record every stack layer.
 - **Complete** means the implementation PR is merged, or a required design or
-  ADR task is accepted and merged.
+  ADR task is accepted and merged. Task 487 is the explicit compile-proof
+  exception recorded in its archived completion decision.
 
 When claiming a task with open hard dependencies, assigning every unclaimed
 task in its full transitive open dependency chain at the same time is
@@ -266,12 +267,11 @@ registers `AssertExpectations` in `t.Cleanup`, do not call it again.
   and adapter work are narrow historical exceptions. They are not precedent
   for another task or permission to preserve deprecated Wallet behavior.
 - [Tasks 470](tasks/470-lnd-wallet-port.md) and
-  [487](tasks/487-compile-lnd-with-managed-wallet.md) are explicit exceptions
-  for lnd runtime integration and compilation, respectively. Task 487's
-  compile-only PR merges into the non-main
-  `yyforyongyu/lnd:btcwallet-sql-integration` branch; Task 470's
-  runtime PR merges into lnd main. Each merged PR closes its own task;
-  ordinary Wallet fixes do not expand into lnd.
+  [487](archive/tasks/487-compile-lnd-with-managed-wallet.md) are explicit
+  exceptions for lnd runtime integration and compilation, respectively.
+  Task 487's compile evidence was accepted without a PR merge on 2026-11-02;
+  Task 470 owns continued adapter work and its eventual lnd-main merge.
+  Ordinary Wallet fixes do not expand into lnd.
 - If the required public behavior cannot be implemented inside the allowed
   production boundary, narrow, defer, or supersede the task, or obtain an
   explicit task-specific exception before implementation. Do not silently
@@ -400,8 +400,8 @@ rephase both open and completed rows so the table continues to reflect the
 current thematic map. Preserve the completed edge in each owning task file.
 Rephasing is never inferred from dependency completion.
 
-A task is complete only when **every** PR linked to it has merged. If a
-linked PR is closed unmerged, or cannot be accounted for, the task is not
-complete.
+Except for Task 487's explicitly accepted compile-proof milestone, a task is
+complete only when **every** PR linked to it has merged. If a linked PR is
+closed unmerged, or cannot be accounted for, the task is not complete.
 
 Preserve task numbers. Never reuse an archived number for a different task.

@@ -19,6 +19,9 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 487](tasks/487-compile-lnd-with-managed-wallet.md) completed on
+  2026-11-02 by explicit acceptance of pinned compile evidence, without a PR
+  merge. Task 470 owns continued development of open lnd PR #77.
 - [Task 410](tasks/410-transaction-graph-admission.md) completed on 2026-11-02.
 - [Task 372](tasks/372-multi-wallet-rollback.md) completed on 2026-11-02.
 - [Task 370](tasks/370-chain-source-delivery.md) completed on 2026-10-31.
