@@ -31,7 +31,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | — | — |
 | [Task 439][t439] | Test PSBT funding | Test | 2B | — | — |
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
-| [Task 444][t444] | Test receive and reopen | Test | 2B | Abdullahi | [#1457][pr1457] |
 | [Task 445][t445] | Test account signing identity | Test | 2B | — | — |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | — | — |
 | [Task 448][t448] | Test sync and rollback | Test | 2B | Abdullahi | [#1458][pr1458] |
@@ -75,7 +74,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t438]: tasks/438-psbt-decoration-combination-itests.md
 [t439]: tasks/439-psbt-funding-itests.md
 [t440]: tasks/440-psbt-signing-finalization-itests.md
-[t444]: tasks/444-wallet-receive-reload-scenario.md
 [t445]: tasks/445-account-signing-scenario.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t448]: tasks/448-sync-rollback-scenario.md
@@ -106,7 +104,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1458]: https://github.com/btcsuite/btcwallet/pull/1458
-[pr1457]: https://github.com/btcsuite/btcwallet/pull/1457
 [pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
 [pr1460]: https://github.com/btcsuite/btcwallet/pull/1460
 [pr1459]: https://github.com/btcsuite/btcwallet/pull/1459

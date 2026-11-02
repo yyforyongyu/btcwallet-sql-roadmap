@@ -91,7 +91,6 @@ that structural exclusion explicitly.
 
 ## Integration-test scenarios
 
-- [Task 444](444-wallet-receive-reload-scenario.md): cover new-account receipt
   and durable reload.
 - [Task 445](445-account-signing-scenario.md): cover new-account signing
   identity.
