@@ -28,7 +28,7 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
-| [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | — |
+| [Task 428][t428] | Test resync and rescan | Test | 2B | Gustavo | [#1463][pr1463] |
 | [Task 432][t432] | Test address imports | Test | 2B | Gustavo | — |
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | — | — |
 | [Task 439][t439] | Test PSBT funding | Test | 2B | — | — |
@@ -115,3 +115,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1460]: https://github.com/btcsuite/btcwallet/pull/1460
 [pr1459]: https://github.com/btcsuite/btcwallet/pull/1459
 [pr1462]: https://github.com/btcsuite/btcwallet/pull/1462
+[pr1463]: https://github.com/btcsuite/btcwallet/pull/1463
