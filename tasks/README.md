@@ -83,7 +83,6 @@ that structural exclusion explicitly.
   contracts.
 - [Task 462](462-account-mutation-error-itests.md): complete missing account
   mutation-error evidence.
-- [Task 463](463-path-bound-utxo-identity-itests.md): verify path-bound UTXO
   account identity.
   list and path-bound account queries.
   allocation.
