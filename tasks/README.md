@@ -46,7 +46,6 @@ They do not consume task numbers or require task files.
 ## Transactions, UTXOs, and PSBTs
 
   allocation until viable.
-- [Task 406](406-psbt-funding-lease-release.md): clean up failed PSBT funding
   leases.
 - [Task 407](407-psbt-finalization-authorization.md): authorize PSBT
   auto-finalization.

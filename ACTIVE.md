@@ -9,7 +9,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 406][t406] | Clean up failed PSBT funding leases | Gap fix | 2A | Gustavo | [#1462][pr1462] |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | — |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
@@ -63,7 +62,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t369]: tasks/369-repeated-wallet-unlock.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t406]: tasks/406-psbt-funding-lease-release.md
 [t407]: tasks/407-psbt-finalization-authorization.md
 [t417]: tasks/417-start-to-synced-benchmark.md
 [t419]: tasks/419-address-read-benchmark.md
@@ -107,6 +105,5 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
 [pr1460]: https://github.com/btcsuite/btcwallet/pull/1460
 [pr1459]: https://github.com/btcsuite/btcwallet/pull/1459
-[pr1462]: https://github.com/btcsuite/btcwallet/pull/1462
 [pr1463]: https://github.com/btcsuite/btcwallet/pull/1463
 [pr1466]: https://github.com/btcsuite/btcwallet/pull/1466

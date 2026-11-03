@@ -111,7 +111,7 @@ task. No ADR is required.
 [t344]: ../archive/tasks/344-bulk-address-allocation.md
 [t346]: ../archive/tasks/346-psbt-funding-metadata.md
 [t356]: ../archive/tasks/356-defer-change-script-allocation.md
-[t406]: 406-psbt-funding-lease-release.md
+[t406]: ../archive/tasks/406-psbt-funding-lease-release.md
 [t474]: ../archive/tasks/474-authored-change-watch.md
 [t376]: 376-orchestrate-legacy-conversion.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
