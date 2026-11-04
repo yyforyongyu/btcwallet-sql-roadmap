@@ -68,7 +68,6 @@ Shared public contracts run on kvdb, SQLite, and PostgreSQL. A task may exclude
 a backend only when that backend cannot represent the scenario, and must state
 that structural exclusion explicitly.
 
-- [Task 428](428-controller-sync-info-itests.md): cover Controller resync and
   rescan contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.

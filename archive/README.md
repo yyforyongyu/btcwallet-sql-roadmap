@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 428](tasks/428-controller-sync-info-itests.md) completed on 2026-11-05.
 - [Task 369](tasks/369-repeated-wallet-unlock.md) completed on 2026-11-04.
 - [Task 350](tasks/350-native-pgx-postgres.md) completed on 2026-11-04.
 - [Task 463](tasks/463-path-bound-utxo-identity-itests.md) completed on 2026-11-03.

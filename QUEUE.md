@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **47 open**, **91 done**,
+The numbered roadmap contains **164 tasks**: **46 open**, **92 done**,
 **24 superseded**, and **2 deferred**. With **123 ad hoc tasks**, that is
-**287 tracked tasks** and **214 completed** overall.
+**287 tracked tasks** and **215 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -78,7 +78,6 @@ profile references in btcwallet's `docs/developer/benchmark/`.
 | [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 471 |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 471 |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 471 |
-| [Task 428][t428] | open | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | — |
 | [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
 | [Task 438][t438] | open | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | — |
 | [Task 439][t439] | open | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | 356, 406 |
@@ -201,9 +200,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 91
+## Done · 92
 
-**214 completed: 91 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
+**215 completed: 92 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -268,6 +267,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 421][t421] | 2 | WalletVault and SQL wallet-secret persistence | Bug fix | Reconcile SQL passphrase commits | [#1341][pr1341] |
 | [Task 425][t425] | 2 | Wallet transaction-authoring wrapper boundary | Refactor | Isolate shared transaction authoring from wrapper watch and lease effects | [#1327][pr1327] |
 | [Task 427][t427] | 1 | Controller credential integration tests | Test | Cover remaining Controller credential contracts | [#1349][pr1349] |
+| [Task 428][t428] | 2B | Controller Resync and Rescan integration tests | Test | Cover Controller resync and rescan contracts | [#1463][pr1463] |
 | [Task 429][t429] | 1 | AccountManager mutation integration tests | Test | Cover public account mutation contracts | [#1326][pr1326] |
 | [Task 430][t430] | 1 | AccountManager query integration tests | Test | Cover public account query contracts | [#1389][pr1389] |
 | [Task 431][t431] | 1 | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | [#1407][pr1407] |
