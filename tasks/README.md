@@ -106,7 +106,6 @@ that structural exclusion explicitly.
 - [Task 354](354-vault-owned-secret-resolution.md): define Vault secret-operation
   ownership.
   lifetime.
-- [Task 369](369-repeated-wallet-unlock.md): reject repeated Wallet unlocks
   without resetting timeout.
 - [Task 382](382-vault-account-derivation.md): move account derivation into the
   Vault.

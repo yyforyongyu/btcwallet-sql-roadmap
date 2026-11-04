@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **48 open**, **90 done**,
+The numbered roadmap contains **164 tasks**: **47 open**, **91 done**,
 **24 superseded**, and **2 deferred**. With **123 ad hoc tasks**, that is
-**287 tracked tasks** and **213 completed** overall.
+**287 tracked tasks** and **214 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -75,7 +75,6 @@ profile references in btcwallet's `docs/developer/benchmark/`.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 369][t369] | open | Controller | Test | Reject repeated Wallet unlocks without resetting timeout | — |
 | [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 471 |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 471 |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 471 |
@@ -202,9 +201,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 90
+## Done · 91
 
-**213 completed: 90 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
+**214 completed: 91 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -239,6 +238,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 360][t360] | 1 | ADR 0013 and the modern kvdb adapter contract | Design | Document kvdb adapter identity | [#1308][pr1308] |
 | [Task 365][t365] | 2A | Manager creation preflight | Bug fix | Validate wallet genesis key identities | [#1423][pr1423] |
 | [Task 367][t367] | 2A | Manager and WalletVault genesis preparation | Bug fix | Bound SQL genesis secret lifetime | [#1414][pr1414] |
+| [Task 369][t369] | 2B | Controller | Test | Reject repeated Wallet unlocks without resetting timeout | [#1460][pr1460] |
 | [Task 370][t370] | 2A | Manager chain-event fanout and Wallet processors | Refactor | Fan out ordered Manager chain events | [#1449][pr1449] |
 | [Task 372][t372] | 2A | Manager chain dispatcher and SQL Store rollback | Bug fix | Coordinate multi-Wallet rollback | [#1435][pr1435] |
 | [Task 377][t377] | 1 | AccountManager public result contract | Gap fix | Make AccountManager results wallet-owned | [#1329][pr1329] |

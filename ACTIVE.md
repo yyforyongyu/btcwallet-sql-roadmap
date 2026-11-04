@@ -21,7 +21,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 369][t369] | Test repeated unlocks | Test | 2B | YY | [#1460][pr1460] |
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
@@ -54,7 +53,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 | [Task 457][t457] | Fence process-local Managers | Feature | Hardening | YY | — |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
-[t369]: tasks/369-repeated-wallet-unlock.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
 [t407]: tasks/407-psbt-finalization-authorization.md
@@ -97,7 +95,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1458]: https://github.com/btcsuite/btcwallet/pull/1458
 [pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
-[pr1460]: https://github.com/btcsuite/btcwallet/pull/1460
 [pr1463]: https://github.com/btcsuite/btcwallet/pull/1463
 [pr1466]: https://github.com/btcsuite/btcwallet/pull/1466
 [pr1468]: https://github.com/btcsuite/btcwallet/pull/1468
