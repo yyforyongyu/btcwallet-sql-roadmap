@@ -19,7 +19,6 @@ They do not consume task numbers or require task files.
 
 - [Task 329](329-atomic-wallet-account-creation.md): commit SQL wallet genesis
   atomically.
-- [Task 350](350-native-pgx-postgres.md): use native pgx for PostgreSQL storage.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
   identities.

@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 350](tasks/350-native-pgx-postgres.md) completed on 2026-11-04.
 - [Task 463](tasks/463-path-bound-utxo-identity-itests.md) completed on 2026-11-03.
 - [Task 406](tasks/406-psbt-funding-lease-release.md) completed on 2026-11-03.
 - [Task 444](tasks/444-wallet-receive-reload-scenario.md) completed on 2026-11-03.

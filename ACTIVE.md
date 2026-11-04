@@ -49,14 +49,11 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
-| [Task 350][t350] | Use native PostgreSQL driver | Refactor | 4 | YY | [#1321][pr1321] |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 4 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 4 | YY | — |
 | [Task 457][t457] | Fence process-local Managers | Feature | Hardening | YY | — |
 
-[pr1321]: https://github.com/btcsuite/btcwallet/pull/1321
 [t329]: tasks/329-atomic-wallet-account-creation.md
-[t350]: tasks/350-native-pgx-postgres.md
 [t369]: tasks/369-repeated-wallet-unlock.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md

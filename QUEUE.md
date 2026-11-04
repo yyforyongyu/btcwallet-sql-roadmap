@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **49 open**, **89 done**,
+The numbered roadmap contains **164 tasks**: **48 open**, **90 done**,
 **24 superseded**, and **2 deferred**. With **123 ad hoc tasks**, that is
-**287 tracked tasks** and **212 completed** overall.
+**287 tracked tasks** and **213 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -118,14 +118,13 @@ Modern kvdb remains supported for the current and next release.
 | [Task 477][t477] | open | PostgreSQL migration importer | Migration | Import a legacy snapshot into PostgreSQL | 374, 478 |
 | [Task 485][t485] | open | Manager.Create legacy conversion selection | Migration | Convert legacy SQL wallets through Manager | 376, 476, 477 |
 
-## Phase 4 — optional improvements · 5 open
+## Phase 4 — optional improvements · 4 open
 
 Additional capabilities, performance refactors, and defensive integrity work.
 Task types, scopes, and evidence requirements are unchanged.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 350][t350] | open | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | — |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 397 |
 | [Task 411][t411] | open | Wallet-owned SQL transaction ingestion | Bug fix | Reject children of terminal transactions | 410 |
@@ -203,9 +202,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 89
+## Done · 90
 
-**212 completed: 89 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
+**213 completed: 90 numbered tasks and 123 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -232,6 +231,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 345][t345] | 1 | SQL account schema and AccountStore persistence | Gap fix | Persist SQL account NoChainSync state | [#1365][pr1365] |
 | [Task 346][t346] | 2 | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | [#1359][pr1359] |
 | [Task 347][t347] | 2A | PsbtManager existing-signature validation | Bug fix | Authorize existing PSBT signatures | [#1400][pr1400] |
+| [Task 350][t350] | 4 | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | [#1321][pr1321] |
 | [Task 355][t355] | 2 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |
 | [Task 356][t356] | 2A | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | [#1453][pr1453] |
 | [Task 357][t357] | 2 | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | [#1348][pr1348] |
