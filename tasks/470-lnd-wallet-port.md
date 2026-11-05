@@ -134,7 +134,7 @@ task. No ADR is required.
 [t479]: ../archive/tasks/479-mix-imported-xpub-accounts.md
 [t480]: ../archive/tasks/480-own-raw-imports-in-one-wallet.md
 [t481]: ../archive/tasks/481-persist-imported-account-address-schema.md
-[t482]: 482-fund-imported-inputs-without-origin.md
+[t482]: ../archive/tasks/482-fund-imported-inputs-without-origin.md
 [t483]: ../archive/tasks/483-preserve-labels-on-chain-replay.md
 [t484]: ../archive/tasks/484-align-authoring-confirmation-height.md
 [t485]: 485-convert-legacy-sql-wallets-through-manager.md

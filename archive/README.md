@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 482](tasks/482-fund-imported-inputs-without-origin.md) completed on 2026-11-06.
 - [Task 448](tasks/448-sync-rollback-scenario.md) completed on 2026-11-05.
 - [Task 428](tasks/428-controller-sync-info-itests.md) completed on 2026-11-05.
 - [Task 369](tasks/369-repeated-wallet-unlock.md) completed on 2026-11-04.

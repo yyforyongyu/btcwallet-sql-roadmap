@@ -13,7 +13,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1468][pr1468] |
 | [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | [lnd #77][lnd77] |
-| [Task 482][t482] | Fund imported inputs without known origin | Gap fix | 2A | YY | [#1461][pr1461] |
 
 ## Upcoming Phase 2 Tasks
 
@@ -79,7 +78,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [t476]: tasks/476-read-legacy-sql-walletdb-source.md
 [t477]: tasks/477-import-legacy-snapshot-postgres.md
-[t482]: tasks/482-fund-imported-inputs-without-origin.md
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
 [lnd77]: https://github.com/yyforyongyu/lnd/pull/77
@@ -89,7 +87,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
-[pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
 [pr1466]: https://github.com/btcsuite/btcwallet/pull/1466
 [pr1468]: https://github.com/btcsuite/btcwallet/pull/1468
 [pr1470]: https://github.com/btcsuite/btcwallet/pull/1470

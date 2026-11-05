@@ -56,7 +56,6 @@ They do not consume task numbers or require task files.
 - [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
   effective keys.
   leases.
-- [Task 482](482-fund-imported-inputs-without-origin.md): fund imported inputs
   without known origin.
   on chain replay.
   confirmation height.
