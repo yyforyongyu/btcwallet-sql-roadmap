@@ -92,7 +92,6 @@ that structural exclusion explicitly.
   identity.
   publication and reload.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
-- [Task 448](448-sync-rollback-scenario.md): cover synchronization and rollback.
 - [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
   isolation.
 - [Task 450](450-bitcoind-compatibility-scenario.md): compare public wallet

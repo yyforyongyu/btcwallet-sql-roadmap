@@ -29,7 +29,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
 | [Task 445][t445] | Test account signing identity | Test | 2B | YY | [#1471][pr1471] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | — | — |
-| [Task 448][t448] | Test sync and rollback | Test | 2B | Abdullahi | [#1458][pr1458] |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
 | [Task 450][t450] | Compare wallet state with bitcoind | Test | 2B | YY | [#1470][pr1470] |
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
@@ -65,7 +64,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t440]: tasks/440-psbt-signing-finalization-itests.md
 [t445]: tasks/445-account-signing-scenario.md
 [t447]: tasks/447-psbt-workflow-scenario.md
-[t448]: tasks/448-sync-rollback-scenario.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
 [t450]: tasks/450-bitcoind-compatibility-scenario.md
 [t451]: tasks/451-chain-version-itest-matrix.md
@@ -91,7 +89,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
-[pr1458]: https://github.com/btcsuite/btcwallet/pull/1458
 [pr1461]: https://github.com/btcsuite/btcwallet/pull/1461
 [pr1466]: https://github.com/btcsuite/btcwallet/pull/1466
 [pr1468]: https://github.com/btcsuite/btcwallet/pull/1468
