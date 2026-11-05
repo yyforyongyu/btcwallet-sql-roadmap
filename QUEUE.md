@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **45 open**, **93 done**,
-**24 superseded**, and **2 deferred**. With **125 ad hoc tasks**, that is
-**289 tracked tasks** and **218 completed** overall.
+**24 superseded**, and **2 deferred**. With **126 ad hoc tasks**, that is
+**290 tracked tasks** and **219 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -201,7 +201,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 93
 
-**218 completed: 93 numbered tasks and 125 ad hoc PRs.** Each closing PR counts
+**219 completed: 93 numbered tasks and 126 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -443,6 +443,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1424](https://github.com/btcsuite/btcwallet/pull/1424) | multi: fix reorg ancestry and miner isolation | yyforyongyu | 2026-10-20 |
 | [#1425](https://github.com/btcsuite/btcwallet/pull/1425) | wallet: make authored change flow explicit | GustavoStingelin | 2026-10-21 |
 | [#1436](https://github.com/btcsuite/btcwallet/pull/1436) | wallet: recover KVDB history ahead of sync tip | yyforyongyu | 2026-11-05 |
+| [#1451](https://github.com/btcsuite/btcwallet/pull/1451) | wallet: retain txs after failed rebroadcast | yyforyongyu | 2026-11-05 |
 | [#1454](https://github.com/btcsuite/btcwallet/pull/1454) | kvdb: support exact root-derived accounts | yyforyongyu | 2026-11-05 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
