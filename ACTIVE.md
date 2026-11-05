@@ -23,11 +23,11 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
-| [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | — | — |
+| [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | Abdullahi | — |
 | [Task 439][t439] | Test PSBT funding | Test | 2B | YY | [#1472][pr1472] |
-| [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | — | — |
+| [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | Abdullahi | — |
 | [Task 445][t445] | Test account signing identity | Test | 2B | YY | [#1471][pr1471] |
-| [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | — | — |
+| [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | Abdullahi | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
 | [Task 450][t450] | Compare wallet state with bitcoind | Test | 2B | YY | [#1470][pr1470] |
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
