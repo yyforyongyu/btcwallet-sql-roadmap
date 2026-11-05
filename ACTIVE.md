@@ -48,6 +48,10 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 4 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 4 | YY | — |
 | [Task 457][t457] | Fence process-local Managers | Feature | Hardening | YY | — |
+| [Task 354][t354] | define Vault secret-operation ownership | 4 | Gustavo |
+| [Task 383][t383] | resolve output scripts through the Vault | 4 | Gustavo |
+| [Task 384][t384] | route safe signing through the Vault | 4 | Gustavo |
+| [Task 385][t385] | isolate UnsafeSigner key extraction | 4 | Gustavo |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
@@ -92,3 +96,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1470]: https://github.com/btcsuite/btcwallet/pull/1470
 [pr1471]: https://github.com/btcsuite/btcwallet/pull/1471
 [pr1472]: https://github.com/btcsuite/btcwallet/pull/1472
+[t354]: tasks/354-define-vault-secret-operation-ownership.md
+[t383]: tasks/383-resolve-output-scripts-through-the-vault.md
+[t384]: tasks/384-route-safe-signing-through-the-vault.md
+[t385]: tasks/385-isolate-unsafesigner-key-extraction.md
