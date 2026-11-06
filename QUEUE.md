@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **44 open**, **94 done**,
-**24 superseded**, and **2 deferred**. With **128 ad hoc tasks**, that is
-**292 tracked tasks** and **222 completed** overall.
+**24 superseded**, and **2 deferred**. With **129 ad hoc tasks**, that is
+**293 tracked tasks** and **223 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -200,7 +200,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 94
 
-**222 completed: 94 numbered tasks and 128 ad hoc PRs.** Each closing PR counts
+**223 completed: 94 numbered tasks and 129 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -447,6 +447,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1454](https://github.com/btcsuite/btcwallet/pull/1454) | kvdb: support exact root-derived accounts | yyforyongyu | 2026-11-05 |
 | [#1474](https://github.com/btcsuite/btcwallet/pull/1474) | wallet: fix 32-bit transaction indices | yyforyongyu | 2026-11-06 |
 | [#1478](https://github.com/btcsuite/btcwallet/pull/1478) | pg: cover concurrent same-hash admission | yyforyongyu | 2026-11-06 |
+| [#1482](https://github.com/btcsuite/btcwallet/pull/1482) | wallet: honor per-wallet recovery lookahead | yyforyongyu | 2026-11-06 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
