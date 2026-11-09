@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **43 open**, **95 done**,
-**24 superseded**, and **2 deferred**. With **132 ad hoc tasks**, that is
-**296 tracked tasks** and **227 completed** overall.
+**24 superseded**, and **2 deferred**. With **133 ad hoc tasks**, that is
+**297 tracked tasks** and **228 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -199,7 +199,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 95
 
-**227 completed: 95 numbered tasks and 132 ad hoc PRs.** Each closing PR counts
+**228 completed: 95 numbered tasks and 133 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -450,6 +450,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1478](https://github.com/btcsuite/btcwallet/pull/1478) | pg: cover concurrent same-hash admission | yyforyongyu | 2026-11-06 |
 | [#1482](https://github.com/btcsuite/btcwallet/pull/1482) | wallet: honor per-wallet recovery lookahead | yyforyongyu | 2026-11-06 |
 | [#1484](https://github.com/btcsuite/btcwallet/pull/1484) | wallet: exclude native SQLite from JS builds | yyforyongyu | 2026-11-08 |
+| [#1485](https://github.com/btcsuite/btcwallet/pull/1485) | wallet: hash the compressed point in ECDH | GustavoStingelin | 2026-11-09 |
 | [#1487](https://github.com/btcsuite/btcwallet/pull/1487) | keyvault: split raw decryption into UnsafeVault | GustavoStingelin | 2026-11-07 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
