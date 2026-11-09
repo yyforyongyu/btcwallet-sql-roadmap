@@ -39,4 +39,4 @@ failures leave the caller unchanged.
 FinalizePsbt cannot bypass the completed signing authorization or
 silently sign a tweaked input and returns no partially mutated packet on error.
 
-[t469]: 469-sign-psbt-with-effective-keys.md
+[t469]: ../archive/tasks/469-sign-psbt-with-effective-keys.md

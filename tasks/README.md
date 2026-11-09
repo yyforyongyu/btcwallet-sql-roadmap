@@ -53,7 +53,6 @@ They do not consume task numbers or require task files.
   transactions.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
   transaction output aggregates.
-- [Task 469](469-sign-psbt-with-effective-keys.md): sign PSBT inputs with
   effective keys.
   leases.
   without known origin.

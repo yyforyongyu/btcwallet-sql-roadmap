@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **44 open**, **94 done**,
+The numbered roadmap contains **164 tasks**: **43 open**, **95 done**,
 **24 superseded**, and **2 deferred**. With **132 ad hoc tasks**, that is
-**296 tracked tasks** and **226 completed** overall.
+**296 tracked tasks** and **227 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -58,7 +58,6 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 | --- | --- | --- | --- | --- | --- |
 | [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372 |
-| [Task 469][t469] | open | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | — |
 | [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484 |
 
 ## Phase 2B — verification · 26 open
@@ -198,9 +197,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 94
+## Done · 95
 
-**226 completed: 94 numbered tasks and 132 ad hoc PRs.** Each closing PR counts
+**227 completed: 95 numbered tasks and 132 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -294,6 +293,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 466][t466] | 2B | AddressManager final count-one integration tests | Test | Verify final oldest-unused allocation | [#1446][pr1446] |
 | [Task 467][t467] | 1 | wallet public durable-mutation error identity | Gap fix | Define the indeterminate commit identity | [#1355][pr1355] |
 | [Task 468][t468] | 1 | AccountManager NoChainSync creation admission | Gap fix | Activate NoChainSync account creation | [#1369][pr1369] |
+| [Task 469][t469] | 2A | PsbtManager and Signer effective-key signing | Bug fix | Sign PSBT inputs with effective keys | [#1437][pr1437] |
 | [Task 475][t475] | 1 | Wallet transaction notifications | Gap fix | Deliver wallet transaction subscriptions | [#1426][pr1426] |
 | [Task 478][t478] | 1 | UtxoManager lease policy and stores | Gap fix | Retain spend-confirmation leases | [#1413][pr1413], [#1427][pr1427], [#1428][pr1428] |
 | [Task 479][t479] | 1 | AccountManager custody and Wallet results | Gap fix | Mix imported XPub and signing accounts | [#1411][pr1411] |

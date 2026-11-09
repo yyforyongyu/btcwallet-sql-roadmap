@@ -11,7 +11,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 | --- | --- | --- | --- | --- | --- |
 | [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | — |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1468][pr1468] |
-| [Task 469][t469] | Sign PSBT inputs with effective keys | Bug fix | 2A | Abdullahi | [#1437][pr1437] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | [lnd #77][lnd77] |
 
 ## Upcoming Phase 2 Tasks
@@ -72,7 +71,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t451]: tasks/451-chain-version-itest-matrix.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t462]: tasks/462-account-mutation-error-itests.md
-[t469]: tasks/469-sign-psbt-with-effective-keys.md
 [t470]: tasks/470-lnd-wallet-port.md
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
 [t472]: tasks/472-multi-wallet-rescan-isolation-scenario.md
@@ -88,7 +86,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
-[pr1437]: https://github.com/btcsuite/btcwallet/pull/1437
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1466]: https://github.com/btcsuite/btcwallet/pull/1466
