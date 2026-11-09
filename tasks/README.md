@@ -77,7 +77,6 @@ that structural exclusion explicitly.
 - [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.
   contracts.
-- [Task 462](462-account-mutation-error-itests.md): complete missing account
   mutation-error evidence.
   account identity.
   list and path-bound account queries.

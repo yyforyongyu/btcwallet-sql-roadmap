@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 462](tasks/462-account-mutation-error-itests.md) completed on 2026-11-10.
 - [Task 469](tasks/469-sign-psbt-with-effective-keys.md) completed on 2026-11-09.
 - [Task 482](tasks/482-fund-imported-inputs-without-origin.md) completed on 2026-11-06.
 - [Task 448](tasks/448-sync-rollback-scenario.md) completed on 2026-11-05.
