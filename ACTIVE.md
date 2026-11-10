@@ -28,7 +28,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 445][t445] | Test account signing identity | Test | 2B | YY | [#1471][pr1471] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | Abdullahi | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
-| [Task 450][t450] | Compare wallet state with bitcoind | Test | 2B | YY | [#1470][pr1470] |
 | [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
@@ -66,7 +65,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t445]: tasks/445-account-signing-scenario.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
-[t450]: tasks/450-bitcoind-compatibility-scenario.md
 [t451]: tasks/451-chain-version-itest-matrix.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t470]: tasks/470-lnd-wallet-port.md
@@ -87,7 +85,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1468]: https://github.com/btcsuite/btcwallet/pull/1468
-[pr1470]: https://github.com/btcsuite/btcwallet/pull/1470
 [pr1471]: https://github.com/btcsuite/btcwallet/pull/1471
 [pr1472]: https://github.com/btcsuite/btcwallet/pull/1472
 [t354]: tasks/354-define-vault-secret-operation-ownership.md

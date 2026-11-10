@@ -91,7 +91,6 @@ that structural exclusion explicitly.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
 - [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
   isolation.
-- [Task 450](450-bitcoind-compatibility-scenario.md): compare public wallet
   state with bitcoind.
 - [Task 472](472-multi-wallet-rescan-isolation-scenario.md): isolate historical
   rescans from live Wallets.
