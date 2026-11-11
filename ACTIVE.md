@@ -22,14 +22,15 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
+| [Task 432][t432] | Test address imports | Test | 2B | YY | — |
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | Abdullahi | [#1480][pr1480] |
 | [Task 439][t439] | Test PSBT funding | Test | 2B | YY | [#1472][pr1472] |
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | Abdullahi | [#1481][pr1481] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | Abdullahi | — |
-| [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | — | — |
-| [Task 451][t451] | Test supported daemon releases | Test | 2B | — | — |
+| [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | YY | — |
+| [Task 451][t451] | Test supported daemon releases | Test | 2B | YY | — |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
-| [Task 472][t472] | Test isolated wallet rescans | Test | 2B | — | — |
+| [Task 472][t472] | Test isolated wallet rescans | Test | 2B | YY | — |
 | [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 491][t491] | Benchmark GetAccount with balances | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 492][t492] | Benchmark ListAccounts with balances | Benchmark | 2B | YY | [#1433][pr1433] |
