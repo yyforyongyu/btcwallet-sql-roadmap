@@ -85,7 +85,6 @@ that structural exclusion explicitly.
 ## Integration-test scenarios
 
   and durable reload.
-- [Task 445](445-account-signing-scenario.md): cover new-account signing
   identity.
   publication and reload.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
