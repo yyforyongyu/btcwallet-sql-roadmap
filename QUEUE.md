@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **39 open**, **99 done**,
-**24 superseded**, and **2 deferred**. With **138 ad hoc tasks**, that is
-**302 tracked tasks** and **237 completed** overall.
+**24 superseded**, and **2 deferred**. With **139 ad hoc tasks**, that is
+**303 tracked tasks** and **238 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -195,7 +195,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 99
 
-**237 completed: 99 numbered tasks and 138 ad hoc PRs.** Each closing PR counts
+**238 completed: 99 numbered tasks and 139 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -447,6 +447,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1454](https://github.com/btcsuite/btcwallet/pull/1454) | kvdb: support exact root-derived accounts | yyforyongyu | 2026-11-05 |
 | [#1474](https://github.com/btcsuite/btcwallet/pull/1474) | wallet: fix 32-bit transaction indices | yyforyongyu | 2026-11-06 |
 | [#1475](https://github.com/btcsuite/btcwallet/pull/1475) | db: preserve labels on unmined replay | yyforyongyu | 2026-11-07 |
+| [#1476](https://github.com/btcsuite/btcwallet/pull/1476) | wallet+db: align automatic credit policy | yyforyongyu | 2026-11-12 |
 | [#1478](https://github.com/btcsuite/btcwallet/pull/1478) | pg: cover concurrent same-hash admission | yyforyongyu | 2026-11-06 |
 | [#1482](https://github.com/btcsuite/btcwallet/pull/1482) | wallet: honor per-wallet recovery lookahead | yyforyongyu | 2026-11-06 |
 | [#1484](https://github.com/btcsuite/btcwallet/pull/1484) | wallet: exclude native SQLite from JS builds | yyforyongyu | 2026-11-08 |
