@@ -24,7 +24,6 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 432][t432] | Test address imports | Test | 2B | YY | [#1501][pr1501] |
 | [Task 438][t438] | Test PSBT decoration and combination | Test | 2B | Abdullahi | [#1480][pr1480] |
-| [Task 439][t439] | Test PSBT funding | Test | 2B | YY | [#1472][pr1472] |
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | Abdullahi | [#1481][pr1481] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | Abdullahi | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | YY | — |
@@ -60,7 +59,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t423]: tasks/423-manager-chain-source-cutover.md
 [t432]: tasks/432-address-import-script-itests.md
 [t438]: tasks/438-psbt-decoration-combination-itests.md
-[t439]: tasks/439-psbt-funding-itests.md
 [t440]: tasks/440-psbt-signing-finalization-itests.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
@@ -84,7 +82,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1468]: https://github.com/btcsuite/btcwallet/pull/1468
-[pr1472]: https://github.com/btcsuite/btcwallet/pull/1472
 [t354]: tasks/354-define-vault-secret-operation-ownership.md
 [t383]: tasks/383-resolve-output-scripts-through-the-vault.md
 [t384]: tasks/384-route-safe-signing-through-the-vault.md

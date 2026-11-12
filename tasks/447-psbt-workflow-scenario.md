@@ -66,6 +66,6 @@ scenario-specific production hooks.
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md
 [t438]: 438-psbt-decoration-combination-itests.md
-[t439]: 439-psbt-funding-itests.md
+[t439]: ../archive/tasks/439-psbt-funding-itests.md
 [t440]: 440-psbt-signing-finalization-itests.md
 [source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/bwtest/harness_wallet.go#L465

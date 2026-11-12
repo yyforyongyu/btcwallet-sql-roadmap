@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 439](tasks/439-psbt-funding-itests.md) completed on 2026-11-12.
 - [Task 445](tasks/445-account-signing-scenario.md) completed on 2026-11-11.
 - [Task 450](tasks/450-bitcoind-compatibility-scenario.md) completed on 2026-11-11.
 - [Task 462](tasks/462-account-mutation-error-itests.md) completed on 2026-11-10.
