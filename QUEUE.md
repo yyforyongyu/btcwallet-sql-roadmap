@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **39 open**, **99 done**,
-**24 superseded**, and **2 deferred**. With **144 ad hoc tasks**, that is
-**308 tracked tasks** and **243 completed** overall.
+**24 superseded**, and **2 deferred**. With **145 ad hoc tasks**, that is
+**309 tracked tasks** and **244 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -195,7 +195,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 99
 
-**243 completed: 99 numbered tasks and 144 ad hoc PRs.** Each closing PR counts
+**244 completed: 99 numbered tasks and 145 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -455,6 +455,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1485](https://github.com/btcsuite/btcwallet/pull/1485) | wallet: hash the compressed point in ECDH | GustavoStingelin | 2026-11-09 |
 | [#1486](https://github.com/btcsuite/btcwallet/pull/1486) | docs: define vault secret-operation ownership | GustavoStingelin | 2026-11-09 |
 | [#1487](https://github.com/btcsuite/btcwallet/pull/1487) | keyvault: split raw decryption into UnsafeVault | GustavoStingelin | 2026-11-07 |
+| [#1488](https://github.com/btcsuite/btcwallet/pull/1488) | wallet: resolve SQL output scripts through vault | GustavoStingelin | 2026-11-13 |
 | [#1491](https://github.com/btcsuite/btcwallet/pull/1491) | itest: drop per-case registration comments | GustavoStingelin | 2026-11-09 |
 | [#1495](https://github.com/btcsuite/btcwallet/pull/1495) | wallet: retain mixed block transaction payloads | yyforyongyu | 2026-11-12 |
 | [#1497](https://github.com/btcsuite/btcwallet/pull/1497) | wallet: fix Store history recovery | yyforyongyu | 2026-11-12 |
