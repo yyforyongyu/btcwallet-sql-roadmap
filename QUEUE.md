@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **39 open**, **99 done**,
-**24 superseded**, and **2 deferred**. With **139 ad hoc tasks**, that is
-**303 tracked tasks** and **238 completed** overall.
+**24 superseded**, and **2 deferred**. With **142 ad hoc tasks**, that is
+**306 tracked tasks** and **241 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -195,7 +195,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 99
 
-**238 completed: 99 numbered tasks and 139 ad hoc PRs.** Each closing PR counts
+**241 completed: 99 numbered tasks and 142 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -458,6 +458,9 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1495](https://github.com/btcsuite/btcwallet/pull/1495) | wallet: retain mixed block transaction payloads | yyforyongyu | 2026-11-12 |
 | [#1497](https://github.com/btcsuite/btcwallet/pull/1497) | wallet: fix Store history recovery | yyforyongyu | 2026-11-12 |
 | [#1498](https://github.com/btcsuite/btcwallet/pull/1498) | itest: fix receiving-key ECDH oracle | yyforyongyu | 2026-11-11 |
+| [#1504](https://github.com/btcsuite/btcwallet/pull/1504) | wallet: remove unused Manager.String | yyforyongyu | 2026-11-13 |
+| [#1505](https://github.com/btcsuite/btcwallet/pull/1505) | bwtest: clarify Manager cleanup ownership | yyforyongyu | 2026-11-13 |
+| [#1506](https://github.com/btcsuite/btcwallet/pull/1506) | wallet: isolate Wallet creation preparation | yyforyongyu | 2026-11-13 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
