@@ -69,7 +69,6 @@ that structural exclusion explicitly.
   rescan contracts.
 - [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
-- [Task 438](438-psbt-decoration-combination-itests.md): cover PSBT decoration
   and combination contracts.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
