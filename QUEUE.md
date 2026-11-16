@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **38 open**, **100 done**,
-**24 superseded**, and **2 deferred**. With **145 ad hoc tasks**, that is
-**309 tracked tasks** and **245 completed** overall.
+**24 superseded**, and **2 deferred**. With **146 ad hoc tasks**, that is
+**310 tracked tasks** and **246 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -194,7 +194,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 100
 
-**245 completed: 100 numbered tasks and 145 ad hoc PRs.** Each closing PR counts
+**246 completed: 100 numbered tasks and 146 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -448,6 +448,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1474](https://github.com/btcsuite/btcwallet/pull/1474) | wallet: fix 32-bit transaction indices | yyforyongyu | 2026-11-06 |
 | [#1475](https://github.com/btcsuite/btcwallet/pull/1475) | db: preserve labels on unmined replay | yyforyongyu | 2026-11-07 |
 | [#1476](https://github.com/btcsuite/btcwallet/pull/1476) | wallet+db: align automatic credit policy | yyforyongyu | 2026-11-12 |
+| [#1477](https://github.com/btcsuite/btcwallet/pull/1477) | kvdb: recover credits on confirmed replay | yyforyongyu | 2026-11-16 |
 | [#1478](https://github.com/btcsuite/btcwallet/pull/1478) | pg: cover concurrent same-hash admission | yyforyongyu | 2026-11-06 |
 | [#1479](https://github.com/btcsuite/btcwallet/pull/1479) | wallet: fix PSBT origins and script imports | yyforyongyu | 2026-11-13 |
 | [#1482](https://github.com/btcsuite/btcwallet/pull/1482) | wallet: honor per-wallet recovery lookahead | yyforyongyu | 2026-11-06 |
