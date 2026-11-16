@@ -22,11 +22,9 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
-| [Task 432][t432] | Test address imports | Test | 2B | YY | [#1501][pr1501] |
 | [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | Abdullahi | [#1481][pr1481] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | Abdullahi | — |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | YY | — |
-| [Task 451][t451] | Test supported daemon releases | Test | 2B | YY | [#1500][pr1500] |
 | [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | YY | — |
 | [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | YY | [#1433][pr1433] |
@@ -56,11 +54,9 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md
 [t423]: tasks/423-manager-chain-source-cutover.md
-[t432]: tasks/432-address-import-script-itests.md
 [t440]: tasks/440-psbt-signing-finalization-itests.md
 [t447]: tasks/447-psbt-workflow-scenario.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
-[t451]: tasks/451-chain-version-itest-matrix.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t470]: tasks/470-lnd-wallet-port.md
 [t471]: tasks/471-three-backend-list-unspent-benchmark.md
@@ -85,6 +81,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t384]: tasks/384-route-safe-signing-through-the-vault.md
 [t385]: tasks/385-isolate-unsafesigner-key-extraction.md
 [pr1481]: https://github.com/btcsuite/btcwallet/pull/1481
-[pr1501]: https://github.com/btcsuite/btcwallet/pull/1501
-[pr1500]: https://github.com/btcsuite/btcwallet/pull/1500
 [pr1513]: https://github.com/btcsuite/btcwallet/pull/1513

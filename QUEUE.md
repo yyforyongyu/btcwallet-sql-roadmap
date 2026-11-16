@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **38 open**, **100 done**,
+The numbered roadmap contains **164 tasks**: **36 open**, **102 done**,
 **24 superseded**, and **2 deferred**. With **146 ad hoc tasks**, that is
-**310 tracked tasks** and **246 completed** overall.
+**310 tracked tasks** and **248 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -76,11 +76,9 @@ profile references in btcwallet's `docs/developer/benchmark/`.
 | [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 471 |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 471 |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 471 |
-| [Task 432][t432] | open | AddressManager import and script integration tests | Test | Cover address import and script contracts | — |
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | 407 |
 | [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 356, 406 |
 | [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 423 |
-| [Task 451][t451] | open | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | — |
 | [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
 | [Task 490][t490] | open | wallet UtxoManager benchmarks | Benchmark | Measure GetUtxo performance | 471 |
@@ -192,9 +190,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 100
+## Done · 102
 
-**246 completed: 100 numbered tasks and 146 ad hoc PRs.** Each closing PR counts
+**248 completed: 102 numbered tasks and 146 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -263,6 +261,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 429][t429] | 1 | AccountManager mutation integration tests | Test | Cover public account mutation contracts | [#1326][pr1326] |
 | [Task 430][t430] | 1 | AccountManager query integration tests | Test | Cover public account query contracts | [#1389][pr1389] |
 | [Task 431][t431] | 1 | AddressManager allocation and lookup integration tests | Test | Cover address allocation and lookup contracts | [#1407][pr1407] |
+| [Task 432][t432] | 2B | AddressManager import and script integration tests | Test | Cover address import and script contracts | [#1501][pr1501] |
 | [Task 433][t433] | 1 | Wallet sync-state publication and integration-test harness | Test | Enforce the wallet sync test boundary | [#1314][pr1314] |
 | [Task 434][t434] | 1 | TxCreator integration tests | Test | Cover transaction creation contracts | [#1316][pr1316] |
 | [Task 435][t435] | 1 | TxPublisher integration tests | Test | Cover transaction publication contracts | [#1334][pr1334] |
@@ -278,6 +277,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 446][t446] | 2B | public transaction spend scenario | Test | Cover authored-spend publication and reload | [#1444][pr1444] |
 | [Task 448][t448] | 2B | public Wallet reorganization scenario | Test | Cover synchronization and rollback | [#1458][pr1458] |
 | [Task 450][t450] | 2B | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | [#1470][pr1470] |
+| [Task 451][t451] | 2B | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | [#1500][pr1500] |
 | [Task 452][t452] | 1 | Syncer positive-lookahead account admission and enumeration | Gap fix | Exclude NoChainSync accounts from recovery | [#1368][pr1368] |
 | [Task 453][t453] | 1 | Manager Wallet cache publication | Bug fix | Serialize Manager Wallet publication | [#1336][pr1336] |
 | [Task 454][t454] | 2A | PostgreSQL Store transaction runtime | Bug fix | Make PostgreSQL transaction isolation explicit | [#1447][pr1447] |

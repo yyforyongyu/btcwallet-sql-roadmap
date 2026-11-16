@@ -67,12 +67,10 @@ a backend only when that backend cannot represent the scenario, and must state
 that structural exclusion explicitly.
 
   rescan contracts.
-- [Task 432](432-address-import-script-itests.md): cover address import and
   script contracts.
   and combination contracts.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
-- [Task 451](451-chain-version-itest-matrix.md): test supported chain daemon
   releases.
   contracts.
   mutation-error evidence.
