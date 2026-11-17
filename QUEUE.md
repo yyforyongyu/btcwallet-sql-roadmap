@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **36 open**, **102 done**,
-**24 superseded**, and **2 deferred**. With **146 ad hoc tasks**, that is
-**310 tracked tasks** and **248 completed** overall.
+**24 superseded**, and **2 deferred**. With **148 ad hoc tasks**, that is
+**312 tracked tasks** and **250 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -192,7 +192,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 102
 
-**248 completed: 102 numbered tasks and 146 ad hoc PRs.** Each closing PR counts
+**250 completed: 102 numbered tasks and 148 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -459,12 +459,14 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1488](https://github.com/btcsuite/btcwallet/pull/1488) | wallet: resolve SQL output scripts through vault | GustavoStingelin | 2026-11-13 |
 | [#1491](https://github.com/btcsuite/btcwallet/pull/1491) | itest: drop per-case registration comments | GustavoStingelin | 2026-11-09 |
 | [#1495](https://github.com/btcsuite/btcwallet/pull/1495) | wallet: retain mixed block transaction payloads | yyforyongyu | 2026-11-12 |
+| [#1496](https://github.com/btcsuite/btcwallet/pull/1496) | wallet: serialize Manager ownership in its loop | yyforyongyu | 2026-11-17 |
 | [#1497](https://github.com/btcsuite/btcwallet/pull/1497) | wallet: fix Store history recovery | yyforyongyu | 2026-11-12 |
 | [#1498](https://github.com/btcsuite/btcwallet/pull/1498) | itest: fix receiving-key ECDH oracle | yyforyongyu | 2026-11-11 |
 | [#1503](https://github.com/btcsuite/btcwallet/pull/1503) | waddrmgr: clear partially decoded taproot scripts | GustavoStingelin | 2026-11-13 |
 | [#1504](https://github.com/btcsuite/btcwallet/pull/1504) | wallet: remove unused Manager.String | yyforyongyu | 2026-11-13 |
 | [#1505](https://github.com/btcsuite/btcwallet/pull/1505) | bwtest: clarify Manager cleanup ownership | yyforyongyu | 2026-11-13 |
 | [#1506](https://github.com/btcsuite/btcwallet/pull/1506) | wallet: isolate Wallet creation preparation | yyforyongyu | 2026-11-13 |
+| [#1517](https://github.com/btcsuite/btcwallet/pull/1517) | chain: preserve Neutrino scan birthday | yyforyongyu | 2026-11-17 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
