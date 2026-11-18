@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **36 open**, **102 done**,
+The numbered roadmap contains **164 tasks**: **35 open**, **103 done**,
 **24 superseded**, and **2 deferred**. With **148 ad hoc tasks**, that is
-**312 tracked tasks** and **250 completed** overall.
+**312 tracked tasks** and **251 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -56,7 +56,6 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 407][t407] | open | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | 469 |
 | [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372 |
 | [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484 |
 
@@ -190,9 +189,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 102
+## Done · 103
 
-**250 completed: 102 numbered tasks and 148 ad hoc PRs.** Each closing PR counts
+**251 completed: 103 numbered tasks and 148 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -251,6 +250,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 404][t404] | 2 | TxCreator and PsbtManager input-source adapters | Bug fix | Validate Wallet transaction input amounts | [#1357][pr1357] |
 | [Task 405][t405] | 2A | PsbtManager and UTXO Store funding admission | Gap fix | Reserve PSBT funding inputs atomically | [#1431][pr1431], [#1438][pr1438] |
 | [Task 406][t406] | 2A | PsbtManager private failure cleanup and UTXO Store | Gap fix | Clean up failed PSBT funding leases | [#1462][pr1462] |
+| [Task 407][t407] | 2A | PsbtManager FinalizePsbt | Bug fix | Authorize PSBT auto-finalization | [#1513][pr1513] |
 | [Task 410][t410] | 2A | Wallet-owned SQL transaction mutation ordering | Bug fix | Coordinate transaction graph mutations | [#1442][pr1442] |
 | [Task 412][t412] | 1 | TxWriter transaction invalidation | Gap fix | Expose transaction invalidation on TxWriter | [#1388][pr1388] |
 | [Task 415][t415] | 1 | UtxoManager integration tests | Test | Cover public UTXO contracts end to end | [#1307][pr1307] |

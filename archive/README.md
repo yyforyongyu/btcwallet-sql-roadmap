@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 407](tasks/407-psbt-finalization-authorization.md) completed on 2026-11-18.
 - [Task 451](tasks/451-chain-version-itest-matrix.md) completed on 2026-11-17.
 - [Task 432](tasks/432-address-import-script-itests.md) completed on 2026-11-17.
 - [Task 438](tasks/438-psbt-decoration-combination-itests.md) completed on 2026-11-15.

@@ -9,7 +9,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 407][t407] | Authorize PSBT auto-finalization | Bug fix | 2A | Abdullahi | [#1513][pr1513] |
 | [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1468][pr1468] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | [lnd #77][lnd77] |
 
@@ -49,7 +48,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
 [t398]: tasks/398-semantic-account-recovery-targets.md
-[t407]: tasks/407-psbt-finalization-authorization.md
 [t417]: tasks/417-start-to-synced-benchmark.md
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md
@@ -81,4 +79,3 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t384]: tasks/384-route-safe-signing-through-the-vault.md
 [t385]: tasks/385-isolate-unsafesigner-key-extraction.md
 [pr1481]: https://github.com/btcsuite/btcwallet/pull/1481
-[pr1513]: https://github.com/btcsuite/btcwallet/pull/1513

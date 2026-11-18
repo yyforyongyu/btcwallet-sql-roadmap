@@ -46,7 +46,6 @@ They do not consume task numbers or require task files.
 
   allocation until viable.
   leases.
-- [Task 407](407-psbt-finalization-authorization.md): authorize PSBT
   auto-finalization.
   mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal

@@ -56,5 +56,5 @@ source file.
 - Shared cases contain no backend skip branch and add no new signing behavior.
 
 [issue1250]: https://github.com/btcsuite/btcwallet/issues/1250
-[t407]: 407-psbt-finalization-authorization.md
+[t407]: ../archive/tasks/407-psbt-finalization-authorization.md
 [source]: https://github.com/btcsuite/btcwallet/blob/4236325cbb609881272f488e413b90ab4aa07fc6/wallet/psbt_manager.go
