@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **35 open**, **103 done**,
-**24 superseded**, and **2 deferred**. With **150 ad hoc tasks**, that is
-**314 tracked tasks** and **253 completed** overall.
+**24 superseded**, and **2 deferred**. With **151 ad hoc tasks**, that is
+**315 tracked tasks** and **254 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -191,7 +191,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 103
 
-**253 completed: 103 numbered tasks and 150 ad hoc PRs.** Each closing PR counts
+**254 completed: 103 numbered tasks and 151 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -462,6 +462,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1496](https://github.com/btcsuite/btcwallet/pull/1496) | wallet: serialize Manager ownership in its loop | yyforyongyu | 2026-11-17 |
 | [#1497](https://github.com/btcsuite/btcwallet/pull/1497) | wallet: fix Store history recovery | yyforyongyu | 2026-11-12 |
 | [#1498](https://github.com/btcsuite/btcwallet/pull/1498) | itest: fix receiving-key ECDH oracle | yyforyongyu | 2026-11-11 |
+| [#1502](https://github.com/btcsuite/btcwallet/pull/1502) | docs: align competing transaction model | yyforyongyu | 2026-11-18 |
 | [#1503](https://github.com/btcsuite/btcwallet/pull/1503) | waddrmgr: clear partially decoded taproot scripts | GustavoStingelin | 2026-11-13 |
 | [#1504](https://github.com/btcsuite/btcwallet/pull/1504) | wallet: remove unused Manager.String | yyforyongyu | 2026-11-13 |
 | [#1505](https://github.com/btcsuite/btcwallet/pull/1505) | bwtest: clarify Manager cleanup ownership | yyforyongyu | 2026-11-13 |
