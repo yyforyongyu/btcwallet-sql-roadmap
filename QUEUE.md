@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **35 open**, **103 done**,
-**24 superseded**, and **2 deferred**. With **151 ad hoc tasks**, that is
-**315 tracked tasks** and **254 completed** overall.
+**24 superseded**, and **2 deferred**. With **152 ad hoc tasks**, that is
+**316 tracked tasks** and **255 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -191,7 +191,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 103
 
-**254 completed: 103 numbered tasks and 151 ad hoc PRs.** Each closing PR counts
+**255 completed: 103 numbered tasks and 152 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -468,6 +468,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1505](https://github.com/btcsuite/btcwallet/pull/1505) | bwtest: clarify Manager cleanup ownership | yyforyongyu | 2026-11-13 |
 | [#1506](https://github.com/btcsuite/btcwallet/pull/1506) | wallet: isolate Wallet creation preparation | yyforyongyu | 2026-11-13 |
 | [#1507](https://github.com/btcsuite/btcwallet/pull/1507) | db: index transaction input history | yyforyongyu | 2026-11-18 |
+| [#1512](https://github.com/btcsuite/btcwallet/pull/1512) | db: validate and reconcile transaction inputs | yyforyongyu | 2026-11-19 |
 | [#1517](https://github.com/btcsuite/btcwallet/pull/1517) | chain: preserve Neutrino scan birthday | yyforyongyu | 2026-11-17 |
 | [#1519](https://github.com/btcsuite/btcwallet/pull/1519) | docs: define Manager routing ownership | yyforyongyu | 2026-11-18 |
 
