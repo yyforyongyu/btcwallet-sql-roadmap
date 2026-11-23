@@ -99,7 +99,7 @@ the transaction succeeds.
 - The PR contains no modern-kvdb, manifest, replay, generic-lock, or unrelated
   public API work.
 
-[t330]: 330-duplicate-wallet-create.md
+[t330]: ../archive/tasks/330-duplicate-wallet-create.md
 [t332]: ../archive/tasks/332-watch-only-script-policy.md
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
 [t343]: ../archive/tasks/343-exact-account-creation.md

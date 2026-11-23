@@ -10,23 +10,22 @@ Dependencies: **[Task 331][t331], [Task 415][t415], [Task 423][t423],
 
 ## Rationale
 
-[Issue #1250][issue1250] requires multi-wallet SQL isolation. At `sql-wallet`
-revision `48e7f4b`, Manager shares one chain source and each Wallet
-[consumes its notifications][source] independently, so one Wallet can miss a
-live wakeup. [Task 423][t423] supplies the required live fanout; this scenario
-then proves public receipt, spend, and reload isolation without duplicating
-that production work.
+[Issue #1250][issue1250] requires multi-Wallet SQL isolation. The
+[existing two-Wallet scenario][source] proves transfer and coin isolation.
+Extend it to cover public account and address views and durable isolation
+after a fresh Manager reopens the same database. [Task 423][t423] retains
+the required live delivery boundary.
 
 ## Details
 
-- Create two Wallets under one Manager and SQL database on the same network.
-- Give each Wallet distinct accounts and addresses, fund both, mine once, and
-  cross each Wallet's maintained synchronization boundary.
-- Verify account, address, UTXO, transaction, and spend state never leaks
-  between wallet identities while shared chain height and hash agree.
-- Spend from one Wallet, confirm it, and prove the other Wallet's owned state is
-  unchanged. Stop the Manager, start a fresh Manager, and repeat the isolation
-  assertions with both Wallets from its returned active set.
+- Use the existing SQL scenario with two Wallets under one Manager. Give
+  each Wallet distinct accounts and addresses and preserve the transfer and
+  coin assertions across the maintained synchronization boundary.
+- Verify each Wallet reports only its own accounts and addresses while both
+  see the same canonical chain state.
+- Stop the Manager, open a fresh Manager over the same database, and check
+  that account, address, UTXO, transaction and spend state remain isolated
+  in the Wallets returned by Start.
 - [Task 472][t472] owns the concurrent historical-rescan/live-delivery
   scenario split out on 2026-09-19. This task retains baseline receipt,
   spend, and reopen isolation; neither test task depends on the other.
@@ -40,10 +39,10 @@ that production work.
 
 ## Suggested fix
 
-Add one two-Wallet scenario with deterministic disjoint funding and expected
-sets keyed only by public wallet identities. Reuse the public Manager, Wallet,
-and synchronization harness without waiting for Task 431's coverage or adding
-a scenario-specific coordinator.
+Extend the existing two-Wallet scenario and key expected results by
+public Wallet identity. Reuse its funding, coin assertions and
+synchronization harness. Task 431's separate address coverage does not
+gate this scenario.
 
 ## Verification
 
@@ -74,4 +73,4 @@ a scenario-specific coordinator.
 [t436]: ../archive/tasks/436-transaction-read-itests.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
 [t423]: 423-manager-chain-source-cutover.md
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/syncer.go#L1846
+[source]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/itest/manager_test.go#L737

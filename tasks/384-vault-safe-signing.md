@@ -81,6 +81,6 @@ operation guard. Keep Wallet assembly unchanged.
 
 [t337]: ../archive/tasks/337-imported-xpub-derivation.md
 [t352]: ../archive/tasks/352-kvdb-combined-passphrase-rotation.md
-[t354]: 354-vault-owned-secret-resolution.md
-[t383]: 383-vault-output-script-resolution.md
+[t354]: ../archive/tasks/354-vault-owned-secret-resolution.md
+[t383]: ../archive/tasks/383-vault-output-script-resolution.md
 [t469]: ../archive/tasks/469-sign-psbt-with-effective-keys.md

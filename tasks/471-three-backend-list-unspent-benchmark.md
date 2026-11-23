@@ -1,6 +1,6 @@
 # Task 471 — measure SQL ListUnspent with kvdb baselines
 
-Component: **wallet UtxoManager benchmarks and shared benchmark setup**.
+Component: **wallet UtxoManager benchmarks**.
 
 Type: **Benchmark**.
 
@@ -14,26 +14,24 @@ calls. Preserve those comparisons and reuse selected workloads and results
 for SQL measurement. The existing fixture varies accounts, addresses, and
 transactions together; its labels alone do not establish comparable state.
 
-On 2026-09-19, this task combines [416][t416] and [418][t418]. The first real
-measurement exercises the shared setup directly, removing the need for a
-separate setup-only example and smoke matrix.
+This task combined [416][t416] and [418][t418] on 2026-09-19.
+[PR #1448][pr1448] delivered the reusable SQLite and PostgreSQL fixtures.
+The remaining outcome is the matched ListUnspent measurement.
 
 ## Details
 
 - Follow the [scoped benchmark exception][backend-rule]. Preserve the existing
   comparison suite and reuse selected workloads and kvdb measurements.
-- Put new SQL benchmarks and minimal shared setup in `wallet/bench`, using
-  imported public `wallet` APIs. Keep existing kvdb comparisons in their suite.
+- Put the SQL benchmark in `wallet/bench` and use public `wallet` APIs.
+  Keep the existing kvdb comparisons in their suite.
 - Start with the smallest dataset and one selected case. Build the code, run
   relevant tests, and smoke-run that case. Present the code and results for
   user approval; run full datasets, all cases, and full profile captures only
   after explicit approval.
-- Construct focused SQL Wallets normally through Manager, reusing real-backend
-  setup and teardown. Add only the minimal SQL setup needed here;
+- Construct focused SQL Wallets through Manager using the merged fixtures.
   [417][t417], [419][t419], [420][t420], [490][t490], [491][t491], and
-  [492][t492] reuse it and own their data and baseline alignment. Their
-  dependency is on shared infrastructure, not this task's performance result.
-  Task 417 owns per-sample startup work.
+  [492][t492] reuse those fixtures independently and own their data and
+  baseline alignment. Task 417 owns per-sample startup work.
 
 ### Matching workloads
 
@@ -164,10 +162,9 @@ If results use different commits, add a commit SHA column to the results table.
 
 ## Suggested fix
 
-Select an existing case, describe its workload, and reuse its kvdb measurements
-with an independent Manager-based SQL loop. Exercise minimal shared setup
-through ListUnspent itself, rather than prebuilding later consumers or adding
-a setup-only demonstration project.
+Select an existing case, describe its workload, and reuse matching kvdb
+measurements. Run ListUnspent in an independent Manager-based SQL loop using
+the merged setup.
 
 ## Verification
 
@@ -183,11 +180,11 @@ a setup-only demonstration project.
   table, one unprofiled results table with percentage changes, and profile
   locations/commands in the specified section order. Check that the exact
   benchmark and profile commands reproduce the recorded runs.
-  New SQL benchmarks and setup live in `wallet/bench`.
+  New SQL benchmarks live in `wallet/bench`.
 
 ## Definition of done
 
-One focused SQL ListUnspent measurement exercises minimal reusable setup and
+One focused SQL ListUnspent measurement uses the merged fixtures and
 provides a short method record under `docs/developer/benchmark/` with fair
 standard metric comparisons and separate CPU/memory profiles in Docker.
 Existing kvdb benchmarks remain, without production changes or a reporting
@@ -204,3 +201,4 @@ framework.
 [t490]: 490-get-utxo-benchmark.md
 [t491]: 491-get-account-benchmark.md
 [t492]: 492-list-accounts-benchmark.md
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448

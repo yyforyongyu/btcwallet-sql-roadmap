@@ -9,13 +9,11 @@ Dependencies: **[Task 331][t331], [Task 356][t356], [Task 406][t406],
 
 ## Rationale
 
-[Issue #1250][issue1250] calls for a follow-up PSBT
-fund/decorate/sign/finalize scenario. The component contracts remain useful in
-isolation, but no task proves their packet handoffs compose into a valid,
-publishable transaction backed by real kvdb, SQLite, and PostgreSQL Wallets.
-At `sql-wallet` revision `48e7f4b`, [SignSpend][source] decorates and
-finalizes, but bypasses funding and explicit signing; that handoff remains
-unproved. Task 435 already owns acceptance without publication.
+[Issue #1250][issue1250] calls for a complete PSBT workflow on real
+kvdb, SQLite, and PostgreSQL Wallets. [FundPsbt][fund] leases inputs, and
+[DecorateInputs][decorate] rejects leased inputs. [PR #1524][pr1524]
+exercises caller-selected inputs by decorating first and then funding in
+completion mode. Task 435 already owns acceptance without publication.
 
 ## Details
 
@@ -27,9 +25,11 @@ unproved. Task 435 already owns acceptance without publication.
   not wait for this particular test task to merge.
 - Register the same deterministic PSBT flow for kvdb, SQLite, and PostgreSQL.
   Do not skip kvdb inside the shared flow.
-- Call `FundPsbt`, `DecorateInputs`, `SignPsbt`, and `FinalizePsbt` in that
-  order through the maintained public methods, passing returned packets
-  between calls and checking each handoff.
+- Decorate a template with caller-selected inputs using `DecorateInputs`.
+  Call `FundPsbt` in completion mode to lease those inputs and add change
+  when needed, then call `SignPsbt` and `FinalizePsbt`. Pass returned
+  packets between calls and check that funding preserves the selected
+  outpoints and their metadata and returns the expected change.
 - Extract and independently execute the final transaction, broadcast it, mine
   it, and verify it through TxReader. Reuse Task 435's acceptance-only proof
   without another mempool-verdict step here.
@@ -52,8 +52,8 @@ scenario-specific production hooks.
 
 ## Definition of done
 
-- One public PSBT flow funds, decorates, signs, finalizes, publishes, confirms,
-  and reloads a valid transaction.
+- One public PSBT flow decorates, funds, signs, finalizes, executes,
+  broadcasts, confirms, and reloads a valid transaction.
 - Assertions use public APIs and independent script verification only.
 - The shared scenario contains no backend skip branch.
 
@@ -68,4 +68,6 @@ scenario-specific production hooks.
 [t438]: ../archive/tasks/438-psbt-decoration-combination-itests.md
 [t439]: ../archive/tasks/439-psbt-funding-itests.md
 [t440]: 440-psbt-signing-finalization-itests.md
-[source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/bwtest/harness_wallet.go#L465
+[fund]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/wallet/psbt_manager.go#L1114
+[decorate]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/wallet/psbt_manager.go#L598
+[pr1524]: https://github.com/btcsuite/btcwallet/pull/1524

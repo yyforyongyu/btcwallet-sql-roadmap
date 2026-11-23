@@ -9,10 +9,11 @@ and [Task 467][t467]**.
 
 ## Rationale
 
-`Manager.Create` currently hides `context.Background` inside preparation and
-backend work. An lnd shutdown therefore cannot stop a Create that is still
-waiting, while returning cancellation after durable mutation could falsely
-tell the caller that no wallet was created.
+[PR #1496][pr1496] routes [`Manager.Create`][create] through the Manager's
+runtime queue. Admission uses Manager lifetime, and accepted requests settle
+without cancellation. The method accepts no caller context, so a caller
+cannot cancel its own request while it is still safe to abort. Once a write
+may have committed, returning a context error can misreport the result.
 
 Wait for Task 329's atomic wallet-and-account genesis before adding public
 cancellation, so cancellation does not introduce failures between separately
@@ -77,3 +78,5 @@ operation machinery.
 [t367]: ../archive/tasks/367-bound-sql-genesis-secrets.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md
 [t467]: ../archive/tasks/467-indeterminate-commit-identity.md
+[pr1496]: https://github.com/btcsuite/btcwallet/pull/1496
+[create]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/wallet/manager.go#L624

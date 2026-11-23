@@ -4,7 +4,7 @@ Component: **wallet TxReader benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 471][t471]**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -15,10 +15,10 @@ transaction complexity.
 
 ## Details
 
-- Follow the [scoped benchmark exception][backend-rule], reusing
-  [Task 471][t471]'s minimal SQL setup.
-- Put new SQL benchmarks in `wallet/bench`, using public `wallet` APIs and
-  Task 471's common Docker environment for all four implementations.
+- Follow the [scoped benchmark exception][backend-rule]. Reuse the SQL
+  fixtures from [PR #1448][pr1448].
+- Put new SQL benchmarks in `wallet/bench` and use public `wallet` APIs.
+  Run all four implementations in a common Docker environment.
 - Start with the smallest dataset and one selected case. Build the code, run
   relevant tests, and smoke-run that case. Present the code and results for
   user approval; run full datasets, all cases, and full profile captures only
@@ -80,3 +80,4 @@ and no production changes.
 
 [backend-rule]: ../AGENTS.md#scope-rules
 [t471]: 471-three-backend-list-unspent-benchmark.md
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448

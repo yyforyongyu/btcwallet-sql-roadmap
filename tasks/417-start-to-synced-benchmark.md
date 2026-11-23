@@ -4,7 +4,7 @@ Component: **Manager lifecycle and Syncer benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 331][t331], [Task 471][t471], and [Task 455][t455]**.
+Dependencies: **[Task 331][t331] and [Task 455][t455]**.
 
 ## Rationale
 
@@ -15,10 +15,10 @@ equal block counts alone do not make the two measurements comparable.
 
 ## Details
 
-- Follow the [scoped benchmark exception][backend-rule], reusing
-  [Task 471][t471]'s minimal SQL setup.
-- Put new SQL benchmarks in `wallet/bench`, using public `wallet` APIs and
-  Task 471's common Docker environment for all four implementations.
+- Follow the [scoped benchmark exception][backend-rule]. Reuse the SQL
+  fixtures from [PR #1448][pr1448].
+- Put new SQL benchmarks in `wallet/bench` and use public `wallet` APIs.
+  Run all four implementations in a common Docker environment.
 - Start with the smallest dataset and one selected case. Build the code, run
   relevant tests, and smoke-run that case. Present the code and results for
   user approval; run full datasets, all cases, and full profile captures only
@@ -31,7 +31,7 @@ equal block counts alone do not make the two measurements comparable.
   vary that dimension alone.
 - Before each sample, prepare the same starting Wallet state and construct a
   fresh Manager. Never restart a terminal Manager or Wallet. Keep this local
-  setup in the startup benchmark rather than adding reset modes to Task 471.
+  setup within the startup benchmark.
 - Time Manager.Start through observation of the configured synchronized tip
   using public Wallet information; align the selected legacy startup
   boundary and completion condition to equivalent work. Include completion
@@ -65,8 +65,10 @@ equal block counts alone do not make the two measurements comparable.
 
 Reuse a selected existing startup workload and chain fixture for the focused
 SQL loop, making only necessary local baseline adjustments for comparable
-timing. Reuse public synchronization observation and untimed setup/teardown,
-without a second lifecycle framework or cleanup of every startup benchmark.
+timing. Compare historical results only when the workload and timing boundary
+match. Keep production RPC batching outside this measurement. Reuse public
+synchronization observation and untimed setup/teardown. Keep this local
+to the benchmark without a separate lifecycle framework or broad cleanup.
 
 ## Verification
 
@@ -90,3 +92,4 @@ kvdb replacement.
 [t331]: ../archive/tasks/331-manager-wallet-lifecycle.md
 [t471]: 471-three-backend-list-unspent-benchmark.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448

@@ -62,6 +62,6 @@ operations. Leave backend-private crypto implementation below keyvault.
   production seam they exercise.
 
 [t382]: ../../tasks/382-vault-account-derivation.md
-[t383]: ../../tasks/383-vault-output-script-resolution.md
+[t383]: 383-vault-output-script-resolution.md
 [t384]: ../../tasks/384-vault-safe-signing.md
 [t385]: ../../tasks/385-unsafe-signer-key-extraction.md

@@ -6,6 +6,14 @@ Type: **Design**.
 
 Dependencies: **None**.
 
+## Completion
+
+Merged into `sql-wallet` on 2026-11-09 (UTC).
+[PR #1486][pr1486] amended [ADR 0010][adr10] to define typed Vault
+operations, semantic locators, secret ownership and Store/Vault ordering.
+The accepted boundary leaves script interpretation with Wallet and permits
+caller-owned copies for explicit script and private-key returns.
+
 ## Rationale
 
 ADR 0010 assigns secret lifetime and typed key operations to keyvault but does
@@ -70,3 +78,6 @@ outside Vault; focus on operations that actually consume secrets.
   or duplicating its implementation.
 - The PR changes no Go code and does not absorb genesis, PSBT authorization,
   or production-task test cleanup.
+
+[pr1486]: https://github.com/btcsuite/btcwallet/pull/1486
+[adr10]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/docs/developer/adr/0010-keyvault-encryption-layer.md#L43

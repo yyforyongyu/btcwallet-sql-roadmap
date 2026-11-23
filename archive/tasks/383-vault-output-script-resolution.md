@@ -6,6 +6,14 @@ Type: **Refactor**.
 
 Dependencies: **[Task 354][t354]**.
 
+## Completion
+
+Merged into `sql-wallet` on 2026-11-13 (UTC).
+[PR #1488][pr1488] routes SQL script decryption through a typed Vault
+operation and returns a caller-owned copy. Wallet continues to interpret
+the [Taproot wrapper][script] and clears its temporary buffers, following
+the split accepted in [ADR 0010][adr10].
+
 ## Rationale
 
 `ScriptForOutput` currently receives encrypted address secret DTOs through
@@ -56,5 +64,9 @@ decoding into one WalletVault operation addressed by script pubkey. Make SQL
 - No address mutation, signing authorization, PSBT, or raw private-key work is
   included.
 
-[t352]: ../archive/tasks/352-kvdb-combined-passphrase-rotation.md
+[t352]: 352-kvdb-combined-passphrase-rotation.md
 [t354]: 354-vault-owned-secret-resolution.md
+
+[pr1488]: https://github.com/btcsuite/btcwallet/pull/1488
+[adr10]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/docs/developer/adr/0010-keyvault-encryption-layer.md#L43
+[script]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/wallet/signer.go#L1218

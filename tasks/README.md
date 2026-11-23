@@ -13,7 +13,6 @@ They do not consume task numbers or require task files.
 ## Consumer adoption
 
 - [Task 470](470-lnd-wallet-port.md): complete lnd Wallet runtime parity.
-  transaction subscriptions.
 
 ## Creation, Manager, and storage
 
@@ -21,14 +20,11 @@ They do not consume task numbers or require task files.
   atomically.
 - [Task 358](358-contextual-manager-operations.md): make Manager creation
   cancellable.
-  identities.
-  transaction isolation explicit.
 - [Task 457](457-process-local-manager-lease.md): enforce one process-local
   Manager per database.
 
 ## Accounts, addresses, and recovery
 
-  account commits truthfully.
 - [Task 397](397-semantic-recovery-targets-adr.md): define semantic-account
   recovery targets.
 - [Task 398](398-semantic-account-recovery-targets.md): accept semantic account
@@ -38,26 +34,15 @@ They do not consume task numbers or require task files.
 
 ## Chain and synchronization
 
-  events.
 - [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
 
 ## Transactions, UTXOs, and PSBTs
 
-  allocation until viable.
-  leases.
-  auto-finalization.
-  mutations.
 - [Task 411](411-terminal-parent-rejection.md): reject children of terminal
   transactions.
 - [Task 426](426-sql-transaction-output-aggregates.md): validate persisted
   transaction output aggregates.
-  effective keys.
-  leases.
-  without known origin.
-  on chain replay.
-  confirmation height.
-
 
 ## Integration tests
 
@@ -65,46 +50,24 @@ Shared public contracts run on kvdb, SQLite, and PostgreSQL. A task may exclude
 a backend only when that backend cannot represent the scenario, and must state
 that structural exclusion explicitly.
 
-  rescan contracts.
-  script contracts.
-  and combination contracts.
 - [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
-  releases.
-  contracts.
-  mutation-error evidence.
-  account identity.
-  list and path-bound account queries.
-  allocation.
 
 ## Integration-test scenarios
 
-  and durable reload.
-  identity.
-  publication and reload.
 - [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
 - [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
   isolation.
-  state with bitcoind.
 - [Task 472](472-multi-wallet-rescan-isolation-scenario.md): isolate historical
   rescans from live Wallets.
 
 ## Secrets and credentials
 
-- [Task 354](354-vault-owned-secret-resolution.md): define Vault secret-operation
-  ownership.
-  lifetime.
-  without resetting timeout.
 - [Task 382](382-vault-account-derivation.md): move account derivation into the
   Vault.
-- [Task 383](383-vault-output-script-resolution.md): resolve output scripts
-  through the Vault.
 - [Task 384](384-vault-safe-signing.md): route safe signing through the Vault.
 - [Task 385](385-unsafe-signer-key-extraction.md): isolate UnsafeSigner key
   extraction.
-
-  buffers through completion.
-  rotation during shutdown.
 
 ## Migration
 
@@ -129,10 +92,9 @@ that structural exclusion explicitly.
 
 ## Benchmarks
 
-Task 471 exercises minimal SQL setup with the first ListUnspent measurement.
-Preserve existing kvdb comparisons under the
-[scoped execution exception](../AGENTS.md#scope-rules).
-Other consumers reuse that setup and own their data and baseline alignment.
+Reuse the SQL fixtures delivered by [PR #1448][pr1448]. Each benchmark
+owns its data and baseline alignment. Preserve existing kvdb comparisons
+under the [scoped execution exception](../AGENTS.md#scope-rules).
 Correctness validation belongs to unit/integration tests. Benchmarks retain
 setup/operation error checks and matching workloads and timing boundaries.
 Start with the smallest dataset and one selected case: build the code, run
@@ -158,9 +120,11 @@ reporting or new reporting framework is required.
 - [Task 420](420-transaction-read-benchmark.md): measure transaction-read
   performance.
 - [Task 471](471-three-backend-list-unspent-benchmark.md): measure ListUnspent
-  on SQL with existing kvdb baselines and reusable setup.
+  on SQL with existing kvdb baselines.
 - [Task 490](490-get-utxo-benchmark.md): measure GetUtxo performance.
 - [Task 491](491-get-account-benchmark.md): measure GetAccount performance,
   including balance retrieval.
 - [Task 492](492-list-accounts-benchmark.md): measure ListAccounts performance,
   including balances.
+
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
