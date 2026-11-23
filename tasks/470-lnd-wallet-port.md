@@ -25,12 +25,18 @@ does not prove those existing lnd behaviors.
   Phase 1 requires compilation; this task's linked production gaps and lnd
   behavior tests gate its own merge. The pre-claim gap check is recorded in
   [QUEUE](../QUEUE.md).
-- Task 487's pinned compile evidence was accepted on 2026-11-02 without
-  requiring its PR to merge. Continue the existing adapter in
-  [lnd PR #77][lnd77], preserving its commits and verification evidence.
-  Track [lnd PR #78][lnd78] as CI preparation, not the Wallet adapter or proof
-  of runtime parity. Resolve outstanding Wallet dependencies and runtime
-  failures here; compile acceptance does not certify them or merge readiness.
+- Task 487's pinned compile evidence was accepted on 2026-11-02. Reuse
+  that adapter and verification evidence, then prove runtime parity on the
+  maintained Wallet dependency. Keep the live stack in [ACTIVE](../ACTIVE.md).
+- Recheck the [lnd gap report][issue64] on the maintained pin. SQL retained
+  inputs and admission checks now support the [ADR 0018][adr18] model,
+  and [PR #1496][pr1496] delivers serialized Manager chain processing.
+  Verify remaining transaction and publishing gaps through the consumer
+  before making them prerequisites.
+- [PR #1477][pr1477] provides additive replay of kvdb confirmed credits.
+  Its earlier notification-ordering and retry work was withdrawn. Require
+  a maintained-pin regression before adding any remaining ordering or
+  rebroadcast behavior as a Wallet dependency.
 - In that check, map online remote-signer account installation to
   [Task 391][t391]'s exact path-bound XPub support. Record any required edge
   before implementing the affected path; do not replace known account numbers
@@ -56,9 +62,8 @@ does not prove those existing lnd behaviors.
 - Preserve existing PSBT support. [346][t346], [356][t356], [406][t406],
   and [474][t474], including their production prerequisites, gate merge
   because lnd already exposes FundPsbt; do not disable it to avoid these gates.
-  These are the production fixes
-  previously reached through Task 447's test chain, not added scope.
-  Add other concrete defects exposed by the port as dependencies.
+  Keep these existing production dependencies. Add other concrete defects
+  exposed by the port as dependencies.
   Keep later prerequisites in their phases; fanout, benchmarks, and Vault
   hardening are not blanket gates.
 - Create all new lnd wallets on native SQL. Keep migration adoption separate
@@ -129,7 +134,7 @@ task. No ADR is required.
 [t466]: ../archive/tasks/466-oldest-unused-address-itests.md
 [t468]: ../archive/tasks/468-activate-no-chain-sync-account-creation.md
 
-[t475]: 475-wallet-transaction-subscription.md
+[t475]: ../archive/tasks/475-wallet-transaction-subscription.md
 [t478]: ../archive/tasks/478-retain-spend-confirmation-leases.md
 [t479]: ../archive/tasks/479-mix-imported-xpub-accounts.md
 [t480]: ../archive/tasks/480-own-raw-imports-in-one-wallet.md
@@ -140,7 +145,9 @@ task. No ADR is required.
 [t485]: 485-convert-legacy-sql-wallets-through-manager.md
 
 [t487]: ../archive/tasks/487-compile-lnd-with-managed-wallet.md
-[lnd77]: https://github.com/yyforyongyu/lnd/pull/77
-[lnd78]: https://github.com/yyforyongyu/lnd/pull/78
 [wallet-poc]: https://github.com/yyforyongyu/btcwallet/tree/poc-470-combined
 [lnd-poc]: https://github.com/yyforyongyu/lnd/tree/poc-470-lnd-gaps
+[issue64]: https://github.com/yyforyongyu/btcwallet-sql-roadmap/issues/64
+[adr18]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/docs/developer/adr/0018-unconfirmed-transaction-candidates.md#L5
+[pr1496]: https://github.com/btcsuite/btcwallet/pull/1496
+[pr1477]: https://github.com/btcsuite/btcwallet/pull/1477

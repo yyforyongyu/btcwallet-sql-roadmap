@@ -23,10 +23,16 @@ specifications.
 - [Task 451](tasks/451-chain-version-itest-matrix.md) completed on 2026-11-17.
 - [Task 432](tasks/432-address-import-script-itests.md) completed on 2026-11-17.
 - [Task 438](tasks/438-psbt-decoration-combination-itests.md) completed on 2026-11-15.
+- [Task 383](tasks/383-vault-output-script-resolution.md) completed
+  through [PR #1488](https://github.com/btcsuite/btcwallet/pull/1488)
+  on 2026-11-13.
 - [Task 439](tasks/439-psbt-funding-itests.md) completed on 2026-11-12.
 - [Task 445](tasks/445-account-signing-scenario.md) completed on 2026-11-11.
 - [Task 450](tasks/450-bitcoind-compatibility-scenario.md) completed on 2026-11-11.
 - [Task 462](tasks/462-account-mutation-error-itests.md) completed on 2026-11-10.
+- [Task 354](tasks/354-vault-owned-secret-resolution.md) completed
+  through [PR #1486](https://github.com/btcsuite/btcwallet/pull/1486)
+  on 2026-11-09.
 - [Task 469](tasks/469-sign-psbt-with-effective-keys.md) completed on 2026-11-09.
 - [Task 482](tasks/482-fund-imported-inputs-without-origin.md) completed on 2026-11-06.
 - [Task 448](tasks/448-sync-rollback-scenario.md) completed on 2026-11-05.

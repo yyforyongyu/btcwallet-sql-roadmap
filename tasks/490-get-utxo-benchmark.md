@@ -4,7 +4,7 @@ Component: **wallet UtxoManager benchmarks**.
 
 Type: **Benchmark**.
 
-Dependencies: **[Task 471][t471]**.
+Dependencies: **None**.
 
 ## Rationale
 
@@ -14,10 +14,10 @@ without focused performance measurements.
 
 ## Details
 
-- Follow the [scoped benchmark exception][backend-rule] and Task 471's shared
-  setup. Put new SQL benchmarks in `wallet/bench`, using public Wallet APIs.
-  Keep kvdb execution in the existing suite; the focused suite runs only
-  SQLite/PostgreSQL and remains independent of kvdb retirement.
+- Follow the [scoped benchmark exception][backend-rule] and reuse the SQL
+  fixtures from [PR #1448][pr1448]. Put new SQL benchmarks in `wallet/bench`
+  and use public Wallet APIs. Keep kvdb in the existing comparison suite.
+  The focused suite runs SQLite and PostgreSQL independently of kvdb.
 - Select one representative existing workload and a known unspent outpoint.
   Match account/scope, address/script types, persisted transaction shape,
   confirmation state, live UTXOs, and point selection with both kvdb baselines.
@@ -25,8 +25,8 @@ without focused performance measurements.
 - Seed once, then repeatedly call GetUtxo on the same active Wallet. Keep
   fixture-state and result-content validation in unit/integration tests;
   fail on setup or operation errors.
-- Use matched timing boundaries and Task 471's common Docker environment for
-  a fair comparison. Exclude environment setup, database startup/readiness,
+- Use matched timing boundaries and a common Docker environment for a
+  fair comparison. Exclude environment setup, database startup/readiness,
   initial connections, schema/data creation, and teardown; normal API DB I/O
   remains measured.
 - Start with the smallest dataset and one selected case. Build the code, run
@@ -42,7 +42,8 @@ without focused performance measurements.
 ## Suggested fix
 
 Reuse one existing GetUtxo workload and its kvdb measurements with a focused
-SQL loop over Task 471's setup. Keep any baseline alignment local to that case.
+SQL loop using the shared SQL fixtures. Keep baseline alignment local to
+that case.
 
 ## Verification
 
@@ -62,3 +63,4 @@ The full run follows explicit user approval; production code is unchanged.
 [source]: https://github.com/btcsuite/btcwallet/blob/18a4a11aa7cb66c3f9def3f8df9a01217f261519/wallet/utxo_manager_benchmark_test.go#L18
 [backend-rule]: ../AGENTS.md#scope-rules
 [t471]: 471-three-backend-list-unspent-benchmark.md
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448

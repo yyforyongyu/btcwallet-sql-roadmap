@@ -9,10 +9,11 @@ and [Task 456][t456]**.
 
 ## Rationale
 
-After fanout and rollback are ready, SQL Wallets still register and consume
-chain notifications independently. Manager becomes the sole Wallet
-notification consumer so every active Wallet receives the same ordered
-stream. Shutdown joins Manager's reader and delivery before Store closure.
+[PR #1496][pr1496] puts native chain delivery, Create and shared rollback
+on the [Manager loop][manager-chain] and joins that work before Store
+closure. SQL Wallet activation still needs an end-to-end boundary that
+makes loaded and newly created Wallets watch-ready, with no gaps in live
+delivery as each Wallet catches up.
 
 ## Details
 
@@ -22,8 +23,9 @@ stream. Shutdown joins Manager's reader and delivery before Store closure.
   competing per-Wallet readers; the caller keeps the source usable through
   Manager Stop and closes it afterward. Align ADR 0015 with this ownership,
   Wallet checkpoints, and background catch-up.
-- Make Manager the sole caller of live notification registration and
-  `Notifications()`, forwarding normalized events through Tasks 370 and 372.
+- Complete Manager ownership of live watch registration and preserve a
+  single `Notifications()` consumer. Deliver normalized events under the
+  ordering and rollback guarantees in Tasks 370 and 372.
 - Recover from each Wallet's existing processed height/hash, committed
   atomically with its block effects. Use the chain backend for catch-up, not
   a separate persisted Manager frontier, admission gate, or reconciliation.
@@ -43,9 +45,9 @@ stream. Shutdown joins Manager's reader and delivery before Store closure.
 - Drive Task 402's watch reconstruction and registration through the same
   Wallet processing boundary, preserving its Manager-wide failure policy
   without adding a durable delivery mechanism.
-- On Stop, close reader admission, settle accepted delivery, and join the
-  reader and dispatcher before Store closure, even if the borrowed client's
-  channel stays open. Reuse Task 331's drain and cancellation rules.
+- Preserve the joined shutdown boundary from PR #1496. Stop settles
+  accepted delivery and joins Manager before Store closure even if the
+  borrowed client's channel stays open.
 - Keep modern kvdb on its isolated single-Wallet source path. Preserve
   Wallet-scoped targeted rescans without letting them consume the live stream
   or move another Wallet's checkpoint.
@@ -56,9 +58,10 @@ stream. Shutdown joins Manager's reader and delivery before Store closure.
 
 ## Suggested fix
 
-Move the current SQL notification loop to Manager and connect it to the
-prepared dispatcher. Startup buffering and Wallet registration mechanics are
-private choices as long as the public no-gap and shutdown boundaries hold.
+Reuse the Manager loop and existing live-watch and catch-up mechanisms.
+Establish watch readiness and ordered delivery at the Start/Create handoff.
+Keep buffering, registration and recovery mechanics subject to the public
+behavior below.
 
 ## Verification
 
@@ -83,11 +86,14 @@ private choices as long as the public no-gap and shutdown boundaries hold.
 
 ## Definition of done
 
-One running SQL Manager owns the Wallet notification reader and ordered
-delivery to its complete Wallet set without competing per-Wallet readers or
-stopping the borrowed chain client.
+One SQL Manager owns watch registration and ordered live delivery.
+Start/Create publishes watch-ready Wallets with no handoff gap, and restart
+recovers each Wallet from its own checkpoint. Joined shutdown leaves the
+borrowed chain client under caller ownership.
 
 [t370]: ../archive/tasks/370-chain-source-delivery.md
 [t372]: ../archive/tasks/372-multi-wallet-rollback.md
 [t402]: ../archive/tasks/402-replay-live-watch-obligations.md
 [t456]: ../archive/tasks/456-manager-runtime-configuration.md
+[pr1496]: https://github.com/btcsuite/btcwallet/pull/1496
+[manager-chain]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/wallet/manager.go#L455

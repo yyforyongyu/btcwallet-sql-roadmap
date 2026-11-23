@@ -9,8 +9,8 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1468][pr1468] |
-| [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | [lnd #77][lnd77] |
+| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1468][pr1468]<br>Watch preparation [#1526][pr1526] → [#1520][pr1520] → [#1521][pr1521] |
+| [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | Preparation [lnd #78][lnd78] → [#79][lnd79] → [#80][lnd80] → runtime parity [#77][lnd77] |
 
 ## Upcoming Phase 2 Tasks
 
@@ -21,10 +21,10 @@ All open Phase 2B verification work, including claimed and in-progress tasks.
 | [Task 417][t417] | Benchmark startup synchronization | Benchmark | 2B | YY | [#1455][pr1455] |
 | [Task 419][t419] | Benchmark address reads | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 420][t420] | Benchmark transaction reads | Benchmark | 2B | YY | [#1433][pr1433] |
-| [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | Abdullahi | [#1481][pr1481] |
+| [Task 440][t440] | Test PSBT signing and finalization | Test | 2B | Abdullahi | [#1481][pr1481], [#1525][pr1525] |
 | [Task 447][t447] | Test the complete PSBT workflow | Test | 2B | Abdullahi | [#1524][pr1524] |
 | [Task 449][t449] | Test multi-wallet SQL isolation | Test | 2B | YY | — |
-| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448], [#1433][pr1433] |
+| [Task 471][t471] | Benchmark ListUnspent across backends | Benchmark | 2B | YY | [#1448][pr1448] (merged setup), [#1433][pr1433] (open ListUnspent measurement) |
 | [Task 472][t472] | Test isolated wallet rescans | Test | 2B | YY | — |
 | [Task 490][t490] | Benchmark GetUtxo | Benchmark | 2B | YY | [#1433][pr1433] |
 | [Task 491][t491] | Benchmark GetAccount with balances | Benchmark | 2B | YY | [#1433][pr1433] |
@@ -39,11 +39,9 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 4 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 4 | YY | — |
+| [Task 384][t384] | Route safe signing through the Vault | Refactor | Hardening | Gustavo | [#1522][pr1522], [#1508][pr1508], [#1509][pr1509], [#1510][pr1510] |
+| [Task 385][t385] | Isolate UnsafeSigner key extraction | Refactor | Hardening | Gustavo | — |
 | [Task 457][t457] | Fence process-local Managers | Feature | Hardening | YY | — |
-| [Task 354][t354] | define Vault secret-operation ownership | 4 | Gustavo |
-| [Task 383][t383] | resolve output scripts through the Vault | 4 | Gustavo |
-| [Task 384][t384] | route safe signing through the Vault | 4 | Gustavo |
-| [Task 385][t385] | isolate UnsafeSigner key extraction | 4 | Gustavo |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t397]: tasks/397-semantic-recovery-targets-adr.md
@@ -68,15 +66,24 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t485]: tasks/485-convert-legacy-sql-wallets-through-manager.md
 
 [lnd77]: https://github.com/yyforyongyu/lnd/pull/77
+[lnd78]: https://github.com/yyforyongyu/lnd/pull/78
+[lnd79]: https://github.com/yyforyongyu/lnd/pull/79
+[lnd80]: https://github.com/yyforyongyu/lnd/pull/80
 
 [pr1434]: https://github.com/btcsuite/btcwallet/pull/1434
 [pr1433]: https://github.com/btcsuite/btcwallet/pull/1433
 [pr1448]: https://github.com/btcsuite/btcwallet/pull/1448
 [pr1455]: https://github.com/btcsuite/btcwallet/pull/1455
 [pr1468]: https://github.com/btcsuite/btcwallet/pull/1468
-[t354]: tasks/354-define-vault-secret-operation-ownership.md
-[t383]: tasks/383-resolve-output-scripts-through-the-vault.md
-[t384]: tasks/384-route-safe-signing-through-the-vault.md
-[t385]: tasks/385-isolate-unsafesigner-key-extraction.md
+[t384]: tasks/384-vault-safe-signing.md
+[t385]: tasks/385-unsafe-signer-key-extraction.md
 [pr1481]: https://github.com/btcsuite/btcwallet/pull/1481
 [pr1524]: https://github.com/btcsuite/btcwallet/pull/1524
+[pr1508]: https://github.com/btcsuite/btcwallet/pull/1508
+[pr1509]: https://github.com/btcsuite/btcwallet/pull/1509
+[pr1510]: https://github.com/btcsuite/btcwallet/pull/1510
+[pr1520]: https://github.com/btcsuite/btcwallet/pull/1520
+[pr1521]: https://github.com/btcsuite/btcwallet/pull/1521
+[pr1522]: https://github.com/btcsuite/btcwallet/pull/1522
+[pr1525]: https://github.com/btcsuite/btcwallet/pull/1525
+[pr1526]: https://github.com/btcsuite/btcwallet/pull/1526

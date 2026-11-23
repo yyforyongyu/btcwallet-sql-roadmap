@@ -11,7 +11,10 @@ Dependencies: **[Task 473][t473]**.
 Legacy transaction state is spread across primary records and mined, unmined,
 credit, debit, lease, and synchronization indexes. The modern kvdb projection
 does not expose enough information to prove that an SQL import is complete and
-internally consistent.
+internally consistent. [ADR 0018][adr18] defines retained inputs for
+competing transactions. Both SQL backends [write and validate retained
+inputs][pr1512]. Representability depends on what the destination can store
+and read when importing the snapshot.
 
 ## Details
 
@@ -23,9 +26,10 @@ internally consistent.
 - Decode each transaction, verify its identity, use checked monetary
   arithmetic, and derive the graph and balance facts required by the import.
 - Validate indexes and pointers that supply or contradict imported facts.
-  Refuse contradictory or unrepresentable history instead of selecting one
-  version, dropping it, or substituting a rescan. Do not audit unrelated
-  legacy indexes or build a replacement transaction-graph subsystem.
+  Preserve competing inputs when their retained status, ownership and spend
+  facts are representable. Refuse contradictory or unrepresentable history
+  instead of selecting one version, dropping it, or substituting a rescan.
+  Do not audit unrelated indexes or add a transaction-graph subsystem.
 - Bound allocations and publish no partial snapshot on error or cancellation.
 - Keep implementation in Wallet-owned migration code and legacy packages
   unchanged.
@@ -44,7 +48,8 @@ remain flexible; no standalone graph or general database auditor is required.
   reorg-retained histories preserve exact transaction and sync facts.
 - Corrupt imported identities, indexes, pointers, amounts, statuses, and
   usedness fail before destination access.
-- Unsupported multiple-spender or lease shapes are refused without source
+- Representable competing inputs retain their distinct status and spend
+  facts. Refuse unsupported histories or lease shapes without source
   mutation.
 - Cancellation and resource limits retain no partial published snapshot.
 
@@ -56,3 +61,5 @@ or destination mutation.
 
 [t335]: 335-kvdb-to-sql-migration.md
 [t473]: 473-extract-legacy-address-script-state.md
+[adr18]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/docs/developer/adr/0018-unconfirmed-transaction-candidates.md#L5
+[pr1512]: https://github.com/btcsuite/btcwallet/pull/1512

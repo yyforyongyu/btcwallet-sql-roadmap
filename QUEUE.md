@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **35 open**, **103 done**,
-**24 superseded**, and **2 deferred**. With **152 ad hoc tasks**, that is
-**316 tracked tasks** and **255 completed** overall.
+The numbered roadmap contains **164 tasks**: **33 open**, **105 done**,
+**24 superseded**, and **2 deferred**. With **150 ad hoc tasks**, that is
+**314 tracked tasks** and **255 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -24,11 +24,12 @@ gate. Runtime tests do not gate the sql-wallet-to-master merge.
 
 ## Phase 1 — final SQL schema and lnd compilation · 0 open
 
-Finish the planned SQL account, import, and lease schema changes. Retain the
+Finish the accepted SQL account, import, and lease schema changes. Retain the
 existing SQL file organization and migration loader, and verify fresh creation
-and unchanged reopen on SQLite and PostgreSQL. Build lnd against the maintained
-Wallet without requiring its runtime itests to pass. Keep already assigned
-Phase 1 work, including its focused public tests.
+and unchanged reopen on SQLite and PostgreSQL. Include proposed schema changes
+in this gate once accepted for shipping. Build lnd against the maintained
+Wallet. Task 470 owns the runtime itest gate for lnd adoption. Keep already
+assigned Phase 1 work, including its focused public tests.
 
 Finish Phase 1 before merging `sql-wallet` into `master`. Later data conversion
 targets this final schema; it does not require a post-merge
@@ -46,7 +47,7 @@ stops the Manager; Neutrino fixes and cache optimization remain out of scope.
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
 
-## Phase 2A — bugs and gaps · 14 open
+## Phase 2A — bugs and gaps · 2 open
 
 Prioritize correctness failures that block normal supported operation,
 including Manager fan-out; then address the remaining known bugs and gaps.
@@ -56,33 +57,33 @@ Task 454's isolation policy; a separate integrity ADR is not a gate.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | 370, 372 |
-| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | 356, 406, 475, 478, 482, 483, 484 |
+| [Task 423][t423] | open | SQL Manager chain source and dispatcher wiring | Refactor | Cut over Manager chain notification ownership | — |
+| [Task 470][t470] | open | lnd Wallet integration | Gap fix | Complete lnd Wallet runtime parity | — |
 
-## Phase 2B — verification · 26 open
+## Phase 2B — verification · 11 open
 
 Integration tests, scenarios, compatibility, and benchmarks run alongside 2A.
 Reuse existing component proofs; scenarios own distinct public handoffs.
 Final-contract suites retain their required production prerequisites,
 including later-phase features.
 Benchmarks remain required performance measurements under the
-[scoped execution exception](AGENTS.md#scope-rules). Reuse Task 471's SQL setup
-in `wallet/bench`, run matched cases in Docker, and keep concise records with
-profile references in btcwallet's `docs/developer/benchmark/`.
+[scoped execution exception](AGENTS.md#scope-rules). Reuse the SQL fixtures
+from [PR #1448][pr1448] in `wallet/bench`, run matched cases in Docker, and keep
+concise records with profiles in btcwallet's `docs/developer/benchmark/`.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | 471 |
-| [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | 471 |
-| [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | 471 |
-| [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | 407 |
-| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | 356, 406 |
+| [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | — |
+| [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | — |
+| [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | — |
+| [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
+| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | — |
 | [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 423 |
-| [Task 471][t471] | open | wallet UtxoManager benchmarks and shared benchmark setup | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
+| [Task 471][t471] | open | wallet UtxoManager benchmarks | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
-| [Task 490][t490] | open | wallet UtxoManager benchmarks | Benchmark | Measure GetUtxo performance | 471 |
-| [Task 491][t491] | open | wallet AccountManager benchmarks | Benchmark | Measure GetAccount performance including balances | 471 |
-| [Task 492][t492] | open | wallet AccountManager benchmarks | Benchmark | Measure ListAccounts performance including balances | 471 |
+| [Task 490][t490] | open | wallet UtxoManager benchmarks | Benchmark | Measure GetUtxo performance | — |
+| [Task 491][t491] | open | wallet AccountManager benchmarks | Benchmark | Measure GetAccount performance including balances | — |
+| [Task 492][t492] | open | wallet AccountManager benchmarks | Benchmark | Measure ListAccounts performance including balances | — |
 
 ## Phase 3 — legacy-to-native SQL migration · 11 open
 
@@ -98,11 +99,11 @@ Modern kvdb remains supported for the current and next release.
 | [Task 358][t358] | open | Manager.Create | Gap fix | Make Manager creation cancellable | 329 |
 | [Task 373][t373] | open | Legacy migration wallet, account, and secret extraction | Migration | Extract legacy wallet, account, and secret state | 335 |
 | [Task 374][t374] | open | Legacy migration transaction and sync extraction | Migration | Extract legacy transaction and sync state | 473 |
-| [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 374, 478 |
+| [Task 375][t375] | open | SQLite migration importer | Migration | Import one legacy snapshot into SQLite | 374 |
 | [Task 376][t376] | open | Manager.Create legacy conversion mode | Migration | Convert a legacy wallet through Manager.Create | 358, 375 |
 | [Task 473][t473] | open | Legacy migration address and script extraction | Migration | Extract legacy address and script state | 373 |
 | [Task 476][t476] | open | Legacy migration source adapter | Migration | Read legacy SQL walletdb sources | 374 |
-| [Task 477][t477] | open | PostgreSQL migration importer | Migration | Import a legacy snapshot into PostgreSQL | 374, 478 |
+| [Task 477][t477] | open | PostgreSQL migration importer | Migration | Import a legacy snapshot into PostgreSQL | 374 |
 | [Task 485][t485] | open | Manager.Create legacy conversion selection | Migration | Convert legacy SQL wallets through Manager | 376, 476, 477 |
 
 ## Phase 4 — optional improvements · 4 open
@@ -114,10 +115,10 @@ Task types, scopes, and evidence requirements are unchanged.
 | --- | --- | --- | --- | --- | --- |
 | [Task 397][t397] | open | ADR 0004 targeted-recovery contract | Design | Define semantic-account recovery targets | — |
 | [Task 398][t398] | open | Controller and Syncer recovery account selection | Gap fix | Accept semantic account recovery targets | 397 |
-| [Task 411][t411] | open | Wallet-owned SQL transaction ingestion | Bug fix | Reject children of terminal transactions | 410 |
+| [Task 411][t411] | open | Wallet-owned SQL transaction ingestion | Bug fix | Reject children of terminal transactions | — |
 | [Task 426][t426] | open | Manager Wallet publication and SQL TxStore amount validation | Bug fix | Validate persisted transaction output aggregates | — |
 
-## Hardening — Signer, Vault, and defensive edges · 7 open
+## Hardening — Signer, Vault, and defensive edges · 5 open
 
 Start only after both 2A and 2B are complete. Existing signing bugs remain in
 the core backlog. This category holds later Signer/Vault restructuring and
@@ -125,10 +126,8 @@ optional duplicate-Manager and rare derivation-edge protection.
 
 | Task | Status | Component | Type | Outcome | Open dependencies |
 | --- | --- | --- | --- | --- | --- |
-| [Task 354][t354] | open | ADR 0010 secret-use contract | Design | Define Vault secret-operation ownership | — |
-| [Task 382][t382] | open | AccountManager and account-derivation Vault operation | Refactor | Move account derivation into the Vault | 354 |
-| [Task 383][t383] | open | AddressManager ScriptForOutput and script Vault operation | Refactor | Resolve output scripts through the Vault | 354 |
-| [Task 384][t384] | open | Signer and primitive key-use Vault operations | Refactor | Route safe signing through the Vault | 354, 383, 469 |
+| [Task 382][t382] | open | AccountManager and account-derivation Vault operation | Refactor | Move account derivation into the Vault | — |
+| [Task 384][t384] | open | Signer and primitive key-use Vault operations | Refactor | Route safe signing through the Vault | — |
 | [Task 385][t385] | open | UnsafeSigner raw private-key boundary | Refactor | Isolate UnsafeSigner key extraction | 384 |
 | [Task 457][t457] | open | Manager Start and process-local database ownership | Feature | Enforce one process-local Manager per database | — |
 | [Task 460][t460] | open | AccountManager sequential creation and SQL AccountStore cursor | Bug fix | Make sequential account allocation invalid-child safe | — |
@@ -189,9 +188,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 103
+## Done · 105
 
-**255 completed: 103 numbered tasks and 152 ad hoc PRs.** Each closing PR counts
+**255 completed: 105 numbered tasks and 150 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -219,6 +218,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 346][t346] | 2 | PsbtManager packet validation and transformation | Bug fix | Preserve PSBT metadata during funding | [#1359][pr1359] |
 | [Task 347][t347] | 2A | PsbtManager existing-signature validation | Bug fix | Authorize existing PSBT signatures | [#1400][pr1400] |
 | [Task 350][t350] | 4 | PostgreSQL Store | Refactor | Use native pgx for PostgreSQL storage | [#1321][pr1321] |
+| [Task 354][t354] | Hardening | ADR 0010 secret-use contract | Design | Define Vault secret-operation ownership | [#1486][pr1486] |
 | [Task 355][t355] | 2 | TxCreator and the `txsizes` module | Bug fix | Correct transaction size accounting | [#1338][pr1338] |
 | [Task 356][t356] | 2A | TxCreator, PsbtManager, and Wallet-owned address storage | Bug fix | Defer change-script allocation until viable | [#1453][pr1453] |
 | [Task 357][t357] | 2 | `txauthor` and TxCreator | Bug fix | Validate transaction output and fee arithmetic | [#1348][pr1348] |
@@ -233,6 +233,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 378][t378] | 1 | AccountManager public error boundary | Bug fix | Translate AccountManager backend errors | [#1358][pr1358] |
 | [Task 379][t379] | 1 | Manager Load public error boundary | Bug fix | Translate Manager load not-found errors | [#1331][pr1331] |
 | [Task 380][t380] | 1 | AddressManager GetAddressInfo error boundary | Bug fix | Translate address lookup errors | [#1332][pr1332] |
+| [Task 383][t383] | Hardening | AddressManager ScriptForOutput and script Vault operation | Refactor | Resolve output scripts through the Vault | [#1488][pr1488] |
 | [Task 387][t387] | 1 | ADR 0012 and ADR 0013 account-creation contract | Design | Define account identity and chain-sync policy | [#1342][pr1342] |
 | [Task 388][t388] | 1 | AccountStore account-creation admission | Bug fix | Reject colliding runtime account XPub identities | [#1394][pr1394] |
 | [Task 389][t389] | 2A | AccountManager SQL account-creation results | Bug fix | Report uncertain account commits truthfully | [#1422][pr1422] |
@@ -454,9 +455,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1482](https://github.com/btcsuite/btcwallet/pull/1482) | wallet: honor per-wallet recovery lookahead | yyforyongyu | 2026-11-06 |
 | [#1484](https://github.com/btcsuite/btcwallet/pull/1484) | wallet: exclude native SQLite from JS builds | yyforyongyu | 2026-11-08 |
 | [#1485](https://github.com/btcsuite/btcwallet/pull/1485) | wallet: hash the compressed point in ECDH | GustavoStingelin | 2026-11-09 |
-| [#1486](https://github.com/btcsuite/btcwallet/pull/1486) | docs: define vault secret-operation ownership | GustavoStingelin | 2026-11-09 |
 | [#1487](https://github.com/btcsuite/btcwallet/pull/1487) | keyvault: split raw decryption into UnsafeVault | GustavoStingelin | 2026-11-07 |
-| [#1488](https://github.com/btcsuite/btcwallet/pull/1488) | wallet: resolve SQL output scripts through vault | GustavoStingelin | 2026-11-13 |
 | [#1491](https://github.com/btcsuite/btcwallet/pull/1491) | itest: drop per-case registration comments | GustavoStingelin | 2026-11-09 |
 | [#1495](https://github.com/btcsuite/btcwallet/pull/1495) | wallet: retain mixed block transaction payloads | yyforyongyu | 2026-11-12 |
 | [#1496](https://github.com/btcsuite/btcwallet/pull/1496) | wallet: serialize Manager ownership in its loop | yyforyongyu | 2026-11-17 |
@@ -497,7 +496,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t351]: archive/tasks/351-sql-utxo-integrity.md
 [t352]: archive/tasks/352-kvdb-combined-passphrase-rotation.md
 [t353]: archive/tasks/353-retire-modern-kvdb-backend.md
-[t354]: tasks/354-vault-owned-secret-resolution.md
+[t354]: archive/tasks/354-vault-owned-secret-resolution.md
 [t355]: archive/tasks/355-transaction-size-accounting.md
 [t356]: tasks/356-defer-change-script-allocation.md
 [t357]: archive/tasks/357-transaction-amount-validation.md
@@ -526,7 +525,7 @@ numbered roadmap; old archived task references add no separate completion.
 [t380]: archive/tasks/380-address-lookup-error-boundary.md
 [t381]: archive/tasks/381-recovery-adapter-identity.md
 [t382]: tasks/382-vault-account-derivation.md
-[t383]: tasks/383-vault-output-script-resolution.md
+[t383]: archive/tasks/383-vault-output-script-resolution.md
 [t384]: tasks/384-vault-safe-signing.md
 [t385]: tasks/385-unsafe-signer-key-extraction.md
 [t386]: archive/tasks/386-remove-raw-wallet-secret-seams.md
@@ -710,3 +709,6 @@ numbered roadmap; old archived task references add no separate completion.
 [pr1412]: https://github.com/btcsuite/btcwallet/pull/1412
 [pr1419]: https://github.com/btcsuite/btcwallet/pull/1419
 [pr1421]: https://github.com/btcsuite/btcwallet/pull/1421
+[pr1486]: https://github.com/btcsuite/btcwallet/pull/1486
+[pr1488]: https://github.com/btcsuite/btcwallet/pull/1488
+[pr1448]: https://github.com/btcsuite/btcwallet/pull/1448

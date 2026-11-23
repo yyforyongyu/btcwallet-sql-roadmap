@@ -8,10 +8,9 @@ Dependencies: **[Task 354][t354] and [Task 390][t390]**.
 
 ## Rationale
 
-At local `sql-wallet` revision `48e7f4b7e`, `buildAccountDeriveFn` captures
-encrypted root material but decrypts and derives inside the account-creation
-Store transaction. This is not an existing prepare-then-short-CAS flow.
-AccountManager still owns secret work that ADR 0010 assigns to Vault.
+The [SQL AccountManager][derive] captures encrypted root material and
+decrypts and derives inside the account-creation Store transaction.
+[ADR 0010][adr10] assigns that secret work to Vault.
 
 That path takes Store resources before Vault's lock, while passphrase rotation
 takes the Vault lock before Store access. Validate this source-level concern
@@ -41,8 +40,9 @@ minimal demonstrated bug fix need not wait for this ownership refactor.
   Migrate the sequential and exact callers from [Task 343][t343] and the
   validated custom-scope caller from [Task 390][t390] without adding a second
   preparation workflow.
-- Preserve kvdb's existing sequential creation and unsupported exact/custom
-  request results without migrating that backend's secret handling.
+- Preserve kvdb's existing sequential, exact and custom account creation.
+  [PR #1454][pr1454] delivers these kvdb paths with their existing chain
+  activation behavior. Keep kvdb secret handling outside this refactor.
 - Remove helpers and secret-access seams made unused by this consumer move,
   with their required test/mock updates. Retain any shared seam still needed
   by other consumers or unchanged kvdb behavior; add no legacy adapter.
@@ -61,10 +61,9 @@ intact. Choose the smallest safe boundary under Task 354; leave kvdb unchanged.
 ## Verification
 
 - Public AccountManager itests create sequential, exact, and custom-scope
-  accounts on SQLite and PostgreSQL with unchanged exported results. Modern
-  kvdb covers sequential creation only and proves exact and custom-scope
-  requests match `ErrAccountOperationUnsupported` after the permitted read-only
-  occupied-name lookup and before Vault preparation or Store mutation.
+  accounts on SQLite and PostgreSQL with unchanged exported results.
+  Preserve existing kvdb coverage for its supported account requests and
+  activation behavior.
 - Spies prove SQL AccountManager never calls Store secret reads or raw `Decrypt`
   and receives no plaintext key material.
 - Concurrency tests cover Lock and combined passphrase rotation against account
@@ -84,8 +83,11 @@ intact. Choose the smallest safe boundary under Task 354; leave kvdb unchanged.
   included.
 
 [t352]: ../archive/tasks/352-kvdb-combined-passphrase-rotation.md
-[t354]: 354-vault-owned-secret-resolution.md
+[t354]: ../archive/tasks/354-vault-owned-secret-resolution.md
 [t343]: ../archive/tasks/343-exact-account-creation.md
 [t390]: ../archive/tasks/390-custom-scope-account-creation.md
 [t391]: ../archive/tasks/391-path-bound-watch-only-xpub-accounts.md
 [t460]: 460-sequential-account-invalid-children.md
+[derive]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/wallet/account_manager.go#L228
+[adr10]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/docs/developer/adr/0010-keyvault-encryption-layer.md#L43
+[pr1454]: https://github.com/btcsuite/btcwallet/pull/1454
