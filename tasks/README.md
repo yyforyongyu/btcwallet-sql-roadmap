@@ -50,7 +50,6 @@ Shared public contracts run on kvdb, SQLite, and PostgreSQL. A task may exclude
 a backend only when that backend cannot represent the scenario, and must state
 that structural exclusion explicitly.
 
-- [Task 440](440-psbt-signing-finalization-itests.md): cover PSBT signing and
   finalization contracts.
 
 ## Integration-test scenarios

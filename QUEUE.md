@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **32 open**, **106 done**,
-**24 superseded**, and **2 deferred**. With **153 ad hoc tasks**, that is
-**317 tracked tasks** and **259 completed** overall.
+The numbered roadmap contains **164 tasks**: **31 open**, **107 done**,
+**24 superseded**, and **2 deferred**. With **154 ad hoc tasks**, that is
+**318 tracked tasks** and **261 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -76,7 +76,6 @@ concise records with profiles in btcwallet's `docs/developer/benchmark/`.
 | [Task 417][t417] | open | Manager lifecycle and Syncer benchmarks | Benchmark | Measure start-to-synced performance | — |
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | — |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | — |
-| [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
 | [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 423 |
 | [Task 471][t471] | open | wallet UtxoManager benchmarks | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
@@ -187,9 +186,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 106
+## Done · 107
 
-**259 completed: 106 numbered tasks and 153 ad hoc PRs.** Each closing PR counts
+**261 completed: 107 numbered tasks and 154 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -269,6 +268,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 437][t437] | 1 | TxWriter integration tests | Test | Cover transaction label contracts | [#1347][pr1347] |
 | [Task 438][t438] | 2B | PsbtManager packet integration tests | Test | Cover PSBT decoration and combination contracts | [#1480][pr1480] |
 | [Task 439][t439] | 2B | PsbtManager funding integration tests | Test | Cover PSBT funding contracts | [#1472][pr1472] |
+| [Task 440][t440] | 2B | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | [#1481][pr1481], [#1525][pr1525] |
 | [Task 441][t441] | 1 | Signer derivation integration tests | Test | Cover public derivation and ECDH contracts | [#1374][pr1374] |
 | [Task 442][t442] | 1 | Signer signature integration tests | Test | Cover public signing contracts | [#1384][pr1384] |
 | [Task 443][t443] | 1 | UnsafeSigner integration tests | Test | Cover UnsafeSigner extraction contracts | [#1383][pr1383] |
@@ -473,6 +473,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1516](https://github.com/btcsuite/btcwallet/pull/1516) | wallet+db: cut over retained input spending | yyforyongyu | 2026-11-23 |
 | [#1517](https://github.com/btcsuite/btcwallet/pull/1517) | chain: preserve Neutrino scan birthday | yyforyongyu | 2026-11-17 |
 | [#1519](https://github.com/btcsuite/btcwallet/pull/1519) | docs: define Manager routing ownership | yyforyongyu | 2026-11-18 |
+| [#1532](https://github.com/btcsuite/btcwallet/pull/1532) | wallet: accept a KVDB opener | yyforyongyu | 2026-11-25 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
