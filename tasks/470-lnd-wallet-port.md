@@ -128,7 +128,7 @@ task. No ADR is required.
 [t441]: ../archive/tasks/441-signer-derivation-ecdh-itests.md
 [t442]: ../archive/tasks/442-signer-signing-itests.md
 [t443]: ../archive/tasks/443-unsafe-signer-itests.md
-[t447]: 447-psbt-workflow-scenario.md
+[t447]: ../archive/tasks/447-psbt-workflow-scenario.md
 [t461]: ../archive/tasks/461-address-batch-itests.md
 [t465]: ../archive/tasks/465-new-address-result-itests.md
 [t466]: ../archive/tasks/466-oldest-unused-address-itests.md

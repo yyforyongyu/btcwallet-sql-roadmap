@@ -55,7 +55,6 @@ that structural exclusion explicitly.
 
 ## Integration-test scenarios
 
-- [Task 447](447-psbt-workflow-scenario.md): cover the complete PSBT workflow.
 - [Task 449](449-multi-wallet-sql-isolation-scenario.md): cover multi-Wallet SQL
   isolation.
 - [Task 472](472-multi-wallet-rescan-isolation-scenario.md): isolate historical

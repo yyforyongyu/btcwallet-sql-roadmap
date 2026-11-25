@@ -1,8 +1,8 @@
 # Task delivery phases
 
-The numbered roadmap contains **164 tasks**: **33 open**, **105 done**,
+The numbered roadmap contains **164 tasks**: **32 open**, **106 done**,
 **24 superseded**, and **2 deferred**. With **153 ad hoc tasks**, that is
-**317 tracked tasks** and **258 completed** overall.
+**317 tracked tasks** and **259 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -77,7 +77,6 @@ concise records with profiles in btcwallet's `docs/developer/benchmark/`.
 | [Task 419][t419] | open | wallet AddressManager benchmarks | Benchmark | Measure address-read performance | — |
 | [Task 420][t420] | open | wallet TxReader benchmarks | Benchmark | Measure transaction-read performance | — |
 | [Task 440][t440] | open | PsbtManager signing integration tests | Test | Cover PSBT signing and finalization contracts | — |
-| [Task 447][t447] | open | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | — |
 | [Task 449][t449] | open | multi-Wallet SQL integration scenario | Test | Cover multi-Wallet SQL isolation | 423 |
 | [Task 471][t471] | open | wallet UtxoManager benchmarks | Benchmark | Measure SQL ListUnspent with kvdb baselines | — |
 | [Task 472][t472] | open | multi-Wallet SQL rescan integration scenario | Test | Isolate historical rescans from live Wallets | 423 |
@@ -188,9 +187,9 @@ delivery grouping. These tasks have no current delivery phase.
 | [Task 338][t338] | 2A | Controller | Bug fix | Latch accepted passphrase results | Accepted caller-cancelable observation replaces unconditional waiting; [Task 488][t488] owns input buffers and [Task 489][t489] owns shutdown context; [PR #1421][pr1421] closed unmerged |
 | [Task 424][t424] | 2A | ADR 0006 transaction and UTXO integrity contract | Design | Define transaction and UTXO integrity ownership | Accepted decision eliminates the standalone ADR; ordering evidence and correction stay in [Task 410][t410], with isolation policy in [Task 454][t454]; PR #1343 closed unmerged |
 
-## Done · 105
+## Done · 106
 
-**258 completed: 105 numbered tasks and 153 ad hoc PRs.** Each closing PR counts
+**259 completed: 106 numbered tasks and 153 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -276,6 +275,7 @@ passing compile checks and remaining runtime/merge limitations.
 | [Task 444][t444] | 2B | public wallet receive scenario | Test | Cover new-account receipt and reload | [#1457][pr1457] |
 | [Task 445][t445] | 2B | public account signing scenario | Test | Cover new-account signing identity | [#1471][pr1471] |
 | [Task 446][t446] | 2B | public transaction spend scenario | Test | Cover authored-spend publication and reload | [#1444][pr1444] |
+| [Task 447][t447] | 2B | public PSBT workflow scenario | Test | Cover the complete PSBT workflow | [#1524][pr1524] |
 | [Task 448][t448] | 2B | public Wallet reorganization scenario | Test | Cover synchronization and rollback | [#1458][pr1458] |
 | [Task 450][t450] | 2B | bitcoind compatibility integration scenario | Test | Compare public wallet state with bitcoind | [#1470][pr1470] |
 | [Task 451][t451] | 2B | integration-test CI matrix and chain daemon provisioning | Test | Run itests across supported chain releases | [#1500][pr1500] |

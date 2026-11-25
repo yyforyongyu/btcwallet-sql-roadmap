@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 447](tasks/447-psbt-workflow-scenario.md) completed on 2026-11-25.
 - [Task 407](tasks/407-psbt-finalization-authorization.md) completed on 2026-11-18.
 - [Task 451](tasks/451-chain-version-itest-matrix.md) completed on 2026-11-17.
 - [Task 432](tasks/432-address-import-script-itests.md) completed on 2026-11-17.
