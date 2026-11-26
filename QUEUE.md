@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **30 open**, **108 done**,
-**24 superseded**, and **2 deferred**. With **156 ad hoc tasks**, that is
-**320 tracked tasks** and **264 completed** overall.
+**24 superseded**, and **2 deferred**. With **157 ad hoc tasks**, that is
+**321 tracked tasks** and **265 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -187,7 +187,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 108
 
-**264 completed: 108 numbered tasks and 156 ad hoc PRs.** Each closing PR counts
+**265 completed: 108 numbered tasks and 157 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -446,6 +446,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1436](https://github.com/btcsuite/btcwallet/pull/1436) | wallet: recover KVDB history ahead of sync tip | yyforyongyu | 2026-11-05 |
 | [#1451](https://github.com/btcsuite/btcwallet/pull/1451) | wallet: retain txs after failed rebroadcast | yyforyongyu | 2026-11-05 |
 | [#1454](https://github.com/btcsuite/btcwallet/pull/1454) | kvdb: support exact root-derived accounts | yyforyongyu | 2026-11-05 |
+| [#1456](https://github.com/btcsuite/btcwallet/pull/1456) | multi: fix short kvdb leases and report invalid lease parameters | Abdulkbk | 2026-11-26 |
 | [#1465](https://github.com/btcsuite/btcwallet/pull/1465) | wallet: fix publication retry history | yyforyongyu | 2026-11-24 |
 | [#1474](https://github.com/btcsuite/btcwallet/pull/1474) | wallet: fix 32-bit transaction indices | yyforyongyu | 2026-11-06 |
 | [#1475](https://github.com/btcsuite/btcwallet/pull/1475) | db: preserve labels on unmined replay | yyforyongyu | 2026-11-07 |
