@@ -9,7 +9,6 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1526][pr1526], [#1520][pr1520] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | Preparation [lnd #78][lnd78] → [#79][lnd79] → [#80][lnd80] → runtime parity [#77][lnd77] |
 
 ## Upcoming Phase 2 Tasks
@@ -47,7 +46,6 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [t417]: tasks/417-start-to-synced-benchmark.md
 [t419]: tasks/419-address-read-benchmark.md
 [t420]: tasks/420-transaction-read-benchmark.md
-[t423]: tasks/423-manager-chain-source-cutover.md
 [t449]: tasks/449-multi-wallet-sql-isolation-scenario.md
 [t457]: tasks/457-process-local-manager-lease.md
 [t470]: tasks/470-lnd-wallet-port.md
@@ -76,7 +74,5 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1508]: https://github.com/btcsuite/btcwallet/pull/1508
 [pr1509]: https://github.com/btcsuite/btcwallet/pull/1509
 [pr1510]: https://github.com/btcsuite/btcwallet/pull/1510
-[pr1520]: https://github.com/btcsuite/btcwallet/pull/1520
 [pr1521]: https://github.com/btcsuite/btcwallet/pull/1521
 [pr1522]: https://github.com/btcsuite/btcwallet/pull/1522
-[pr1526]: https://github.com/btcsuite/btcwallet/pull/1526

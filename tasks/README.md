@@ -34,7 +34,6 @@ They do not consume task numbers or require task files.
 
 ## Chain and synchronization
 
-- [Task 423](423-manager-chain-source-cutover.md): cut over Manager chain
   notification ownership.
 
 ## Transactions, UTXOs, and PSBTs

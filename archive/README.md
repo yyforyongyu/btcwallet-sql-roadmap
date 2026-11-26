@@ -19,6 +19,7 @@ specifications.
   decision. Reactivate Task 353 rather than allocating a replacement number.
 
 ## History
+- [Task 423](tasks/423-manager-chain-source-cutover.md) completed on 2026-11-26.
 - [Task 440](tasks/440-psbt-signing-finalization-itests.md) completed on 2026-11-26.
 - [Task 447](tasks/447-psbt-workflow-scenario.md) completed on 2026-11-25.
 - [Task 407](tasks/407-psbt-finalization-authorization.md) completed on 2026-11-18.

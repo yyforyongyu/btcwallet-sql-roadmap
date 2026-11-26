@@ -75,5 +75,5 @@ spend/reopen matrix, cross-process claim, or new coordination architecture.
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
 [t428]: ../archive/tasks/428-controller-sync-info-itests.md
 [t449]: 449-multi-wallet-sql-isolation-scenario.md
-[t423]: 423-manager-chain-source-cutover.md
+[t423]: ../archive/tasks/423-manager-chain-source-cutover.md
 [source]: https://github.com/btcsuite/btcwallet/blob/48e7f4b7e0f3808b5022fd817d12c6a4361bb9c1/wallet/controller.go#L643

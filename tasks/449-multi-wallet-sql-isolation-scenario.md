@@ -72,5 +72,5 @@ gate this scenario.
 [t435]: ../archive/tasks/435-transaction-publication-itests.md
 [t436]: ../archive/tasks/436-transaction-read-itests.md
 [t455]: ../archive/tasks/455-exact-wallet-sync-status.md
-[t423]: 423-manager-chain-source-cutover.md
+[t423]: ../archive/tasks/423-manager-chain-source-cutover.md
 [source]: https://github.com/btcsuite/btcwallet/blob/70f5629b6f5a75b29582eac9251c804d61bd7b20/itest/manager_test.go#L737
