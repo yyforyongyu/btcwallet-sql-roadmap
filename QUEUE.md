@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **30 open**, **108 done**,
-**24 superseded**, and **2 deferred**. With **157 ad hoc tasks**, that is
-**321 tracked tasks** and **265 completed** overall.
+**24 superseded**, and **2 deferred**. With **158 ad hoc tasks**, that is
+**322 tracked tasks** and **266 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -187,7 +187,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 108
 
-**265 completed: 108 numbered tasks and 157 ad hoc PRs.** Each closing PR counts
+**266 completed: 108 numbered tasks and 158 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -477,6 +477,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1528](https://github.com/btcsuite/btcwallet/pull/1528) | sql: prepare Wallet-owned block history | yyforyongyu | 2026-11-26 |
 | [#1532](https://github.com/btcsuite/btcwallet/pull/1532) | wallet: accept a KVDB opener | yyforyongyu | 2026-11-25 |
 | [#1534](https://github.com/btcsuite/btcwallet/pull/1534) | chain: give consumers independent event streams | yyforyongyu | 2026-11-26 |
+| [#1536](https://github.com/btcsuite/btcwallet/pull/1536) | chain: scope transaction watches to a subscription | yyforyongyu | 2026-11-26 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
