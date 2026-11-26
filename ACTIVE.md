@@ -9,7 +9,7 @@ All open Phase 1 and 2A work, including stacked tasks with open dependencies.
 
 | Task | Description | Type | Phase / track | Claimant | PR |
 | --- | --- | --- | --- | --- | --- |
-| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1468][pr1468], [#1526][pr1526], [#1520][pr1520] |
+| [Task 423][t423] | Cut over Manager chain notifications | Refactor | 2A | YY | [#1526][pr1526], [#1520][pr1520] |
 | [Task 470][t470] | Complete lnd Wallet runtime parity | Gap fix | 2A | YY | Preparation [lnd #78][lnd78] → [#79][lnd79] → [#80][lnd80] → runtime parity [#77][lnd77] |
 
 ## Upcoming Phase 2 Tasks

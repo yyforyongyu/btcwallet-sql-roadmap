@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **31 open**, **107 done**,
-**24 superseded**, and **2 deferred**. With **154 ad hoc tasks**, that is
-**318 tracked tasks** and **261 completed** overall.
+**24 superseded**, and **2 deferred**. With **156 ad hoc tasks**, that is
+**320 tracked tasks** and **263 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -188,7 +188,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 107
 
-**261 completed: 107 numbered tasks and 154 ad hoc PRs.** Each closing PR counts
+**263 completed: 107 numbered tasks and 156 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -473,7 +473,9 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1516](https://github.com/btcsuite/btcwallet/pull/1516) | wallet+db: cut over retained input spending | yyforyongyu | 2026-11-23 |
 | [#1517](https://github.com/btcsuite/btcwallet/pull/1517) | chain: preserve Neutrino scan birthday | yyforyongyu | 2026-11-17 |
 | [#1519](https://github.com/btcsuite/btcwallet/pull/1519) | docs: define Manager routing ownership | yyforyongyu | 2026-11-18 |
+| [#1528](https://github.com/btcsuite/btcwallet/pull/1528) | sql: prepare Wallet-owned block history | yyforyongyu | 2026-11-26 |
 | [#1532](https://github.com/btcsuite/btcwallet/pull/1532) | wallet: accept a KVDB opener | yyforyongyu | 2026-11-25 |
+| [#1534](https://github.com/btcsuite/btcwallet/pull/1534) | chain: give consumers independent event streams | yyforyongyu | 2026-11-26 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
 [t330]: tasks/330-duplicate-wallet-create.md
