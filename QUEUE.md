@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **30 open**, **108 done**,
-**24 superseded**, and **2 deferred**. With **158 ad hoc tasks**, that is
-**322 tracked tasks** and **266 completed** overall.
+**24 superseded**, and **2 deferred**. With **160 ad hoc tasks**, that is
+**324 tracked tasks** and **268 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -187,7 +187,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 108
 
-**266 completed: 108 numbered tasks and 158 ad hoc PRs.** Each closing PR counts
+**268 completed: 108 numbered tasks and 160 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -455,6 +455,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1478](https://github.com/btcsuite/btcwallet/pull/1478) | pg: cover concurrent same-hash admission | yyforyongyu | 2026-11-06 |
 | [#1479](https://github.com/btcsuite/btcwallet/pull/1479) | wallet: fix PSBT origins and script imports | yyforyongyu | 2026-11-13 |
 | [#1482](https://github.com/btcsuite/btcwallet/pull/1482) | wallet: honor per-wallet recovery lookahead | yyforyongyu | 2026-11-06 |
+| [#1483](https://github.com/btcsuite/btcwallet/pull/1483) | kvdb: preserve birthday on wallet rewind | yyforyongyu | 2026-11-27 |
 | [#1484](https://github.com/btcsuite/btcwallet/pull/1484) | wallet: exclude native SQLite from JS builds | yyforyongyu | 2026-11-08 |
 | [#1485](https://github.com/btcsuite/btcwallet/pull/1485) | wallet: hash the compressed point in ECDH | GustavoStingelin | 2026-11-09 |
 | [#1487](https://github.com/btcsuite/btcwallet/pull/1487) | keyvault: split raw decryption into UnsafeVault | GustavoStingelin | 2026-11-07 |
@@ -476,6 +477,7 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1519](https://github.com/btcsuite/btcwallet/pull/1519) | docs: define Manager routing ownership | yyforyongyu | 2026-11-18 |
 | [#1528](https://github.com/btcsuite/btcwallet/pull/1528) | sql: prepare Wallet-owned block history | yyforyongyu | 2026-11-26 |
 | [#1532](https://github.com/btcsuite/btcwallet/pull/1532) | wallet: accept a KVDB opener | yyforyongyu | 2026-11-25 |
+| [#1533](https://github.com/btcsuite/btcwallet/pull/1533) | wallet+db: prepare Wallet-local rollback | yyforyongyu | 2026-11-27 |
 | [#1534](https://github.com/btcsuite/btcwallet/pull/1534) | chain: give consumers independent event streams | yyforyongyu | 2026-11-26 |
 | [#1536](https://github.com/btcsuite/btcwallet/pull/1536) | chain: scope transaction watches to a subscription | yyforyongyu | 2026-11-26 |
 
