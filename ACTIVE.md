@@ -36,7 +36,7 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 | [Task 329][t329] | Commit SQL genesis atomically | Bug fix | 3 | YY | — |
 | [Task 397][t397] | Define semantic-account recovery targets | Design | 4 | YY | — |
 | [Task 398][t398] | Accept semantic account recovery targets | Gap fix | 4 | YY | — |
-| [Task 384][t384] | Route safe signing through the Vault | Refactor | Hardening | Gustavo | [#1522][pr1522], [#1508][pr1508], [#1509][pr1509], [#1510][pr1510] |
+| [Task 384][t384] | Route safe signing through the Vault | Refactor | Hardening | Gustavo | [#1522][pr1522], [#1538][pr1538], [#1508][pr1508], [#1509][pr1509], [#1510][pr1510] |
 | [Task 385][t385] | Isolate UnsafeSigner key extraction | Refactor | Hardening | Gustavo | — |
 | [Task 457][t457] | Fence process-local Managers | Feature | Hardening | YY | — |
 
@@ -76,3 +76,4 @@ Parked claims from Phase 3, Phase 4, and Hardening.
 [pr1510]: https://github.com/btcsuite/btcwallet/pull/1510
 [pr1521]: https://github.com/btcsuite/btcwallet/pull/1521
 [pr1522]: https://github.com/btcsuite/btcwallet/pull/1522
+[pr1538]: https://github.com/btcsuite/btcwallet/pull/1538

@@ -1,8 +1,8 @@
 # Task delivery phases
 
 The numbered roadmap contains **164 tasks**: **30 open**, **108 done**,
-**24 superseded**, and **2 deferred**. With **162 ad hoc tasks**, that is
-**326 tracked tasks** and **270 completed** overall.
+**24 superseded**, and **2 deferred**. With **161 ad hoc tasks**, that is
+**325 tracked tasks** and **269 completed** overall.
 
 Task files own scope and dependencies; [ACTIVE.md](ACTIVE.md) owns claims and
 PRs. Tables show open dependencies only. See [AGENTS.md](AGENTS.md) for task
@@ -187,7 +187,7 @@ delivery grouping. These tasks have no current delivery phase.
 
 ## Done · 108
 
-**270 completed: 108 numbered tasks and 162 ad hoc PRs.** Each closing PR counts
+**269 completed: 108 numbered tasks and 161 ad hoc PRs.** Each closing PR counts
 once. Ad hoc entries have no task file or retrospective phase; they record
 additional delivered work, not progress against a numbered phase gate.
 
@@ -480,7 +480,6 @@ numbered roadmap; old archived task references add no separate completion.
 | [#1533](https://github.com/btcsuite/btcwallet/pull/1533) | wallet+db: prepare Wallet-local rollback | yyforyongyu | 2026-11-27 |
 | [#1534](https://github.com/btcsuite/btcwallet/pull/1534) | chain: give consumers independent event streams | yyforyongyu | 2026-11-26 |
 | [#1536](https://github.com/btcsuite/btcwallet/pull/1536) | chain: scope transaction watches to a subscription | yyforyongyu | 2026-11-26 |
-| [#1538](https://github.com/btcsuite/btcwallet/pull/1538) | wallet: derive public keys in the key vault | GustavoStingelin | 2026-11-27 |
 | [#1542](https://github.com/btcsuite/btcwallet/pull/1542) | multi: fix Go 1.27.3 golangci-lint failures on sql-wallet | yyforyongyu | 2026-11-27 |
 
 [t329]: tasks/329-atomic-wallet-account-creation.md
